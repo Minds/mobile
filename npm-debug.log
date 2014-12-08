@@ -1,0 +1,147 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', '-g', 'ios-sim' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.33
+4 verbose cache add [ 'ios-sim', null ]
+5 verbose cache add name=undefined spec="ios-sim" args=["ios-sim",null]
+6 verbose parsed url { protocol: null,
+6 verbose parsed url   slashes: null,
+6 verbose parsed url   auth: null,
+6 verbose parsed url   host: null,
+6 verbose parsed url   port: null,
+6 verbose parsed url   hostname: null,
+6 verbose parsed url   hash: null,
+6 verbose parsed url   search: null,
+6 verbose parsed url   query: null,
+6 verbose parsed url   pathname: 'ios-sim',
+6 verbose parsed url   path: 'ios-sim',
+6 verbose parsed url   href: 'ios-sim' }
+7 silly lockFile 6af69284-ios-sim ios-sim
+8 verbose lock ios-sim /Users/mark/.npm/6af69284-ios-sim.lock
+9 silly lockFile 6af69284-ios-sim ios-sim
+10 silly lockFile 6af69284-ios-sim ios-sim
+11 verbose addNamed [ 'ios-sim', '' ]
+12 verbose addNamed [ null, '*' ]
+13 silly lockFile 03dce7cc-ios-sim ios-sim@
+14 verbose lock ios-sim@ /Users/mark/.npm/03dce7cc-ios-sim.lock
+15 silly addNameRange { name: 'ios-sim', range: '*', hasData: false }
+16 verbose request where is /ios-sim
+17 verbose request registry https://registry.npmjs.org/
+18 verbose request id 9a71fe12c34975cb
+19 verbose url raw /ios-sim
+20 verbose url resolving [ 'https://registry.npmjs.org/', './ios-sim' ]
+21 verbose url resolved https://registry.npmjs.org/ios-sim
+22 verbose request where is https://registry.npmjs.org/ios-sim
+23 info trying registry request attempt 1 at 17:09:07
+24 http GET https://registry.npmjs.org/ios-sim
+25 http 200 https://registry.npmjs.org/ios-sim
+26 silly registry.get cb [ 200,
+26 silly registry.get   { date: 'Fri, 05 Dec 2014 17:09:07 GMT',
+26 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R14B04)',
+26 silly registry.get     etag: '"CUAL6NZL4V4NLXKVU0SFJJH6S"',
+26 silly registry.get     'content-type': 'application/json',
+26 silly registry.get     'cache-control': 'max-age=60',
+26 silly registry.get     'content-length': '16821',
+26 silly registry.get     'accept-ranges': 'bytes',
+26 silly registry.get     via: '1.1 varnish',
+26 silly registry.get     age: '0',
+26 silly registry.get     'x-served-by': 'cache-lcy1126-LCY',
+26 silly registry.get     'x-cache': 'HIT',
+26 silly registry.get     'x-cache-hits': '1',
+26 silly registry.get     'x-timer': 'S1417799347.318436,VS0,VE154',
+26 silly registry.get     vary: 'Accept',
+26 silly registry.get     'keep-alive': 'timeout=10, max=50',
+26 silly registry.get     connection: 'Keep-Alive' } ]
+27 silly addNameRange number 2 { name: 'ios-sim', range: '*', hasData: true }
+28 silly addNameRange versions [ 'ios-sim',
+28 silly addNameRange   [ '1.8.0',
+28 silly addNameRange     '1.8.1',
+28 silly addNameRange     '1.8.2',
+28 silly addNameRange     '1.9.0',
+28 silly addNameRange     '2.0.0',
+28 silly addNameRange     '2.0.1',
+28 silly addNameRange     '3.0.0',
+28 silly addNameRange     '3.1.0',
+28 silly addNameRange     '3.1.1',
+28 silly addNameRange     '4.0.0',
+28 silly addNameRange     '4.0.1' ] ]
+29 verbose addNamed [ 'ios-sim', '3.1.1' ]
+30 verbose addNamed [ '3.1.1', '3.1.1' ]
+31 silly lockFile 022ac800-ios-sim-3-1-1 ios-sim@3.1.1
+32 verbose lock ios-sim@3.1.1 /Users/mark/.npm/022ac800-ios-sim-3-1-1.lock
+33 silly lockFile 94b6d454-js-org-ios-sim-ios-sim-3-1-1-tgz https://registry.npmjs.org/ios-sim/-/ios-sim-3.1.1.tgz
+34 verbose lock https://registry.npmjs.org/ios-sim/-/ios-sim-3.1.1.tgz /Users/mark/.npm/94b6d454-js-org-ios-sim-ios-sim-3-1-1-tgz.lock
+35 verbose addRemoteTarball [ 'https://registry.npmjs.org/ios-sim/-/ios-sim-3.1.1.tgz',
+35 verbose addRemoteTarball   '1129c3fda31b917ef656b8c53fd276392b51c6e8' ]
+36 info retry fetch attempt 1 at 17:09:07
+37 verbose fetch to= /var/folders/39/16cgwxjj1gz9ftz6mx72qlt00000gn/T/npm-20038-xtMXW1N5/registry.npmjs.org/ios-sim/-/ios-sim-3.1.1.tgz
+38 http GET https://registry.npmjs.org/ios-sim/-/ios-sim-3.1.1.tgz
+39 http 200 https://registry.npmjs.org/ios-sim/-/ios-sim-3.1.1.tgz
+40 silly lockFile 94b6d454-js-org-ios-sim-ios-sim-3-1-1-tgz https://registry.npmjs.org/ios-sim/-/ios-sim-3.1.1.tgz
+41 silly lockFile 94b6d454-js-org-ios-sim-ios-sim-3-1-1-tgz https://registry.npmjs.org/ios-sim/-/ios-sim-3.1.1.tgz
+42 silly lockFile 022ac800-ios-sim-3-1-1 ios-sim@3.1.1
+43 silly lockFile 022ac800-ios-sim-3-1-1 ios-sim@3.1.1
+44 silly lockFile 03dce7cc-ios-sim ios-sim@
+45 silly lockFile 03dce7cc-ios-sim ios-sim@
+46 silly resolved [ { name: 'ios-sim',
+46 silly resolved     version: '3.1.1',
+46 silly resolved     description: 'launch iOS apps into the iOS Simulator from the command line (Xcode 6.0)',
+46 silly resolved     main: 'ios-sim',
+46 silly resolved     scripts: { preinstall: 'rake build' },
+46 silly resolved     bin: { 'ios-sim': 'build/Release/ios-sim' },
+46 silly resolved     repository: { type: 'git', url: 'https://github.com/phonegap/ios-sim' },
+46 silly resolved     keywords: [ 'ios-sim', 'iOS Simulator' ],
+46 silly resolved     author: { name: 'Landon Fuller, Jeff Haynie, Eloy Duran, Shazron Abdullah' },
+46 silly resolved     license: 'MIT',
+46 silly resolved     gitHead: 'c6ec64397e5fa462f1ea2d4e4fdc123a856618f9',
+46 silly resolved     bugs: { url: 'https://github.com/phonegap/ios-sim/issues' },
+46 silly resolved     homepage: 'https://github.com/phonegap/ios-sim',
+46 silly resolved     _id: 'ios-sim@3.1.1',
+46 silly resolved     _shasum: '1129c3fda31b917ef656b8c53fd276392b51c6e8',
+46 silly resolved     _from: 'ios-sim@',
+46 silly resolved     _npmVersion: '1.4.14',
+46 silly resolved     _npmUser: { name: 'shazron', email: 'shazron@gmail.com' },
+46 silly resolved     maintainers: [ [Object] ],
+46 silly resolved     dist:
+46 silly resolved      { shasum: '1129c3fda31b917ef656b8c53fd276392b51c6e8',
+46 silly resolved        tarball: 'http://registry.npmjs.org/ios-sim/-/ios-sim-3.1.1.tgz' },
+46 silly resolved     directories: {},
+46 silly resolved     _resolved: 'https://registry.npmjs.org/ios-sim/-/ios-sim-3.1.1.tgz' } ]
+47 info install ios-sim@3.1.1 into /usr/local/lib
+48 info installOne ios-sim@3.1.1
+49 verbose lib/node_modules/ios-sim unbuild
+50 verbose tar unpack /Users/mark/.npm/ios-sim/3.1.1/package.tgz
+51 silly lockFile 5027580f-r-local-lib-node-modules-ios-sim tar:///usr/local/lib/node_modules/ios-sim
+52 verbose lock tar:///usr/local/lib/node_modules/ios-sim /Users/mark/.npm/5027580f-r-local-lib-node-modules-ios-sim.lock
+53 silly lockFile 1a03fade-rk-npm-ios-sim-3-1-1-package-tgz tar:///Users/mark/.npm/ios-sim/3.1.1/package.tgz
+54 verbose lock tar:///Users/mark/.npm/ios-sim/3.1.1/package.tgz /Users/mark/.npm/1a03fade-rk-npm-ios-sim-3-1-1-package-tgz.lock
+55 silly gunzTarPerm modes [ '755', '644' ]
+56 error Error: EACCES, mkdir '/usr/local/lib/node_modules/ios-sim'
+56 error  { [Error: EACCES, mkdir '/usr/local/lib/node_modules/ios-sim']
+56 error   errno: 3,
+56 error   code: 'EACCES',
+56 error   path: '/usr/local/lib/node_modules/ios-sim',
+56 error   fstream_type: 'Directory',
+56 error   fstream_path: '/usr/local/lib/node_modules/ios-sim',
+56 error   fstream_class: 'DirWriter',
+56 error   fstream_stack:
+56 error    [ '/usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23',
+56 error      '/usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:46:53',
+56 error      'Object.oncomplete (fs.js:107:15)' ] }
+57 error Please try running this command again as root/Administrator.
+58 error System Darwin 14.0.0
+59 error command "node" "/usr/local/bin/npm" "install" "-g" "ios-sim"
+60 error cwd /wwwroot/mobile/minds
+61 error node -v v0.10.33
+62 error npm -v 1.4.28
+63 error path /usr/local/lib/node_modules/ios-sim
+64 error fstream_path /usr/local/lib/node_modules/ios-sim
+65 error fstream_type Directory
+66 error fstream_class DirWriter
+67 error code EACCES
+68 error errno 3
+69 error stack Error: EACCES, mkdir '/usr/local/lib/node_modules/ios-sim'
+70 error fstream_stack /usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23
+70 error fstream_stack /usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:46:53
+70 error fstream_stack Object.oncomplete (fs.js:107:15)
+71 verbose exit [ 3, true ]

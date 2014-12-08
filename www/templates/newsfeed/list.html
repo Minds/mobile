@@ -1,0 +1,16 @@
+<ion-view title="Newsfeed">
+	<ion-content>
+
+		<ion-list>
+
+			<ion-item ng-repeat="activity in newsfeedItems" type="item-text-wrap" href="#/tab/newsfeed/{{activity.guid}}">
+				<h3>{{activity.title}}</h3>
+				<p>
+					{{activity.description}}
+				</p>
+			</ion-item>
+
+		</ion-list>
+
+	</ion-content>
+</ion-view>

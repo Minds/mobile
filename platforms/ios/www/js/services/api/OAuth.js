@@ -24,22 +24,30 @@ define(['angular'], function (angular) {
 			timestamp : 0,
 			
 			login: function(username, password, callback){
-				
-				console.log(username, password);
-				$http.post($rootScope.node_url + 'services/api/rest/json', {
-					method: 'minds.login',
-					username: username,
-					password: password
+
+				$http({
+					method : 'POST',
+					url: $rootScope.node_url + 'oauth2/token',
+					data: {
+						'grant_type': 'password',
+						'client_id': '389108873258078208',
+						'client_secret': '360aebf8fe2747c5af044a2c8a3e69eb',
+						'username': username,
+						'password': password
+					},
+					headers : {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'}
 				}).
 				  success(function(data, status, headers, config) {
-				   console.log('success');
-				   console.log(data, status, headers, config);
+				  	alert('woohooo! you\'re access token is' + data.access_token);
+				  	alert('we are now going to commence the grant');
+			
 				  }).
 				  error(function(data, status, headers, config) {
-				    console.log('fail..');
+				    console.log('fail..', data, status, headers, config);
+				    alert('fail...');
 				  });
 			
-				callback(true);
+				//callback(true);
 				
 			}
 

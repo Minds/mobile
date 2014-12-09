@@ -14,6 +14,7 @@ define(function(require) {
 		directives = angular.module('app.directives', ['app.services']);
 
 	directives.directive('activityView', require('directives/activityView'));
+	directives.directive('ownerBriefView', require('directives/ownerBriefView'));
 	
 	return directives;
 }); 

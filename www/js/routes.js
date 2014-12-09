@@ -40,6 +40,15 @@ define(['app'], function (app) {
                         }
                     }
                 })
+                .state('tab.newsfeed-compose', {
+                    url: '/newsfeed/compose',
+                    views: {
+                        'newsfeed-tab': {
+                            templateUrl: 'templates/newsfeed/compose.html',
+                            controller: 'NewsfeedComposerCtrl'
+                        }
+                    }
+                })
                 .state('tab.gatherings', {
                     url: '/gatherings',
                     views: {

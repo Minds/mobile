@@ -4,13 +4,12 @@ define(['angular'], function (angular) {
     "use strict";
 
     var directive = function () {
-    	return function (scope, elm, attrs) {
-        	elm.text('hello');
-        };
-        return function(){
+	 	return {
        		restrict: 'E',
-			templateURL: 'activity.html'
-        }
+			templateUrl: function(elem, attr){
+				return 'templates/directives/activity.html';
+			}
+       	 };
     };
 
     directive.$inject = [];

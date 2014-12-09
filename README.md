@@ -22,7 +22,44 @@ _Angularjs is a MVC framework which make maintaing and development app easy_
 _RequireJS is a file and module loader used to improve speed and quality of code and bring sanity to developers_
 
 ##Contributing
-More details to come.
+
+You will need to a few tools in order to contribute to this project:
+
+#### NPM
+
+Ubuntu:
+```
+curl -sL https://deb.nodesource.com/setup | sudo bash -
+sudo apt-get install -y nodejs
+```
+
+Mac:
+```
+brew install node
+```
+Don't have brew?
+```
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+
+#### Grunt
+```
+sudo npm -g install grunt-cli
+```
+
+#### Run-once setup
+
+```
+npm install
+```
+
+### Compiling / Building
+
+You will need to run the following command to compile the css files.
+
+```
+grunt compile
+```
 
 ##TODO:
 
@@ -40,3 +77,4 @@ More details to come.
   - [ ] Profile
   - [ ] Archive
 - [ ] Improve UI/UX
+- [ ] Unit tests

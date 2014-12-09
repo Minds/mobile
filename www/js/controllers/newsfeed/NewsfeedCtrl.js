@@ -9,7 +9,11 @@ define(function () {
     'use strict';
 
     function ctrl($scope, NewsfeedAPI) {
-        $scope.newsfeedItems = NewsfeedAPI.all();
+    	
+    	NewsfeedAPI.all(function(activity){
+    		$scope.newsfeedItems = activity;
+    	});
+        
     }
 
     ctrl.$inject = ['$scope', 'NewsfeedAPI'];

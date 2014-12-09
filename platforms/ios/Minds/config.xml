@@ -19,6 +19,9 @@
     <feature name="LocalStorage">
         <param name="ios-package" value="CDVLocalStorage" />
     </feature>
+    <feature name="Console">
+        <param name="ios-package" value="CDVLogger" />
+    </feature>
     <name>Minds</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
@@ -27,10 +30,10 @@
         Apache Cordova Team
     </author>
     <content src="index.html" />
-    <access origin="*" />
     <preference name="fullscreen" value="false" />
     <preference name="webviewbounce" value="false" />
     <preference name="UIWebViewBounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="StatusBarOverlaysWebView" value="true" />
+    <access origin="*" />
 </widget>

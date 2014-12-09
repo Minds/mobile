@@ -10,7 +10,7 @@
 define(['angular'], function (angular) {
     "use strict";
 
-    var factory = function () {
+    var factory = function (Client) {
 
         var activity = [
             { guid: 0, title: 'Pen', description: 'good for writing things with' },
@@ -20,8 +20,11 @@ define(['angular'], function (angular) {
         ];
 
         return {
-            all: function () {
-                return activity;
+            all: function (callback) {
+            	Client.get('mark', function(data){
+            		console.log("API::NEWSFEED: Data returned, sending callback to caller");
+            		return callback(data.activity[""]); //@todo try and resolve this in the service, seems like a bug
+            	});
             },
             get: function (guid) {
                 return activity[guid];
@@ -30,6 +33,6 @@ define(['angular'], function (angular) {
 
     };
 
-    factory.$inject = [];
+    factory.$inject = ['Client'];
     return factory;
 });

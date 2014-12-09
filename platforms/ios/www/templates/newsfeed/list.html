@@ -4,10 +4,7 @@
 		<ion-list>
 
 			<ion-item ng-repeat="activity in newsfeedItems" type="item-text-wrap" href="#/tab/newsfeed/{{activity.guid}}">
-				<h3>{{activity.title}}</h3>
-				<p>
-					{{activity.description}}
-				</p>
+				<activity-view></activity-view>
 			</ion-item>
 
 		</ion-list>

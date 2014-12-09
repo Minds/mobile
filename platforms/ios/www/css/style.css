@@ -1,12 +1,1 @@
-
-/**
- * Ionic overrides
- */
-.bar-header{
-	background:#FAFAFA;
-	color:#FFF;
-}
-
-.bar-header h1{
-	color:#333;
-}
+.button.button-positive{background:#4690D6}.bar-header{background:#FAFAFA;color:#FFF}.bar-header h1{color:#333}

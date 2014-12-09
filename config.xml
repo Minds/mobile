@@ -19,5 +19,7 @@
         </feature>
 
     <preference name="StatusBarOverlaysWebView" value="true" />
+
+    <access origin="*"/>
   
 </widget>

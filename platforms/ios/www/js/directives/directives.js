@@ -13,6 +13,7 @@ define(function(require) {
 		services = require('services/services'), 
 		directives = angular.module('app.directives', ['app.services']);
 
-	//directives.directive('appVersion', require('directives/VersionDirective'));
+	directives.directive('activityView', require('directives/activityView'));
+	
 	return directives;
 }); 

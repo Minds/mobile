@@ -18,8 +18,8 @@ define(function (require) {
 	controllers.controller('NewsfeedCtrl', require('controllers/newsfeed/NewsfeedCtrl'));
 	controllers.controller('NewsfeedViewCtrl', require('controllers/newsfeed/NewsfeedViewCtrl'));
     
-	controllers.run(['$rootScope', function ($rootScope) {
-	
+	controllers.run(['$rootScope', 'NODE_URL', function ($rootScope, NODE_URL) {
+		$rootScope.node_url = NODE_URL;
 	}]);
     
 	return controllers;

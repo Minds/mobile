@@ -14,8 +14,8 @@ define(['angular'], function (angular) {
 
         return {
             all: function (callback) {
-            	Client.get('mark', function(data){
-            		return callback(data.activity[""]); //@todo try and resolve this in the service, seems like a bug
+            	Client.get('api/v1/newsfeed', function(data){
+            		return callback(data.activity); 
             	});
             },
             get: function (guid) {

@@ -14,6 +14,7 @@ define(function(require) {
 		services = angular.module('app.services', ['app.config']);
 
 	services.factory('OAuth', require('services/api/OAuth'));
+	services.factory('storage', require('services/storage'));
 	services.factory('Client', require('services/api/Client'));
 	services.factory('NewsfeedAPI', require('services/api/Newsfeed'));
 

@@ -13,14 +13,17 @@ define(['angular'], function (angular) {
     var factory = function (OAuth, $rootScope, $http) {
 
         return {
-            get: function (endpoint, callback) {
+            get: function (endpoint, success_callback, error_callback) {
 				$http({
 					method: 'GET',
-					url: $rootScope.node_url + endpoint + '?view=json',
-					data: { view: 'json' }
+					url: $rootScope.node_url + endpoint,
+					params: OAuth.buildParams({ limit:1 })
 					}).
 						success(function(data){
-							callback(data);
+							success_callback(data);
+						}).
+						error(function(data){
+							error_callback(data);
 						});
             },
            post: function (guid) {

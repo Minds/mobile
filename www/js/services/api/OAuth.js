@@ -10,11 +10,11 @@
 define(['angular'], function (angular) {
     "use strict";
 
-    var factory = function ($rootScope, OAuthConfig, $http) {
+    var factory = function ($rootScope, OAuthConfig, $http, storage) {
 
 		var time = Math.round(new Date().getTime() / 1000);
 
-        return {
+        var self = {
         	
 			client_id : OAuthConfig.client_id,
 			client_secret : OAuthConfig.client_secret,
@@ -22,6 +22,14 @@ define(['angular'], function (angular) {
 			//refresh_token : localStorage.getItem('refresh_token'),
 			access_token : null,
 			timestamp : 0,
+			
+			buildParams : function(params){
+				return angular.extend(params, {
+					'client_id': '389108873258078208',
+					'client_secret': '360aebf8fe2747c5af044a2c8a3e69eb',
+					'access_token': storage.get('access_token')
+				});
+			},
 			
 			login: function(username, password, callback){
 
@@ -38,23 +46,46 @@ define(['angular'], function (angular) {
 					headers : {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'}
 				}).
 				  success(function(data, status, headers, config) {
-				  	alert('woohooo! you\'re access token is' + data.access_token);
-				  	alert('we are now going to commence the grant');
+				  	storage.set('access_token', data.access_token);
+				  	storage.set('loggedin', true);
+
+					callback(true);
+				  }).
+				  error(function(data, status, headers, config) {
+				    console.log('fail..', data, status, headers, config);
+				    callback(false);
+				  });
+				
+			},
 			
+			refresh: function(token, callback){
+				$http({
+					method : 'POST',
+					url: $rootScope.node_url + 'oauth2/token',
+					data: {
+						'grant_type': 'refresh_token',
+						'client_id': '389108873258078208',
+						'client_secret': '360aebf8fe2747c5af044a2c8a3e69eb',
+						'refresh_token': token
+					},
+					headers : {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'}
+				}).
+				  success(function(data, status, headers, config) {
+					//self.refresh(data.access_token);
+					console.log(data);
 				  }).
 				  error(function(data, status, headers, config) {
 				    console.log('fail..', data, status, headers, config);
 				    alert('fail...');
 				  });
-			
-				//callback(true);
-				
 			}
 
 		};
+		
+		return self;
 
     };
 
-    factory.$inject = ['$rootScope', 'OAuthConfig', '$http'];
+    factory.$inject = ['$rootScope', 'OAuthConfig', '$http', 'storage'];
     return factory;
 });

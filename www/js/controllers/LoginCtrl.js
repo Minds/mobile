@@ -8,13 +8,30 @@
 define(function() {
 	'use strict';
 
-	function ctrl($scope, $state, OAuth) {
+	function ctrl($scope, $state, OAuth, $ionicPopup, storage) {
+
+		if(storage.get('access_token') && storage.get('loggedin'))
+			$state.go('tab.newsfeed');
 
 		$scope.login = function() {
-			//$state.go('tab.newsfeed');
-			OAuth.login($scope.username, $scope.password, function(data){
-				if(data)
+
+			
+			OAuth.login($scope.username, $scope.password, function(success){
+				if(success){
 					$state.go('tab.newsfeed');
+				} else {
+					
+						var alertPopup = $ionicPopup.alert({
+							title: 'Ooops..',
+							template: 'We couldn\'t log you in. Please check your credentials and try again.'
+						});
+						
+						//clear the password?
+						alertPopup.then(function(res) {
+							
+						});
+
+				}
 			});
 			
 		};
@@ -22,7 +39,7 @@ define(function() {
 	}
 
 
-	ctrl.$inject = ['$scope', '$state', 'OAuth'];
+	ctrl.$inject = ['$scope', '$state', 'OAuth', '$ionicPopup', 'storage'];
 	return ctrl;
 
 }); 

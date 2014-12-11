@@ -16,6 +16,7 @@ define(function (require) {
 
 	controllers.controller('LoginCtrl', require('controllers/LoginCtrl'));
 	controllers.controller('NewsfeedCtrl', require('controllers/newsfeed/NewsfeedCtrl'));
+	controllers.controller('NewsfeedComposerCtrl', require('controllers/newsfeed/NewsfeedCompoerCtrl'));
 	controllers.controller('NewsfeedViewCtrl', require('controllers/newsfeed/NewsfeedViewCtrl'));
     
 	controllers.run(['$rootScope', 'NODE_URL', function ($rootScope, NODE_URL) {

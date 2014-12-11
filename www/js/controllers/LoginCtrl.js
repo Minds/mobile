@@ -21,15 +21,15 @@ define(function() {
 					$state.go('tab.newsfeed');
 				} else {
 					
-						var alertPopup = $ionicPopup.alert({
-							title: 'Ooops..',
-							template: 'We couldn\'t log you in. Please check your credentials and try again.'
-						});
+					var alertPopup = $ionicPopup.alert({
+						title: 'Ooops..',
+						template: 'We couldn\'t log you in. Please check your credentials and try again.'
+					});
+					
+					//clear the password?
+					alertPopup.then(function(res) {
 						
-						//clear the password?
-						alertPopup.then(function(res) {
-							
-						});
+					});
 
 				}
 			});

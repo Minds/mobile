@@ -13,6 +13,7 @@ define(['angular'], function (angular) {
     var factory = function (OAuth, $rootScope, $http) {
 
         return {
+        
             get: function (endpoint, success_callback, error_callback) {
 				$http({
 					method: 'GET',
@@ -26,9 +27,22 @@ define(['angular'], function (angular) {
 							error_callback(data);
 						});
             },
-           post: function (guid) {
-                return 'post req';
+            
+			post: function (endpoint, data, success_callback, error_callback) {
+                $http({
+					method: 'POST',
+					url: $rootScope.node_url + endpoint,
+					data: OAuth.buildParams(data),
+					headers : {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'}
+					}).
+						success(function(data){
+							success_callback(data);
+						}).
+						error(function(data){
+							error_callback(data);
+						});
             }
+            
         };
 
     };

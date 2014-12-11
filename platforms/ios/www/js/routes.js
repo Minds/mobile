@@ -31,21 +31,21 @@ define(['app'], function (app) {
                         }
                     }
                 })
-                .state('tab.newsfeed-view', {
-                    url: '/newsfeed/:guid',
-                    views: {
-                        'newsfeed-tab': {
-                            templateUrl: 'templates/newsfeed/view.html',
-                            controller: 'NewsfeedViewCtrl'
-                        }
-                    }
-                })
                 .state('tab.newsfeed-compose', {
                     url: '/newsfeed/compose',
                     views: {
                         'newsfeed-tab': {
                             templateUrl: 'templates/newsfeed/compose.html',
                             controller: 'NewsfeedComposerCtrl'
+                        }
+                    }
+                })
+                .state('tab.newsfeed-view', {
+                    url: '/newsfeed/:guid',
+                    views: {
+                        'newsfeed-tab': {
+                            templateUrl: 'templates/newsfeed/view.html',
+                            controller: 'NewsfeedViewCtrl'
                         }
                     }
                 })

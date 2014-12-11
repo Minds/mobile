@@ -1,17 +1,23 @@
-<ion-view title="Newsfeed" ng-controller="NewsfeedCtrl">
-	<ion-nav-buttons side="right">
-		<button class="button button-clear icon ion-compose" href="#/tab/newsfeed/compose"></button>
-	</ion-nav-buttons>
+<ion-view title="Compose" ng-controller="NewsfeedComposerCtrl">
 
 	<ion-content>
 
-		<ion-list>
+		<label class="item item-input item-stacked-label">
+			<span class="input-label">textarea label</span>
+		
+			<textarea placeholder="yyy" rows="8" cols="10" ng-model="$parent.message">
+			</textarea>
+		</label>
+		
+		<div class="padding">
 
-			<ion-item ng-repeat="activity in newsfeedItems" type="item-text-wrap" href="#/tab/newsfeed/{{activity.guid}}">
-				<activity-view></activity-view>
-			</ion-item>
+            <div>
+                <button class="button button-block button-positive" ng-click="post()">
+                    Post
+                </button>
+            </div>
 
-		</ion-list>
-
+        </div>
+		
 	</ion-content>
 </ion-view>

@@ -13,14 +13,23 @@ define(['angular'], function (angular) {
     var factory = function (Client) {
 
         return {
+        
             all: function (callback) {
             	Client.get('api/v1/newsfeed', function(data){
             		return callback(data.activity); 
             	});
             },
-            get: function (guid) {
-                return activity[guid];
+            
+            post: function(data, callback){
+            	Client.post('api/v1/newsfeed', data, 
+            		function(success){
+            			return callback(success); 
+            		},
+            		function(fail){
+            			console.log('post fail');
+            		});
             }
+            
         };
 
     };

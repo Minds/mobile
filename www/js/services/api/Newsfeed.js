@@ -14,20 +14,24 @@ define(['angular'], function (angular) {
 
         return {
         
-            all: function (callback) {
-            	Client.get('api/v1/newsfeed', function(data){
-            		return callback(data.activity); 
+            all: function (options, success_callback, error_callback) {
+            
+            	Client.get('api/v1/newsfeed', options, function(data){
+            		return success_callback(data); 
             	});
+            	
             },
             
-            post: function(data, callback){
+            post: function(data, success_callback, error_callback){
+            
             	Client.post('api/v1/newsfeed', data, 
             		function(success){
-            			return callback(success); 
+            			return success_callback(success); 
             		},
-            		function(fail){
-            			console.log('post fail');
+            		function(error){
+            			return error_callback(error);
             		});
+            		
             }
             
         };

@@ -14,8 +14,10 @@ define(function () {
 
     		NewsfeedAPI.post({
     			message: $scope.message
-	    	},function(success){
+	    	}, function(success){
 	    		$state.go('tab.newsfeed');
+	    	}, function(error){
+	    		alert('there was an error and we couldn\'t save!');
 	    	});
 	    	
 		};

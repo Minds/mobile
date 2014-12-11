@@ -14,33 +14,37 @@ define(['angular'], function (angular) {
 
         return {
         
-            get: function (endpoint, success_callback, error_callback) {
+            get: function (endpoint, options, success_callback, error_callback) {
+            
 				$http({
 					method: 'GET',
 					url: $rootScope.node_url + endpoint,
-					params: OAuth.buildParams({ limit:1 })
+					params: OAuth.buildParams(options)
 					}).
-						success(function(data){
-							success_callback(data);
-						}).
-						error(function(data){
-							error_callback(data);
-						});
+				      success(function(data){
+						success_callback(data);
+					  }).
+					  error(function(data){
+						error_callback(data);
+					  });
+						
             },
             
 			post: function (endpoint, data, success_callback, error_callback) {
+			
                 $http({
 					method: 'POST',
 					url: $rootScope.node_url + endpoint,
 					data: OAuth.buildParams(data),
 					headers : {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'}
 					}).
-						success(function(data){
-							success_callback(data);
-						}).
-						error(function(data){
-							error_callback(data);
-						});
+					  success(function(data){
+						success_callback(data);
+					  }).
+					  error(function(data){
+						error_callback(data);
+					  });
+						
             }
             
         };

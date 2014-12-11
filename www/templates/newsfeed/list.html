@@ -1,4 +1,5 @@
-<ion-view title="Newsfeed" ng-controller="NewsfeedCtrl">
+<ion-view title="Newsfeed" ng-controller="NewsfeedCtrl" class="view-bg">
+	
 	<ion-nav-buttons side="right">
 		<a class="button button-clear icon ion-compose" href="#/tab/newsfeed/compose"></a>
 	</ion-nav-buttons>
@@ -6,8 +7,13 @@
 	<ion-content>
 
 		<ion-list>
+		
+			<ion-refresher
+				pulling-text="Pull to refresh..."
+				on-refresh="refresh()">
+			</ion-refresher>
 
-			<ion-item ng-repeat="activity in newsfeedItems" type="item-text-wrap" href="#/tab/newsfeed/{{activity.guid}}">
+			<ion-item ng-repeat="activity in newsfeedItems" class="activity-item" type="item-text-wrap" href="#/tab/newsfeed/{{activity.guid}}">
 				<activity-view></activity-view>
 			</ion-item>
 

@@ -49,11 +49,21 @@ define(['app'], function (app) {
                         }
                     }
                 })
-                .state('tab.gatherings', {
-                    url: '/gatherings',
+                .state('tab.chat', {
+                    url: '/gatherings/conversations',
                     views: {
-                        'gatherings-tab': {
-                            templateUrl: 'templates/gatherings/list.html'
+                        'chat-tab': {
+                            templateUrl: 'templates/gatherings/chat/list.html',
+                            controller: 'ChatCtrl'
+                        }
+                    }
+                })
+                .state('tab.chat-conversation', {
+                    url: '/gatherings/conversations/:username',
+                    views: {
+                        'chat-tab': {
+                            templateUrl: 'templates/gatherings/chat/conversation.html',
+                            controller: 'ChatConversationCtrl'
                         }
                     }
                 })

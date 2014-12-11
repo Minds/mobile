@@ -1,0 +1,9 @@
+.activity-item{
+
+}
+
+.activity-item .owner-brief{
+	display:block;
+	overflow:visible;
+}
+

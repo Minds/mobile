@@ -1,6 +1,6 @@
 /**
  * Minds::mobile
- * Newsfeed controller
+ * Chat controller
  * 
  * @author Mark Harding
  */
@@ -8,16 +8,12 @@
 define(function () {
     'use strict';
 
-    function ctrl($scope, NewsfeedAPI, $filter) {
-    	$scope.newsfeedItems = [];
+    function ctrl($scope, Client) {
+    
+    	$scope.conversations = [];
     	$scope.next  = "";
     	$scope.hasMoreData = true;
-    	
-    	/*NewsfeedAPI.all({ limit: 12}, function(data){
-    		$scope.newsfeedItems = data.activity;
-    		$scope.next = data['load-next'];
-    	});*/
-    	
+
     	/**
     	 * Load more posts
     	 */
@@ -26,17 +22,17 @@ define(function () {
     		console.log('loading next');
     		console.log($scope.next);
     		
-    		NewsfeedAPI.all({ limit: 12, offset: $scope.next }, 
+    		Client.get('api/v1/conversations', { limit: 12, offset: $scope.next }, 
     			function(data){
     		
-	    			if(!data.activity){
+	    			if(!data.conversations){
 	    				$scope.hasMoreData = false;
 	    				return false;
 	    			} else {
 	    				$scope.hasMoreData = true;
 	    			};
 	    			
-	    			$scope.newsfeedItems = $scope.newsfeedItems.concat(data.activity);
+	    			$scope.conversations = $scope.conversations.concat(data.conversations);
 	
 	    			$scope.next = data['load-next'];
 	    			
@@ -56,25 +52,13 @@ define(function () {
 		
 		$scope.refresh = function(){
 			
-			NewsfeedAPI.all({ limit: 12, offset: '' }, 
-				function(data){
-    		
-	    			$scope.newsfeedItems = data.activity;
-	
-	    			$scope.next = data['load-next'];
-	    			
-	    			$scope.$broadcast('scroll.refreshComplete');
-	
-	    		}, 
-	    		function(error){ 
-	    			alert('error'); 
-	    		});
+			
 			
 		};
 		
     }
 
-    ctrl.$inject = ['$scope', 'NewsfeedAPI', '$filter'];
+    ctrl.$inject = ['$scope', 'Client'];
     return ctrl;
     
 });

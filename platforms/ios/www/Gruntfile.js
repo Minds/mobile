@@ -6,8 +6,10 @@ module.exports = function (grunt) {
             compress: {
                 files: {
                     'css/style.css': [
+                    	'css/core.css',
                         'css/buttons.css', 
-                        'css/components.css'
+                        'css/components.css',
+                        'css/newsfeed.css'
                     ]
                 }
             }

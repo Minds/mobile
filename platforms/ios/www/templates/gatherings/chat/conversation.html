@@ -1,0 +1,23 @@
+<ion-view title="{{conversation.name}}" ng-controller="ChatConversationCtrl" class="view-bg">
+    
+    <ion-nav-buttons side="right">
+        <a class="button button-clear icon ion-compose" href="#/tab/newsfeed/compose"></a>
+    </ion-nav-buttons>
+
+    <ion-content>
+
+        <ion-list>
+        
+            <ion-refresher
+                pulling-text="Load earlier messages.."
+                on-refresh="loadMore()">
+            </ion-refresher>
+
+            <ion-item ng-repeat="message in messages" class="messages" type="item-text-wrap">
+                <owner-brief-view owner="{{message.ownerObj}}" ts="{{message.time_created}}"></owner-brief-view></p>
+            </ion-item>
+
+        </ion-list>
+
+    </ion-content>
+</ion-view>

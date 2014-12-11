@@ -26,22 +26,27 @@ define(function () {
     		console.log('loading next');
     		console.log($scope.next);
     		
-    		NewsfeedAPI.all({ limit: 12, offset: $scope.next }, function(data){
+    		NewsfeedAPI.all({ limit: 12, offset: $scope.next }, 
+    			function(data){
     		
-    			if(!data.activity){
-    				$scope.hasMoreData = false;
-    				return false;
-    			} else {
-    				$scope.hasMoreData = true;
-    			};
-    			
-    			$scope.newsfeedItems = $scope.newsfeedItems.concat(data.activity);
-
-    			$scope.next = data['load-next'];
-    			
-    			$scope.$broadcast('scroll.infiniteScrollComplete');
-
-    		}, function(error){ alert('error'); });
+	    			if(!data.activity){
+	    				$scope.hasMoreData = false;
+	    				return false;
+	    			} else {
+	    				$scope.hasMoreData = true;
+	    			};
+	    			
+	    			$scope.newsfeedItems = $scope.newsfeedItems.concat(data.activity);
+	
+	    			$scope.next = data['load-next'];
+	    			
+	    			$scope.$broadcast('scroll.infiniteScrollComplete');
+	
+	    		}, 
+	    		function(error){ 
+	    			alert('error'); 
+	    		});
+	    		
     	};
         
         $scope.$on('$stateChangeSuccess', function() {
@@ -49,9 +54,23 @@ define(function () {
 			//$scope.loadMore();
 		});
 		
-		/*$scope.canLoad = function(){
-			return true;
-		};*/
+		$scope.refresh = function(){
+			
+			NewsfeedAPI.all({ limit: 12, offset: '' }, 
+				function(data){
+    		
+	    			$scope.newsfeedItems = data.activity;
+	
+	    			$scope.next = data['load-next'];
+	    			
+	    			$scope.$broadcast('scroll.refreshComplete');
+	
+	    		}, 
+	    		function(error){ 
+	    			alert('error'); 
+	    		});
+			
+		};
 		
     }
 

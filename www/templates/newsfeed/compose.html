@@ -1,23 +1,15 @@
 <ion-view title="Compose" ng-controller="NewsfeedComposerCtrl">
 
+    <ion-nav-buttons side="right">
+        <a class="button button-not-clear icon-hide ion-paper-airplane-hide" ng-click="post()">Post</a>
+    </ion-nav-buttons>
+
 	<ion-content>
 
 		<label class="item item-input item-stacked-label">
-			<span class="input-label">textarea label</span>
-		
-			<textarea placeholder="yyy" rows="8" cols="10" ng-model="$parent.message">
+			<textarea placeholder="Enter a message here" rows="8" cols="10" ng-model="$parent.message">
 			</textarea>
 		</label>
-		
-		<div class="padding">
 
-            <div>
-                <button class="button button-block button-positive" ng-click="post()">
-                    Post
-                </button>
-            </div>
-
-        </div>
-		
 	</ion-content>
 </ion-view>

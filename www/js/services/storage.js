@@ -18,10 +18,15 @@ define(['angular'], function (angular) {
             },
             get: function(key){
             	var val = ls.getItem(key);
-            	if(val)
-            		return JSON.parse(val);
-            	else
+            	if(val){
+            		try{
+            			return JSON.parse(val);
+            		} catch(e) {
+            			return false;
+            		}
+            	} else {
             		return false;
+            	}
             },
             remove: function(key){
             	return ls.removeItem(key);

@@ -15,6 +15,7 @@ define(function(require) {
 
 	services.factory('OAuth', require('services/api/OAuth'));
 	services.factory('storage', require('services/storage'));
+	services.factory('Cacher', require('services/cacher'));
 	services.factory('Client', require('services/api/Client'));
 	services.factory('NewsfeedAPI', require('services/api/Newsfeed'));
 

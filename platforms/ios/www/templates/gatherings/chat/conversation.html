@@ -15,6 +15,7 @@
 
             <ion-item ng-repeat="message in messages" class="messages" type="item-text-wrap">
                 <owner-brief-view owner="{{message.ownerObj}}" ts="{{message.time_created}}"></owner-brief-view>
+               {{message.message}}
                 <decrypt message="{{message.message}}"></decrypt>
             </ion-item>
 

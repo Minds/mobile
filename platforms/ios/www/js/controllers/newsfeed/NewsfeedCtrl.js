@@ -8,23 +8,30 @@
 define(function () {
     'use strict';
 
-    function ctrl($scope, NewsfeedAPI, $filter) {
-    	$scope.newsfeedItems = [];
-    	$scope.next  = "";
-    	$scope.hasMoreData = true;
+    function ctrl($scope, NewsfeedAPI, $filter, $ionicScrollDelegate, Cacher) {
     	
-    	/*NewsfeedAPI.all({ limit: 12}, function(data){
-    		$scope.newsfeedItems = data.activity;
-    		$scope.next = data['load-next'];
-    	});*/
+		if(Cacher.get('newsfeed.items'))
+			$scope.newsfeedItems = Cacher.get('newsfeed.items');
+		else
+    		$scope.newsfeedItems =  [];
+    	
+    	if(Cacher.get('newsfeed.next'))
+    		$scope.next = Cacher.get('newsfeed.next');
+    	else
+    		$scope.next  = "";
+    	
+    	$scope.hasMoreData = true;
+    	console.log($scope.newsfeedItems);
+		//$ionicScrollDelegate.rememberScrollPosition('my-scroll-id');
+  		//$ionicScrollDelegate.scrollToRememberedPosition();
     	
     	/**
     	 * Load more posts
     	 */
     	$scope.loadMore = function(){
-    			
-    		console.log('loading next');
-    		console.log($scope.next);
+    	
+    		if(!$scope.hasMoreData)
+    			return;
     		
     		NewsfeedAPI.all({ limit: 12, offset: $scope.next }, 
     			function(data){
@@ -37,8 +44,10 @@ define(function () {
 	    			};
 	    			
 	    			$scope.newsfeedItems = $scope.newsfeedItems.concat(data.activity);
+	    			Cacher.put('newsfeed.items', $scope.newsfeedItems );
 	
 	    			$scope.next = data['load-next'];
+	    			Cacher.put('newsfeed.item', $scope.next);
 	    			
 	    			$scope.$broadcast('scroll.infiniteScrollComplete');
 	
@@ -56,7 +65,7 @@ define(function () {
 		
 		$scope.refresh = function(){
 			
-			NewsfeedAPI.all({ limit: 12, offset: '' }, 
+			NewsfeedAPI.all({ limit: 12, offset: '', cache_break: Date.now() }, 
 				function(data){
     		
 	    			$scope.newsfeedItems = data.activity;
@@ -74,7 +83,7 @@ define(function () {
 		
     }
 
-    ctrl.$inject = ['$scope', 'NewsfeedAPI', '$filter'];
+    ctrl.$inject = ['$scope', 'NewsfeedAPI', '$filter', '$ionicScrollDelegate', 'Cacher'];
     return ctrl;
     
 });

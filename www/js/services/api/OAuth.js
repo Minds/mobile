@@ -25,8 +25,8 @@ define(['angular'], function (angular) {
 			
 			buildParams : function(params){
 				return angular.extend(params, {
-					'client_id': '389108873258078208',
-					'client_secret': '360aebf8fe2747c5af044a2c8a3e69eb',
+					'client_id': OAuthConfig.client_id,
+					'client_secret': OAuthConfig.client_secret,
 					'access_token': storage.get('access_token')
 				});
 			},
@@ -38,8 +38,8 @@ define(['angular'], function (angular) {
 					url: $rootScope.node_url + 'oauth2/token',
 					data: {
 						'grant_type': 'password',
-						'client_id': '389108873258078208',
-						'client_secret': '360aebf8fe2747c5af044a2c8a3e69eb',
+						'client_id': self.client_id,
+						'client_secret': self.client_secret,
 						'username': username,
 						'password': password
 					},
@@ -64,8 +64,8 @@ define(['angular'], function (angular) {
 					url: $rootScope.node_url + 'oauth2/token',
 					data: {
 						'grant_type': 'refresh_token',
-						'client_id': '389108873258078208',
-						'client_secret': '360aebf8fe2747c5af044a2c8a3e69eb',
+						'client_id': self.client_id,
+						'client_secret': self.client_secret,
 						'refresh_token': token
 					},
 					headers : {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'}

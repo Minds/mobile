@@ -443,6 +443,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = Minds;
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -472,6 +473,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = Minds;
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

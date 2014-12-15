@@ -19,7 +19,8 @@ define(['angular'], function (angular) {
 				$http({
 					method: 'GET',
 					url: $rootScope.node_url + endpoint,
-					params: OAuth.buildParams(options)
+					params: OAuth.buildParams(options),
+					cache: true
 					}).
 				      success(function(data){
 						success_callback(data);

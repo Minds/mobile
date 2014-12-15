@@ -35,7 +35,7 @@ define(function () {
 	    				$scope.hasMoreData = false;
 	    				return false;
 	    			} else {
-	    				$scope.hasMoreData = true;
+	    				$scope.hasMoreData = false;
 	    			};
 	    			
 	    			$scope.conversations = $scope.conversations.concat(data.conversations);

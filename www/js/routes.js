@@ -76,6 +76,15 @@ define(['app'], function (app) {
                         }
                     }
                 })
+                .state('tab.channel', {
+                    url: '/channel/:username',
+                    views: {
+                        'channel-tab': {
+                            templateUrl: 'templates/channels/channel.html',
+                            controller: 'ChannelCtrl'
+                        }
+                    }
+                })
                 .state('tab.about', {
                     url: '/about',
                     views: {

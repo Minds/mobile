@@ -30,6 +30,12 @@ define(function (require) {
 	controllers.controller('ChatConversationCtrl', require('controllers/gatherings/ChatConversationCtrl'));
 	controllers.controller('ChatSetupCtrl', require('controllers/gatherings/ChatSetupCtrl'));
     
+    
+    /**
+     * Channels
+     */
+    controllers.controller('ChannelCtrl', require('controllers/channels/ChannelCtrl'));
+    
 	controllers.run(['$rootScope', 'NODE_URL', function ($rootScope, NODE_URL) {
 		$rootScope.node_url = NODE_URL;
 	}]);

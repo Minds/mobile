@@ -8,11 +8,17 @@
 define(function () {
     'use strict';
 
-    function ctrl($scope, Client) {
+    function ctrl($scope, $state, Client, storage) {
     
     	$scope.conversations = [];
     	$scope.next  = "";
     	$scope.hasMoreData = true;
+    	console.log(storage.get('private-key'));
+		
+		if(!storage.get('private-key')){
+    		$state.go('tab.chat-setup');
+    		return false;
+    	}
 
     	/**
     	 * Load more posts
@@ -58,7 +64,7 @@ define(function () {
 		
     }
 
-    ctrl.$inject = ['$scope', 'Client'];
+    ctrl.$inject = ['$scope', '$state', 'Client', 'storage'];
     return ctrl;
     
 });

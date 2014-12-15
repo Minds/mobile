@@ -13,7 +13,8 @@ requirejs.config({
         uiRouter:         '../vendors/angular-ui/angular-ui-router.min',
         ionic:            '../vendors/ionic/ionic.min',
         ionicAngular:     '../vendors/ionic/ionic-angular.min',
-        text:             '../vendors/text'
+        text:             '../vendors/text',
+        JSEncrypt:		  '../vendors/jsencrypt/jsencrypt'
     },
     shim: {
         angular : {exports : 'angular'},
@@ -21,7 +22,8 @@ requirejs.config({
         angularSanitize : {deps: ['angular']},
         uiRouter : {deps: ['angular']},
         ionic :  {deps: ['angular'], exports : 'ionic'},
-        ionicAngular: {deps: ['angular', 'ionic', 'uiRouter', 'angularAnimate', 'angularSanitize']}
+        ionicAngular: {deps: ['angular', 'ionic', 'uiRouter', 'angularAnimate', 'angularSanitize']},
+   		JSEncrypt : {exports: 'JSEncrypt'}
     },
     priority: [
         'angular',

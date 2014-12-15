@@ -8,13 +8,12 @@
 define(function () {
     'use strict';
 
-    function ctrl($scope, $stateParams, Client) {
+    function ctrl($scope, $stateParams, $state, Client, storage) {
     
     	$scope.messages = [];
     	$scope.next  = "";
     	$scope.hasMoreData = true;
-
-
+    	
     	/**
     	 * Load more posts
     	 */
@@ -22,11 +21,9 @@ define(function () {
 
     		console.log('loading messages from:' + $scope.next);
     		
-    		Client.get('api/v1/conversations/'+$stateParams.username, { limit: 12, offset: $scope.next }, 
+    		Client.get('api/v1/conversations/'+$stateParams.username, { limit: 6, offset: $scope.next }, 
     			function(data){
-    			
-    				console.log(data);
-    		
+    			    		
 	    			if(!data.messages){
 	    				$scope.hasMoreData = false;
 	    				return false;
@@ -56,7 +53,7 @@ define(function () {
 		
     }
 
-    ctrl.$inject = ['$scope', '$stateParams', 'Client'];
+    ctrl.$inject = ['$scope', '$stateParams', '$state', 'Client', 'storage'];
     return ctrl;
     
 });

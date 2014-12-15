@@ -1,0 +1,21 @@
+<ion-view title="Unlock" >
+
+    <ion-content ng-controller="ChatSetupCtrl" class="view-bg">
+
+         <label class="item item-input">
+            <span class="input-label">Password</span>
+            <input type="password" ng-model="password">
+        </label>
+        
+        <div class="padding">
+
+            <div>
+                <button class="button button-block button-positive" ng-click="unlock(password)">
+                    Unlock chat
+                </button>
+            </div>
+
+        </div>
+
+    </ion-content>
+</ion-view>

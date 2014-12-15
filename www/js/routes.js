@@ -67,6 +67,15 @@ define(['app'], function (app) {
                         }
                     }
                 })
+                .state('tab.chat-setup', {
+                    url: '/gatherings/key-setup',
+                    views: {
+                        'chat-tab': {
+                            templateUrl: 'templates/gatherings/chat/setup.html',
+                            controller: 'ChatSetupCtrl'
+                        }
+                    }
+                })
                 .state('tab.about', {
                     url: '/about',
                     views: {

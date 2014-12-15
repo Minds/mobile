@@ -17,7 +17,11 @@ define(['angular'], function (angular) {
             	return ls.setItem(key, JSON.stringify(value));
             },
             get: function(key){
-            	return JSON.parse(ls.getItem(key));
+            	var val = ls.getItem(key);
+            	if(val)
+            		return JSON.parse(val);
+            	else
+            		return false;
             },
             remove: function(key){
             	return ls.removeItem(key);

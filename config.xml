@@ -60,7 +60,11 @@
         <param name="ios-package" value="CDVDevice" />
         <param name="android-package" value="org.apache.cordova.device.Device" />
     </feature>
-    
+
+    <feature name="Capture">
+         <param name="android-package" value="org.apache.cordova.mediacapture.Capture" />
+        <param name="ios-package" value="CDVCapture" />
+    </feature>    
     
     <feature name="File">
         <param name="ios-package" value="CDVFile" />

@@ -23,6 +23,10 @@
                         {
                             "xml": "<feature name=\"FileTransfer\"><param name=\"ios-package\" value=\"CDVFileTransfer\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Capture\"><param name=\"ios-package\" value=\"CDVCapture\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -36,6 +40,12 @@
                         }
                     ],
                     "MobileCoreServices.framework": [
+                        {
+                            "xml": "false",
+                            "count": 2
+                        }
+                    ],
+                    "CoreGraphics.framework": [
                         {
                             "xml": "false",
                             "count": 1
@@ -56,6 +66,9 @@
             "PACKAGE_NAME": "com.minds.mobile"
         },
         "org.apache.cordova.file-transfer": {
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
+        "org.apache.cordova.media-capture": {
             "PACKAGE_NAME": "com.minds.mobile"
         }
     },

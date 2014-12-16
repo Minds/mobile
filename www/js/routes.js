@@ -76,6 +76,15 @@ define(['app'], function (app) {
                         }
                     }
                 })
+                .state('tab.capture', {
+                 	url: '/capture',
+                    views: {
+                        'capture-tab': {
+                            //templateUrl: 'templates/channels/channel.html',
+                            controller: 'CaptureCtrl'
+                        }
+                    }
+                })
                 .state('tab.channel', {
                     url: '/channel/:username',
                     views: {

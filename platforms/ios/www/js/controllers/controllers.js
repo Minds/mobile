@@ -36,6 +36,11 @@ define(function (require) {
      */
     controllers.controller('ChannelCtrl', require('controllers/channels/ChannelCtrl'));
     
+    /**
+     * Capture
+     */
+   	controllers.controller('CaptureCtrl', require('controllers/capture/CaptureCtrl'));
+    
 	controllers.run(['$rootScope', 'NODE_URL', function ($rootScope, NODE_URL) {
 		$rootScope.node_url = NODE_URL;
 	}]);

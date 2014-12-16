@@ -21,9 +21,6 @@ define(function () {
     		$scope.next  = "";
     	
     	$scope.hasMoreData = true;
-    	console.log($scope.newsfeedItems);
-		//$ionicScrollDelegate.rememberScrollPosition('my-scroll-id');
-  		//$ionicScrollDelegate.scrollToRememberedPosition();
     	
     	/**
     	 * Load more posts
@@ -59,8 +56,6 @@ define(function () {
     	};
         
         $scope.$on('$stateChangeSuccess', function() {
-        	console.log('state changed..');
-			//$scope.loadMore();
 		});
 		
 		$scope.refresh = function(){

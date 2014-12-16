@@ -65,7 +65,7 @@
       <ion-slide-box autoplay>
           <ion-slide ng-repeat="carousel in channel.carousels">
             <div class="box blue">
-                <img img-cache ng-src="{{carousel.src}}"/>
+                <img image-cache ng-src="{{carousel.src}}"/>
             </div>
           </ion-slide>
         </ion-slide-box>
@@ -75,7 +75,7 @@
     
         <div class="inner">
 
-            <img ng-src="{{channel.avatar_url.large}}" style="width:140px"/>
+            <img image-cache ng-src="{{channel.avatar_url.large}}" style="width:140px"/>
             <h1 style="position:absolute; top: 0; left: 160px; font-size:24px;">{{channel.name}}</h1>
         
         </div>

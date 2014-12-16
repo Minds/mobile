@@ -24,6 +24,16 @@ It adds additional function for iOS, Ubuntu, Windows Phone 8, and Windows 8. If
 you are happy with how console.log() works for you, then you probably
 don't need this plugin.
 
+This plugin defines a global `console` object.
+
+Although the object is in the global scope, features provided by this plugin
+are not available until after the `deviceready` event.
+
+    document.addEventListener("deviceready", onDeviceReady, false);
+    function onDeviceReady() {
+        console.log("console.log works well");
+    }
+
 ## Installation
 
     cordova plugin add org.apache.cordova.console

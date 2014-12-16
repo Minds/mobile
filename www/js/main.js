@@ -15,7 +15,7 @@ requirejs.config({
         ionicAngular:     '../vendors/ionic/ionic-angular.min',
         text:             '../vendors/text',
         JSEncrypt:		  '../vendors/jsencrypt/jsencrypt',
-        ImgCache:		  '../vendors/imgcache/imgcache'
+        imgcache:		  '../vendors/imgcache/imgcache'
     },
     shim: {
         angular : {exports : 'angular'},
@@ -24,8 +24,7 @@ requirejs.config({
         uiRouter : {deps: ['angular']},
         ionic :  {deps: ['angular'], exports : 'ionic'},
         ionicAngular: {deps: ['angular', 'ionic', 'uiRouter', 'angularAnimate', 'angularSanitize']},
-   		JSEncrypt : {exports: 'JSEncrypt'},
-   		ImgCache : {exports: 'ImgCache'},
+   		JSEncrypt : {exports: 'JSEncrypt'}
     },
     priority: [
         'angular',

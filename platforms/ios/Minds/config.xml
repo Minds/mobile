@@ -22,6 +22,26 @@
     <feature name="Console">
         <param name="ios-package" value="CDVLogger" />
     </feature>
+    <icon height="180" src="res/ios/icon-60@3x.png" width="180" />
+    <splash height="1334" src="res/ios/screen-667h.png" width="750" />
+    <splash height="2208" src="res/ios/screen-736h.png" width="1242" />
+    <icon height="60" src="res/ios/icon-60.png" width="60" />
+    <icon height="120" src="res/ios/icon-60@2x.png" width="120" />
+    <splash height="1136" src="res/ios/screen-568h@2x.png" width="640" />
+    <icon height="76" src="res/ios/icon-76.png" width="76" />
+    <icon height="152" src="res/ios/icon-76@2x.png" width="152" />
+    <icon height="40" src="res/ios/icon-40.png" width="40" />
+    <icon height="80" src="res/ios/icon-40@2x.png" width="80" />
+    <icon height="57" src="res/ios/icon.png" width="57" />
+    <icon height="114" src="res/ios/icon@2x.png" width="114" />
+    <splash height="480" src="res/ios/screen-iphone.png" width="320" />
+    <splash height="960" src="res/screen/ios/screen-iphone@2x.png" width="640" />
+    <icon height="72" src="res/ios/icon-72.png" width="72" />
+    <icon height="144" src="res/ios/icon-72@2x.png" width="144" />
+    <icon height="29" src="res/ios/icon-small.png" width="29" />
+    <icon height="58" src="res/ios/icon-small@2x.png" width="58" />
+    <icon height="50" src="res/ios/icon-50.png" width="50" />
+    <icon height="100" src="res/ios/icon-50@2x.png" width="100" />
     <name>Minds</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
@@ -34,6 +54,7 @@
     <preference name="webviewbounce" value="false" />
     <preference name="UIWebViewBounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />
+    <preference name="auto-hide-splash-screen" value="false" />
     <preference name="StatusBarOverlaysWebView" value="true" />
     <access origin="*" />
 </widget>

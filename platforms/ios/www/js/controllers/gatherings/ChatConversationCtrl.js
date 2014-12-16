@@ -21,7 +21,7 @@ define(function () {
 
     		console.log('loading messages from:' + $scope.next);
     		
-    		Client.get('api/v1/conversations/'+$stateParams.username, { limit: 6, offset: $scope.next }, 
+    		Client.get('api/v1/conversations/'+$stateParams.username, { limit: 6, offset: $scope.next, cachebreak: Date.now()}, 
     			function(data){
     			    		
 	    			if(!data.messages){

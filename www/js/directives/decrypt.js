@@ -15,10 +15,11 @@ define(['angular', 'JSEncrypt'], function (angular, JSEncrypt) {
 
 				//console.log(JSEncrypt);
 				var decrypt = new JSEncrypt();
+				decrypt.setPrivateKey(storage.get('private-key'));
 
-			//	var uncrypted = decrypt.decrypt(attrs.message);
+				var uncrypted = decrypt.decrypt(attrs.message);
 				
-				//scope.message = uncrypted;
+				scope.message = uncrypted;
 			      
 			}
        	 };

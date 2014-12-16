@@ -16,6 +16,7 @@ define(function(require) {
 	directives.directive('activityView', require('directives/activityView'));
 	directives.directive('ownerBriefView', require('directives/ownerBriefView'));
 	directives.directive('decrypt', require('directives/decrypt'));
-		
+	directives.directive('imgCache', require('directives/imgCache'));
+	
 	return directives;
 }); 

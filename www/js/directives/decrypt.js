@@ -12,14 +12,13 @@ define(['angular', 'JSEncrypt'], function (angular, JSEncrypt) {
 			link: function(scope, element, attrs) {
 				//console.log(attrs.message);
 				scope.message = attrs.message;
-
-				//console.log(JSEncrypt);
-				var decrypt = new JSEncrypt();
-				decrypt.setPrivateKey(storage.get('private-key'));
-
-				var uncrypted = decrypt.decrypt(attrs.message);
 				
-				scope.message = uncrypted;
+				crypt.setPrivateKey(storage.get('private-key'));
+				
+				crypt.decrypt(attrs.message, function(success){
+		    			scope.message = success;
+				});
+
 			      
 			}
        	 };

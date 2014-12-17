@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+            id="org.apache.cordova.crypt" version="0.0.1">
+        <name>Crypt</name>
+        <description>Cordova Decrypt Plugin</description>
+        <license>TBC</license>
+        <keywords>cordova,minds, crypt, decrypt, encrypt, rsa, openssl</keywords>
+        <js-module src="www/crypt.js" name="crypt">
+            <clobbers target="crypt" />
+        </js-module>
+        <platform name="ios">
+            <config-file target="config.xml" parent="/*">
+                <feature name="Crypt">
+                    <param name="ios-package" value="CDVCrypt"/>
+                </feature>
+            </config-file>
+            <header-file src="src/ios/CDVCrypt.h" />
+            <source-file src="src/ios/CDVCrypt.m" />
+            <header-file src="src/ios/Libraries/RSA/RSA.h" />
+            <source-file src="src/ios/Libraries/RSA/RSA.c" />
+            <header-file src="src/ios/Libraries/RSA/Base64.h" />
+            <source-file src="src/ios/Libraries/RSA/Base64.c" />
+
+            <!-- openssl library -->
+            <framework src="src/ios/openssl.framework"  custom="true" />
+        </platform>
+    </plugin>

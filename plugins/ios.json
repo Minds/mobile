@@ -27,6 +27,10 @@
                         {
                             "xml": "<feature name=\"Capture\"><param name=\"ios-package\" value=\"CDVCapture\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Crypt\"><param name=\"ios-package\" value=\"CDVCrypt\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -69,6 +73,9 @@
             "PACKAGE_NAME": "com.minds.mobile"
         },
         "org.apache.cordova.media-capture": {
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
+        "org.apache.cordova.crypt": {
             "PACKAGE_NAME": "com.minds.mobile"
         }
     },

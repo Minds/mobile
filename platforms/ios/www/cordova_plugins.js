@@ -229,6 +229,13 @@ module.exports = [
         "clobbers": [
             "navigator.device.capture"
         ]
+    },
+    {
+        "file": "plugins/org.apache.cordova.crypt/www/crypt.js",
+        "id": "org.apache.cordova.crypt.crypt",
+        "clobbers": [
+            "crypt"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -238,7 +245,8 @@ module.exports.metadata =
     "org.apache.cordova.device": "0.2.13",
     "org.apache.cordova.file": "1.3.2",
     "org.apache.cordova.file-transfer": "0.4.8",
-    "org.apache.cordova.media-capture": "0.3.5"
+    "org.apache.cordova.media-capture": "0.3.5",
+    "org.apache.cordova.crypt": "0.0.1"
 }
 // BOTTOM OF METADATA
 });

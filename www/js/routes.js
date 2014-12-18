@@ -63,7 +63,7 @@ define(['app'], function (app) {
                     views: {
                         'chat-tab': {
                             templateUrl: 'templates/gatherings/chat/conversation.html',
-                            controller: 'ChatConversationCtrl'
+                         //   controller: 'ChatConversationCtrl'
                         }
                     }
                 })

@@ -9,7 +9,8 @@ module.exports = function (grunt) {
                     	'css/core.css',
                         'css/buttons.css', 
                         'css/components.css',
-                        'css/newsfeed.css'
+                        'css/newsfeed.css',
+                        'css/gatherings.css'
                     ]
                 }
             }

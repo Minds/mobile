@@ -6,12 +6,12 @@ define(['angular', 'JSEncrypt'], function (angular, JSEncrypt) {
     var directive = function ($rootScope, $filter, storage) {
 	  	return {
        		restrict: 'E',
-			template: "<p>{{message}}</p>",
+			template: "<div class='item-text-wrap'>{{message}}</div>",
 			replace: true,
 			scope: true,
 			link: function(scope, element, attrs) {
 				//console.log(attrs.message);
-				scope.message = attrs.message;
+				scope.message = 'decrypting..';
 				
 				crypt.setPrivateKey(storage.get('private-key'));
 				

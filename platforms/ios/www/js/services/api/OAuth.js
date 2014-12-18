@@ -46,6 +46,9 @@ define(['angular'], function (angular) {
 					headers : {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'}
 				}).
 				  success(function(data, status, headers, config) {
+
+					storage.set('user_id', data.user_id);
+					storage.set('user_guid', data.user_id);
 				  	storage.set('access_token', data.access_token);
 				  	storage.set('loggedin', true);
 

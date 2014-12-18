@@ -1,0 +1,13 @@
+
+.message-input{
+	margin-left:8px;
+	border-radius:3px;
+	border:1px solid #DDD;
+	width:228px;
+	padding-top:8px;
+	float:left;
+}
+
+.submit-button{
+	float:left;
+}

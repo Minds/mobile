@@ -15,11 +15,17 @@
 
             <ion-item ng-repeat="message in messages" class="messages" type="item-text-wrap">
                 <owner-brief-view owner="{{message.ownerObj}}" ts="{{message.time_created}}"></owner-brief-view>
-               {{message.message}}
                 <decrypt message="{{message.message}}"></decrypt>
             </ion-item>
 
         </ion-list>
 
     </ion-content>
+        
+    <ion-footer-bar >
+        <form ng-submit="send()">
+         <input type="text" class="message-input" placeholder="message-here" ng-model="message"/> <input type="submit" class="button button-clear submit-button" value="submit"/>
+        </form>
+    </ion-footer-bar>
+    
 </ion-view>

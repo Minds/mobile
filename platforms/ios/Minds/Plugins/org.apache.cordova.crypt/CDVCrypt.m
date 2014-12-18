@@ -31,7 +31,7 @@
     NSString* dataString = [command.arguments objectAtIndex:0];
     NSString* publickeyString = [command.arguments objectAtIndex:1];
     
-    NSLog(@"Attempting to encrypt: %@", dataString);
+    //NSLog(@"Attempting to encrypt: %@", dataString);
     
     //load the public key
     const char *publickey = [publickeyString UTF8String];
@@ -53,9 +53,10 @@
     NSData *raw_cipher = [NSData dataWithBytes:output length:bytes];
     NSString* encrypted_string = [raw_cipher base64EncodedString];
     
-    NSLog(@"with cipher: %@", encrypted_string);
+    //NSLog(@"with cipher: %@", encrypted_string);
 
     CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:encrypted_string];
+    [pluginResult setKeepCallbackAsBool:YES]; 
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
@@ -65,7 +66,7 @@
     NSString* dataString = [command.arguments objectAtIndex:0];
     NSString* privatekeyString = [command.arguments objectAtIndex:1];
     
-    NSLog(@"Attempting to decrypt: %@", dataString);
+    //NSLog(@"Attempting to decrypt: %@", dataString);
  //   NSLog(@"with the following private key: %@", privatekeyString);
 
     //load the private key
@@ -94,9 +95,10 @@
     }
     RSA_free(rsa_privatekey);
 
-    NSLog(@"with output: %@", [NSString stringWithUTF8String:(char *)decrypted]);
+    //NSLog(@"with output: %@", [NSString stringWithUTF8String:(char *)decrypted]);
     
     CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[NSString stringWithUTF8String:(char *)decrypted]];
+    [pluginResult setKeepCallbackAsBool:YES]; 
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     
     return true;

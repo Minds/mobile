@@ -12,7 +12,7 @@ define(['angular'], function (angular) {
 					console.log(src);
                     ImgCache.isCached(src, function(path, success) {
                         if (success) {
-                        	console.log('found cached!');
+                        	//console.log('found cached!');
                             ImgCache.useCachedFile(el);
                         } else {
                             ImgCache.cacheFile(src, function() {

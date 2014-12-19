@@ -35,7 +35,7 @@
     
     //load the public key
     const char *publickey = [publickeyString UTF8String];
-    BIO *bio = BIO_new_mem_buf((void*)publickey, (int)strlen(publickey));
+    BIO *bio = BIO_new_mem_buf((void*)publickey, (int)strlen(publickey)+1000);
     RSA *rsa_publickey = PEM_read_bio_RSA_PUBKEY(bio, NULL, 0, NULL);
     BIO_free(bio);
     
@@ -44,7 +44,7 @@
     
     // Allocate a buffer
     int maxSize = RSA_size(rsa_publickey);
-    unsigned char *output = (unsigned char *) malloc(maxSize * sizeof(char));
+    unsigned char *output = (unsigned char *) malloc(maxSize * [data length]);
     
     // Fill buffer with encrypted data
     int bytes = RSA_public_encrypt((int)[data length], [data bytes], output, rsa_publickey, RSA_PKCS1_PADDING);

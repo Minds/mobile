@@ -17,6 +17,7 @@ define(['angular', 'JSEncrypt'], function (angular, JSEncrypt) {
 				
 				crypt.decrypt(attrs.message, function(success){
 		    			scope.message = success;
+		    			scope.$apply();
 				});
 
 			      

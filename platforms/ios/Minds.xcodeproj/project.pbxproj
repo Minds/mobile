@@ -47,10 +47,10 @@
 		FE153A25110340EFBA53ED6B /* CDVFileTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1ED66DDA6D406290D25BCF /* CDVFileTransfer.m */; };
 		2944333CAC9948F9B6C26BF7 /* CDVCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = A589521EF3734901AC5576B7 /* CDVCapture.m */; };
 		DF2D219420734EA7B14B83C3 /* CDVCapture.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6CE11101AE664CC0B342213F /* CDVCapture.bundle */; };
-		F682859B273A4927B2AD39D3 /* CDVCrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = 710D3BA82B48433AACD6E0A0 /* CDVCrypt.m */; };
-		28F2F4E318DD428B87885BE2 /* RSA.c in Resources */ = {isa = PBXBuildFile; fileRef = BE330BD6474E4AFE8CA96E16 /* RSA.c */; };
-		DD47F67F979744C297B52074 /* Base64.c in Resources */ = {isa = PBXBuildFile; fileRef = 904EDFFD3D8C44E3882A9C50 /* Base64.c */; };
-		2BC0437246774E7FBAF1E582 /* openssl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C816F026FE234424A0D8C387 /* openssl.framework */; };
+		F71D2FF6CE2A49FBB72AC250 /* CDVCrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = 86DB8AE76A464AF1A74EF63E /* CDVCrypt.m */; };
+		E41EA7731A424ED7B203F52A /* RSA.c in Resources */ = {isa = PBXBuildFile; fileRef = 40C115972A4240E78D0D444E /* RSA.c */; };
+		BB80345CF5524288B6CD1991 /* Base64.c in Resources */ = {isa = PBXBuildFile; fileRef = 4E203A063C554BCF98E59116 /* Base64.c */; };
+		2F2237EE41974385AB0AEF30 /* openssl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C09969C459482CAC31A379 /* openssl.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,13 +131,13 @@
 		A589521EF3734901AC5576B7 /* CDVCapture.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVCapture.m"; path = "org.apache.cordova.media-capture/CDVCapture.m"; sourceTree = "<group>"; fileEncoding = 4; };
 		DE4778F849F7410A8BC4B513 /* CDVCapture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVCapture.h"; path = "org.apache.cordova.media-capture/CDVCapture.h"; sourceTree = "<group>"; fileEncoding = 4; };
 		6CE11101AE664CC0B342213F /* CDVCapture.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = "CDVCapture.bundle"; path = "CDVCapture.bundle"; sourceTree = "<group>"; };
-		710D3BA82B48433AACD6E0A0 /* CDVCrypt.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVCrypt.m"; path = "org.apache.cordova.crypt/CDVCrypt.m"; sourceTree = "<group>"; fileEncoding = 4; };
-		BE330BD6474E4AFE8CA96E16 /* RSA.c */ = {isa = PBXFileReference; lastKnownFileType = unknown; name = "RSA.c"; path = "org.apache.cordova.crypt/RSA.c"; sourceTree = "<group>"; fileEncoding = 4; };
-		904EDFFD3D8C44E3882A9C50 /* Base64.c */ = {isa = PBXFileReference; lastKnownFileType = unknown; name = "Base64.c"; path = "org.apache.cordova.crypt/Base64.c"; sourceTree = "<group>"; fileEncoding = 4; };
-		AA4E0CE6F67B41CEBCA1E359 /* CDVCrypt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVCrypt.h"; path = "org.apache.cordova.crypt/CDVCrypt.h"; sourceTree = "<group>"; fileEncoding = 4; };
-		7054A759D75D477284623D9B /* RSA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "RSA.h"; path = "org.apache.cordova.crypt/RSA.h"; sourceTree = "<group>"; fileEncoding = 4; };
-		9A5A52C597764D08A65C373D /* Base64.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Base64.h"; path = "org.apache.cordova.crypt/Base64.h"; sourceTree = "<group>"; fileEncoding = 4; };
-		C816F026FE234424A0D8C387 /* openssl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "openssl.framework"; path = "Minds/Plugins/org.apache.cordova.crypt/openssl.framework"; sourceTree = "<group>"; };
+		86DB8AE76A464AF1A74EF63E /* CDVCrypt.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVCrypt.m"; path = "org.apache.cordova.crypt/CDVCrypt.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		40C115972A4240E78D0D444E /* RSA.c */ = {isa = PBXFileReference; lastKnownFileType = unknown; name = "RSA.c"; path = "org.apache.cordova.crypt/RSA.c"; sourceTree = "<group>"; fileEncoding = 4; };
+		4E203A063C554BCF98E59116 /* Base64.c */ = {isa = PBXFileReference; lastKnownFileType = unknown; name = "Base64.c"; path = "org.apache.cordova.crypt/Base64.c"; sourceTree = "<group>"; fileEncoding = 4; };
+		E685E2B988AA475D9CF83E6E /* CDVCrypt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVCrypt.h"; path = "org.apache.cordova.crypt/CDVCrypt.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		53C8F5CFA8364A2AAC1F013C /* RSA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "RSA.h"; path = "org.apache.cordova.crypt/RSA.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		97C705A4C3CA4E0BB98AC2E6 /* Base64.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Base64.h"; path = "org.apache.cordova.crypt/Base64.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		D3C09969C459482CAC31A379 /* openssl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "openssl.framework"; path = "Minds/Plugins/org.apache.cordova.crypt/openssl.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,7 +149,7 @@
 				301BF552109A68D80062928A /* libCordova.a in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
 				305D5FD1115AB8F900A74A75 /* MobileCoreServices.framework in Frameworks */,
-				2BC0437246774E7FBAF1E582 /* openssl.framework in Frameworks */,
+				2F2237EE41974385AB0AEF30 /* openssl.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,7 +223,7 @@
 				5B1594DC16A7569C00FEF299 /* AssetsLibrary.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
 				305D5FD0115AB8F900A74A75 /* MobileCoreServices.framework */,
-				C816F026FE234424A0D8C387 /* openssl.framework */,
+				D3C09969C459482CAC31A379 /* openssl.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -253,12 +253,12 @@
 				81012FBABA4B4B3EB984EF11 /* CDVFileTransfer.h */,
 				A589521EF3734901AC5576B7 /* CDVCapture.m */,
 				DE4778F849F7410A8BC4B513 /* CDVCapture.h */,
-				710D3BA82B48433AACD6E0A0 /* CDVCrypt.m */,
-				BE330BD6474E4AFE8CA96E16 /* RSA.c */,
-				904EDFFD3D8C44E3882A9C50 /* Base64.c */,
-				AA4E0CE6F67B41CEBCA1E359 /* CDVCrypt.h */,
-				7054A759D75D477284623D9B /* RSA.h */,
-				9A5A52C597764D08A65C373D /* Base64.h */,
+				86DB8AE76A464AF1A74EF63E /* CDVCrypt.m */,
+				40C115972A4240E78D0D444E /* RSA.c */,
+				4E203A063C554BCF98E59116 /* Base64.c */,
+				E685E2B988AA475D9CF83E6E /* CDVCrypt.h */,
+				53C8F5CFA8364A2AAC1F013C /* RSA.h */,
+				97C705A4C3CA4E0BB98AC2E6 /* Base64.h */,
 			);
 			name = Plugins;
 			path = "Minds/Plugins";
@@ -451,9 +451,9 @@
 				B08960822485466C84FC777C /* CDVAssetLibraryFilesystem.m in Sources */,
 				FE153A25110340EFBA53ED6B /* CDVFileTransfer.m in Sources */,
 				2944333CAC9948F9B6C26BF7 /* CDVCapture.m in Sources */,
-				F682859B273A4927B2AD39D3 /* CDVCrypt.m in Sources */,
-				28F2F4E318DD428B87885BE2 /* RSA.c in Resources */,
-				DD47F67F979744C297B52074 /* Base64.c in Resources */,
+				F71D2FF6CE2A49FBB72AC250 /* CDVCrypt.m in Sources */,
+				E41EA7731A424ED7B203F52A /* RSA.c in Resources */,
+				BB80345CF5524288B6CD1991 /* Base64.c in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -590,6 +590,8 @@
 					"\"Minds/Plugins/org.apache.cordova.crypt\"",
 					"\"Minds/Plugins/org.apache.cordova.crypt\"",
 					"\"Minds/Plugins/org.apache.cordova.crypt\"",
+					"\"Minds/Plugins/org.apache.cordova.crypt\"",
+					"\"Minds/Plugins/org.apache.cordova.crypt\"",
 				);
 			};
 			name = Debug;
@@ -622,6 +624,8 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"Minds/Plugins/org.apache.cordova.crypt\"",
+					"\"Minds/Plugins/org.apache.cordova.crypt\"",
 					"\"Minds/Plugins/org.apache.cordova.crypt\"",
 					"\"Minds/Plugins/org.apache.cordova.crypt\"",
 					"\"Minds/Plugins/org.apache.cordova.crypt\"",

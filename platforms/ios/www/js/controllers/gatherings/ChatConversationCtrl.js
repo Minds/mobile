@@ -62,7 +62,7 @@ define(function () {
     			(function(i){ //prevent async callback using wrong index
 	    			crypt.setPublicKey($scope.publickeys[i]);
 	    			crypt.encrypt($scope.message, function(success){
-	    				console.log(success);
+	    				//console.log(success);
 	    				encrypted[i] = encodeURIComponent(success);
 	    			});
 	    		})(index);
@@ -77,12 +77,13 @@ define(function () {
     				for(var index in encrypted){
     					data["message:"+index] = encrypted[index];
     				}
-    				console.log(data);
+    				//console.log(data);
     				Client.post('api/v1/conversations/'+$stateParams.username, 
     					data,
     					function(data){
     						$scope.messages.push(data.message);
     						$scope.message = "";
+    						$ionicScrollDelegate.scrollBottom();
     					},
     					function(error){
     						console.log(error);

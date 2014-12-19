@@ -10,11 +10,35 @@ define(function () {
 
     function ctrl($scope, $stateParams) {
 
-		navigator.device.capture.captureVideo(function(){
-			console.log('capture complete');
-		}, function(){
-			console.log('capture failed');
-		}, {limit: 2, duration:30});
+		$scope.video = function(){
+			navigator.device.capture.captureVideo(function(mediaFiles){
+				console.log('capture complete');
+				var i, path, len;
+			    for (i = 0, len = mediaFiles.length; i < len; i += 1) {
+			    	var mediafile = mediaFiles[i];
+			    	console.log(mediafile);
+			        path = mediafile.fullPath;
+			        console.log(path);
+			        
+			        alert('Uploading to Minds will be here soon!');
+			    }
+			}, function(){
+				console.log('capture failed');
+			}, {limit: 2, duration:30});
+		};
+		
+		$scope.photo= function(){
+			navigator.device.capture.captureImage(function(mediaFiles){
+				var i, path, len;
+			    for (i = 0, len = mediaFiles.length; i < len; i += 1) {
+			        path = mediaFiles[i].fullPath;
+			        console.log(path);
+			    }
+			}, function(){
+				console.log('capture failed');
+				alert('Uploading to Minds will be here soon!');
+			}, {limit: 1});
+		};
        
     }
 

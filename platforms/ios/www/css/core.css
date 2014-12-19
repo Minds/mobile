@@ -6,3 +6,19 @@
 	font-size: 13px !important;
 	color: #6A6A74 !important; 
 }
+
+.tabs{
+	
+}
+.tabs .tab-item{
+	border-color:#4690C3 !important;
+}
+
+.capture-tab{
+
+	margin-top:-2px;
+	height:50px;
+	background: #000 !important;
+	color:#EEE;
+	
+}

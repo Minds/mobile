@@ -236,6 +236,34 @@ module.exports = [
         "clobbers": [
             "crypt"
         ]
+    },
+    {
+        "file": "plugins/org.apache.cordova.camera/www/CameraConstants.js",
+        "id": "org.apache.cordova.camera.Camera",
+        "clobbers": [
+            "Camera"
+        ]
+    },
+    {
+        "file": "plugins/org.apache.cordova.camera/www/CameraPopoverOptions.js",
+        "id": "org.apache.cordova.camera.CameraPopoverOptions",
+        "clobbers": [
+            "CameraPopoverOptions"
+        ]
+    },
+    {
+        "file": "plugins/org.apache.cordova.camera/www/Camera.js",
+        "id": "org.apache.cordova.camera.camera",
+        "clobbers": [
+            "navigator.camera"
+        ]
+    },
+    {
+        "file": "plugins/org.apache.cordova.camera/www/ios/CameraPopoverHandle.js",
+        "id": "org.apache.cordova.camera.CameraPopoverHandle",
+        "clobbers": [
+            "CameraPopoverHandle"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -246,7 +274,8 @@ module.exports.metadata =
     "org.apache.cordova.file": "1.3.2",
     "org.apache.cordova.file-transfer": "0.4.8",
     "org.apache.cordova.media-capture": "0.3.5",
-    "org.apache.cordova.crypt": "0.0.1"
+    "org.apache.cordova.crypt": "0.0.1",
+    "org.apache.cordova.camera": "0.3.4"
 }
 // BOTTOM OF METADATA
 });

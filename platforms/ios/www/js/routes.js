@@ -80,8 +80,8 @@ define(['app'], function (app) {
                  	url: '/capture',
                     views: {
                         'capture-tab': {
-                            //templateUrl: 'templates/channels/channel.html',
-                            controller: 'CaptureCtrl'
+                            templateUrl: 'templates/capture/default.html',
+                          //  controller: 'CaptureCtrl'
                         }
                     }
                 })

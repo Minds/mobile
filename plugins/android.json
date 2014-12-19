@@ -1,0 +1,78 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {
+            "res/xml/config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"File\"><param name=\"android-package\" value=\"org.apache.cordova.file.FileUtils\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"FileTransfer\"><param name=\"android-package\" value=\"org.apache.cordova.filetransfer.FileTransfer\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Capture\"><param name=\"android-package\" value=\"org.apache.cordova.mediacapture.Capture\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
+            "AndroidManifest.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
+                            "count": 4
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.RECORD_AUDIO\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.RECORD_VIDEO\" />",
+                            "count": 1
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "installed_plugins": {
+        "org.apache.cordova.camera": {
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
+        "org.apache.cordova.console": {
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
+        "org.apache.cordova.crypt": {
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
+        "org.apache.cordova.device": {
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
+        "org.apache.cordova.file": {
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
+        "org.apache.cordova.file-transfer": {
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
+        "org.apache.cordova.media-capture": {
+            "PACKAGE_NAME": "com.minds.mobile"
+        }
+    },
+    "dependent_plugins": {}
+}

@@ -24,6 +24,10 @@
 	float:left;
 	margin-right:8px;
 }
+.image-block .image > img{
+	width:40px;
+	height:40px;
+}
 .image-block .body{
 	padding:0 12px;
 	overflow:visible;

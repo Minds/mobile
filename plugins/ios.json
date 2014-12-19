@@ -31,6 +31,14 @@
                         {
                             "xml": "<feature name=\"Crypt\"><param name=\"ios-package\" value=\"CDVCrypt\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Camera\"><param name=\"ios-package\" value=\"CDVCamera\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<preference name=\"CameraUsesGeolocation\" value=\"false\" />",
+                            "count": 1
                         }
                     ]
                 }
@@ -40,18 +48,40 @@
                     "AssetsLibrary.framework": [
                         {
                             "xml": "false",
-                            "count": 2
+                            "count": 3
                         }
                     ],
                     "MobileCoreServices.framework": [
                         {
                             "xml": "false",
-                            "count": 2
+                            "count": 3
                         }
                     ],
                     "CoreGraphics.framework": [
                         {
                             "xml": "false",
+                            "count": 3
+                        }
+                    ],
+                    "ImageIO.framework": [
+                        {
+                            "xml": "true",
+                            "count": 1
+                        }
+                    ],
+                    "CoreLocation.framework": [
+                        {
+                            "xml": "false",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
+            "*-Info.plist": {
+                "parents": {
+                    "NSLocationWhenInUseUsageDescription": [
+                        {
+                            "xml": "<string />",
                             "count": 1
                         }
                     ]
@@ -76,6 +106,9 @@
             "PACKAGE_NAME": "com.minds.mobile"
         },
         "org.apache.cordova.crypt": {
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
+        "org.apache.cordova.camera": {
             "PACKAGE_NAME": "com.minds.mobile"
         }
     },

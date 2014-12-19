@@ -16,6 +16,12 @@ define(['angular'], function (angular) {
         
             all: function (options, success_callback, error_callback) {
             
+            	/*return success_callback({
+            		activity: [{
+            			guid:123
+            		}]
+            	});*/
+            
             	Client.get('api/v1/newsfeed', options, function(data){
             		return success_callback(data); 
             	});

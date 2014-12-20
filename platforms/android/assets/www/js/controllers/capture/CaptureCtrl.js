@@ -19,6 +19,8 @@ define(function () {
 			    	console.log(mediafile);
 			        path = mediafile.fullPath;
 			        console.log(path);
+			        
+			        alert('Uploading to Minds will be here soon!');
 			    }
 			}, function(){
 				console.log('capture failed');
@@ -34,6 +36,7 @@ define(function () {
 			    }
 			}, function(){
 				console.log('capture failed');
+				alert('Uploading to Minds will be here soon!');
 			}, {limit: 1});
 		};
        

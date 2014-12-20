@@ -94,11 +94,11 @@ define(['app'], function (app) {
                         }
                     }
                 })
-                .state('tab.about', {
-                    url: '/about',
+                .state('tab.notifications', {
+                    url: '/notifications',
                     views: {
-                        'about-tab': {
-                            templateUrl: 'templates/about.html'
+                        'notifications-tab': {
+                            templateUrl: 'templates/notifications/list.html'
                         }
                     }
                 });

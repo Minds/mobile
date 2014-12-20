@@ -1,2 +1,2 @@
-/wwwroot/mobile/minds/platforms/android/ant-build/AndroidManifest.xml : \
-/wwwroot/mobile/minds/platforms/android/AndroidManifest.xml \
+/home/mark/mobile/platforms/android/ant-build/AndroidManifest.xml : \
+/home/mark/mobile/platforms/android/AndroidManifest.xml \

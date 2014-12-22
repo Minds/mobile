@@ -17,6 +17,9 @@ DerivedData
 *.ipa
 *.xcuserstate
 
+platforms/*
+!platforms/README.md
+
 node_modules
 npm-debug.log
 tmp

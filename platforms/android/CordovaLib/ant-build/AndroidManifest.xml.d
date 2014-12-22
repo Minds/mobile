@@ -1,2 +1,2 @@
-/home/mark/mobile/platforms/android/CordovaLib/ant-build/AndroidManifest.xml : \
-/home/mark/mobile/platforms/android/CordovaLib/AndroidManifest.xml \
+/wwwroot/mobile/mobile/platforms/android/CordovaLib/ant-build/AndroidManifest.xml : \
+/wwwroot/mobile/mobile/platforms/android/CordovaLib/AndroidManifest.xml \

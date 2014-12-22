@@ -8,6 +8,17 @@
         <js-module src="www/crypt.js" name="crypt">
             <clobbers target="crypt" />
         </js-module>
+
+        <platform name="android">
+            <config-file target="res/xml/config.xml" parent="/*">
+                <feature name="Crypt" >
+                    <param name="android-package" value="org.apache.cordova.crypt.Crypt"/>
+                </feature>
+            </config-file>
+
+            <source-file src="src/android/Crypt.java" target-dir="src/org/apache/cordova/Crypt" />
+        </platform>
+
         <platform name="ios">
             <config-file target="config.xml" parent="/*">
                 <feature name="Crypt">

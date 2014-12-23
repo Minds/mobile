@@ -6,19 +6,19 @@
 
 <div class="activity-action-bar positive" style="padding:0;background-color:#F7F7F7">
     <div class="button-bar bar-positive positive">
-        <button class="button button-light button-clear small-font">
+        <button class="button button-light button-clear small-font" ng-click="thumbsUp({{activity.guid}})">
             <i class="icon ion-thumbsup"></i>
 
         </button>
-        <button class="button button-light button-clear small-font">
+        <button class="button button-light button-clear small-font" ng-click="thumbsDown({{activity.guid}})">
             <i class="icon ion-thumbsdown"></i>
 
         </button>
-        <button class="button button-light button-clear small-font">
+        <button class="button button-light button-clear small-font" ng-click="loadComments({{activity.guid}})">
             <i class="icon ion-chatbox"></i>
 
         </button>
-        <button class="button button-light button-clear small-font">
+        <button class="button button-light button-clear small-font" ng-click="remind({{activity.guid}})">
             <i class="icon ion-share"></i>
 
         </button>

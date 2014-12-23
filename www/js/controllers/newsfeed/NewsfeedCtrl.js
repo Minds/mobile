@@ -76,6 +76,37 @@ define(function () {
 			
 		};
 		
+		
+		/**************************
+		 **** Newsfeed actions ****
+		 *************************/
+		/**
+		 * Thumb up an activity
+		 */
+		$scope.thumbsUp = function(guid){
+			alert('woohoo');
+		};
+		
+		/**
+		 * Thumb down an activity
+		 */
+		$scope.thumbsDown = function(guid){
+			alert('wowza');
+		};
+		
+		/**
+		 * Load comments
+		 */
+		$scope.loadComments = function(guid){
+			alert('sorry, not done this yet');
+		};
+		
+		/**
+		 * Remind an activity
+		 */
+		$scope.remind = function(guid){
+			alert('sorry, not done this yet');
+		};
     }
 
     ctrl.$inject = ['$scope', 'NewsfeedAPI', '$filter', '$ionicScrollDelegate', 'Cacher'];

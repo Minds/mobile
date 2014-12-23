@@ -8,7 +8,7 @@
 define(function () {
     'use strict';
 
-    function ctrl($scope, NewsfeedAPI, $filter, $ionicScrollDelegate, Cacher) {
+    function ctrl($scope, NewsfeedAPI, $filter, $ionicScrollDelegate, Cacher, Client, storage) {
     	
 		if(Cacher.get('newsfeed.items'))
 			$scope.newsfeedItems = Cacher.get('newsfeed.items');
@@ -84,14 +84,51 @@ define(function () {
 		 * Thumb up an activity
 		 */
 		$scope.thumbsUp = function(guid){
-			alert('woohoo');
+
+			Client.put('api/v1/thumbs/'+guid+'/up', {},
+				function(success){
+					$scope.newsfeedItems.forEach(function(item, index, array){
+						if(item.guid == guid){
+							if(!array[index].hasOwnProperty('thumbs:up:user_guids') || !array[index]['thumbs:up:user_guids'])
+								array[index]['thumbs:up:user_guids'] = [];
+								
+							if(array[index]['thumbs:up:user_guids'].indexOf(storage.get('user_guid')) > -1){
+								var pos = array[index]['thumbs:up:user_guids'].indexOf(storage.get('user_guid'));
+								array[index]['thumbs:up:user_guids'].splice(pos, 1);
+							} else {
+								array[index]['thumbs:up:user_guids'].push(storage.get('user_guid'));
+							}
+						}
+					});
+				},
+				function(error){
+					alert('failed..');
+				});
 		};
 		
 		/**
 		 * Thumb down an activity
 		 */
 		$scope.thumbsDown = function(guid){
-			alert('wowza');
+			Client.put('api/v1/thumbs/'+guid+'/down', {},
+				function(success){
+					$scope.newsfeedItems.forEach(function(item, index, array){
+						if(item.guid == guid){
+							if(!array[index].hasOwnProperty('thumbs:down:user_guids') || !array[index]['thumbs:down:user_guids'])
+								array[index]['thumbs:down:user_guids'] = [];
+							
+							if(array[index]['thumbs:down:user_guids'].indexOf(storage.get('user_guid')) > -1){
+								var pos = array[index]['thumbs:up:user_guids'].indexOf(storage.get('user_guid'));
+								array[index]['thumbs:down:user_guids'].splice(pos, 1);
+							} else {
+								array[index]['thumbs:down:user_guids'].push(storage.get('user_guid'));
+							}
+						}
+					});
+				},
+				function(error){
+					alert('failed..');
+				});
 		};
 		
 		/**
@@ -109,7 +146,7 @@ define(function () {
 		};
     }
 
-    ctrl.$inject = ['$scope', 'NewsfeedAPI', '$filter', '$ionicScrollDelegate', 'Cacher'];
+    ctrl.$inject = ['$scope', 'NewsfeedAPI', '$filter', '$ionicScrollDelegate', 'Cacher', 'Client', 'storage'];
     return ctrl;
     
 });

@@ -8,3 +8,7 @@
 	color:#EEE;
 	
 }
+
+.button.selected > i{
+	color:#4690D6 !important;
+}

@@ -37,6 +37,8 @@ define(['angular',
 			    }, function(){
 			        console.log('check the log for errors');
 			    });
+			    
+			    $rootScope.user_guid = storage.get('user_guid');
 		    } catch(e){}
 		});
 

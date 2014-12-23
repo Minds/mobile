@@ -76,6 +76,10 @@
         <param name="android-package" value="org.apache.cordova.filetransfer.FileTransfer" />
     </feature>
 
+    <feature name="Keyboard">
+        <param name="ios-package" value="IonicKeyboard" onload="true" />
+    </feature>
+
     <preference name="StatusBarOverlaysWebView" value="true" />
    <preference name="iosPersistentFileLocation" value="Library" />
    <preference name="BackupWebStorage" value="none" />

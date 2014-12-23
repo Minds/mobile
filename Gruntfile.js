@@ -5,13 +5,13 @@ module.exports = function (grunt) {
         cssmin: {
             compress: {
                 files: {
-                    'css/style.css': [
-                    	'css/core.css',
-                        'css/buttons.css', 
-                        'css/components.css',
-                        'css/newsfeed.css',
-                        'css/gatherings.css',
-                        'css/capture.css'
+                    'www/css/style.css': [
+                    	'www/css/core.css',
+                        'www/css/buttons.css', 
+                        'www/css/components.css',
+                        'www/css/newsfeed.css',
+                        'www/css/gatherings.css',
+                        'www/css/capture.css'
                     ]
                 }
             }

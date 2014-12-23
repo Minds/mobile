@@ -46,6 +46,38 @@ define(['angular'], function (angular) {
 						error_callback(data);
 					  });
 						
+            },
+            
+            put: function (endpoint, data, success_callback, error_callback) {
+			
+                $http({
+					method: 'PUT',
+					url: $rootScope.node_url + endpoint,
+					params: OAuth.buildParams(data)
+					}).
+					  success(function(data){
+						success_callback(data);
+					  }).
+					  error(function(data){
+						error_callback(data);
+					  });
+						
+            },
+            
+            delete: function (endpoint, data, success_callback, error_callback) {
+			
+                $http({
+					method: 'DELETE',
+					url: $rootScope.node_url + endpoint,
+					params: OAuth.buildParams(data)
+					}).
+					  success(function(data){
+						success_callback(data);
+					  }).
+					  error(function(data){
+						error_callback(data);
+					  });
+						
             }
             
         };

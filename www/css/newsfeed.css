@@ -1,14 +1,11 @@
 .activity-item{
-
+	padding-bottom:45px !important;
 }
-
 .activity-item .owner-brief{
 	display:block;
 	overflow:visible;
 }
-.activity-item .item-content{
-	padding-bottom:45px;
-}
+
 
 .activity-action-bar{
 	position:absolute;

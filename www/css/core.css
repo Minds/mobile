@@ -8,10 +8,11 @@
 }
 
 .tabs{
-	
+	background:#222 !important;
 }
 .tabs .tab-item{
 	border-color:#4690C3 !important;
+	color:#FFF;
 }
 
 .capture-tab{

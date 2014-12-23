@@ -13,6 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import android.util.Log;
 import android.util.Base64;
+import java.math.BigInteger;
 
 import java.security.InvalidKeyException;
 import java.security.KeyFactory;
@@ -25,11 +26,14 @@ import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
+import java.security.spec.RSAPublicKeySpec;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+
+import java.nio.charset.Charset;
 
 public class Crypt extends CordovaPlugin {
 
@@ -71,15 +75,15 @@ public class Crypt extends CordovaPlugin {
                 X509EncodedKeySpec keySpec = new X509EncodedKeySpec(publickeyRaw); 
                 KeyFactory fact = KeyFactory.getInstance("RSA");
                 PublicKey pub = fact.generatePublic(keySpec);
-           
-                byte[] text = data.getBytes("ASCII");
+
+                byte[] text = data.getBytes(Charset.forName("UTF-8"));
             
                 Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
                 cipher.init(Cipher.ENCRYPT_MODE, pub);
                 byte[] cipherString = cipher.doFinal(text);
                
                 
-                return Base64.encodeToString(cipherString, Base64.DEFAULT);
+                return new String(Base64.encode(cipherString, Base64.DEFAULT));
 
             } catch(Exception e){
                 Log.w("Crypt", e);

@@ -71,7 +71,7 @@
 
     //load the private key
     const char *private_key = [privatekeyString UTF8String];
-    BIO *bio = BIO_new_mem_buf((void *)private_key, 10000);
+    BIO *bio = BIO_new_mem_buf((void *)private_key, -1);
     RSA *rsa_privatekey = PEM_read_bio_RSAPrivateKey(bio, NULL, NULL, NULL);
     BIO_free(bio);
     
@@ -87,9 +87,16 @@
     char *err = NULL;
     if (RSA_private_decrypt([decodedData length], [decodedData bytes], decrypted, rsa_privatekey, RSA_PKCS1_PADDING) == -1) {
         ERR_load_CRYPTO_strings();
-        fprintf(stderr, "Error %s\n", ERR_error_string(ERR_get_error(), err));
-        fprintf(stderr, "Error %s\n", err);
+        NSLog(@"Decrypt error: %s (%s)",
+                          ERR_error_string(ERR_get_error(), malloc(130)),
+                                            ERR_reason_error_string(ERR_get_error()));
+        NSLog(@"cipher was: %@", dataString);
+        NSLog(@"Expected:: %@", [NSString stringWithUTF8String:(char *)decrypted]);
         NSLog(@"Hmm, there was an error decrypting");
+
+        NSLog(@"the cipher length was %@", [decodedData length]);
+        NSLog(@"base64 was...", [decodedData base64EncodedString]);
+        NSLog(@"an raw was...", decodedData);
         return nil;
         
     }

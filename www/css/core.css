@@ -7,6 +7,11 @@
 	color: #6A6A74 !important; 
 }
 
+.topbar-logo{
+	height:32px;
+	margin:5px;
+}
+
 .tabs{
 	background:#222 !important;
 }

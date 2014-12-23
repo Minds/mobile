@@ -9,7 +9,7 @@ define(function () {
     'use strict';
 
     function ctrl($scope, NewsfeedAPI, $filter, $ionicScrollDelegate, Cacher, Client, storage) {
-    	
+    	console.log(123);
 		if(Cacher.get('newsfeed.items'))
 			$scope.newsfeedItems = Cacher.get('newsfeed.items');
 		else

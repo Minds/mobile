@@ -94,10 +94,7 @@
         NSLog(@"Expected:: %@", [NSString stringWithUTF8String:(char *)decrypted]);
         NSLog(@"Hmm, there was an error decrypting");
 
-        NSLog(@"the cipher length was %@", [decodedData length]);
-        NSLog(@"base64 was...", [decodedData base64EncodedString]);
-        NSLog(@"an raw was...", decodedData);
-        return nil;
+        return false;
         
     }
     RSA_free(rsa_privatekey);

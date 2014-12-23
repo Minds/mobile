@@ -8,12 +8,14 @@
 define(function () {
     'use strict';
 
-    function ctrl($scope, $stateParams, $state, Client, storage, $ionicScrollDelegate) {
+    function ctrl($scope, $stateParams, $state, Client, storage, $ionicScrollDelegate, $interval) {
     
     	$scope.messages = [];
     	$scope.next  = "";
+    	$scope.previous = "";
     	$scope.hasMoreData = true;
     	$scope.publickeys = {};
+    	var poll = false;
     	
     	/**
     	 * Load more posts
@@ -40,9 +42,10 @@ define(function () {
 	    			console.log("------ MESSAGES ARE LOADED ------");
 	
 	    			$scope.next = data['load-previous'];
-	    			
+	    			$scope.previous = data['load-next'];
 	    			$scope.$broadcast('scroll.refreshComplete');
 	    			
+	    			poll = true;
 	    			
 	    			//now update the public keys
 					$scope.publickeys = data.publickeys;
@@ -53,6 +56,37 @@ define(function () {
 	    		
     	};
     	$scope.loadMore();
+    	
+    	$interval(function(){
+    		if(!poll){
+    			return false;
+    		}
+    		poll = false;
+    		console.log('checking for new chats from' + $scope.previous);
+
+    		Client.get('api/v1/conversations/'+$stateParams.username, { limit: 1000, start: $scope.previous, cachebreak: Date.now()}, 
+    			function(data){
+					
+					if(data && data.messages){
+	    			
+		    			$scope.messages = $scope.messages.concat(data.messages);
+	
+					
+		    			$scope.previous = data['load-next'];
+		    			$ionicScrollDelegate.scrollBottom();
+		    		}
+
+	    			poll = true;
+
+	    		}, 
+	    		function(error){ 
+	    			poll = false;
+	    			console.log('polling for new messages failed');
+	    		});
+    		
+    		
+    	}, 5000);
+    	
     	
     	$scope.send = function(){
     		
@@ -102,7 +136,7 @@ define(function () {
 		
     }
 
-    ctrl.$inject = ['$scope', '$stateParams', '$state', 'Client', 'storage', '$ionicScrollDelegate'];
+    ctrl.$inject = ['$scope', '$stateParams', '$state', 'Client', 'storage', '$ionicScrollDelegate', '$interval'];
     return ctrl;
     
 });

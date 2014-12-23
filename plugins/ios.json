@@ -71,11 +71,11 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"Crypt\"><param name=\"ios-package\" value=\"CDVCrypt\" /></feature>",
+                            "xml": "<feature name=\"Keyboard\"><param name=\"ios-package\" onload=\"true\" value=\"IonicKeyboard\" /></feature>",
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"Keyboard\"><param name=\"ios-package\" onload=\"true\" value=\"IonicKeyboard\" /></feature>",
+                            "xml": "<feature name=\"Crypt\"><param name=\"ios-package\" value=\"CDVCrypt\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -112,10 +112,10 @@
         "org.apache.cordova.media-capture": {
             "PACKAGE_NAME": "com.minds.mobile"
         },
-        "org.apache.cordova.crypt": {
+        "com.ionic.keyboard": {
             "PACKAGE_NAME": "com.minds.mobile"
         },
-        "com.ionic.keyboard": {
+        "org.apache.cordova.crypt": {
             "PACKAGE_NAME": "com.minds.mobile"
         }
     },

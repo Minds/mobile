@@ -9,7 +9,7 @@ define(function () {
     'use strict';
 
     function ctrl($scope, NewsfeedAPI, $filter, $ionicScrollDelegate, Cacher, Client, storage) {
-    	console.log(123);
+
 		if(Cacher.get('newsfeed.items'))
 			$scope.newsfeedItems = Cacher.get('newsfeed.items');
 		else
@@ -22,15 +22,22 @@ define(function () {
     	
     	$scope.hasMoreData = true;
     	
+    	if(Cacher.get('newsfeed.cachebreaker')){
+    		$scope.cachebreaker = Cacher.get('newsfeed.cachebreaker');
+    	} else {
+    		$scope.cachebreaker = 0;
+    	}
+    	
     	/**
     	 * Load more posts
     	 */
     	$scope.loadMore = function(){
+    		console.log('==== loading more ====');
     	
     		if(!$scope.hasMoreData)
     			return;
     		
-    		NewsfeedAPI.all({ limit: 12, offset: $scope.next }, 
+    		NewsfeedAPI.all({ limit: 12, offset: $scope.next, cachebreaker: $scope.cachebreaker }, 
     			function(data){
     		
 	    			if(!data.activity){
@@ -66,6 +73,8 @@ define(function () {
 	    			$scope.newsfeedItems = data.activity;
 	
 	    			$scope.next = data['load-next'];
+	    			
+	    			Cacher.put('newsfeed.cachebreaker', Date.now);
 	    			
 	    			$scope.$broadcast('scroll.refreshComplete');
 	

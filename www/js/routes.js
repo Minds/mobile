@@ -27,7 +27,7 @@ define(['app'], function (app) {
                     views: {
                         'newsfeed-tab': {
                             templateUrl: 'templates/newsfeed/list.html',
-                            controller: 'NewsfeedCtrl'
+                      //      controller: 'NewsfeedCtrl'
                         }
                     }
                 })

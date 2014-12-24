@@ -3,7 +3,7 @@
 define(['angular'], function (angular) {
     "use strict";
 
-    var directive = function ($rootScope, $filter, storage) {
+    var directive = function ($rootScope, storage) {
 	  	return {
        		restrict: 'A',
 			link: function(scope, element, attrs) {
@@ -15,11 +15,17 @@ define(['angular'], function (angular) {
 						angular.element(element).removeClass('selected');
 					}
 			    });
+			   
+			   /*if(attrs.thumbs.indexOf(storage.get('user_guid')) > -1){
+			   		angular.element(element).addClass('selected');
+			   } else {
+			   		angular.element(element).removeClass('selected');
+			   }*/
 				
 			}
        	 };
     };
 
-    directive.$inject = ['$rootScope', '$filter', 'storage'];
+    directive.$inject = ['$rootScope', 'storage'];
     return directive;
 });

@@ -8,7 +8,7 @@
 define(function () {
     'use strict';
 
-    function ctrl($scope, $stateParams) {
+    function ctrl($scope, $stateParams, $rootScope, Client, OAuth) {
 
 		$scope.video = function(){
 			navigator.device.capture.captureVideo(function(mediaFiles){
@@ -16,11 +16,13 @@ define(function () {
 				var i, path, len;
 			    for (i = 0, len = mediaFiles.length; i < len; i += 1) {
 			    	var mediafile = mediaFiles[i];
-			    	console.log(mediafile);
 			        path = mediafile.fullPath;
 			        console.log(path);
 			        
-			        alert('Uploading to Minds will be here soon!');
+			        var options = new FileUploadOptions();
+			        var ft = new FileTransfer();
+			        
+			    //    ft.upload(path, encodeURI($rootScope.node_url + 'api/v1/archive'), function(success){console.log(success);}, function(error){console.log(error);}, OAuth.buildParams(options));
 			    }
 			}, function(){
 				console.log('capture failed');
@@ -28,11 +30,28 @@ define(function () {
 		};
 		
 		$scope.photo= function(){
+			
 			navigator.device.capture.captureImage(function(mediaFiles){
 				var i, path, len;
 			    for (i = 0, len = mediaFiles.length; i < len; i += 1) {
 			        path = mediaFiles[i].fullPath;
 			        console.log(path);
+			        
+			        var ft = new FileTransfer();
+			        var options = new FileUploadOptions();
+			        
+			      	ft.upload(path, encodeURI($rootScope.node_url + 'api/v1/archive'), 
+			      		function(success){
+			      			console.log('success');
+			      			console.log(success);
+			      		}, 
+			      		function(error){
+			      			console.log('error');
+			      			console.log(error);
+			      		}, 
+			      		OAuth.buildParams(options)
+			      	);
+ 
 			    }
 			}, function(){
 				console.log('capture failed');
@@ -42,7 +61,7 @@ define(function () {
        
     }
 
-    ctrl.$inject = ['$scope', '$stateParams'];
+    ctrl.$inject = ['$scope', '$stateParams', '$rootScope', 'Client', 'OAuth'];
     return ctrl;
     
 });

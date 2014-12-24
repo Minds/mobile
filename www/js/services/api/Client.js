@@ -53,7 +53,8 @@ define(['angular'], function (angular) {
                 $http({
 					method: 'PUT',
 					url: $rootScope.node_url + endpoint,
-					params: OAuth.buildParams(data)
+					params: OAuth.buildParams({}),
+					data: data
 					}).
 					  success(function(data){
 						success_callback(data);

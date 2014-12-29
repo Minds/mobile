@@ -9,7 +9,6 @@ define(['angular'], function (angular) {
             link: function(scope, el, attrs) {
             	
                 attrs.$observe('ngSrc', function(src) {
-					console.log(src);
                     ImgCache.isCached(src, function(path, success) {
                         if (success) {
                         	//console.log('found cached!');

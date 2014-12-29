@@ -8,12 +8,13 @@
 define(function () {
     'use strict';
 
-    function ctrl($scope, NewsfeedAPI, $filter, $ionicScrollDelegate, Cacher, Client, storage) {
+    function ctrl($rootScope, $scope, NewsfeedAPI, $filter, $ionicScrollDelegate, Cacher, Client, storage) {
 
-		if(Cacher.get('newsfeed.items'))
+		if(Cacher.get('newsfeed.items')){
 			$scope.newsfeedItems = Cacher.get('newsfeed.items');
-		else
+		}else{
     		$scope.newsfeedItems =  [];
+    	}
     	
     	if(Cacher.get('newsfeed.next'))
     		$scope.next = Cacher.get('newsfeed.next');
@@ -27,7 +28,7 @@ define(function () {
     	} else {
     		$scope.cachebreaker = 0;
     	}
-    	
+
     	/**
     	 * Load more posts
     	 */
@@ -48,7 +49,11 @@ define(function () {
 	    			};
 	    			
 	    			$scope.newsfeedItems = $scope.newsfeedItems.concat(data.activity);
-	    			Cacher.put('newsfeed.items', $scope.newsfeedItems );
+	    			if($scope.newsfeedItems.length < 30){
+	    				Cacher.put('newsfeed.items', $scope.newsfeedItems);
+	    			} else {
+	    				Cacher.put('newsfeed.items', data.activity);
+	    			}
 	
 	    			$scope.next = data['load-next'];
 	    			Cacher.put('newsfeed.item', $scope.next);
@@ -61,9 +66,6 @@ define(function () {
 	    		});
 	    		
     	};
-        
-        $scope.$on('$stateChangeSuccess', function() {
-		});
 		
 		$scope.refresh = function(){
 			
@@ -71,6 +73,7 @@ define(function () {
 				function(data){
     		
 	    			$scope.newsfeedItems = data.activity;
+	    			Cacher.put('newsfeed.items', $scope.newsfeedItems );
 	
 	    			$scope.next = data['load-next'];
 	    			
@@ -155,7 +158,7 @@ define(function () {
 		};
     }
 
-    ctrl.$inject = ['$scope', 'NewsfeedAPI', '$filter', '$ionicScrollDelegate', 'Cacher', 'Client', 'storage'];
+    ctrl.$inject = ['$rootScope', '$scope', 'NewsfeedAPI', '$filter', '$ionicScrollDelegate', 'Cacher', 'Client', 'storage'];
     return ctrl;
     
 });

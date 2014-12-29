@@ -8,7 +8,7 @@
 define(function () {
     'use strict';
 
-    function ctrl($scope, $stateParams, $rootScope, Client, OAuth) {
+    function ctrl($scope, $stateParams, $rootScope, Client, OAuth, storage) {
 
 		$scope.video = function(){
 			navigator.device.capture.captureVideo(function(mediaFiles){
@@ -39,7 +39,9 @@ define(function () {
 			        
 			        var ft = new FileTransfer();
 			        var options = new FileUploadOptions();
-			        
+			        options.httpMethod = 'PUT';
+			        options.headers = {"Authorization": "Bearer " + storage.get('access_token') };
+			        console.log(options.headers);
 			      	ft.upload(path, encodeURI($rootScope.node_url + 'api/v1/archive'), 
 			      		function(success){
 			      			console.log('success');
@@ -49,7 +51,7 @@ define(function () {
 			      			console.log('error');
 			      			console.log(error);
 			      		}, 
-			      		OAuth.buildParams(options)
+			      		options
 			      	);
  
 			    }
@@ -61,7 +63,7 @@ define(function () {
        
     }
 
-    ctrl.$inject = ['$scope', '$stateParams', '$rootScope', 'Client', 'OAuth'];
+    ctrl.$inject = ['$scope', '$stateParams', '$rootScope', 'Client', 'OAuth', 'storage'];
     return ctrl;
     
 });

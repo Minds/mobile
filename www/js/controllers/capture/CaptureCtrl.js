@@ -8,7 +8,9 @@
 define(function () {
     'use strict';
 
-    function ctrl($scope, $stateParams, $rootScope, Client, OAuth, storage) {
+    function ctrl($scope, $stateParams, $rootScope, Client, OAuth, storage, $ionicModal) {
+    
+    	$scope.captured = false;
 
 		$scope.video = function(){
 			navigator.device.capture.captureVideo(function(mediaFiles){
@@ -32,20 +34,24 @@ define(function () {
 		$scope.photo= function(){
 			
 			navigator.device.capture.captureImage(function(mediaFiles){
+				
+				$scope.captured = true;
+				$scope.$apply();
+			
 				var i, path, len;
 			    for (i = 0, len = mediaFiles.length; i < len; i += 1) {
 			        path = mediaFiles[i].fullPath;
-			        console.log(path);
 			        
 			        var ft = new FileTransfer();
 			        var options = new FileUploadOptions();
 			        options.httpMethod = 'PUT';
 			        options.headers = {"Authorization": "Bearer " + storage.get('access_token') };
-			        console.log(options.headers);
+			       	
 			      	ft.upload(path, encodeURI($rootScope.node_url + 'api/v1/archive'), 
 			      		function(success){
-			      			console.log('success');
-			      			console.log(success);
+			      			var response = JSON.parse(success.response);
+			      			$scope.guid = response.guid;
+			      			$scope.$apply();
 			      		}, 
 			      		function(error){
 			      			console.log('error');
@@ -60,10 +66,18 @@ define(function () {
 				alert('Uploading to Minds will be here soon!');
 			}, {limit: 1});
 		};
+		
+		$scope.reset = function(){
+			$scope.captured = false;
+		};
+		
+		$scope.save = function(){
+			
+		};
        
     }
 
-    ctrl.$inject = ['$scope', '$stateParams', '$rootScope', 'Client', 'OAuth', 'storage'];
+    ctrl.$inject = ['$scope', '$stateParams', '$rootScope', 'Client', 'OAuth', 'storage', '$ionicModal'];
     return ctrl;
     
 });

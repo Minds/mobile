@@ -1,18 +1,44 @@
 <ion-view title="Capture" ng-controller="CaptureCtrl" class="view-bg">
 	
+        <ion-nav-buttons side="left" ng-if="captured">
+            <a class="button button-clear" ng-click="reset()">Back</a>
+        </ion-nav-buttons>
 	<ion-content>
-	   <ion-list class="capture-options">
-        
-           
-            <ion-item ng-click="video()">
-                <h1>Video</h1>
-            </ion-item>
+	
+    	<div ng-if="!captured">
+    	   <ion-list class="capture-options">
             
-            <ion-item ng-click="photo()">
-                <h1>Photo</h1>
-            </ion-item>
+               
+                <ion-item ng-click="video()">
+                    <h1>Video</h1>
+                </ion-item>
+                
+                <ion-item ng-click="photo()">
+                    <h1>Photo</h1>
+                </ion-item>
+    
+            </ion-list>
+        </div>
+        
+            <div ng-if="captured">   
+            <form ng-submit="save()">
+               <div class="list">
+                  <label class="item item-input item-floating-label">
+                    <span class="input-label">Title</span>
+                    <input type="text" placeholder="Title">
+                  </label>
+                  <label class="item item-input item-floating-label">
+                    <span class="input-label">Description</span>
+                    <textarea></textarea>
+                  </label>
+                  
+                  <div ng-if="guid">
+                    <input type="submit" class="button button-positive" value="Save"/>
+                  </div>
+                </div>
+            </form>
 
-        </ion-list>
+        </div>
        
 	</ion-content>
 

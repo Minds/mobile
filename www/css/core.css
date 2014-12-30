@@ -1,6 +1,9 @@
 .view-bg, .grey-bg{
 	background-color: #d2d5da;
 }
+.white-bg{
+	background: #FFF;
+}
 
 .small-font {
 	font-size: 13px !important;

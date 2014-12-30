@@ -48,3 +48,14 @@
 .owner-brief h3{
 	font-size:16px;
 }
+
+/**
+ * Upload bar
+ */
+progress[value] {
+  /* Reset the default appearance */
+  -webkit-appearance: none;
+   appearance: none;
+   height:32px;
+   color:#4690D6;
+  }

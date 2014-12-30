@@ -1,25 +1,56 @@
-<owner-brief-view owner="{{activity.ownerObj}}" ts="{{activity.time_created}}"></owner-brief-view>
 
+    <owner-brief-view owner="{{activity.ownerObj}}" ts="{{activity.time_created}}"></owner-brief-view>
+    
+    
+   
+    <div class="item" ng-if="activity.message">
+        <p ng-bind-html="activity.message"></p>
+    </div>
+    
+    <!--Rich content -->
 
-<p ng-bind-html="activity.message"></p>
+    <div class="item item-image" ng-if="activity.thumbnail_src">
+        <img ng-src="{{activity.thumbnail_src}}">
+    </div>
 
-
-<div class="activity-action-bar positive" style="padding:0;background-color:#F7F7F7">
-    <div class="button-bar bar-positive positive">
-        <button class="button button-light button-clear small-font thumbs-up" ng-click="thumbsUp(activity.guid)" thumbs="{{activity['thumbs:up:user_guids']}}">
-            <i class="icon ion-thumbsup"></i>
-        </button>
-        <button class="button button-light button-clear small-font thumbs-down" ng-click="thumbsDown(activity.guid)" thumbs="{{activity['thumbs:down:user_guids']}}">
+    <div class="item" ng-if="activity.blurb">
+        <p >
+          {{activity.blurb}}
+        </p>
+    </div>
+    
+    <!-- Custom type:: batch -->
+    <div class="item item-image" ng-if="activity.custom_type == 'batch'">
+        <img image-cache ng-repeat="data in activity.custom_data" ng-src="{{data.src}}">
+    </div>
+    
+    <!-- Custom type:: video -->
+    <div class="item item-image" ng-if="activity.custom_type == 'video'" play-video guid="{{activity.custom_data.guid}}">
+      
+        <video id="video" ng-show="showVideo" src="{{src}}" width="100%" height="100%" style="background:#000;" muted autoplay webkit-playsinline loop ></video>
+        
+        <!-- Consume the screen -->
+        <video ng-show="showVideoFull" src="{{srcFull}}" width="100%" height="100%" style="background:#000;" autoplay loop ></video>
+        
+         <img image-cache ng-src="{{activity.custom_data.thumbnail_src}}" ng-hide="showVideo">
+         <i class="icon ion-play" ng-hide="showVideo"></i>
+         
+    </div>
+    
+    <div class="item tabs tabs-secondary tabs-icon-left" style="padding:0;background-color:#F7F7F7 !important;">
+        <a class="tab-item small-font thumbs-up" ng-click="thumbsUp(activity.guid)" thumbs="{{activity['thumbs:up:user_guids']}}">
+                <i class="icon ion-thumbsup"></i>
+        </a>
+        <a class="tab-item small-font thumbs-down" ng-click="thumbsDown(activity.guid)" thumbs="{{activity['thumbs:down:user_guids']}}">
             <i class="icon ion-thumbsdown"></i>
 
-        </button>
-        <button class="button button-light button-clear small-font" ng-click="loadComments({{activity.guid}})">
+        </a>
+        <a class="tab-item  small-font" ng-click="loadComments({{activity.guid}})">
             <i class="icon ion-chatbox"></i>
 
-        </button>
-        <button class="button button-light button-clear small-font" ng-click="remind({{activity.guid}})">
+        </a>
+        <a class="tab-item small-font" ng-click="remind({{activity.guid}})">
             <i class="icon ion-share"></i>
 
-        </button>
+        </a>
     </div>
-</div>

@@ -1,4 +1,9 @@
 
+.messages .item-avatar{
+	box-shadow:0 !important;
+	border:0 !important;
+}
+
 .message-input{
 	margin-left:8px;
 	border-radius:3px;
@@ -10,4 +15,13 @@
 
 .submit-button{
 	float:left;
+}
+
+.conversation{
+	padding:0 !important;
+	margin:0 !important;
+}
+.conversation .item-avatar{
+	border:0 !important;
+	box-shadow:0 !important;
 }

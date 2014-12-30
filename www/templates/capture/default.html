@@ -1,11 +1,11 @@
-<ion-view title="Capture" ng-controller="CaptureCtrl" class="white-bg">
+<ion-view title="Capture" class="white-bg" ng-controller="CaptureCtrl">
 	
         <ion-nav-buttons side="left" ng-if="captured">
             <a class="button button-clear" ng-click="reset()">Back</a>
         </ion-nav-buttons>
-	<ion-content>
+	<ion-content >
 	
-    	<div ng-if="!captured">
+    	<div ng-hide="captured">
     	   <ion-list class="capture-options">
             
                
@@ -20,18 +20,18 @@
             </ion-list>
         </div>
         
-            <div ng-if="captured">   
-            <form ng-submit="save()">
+            <div ng-show="captured">   
+            <form >
                  
                <progress max="100" value="{{progress}}"> </progress>
                <div class="list">
                   <label class="item item-input item-floating-label">
                     <span class="input-label">Title</span>
-                    <input type="text" placeholder="Title">
+                    <input type="text" placeholder="Title" ng-model="form.title">
                   </label>
                   <label class="item item-input item-floating-label">
                     <span class="input-label">Description</span>
-                    <textarea placeholder="Description"></textarea>
+                    <textarea placeholder="Description" ng-model="form.description"></textarea>
                   </label>
                   
                   <div ng-if="guid">

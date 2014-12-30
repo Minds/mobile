@@ -13,7 +13,7 @@
                 on-refresh="refresh()">
             </ion-refresher>
 
-            <ion-item ng-repeat="conversation in conversations" class="conversation" type="item-text-wrap" href="#/tab/gatherings/conversations/{{conversation.guid}}">
+            <ion-item ng-repeat="conversation in conversations" class="conversation list card" href="#/tab/gatherings/conversations/{{conversation.guid}}">
                 <owner-brief-view owner="{{conversation}}"></owner-brief-view>
             </ion-item>
 

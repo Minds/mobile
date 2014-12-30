@@ -156,6 +156,13 @@ define(function () {
 		$scope.remind = function(guid){
 			alert('sorry, not done this yet');
 		};
+		
+		/**
+		 * Play video
+		 */
+		$scope.playVideo = function(guid){
+			alert('hold your horses');
+		};
     }
 
     ctrl.$inject = ['$rootScope', '$scope', 'NewsfeedAPI', '$filter', '$ionicScrollDelegate', 'Cacher', 'Client', 'storage'];

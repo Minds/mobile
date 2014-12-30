@@ -8,10 +8,11 @@
 define(function () {
     'use strict';
 
-    function ctrl($scope, $stateParams, $state, $rootScope, Client, OAuth, storage, $ionicModal) {
+    function ctrl($scope, $stateParams, $state, $rootScope, Client, OAuth, storage) {
     
     	$scope.captured = false;
     	$scope.progress = 0;
+    	$scope.form = {};
 
 		$scope.video = function(){
 			navigator.device.capture.captureVideo(function(mediaFiles){
@@ -93,8 +94,11 @@ define(function () {
 		};
 		
 		$scope.save = function(){
+
 			Client.post('api/v1/archive/' + $scope.guid, {
-					album_title: 'Mobile'
+					album_title: 'Mobile',
+					title: $scope.form.title,
+					description: $scope.form.description
 				},
 				function(success){
 					alert('done, a future build will take you to the image view..');
@@ -108,7 +112,7 @@ define(function () {
        
     }
 
-    ctrl.$inject = ['$scope', '$stateParams', '$state', '$rootScope', 'Client', 'OAuth', 'storage', '$ionicModal'];
+    ctrl.$inject = ['$scope', '$stateParams', '$state', '$rootScope', 'Client', 'OAuth', 'storage'];
     return ctrl;
     
 });

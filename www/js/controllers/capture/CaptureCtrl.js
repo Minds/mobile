@@ -8,7 +8,7 @@
 define(function () {
     'use strict';
 
-    function ctrl($scope, $stateParams, $state, $rootScope, Client, OAuth, storage) {
+    function ctrl($scope, $stateParams, $state, $rootScope, Client, OAuth, storage, $ionicLoading, $ionicPopup) {
     
     	$scope.captured = false;
     	$scope.progress = 0;
@@ -94,6 +94,10 @@ define(function () {
 		};
 		
 		$scope.save = function(){
+		
+			$ionicLoading.show({
+		      template: 'Please wait a moment...'
+		    });
 
 			Client.post('api/v1/archive/' + $scope.guid, {
 					album_title: 'Mobile',
@@ -101,18 +105,26 @@ define(function () {
 					description: $scope.form.description
 				},
 				function(success){
-					alert('done, a future build will take you to the image view..');
+					$ionicPopup.alert({
+					     title: 'Complete.',
+					     template: ''
+					   });
 					$scope.reset();
+					$ionicLoading.hide();
 				}, 
 				function(error){
-					alert('oops. something didn\'t go to plan.');
+					$ionicPopup.alert({
+					     title: 'Error',
+					     template: 'Saving failed.'
+					   });
 					$scope.reset();
+					$ionicLoading.hide();
 				});
 		};
        
     }
 
-    ctrl.$inject = ['$scope', '$stateParams', '$state', '$rootScope', 'Client', 'OAuth', 'storage'];
+    ctrl.$inject = ['$scope', '$stateParams', '$state', '$rootScope', 'Client', 'OAuth', 'storage', '$ionicLoading', '$ionicPopup'];
     return ctrl;
     
 });

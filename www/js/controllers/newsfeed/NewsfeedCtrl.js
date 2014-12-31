@@ -8,7 +8,7 @@
 define(function () {
     'use strict';
 
-    function ctrl($rootScope, $scope, NewsfeedAPI, $filter, $ionicScrollDelegate, Cacher, Client, storage) {
+    function ctrl($rootScope, $scope, NewsfeedAPI, $filter, $ionicScrollDelegate, Cacher, Client, storage, $ionicPopover, $ionicLoading) {
 
 		if(Cacher.get('newsfeed.items')){
 			$scope.newsfeedItems = Cacher.get('newsfeed.items');
@@ -153,19 +153,44 @@ define(function () {
 		/**
 		 * Remind an activity
 		 */
-		$scope.remind = function(guid){
+		$scope.remind = function(guid, $event){
 			alert('sorry, not done this yet');
 		};
 		
 		/**
-		 * Play video
+		 * Init the composer popover
 		 */
-		$scope.playVideo = function(guid){
-			alert('hold your horses');
+		$scope.composerData = {};
+		$ionicPopover.fromTemplateUrl('templates/newsfeed/compose.html', {
+		    scope: $scope,
+		  }).then(function(popover) {
+		    $scope.composer = popover;
+		  });
+		  
+		$scope.post = function(){
+			$ionicLoading.show({
+		      template: 'Please wait a moment...'
+		    });
+
+    		NewsfeedAPI.post({
+    			message: $scope.composerData.message
+	    	}, function(success){
+	    		$scope.refresh();
+	    		$scope.message = '';
+	    		$scope.composer.hide();
+	    		
+	    		$ionicLoading.hide();
+	    	}, function(error){
+	    		alert('there was an error and we couldn\'t save!');
+	    		$ionicLoading.hide();
+	    	});
+	    	
 		};
+		
+		
     }
 
-    ctrl.$inject = ['$rootScope', '$scope', 'NewsfeedAPI', '$filter', '$ionicScrollDelegate', 'Cacher', 'Client', 'storage'];
+    ctrl.$inject = ['$rootScope', '$scope', 'NewsfeedAPI', '$filter', '$ionicScrollDelegate', 'Cacher', 'Client', 'storage', '$ionicPopover', '$ionicLoading'];
     return ctrl;
     
 });

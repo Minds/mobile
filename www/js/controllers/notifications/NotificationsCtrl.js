@@ -50,7 +50,7 @@ define(function () {
 	    			};
 	    			
 	    			$scope.notificationItems = $scope.notificationItems.concat(data.notifications);
-	    			Cacher.put('newsfeed.items', $scope.notificationItems);
+	    			Cacher.put('notification.items', $scope.notificationItems);
 	    		
 	
 	    			$scope.next = data['load-next'];
@@ -71,7 +71,7 @@ define(function () {
 				function(data){
     		
 	    			$scope.notificationItems = data.notifications;
-	    			Cacher.put('newsfeed.items', $scope.notificationItems);
+	    			Cacher.put('notification.items', $scope.notificationItems);
 	
 	    			$scope.next = data['load-next'];
 	    			

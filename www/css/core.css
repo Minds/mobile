@@ -19,7 +19,8 @@
 	background:#222 !important;
 }
 .tabs .tab-item{
-	border-color:#4690C3 !important;
+	/*border-color:#4690C3 !important;*/
+	border-color:#FFCC00 !important;
 	color:#FFF;
 }
 
@@ -30,4 +31,11 @@
 	background: #000 !important;
 	color:#EEE;
 	
+}
+
+.minds-yellow{
+	color:#FFCC00;
+}
+.minds-blue{
+	color:#4690C3;
 }

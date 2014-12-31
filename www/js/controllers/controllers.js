@@ -40,6 +40,11 @@ define(function (require) {
      * Capture
      */
    	controllers.controller('CaptureCtrl', require('controllers/capture/CaptureCtrl'));
+   	
+   	/**
+     * Notifications
+     */
+   	controllers.controller('NotificationsCtrl', require('controllers/notifications/NotificationsCtrl'));
     
 	controllers.run(['$rootScope', 'NODE_URL', function ($rootScope, NODE_URL) {
 		$rootScope.node_url = NODE_URL;

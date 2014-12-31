@@ -1,8 +1,4 @@
-<ion-view title="Notifications" class="view-bg">
-	
-	<ion-nav-buttons side="right">
-		<a class="button button-clear icon ion-compose" href="#/tab/newsfeed/compose"></a>
-	</ion-nav-buttons>
+<ion-view title="Notifications" ng-controller="NotificationsCtrl" class="view-bg">
 
 	<ion-content>
 
@@ -13,9 +9,21 @@
 				on-refresh="refresh()">
 			</ion-refresher>
 
-			<ion-item >
-				<p>Notifications are still to be built</p>
-			</ion-item>
+			<div class="activity-item list card" ng-repeat="notification in notificationItems">
+				<div class="item item-avatar">
+                    <img ng-src="{{$root.node_url}}icon/{{notification.from_guid}}">
+                    
+                    <div ng-switch="notification.notification_view">
+                        <div ng-switch-when="friends"><h2>{{notification.fromObj.name}} subscribed to you</h2></div>
+                        <div ng-switch-when="group_invite"><h2>You've been invited to join {{notification.entityObj.name}}</h2></div>
+                        <div ng-switch-when="comment"><h2>{{notification.fromObj.name}} commented on {{notification.entityObj.title}}</h2></div>
+                        <div ng-switch-when="like"><h2>{{notification.fromObj.name}} voted up {{notification.entityObj.title}}</h2></div>
+                        <div ng-switch-when="feature"><h2>{{notification.entityObj.title}} was featured</h2></div>
+                    </div>
+                    
+                    <p>{{time_created}}</p>
+                 </div>
+			</div>
 
 		</ion-list>
 		

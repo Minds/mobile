@@ -8,72 +8,65 @@ define(['angular'], function (angular) {
        		restrict: 'AE',
 			link: function(scope, el, attrs) {
 				//console.log('hello from playvideo');
-            	el.on('click', function(){ 
-            		Client.get('api/v1/archive/'+attrs.guid, {}, 
-    					function(success){
-    						
-    						scope.showVideo = true;
-    						scope.srcFull = $sce.trustAsResourceUrl(success.transcodes['360.mp4']);
-    						
-    						video = angular.element(el.find('video'));
-    						video[0].play();
-    	
-
-    						
-    					},
-    					function(error){
-    						console.log(error);
-    					});
-            		
-            		
-            	});
+				
+				/**
+				 * Initialises the playback.
+				 */
+				scope.play = function(){
+					if(!scope.srcFull){
+						Client.get('api/v1/archive/'+attrs.guid, {}, 
+	    					function(success){
+	    						
+	    						scope.showVideo = true;
+	    						scope.srcFull = $sce.trustAsResourceUrl(success.transcodes['360.mp4']);
+	    						
+	    						video = angular.element(el.find('video'));
+	    						video[0].play();
+	    	
+	
+	    						
+	    					},
+	    					function(error){
+	    						console.log(error);
+	    					});
+    				} else {
+    					video = angular.element(el.find('video'));
+	 					video[0].play();
+    				}
+				};
+				
+            	el.on('click', scope.play);
+            	
             	scope.showVideo = false;
             	var playing = false;
             	
             	/**
-            	 * To be revisted, autoplaying videos... not supported without native plugin though
+            	 * Get the src info when a user is hovering over
             	 */
-            	/*stop = $interval(function() {
+            	stop = $interval(function() {
             		//get the scroll position
             		var scroll = $ionicScrollDelegate.getScrollPosition();
             		var position = el.prop('offsetTop');
             		var src = "";
 
             		if((scroll.top - position) < 100){
-            			if(!playing){
-            				playing=true;
-            				console.log(attrs.guid);
-            				Client.get('api/v1/archive/'+attrs.guid, {}, 
-            					function(success){
-            						
-            						scope.showVideo = true;
-            						scope.src = $sce.trustAsResourceUrl(success.transcodes['360.mp4']);
-            						
-            						video = angular.element(el.find('video'));
-            						video[0].play();
-            	
 
-            						
-            					},
-            					function(error){
-            						console.log(error);
-            					});
-            			} else {
-            				video = angular.element(el.find('video'));
-            				video[0].play();
-            			}
-            		} else {
-            			playing = false;
-            			//var video = document.getElementById("video");
-            			video = angular.element(el.find('video'));
-            			video[0].pause();
-            		}
-            	},600);*/
+        				Client.get('api/v1/archive/'+attrs.guid, {}, 
+        					function(success){
+        						
+        						scope.showVideo = true;
+        						scope.srcFull = $sce.trustAsResourceUrl(success.transcodes['360.mp4']);
+   
+            				},
+            				function(error){
+            					console.log(error);
+            				});
+            			
+            		} 
+            	},600);
             	
             	scope.$on('$destroy', function() {
-            		//$interval.cancel(stop);
-            		video = angular.element(el.find('video'));
-            		video[0].pause();
+            		//	$interval.cancel(stop);
             	});
 			}
        	 };

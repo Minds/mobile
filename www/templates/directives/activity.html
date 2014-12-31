@@ -27,13 +27,13 @@
     <!-- Custom type:: video -->
     <div class="item item-image" ng-if="activity.custom_type == 'video'" play-video guid="{{activity.custom_data.guid}}">
       
-        <video id="video" ng-show="showVideo" src="{{src}}" width="100%" height="100%" style="background:#000;" muted autoplay webkit-playsinline loop ></video>
+        <!--<video id="video" ng-show="showVideo" src="{{src}}" width="100%" height="100%" style="background:#000;" muted autoplay webkit-playsinline loop ></video>-->
         
         <!-- Consume the screen -->
-        <video ng-show="showVideoFull" src="{{srcFull}}" width="100%" height="100%" style="background:#000;" autoplay loop ></video>
+        <video id="video" ng-show="showVideoFull" src="{{srcFull}}" width="100%" height="100%" style="background:#000;" loop></video>
         
-         <img image-cache ng-src="{{activity.custom_data.thumbnail_src}}" ng-hide="showVideo">
-         <i class="icon ion-play" ng-hide="showVideo"></i>
+         <img image-cache ng-src="{{activity.custom_data.thumbnail_src}}">
+         <i class="icon ion-play"></i>
          
     </div>
     

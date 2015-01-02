@@ -8,7 +8,7 @@
 define(function () {
     'use strict';
 
-    function ctrl($rootScope, $scope, NewsfeedAPI, $filter, $ionicScrollDelegate, Cacher, Client, storage, $ionicPopover, $ionicLoading) {
+    function ctrl($rootScope, $scope, NewsfeedAPI, $filter, $ionicScrollDelegate, Cacher, Client, storage, $ionicPopover, $ionicLoading, $sce) {
 
 		if(Cacher.get('newsfeed.items')){
 			$scope.newsfeedItems = Cacher.get('newsfeed.items');
@@ -49,11 +49,11 @@ define(function () {
 	    			};
 	    			
 	    			$scope.newsfeedItems = $scope.newsfeedItems.concat(data.activity);
-	    			if($scope.newsfeedItems.length < 30){
+	    			//if($scope.newsfeedItems.length < 30){
 	    				Cacher.put('newsfeed.items', $scope.newsfeedItems);
-	    			} else {
-	    				Cacher.put('newsfeed.items', data.activity);
-	    			}
+	    			//} else {
+	    			//	Cacher.put('newsfeed.items', data.activity);
+	    			//}
 	
 	    			$scope.next = data['load-next'];
 	    			Cacher.put('newsfeed.item', $scope.next);
@@ -190,7 +190,7 @@ define(function () {
 		
     }
 
-    ctrl.$inject = ['$rootScope', '$scope', 'NewsfeedAPI', '$filter', '$ionicScrollDelegate', 'Cacher', 'Client', 'storage', '$ionicPopover', '$ionicLoading'];
+    ctrl.$inject = ['$rootScope', '$scope', 'NewsfeedAPI', '$filter', '$ionicScrollDelegate', 'Cacher', 'Client', 'storage', '$ionicPopover', '$ionicLoading', '$sce'];
     return ctrl;
     
 });

@@ -7,12 +7,12 @@
 
 requirejs.config({
 	paths: {
-        angular:          '../vendors/angular/angular.min',
-        angularAnimate:   '../vendors/angular/angular-animate.min',
-        angularSanitize:  '../vendors/angular/angular-sanitize.min',
-        uiRouter:         '../vendors/angular-ui/angular-ui-router.min',
-        ionic:            '../vendors/ionic/ionic.min',
-        ionicAngular:     '../vendors/ionic/ionic-angular.min',
+        angular:          '../vendors/ionic/js/angular/angular.min',
+        angularAnimate:   '../vendors/ionic/js/angular/angular-animate.min',
+        angularSanitize:  '../vendors/ionic/js/angular/angular-sanitize.min',
+        uiRouter:         '../vendors/ionic/js/angular-ui/angular-ui-router.min',
+        ionic:            '../vendors/ionic/js/ionic.min',
+        ionicAngular:     '../vendors/ionic/js/ionic-angular.min',
         text:             '../vendors/text',
         JSEncrypt:		  '../vendors/jsencrypt/jsencrypt',
         imgcache:		  '../vendors/imgcache/imgcache'

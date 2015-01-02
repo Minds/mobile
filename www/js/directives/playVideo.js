@@ -3,7 +3,7 @@
 define(['angular'], function (angular) {
     "use strict";
 
-    var directive = function ($ionicScrollDelegate, $interval, Client, $sce) {
+    var directive = function ($ionicScrollDelegate, $interval, Client, $sce, $ionicLoading) {
 	 	return {
        		restrict: 'AE',
 			link: function(scope, el, attrs) {
@@ -13,7 +13,9 @@ define(['angular'], function (angular) {
 				 * Initialises the playback.
 				 */
 				scope.play = function(){
+
 					if(!scope.srcFull){
+					
 						Client.get('api/v1/archive/'+attrs.guid, {}, 
 	    					function(success){
 	    						
@@ -22,20 +24,27 @@ define(['angular'], function (angular) {
 	    						
 	    						video = angular.element(el.find('video'));
 	    						video[0].play();
-	    	
-	
 	    						
 	    					},
 	    					function(error){
 	    						console.log(error);
 	    					});
     				} else {
+    				
+    					 $ionicLoading.show({
+					      template: 'Loading...'
+					    });
+    				
+    					scope.showVideo = true;
     					video = angular.element(el.find('video'));
 	 					video[0].play();
+	 					video[0].onplaying  = function(){
+	 						$ionicLoading.hide();
+	 					};
     				}
 				};
 				
-            	el.on('click', scope.play);
+            	el.on('touch', scope.play);
             	
             	scope.showVideo = false;
             	var playing = false;
@@ -49,7 +58,7 @@ define(['angular'], function (angular) {
             		var position = el.prop('offsetTop');
             		var src = "";
 
-            		if((scroll.top - position) < 100){
+            		if((scroll.top - position) < 100 && !scope.srcFull){
 
         				Client.get('api/v1/archive/'+attrs.guid, {}, 
         					function(success){
@@ -72,6 +81,6 @@ define(['angular'], function (angular) {
        	 };
     };
 
-    directive.$inject = ['$ionicScrollDelegate', '$interval', 'Client', '$sce'];
+    directive.$inject = ['$ionicScrollDelegate', '$interval', 'Client', '$sce', '$ionicLoading'];
     return directive;
 });

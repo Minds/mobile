@@ -17,6 +17,7 @@
 
 .tabs{
 	background:#222 !important;
+	border:0 !important;
 }
 .tabs .tab-item{
 	/*border-color:#4690C3 !important;*/
@@ -24,14 +25,14 @@
 	color:#FFF;
 }
 
-.capture-tab{
+/*.capture-tab{
 
 	margin-top:-2px;
 	height:50px;
 	background: #000 !important;
 	color:#EEE;
 	
-}
+}*/
 
 .minds-yellow{
 	color:#FFCC00;

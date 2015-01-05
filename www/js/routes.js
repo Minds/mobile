@@ -90,7 +90,7 @@ define(['app'], function (app) {
                     views: {
                         'channel-tab': {
                             templateUrl: 'templates/channels/channel.html',
-                            controller: 'ChannelCtrl'
+                        //    controller: 'ChannelCtrl'
                         }
                     }
                 })

@@ -8,7 +8,7 @@
 define(function () {
     'use strict';
 
-    function ctrl($scope, $stateParams, $state, Client, storage, $ionicScrollDelegate, $interval) {
+    function ctrl($scope, $stateParams, $state, Client, storage, $ionicScrollDelegate, $interval, $ionicLoading) {
     
     	$scope.messages = [];
     	$scope.next  = "";
@@ -51,19 +51,27 @@ define(function () {
 					$scope.publickeys = data.publickeys;
 	    		}, 
 	    		function(error){ 
+	    			console.log(error);
 	    			alert('error'); 
 	    		});
 	    		
     	};
     	$scope.loadMore();
     	
-    	$interval(function(){
+    	var polling = $interval(function(){
     		if(!poll){
     			return false;
     		}
     		poll = false;
-    		console.log('checking for new chats from' + $scope.previous);
+    		
 
+    		$scope.doPoll();
+    		
+    		
+    	}, 5000);
+    	
+    	$scope.doPoll = function(){
+    		console.log('checking for new chats from' + $scope.previous);
     		Client.get('api/v1/conversations/'+$stateParams.username, { limit: 1000, start: $scope.previous, cachebreak: Date.now()}, 
     			function(data){
 					
@@ -83,12 +91,14 @@ define(function () {
 	    			poll = false;
 	    			console.log('polling for new messages failed');
 	    		});
-    		
-    		
-    	}, 5000);
+    	};
     	
     	
     	$scope.send = function(){
+    	
+    		$ionicLoading.show({
+		      template: 'Sending...'
+		    });
     		
     		var encrypted = {};
     		
@@ -102,6 +112,9 @@ define(function () {
 	    		})(index);
     		}
     		
+    		/**
+    		 * @todo make this into a promise.. interval looping is dumb
+    		 */
     		//to make this syncronous we have to loop until we get all the values we need!
     		var sync = setInterval(function(){
     			if(encrypted.length == $scope.publickeys.length){
@@ -115,11 +128,17 @@ define(function () {
     				Client.post('api/v1/conversations/'+$stateParams.username, 
     					data,
     					function(data){
-    						$scope.messages.push(data.message);
+    						$scope.doPoll();
+    						//console.log(data);
+    						//$scope.previous = data.message.guid;
+    						//$scope.messages.push(data.message);
     						$scope.message = "";
     						$ionicScrollDelegate.scrollBottom();
+    						$ionicLoading.hide();
     					},
     					function(error){
+    						$ionicLoading.hide();
+    						alert('sorry, your message could not be sent');
     						console.log(error);
     					});
     				
@@ -131,12 +150,14 @@ define(function () {
         $scope.$on('$stateChangeSuccess', function() {
         	console.log('state changed..');
 			//$scope.loadMore();
+			//if(polling)
+			//	$interval.cancel(polling);
 		});
 
 		
     }
 
-    ctrl.$inject = ['$scope', '$stateParams', '$state', 'Client', 'storage', '$ionicScrollDelegate', '$interval'];
+    ctrl.$inject = ['$scope', '$stateParams', '$state', 'Client', 'storage', '$ionicScrollDelegate', '$interval', '$ionicLoading'];
     return ctrl;
     
 });

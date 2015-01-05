@@ -25,6 +25,10 @@
 	color:#FFF;
 }
 
+.item-avatar img{
+	border-radius:3px !important;
+}
+
 /*.capture-tab{
 
 	margin-top:-2px;

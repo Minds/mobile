@@ -3,7 +3,7 @@
 define(['angular'], function (angular) {
     "use strict";
 
-    var directive = function ($ionicScrollDelegate, $interval, Client, $sce, $ionicLoading) {
+    var directive = function ($ionicScrollDelegate, $interval, Client, $sce, $ionicLoading, $timeout) {
 	 	return {
        		restrict: 'AE',
 			link: function(scope, el, attrs) {
@@ -41,10 +41,14 @@ define(['angular'], function (angular) {
 	 					video[0].onplaying  = function(){
 	 						$ionicLoading.hide();
 	 					};
+	 					
+	 					$timeout(function(){
+	 						$ionicLoading.hide();
+	 					}, 3000);
     				}
 				};
 				
-            	el.on('touch', scope.play);
+            	el.on('click', scope.play);
             	
             	scope.showVideo = false;
             	var playing = false;
@@ -81,6 +85,6 @@ define(['angular'], function (angular) {
        	 };
     };
 
-    directive.$inject = ['$ionicScrollDelegate', '$interval', 'Client', '$sce', '$ionicLoading'];
+    directive.$inject = ['$ionicScrollDelegate', '$interval', 'Client', '$sce', '$ionicLoading', '$timeout'];
     return directive;
 });

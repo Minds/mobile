@@ -15,7 +15,7 @@ define(['angular'], function (angular) {
                             ImgCache.useCachedFile(el);
                         } else {
                             ImgCache.cacheFile(src, function() {
-                                ImgCache.useCachedFile(el);
+                            	ImgCache.useCachedFile(el);
                                 console.log('cache not found!');
                             });
                         }

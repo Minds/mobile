@@ -19,7 +19,7 @@
     
     <!-- Custom type:: batch -->
     <div class="item item-image" ng-if="activity.custom_type == 'batch'">
-        <img image-cache ng-repeat="data in activity.custom_data" ng-src="{{data.src}}">
+        <img ng-repeat="data in activity.custom_data" ng-src="{{data.src}}">
     </div>
     
     <!-- Custom type:: video -->
@@ -27,7 +27,7 @@
       
         <!--<video id="video" ng-show="showVideo" src="{{src}}" width="100%" height="100%" style="background:#000;" muted autoplay webkit-playsinline loop ></video>-->       
         
-         <img image-cache ng-src="{{activity.custom_data.thumbnail_src}}">
+         <img ng-src="{{activity.custom_data.thumbnail_src}}">
          <i class="icon ion-play"></i>
          
           <video id="video" ng-show="showVideo" src="{{srcFull}}" width="100%" height="100%" style="display:none;background:#000;" loop preload="auto"></video>

@@ -146,9 +146,30 @@ define(function () {
 		/**
 		 * Load comments
 		 */
-		$scope.loadComments = function(guid){
-			alert('sorry, not done this yet');
+		$scope.commentsData = {};
+		$scope.loadComments = function(guid, $event){
+			$scope.comments.show($event);
+			
+			/**
+			 * Now load the comments
+			 */
+			Client.get('api/v1/comments/'+guid, {
+					cachebreaker: Date.now
+				}, 
+				function(success){
+					console.log('success for ' + guid );
+					console.log(success);
+					$scope.commentsData = success.comments;
+				}, function(error){
+					console.log('error');
+				});
+							
 		};
+		$ionicPopover.fromTemplateUrl('templates/comments/list.html', {
+		    scope: $scope,
+		  }).then(function(popover) {
+		    $scope.comments = popover;
+		  });
 		
 		/**
 		 * Remind an activity

@@ -13,6 +13,12 @@ define(function (require) {
 		services = require('services/services'),
 		config = require('config'),
 		controllers = angular.module('app.controllers', ['app.services', 'app.config']);
+		
+		
+	/**
+	 * Tabs
+	 */
+	controllers.controller('TabsCtrl', require('controllers/TabsCtrl'));
 
 	controllers.controller('LoginCtrl', require('controllers/LoginCtrl'));
 	

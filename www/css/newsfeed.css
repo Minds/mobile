@@ -55,8 +55,8 @@
      left:0;
  }
  .carousel.blur img{
-    transition: 0.5s -webkit-filter linear;
-    -webkit-filter:blur(20px);
+  /*  transition: 0.5s -webkit-filter linear;
+    -webkit-filter:blur(20px);*/
  }
 .channel-content {
       padding-top:120px;

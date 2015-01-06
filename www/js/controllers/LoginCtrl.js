@@ -12,6 +12,9 @@ define(function() {
 
 		if(storage.get('access_token') && storage.get('loggedin'))
 			$state.go('tab.newsfeed');
+			
+			console.log(storage.get('access_token'));
+			console.log(storage.get('loggedin'));
 
 		$scope.login = function() {
 

@@ -9,7 +9,7 @@ define(function () {
     'use strict';
 
     function ctrl($rootScope, $scope, NewsfeedAPI, $filter, $ionicScrollDelegate, Cacher, Client, storage, $ionicPopover, $ionicLoading, $sce) {
-
+		
 		if(Cacher.get('newsfeed.items')){
 			$scope.newsfeedItems = Cacher.get('newsfeed.items');
 		}else{
@@ -149,6 +149,7 @@ define(function () {
 		$scope.commentsData = {};
 		$scope.loadComments = function(guid, $event){
 			$scope.comments.show($event);
+			$scope.commentsData = {}; 
 			
 			/**
 			 * Now load the comments

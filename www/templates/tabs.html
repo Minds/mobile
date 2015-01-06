@@ -1,6 +1,6 @@
-<ion-tabs class="tabs-striped tabs-icon-only">
+<ion-tabs class="tabs-striped tabs-icon-only" ng-controller="TabsCtrl">
 
-    <ion-tab title="Newsfeed" icon="icon ion-home" href="#/tab/newsfeed">
+    <ion-tab title="Newsfeed" icon="icon ion-home" href="#/tab/newsfeed" on-select="onTabSelect()">
         <ion-nav-view name="newsfeed-tab"></ion-nav-view>
     </ion-tab>
 
@@ -12,12 +12,14 @@
         <ion-nav-view name="capture-tab" style="background: #000 !important; color:#FFF;"></ion-nav-view>
     </ion-tab>
 
-    <ion-tab title="Channel" icon="icon ion-person" href="#/tab/channel/me">
-        <ion-nav-view name="channel-tab"></ion-nav-view>
-    </ion-tab>
+    <ion-tab title="Discover" icon="icon ion-search" href="#/tab/discover">
+        <ion-nav-view name="discover-tab"></ion-nav-view>
+    </ion-tab>-->
     
-    <ion-tab title="Notifications" icon="icon ion-ios7-bell" href="#/tab/notifications">
-        <ion-nav-view name="notifications-tab"></ion-nav-view>
+
+    
+    <ion-tab title="More" icon="icon ion-navicon" href="#/tab/more">
+        <ion-nav-view name="more-tab"></ion-nav-view>
     </ion-tab>
 
 </ion-tabs>

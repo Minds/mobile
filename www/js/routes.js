@@ -15,7 +15,7 @@ define(['app'], function (app) {
                 .state('login', {
                     url: "/login",
                     templateUrl: "templates/login.html",
-                    controller: 'LoginCtrl'
+                  //  controller: 'LoginCtrl'
                 })
                 .state('tab', {
                     url: "/tab",
@@ -85,19 +85,27 @@ define(['app'], function (app) {
                         }
                     }
                 })
-                .state('tab.channel', {
-                    url: '/channel/:username',
-                    views: {
-                        'channel-tab': {
-                            templateUrl: 'templates/channels/channel.html',
-                        //    controller: 'ChannelCtrl'
+                .state('tab.more', {
+					url: "/more",
+					 views: {
+                        'more-tab': {
+                            templateUrl: 'templates/more.html'
                         }
                     }
                 })
-                .state('tab.notifications', {
-                    url: '/notifications',
+                .state('tab.more-channel', {
+					url: "/more/channel/:username",
+					 views: {
+                        'more-tab': {
+                            templateUrl: 'templates/channels/channel.html'
+                        }
+                    }
+                })
+                
+                .state('tab.more-notifications', {
+                    url: '/more/notifications',
                     views: {
-                        'notifications-tab': {
+                        'more-tab': {
                             templateUrl: 'templates/notifications/list.html'
                         }
                     }

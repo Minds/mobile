@@ -85,6 +85,14 @@ define(['app'], function (app) {
                         }
                     }
                 })
+                .state('tab.discover', {
+					url: "/discover",
+					 views: {
+                        'discover-tab': {
+                            templateUrl: 'templates/discover/list.html'
+                        }
+                    }
+                })
                 .state('tab.more', {
 					url: "/more",
 					 views: {
@@ -106,7 +114,7 @@ define(['app'], function (app) {
                     url: '/more/notifications',
                     views: {
                         'more-tab': {
-                            templateUrl: 'templates/notifications/list.html'
+                            templateUrl: 'templates/notifications/list.html',
                         }
                     }
                 });

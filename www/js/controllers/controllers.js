@@ -51,6 +51,11 @@ define(function (require) {
      * Notifications
      */
    	controllers.controller('NotificationsCtrl', require('controllers/notifications/NotificationsCtrl'));
+   	
+   	/**
+     * Discover
+     */
+   	controllers.controller('DiscoverCtrl', require('controllers/discover/DiscoverCtrl'));
     
 	controllers.run(['$rootScope', 'NODE_URL', function ($rootScope, NODE_URL) {
 		$rootScope.node_url = NODE_URL;

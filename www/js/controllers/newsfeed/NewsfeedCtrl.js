@@ -8,7 +8,7 @@
 define(function () {
     'use strict';
 
-    function ctrl($rootScope, $scope, NewsfeedAPI, $filter, $ionicScrollDelegate, Cacher, Client, storage, $ionicPopover, $ionicLoading, $sce) {
+    function ctrl($rootScope, $scope, $state, NewsfeedAPI, $filter, $ionicScrollDelegate, Cacher, Client, storage, $ionicPopover, $ionicLoading, $sce) {
 		
 		if(Cacher.get('newsfeed.items')){
 			$scope.newsfeedItems = Cacher.get('newsfeed.items');
@@ -210,9 +210,14 @@ define(function () {
 		};
 		
 		
+		$scope.loadNotifications = function(){
+			$state.go('tab.more-notifications', {}, {reload:true});
+		};
+		
+		
     }
 
-    ctrl.$inject = ['$rootScope', '$scope', 'NewsfeedAPI', '$filter', '$ionicScrollDelegate', 'Cacher', 'Client', 'storage', '$ionicPopover', '$ionicLoading', '$sce'];
+    ctrl.$inject = ['$rootScope', '$scope', '$state', 'NewsfeedAPI', '$filter', '$ionicScrollDelegate', 'Cacher', 'Client', 'storage', '$ionicPopover', '$ionicLoading', '$sce'];
     return ctrl;
     
 });

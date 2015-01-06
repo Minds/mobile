@@ -1,34 +1,34 @@
 <ion-view title="<input type='text' placeholder='search' style='margin:5px; padding-left:12px; background:#EEE; '>" ng-controller="DiscoverCtrl" class="view-bg">
 
-<div class="tabs-striped tabs-top tabs-background-positive tabs-color-light">
-    <div class="tabs">
-      
-      <a class="tab-item active" href="#">
-        <i class="icon ion-arrow-graph-up-right"></i>
-        Trending
-      </a>
-      <a class="tab-item" href="#">
-        <i class="icon ion-star"></i>
-        Test
-      </a>
-      <a class="tab-item active" href="#">
-        <i class="icon ion-ios7-videocam"></i>
-        Videos
-      </a>
-      <a class="tab-item" href="#">
-        <i class="icon ion-image"></i>
-        Images
-      </a>
-       <a class="tab-item" href="#">
-        <i class="icon ion-person-stalker"></i>
-        Directory
-      </a>
-
+    <div class="tabs-striped tabs-top tabs-background-positive tabs-color-light">
+        <div class="tabs">
+          
+          <a class="tab-item active" href="#">
+            <i class="icon ion-arrow-graph-up-right"></i>
+            Trending
+          </a>
+          <a class="tab-item" href="#">
+            <i class="icon ion-star"></i>
+            Test
+          </a>
+          <a class="tab-item active" href="#">
+            <i class="icon ion-ios7-videocam"></i>
+            Videos
+          </a>
+          <a class="tab-item" href="#">
+            <i class="icon ion-image"></i>
+            Images
+          </a>
+           <a class="tab-item" href="#">
+            <i class="icon ion-person-stalker"></i>
+            Directory
+          </a>
+    
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
-	<ion-content>
+	<ion-content style="padding-top:50px">
 
 		<ion-list>
 		
@@ -37,8 +37,12 @@
 				on-refresh="refresh()">
 			</ion-refresher>
 
-			
-
+			<ion-item>
+    			 <div style="margin:auto:">
+    			     This tab is coming soon!
+    			 </div>
+            </ion-item>
+                
 		</ion-list>
 		
 		<ion-infinite-scroll on-infinite="loadMore()" distance="1%" ng-if="hasMoreData"></ion-infinite-scroll>

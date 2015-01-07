@@ -4,6 +4,9 @@
 .white-bg{
 	background: #FFF;
 }
+.login-bg{
+	
+}
 
 .small-font {
 	font-size: 13px !important;
@@ -13,6 +16,32 @@
 .topbar-logo{
 	height:32px;
 	margin:5px;
+}
+.login-logo{
+	width:152px;
+
+}
+.login-header{
+
+	position:relative;
+	text-align:center;
+	padding:50px 0;
+	
+	background:url('../img/splash.jpg') no-repeat center center fixed;
+	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+ 	-o-background-size: cover;
+  	background-size: cover;
+}
+.login-options{
+	text-align:center;
+}
+.login-options a{
+	color:#888;
+	text-decoration:none;
+	font-size:14px;
+	padding:12px 0;
+	display:block;
 }
 
 .tabs{

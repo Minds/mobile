@@ -28,7 +28,12 @@
 .item-avatar img{
 	border-radius:3px !important;
 }
-
+.tabs-background-white .tabs{
+	background:#FFF !important;
+}
+.tabs-background-white .tab-item{
+	color:#222 !important;
+}
 /*.capture-tab{
 
 	margin-top:-2px;

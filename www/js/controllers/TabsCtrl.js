@@ -8,7 +8,7 @@
 define(function() {
 	'use strict';
 
-	function ctrl($scope, $state, $ionicPopover, storage) {
+	function ctrl($rootScope, $scope, $state, $ionicPopover, storage) {
 
 		$scope.logout = function(){
 		  	storage.remove('loggedin');
@@ -16,10 +16,24 @@ define(function() {
 		  	$state.go('login');
 		};
 		
+		$scope.onTabSelect = function(tab){
+			if(tab == $state.current.name){
+				$state.go(tab, {}, {
+					reload:true
+				});
+				return true;
+			};
+			$state.go(tab);
+		};
+		
+				
+		$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){ 
+		});
+		
 	}
 
 
-	ctrl.$inject = ['$scope', '$state', '$ionicPopover', 'storage'];
+	ctrl.$inject = ['$rootScope', '$scope', '$state', '$ionicPopover', 'storage'];
 	return ctrl;
 
 }); 

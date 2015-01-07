@@ -15,7 +15,7 @@
 				on-refresh="refresh()">
 			</ion-refresher>
 
-			<activity-view ng-repeat="activity in newsfeedItems" id="{{activity.guid}}" class="activity-item list card" >
+			<activity-view ng-repeat="activity in newsfeedItems" id="{{activity.guid}}" class="activity-item list card" on-swipe-left="thumbsDown(activity.guid)" on-swipe-right="thumbsUp(activity.guid)">
 			</activity-view>
 
 		</ion-list>

@@ -8,7 +8,7 @@
 define(function () {
     'use strict';
 
-    function ctrl($rootScope, $scope, $state, $stateParams, NewsfeedAPI, $filter, $ionicScrollDelegate, Cacher, Client, storage, $ionicPopover, $ionicLoading, $sce) {
+    function ctrl($rootScope, $scope, $state, $stateParams, NewsfeedAPI, $filter, $ionicScrollDelegate, Cacher, Client, storage, $ionicPopover, $ionicLoading, $timeout) {
 
     	$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){ 
 			if(toState.name == fromState.name){
@@ -123,6 +123,13 @@ define(function () {
 				function(error){
 					alert('failed..');
 				});
+				
+			$ionicLoading.show({
+				template: '<i class="icon ion-thumbsup" style="font-size:90px"></i>'
+				});
+			$timeout(function(){
+				$ionicLoading.hide();
+				}, 1000);
 		};
 		
 		/**
@@ -148,6 +155,12 @@ define(function () {
 				function(error){
 					alert('failed..');
 				});
+			$ionicLoading.show({
+				template: '<i class="icon ion-thumbsdown" style="font-size:90px"></i>'
+				});
+			$timeout(function(){
+				$ionicLoading.hide();
+				}, 1000);
 		};
 		
 		/**
@@ -221,10 +234,17 @@ define(function () {
 			$state.go('tab.more-notifications', {}, {reload:true});
 		};
 		
+		$scope.swipeLeft = function(){
+			alert('left swipe!');
+		};
+		
+		$scope.swipeRight = function($event){
+			$event.preventDefault();
+		};
 		
     }
 
-    ctrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', 'NewsfeedAPI', '$filter', '$ionicScrollDelegate', 'Cacher', 'Client', 'storage', '$ionicPopover', '$ionicLoading', '$sce'];
+    ctrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', 'NewsfeedAPI', '$filter', '$ionicScrollDelegate', 'Cacher', 'Client', 'storage', '$ionicPopover', '$ionicLoading', '$timeout'];
     return ctrl;
     
 });

@@ -1,0 +1,16 @@
+<owner-brief-view owner="{{entity.ownerObj}}" ts="{{entity.time_created}}"></owner-brief-view>
+
+<!-- Video -->
+<div class="item item-image" ng-if="entity.subtype == 'video'" play-video guid="{{entity.guid}}">
+          
+     <img ng-src="{{entity.thumbnail_src}}">
+     <i class="icon ion-play"></i>
+     
+      <video id="video" ng-show="showVideo" src="{{srcFull}}" width="100%" height="100%" style="display:none;background:#000;" loop preload="auto"></video>
+     
+</div>
+
+<!-- Image -->
+<div class="item item-image" ng-if="entity.subtype == 'image'">
+   <img ng-src="{{entity.thumbnail_src}}">
+</div>

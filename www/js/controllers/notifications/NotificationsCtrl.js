@@ -54,7 +54,7 @@ define(function () {
 	    		
 	
 	    			$scope.next = data['load-next'];
-	    			Cacher.put('notification.item', $scope.next);
+	    			Cacher.put('notification.next', $scope.next);
 	    			
 	    			$scope.$broadcast('scroll.infiniteScrollComplete');
 	

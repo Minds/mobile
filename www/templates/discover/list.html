@@ -15,23 +15,23 @@
     <div class="tabs-striped tabs-top tabs-background-white tabs-color-light">
         <div class="tabs">
           
-          <a class="tab-item active" href="#">
+          <a class="tab-item" ng-class="{active: filter == 'trending'}" ng-click="changeFilter('trending')">
             <i class="icon ion-arrow-graph-up-right"></i>
             Trending
           </a>
-          <a class="tab-item" href="#">
+          <a class="tab-item" ng-class="{active: filter == 'featured'}" ng-click="changeFilter('featured')">
             <i class="icon ion-star"></i>
             Test
           </a>
-          <a class="tab-item active" href="#">
+          <a class="tab-item" ng-class="{active: type == 'video'}" ng-click="changeType('video')">
             <i class="icon ion-ios7-videocam"></i>
             Videos
           </a>
-          <a class="tab-item" href="#">
+          <a class="tab-item" ng-class="{active: type == 'image'}" ng-click="changeType('image')">
             <i class="icon ion-image"></i>
             Images
           </a>
-           <a class="tab-item" href="#">
+           <a class="tab-item" ng-class="{active: type == 'channel'}" ng-click="changeType('channel')">
             <i class="icon ion-person-stalker"></i>
             Directory
           </a>
@@ -49,15 +49,25 @@
 				on-refresh="refresh()">
 			</ion-refresher>
 
-			<ion-item>
-    			 <div style="margin:auto:">
-    			     This tab is coming soon!
-    			 </div>
-            </ion-item>
+			<div ng-repeat="entity in entities">
+                <div ng-switch="entity.type">
                 
+                    <!-- Objects -->
+                    <div ng-switch-when="object">
+                        <div class="list card" ng-include src="'templates/discover/entities/object.html'"></div>
+                    </div>
+                    
+                    <!-- USERS -->
+                    <div ng-switch-when="user">
+                        <div class="list card" ng-include src="'templates/discover/entities/user.html'"></div>
+                    </div>
+                    
+                </div>
+			</div>
+    			                
 		</ion-list>
 		
-		<ion-infinite-scroll on-infinite="loadMore()" distance="1%" ng-if="hasMoreData"></ion-infinite-scroll>
+		<ion-infinite-scroll on-infinite="load()" distance="1%" ng-if="hasMoreData"></ion-infinite-scroll>
 
 	</ion-content>
 </ion-view>

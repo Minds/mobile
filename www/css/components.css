@@ -63,7 +63,6 @@ progress[value] {
 /**
  * Search
  */
-.bar-header.item-input-inset{
-	/*margin-top: -18px;*/
-	top:0;
+.platform-ios .bar-header.item-input-inset{
+	margin-top: -18px;
 }

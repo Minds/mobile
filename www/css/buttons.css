@@ -12,6 +12,9 @@
 .selected > i{
 	color:#4690D6 !important;
 }
+.selected{
+	color:#4690D6 !important;
+	}
 
 .submit-button{
 	color:#4690D6 !important;

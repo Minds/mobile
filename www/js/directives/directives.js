@@ -19,6 +19,7 @@ define(function(require) {
 	directives.directive('imageCache', require('directives/imageCache'));
 	directives.directive('thumbs', require('directives/thumbs'));
 	directives.directive('playVideo', require('directives/playVideo'));
+	directives.directive('subscribe', require('directives/subscribe'));
 	
 	return directives;
 }); 

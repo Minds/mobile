@@ -15,13 +15,18 @@
     <div class="tabs-striped tabs-top tabs-background-white tabs-color-light">
         <div class="tabs">
           
+         
+          <a class="tab-item" ng-class="{active: filter == 'minder'}" ng-click="changeFilter('minder')">
+            <i class="icon ion-lightbulb"></i>
+            Suggested
+          </a>
           <a class="tab-item" ng-class="{active: filter == 'trending'}" ng-click="changeFilter('trending')">
             <i class="icon ion-arrow-graph-up-right"></i>
             Trending
           </a>
           <a class="tab-item" ng-class="{active: filter == 'featured'}" ng-click="changeFilter('featured')">
             <i class="icon ion-star"></i>
-            Test
+            Featured
           </a>
           <a class="tab-item" ng-class="{active: type == 'video'}" ng-click="changeType('video')">
             <i class="icon ion-ios7-videocam"></i>
@@ -40,7 +45,8 @@
       </div>
     </div>
 
-	<ion-content style="padding-top:50px">
+    <!-- List view -->
+	<ion-content style="padding-top:50px" scroll="{{infinite}}">
 
 		<ion-list>
 		
@@ -49,7 +55,7 @@
 				on-refresh="refresh()">
 			</ion-refresher>
 
-			<div ng-repeat="entity in entities">
+			<div ng-repeat="entity in entities" ng-class="{stack: view == 'swipe'}">
                 <div ng-switch="entity.type">
                 
                     <!-- Objects -->
@@ -67,7 +73,9 @@
     			                
 		</ion-list>
 		
-		<ion-infinite-scroll on-infinite="load()" distance="1%" ng-if="hasMoreData"></ion-infinite-scroll>
+		<ion-infinite-scroll on-infinite="load()" distance="1%" ng-if="hasMoreData && infinite"></ion-infinite-scroll>
 
 	</ion-content>
+	
+	
 </ion-view>

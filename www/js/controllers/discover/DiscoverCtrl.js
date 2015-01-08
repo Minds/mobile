@@ -25,9 +25,17 @@ define(function () {
 		}
 		$scope.filter = 'featured';
 		$scope.type = 'channel';
+		$scope.view = 'list';
+		$scope.infinite = true;
 
 		
 		$scope.changeFilter = function(filter){
+			if(filter == 'minder'){
+				$scope.view = 'swipe';
+				$scope.infinite = false;
+			} else {
+				$scope.view = 'list';
+			}
 			$scope.filter = filter;
 			$scope.entities = [];
 			$scope.next = "";

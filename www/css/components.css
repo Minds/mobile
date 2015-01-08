@@ -13,6 +13,10 @@
 /**
  * Lists
  */
+/**Stacked**/
+.stack .card{
+	position:absolute;
+}
 
 
 /**

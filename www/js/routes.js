@@ -8,8 +8,10 @@
 define(['app'], function (app) {
     'use strict';
 
-    app.config(['$stateProvider', '$urlRouterProvider',
-            function ($stateProvider, $urlRouterProvider) {
+    app.config(['$stateProvider', '$urlRouterProvider', '$ionicConfigProvider',
+            function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+            
+           	$ionicConfigProvider.platform.android.tabs.position("bottom");
 
             $stateProvider
                 .state('login', {

@@ -116,8 +116,10 @@ define(function () {
 							if(array[index]['thumbs:up:user_guids'].indexOf(storage.get('user_guid')) > -1){
 								var pos = array[index]['thumbs:up:user_guids'].indexOf(storage.get('user_guid'));
 								array[index]['thumbs:up:user_guids'].splice(pos, 1);
+								array[index]['thumbs:up:count'] = array[index]['thumbs:up:count'] -1;
 							} else {
 								array[index]['thumbs:up:user_guids'].push(storage.get('user_guid'));
+								array[index]['thumbs:up:count'] = array[index]['thumbs:up:count'] +1;
 							}
 						}
 					});
@@ -262,12 +264,8 @@ define(function () {
 			$state.go('tab.more-notifications', {}, {reload:true});
 		};
 		
-		$scope.swipeLeft = function(){
-			alert('left swipe!');
-		};
-		
-		$scope.swipeRight = function($event){
-			$event.preventDefault();
+		$scope.openUrl = function(url){
+			window.open(url, '_blank', {toolbarposition:'top'});
 		};
 		
     }

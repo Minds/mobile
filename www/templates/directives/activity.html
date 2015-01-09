@@ -7,7 +7,7 @@
     
     <!--Rich content -->
 
-    <div class="item item-image" ng-if="activity.thumbnail_src">
+    <div class="item item-image" ng-if="activity.thumbnail_src" ng-click="openUrl(activity.perma_url)">
         <img ng-src="{{activity.thumbnail_src}}">
     </div>
 
@@ -34,7 +34,8 @@
 
     <div class="item tabs tabs-secondary tabs-icon-left" style="padding:0;background-color:#F7F7F7 !important;">
         <a class="tab-item small-font thumbs-up" ng-click="thumbsUp(activity.guid)" thumbs="{{activity['thumbs:up:user_guids']}}">
-                <i class="icon ion-thumbsup"></i>
+               <i style="padding-left:4px;" class="icon ion-thumbsup"></i>
+                <b ng-show="activity['thumbs:up:count']" style="font-size:14px; padding:2px 0 0">({{activity['thumbs:up:count']}})</b> 
         </a>
         <a class="tab-item small-font thumbs-down" ng-click="thumbsDown(activity.guid)" thumbs="{{activity['thumbs:down:user_guids']}}">
             <i class="icon ion-thumbsdown"></i>

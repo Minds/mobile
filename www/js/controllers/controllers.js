@@ -57,8 +57,9 @@ define(function (require) {
      */
    	controllers.controller('DiscoverCtrl', require('controllers/discover/DiscoverCtrl'));
     
-	controllers.run(['$rootScope', 'NODE_URL', function ($rootScope, NODE_URL) {
+	controllers.run(['$rootScope', 'NODE_URL', 'storage', function ($rootScope, NODE_URL, storage) {
 		$rootScope.node_url = NODE_URL;
+		$rootScope.user_guid = storage.get('user_guid');
 	}]);
     
 	return controllers;

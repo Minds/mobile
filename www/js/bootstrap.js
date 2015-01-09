@@ -11,7 +11,6 @@ define(['ionic', 'angular', 'app', 'routes'], function (ionic, angular, app) {
     var $html,
         onDeviceReady = function () {
             angular.bootstrap(document, [app.name]);
-            cordova.plugins.Keyboard.disableScroll(true);
         };
 
     document.addEventListener("deviceready", onDeviceReady, false);

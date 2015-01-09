@@ -9,6 +9,8 @@ define(function() {
 	'use strict';
 
 	function ctrl($scope, $state, OAuth, $ionicPopup, storage) {
+	
+		cordova.plugins.Keyboard.disableScroll(true);
 
 		if(storage.get('access_token') && storage.get('loggedin'))
 			$state.go('tab.newsfeed');

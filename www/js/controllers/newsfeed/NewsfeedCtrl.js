@@ -10,6 +10,8 @@ define(function () {
 
     function ctrl($rootScope, $scope, $state, $stateParams, NewsfeedAPI, $filter, $ionicScrollDelegate, Cacher, Client, storage, $ionicPopover, $ionicLoading, $timeout) {
 
+		//cordova.plugins.Keyboard.disableScroll(false);
+
     	$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){ 
 			if(toState.name == fromState.name){
 				$ionicScrollDelegate.scrollTop();
@@ -209,10 +211,16 @@ define(function () {
 		    $scope.composer = popover;
 		  });
 		  
+		var posting;
 		$scope.post = function(){
+			if(posting)
+				return false;
+				
+			console.log("posting");
 			$ionicLoading.show({
 		      template: 'Please wait a moment...'
 		    });
+		    var posting = true;
 
     		NewsfeedAPI.post({
     			message: $scope.composerData.message
@@ -222,11 +230,31 @@ define(function () {
 	    		$scope.composer.hide();
 	    		
 	    		$ionicLoading.hide();
+	    		posting = false;
 	    	}, function(error){
 	    		alert('there was an error and we couldn\'t save!');
 	    		$ionicLoading.hide();
+	    		posting = false;
 	    	});
 	    	
+		};
+		
+		$scope.remove = function(guid){
+			console.log('api/v1/newsfeed/'+guid);
+			Client.delete('api/v1/newsfeed/'+guid, {
+					cachebreaker: Date.now
+				}, 
+				function(success){
+					console.log(success);
+					$scope.newsfeedItems.forEach(function(item, index, array){
+						if(item.guid == guid){
+							console.log('removed');
+							array.splice(index, 1);
+						}
+					});
+				}, function(error){
+					console.log('error');
+				});
 		};
 		
 		

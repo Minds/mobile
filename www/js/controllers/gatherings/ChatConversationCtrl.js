@@ -10,6 +10,8 @@ define(function () {
 
     function ctrl($scope, $stateParams, $state, Client, storage, $ionicScrollDelegate, $interval, $ionicLoading) {
     
+    	cordova.plugins.Keyboard.disableScroll(false);
+    
     	$scope.messages = [];
     	$scope.next  = "";
     	$scope.previous = "";

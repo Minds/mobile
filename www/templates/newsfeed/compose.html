@@ -3,9 +3,9 @@
         <h1 class="title">Write a post...</h1> 
     </ion-header-bar> 
     <ion-content> 
-        <form ng-submit="post()">
+        <form>
             <label class="item item-input item-stacked-label">
-                <textarea placeholder="Enter a message here" rows="8" cols="10" ng-model="composerData.message">
+                <textarea placeholder="Enter a message here" ng-model="composerData.message">
                 </textarea>
             </label>
             <input type="submit" value="Post" class="button button-positive ion-paper-airplane-hide" style="float:right; margin-top:10px; margin-right:10px;" ng-click="post()"/>

@@ -64,17 +64,17 @@ grunt compile
 ##TODO:
 
 - [x] Architect the base stucture
-- [ ] Create controllers and views for:
+- [x] Create controllers and views for:
   - [x] Newsfeed
-  - [ ] Chat/Gatherings
-  - [ ] Profile
-  - [ ] Archive
-    - [ ] Capture
+  - [x] Chat/Gatherings
+  - [x] Profile
+  - [x] Archive
+    - [x] Capture
     - [ ] View
-- [ ] Build services to interact with API
-  - [ ] Newsfeed
-  - [ ] Chat/Gatherings
-  - [ ] Profile
-  - [ ] Archive
-- [ ] Improve UI/UX
+- [x] Build services to interact with API
+  - [x] Newsfeed
+  - [x] Chat/Gatherings
+  - [x] Profile
+  - [x] Archive
+- [x] Improve UI/UX
 - [ ] Unit tests

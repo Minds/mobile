@@ -7,6 +7,19 @@ The minds mobile apps source code repository.
 - iOS
 - Android
 
+##Features
+
+####Encrypted Chat 
+####Newsfeed
+####Capture (Video, Audio, Photos)
+####Democratized Voting
+####Followers
+####Discover (Search and swipe to connect)
+####Profiles
+####Wallets
+####Notifications
+####Comments
+
 ##Tech
 
 #####Cordova (http://cordova.apache.org/)

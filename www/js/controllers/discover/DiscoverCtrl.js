@@ -136,8 +136,8 @@ define(function () {
 			});
 			$scope.$apply();
 			
-			if($scope.entities.length < 4){
-				
+			if($scope.entities.length  < 5){
+				Cacher.put('entities.cb', Date.now());
 				$scope.load();
 			}
 		}
@@ -145,6 +145,9 @@ define(function () {
 		$scope.ignore = function(entity){
 			//remove the entity from the list
 			$scope.pop(entity);
+			
+			//notify the suggested that we have decided to ignore
+			Client.post('api/v1/entities/suggested/pass/' + entity.guid, {}, function(){}, function(){});
 			
 			//show a quick ui confirmation
 			$ionicLoading.show({
@@ -157,6 +160,13 @@ define(function () {
 		$scope.subscribe = function(entity){
 			//remove the entity from the list	
 			$scope.pop(entity);
+			console.log('api/v1/subscribe/' + entity.guid);
+			//subscribe to the user
+			Client.post('api/v1/subscribe/' + entity.guid, {},
+					function(){
+					},
+					function(){
+					});
 			
 			//show a quick ui confirmation
 			$ionicLoading.show({

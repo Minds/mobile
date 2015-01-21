@@ -16,6 +16,7 @@ define(function () {
 		} else {
 			$scope.next = "";
 		}
+		$scope.passed = []; //we keep this so that on loading new items, there are not conflicts. 
 		
 		$scope.hasMoreData = true;
 		if(Cacher.get('entities.cb')){
@@ -76,8 +77,17 @@ define(function () {
 	    			}
 	    			
 	    			$scope.entities = $scope.entities.concat(data.entities);
+	    			
+	    			//scan for duplicates..
+	    			$scope.passed.forEach(function(item, index, array){
+	    				$scope.entities.forEach(function(eitem, eindex, earray){
+	    					if(item == eitem){
+	    						earray.splicee(index, 1);
+	    					}
+	    				});
+	    			});
+	    			
 	    			Cacher.put('entities.data', $scope.entities);
-	    		
 	
 	    			$scope.next = data['load-next'];
 	    			//Cacher.put('entities.next', $scope.next);
@@ -128,18 +138,20 @@ define(function () {
 		};
 		
 		$scope.pop = function(entity){
-			$scope.entities.forEach(function(item, index, array){
-				if(item.guid == entity.guid){
-					array.splice(index, 1);
-					console.log('popped');
-				}
-			});
-			$scope.$apply();
 			
 			if($scope.entities.length  < 5){
 				Cacher.put('entities.cb', Date.now());
 				$scope.load();
 			}
+			
+			$scope.entities.forEach(function(item, index, array){
+				if(item.guid == entity.guid){
+					array.splice(index, 1);
+					$scope.passed.push(entity);
+				} 
+			});
+			$scope.$digest();
+			
 		}
 		
 		$scope.ignore = function(entity){

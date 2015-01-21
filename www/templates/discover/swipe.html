@@ -45,37 +45,27 @@
       </div>
     </div>
 
-    <!-- List view -->
-	<ion-content style="padding-top:50px" scroll="{{infinite}}">
+    <!-- Scroll view -->
+	<ion-pane style="padding-top:125px" style="-webkit-transform: translate3d(0px, 0px, 0px);">
 
-		<ion-list>
+		<div ng-repeat="entity in entities" class="swipe-container" ng-show="$index == 0">
 		
-			<ion-refresher
-				pulling-text="Pull to refresh..."
-				on-refresh="refresh()">
-			</ion-refresher>
-
-			<div ng-repeat="entity in entities" ng-class="{stack: view == 'swipe'}">
-                <div ng-switch="entity.type">
-                
-                    <!-- Objects -->
-                    <div ng-switch-when="object">
-                        <div class="list card" ng-include src="'templates/discover/entities/object.html'"></div>
-                    </div>
-                    
-                    <!-- USERS -->
-                    <div ng-switch-when="user">
-                        <div class="list card" ng-include src="'templates/discover/entities/user.html'" subscribe></div>
-                    </div>
-                    
+            <div ng-switch="entity.type">
+            
+                <!-- Objects -->
+                <div ng-switch-when="object">
+                    <div class="list card" ng-include src="'templates/discover/entities/object.html'"></div>
                 </div>
-			</div>
+                
+                <!-- USERS -->
+                <div ng-switch-when="user">
+                    <div class="list card" ng-include src="'templates/discover/entities/user.html'" swipe swipe-on-left="ignore(entity)" swipe-on-right="subscribe(entity)"></div>
+                </div>
+                
+            </div>
+		</div>
     			                
-		</ion-list>
-		
-		<ion-infinite-scroll on-infinite="load()" distance="1%" ng-if="hasMoreData && infinite"></ion-infinite-scroll>
-
-	</ion-content>
+	</ion-pane>
 	
 	
 </ion-view>

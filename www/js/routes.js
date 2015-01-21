@@ -91,7 +91,7 @@ define(['app'], function (app) {
 					url: "/discover",
 					 views: {
                         'discover-tab': {
-                            templateUrl: 'templates/discover/list.html'
+                            templateUrl: 'templates/discover/swipe.html'
                         }
                     }
                 })

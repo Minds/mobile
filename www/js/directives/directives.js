@@ -20,6 +20,7 @@ define(function(require) {
 	directives.directive('thumbs', require('directives/thumbs'));
 	directives.directive('playVideo', require('directives/playVideo'));
 	directives.directive('subscribe', require('directives/subscribe'));
+	directives.directive('swipe', require('directives/swipe'));
 	
 	return directives;
 }); 

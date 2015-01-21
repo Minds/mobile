@@ -8,7 +8,7 @@ define(['angular'], function (angular) {
             restrict: 'A',
             link: function(scope, el, attrs) {
             	
-                attrs.$observe('ngSrc', function(src) {
+                /*attrs.$observe('ngSrc', function(src) {
                     ImgCache.isCached(src, function(path, success) {
                         if (success) {
                         	//console.log('found cached!');
@@ -21,7 +21,7 @@ define(['angular'], function (angular) {
                         }
                     });
 
-                });
+                });*/
             }
         };
     };

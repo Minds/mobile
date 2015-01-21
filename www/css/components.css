@@ -18,6 +18,9 @@
 	position:absolute;
 }
 
+.swipe-container .card{
+	margin-bottom:1000px;
+}
 
 /**
  * Image block

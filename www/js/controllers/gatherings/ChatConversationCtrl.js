@@ -8,7 +8,7 @@
 define(function () {
     'use strict';
 
-    function ctrl($scope, $stateParams, $state, Client, storage, $ionicScrollDelegate, $interval, $ionicLoading) {
+    function ctrl($scope, $stateParams, $state, Client, storage, $ionicScrollDelegate, $timeout, $ionicLoading) {
     
     	cordova.plugins.Keyboard.disableScroll(false);
     
@@ -17,7 +17,7 @@ define(function () {
     	$scope.previous = "";
     	$scope.hasMoreData = true;
     	$scope.publickeys = {};
-    	var poll = false;
+    	var poll = true;
     	
     	/**
     	 * Load more posts
@@ -60,20 +60,15 @@ define(function () {
     	};
     	$scope.loadMore();
     	
-    	var polling = $interval(function(){
-    		if(!poll){
-    			return false;
-    		}
-    		poll = false;
-    		
-
-    		$scope.doPoll();
-    		
-    		
-    	}, 5000);
     	
-    	$scope.doPoll = function(){
-    		console.log('checking for new chats from' + $scope.previous);
+    	var doPoll = function(){
+    		if(!poll){
+    			console.log('poll is false, skipping');
+    			return false;
+    		} else {
+    			console.log('checking..');
+    			poll = false;
+    		}
     		Client.get('api/v1/conversations/'+$stateParams.username, { limit: 1000, start: $scope.previous, cachebreak: Date.now()}, 
     			function(data){
 					
@@ -87,13 +82,19 @@ define(function () {
 		    		}
 
 	    			poll = true;
+	    			//check again
+	        		$timeout(doPoll, 5000);
 
 	    		}, 
 	    		function(error){ 
-	    			poll = false;
+	    			poll = true;
 	    			console.log('polling for new messages failed');
 	    		});
+    		
     	};
+    	
+    	//check for new messages
+    	$timeout(doPoll, 5000);
     	
     	
     	$scope.send = function(){
@@ -130,10 +131,7 @@ define(function () {
     				Client.post('api/v1/conversations/'+$stateParams.username, 
     					data,
     					function(data){
-    						$scope.doPoll();
-    						//console.log(data);
-    						//$scope.previous = data.message.guid;
-    						//$scope.messages.push(data.message);
+    						doPoll();
     						$scope.message = "";
     						$ionicScrollDelegate.scrollBottom();
     						$ionicLoading.hide();

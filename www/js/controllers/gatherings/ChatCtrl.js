@@ -8,12 +8,21 @@
 define(function () {
     'use strict';
 
-    function ctrl($scope, $state, Client, storage) {
+    function ctrl($rootScope, $scope, $state, Client, storage) {
+    	
+    	$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+    		console.log('hihohiho');
+			if(toState.name == fromState.name){
+				console.log('hiho');
+				$ionicScrollDelegate.scrollTop();
+				$scope.refresh();
+			}
+		});
     
     	$scope.conversations = [];
     	$scope.next  = "";
     	$scope.hasMoreData = true;
-    	console.log(storage.get('private-key'));
+    	$scope.cb = Date.now();
 		
 		if(!storage.get('private-key')){
     		$state.go('tab.chat-setup');
@@ -28,7 +37,11 @@ define(function () {
     		console.log('loading next');
     		console.log($scope.next);
     		
-    		Client.get('api/v1/conversations', { limit: 12, offset: $scope.next }, 
+    		Client.get('api/v1/conversations', { 
+    				limit: 12, 
+    				offset: $scope.next,
+    				cb: $scope.cb
+    			}, 
     			function(data){
     		
 	    			if(!data.conversations){
@@ -57,14 +70,14 @@ define(function () {
 		});
 		
 		$scope.refresh = function(){
-			
-			
-			
+			$scope.next = "";
+			$scope.cb = Date.now();
+			$scope.loadMore();
 		};
 		
     }
 
-    ctrl.$inject = ['$scope', '$state', 'Client', 'storage'];
+    ctrl.$inject = ['$rootScope', '$scope', '$state', 'Client', 'storage'];
     return ctrl;
     
 });

@@ -35,6 +35,8 @@ define(function () {
 			if(filter == 'suggested'){
 				$scope.view = 'swipe';
 				$scope.infinite = false;
+				Cacher.put('entities.cb', Date.now());
+				$scope.cachebreaker = Date.now();
 			} else {
 				$scope.view = 'list';
 			}
@@ -68,7 +70,7 @@ define(function () {
 				cachebreaker: $scope.cachebreaker 
 				}, 
     			function(data){
-    			console.log(data); 
+					//console.log(data); 
     				if(!data.entities){
 	    				$scope.hasMoreData = false;
 	    				return false;
@@ -82,7 +84,8 @@ define(function () {
 	    			$scope.passed.forEach(function(item, index, array){
 	    				$scope.entities.forEach(function(eitem, eindex, earray){
 	    					if(item == eitem){
-	    						earray.splicee(index, 1);
+	    						console.log('found duplicate, attempting to remove');
+	    						earray.splice(index, 1);
 	    					}
 	    				});
 	    			});
@@ -91,6 +94,9 @@ define(function () {
 	
 	    			$scope.next = data['load-next'];
 	    			//Cacher.put('entities.next', $scope.next);
+	    			
+	    			Cacher.put('entities.cb', Date.now());
+					$scope.cachebreaker = Date.now();
 	    			
 	    			$scope.$broadcast('scroll.infiniteScrollComplete');
 	    		}, 
@@ -102,6 +108,7 @@ define(function () {
 	    	
 		};
 		$scope.load();
+				
 		$scope.refresh = function(){
 			$scope.next = "";
 			if($scope.type != 'channel'){
@@ -117,7 +124,7 @@ define(function () {
 			Client.get('api/v1/entities/' + $scope.filter, { 
 				type: type,
 				subtype: subtype,
-				limit: 12, 
+				limit: 24, 
 				offset: $scope.next, 
 				cachebreaker: Date.now() 
 				}, 
@@ -140,6 +147,7 @@ define(function () {
 		$scope.pop = function(entity){
 			
 			if($scope.entities.length  < 5){
+				console.log('loading new...');
 				Cacher.put('entities.cb', Date.now());
 				$scope.load();
 			}

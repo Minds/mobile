@@ -8,17 +8,16 @@
 define(function () {
     'use strict';
 
-    function ctrl($rootScope, $scope, $state, $stateParams, NewsfeedAPI, $filter, $ionicScrollDelegate, Cacher, Client, storage, $ionicPopover, $ionicLoading, $timeout) {
+    function ctrl( $rootScope, $scope, $state, $stateParams, NewsfeedAPI, $filter, $ionicScrollDelegate, Cacher, Client, storage, $ionicPopover, $ionicLoading, $timeout) {
 
-		//cordova.plugins.Keyboard.disableScroll(false);
-
-    	$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){ 
+    	//if same tab click, refresh and go to top
+    	$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
 			if(toState.name == fromState.name){
 				$ionicScrollDelegate.scrollTop();
 				$scope.refresh();
 			}
 		});
-		
+
 		if(Cacher.get('newsfeed.items')){
 			$scope.newsfeedItems = Cacher.get('newsfeed.items');
 		}else{
@@ -171,9 +170,16 @@ define(function () {
 		 * Load comments
 		 */
 		$scope.commentsData = {};
-		$scope.loadComments = function(guid, $event){
+		$scope.loadComments = function(activity, $event){
 			$scope.comments.show($event);
 			$scope.commentsData = {}; 
+			
+			var guid;
+			if(activity.entity_guid){
+				guid = activity.entity_guid;
+			} else {
+				guid = activity.guid;
+			}
 			
 			/**
 			 * Now load the comments

@@ -29,7 +29,7 @@ define(function () {
      	}, 100);
      	
      	$scope.next = "";
-     	$scope.newsfeedItems = [];
+     	$scope.ChannelItems = [];
      	
      	$scope.loadMore = function(){
 	     	Client.get('api/v1/newsfeed/personal', { limit: 6, offset: $scope.next }, 
@@ -42,7 +42,7 @@ define(function () {
 	    				$scope.hasMoreData = true;
 	    			};
 	    			
-	    			$scope.newsfeedItems = $scope.newsfeedItems.concat(data.activity);
+	    			$scope.ChannelItems = $scope.ChannelItems.concat(data.activity);
 	
 	    			$scope.next = data['load-next'];
 	    			

@@ -6,7 +6,7 @@
             <i class="icon ion-ios7-search placeholder-icon"></i>
             <input type="search" placeholder="Search">
           </label>
-          <button class="button button-clear" ng-show="search.q">
+          <button class="button button-clear" ng-show="search.q" style="display:none;">
             Cancel
           </button>
         </div>
@@ -47,6 +47,10 @@
 
     <!-- Scroll view -->
 	<ion-pane style="padding-top:125px" style="-webkit-transform: translate3d(0px, 0px, 0px);">
+
+		<div ng-show="entities.length == 0" style="text-align:center; font-weight:bold; padding-top:50px;">
+			please wait, loading.
+		</div>
 
 		<div ng-repeat="entity in entities" class="swipe-container" ng-show="$index == 0">
 		

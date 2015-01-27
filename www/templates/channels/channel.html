@@ -14,23 +14,24 @@
     
         <div class="inner">
 
-            <img image-cache ng-src="{{channel.avatar_url.large}}" style="width:140px; background:#222;"/>
-            <h1 style="position:absolute; top: 0; left: 160px; font-size:24px;">{{channel.name}}</h1>
+            <img image-cache ng-src="{{channel.avatar_url.large}}" style="width:140px;"/>
+            <h1>{{channel.name}}</h1>
         
         </div>
         
-        <ion-list>
-        
-            <ion-refresher
-                pulling-text="Pull to refresh..."
-                on-refresh="refresh()">
-            </ion-refresher>
-
-            <ion-item ng-repeat="activity in newsfeedItems" class="activity-item" type="item-text-wrap">
-                <activity-view></activity-view>
-            </ion-item>
-
-        </ion-list>
+        <div class="view-bg" ng-controller="NewsfeedCtrl">
+	        <ion-list>
+	        
+	            <!--<ion-refresher
+	                pulling-text="Pull to refresh..."
+	                on-refresh="refresh()">
+	            </ion-refresher>-->
+	
+	            <activity-view ng-repeat="activity in ChannelItems" class="activity-item list card" type="item-text-wrap">
+	            </activity-view>
+	
+	        </ion-list>
+        </div>
         
         <ion-infinite-scroll 
             on-infinite="loadMore()" 

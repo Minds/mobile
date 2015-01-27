@@ -12,10 +12,8 @@ define(['angular'], function (angular) {
 		.constant('VERSION', '0.0.1')
 		.constant('NODE_URL', 'https://www.minds.io/')
 		.constant('OAuthConfig', { 
-			client_id: '391262589742485504', 
-			client_secret: '5ac059d946fd4c389db7525c1ea52f65' 
-		})
-		.constant('OAuthClientID', '391262589742485504')
-		.constant('OAuthClientSecret', '5ac059d946fd4c389db7525c1ea52f65');
+			client_id: '405468526791364608', 
+			client_secret: 'e7088ba133b64aeb94389f4c3860f6be' 
+		});
     
 });

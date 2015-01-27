@@ -1,8 +1,8 @@
 
     <owner-brief-view owner="{{activity.ownerObj}}" ts="{{activity.time_created}}"></owner-brief-view>
     
-    <div class="item" ng-if="activity.message">
-        <p ng-bind-html="activity.message"></p>
+    <div class="item item-text-wrap" ng-if="activity.message">
+        <p ng-bind-html="activity.message" class="wrap"></p>
     </div>
     
     <!--Rich content -->
@@ -11,7 +11,7 @@
         <img ng-src="{{activity.thumbnail_src}}">
     </div>
 
-    <div class="item" ng-if="activity.blurb">
+    <div class="item item-text-wrap" ng-if="activity.blurb">
         <p >
           {{activity.blurb}}
         </p>
@@ -41,7 +41,7 @@
             <i class="icon ion-thumbsdown"></i>
 
         </a>
-        <a class="tab-item  small-font" ng-click="loadComments(activity.guid,$event)">
+        <a class="tab-item  small-font" ng-click="loadComments(activity,$event)">
             <i class="icon ion-chatbox"></i>
 
         </a>

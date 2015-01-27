@@ -14,6 +14,11 @@ define(['app'], function (app) {
            	$ionicConfigProvider.platform.android.tabs.position("bottom");
 
             $stateProvider
+                .state('loading', {
+                    url: "/loading",
+                    templateUrl: "templates/loading.html",
+                  //  controller: 'LoginCtrl'
+                })
                 .state('login', {
                     url: "/login",
                     templateUrl: "templates/login.html",
@@ -122,7 +127,7 @@ define(['app'], function (app) {
                 });
 
 
-            $urlRouterProvider.otherwise("/login");
+            $urlRouterProvider.otherwise("/loading");
 
         }]);
 

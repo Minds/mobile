@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.minds.mobile" version="0.0.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.minds.mobile" version="0.0.4" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Minds</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
@@ -50,6 +50,20 @@
               <icon src="res/ios/icon-50.png" width="50" height="50" />
               <icon src="res/ios/icon-50@2x.png" width="100" height="100" />
      </platform>
+
+   <platform name="android">
+              <icon src="res/android/dpi.png" density="ldpi" />
+              <icon src="res/android/dpi.png" density="mdpi" />
+              <icon src="res/android/dpi.png" density="hdpi" />
+              <icon src="res/android/dpi.png" density="xhdpi" />
+
+	<splash src="res/android/screen-dpi.png" density="land-hdpi"/>
+ 	<splash src="res/android/screen-dpi.png" density="land-ldpi"/>
+	<splash src="res/android/screen-dpi.png" density="land-mdpi"/>
+	<splash src="res/android/screen-dpi.png" density="land-xhdpi"/>
+
+     </platform>
+
 
     <feature name="StatusBar">
             <param name="ios-package" value="CDVStatusBar" onload="true" />

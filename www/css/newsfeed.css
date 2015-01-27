@@ -59,16 +59,37 @@
     -webkit-filter:blur(20px);*/
  }
 .channel-content {
-      padding-top:120px;
+	padding-top:80px;
+	width:100%;
 }
 .channel-content .inner{
-    background:#FFF;
-    padding:10px;
+    /*background:#FFF;*/
     z-index:99;
     position:relative;
+    width:100%;
+	background-image: -webkit-gradient(
+		linear, left top, left bottom, from(rgba(255,255,255,0)),
+		to(rgba(0,0,0,0.6))
+	);
+	display:table;
 }
 .channel-content .inner img{
-    margin-top:-72px;
+	display:table-cell;
+	max-width:140px;
+	margin-left:10px;
+	box-shadow:0 0 3px #000;
+    /*margin-top:-72px;*/
+}
+.channel-content h1{
+	color:#FFF;
+	width:50%;
+	line-height:26px;
+	font-size:24px; 
+	padding:0; 
+	margin:0; 
+	vertical-align:middle;
+	text-align:left;
+	display:table-cell;
 }
     
 .slider {
@@ -86,4 +107,3 @@
 .slider-pager{
     display:none;
 }
-

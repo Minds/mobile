@@ -21,15 +21,16 @@ define(['angular'], function (angular) {
 				}, element);
 				
 				$ionicGesture.on('drag', function(e){
-					
+					e.preventDefault();
+				
 					var o = e.gesture.deltaX / -1000;
 					var rotationAngle = Math.atan(o);
 										
 					var x = (e.gesture.deltaX * 0.8);
 					var y = (e.gesture.deltaY * 0.8);
 					
-					element.style.transform = element.css('webkitTransform', 'translate3d(' + x + 'px, ' + y + 'px, 0) rotate(' + (rotationAngle || 0) + 'rad)');
-					element.css('z-index', 99999999);
+					element.css('webkitTransform', 'translate3d(' + x + 'px, ' + y + 'px, 0) rotate(' + (rotationAngle || 0) + 'rad)');
+					//element.css('z-index', 99999999);
 					
 				}, element);
 				

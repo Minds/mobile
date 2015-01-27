@@ -46,7 +46,7 @@
     </div>
 
     <!-- Scroll view -->
-	<ion-pane style="padding-top:125px" style="-webkit-transform: translate3d(0px, 0px, 0px);">
+	<ion-pane style="padding-top:102px" style="-webkit-transform: translate3d(0px, 0px, 0px);">
 
 		<div ng-show="entities.length == 0" style="text-align:center; font-weight:bold; padding-top:50px;">
 			please wait, loading.
@@ -63,7 +63,7 @@
                 
                 <!-- USERS -->
                 <div ng-switch-when="user">
-                    <div class="list card" ng-include src="'templates/discover/entities/user.html'" swipe swipe-on-left="ignore(entity)" swipe-on-right="subscribe(entity)"></div>
+                    <div class="list card tabs-background-white" ng-include src="'templates/discover/entities/user.html'" swipe swipe-on-left="ignore(entity)" swipe-on-right="subscribe(entity)"></div>
                 </div>
                 
             </div>

@@ -12,8 +12,20 @@
 
 }
 
-.item-image{
-	overflow:hidden;
+.card, .card .item{
+	overflow:visible !important;
+}
+
+.card .item-image{
+	overflow:hidden !important;
+	height:auto;
+	margin-left:-5px !important;
+	width:calc(100% + 10px) !important;
+	border:0;
+	z-index:10;
+	box-shadow:0 0 2px #000;
+}
+.card .item-image.item-image-video{
 	height:200px;
 }
 

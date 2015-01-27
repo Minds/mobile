@@ -8,7 +8,7 @@
                 on-refresh="refresh()">
             </ion-refresher>-->
 
-            <ion-item ng-repeat="comment in commentsData" id="{{comment.guid}}" >
+            <ion-item ng-repeat="comment in commentsData" class="item-wrap-content" id="{{comment.guid}}" >
                 {{comment.ownerObj.name}}: {{comment.description}}
             </ion-item>
 

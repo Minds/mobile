@@ -74,7 +74,7 @@ define(function () {
 	    		});
 	    		
     	};
-		
+
 		$scope.refresh = function(){
 			
 			NewsfeedAPI.all({ limit: 12, offset: '', cache_break: Date.now() }, 

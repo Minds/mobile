@@ -14,6 +14,7 @@ define(['angular'], function (angular) {
 				
 
 				$ionicGesture.on('dragstart', function(e){
+					e.preventDefault();
 					var width = 320;
 					var point = window.innerWidth / 2 + 1 * (width / 2)
 					var distance = Math.abs(point - e.gesture.touches[0].pageX);// - window.innerWidth/2);

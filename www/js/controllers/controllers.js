@@ -15,7 +15,8 @@ define(function (require) {
 		controllers = angular.module('app.controllers', ['app.services', 'app.config']);
 		
 	controllers.controller('LoadingCtrl', require('controllers/LoadingCtrl'));
-		
+	controllers.controller('TutorialCtrl', require('controllers/TutorialCtrl'));	
+	
 	/**
 	 * Tabs
 	 */

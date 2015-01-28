@@ -23,7 +23,8 @@ define(function() {
 			
 			OAuth.login($scope.username, $scope.password, function(success){
 				if(success){
-					$state.go('tab.newsfeed');
+					//$state.go('tab.newsfeed');
+					$state.go('tutorial');
 				} else {
 					
 					var alertPopup = $ionicPopup.alert({

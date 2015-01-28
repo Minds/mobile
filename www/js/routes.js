@@ -24,6 +24,10 @@ define(['app'], function (app) {
                     templateUrl: "templates/login.html",
                   //  controller: 'LoginCtrl'
                 })
+                .state('tutorial', {
+                    url: "/tutorial",
+                    templateUrl: "templates/tutorial.html",
+                })
                 .state('tab', {
                     url: "/tab",
                     abstract: true,

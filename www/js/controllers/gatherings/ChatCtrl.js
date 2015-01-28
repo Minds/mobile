@@ -11,12 +11,7 @@ define(function () {
     function ctrl($rootScope, $scope, $state, Client, storage) {
     	
     	$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
-    		console.log('hihohiho');
-			if(toState.name == fromState.name){
-				console.log('hiho');
-				$ionicScrollDelegate.scrollTop();
-				$scope.refresh();
-			}
+				//$scope.refresh();
 		});
     
     	$scope.conversations = [];

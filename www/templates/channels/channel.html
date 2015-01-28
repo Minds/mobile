@@ -1,7 +1,7 @@
 <ion-view title="Channel" ng-controller="ChannelCtrl" hide-nav-bar="true">
 
     <div class="carousel {{carousel_class}}">
-      <ion-slide-box autoplay>
+      <ion-slide-box autoplay show-pager="false">
           <ion-slide ng-repeat="carousel in channel.carousels">
             <div class="box blue">
                 <img image-cache ng-src="{{carousel.src}}"/>

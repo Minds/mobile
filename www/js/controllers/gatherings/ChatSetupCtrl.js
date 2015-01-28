@@ -16,7 +16,7 @@ define(function () {
     			function(data){
     		
 	    			storage.set('private-key', data.key);
-	    			$state.go('tab.chat', {}, {
+	    			$state.go('tab.chat', { refresh:true }, {
 						reload:true
 					});
 	

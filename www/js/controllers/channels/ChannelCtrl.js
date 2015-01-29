@@ -32,7 +32,7 @@ define(function () {
      	$scope.ChannelItems = [];
      	
      	$scope.loadMore = function(){
-	     	Client.get('api/v1/newsfeed/personal', { limit: 6, offset: $scope.next }, 
+	     	Client.get('api/v1/newsfeed/personal/' + $scope.channel.guid, { limit: 6, offset: $scope.next }, 
 				function(data){
 	    		
 	    			if(!data.activity){

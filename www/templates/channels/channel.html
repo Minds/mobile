@@ -20,6 +20,25 @@
         </div>
         
         <div class="view-bg" ng-controller="NewsfeedCtrl">
+        	<div class="item tabs tabs-secondary tabs-icon-left" style="padding:0;background-color:#F7F7F7 !important;">
+		        <a class="tab-item small-font ">
+		        	<i class="icon ion-person-stalker"></i> 
+		        	<b>{{channel.subscribers_count}}</b>
+		        </a>
+		        
+		      
+		        <a class="tab-item small-font" ng-show="channel.guid == $root.user_guid">
+		            <i class="icon ion-more"></i> Edit
+		        </a>
+		        
+		        <a class="tab-item small-font" ng-show="channel.guid != $root.user_guid && channel.subscribed == false">
+		            <i class="icon ion-person-add"></i> Subscribe
+		        </a>
+		        <a class="tab-item small-font" ng-show="channel.guid != $root.user_guid && channel.subscribed == true">
+		            <i class="icon ion-person-add"></i> Un-Subscribe
+		        </a>
+		        
+		    </div>
 	        <ion-list>
 	        
 	            <!--<ion-refresher
@@ -27,7 +46,7 @@
 	                on-refresh="refresh()">
 	            </ion-refresher>-->
 	
-	            <activity-view ng-repeat="activity in ChannelItems" class="activity-item list card" type="item-text-wrap">
+	            <activity-view ng-repeat="activity in ChannelItems" swipe swipe-disable-vertical="true" swipe-on-right="thumbsUp(activity.guid)" swipe-on-left="thumbsDown(activity.guid)" class="activity-item list card" type="item-text-wrap">
 	            </activity-view>
 	
 	        </ion-list>

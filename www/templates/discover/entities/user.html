@@ -1,17 +1,17 @@
 
-<div class="item item-image">
+<a class="item item-image" href="#/tab/more/channel/{{entity.guid}}">
     <img ng-src="{{$root.node_url}}icon/{{entity.guid}}/large">
     <div class="overlay">
     	<h1>{{entity.name}}</h1>
     </div>
-</div>
+</a>
 
 <div class="item tabs tabs-secondary tabs-icon-left">
     <a class="tab-item" href="#" ng-click="ignore(entity)">
 		<i class="icon ion-close"></i>
     </a>
-    <a class="tab-item" href="#" ng-click="subscribe(entity)">
-      <i class="icon ion-person-add"></i> 
+    <a class="tab-item small-font" href="#" ng-click="subscribe(entity)">
+      <i class="icon ion-person-add"></i> <b>{{entity.subscribers_count}}</b>
     </a>
 </div>
 <div class="item" ng-show="entity.description">

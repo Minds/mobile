@@ -42,6 +42,7 @@ define(function () {
 			}
 			$scope.filter = filter;
 			$scope.entities = [];
+			$scope.passed = [];
 			$scope.next = "";
 			$scope.load();
 		};
@@ -61,11 +62,9 @@ define(function () {
 				var subtype = '';
 				var type =  'user';
 			}
-			console.log($scope.filter);
-			Client.get('api/v1/entities/' + $scope.filter, { 
-				type: type,
-				subtype: subtype,
-				limit: 12, 
+			console.log('loading entities...');
+			Client.get('api/v1/entities/' + $scope.filter + '/' + subtype, { 
+				limit: 16, 
 				offset: $scope.next, 
 				cachebreaker: $scope.cachebreaker 
 				}, 
@@ -90,6 +89,8 @@ define(function () {
 	    				});
 	    			});
 	    			
+	    			
+	    			
 	    			Cacher.put('entities.data', $scope.entities);
 	
 	    			$scope.next = data['load-next'];
@@ -97,13 +98,16 @@ define(function () {
 	    			
 	    			Cacher.put('entities.cb', Date.now());
 					$scope.cachebreaker = Date.now();
+					
+					console.log('got it!');
+					//$scope.$apply();
 	    			
-	    			$scope.$broadcast('scroll.infiniteScrollComplete');
+	    			//$scope.$broadcast('scroll.infiniteScrollComplete');
 	    		}, 
 	    		function(error){ 
 	    			alert('error'); 
 	    		});
-	    	console.log('api/v1/entities/' + $scope.filter);
+	    	//console.log('api/v1/entities/' + $scope.filter);
 
 	    	
 		};
@@ -164,6 +168,9 @@ define(function () {
 			//$scope.$digest();
 		}
 		
+		/**
+		 * User specific actions
+		 */
 		$scope.ignore = function(entity){
 			//remove the entity from the list
 			$scope.pop(entity);
@@ -193,6 +200,57 @@ define(function () {
 			//show a quick ui confirmation
 			$ionicLoading.show({
 				template: '<i class="icon ion-person" style="font-size:90px"></i>'
+				});
+			$timeout(function(){
+				$ionicLoading.hide();
+				}, 300);
+		}
+		
+		/**
+		 * Object specific actions
+		 */
+		$scope.pass = function(entity){
+			//remove the entity from the list
+			$scope.pop(entity);
+
+			//notify the suggested that we have decided to ignore
+			Client.post('api/v1/entities/suggested/pass/' + entity.guid, {}, function(){}, function(){});
+			
+			//show a quick ui confirmation
+			$ionicLoading.show({
+				template: '<i class="icon" style="font-size:48px">pass</i>'
+				});
+			$timeout(function(){
+				$ionicLoading.hide();
+				}, 300);
+		};
+		
+		$scope.down = function(entity){
+			//remove the entity from the list
+			$scope.pop(entity);
+			
+			Client.put('api/v1/thumbs/'+entity.guid+'/down', {}, 
+					function(success){},
+					function(error){});
+			
+			$ionicLoading.show({
+				template: '<i class="icon ion-thumbsdown" style="font-size:90px"></i>'
+				});
+			$timeout(function(){
+				$ionicLoading.hide();
+				}, 300);
+		};
+		
+		$scope.up = function(entity){
+			//remove the entity from the list
+			$scope.pop(entity);
+			
+			Client.put('api/v1/thumbs/'+entity.guid+'/up', {}, 
+					function(success){},
+					function(error){});
+			
+			$ionicLoading.show({
+				template: '<i class="icon ion-thumbsup" style="font-size:90px"></i>'
 				});
 			$timeout(function(){
 				$ionicLoading.hide();

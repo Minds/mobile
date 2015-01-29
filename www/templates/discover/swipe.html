@@ -48,8 +48,9 @@
     <!-- Scroll view -->
 	<ion-pane style="padding-top:102px" style="-webkit-transform: translate3d(0px, 0px, 0px);">
 
-		<div ng-show="entities.length == 0" style="text-align:center; font-weight:bold; padding-top:50px;">
-			please wait, loading.
+		<div ng-show="entities.length == 0" style="text-align:center; font-weight:200; padding-top:50px;">
+			<img src="img/logo-transparent.png" class="loading-bulb-glow"/> <br/>
+			discovering..
 		</div>
 
 		<div ng-repeat="entity in entities" class="swipe-container" ng-show="$index == 0">
@@ -58,7 +59,7 @@
             
                 <!-- Objects -->
                 <div ng-switch-when="object">
-                    <div class="list card" ng-include src="'templates/discover/entities/object.html'"></div>
+                    <div class="list card tabs-background-white " ng-include src="'templates/discover/entities/object.html'" swipe swipe-on-down="down(entity)" swipe-on-left="pass(entity)" swipe-on-right="up(entity)"></div>
                 </div>
                 
                 <!-- USERS -->

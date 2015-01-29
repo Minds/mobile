@@ -41,8 +41,8 @@ define(['angular'], function (angular) {
 	    						scope.srcFull = $sce.trustAsResourceUrl(success.transcodes['360.mp4']);
 	    						scope.$digest();
 	    						
-	    						video = angular.element(el.find('video'));
-	    						video[0].play();
+	    						var video = el[0].querySelector('#video');
+	    						video.play();
 	    						
 	    					},
 	    					function(error){
@@ -51,13 +51,15 @@ define(['angular'], function (angular) {
     				} else {
 
     					scope.showVideo = true;
-
-    					video = angular.element(el.find('video'));
-	 					video[0].play();
-	 					video[0].onplaying  = function(){
+    					
+    					var video = el[0].querySelector('#video');
+    					console.log(video);
+	 					video.play();
+	 					video.webkitEnterFullscreen();
+	 					video.onplaying  = function(){
 	 						$ionicLoading.hide();
 	 					};
-	 					video[0].onerror = function(){
+	 					video.onerror = function(){
 	 						alert('error in playing');
 	 					};
 	 					

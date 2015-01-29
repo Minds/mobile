@@ -104,7 +104,6 @@ define(function () {
 		 * Thumb up an activity
 		 */
 		$scope.thumbsUp = function(guid){
-
 			Client.put('api/v1/thumbs/'+guid+'/up', {},
 				function(success){
 					$scope.newsfeedItems.forEach(function(item, index, array){

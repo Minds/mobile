@@ -12,35 +12,6 @@
 
 }
 
-.card, .card .item{
-	overflow:visible !important;
-}
-
-.card .item-image{
-	overflow:hidden !important;
-	height:auto;
-	margin-left:-5px !important;
-	width:calc(100% + 10px) !important;
-	border:0;
-	z-index:10;
-	box-shadow:0 0 2px #000;
-}
-.card .item-image.item-image-video{
-	height:200px;
-}
-
-.item-image .ion-play{
-	color:#FFF;
-	position:absolute;
-	text-align:center;
-	top:50px; 
-	left:0;
-	width:100%;
-	height:100%;
-	font-size:90px;
-	z-index:9999;
-	opacity:0.75;
-}
 
    /* .bar-header{
         background:transparent !important;

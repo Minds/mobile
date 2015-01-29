@@ -17,6 +17,7 @@ define(function () {
 			$scope.next = "";
 		}
 		$scope.passed = []; //we keep this so that on loading new items, there are not conflicts. 
+		$scope.acted = [];
 		
 		$scope.hasMoreData = true;
 		if(Cacher.get('entities.cb')){
@@ -80,14 +81,14 @@ define(function () {
 	    			$scope.entities = $scope.entities.concat(data.entities);
 	    			
 	    			//scan for duplicates..
-	    			$scope.passed.forEach(function(item, index, array){
+	    			/*$scope.passed.forEach(function(item, index, array){
 	    				$scope.entities.forEach(function(eitem, eindex, earray){
 	    					if(item == eitem){
 	    						console.log('found duplicate, attempting to remove');
 	    						earray.splice(index, 1);
 	    					}
 	    				});
-	    			});
+	    			});*/
 	    			
 	    			
 	    			

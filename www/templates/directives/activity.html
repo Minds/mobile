@@ -11,10 +11,10 @@
         <img ng-src="{{activity.thumbnail_src}}">
     </div>
 
-    <div class="item item-text-wrap" ng-if="activity.blurb">
-        <p >
-          {{activity.blurb}}
-        </p>
+    <div class="item item-text-wrap" ng-if="activity.blurb" ng-click="openUrl(activity.perma_url)">
+        <h3>
+          {{activity.title}}
+        </h3>
     </div>
     
     <!-- Custom type:: batch -->

@@ -35,7 +35,7 @@
 		            <i class="icon ion-person-add"></i> Subscribe
 		        </a>
 		        <a class="tab-item small-font" ng-show="channel.guid != $root.user_guid && channel.subscribed == true">
-		            <i class="icon ion-person-add"></i> Un-Subscribe
+		            <i class="icon ion-person-add"></i> Subscribe
 		        </a>
 		        
 		    </div>
@@ -46,7 +46,7 @@
 	                on-refresh="refresh()">
 	            </ion-refresher>-->
 	
-	            <activity-view ng-repeat="activity in ChannelItems" swipe swipe-disable-vertical="true" swipe-on-right="thumbsUp(activity.guid)" swipe-on-left="thumbsDown(activity.guid)" class="activity-item list card" type="item-text-wrap">
+	            <activity-view ng-repeat="activity in ChannelItems" swipe swipe-disable-vertical="true" swipe-on-right="thumbsUp(activity.guid)" swipe-on-left="thumbsDown(activity.guid)" class="activity-item list card item-text-wrap">
 	            </activity-view>
 	
 	        </ion-list>

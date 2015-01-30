@@ -29,5 +29,5 @@ define(['ionic', 'angular', 'app', 'routes'], function (ionic, angular, app) {
     document.ontouchmove = function(event) {
     	event.preventDefault();
     	};
-    
+
 });

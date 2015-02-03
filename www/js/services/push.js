@@ -48,12 +48,14 @@ define(['angular'], function (angular) {
 					 */
 					 window.plugins.pushNotification.register(
 						    function(result){
-						    	
+						    	console.log('push notifications result::');
+						    	console.log(result);
 						    	Client.post('api/v1/notifications', {
 						    		service: 'apple',
 						    		token: result
 						    		}, 
 						    		function(){
+						    			console.log(result);
 						    			if(storage.get('push-token') != result){
 						    				storage.set('push-token', result);
 						    			}

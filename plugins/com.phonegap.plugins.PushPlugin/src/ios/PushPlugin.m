@@ -49,68 +49,35 @@
 
     NSMutableDictionary* options = [command.arguments objectAtIndex:0];
 
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
-		UIUserNotificationType UserNotificationTypes = UIUserNotificationTypeNone;
-#endif
     UIRemoteNotificationType notificationTypes = UIRemoteNotificationTypeNone;
-
     id badgeArg = [options objectForKey:@"badge"];
     id soundArg = [options objectForKey:@"sound"];
     id alertArg = [options objectForKey:@"alert"];
-
+    
     if ([badgeArg isKindOfClass:[NSString class]])
     {
-        if ([badgeArg isEqualToString:@"true"]) {
+        if ([badgeArg isEqualToString:@"true"])
             notificationTypes |= UIRemoteNotificationTypeBadge;
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
-            UserNotificationTypes |= UIUserNotificationTypeBadge;
-#endif
-        }
     }
-    else if ([badgeArg boolValue]) {
+    else if ([badgeArg boolValue])
         notificationTypes |= UIRemoteNotificationTypeBadge;
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
-        UserNotificationTypes |= UIUserNotificationTypeBadge;
-#endif
-    }
-
+    
     if ([soundArg isKindOfClass:[NSString class]])
     {
-        if ([soundArg isEqualToString:@"true"]) {
+        if ([soundArg isEqualToString:@"true"])
             notificationTypes |= UIRemoteNotificationTypeSound;
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
-            UserNotificationTypes |= UIUserNotificationTypeSound;
-#endif
     }
-    }
-    else if ([soundArg boolValue]) {
+    else if ([soundArg boolValue])
         notificationTypes |= UIRemoteNotificationTypeSound;
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
-        UserNotificationTypes |= UIUserNotificationTypeSound;
-#endif
-    }
-
+    
     if ([alertArg isKindOfClass:[NSString class]])
     {
-        if ([alertArg isEqualToString:@"true"]) {
+        if ([alertArg isEqualToString:@"true"])
             notificationTypes |= UIRemoteNotificationTypeAlert;
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
-            UserNotificationTypes |= UIUserNotificationTypeAlert;
-#endif
     }
-    }
-    else if ([alertArg boolValue]) {
+    else if ([alertArg boolValue])
         notificationTypes |= UIRemoteNotificationTypeAlert;
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
-        UserNotificationTypes |= UIUserNotificationTypeAlert;
-#endif
-    }
-
-    notificationTypes |= UIRemoteNotificationTypeNewsstandContentAvailability;
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
-    UserNotificationTypes |= UIUserNotificationActivationModeBackground;
-#endif
-
+    
     self.callback = [options objectForKey:@"ecb"];
 
     if (notificationTypes == UIRemoteNotificationTypeNone)
@@ -118,18 +85,8 @@
 
     isInline = NO;
 
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
-    if ([[UIApplication sharedApplication]respondsToSelector:@selector(registerUserNotificationSettings:)]) {
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UserNotificationTypes categories:nil];
-        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-        [[UIApplication sharedApplication] registerForRemoteNotifications];
-    } else {
-    		[[UIApplication sharedApplication] registerForRemoteNotificationTypes:notificationTypes];
-    }
-#else
-		[[UIApplication sharedApplication] registerForRemoteNotificationTypes:notificationTypes];
-#endif
-
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:notificationTypes];
+	
 	if (notificationMessage)			// if there is a pending startup notification
 		[self notificationReceived];	// go ahead and process it
 }
@@ -149,12 +106,12 @@
                         stringByReplacingOccurrencesOfString:@">" withString:@""]
                        stringByReplacingOccurrencesOfString: @" " withString: @""];
     [results setValue:token forKey:@"deviceToken"];
-
+    
     #if !TARGET_IPHONE_SIMULATOR
         // Get Bundle Info for Remote Registration (handy if you have more than one app)
         [results setValue:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"] forKey:@"appName"];
         [results setValue:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"] forKey:@"appVersion"];
-
+        
         // Check what Notifications the user has turned on.  We registered for all three, but they may have manually disabled some or all of them.
         NSUInteger rntypes = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
 
@@ -197,56 +154,36 @@
 }
 
 - (void)notificationReceived {
-    NSLog(@"Notification received");
-
+    NSLog(@"PushPlugin_NOTIFICATION_RECEIVED");
+    //NSLog(@"PushPlugin_NOTIFICATION: %@", notificationMessage);
     if (notificationMessage && self.callback)
     {
-        NSMutableString *jsonStr = [NSMutableString stringWithString:@"{"];
+        NSMutableDictionary *editableNotification = [notificationMessage mutableCopy];
+        NSError *error;
 
-        [self parseDictionary:notificationMessage intoJSON:jsonStr];
-
-        if (isInline)
-        {
-            [jsonStr appendFormat:@"foreground:\"%d\"", 1];
+        if (isInline) {
+            [editableNotification setObject:@1 forKey:@"foreground"];
             isInline = NO;
         }
-		else
-            [jsonStr appendFormat:@"foreground:\"%d\"", 0];
+        else {
+            [editableNotification setObject:@0 forKey:@"foreground"];
+        }
 
-        [jsonStr appendString:@"}"];
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:editableNotification
+                                                           options:0
+                                                             error:&error];
+        if (! jsonData) {
+            NSLog(@"PushPlugin_ERROR: %@", error);
+        } else {
+            NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 
-        NSLog(@"Msg: %@", jsonStr);
+            NSLog(@"PushPlugin_JSON: %@",jsonStr);
 
-        NSString * jsCallBack = [NSString stringWithFormat:@"%@(%@);", self.callback, jsonStr];
-        [self.webView stringByEvaluatingJavaScriptFromString:jsCallBack];
-	NSLog(@"%@", jsCallBack);
+            NSString * jsCallBack = [NSString stringWithFormat:@"%@(%@);", self.callback, jsonStr];
+            [self.webView stringByEvaluatingJavaScriptFromString:jsCallBack];
+        }
 
         self.notificationMessage = nil;
-    }
-}
-
-// reentrant method to drill down and surface all sub-dictionaries' key/value pairs into the top level json
--(void)parseDictionary:(NSDictionary *)inDictionary intoJSON:(NSMutableString *)jsonString
-{
-    NSArray         *keys = [inDictionary allKeys];
-    NSString        *key;
-
-    for (key in keys)
-    {
-        id thisObject = [inDictionary objectForKey:key];
-
-        if ([thisObject isKindOfClass:[NSDictionary class]])
-            [self parseDictionary:thisObject intoJSON:jsonString];
-        else if ([thisObject isKindOfClass:[NSString class]])
-             [jsonString appendFormat:@"\"%@\":\"%@\",",
-              key,
-              [[[[inDictionary objectForKey:key]
-                stringByReplacingOccurrencesOfString:@"\\" withString:@"\\\\"]
-                 stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""]
-                 stringByReplacingOccurrencesOfString:@"\n" withString:@"\\n"]];
-        else {
-            [jsonString appendFormat:@"\"%@\":\"%@\",", key, [inDictionary objectForKey:key]];
-        }
     }
 }
 
@@ -274,8 +211,9 @@
 {
     NSString        *errorMessage = (error) ? [NSString stringWithFormat:@"%@ - %@", message, [error localizedDescription]] : message;
     CDVPluginResult *commandResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:errorMessage];
-
+    
     [self.commandDelegate sendPluginResult:commandResult callbackId:self.callbackId];
 }
 
 @end
+

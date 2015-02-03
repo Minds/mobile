@@ -10,11 +10,6 @@
 
         <ion-list>
         
-        	<div ng-show="messages.length == 0" style="text-align:center; font-weight:200; padding-top:50px;">
-				<img src="img/logo-transparent.png" class="loading-bulb-glow"/> <br/>
-				downloading..
-			</div>
-        
             <ion-refresher
                 pulling-text="Load earlier messages.."
                 on-refresh="loadMore()">
@@ -24,6 +19,11 @@
                 <owner-brief-view owner="{{message.ownerObj}}" ts="{{message.time_created}}"></owner-brief-view>
                 <decrypt message="{{message.message}}"></decrypt>
             </ion-item>
+            
+            <div ng-show="messages.length == 0" style="top:100px; left: 50%; margin-left: -40px; position:fixed; text-align:center; font-weight:200; padding-top:50px;">
+				<img src="img/logo-transparent.png" class="loading-bulb-glow"/> <br/>
+				downloading..
+			</div>
 
         </ion-list>
 

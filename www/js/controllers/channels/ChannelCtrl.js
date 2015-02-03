@@ -10,15 +10,20 @@ define(function () {
 
     function ctrl($scope, $stateParams, Client, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
 
+     	$scope.next = "";
+     	$scope.ChannelItems = [];
+     	
 		Client.get('api/v1/channel/'+$stateParams.username, {}, 
 			function(success){
 				$scope.channel = success.channel;
 				$ionicSlideBoxDelegate.update();
+				if($scope.ChannelItems.length == 0)
+					$scope.loadMore();
 			},
 			function(error){
 			});
      
-     	setInterval(function(){
+     	/*setInterval(function(){
      		 var top = $ionicScrollDelegate.getScrollPosition().top;
      		 if(top > 10){
      		 	$scope.carousel_class = "blur";
@@ -26,19 +31,23 @@ define(function () {
      		 	$scope.carousel_class = "not-blurred";
      		 }
      		 $scope.$apply();
-     	}, 100);
+     	}, 100);*/
      	
-     	$scope.next = "";
-     	$scope.ChannelItems = [];
      	
      	$scope.loadMore = function(){
+     		if(!$scope.channel){
+     			return false;
+     		}
+     		console.log('getting a users feed');
 	     	Client.get('api/v1/newsfeed/personal/' + $scope.channel.guid, { limit: 6, offset: $scope.next }, 
 				function(data){
 	    		
 	    			if(!data.activity){
+	    				console.log('users feed not found');
 	    				$scope.hasMoreData = false;
 	    				return false;
 	    			} else {
+	    				console.log('found users feed, loading it');
 	    				$scope.hasMoreData = true;
 	    			};
 	    			

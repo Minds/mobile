@@ -1,3 +1,14 @@
+@font-face {
+  font-family: 'fontello';
+  src: url('../vendors/fontello/font/fontello.eot?37218800');
+  src: url('../vendors/fontello/font/fontello.eot?37218800#iefix') format('embedded-opentype'),
+       url('../vendors/fontello/font/fontello.woff?37218800') format('woff'),
+       url('../vendors/fontello/font/fontello.ttf?37218800') format('truetype'),
+       url('../vendors/fontello/font/fontello.svg?37218800#fontello') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .view-bg, .grey-bg{
 	background-color: #d2d5da;
 }

@@ -20,3 +20,8 @@
 	color:#4690D6 !important;
 	font-weight:600 !important;
 }
+
+.icon-remind:before{
+	content: '\e800';
+	font-family:"fontello";
+}

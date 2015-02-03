@@ -1,0 +1,12 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>Copyright (C) 2015 by original authors @ fontello.com</metadata>
+<defs>
+<font id="fontello" horiz-adv-x="1000" >
+<font-face font-family="fontello" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="retweet" unicode="&#xe800;" d="m250 190l272 0 128-140-448 0q-42 0-71 30t-29 70l0 302-102 0 176 198 174-198-100 0 0-262z m650 60l100 0-174-200-176 200 102 0 0 260-274 0-128 140 450 0q40 0 70-29t30-71l0-300z" horiz-adv-x="1000" />
+</font>
+</defs>
+</svg>

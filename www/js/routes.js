@@ -42,6 +42,14 @@ define(['app'], function (app) {
                         }
                     }
                 })
+                .state('tab.newsfeed-channel', {
+					url: "/newsfeed/channel/:username",
+					 views: {
+                        'newsfeed-tab': {
+                            templateUrl: 'templates/channels/channel.html'
+                        }
+                    }
+                })
                 .state('tab.newsfeed-compose', {
                     url: '/newsfeed/compose',
                     views: {

@@ -8,7 +8,7 @@
 define(function() {
 	'use strict';
 
-	function ctrl($scope, $state, OAuth, $ionicPopup, storage) {
+	function ctrl($scope, $state, OAuth, $ionicPopup, storage, push) {
 	
 		cordova.plugins.Keyboard.disableScroll(true);
 
@@ -24,6 +24,7 @@ define(function() {
 			OAuth.login($scope.username, $scope.password, function(success){
 				if(success){
 					//$state.go('tab.newsfeed');
+					push.register();
 					$state.go('tutorial');
 				} else {
 					
@@ -45,7 +46,7 @@ define(function() {
 	}
 
 
-	ctrl.$inject = ['$scope', '$state', 'OAuth', '$ionicPopup', 'storage'];
+	ctrl.$inject = ['$scope', '$state', 'OAuth', '$ionicPopup', 'storage', 'push'];
 	return ctrl;
 
 }); 

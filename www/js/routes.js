@@ -70,6 +70,7 @@ define(['app'], function (app) {
                     }
                 })
                 .state('tab.chat-conversation', {
+                	cache: false,
                     url: '/gatherings/conversations/:username',
                     views: {
                         'chat-tab': {

@@ -37,6 +37,14 @@ define(['angular'], function (angular) {
 						y = 0;
 					}
 					
+					if(attrs.swipeDisableVertical){
+						
+						if(!(x < -15 || x > 15)){
+							return false;
+						}
+						
+					}
+					
 					element.css('webkitTransform', 'translate3d(' + x + 'px, ' + y + 'px, 0) rotate(' + (rotationAngle || 0) + 'rad)');
 					//element.css('z-index', 99999999);
 					

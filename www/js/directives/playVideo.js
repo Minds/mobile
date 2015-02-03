@@ -8,8 +8,6 @@ define(['angular'], function (angular) {
        		restrict: 'AE',
 			link: function(scope, el, attrs) {
 
-				
-				
             	scope.showVideo = false;
             	var playing = false;
             	
@@ -29,9 +27,8 @@ define(['angular'], function (angular) {
 					$timeout(function(){
 						$ionicLoading.hide();
 					}, 3000);
+									
 					
-					console.log(scope.srcFull);
-					    
 					if(!scope.srcFull){
 						console.log('downloading src info');
 						Client.get('api/v1/archive/'+attrs.guid, {}, 
@@ -39,11 +36,15 @@ define(['angular'], function (angular) {
 	    						
 	    						scope.showVideo = true;
 	    						scope.srcFull = $sce.trustAsResourceUrl(success.transcodes['360.mp4']);
+	    						console.log(scope.srcFull);
 	    						scope.$digest();
 	    						
 	    						var video = el[0].querySelector('#video');
+	    						console.log(video);
 	    						video.play();
-	    						
+	    						video.onended = function(){
+	    	 						scope.showVideo = false;
+	    	 					}
 	    					},
 	    					function(error){
 	    						console.log(error);
@@ -51,9 +52,16 @@ define(['angular'], function (angular) {
     				} else {
 
     					scope.showVideo = true;
+    					if ( device.platform == 'android' || device.platform == 'Android' ){
+    						scope.showVideo = false;
+    						scope.$apply();
+    					}
+    					
     					
     					var video = el[0].querySelector('#video');
-    					console.log(video);
+    					//console.log('video is..');
+    					//console.log(el);
+    					//return true;
 	 					video.play();
 	 					video.webkitEnterFullscreen();
 	 					video.onplaying  = function(){
@@ -62,6 +70,19 @@ define(['angular'], function (angular) {
 	 					video.onerror = function(){
 	 						alert('error in playing');
 	 					};
+	 					video.onended = function(){
+	 						scope.showVideo = false;
+	 					}
+	 					
+	 					video.addEventListener('webkitendfullscreen', function (e) { 
+	 						scope.showVideo = false;
+	 						scope.$apply();
+	 						console.log('ended full screen');
+	 					});
+	 					video.addEventListener('ended', function(e){
+	 						scope.showVideo = false;
+	 						scope.$apply();
+	 					}, false);
 	 					
     				}
 				};
@@ -80,7 +101,7 @@ define(['angular'], function (angular) {
 
         				Client.get('api/v1/archive/'+attrs.guid, {}, 
         					function(success){
-        						scope.showVideo = true;
+        						scope.showVideo = false;
         						scope.srcFull = $sce.trustAsResourceUrl(success.transcodes['360.mp4']);
             				},
             				function(error){

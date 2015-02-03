@@ -8,7 +8,7 @@
 define(function () {
     'use strict';
 
-    function ctrl($scope, $stateParams, $state, Client, storage, $ionicScrollDelegate, $timeout, $ionicLoading) {
+    function ctrl($rootScope, $scope, $stateParams, $state, Client, storage, $ionicScrollDelegate, $timeout, $ionicLoading, push) {
     
     	cordova.plugins.Keyboard.disableScroll(false);
     
@@ -18,6 +18,7 @@ define(function () {
     	$scope.hasMoreData = true;
     	$scope.publickeys = {};
     	var poll = true;
+    	var timeout;
     	
     	/**
     	 * Load more posts
@@ -49,6 +50,7 @@ define(function () {
 	    			
 	    			poll = true;
 	    			
+	    			
 	    			//now update the public keys
 					$scope.publickeys = data.publickeys;
 	    		}, 
@@ -60,42 +62,64 @@ define(function () {
     	};
     	$scope.loadMore();
     	
+    	/**
+    	 * Only do polling if we can't use push notifications
+    	 */
+    	if(!storage.get('push-token')){
+	    	var doPoll = function(){
+	    		if(!poll){
+	    			//console.log('poll is false, skipping');
+	    			return false;
+	    		} else {
+	    			console.log('checking for new messages..');
+	    			poll = false;
+	    		}
+	    		Client.get('api/v1/conversations/'+$stateParams.username, { limit: 1000, start: $scope.previous, cachebreak: Date.now()}, 
+	    			function(data){
+						
+						if(data && data.messages){
+		    			
+			    			$scope.messages = $scope.messages.concat(data.messages);
+		
+						
+			    			$scope.previous = data['load-next'];
+			    			$ionicScrollDelegate.scrollBottom();
+			    		}
+	
+		    			poll = true;
+		    			clearTimeout($scope.timeout);
+		    			$scope.timeout = setTimeout(doPoll, 5000);
+	
+		    		}, 
+		    		function(error){ 
+		    			poll = true;
+		    			console.log('polling for new messages failed');
+		    		});
+	    		
+	    	};
+	    	
+	    	$scope.timeout = setTimeout(doPoll, 5000);
+    	}
     	
-    	var doPoll = function(){
-    		if(!poll){
-    			console.log('poll is false, skipping');
-    			return false;
-    		} else {
-    			console.log('checking..');
-    			poll = false;
-    		}
+    	/**
+    	 * Listen to push notifications
+    	 */
+    	var push_listen_id = push.listen('chat', function(){
+    		console.log('think you got a new message');
     		Client.get('api/v1/conversations/'+$stateParams.username, { limit: 1000, start: $scope.previous, cachebreak: Date.now()}, 
     			function(data){
 					
 					if(data && data.messages){
 	    			
 		    			$scope.messages = $scope.messages.concat(data.messages);
-	
-					
+						
 		    			$scope.previous = data['load-next'];
 		    			$ionicScrollDelegate.scrollBottom();
 		    		}
 
-	    			poll = true;
-	    			//check again
-	        		$timeout(doPoll, 5000);
-
 	    		}, 
-	    		function(error){ 
-	    			poll = true;
-	    			console.log('polling for new messages failed');
-	    		});
-    		
-    	};
-    	
-    	//check for new messages
-    	$timeout(doPoll, 5000);
-    	
+	    		function(error){ });
+    	});
     	
     	$scope.send = function(){
     	
@@ -120,6 +144,7 @@ define(function () {
     		 */
     		//to make this syncronous we have to loop until we get all the values we need!
     		var sync = setInterval(function(){
+    			var pushed = false;
     			if(encrypted.length == $scope.publickeys.length){
     				clearInterval(sync);
     				
@@ -127,11 +152,14 @@ define(function () {
     				for(var index in encrypted){
     					data["message:"+index] = encrypted[index];
     				}
-    				//console.log(data);
     				Client.post('api/v1/conversations/'+$stateParams.username, 
     					data,
     					function(data){
-    						doPoll();
+    						if(!pushed){
+    							$scope.messages.push(data.message);
+    							$scope.previous = data.message.guid;
+    							pushed = true;
+    						}
     						$scope.message = "";
     						$ionicScrollDelegate.scrollBottom();
     						$ionicLoading.hide();
@@ -146,18 +174,18 @@ define(function () {
     		}, 100);
     		
     	};
-        
-        $scope.$on('$stateChangeSuccess', function() {
-        	console.log('state changed..');
-			//$scope.loadMore();
-			//if(polling)
-			//	$interval.cancel(polling);
-		});
+
+        $scope.$on('$destroy', function() {
+        	
+        	clearTimeout($scope.timeout);
+        	push.unlisten('chat', push_listen_id);
+        	
+        });
 
 		
     }
 
-    ctrl.$inject = ['$scope', '$stateParams', '$state', 'Client', 'storage', '$ionicScrollDelegate', '$interval', '$ionicLoading'];
+    ctrl.$inject = ['$rootScope', '$scope', '$stateParams', '$state', 'Client', 'storage', '$ionicScrollDelegate', '$interval', '$ionicLoading', 'push'];
     return ctrl;
     
 });

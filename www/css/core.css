@@ -61,6 +61,9 @@
 	background:#FFF !important;
 }
 .tabs-background-white .tab-item{
+	color:#999 !important;
+}
+.tabs-background-white .tab-item i{
 	color:#222 !important;
 }
 /*.capture-tab{

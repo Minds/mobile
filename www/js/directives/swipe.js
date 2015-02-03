@@ -36,10 +36,14 @@ define(['angular'], function (angular) {
 					if(attrs.swipeDisableVertical){
 						y = 0;
 					}
-					
+
 					if(attrs.swipeDisableVertical){
 						
 						if(!(x < -15 || x > 15)){
+							return false;
+						}
+						
+						if( device.platform == 'android' || device.platform == 'Android' ){
 							return false;
 						}
 						
@@ -53,7 +57,6 @@ define(['angular'], function (angular) {
 				$ionicGesture.on('dragend', function(e){
 					
 					element.css('webkitTransform', 'none');
-					console.log('you let go!');
 					
 					var right_threshold = 100;
 					var left_threshold = -100;
@@ -61,13 +64,13 @@ define(['angular'], function (angular) {
 					var down_threshold = 140;
 					
 					if(e.gesture.deltaX > right_threshold){
-						console.log('you swiped right');
+						//console.log('you swiped right');
 						scope.swipeOnRight();
 						return true;
 					}
 					
 					if(e.gesture.deltaX < left_threshold){
-						console.log('you swiped left');
+						//console.log('you swiped left');
 						scope.swipeOnLeft();
 						return true;
 					}
@@ -77,13 +80,13 @@ define(['angular'], function (angular) {
 					}
 					
 					if(e.gesture.deltaY < up_threshold){
-						console.log('you swiped up');
+						//console.log('you swiped up');
 						scope.swipeOnUp();
 						return true;
 					}
 					
 					if(e.gesture.deltaY > down_threshold){
-						console.log('you swiped down');
+						//console.log('you swiped down');
 						scope.swipeOnDown();
 						return true;
 					}

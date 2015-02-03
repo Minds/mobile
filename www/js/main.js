@@ -12,7 +12,7 @@ requirejs.config({
         angularSanitize:  '../vendors/ionic/js/angular/angular-sanitize.min',
         uiRouter:         '../vendors/ionic/js/angular-ui/angular-ui-router.min',
         ionic:            '../vendors/ionic/js/ionic.min',
-        ionicAngular:     '../vendors/ionic/js/ionic-angular.min',
+        ionicAngular:     '../vendors/ionic/js/ionic-angular',
         text:             '../vendors/text',
         JSEncrypt:		  '../vendors/jsencrypt/jsencrypt',
         imgcache:		  '../vendors/imgcache/imgcache'

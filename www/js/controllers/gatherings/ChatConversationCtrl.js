@@ -121,6 +121,10 @@ define(function () {
 	    		function(error){ });
     	});
     	
+    	window.addEventListener('native.keyboardshow', function(){
+    		$ionicScrollDelegate.scrollBottom();
+    	});
+    	
     	$scope.send = function(){
     	
     		$ionicLoading.show({

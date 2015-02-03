@@ -50,6 +50,22 @@ define(['app'], function (app) {
                         }
                     }
                 })
+                .state('tab.newsfeed-channel-edit', {
+					url: "/newsfeed/channel/:guid/edit",
+					 views: {
+                        'newsfeed-tab': {
+                            templateUrl: 'templates/channels/edit.html'
+                        }
+                    }
+                })
+                .state('tab.newsfeed-channel-subscribers', {
+					url: "/newsfeed/channel/:guid/subscribers",
+					 views: {
+                        'newsfeed-tab': {
+                            templateUrl: 'templates/channels/subscribers.html'
+                        }
+                    }
+                })
                 .state('tab.newsfeed-compose', {
                     url: '/newsfeed/compose',
                     views: {

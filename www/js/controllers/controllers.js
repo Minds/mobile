@@ -43,6 +43,7 @@ define(function (require) {
      * Channels
      */
     controllers.controller('ChannelCtrl', require('controllers/channels/ChannelCtrl'));
+    controllers.controller('ChannelSubscribersCtrl', require('controllers/channels/ChannelSubscribersCtrl'));
     
     /**
      * Capture

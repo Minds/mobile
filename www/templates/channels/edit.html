@@ -21,14 +21,14 @@
         
         <div class="view-bg" ng-controller="NewsfeedCtrl">
         	<div class="item tabs tabs-secondary tabs-icon-left" style="padding:0;background-color:#F7F7F7 !important;">
-		        <a class="tab-item small-font " href="#/tab/newsfeed/channel/{{channel.guid}}/subscribers" >
+		        <a class="tab-item small-font ">
 		        	<i class="icon ion-person-stalker"></i> 
 		        	<b>{{channel.subscribers_count}}</b>
 		        </a>
 		        
 		      
-		        <a class="tab-item small-font" href="#/tab/newsfeed/channel/{{channel.guid}}/edit" ng-show="channel.guid == $root.user_guid">
-		            <i class="icon ion-more"></i> Settings
+		        <a class="tab-item small-font" ng-show="channel.guid == $root.user_guid">
+		            <i class="icon ion-more"></i> Edit
 		        </a>
 		        
 		        <a class="tab-item small-font" ng-click="subscribe(channel)" ng-show="channel.guid != $root.user_guid && channel.subscribed == false">

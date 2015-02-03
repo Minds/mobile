@@ -1,0 +1,30 @@
+<ion-view title="Subscribers" ng-controller="ChannelSubscribersCtrl">
+
+	<ion-nav-bar>
+	  <ion-nav-back-button>
+	  </ion-nav-back-button>
+	</ion-nav-bar>
+
+    <ion-content>
+
+        <ion-list>
+        
+            <!--<ion-refresher
+                pulling-text="Pull to refresh..."
+                on-refresh="refresh()">
+            </ion-refresher>-->
+            <owner-brief-view owner="{{user}}" ng-repeat="user in subscribers">
+            	
+            </owner-brief-view>
+
+           
+        </ion-list>
+        
+        <ion-infinite-scroll 
+            on-infinite="loadMore()" 
+            distance="5%" 
+            ng-if="hasMoreData">
+        </ion-infinite-scroll>
+       
+    </ion-content>
+</ion-view>

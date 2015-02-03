@@ -44,6 +44,7 @@ define(function () {
 	    		
 	    			if(!data.activity){
 	    				console.log('users feed not found');
+	    				$scope.$broadcast('scroll.refreshComplete');
 	    				$scope.hasMoreData = false;
 	    				return false;
 	    			} else {
@@ -56,11 +57,26 @@ define(function () {
 	    			$scope.next = data['load-next'];
 	    			
 	    			$scope.$broadcast('scroll.infiniteScrollComplete');
+	    			$scope.$broadcast('scroll.refreshComplete');
 	
 	    		}, 
 	    		function(error){ 
 	    			alert('error'); 
 	    		});
+	 	};
+	 	
+	 	$scope.subscribe = function(channel){
+	 		
+	 		$scope.channel.subscribed = true;
+	 		$scope.channel.subscribers_count = $scope.channel.subscribers_count + 1;
+	 		Client.post('api/v1/subscribe/' + channel.guid, {},
+					function(){
+					},
+					function(){
+						$scope.channel.subscribed = false;
+						$scope.channel.subscribers_count = $scope.channel.subscribers_count - 1;
+					});
+	 		
 	 	};
        
     }

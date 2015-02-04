@@ -12,6 +12,7 @@ define(function () {
 
      	$scope.next = "";
      	$scope.subscribers = [];
+     	$scope.guid = $stateParams.guid;
      	
      	
      	$scope.loadMore = function(){

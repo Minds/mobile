@@ -16,6 +16,9 @@ define(function () {
 		} else {
 			$scope.next = "";
 		}
+		$scope.query = {
+				string: ""
+		};
 		$scope.passed = []; //we keep this so that on loading new items, there are not conflicts. 
 		$scope.acted = [];
 		
@@ -49,6 +52,12 @@ define(function () {
 		};
 		
 		$scope.changeType = function(type){
+			if($scope.filter == 'search'){
+				$scope.type = type;
+				$scope.search();
+				return true;
+			}
+			$scope.query.string = '';
 			$scope.type = type;
 			$scope.entities = [];
 			$scope.next = "";
@@ -149,6 +158,60 @@ define(function () {
 	    		function(error){ 
 	    			alert('error'); 
 	    		});
+		};
+		
+		$scope.search = function(){
+			$scope.next = "";
+			$scope.filter = 'search';
+			if($scope.type != 'channel'){
+				var subtype = $scope.type;
+				var type = 'object';
+			} else {
+				var subtype = '';
+				var type = 'user';
+			}
+			if($scope.query.string.length > 3){
+				$scope.entities = [];
+				console.log({ 
+					type: type,
+					subtype: subtype,
+					q: $scope.query.string,
+					limit: 24, 
+					offset: $scope.next, 
+					cachebreaker: Date.now(),
+					view: 'json'
+					});
+				Client.get('search', { 
+					type: type,
+					subtype: subtype,
+					q: $scope.query.string,
+					limit: 24, 
+					offset: $scope.next, 
+					cachebreaker: Date.now(),
+					view: 'json'
+					}, 
+	    			function(data){
+						
+						if(type == 'user'){
+							$scope.entities = data[type][0];
+							console.log($scope.entities);
+						} else {
+							$scope.entities = data[type][subtype];
+						}
+						
+						
+		    			Cacher.put('entities.data', $scope.entities);
+		
+		    			$scope.next = data['load-next'];
+		    			//Cacher.put('entities.next', $scope.next);
+		    			
+		    			$scope.$broadcast('scroll.infiniteScrollComplete');
+		    		}, 
+		    		function(error){ 
+		    			alert('error'); 
+		    		});
+			}
+			
 		};
 		
 		$scope.pop = function(entity){

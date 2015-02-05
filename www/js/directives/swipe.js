@@ -33,11 +33,11 @@ define(['angular'], function (angular) {
 					var x = (e.gesture.deltaX * 0.8);
 					var y = (e.gesture.deltaY * 0.8);
 					
-					if(attrs.swipeDisableVertical){
+					if(scope.$eval(attrs.swipeDisableVertical)){
 						y = 0;
 					}
 
-					if(attrs.swipeDisableVertical){
+					if(scope.$eval(attrs.swipeDisableVertical)){
 						
 						if(!(x < -15 || x > 15)){
 							return false;
@@ -75,7 +75,7 @@ define(['angular'], function (angular) {
 						return true;
 					}
 					
-					if(attrs.swipeDisableVertical){
+					if(scope.$eval(attrs.swipeDisableVertical)){
 						return true;
 					}
 					

@@ -24,6 +24,9 @@
 .swipe-container .card{
 	margin-bottom:1000px;
 }
+.forced-scroll .swipe-container .card{
+	margin-bottom:0;
+}
 .swipe-container .card .item-image{
 	max-height:220px;
 }

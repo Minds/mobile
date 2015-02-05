@@ -4,7 +4,7 @@
        <div class="bar bar-header item-input-inset">
           <label class="item-input-wrapper">
             <i class="icon ion-ios7-search placeholder-icon"></i>
-            <input type="search" placeholder="Search">
+            <input type="search" placeholder="Search" ng-model="query.string" ng-keyup="search()">
           </label>
           <button class="button button-clear" ng-show="search.q" style="display:none;">
             Cancel
@@ -46,7 +46,32 @@
     </div>
 
     <!-- Scroll view -->
-	<ion-pane style="padding-top:102px" style="-webkit-transform: translate3d(0px, 0px, 0px);">
+    <ion-content class="forced-scroll" ng-show="filter == 'search'" style="padding-top:80px" scroll="true">
+    		
+    		<div ng-show="entities.length == 0" style="text-align:center; font-weight:200; padding-top:50px;">
+				<img src="img/logo-transparent.png" class="loading-bulb-glow"/> <br/>
+				discovering..
+			</div>
+    
+			<div ng-repeat="entity in entities" class="swipe-container">
+			
+	            <div ng-switch="entity.type">
+	            
+	                <!-- Objects -->
+	                <div ng-switch-when="object">
+	                    <div class="list card tabs-background-white " ng-include src="'templates/discover/entities/object.html'" swipe swipe-disable-vertical="true" swipe-on-down="down(entity)" swipe-on-left="pass(entity)" swipe-on-right="up(entity)"></div>
+	                </div>
+	                
+	                <!-- USERS -->
+	                <div ng-switch-when="user">
+	                    <div class="list card tabs-background-white" ng-include src="'templates/discover/entities/user.html'" swipe swipe-disable-vertical="true" swipe-on-left="ignore(entity)" swipe-on-right="subscribe(entity)"></div>
+	                </div>
+	                
+	            </div>
+			</div>
+	</ion-content>
+    
+	<ion-pane style="padding-top:102px" style="-webkit-transform: translate3d(0px, 0px, 0px);" ng-if="filter != 'search'">
 
 		<div ng-show="entities.length == 0" style="text-align:center; font-weight:200; padding-top:50px;">
 			<img src="img/logo-transparent.png" class="loading-bulb-glow"/> <br/>

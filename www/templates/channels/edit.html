@@ -1,63 +1,38 @@
-<ion-view title="Channel" ng-controller="ChannelCtrl" hide-nav-bar="true">
+<ion-view title="Settings" ng-controller="ChannelEditCtrl">
 
-    <div class="carousel {{carousel_class}}">
-      <ion-slide-box autoplay show-pager="false">
-          <ion-slide ng-repeat="carousel in channel.carousels">
-            <div class="box blue">
-                <img image-cache ng-src="{{carousel.src}}"/>
-            </div>
-          </ion-slide>
-        </ion-slide-box>
-    </div>
+	<ion-nav-buttons side="left">
+        <a class="button button-clear icon ion-arrow-left-b" href="#/tab/newsfeed/channel/me"></a>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <a class="button button-clear">Save</a>
+    </ion-nav-buttons>
 
-    <ion-content class="channel-content">
+    <ion-content>
     
-        <div class="inner">
+    	<div class="list">
+			<label class="item item-input">
+                <span class="input-label">Name</span>
+                <input type="text" ng-model="channel.name">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Website</span>
+                <input type="text" ng-model="channel.website">
+            </label>
+            <label class="item item-input" ng-click="changeAvatar()">
+                <span class="input-label">Avatar</span>
+                <img id="avatar" ng-src="{{channel.avatar_url.large}}/{{cb}}" style="width:60%; height:auto;"/>
+            </label>
+            <label class="item item-input">
+            </label>
+            <a class="item item-input" href="mailto:mark@minds.com, bill@minds.com">
+            	<span class="input-label"><i class="icon ion-email"></i></span>
+                 Contact Us
+			</a>
+            <label class="item item-input" ng-click="changeAvatar()">
+            	<span class="input-label"><i class="icon ion-power"></i></span>
+                 Logout
+			</label>
+		</div>
 
-            <img image-cache ng-src="{{channel.avatar_url.large}}" style="width:140px;"/>
-            <h1>{{channel.name}}</h1>
-        
-        </div>
-        
-        <div class="view-bg" ng-controller="NewsfeedCtrl">
-        	<div class="item tabs tabs-secondary tabs-icon-left" style="padding:0;background-color:#F7F7F7 !important;">
-		        <a class="tab-item small-font ">
-		        	<i class="icon ion-person-stalker"></i> 
-		        	<b>{{channel.subscribers_count}}</b>
-		        </a>
-		        
-		      
-		        <a class="tab-item small-font" ng-show="channel.guid == $root.user_guid">
-		            <i class="icon ion-more"></i> Edit
-		        </a>
-		        
-		        <a class="tab-item small-font" ng-click="subscribe(channel)" ng-show="channel.guid != $root.user_guid && channel.subscribed == false">
-		            <i class="icon ion-person-add"></i> Subscribe
-		        </a>
-		        <a class="tab-item small-font minds-blue" style="color:#4690C3 !important;" ng-click="subscribe(channel)" ng-show="channel.guid != $root.user_guid && channel.subscribed == true">
-		            <i class="icon ion-person-add"></i> Subscribed
-		        </a>
-		        
-		    </div>
-	        <ion-list>
-	        
-	            <!--<ion-refresher
-	                pulling-text="Pull to refresh..."
-	                on-refresh="refresh()">
-	            </ion-refresher>-->
-	
-	            <activity-view ng-repeat="activity in ChannelItems" swipe swipe-disable-vertical="true" swipe-on-right="thumbsUp(activity.guid)" swipe-on-left="thumbsDown(activity.guid)" class="activity-item list card item-text-wrap">
-	            </activity-view>
-	
-	        </ion-list>
-        </div>
-        
-        <ion-infinite-scroll 
-            on-infinite="loadMore()" 
-            distance="5%" 
-            ng-if="hasMoreData">
-
-        </ion-infinite-scroll>
-       
     </ion-content>
 </ion-view>

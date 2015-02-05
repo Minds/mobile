@@ -14,7 +14,7 @@
     
         <div class="inner">
 
-            <img image-cache ng-src="{{channel.avatar_url.large}}" style="width:140px;"/>
+            <img image-cache ng-src="{{channel.avatar_url.large}}/{{$root.globalCB}}" style="width:140px;"/>
             <h1>{{channel.name}}</h1>
         
         </div>
@@ -27,14 +27,14 @@
 		        </a>
 		        
 		      
-		        <a class="tab-item small-font" href="#/tab/newsfeed/channel/{{channel.guid}}/edit" ng-show="channel.guid == $root.user_guid">
+		        <a class="tab-item small-font" href="#/tab/newsfeed/channel/{{channel.guid}}/edit" ng-if="channel.guid == $root.user_guid">
 		            <i class="icon ion-more"></i> Settings
 		        </a>
 		        
-		        <a class="tab-item small-font" ng-click="subscribe(channel)" ng-show="channel.guid != $root.user_guid && channel.subscribed == false">
+		        <a class="tab-item small-font" ng-click="subscribe(channel)" ng-if="channel.guid != $root.user_guid && channel.subscribed == false">
 		            <i class="icon ion-person-add"></i> Subscribe
 		        </a>
-		        <a class="tab-item small-font minds-blue" style="color:#4690C3 !important;" ng-click="subscribe(channel)" ng-show="channel.guid != $root.user_guid && channel.subscribed == true">
+		        <a class="tab-item small-font minds-blue" style="color:#4690C3 !important;" ng-click="subscribe(channel)" ng-if="channel.guid != $root.user_guid && channel.subscribed == true">
 		            <i class="icon ion-person-add"></i> Subscribed
 		        </a>
 		        

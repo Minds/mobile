@@ -223,7 +223,7 @@ define(function () {
 				} 
 			});
 			
-			if($scope.entities.length  < 5){
+			if($scope.entities.length < 2){
 				console.log('loading new...');
 				Cacher.put('entities.cb', Date.now());
 				$scope.load();

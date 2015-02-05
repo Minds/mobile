@@ -8,7 +8,7 @@
 define(function () {
     'use strict';
 
-    function ctrl( $rootScope, $scope, $state, $stateParams, NewsfeedAPI, $filter, $ionicScrollDelegate, Cacher, Client, storage, $ionicPopover, $ionicLoading, $timeout) {
+    function ctrl( $rootScope, $scope, $state, $stateParams, NewsfeedAPI, $filter, $ionicScrollDelegate, Cacher, Client, storage, $ionicPopover, $ionicLoading, $timeout, $ionicActionSheet) {
 
     	//if same tab click, refresh and go to top
     	$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
@@ -273,9 +273,29 @@ define(function () {
 			window.open(url, '_blank', {toolbarposition:'top'});
 		};
 		
+		$scope.openActions = function(){
+			
+			$ionicActionSheet.show({
+			     buttons: [
+			       //{ text: '<b>Share</b> This' },
+			       { text: 'Boost' }
+			     ],
+			     destructiveText: 'Delete',
+			     cancelText: 'Cancel',
+			     cancel: function() {
+			          // add cancel code..
+			        },
+			     buttonClicked: function(index) {
+			    	 console.log(index);
+			       return true;
+			     }
+			   });
+			
+		}
+		
     }
 
-    ctrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', 'NewsfeedAPI', '$filter', '$ionicScrollDelegate', 'Cacher', 'Client', 'storage', '$ionicPopover', '$ionicLoading', '$timeout'];
+    ctrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', 'NewsfeedAPI', '$filter', '$ionicScrollDelegate', 'Cacher', 'Client', 'storage', '$ionicPopover', '$ionicLoading', '$timeout', '$ionicActionSheet'];
     return ctrl;
     
 });

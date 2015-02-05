@@ -43,6 +43,7 @@ define(function (require) {
      * Channels
      */
     controllers.controller('ChannelCtrl', require('controllers/channels/ChannelCtrl'));
+    controllers.controller('ChannelEditCtrl', require('controllers/channels/ChannelEditCtrl'));
     controllers.controller('ChannelSubscribersCtrl', require('controllers/channels/ChannelSubscribersCtrl'));
     
     /**
@@ -64,6 +65,7 @@ define(function (require) {
 	controllers.run(['$rootScope', 'NODE_URL', 'storage', function ($rootScope, NODE_URL, storage) {
 		$rootScope.node_url = NODE_URL;
 		$rootScope.user_guid = storage.get('user_guid');
+		$rootScope.globalCB = Date.now();
 	}]);
     
 	return controllers;

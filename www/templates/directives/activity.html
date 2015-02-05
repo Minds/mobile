@@ -45,13 +45,24 @@
             <i class="icon ion-chatbox"></i>
 
         </a>
+        
+        
+        <!-- <a class="tab-item small-font" ng-click="boost({{activity.guid}})">
+            <i class="icon ion-radio-waves"></i>
+        </a>-->
+      
+        
         <a class="tab-item small-font" ng-click="remind({{activity.guid}})">
             <i class="icon icon-remind"></i>
 
         </a>
       
-        <a class="tab-item small-font" ng-click="remove(activity.guid)" ng-if="activity.ownerObj.guid == $root.user_guid">
+        <!--<a class="tab-item small-font" ng-click="remove(activity.guid)" ng-if="activity.ownerObj.guid == $root.user_guid">
             <i class="icon ion-ios7-close"></i>
+        </a>-->
+        
+        <a class="tab-item small-font" ng-click="openActions()">
+            <i class="icon ion-more"></i>
         </a>
         
     </div>

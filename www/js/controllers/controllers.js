@@ -54,6 +54,7 @@ define(function (require) {
      * Notifications
      */
    	controllers.controller('NotificationsCtrl', require('controllers/notifications/NotificationsCtrl'));
+   	controllers.controller('NotificationsEntityCtrl', require('controllers/notifications/NotificationsEntityCtrl'));
    	
    	/**
      * Discover

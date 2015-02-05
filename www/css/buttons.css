@@ -2,13 +2,6 @@
 	background:#4690D6;
 }
 
-.capture-tab{
-
-	background: #000 !important;
-	color:#EEE;
-	
-}
-
 .selected > i{
 	color:#4690D6 !important;
 }

@@ -26,7 +26,7 @@ define(['angular'], function (angular) {
 			buildParams : function(params){
 				return angular.extend(params, {
 					'client_id': OAuthConfig.client_id,
-					'client_secret': OAuthConfig.client_secret,
+					//'client_secret': OAuthConfig.client_secret,
 					'access_token': storage.get('access_token')
 				});
 			},

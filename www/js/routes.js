@@ -145,15 +145,22 @@ define(['app'], function (app) {
                         }
                     }
                 })
-                
-                .state('tab.more-notifications', {
-                    url: '/more/notifications',
+                .state('tab.notifications', {
+                    url: '/notifications',
                     views: {
-                        'more-tab': {
+                        'notifications-tab': {
                             templateUrl: 'templates/notifications/list.html',
                         }
                     }
-                });
+                })
+	            .state('tab.notifications-entity', {
+	                url: '/notifications/entity/:guid',
+	                views: {
+	                    'notifications-tab': {
+	                        templateUrl: 'templates/notifications/entity.html',
+	                    }
+	                }
+	            });
 
 
             $urlRouterProvider.otherwise("/loading");

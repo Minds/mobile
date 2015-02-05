@@ -18,6 +18,15 @@
    <img ng-src="{{entity.thumbnail_src}}">
 </div>
 
+<!-- Article/blog -->
+<div class="item item-image" ng-show="entity.subtype == 'blog'">
+   <img ng-src="{{entity.thumbnail_src}}">
+</div>
+<div class="item item-wrap-content" ng-show="entity.subtype == 'blog'">
+   <h3>{{entity.title}}</h3>
+   <p>{{entity.perma_url}}</p>
+</div>
+
 <div class="item tabs tabs-secondary tabs-icon-left">
     <a class="tab-item" href="#" ng-click="down(entity)">
     	<i class="icon ion-thumbsdown"></i> 

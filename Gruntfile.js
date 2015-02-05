@@ -10,8 +10,10 @@ module.exports = function (grunt) {
                         'www/css/buttons.css', 
                         'www/css/components.css',
                         'www/css/newsfeed.css',
+			'www/css/channel.css',
                         'www/css/gatherings.css',
-                        'www/css/capture.css'
+                        'www/css/notifications.css',
+			'www/css/capture.css'
                     ]
                 }
             }

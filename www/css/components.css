@@ -13,6 +13,9 @@
 /**
  * Lists
  */
+.item-avatar img{
+	border-radius:3px !important;
+}
 /**Stacked**/
 .stack .card{
 	position:absolute;

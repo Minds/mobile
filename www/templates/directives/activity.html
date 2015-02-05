@@ -31,6 +31,11 @@
           <video id="video" ng-show="showVideo" src="{{srcFull}}" width="100%" height="100%" style="background:#000;" preload="auto"></video>
          
     </div>
+    
+    <!-- custom type:: remind -->
+    <div class="item item-text-wrap" ng-if="activity.remind_object">
+    	<div ng-include src="'templates/directives/activity.html'" onload="activity = activity.remind_object"></div>
+    </div>
 
     <div class="item tabs tabs-secondary tabs-icon-left" style="padding:0;background-color:#F7F7F7 !important;">
         <a class="tab-item small-font thumbs-up" ng-click="thumbsUp(activity.guid)" thumbs="{{activity['thumbs:up:user_guids']}}">
@@ -52,7 +57,7 @@
         </a>-->
       
         
-        <a class="tab-item small-font" ng-click="remind({{activity.guid}})">
+        <a class="tab-item small-font" ng-click="remind(activity)">
             <i class="icon icon-remind"></i>
 
         </a>
@@ -61,7 +66,7 @@
             <i class="icon ion-ios7-close"></i>
         </a>-->
         
-        <a class="tab-item small-font" ng-click="openActions()">
+        <a class="tab-item small-font" ng-click="openActions(activity.guid)">
             <i class="icon ion-more"></i>
         </a>
         

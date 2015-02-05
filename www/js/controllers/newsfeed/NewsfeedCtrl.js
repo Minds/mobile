@@ -204,8 +204,22 @@ define(function () {
 		/**
 		 * Remind an activity
 		 */
-		$scope.remind = function(guid, $event){
-			alert('sorry, not done this yet');
+		$scope.remind = function(activity, $event){
+			console.log('reminding..');
+			console.log(activity)
+			Client.post('api/v1/newsfeed/remind/'+activity.guid, {},
+					function(success){
+						
+					},
+					function(error){
+						alert('failed..');
+					});
+			$ionicLoading.show({
+				template: '<i class="icon icon-remind" style="line-height:100px; vertical-align:middle; font-size:90px"></i>'
+				});
+			$timeout(function(){
+				$ionicLoading.hide();
+				}, 1000);
 		};
 		
 		/**
@@ -273,7 +287,7 @@ define(function () {
 			window.open(url, '_blank', {toolbarposition:'top'});
 		};
 		
-		$scope.openActions = function(){
+		$scope.openActions = function(guid){
 			
 			$ionicActionSheet.show({
 			     buttons: [
@@ -281,6 +295,10 @@ define(function () {
 			       { text: 'Boost' }
 			     ],
 			     destructiveText: 'Delete',
+			     destructiveButtonClicked: function(){
+			    	 $scope.remove(guid);
+			    	 return true;
+			     },
 			     cancelText: 'Cancel',
 			     cancel: function() {
 			          // add cancel code..

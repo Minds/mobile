@@ -1,1 +1,1 @@
-{"source":{"type":"registry","id":"org.apache.cordova.camera"}}
+{"source":{"type":"git","url":"https://github.com/apache/cordova-plugin-camera","subdir":"."}}

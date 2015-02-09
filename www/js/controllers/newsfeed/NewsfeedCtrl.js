@@ -312,11 +312,13 @@ define(function () {
 			$ionicActionSheet.show({
 			     buttons: [
 			       //{ text: '<b>Share</b> This' },
-			       { text: 'Boost' }
+			       { text: 'Boost' },
+			       { text: 'Report this' }
 			     ],
 			     destructiveText: 'Delete',
 			     destructiveButtonClicked: function(){
-			    	 $scope.remove(guid);
+			    	 if(confirm("are you sure?"))
+			    		 $scope.remove(guid);
 			    	 return true;
 			     },
 			     cancelText: 'Cancel',
@@ -324,7 +326,12 @@ define(function () {
 			          // add cancel code..
 			        },
 			     buttonClicked: function(index) {
-			    	 console.log(index);
+			    	 switch(index){
+			    	 	case 0:
+			    	 		break;
+			    	 	case 1:
+			    	 		window.location.href = "mailto:report@minds.com?subject=Report " + guid + "&body=This content violates the terms and conditions";
+			    	 }
 			       return true;
 			     }
 			   });

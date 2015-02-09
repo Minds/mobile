@@ -13,14 +13,6 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"Camera\"><param name=\"ios-package\" value=\"CDVCamera\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<preference name=\"CameraUsesGeolocation\" value=\"false\" />",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"Console\"><param name=\"ios-package\" value=\"CDVLogger\" /></feature>",
                             "count": 1
                         },
@@ -50,6 +42,14 @@
                         },
                         {
                             "xml": "<feature name=\"PushPlugin\"><param name=\"ios-package\" value=\"PushPlugin\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Camera\"><param name=\"ios-package\" value=\"CDVCamera\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<preference name=\"CameraUsesGeolocation\" value=\"false\" />",
                             "count": 1
                         }
                     ]
@@ -105,9 +105,6 @@
         "com.ionic.keyboard": {
             "PACKAGE_NAME": "com.minds.mobile"
         },
-        "org.apache.cordova.camera": {
-            "PACKAGE_NAME": "com.minds.mobile"
-        },
         "org.apache.cordova.console": {
             "PACKAGE_NAME": "com.minds.mobile"
         },
@@ -130,6 +127,9 @@
             "PACKAGE_NAME": "com.minds.mobile"
         },
         "com.phonegap.plugins.PushPlugin": {
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
+        "org.apache.cordova.camera": {
             "PACKAGE_NAME": "com.minds.mobile"
         }
     },

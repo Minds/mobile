@@ -55,8 +55,10 @@ define(function () {
 			}, {
 				limit: 1,
 				correctOrientation: true,
-				ecodingType: Camera.EncodingType.JPEG,
-				targetWidth: 720
+				encodingType: 0, //jpeg
+				destinationType: Camera.DestinationType.FILE_URI,
+				allowEdit: true,
+				saveToPhotoAlbum: true
 			});
 		};
 		

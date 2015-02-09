@@ -23,7 +23,7 @@ define(function () {
      		
      		navigator.camera.getPicture(onSuccess, onFail, { 
      			quality: 50,
-     		    ddestinationType: Camera.DestinationType.FILE_URI,
+     		    destinationType: Camera.DestinationType.FILE_URI,
      		    sourceType : 0,
      		   correctOrientation: true
      		});

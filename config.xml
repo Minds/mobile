@@ -15,7 +15,7 @@
     <preference name="DisallowOverscroll" value="true" />
     <preference name="auto-hide-splash-screen" value="false" />
     <preference name="AllowInlineMediaPlayback" value="true"/>
-
+    <access origin="mailto:*" launch-external="yes"/>
 
     <platform name="ios">
               <!-- iOS 8.0+ -->

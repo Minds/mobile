@@ -124,6 +124,7 @@ define(['app'], function (app) {
                 })
                 .state('tab.capture', {
                  	url: '/capture',
+                 	cache: false, 
                     views: {
                         'capture-tab': {
                             templateUrl: 'templates/capture/default.html',

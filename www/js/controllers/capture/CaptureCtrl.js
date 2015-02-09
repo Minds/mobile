@@ -62,6 +62,26 @@ define(function () {
 			});
 		};
 		
+		$scope.library = function(){
+			
+			navigator.camera.getPicture(function(mediaFile){
+				
+				$scope.captured = true;
+				$scope.$apply();
+				console.log(mediaFile);
+				$scope.upload(mediaFile, 'image');
+
+			}, function(message){
+				console.log('capture failed');
+				alert('Uploading to Minds will be here soon!');
+			}, {
+				correctOrientation: true,
+				destinationType: Camera.DestinationType.FILE_URI,
+				sourceType : 0
+			});
+			
+		};
+		
 		$scope.reset = function(){
 			$scope.captured = false;
 			$scope.guid = false;

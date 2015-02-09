@@ -1,9 +1,6 @@
 <ion-view title="Capture" class="white-bg" ng-controller="CaptureCtrl">
 	
-        <ion-nav-buttons side="left" ng-if="captured">
-            <a class="button button-clear" ng-click="reset()">Back</a>
-        </ion-nav-buttons>
-	<ion-content >
+	<ion-content>
 	
     	<div ng-hide="captured">
     	   <ion-list class="capture-options">
@@ -11,11 +8,18 @@
                
                 <ion-item ng-click="video()">
                     <h1 class="icon ion-ios7-videocam"></h1>
-                    <i ></i>
                 </ion-item>
                 
                 <ion-item ng-click="photo()">
                     <h1 class="icon ion-camera"></h1>
+                </ion-item>
+                
+                <ion-item ng-click="activity()">
+                    <h1 class="icon ion-compose"></h1>
+                </ion-item>
+                
+                <ion-item ng-click="library()">
+                    <h1 class="icon ion-images"></h1>
                 </ion-item>
     
             </ion-list>

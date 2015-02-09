@@ -18,3 +18,10 @@
 	content: '\e800';
 	font-family:"fontello";
 }
+.icon-bank:before{
+	content: '\e801';
+	font-family:"fontello";
+}
+.bar .icon-bank:before{
+	font-size:22px !important;
+}

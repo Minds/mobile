@@ -1,0 +1,21 @@
+<ion-view title="Wallet" ng-controller="WalletCtrl" class="view-bg">
+
+	<ion-content>
+
+		<i class="icon icon-bank" style="text-align:center; font-size:200px; line-height:220px; width:100%; display:block;"></i>
+		
+		<h3 style="text-align:center; color:green">{{points}} points</h3>
+		<p style="text-align:center"><i class="icon ion-social-bitcoin"></i> {{btc}}</p>
+		
+		<ion-list>
+			<div class="item card transaction" ng-repeat="transaction in transactions">
+				<span class="point" ng-show="transaction.points > 0">+{{transaction.points}}</span>
+				<span class="point negative" ng-show="transaction.points < 0">{{transaction.points}}</span>
+				<p>{{transaction.description}}</p>
+				<p class="ts">{{transaction.time_created * 1000 | date:"MM/dd/yyyy 'at' h:mma"}}</p>
+			</div>
+		</ion-list>
+		<ion-infinite-scroll on-infinite="loadMore()" distance="1%" ng-if="hasMoreData"></ion-infinite-scroll>
+
+	</ion-content>
+</ion-view>

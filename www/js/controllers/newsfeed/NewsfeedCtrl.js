@@ -16,18 +16,24 @@ define(function () {
 				$ionicScrollDelegate.scrollTop();
 				$scope.refresh();
 			}
-		});
+			if(toState.name == 'tab.newsfeed'){
 
-		if(Cacher.get('newsfeed.items')){
+			}
+		});
+    	
+    	$scope.newsfeedItems =  [];
+    	$scope.next  = "";
+    	
+		/*if(Cacher.get('newsfeed.items')){
 			$scope.newsfeedItems = Cacher.get('newsfeed.items');
 		}else{
     		$scope.newsfeedItems =  [];
-    	}
+    	}*/
     	
-    	if(Cacher.get('newsfeed.next'))
+    	/*if(Cacher.get('newsfeed.next'))
     		$scope.next = Cacher.get('newsfeed.next');
     	else
-    		$scope.next  = "";
+    		$scope.next  = "";*/
     	
     	$scope.hasMoreData = true;
     	
@@ -57,14 +63,14 @@ define(function () {
 	    			};
 	    			
 	    			$scope.newsfeedItems = $scope.newsfeedItems.concat(data.activity);
-	    			//if($scope.newsfeedItems.length < 30){
-	    				Cacher.put('newsfeed.items', $scope.newsfeedItems);
+	    			//if($scope.newsfeedItems.length < 30){	    			
+	    				//Cacher.put('newsfeed.items', $scope.newsfeedItems);
 	    			//} else {
 	    			//	Cacher.put('newsfeed.items', data.activity);
 	    			//}
 	
 	    			$scope.next = data['load-next'];
-	    			Cacher.put('newsfeed.item', $scope.next);
+	    			//Cacher.put('newsfeed.item', $scope.next);
 	    			
 	    			$scope.$broadcast('scroll.infiniteScrollComplete');
 	
@@ -76,7 +82,7 @@ define(function () {
     	};
 
 		$scope.refresh = function(){
-			
+			console.log("=== refreshing ===");
 			NewsfeedAPI.all({ limit: 12, offset: '', cache_break: Date.now() }, 
 				function(data){
     		
@@ -104,6 +110,9 @@ define(function () {
 		 * Thumb up an activity
 		 */
 		$scope.thumbsUp = function(guid){
+			//increment count
+			$rootScope.points = $rootScope.points + 1;
+			
 			Client.put('api/v1/thumbs/'+guid+'/up', {},
 				function(success){
 					$scope.newsfeedItems.forEach(function(item, index, array){
@@ -115,6 +124,8 @@ define(function () {
 								var pos = array[index]['thumbs:up:user_guids'].indexOf(storage.get('user_guid'));
 								array[index]['thumbs:up:user_guids'].splice(pos, 1);
 								array[index]['thumbs:up:count'] = array[index]['thumbs:up:count'] -1;
+								//remove count
+								$rootScope.points = $rootScope.points - 2;
 							} else {
 								array[index]['thumbs:up:user_guids'].push(storage.get('user_guid'));
 								array[index]['thumbs:up:count'] = array[index]['thumbs:up:count'] +1;
@@ -125,7 +136,7 @@ define(function () {
 				function(error){
 					alert('failed..');
 				});
-				
+			
 			$ionicLoading.show({
 				template: '<i class="icon ion-thumbsup" style="font-size:90px"></i>'
 				});
@@ -138,6 +149,9 @@ define(function () {
 		 * Thumb down an activity
 		 */
 		$scope.thumbsDown = function(guid){
+			//increment count
+			$rootScope.points = $rootScope.points + 1;
+			
 			Client.put('api/v1/thumbs/'+guid+'/down', {},
 				function(success){
 					$scope.newsfeedItems.forEach(function(item, index, array){
@@ -148,6 +162,8 @@ define(function () {
 							if(array[index]['thumbs:down:user_guids'].indexOf(storage.get('user_guid')) > -1){
 								var pos = array[index]['thumbs:up:user_guids'].indexOf(storage.get('user_guid'));
 								array[index]['thumbs:down:user_guids'].splice(pos, 1);
+								//remove count
+								$rootScope.points = $rootScope.points -2;
 							} else {
 								array[index]['thumbs:down:user_guids'].push(storage.get('user_guid'));
 							}
@@ -157,6 +173,7 @@ define(function () {
 				function(error){
 					alert('failed..');
 				});
+
 			$ionicLoading.show({
 				template: '<i class="icon ion-thumbsdown" style="font-size:90px"></i>'
 				});
@@ -205,8 +222,7 @@ define(function () {
 		 * Remind an activity
 		 */
 		$scope.remind = function(activity, $event){
-			console.log('reminding..');
-			console.log(activity)
+
 			Client.post('api/v1/newsfeed/remind/'+activity.guid, {},
 					function(success){
 						
@@ -214,6 +230,10 @@ define(function () {
 					function(error){
 						alert('failed..');
 					});
+			
+			//increment count
+			$rootScope.points = $rootScope.points + 1;
+			
 			$ionicLoading.show({
 				template: '<i class="icon icon-remind" style="line-height:100px; vertical-align:middle; font-size:90px"></i>'
 				});

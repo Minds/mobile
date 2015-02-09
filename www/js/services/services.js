@@ -19,6 +19,7 @@ define(function(require) {
 	services.factory('Cacher', require('services/cacher'));
 	services.factory('Client', require('services/api/Client'));
 	services.factory('NewsfeedAPI', require('services/api/Newsfeed'));
+	services.factory('wallet', require('services/wallet'));
 
 	return services;
 

@@ -5,3 +5,14 @@
 	display:block;
 	overflow:visible;
 }
+
+.hide-tabs .item.tabs{
+	display:none !important;
+}
+
+.topbar-user-icon{
+	border-radius:3px;
+	width:32px;
+	margin:2px;
+	box-shadow: 0 0 3px #888;
+}

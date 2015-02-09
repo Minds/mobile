@@ -35,10 +35,20 @@ define(['app'], function (app) {
                 })
                 .state('tab.newsfeed', {
                     url: '/newsfeed',
+                    cache: false, //don't cache until we can handle large lists well
                     views: {
                         'newsfeed-tab': {
                             templateUrl: 'templates/newsfeed/list.html',
                       //      controller: 'NewsfeedCtrl'
+                        }
+                    }
+                })
+                .state('tab.newsfeed-wallet', {
+                    url: '/newsfeed/wallet',
+                    cache: false,
+                    views: {
+                        'newsfeed-tab': {
+                            templateUrl: 'templates/wallet/balance.html',
                         }
                     }
                 })

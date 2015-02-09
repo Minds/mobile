@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'fontello';
-  src: url('../font/fontello.eot?37218800');
-  src: url('../font/fontello.eot?37218800#iefix') format('embedded-opentype'),
-       url('../font/fontello.woff?37218800') format('woff'),
-       url('../font/fontello.ttf?37218800') format('truetype'),
-       url('../font/fontello.svg?37218800#fontello') format('svg');
+  src: url('../font/fontello.eot?15806998');
+  src: url('../font/fontello.eot?15806998#iefix') format('embedded-opentype'),
+       url('../font/fontello.woff?15806998') format('woff'),
+       url('../font/fontello.ttf?15806998') format('truetype'),
+       url('../font/fontello.svg?15806998#fontello') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -14,7 +14,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'fontello';
-    src: url('../font/fontello.svg?37218800#fontello') format('svg');
+    src: url('../font/fontello.svg?15806998#fontello') format('svg');
   }
 }
 */
@@ -51,3 +51,4 @@
 }
  
 .icon-retweet:before { content: '\e800'; } /* '' */
+.icon-bank:before { content: '\e801'; } /* '' */

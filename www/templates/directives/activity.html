@@ -32,11 +32,11 @@
          
     </div>
     
-    <!-- custom type:: remind -->
+    <!-- custom type:: remind @todo this leads to memory leaks.. -->
     <div class="item item-text-wrap" ng-if="activity.remind_object">
-    	<div ng-include src="'templates/directives/activity.html'" onload="activity = activity.remind_object"></div>
+    	<div ng-include src="'templates/directives/activity.html'" onload="activity = activity.remind_object" class="hide-tabs"></div>
     </div>
-
+    
     <div class="item tabs tabs-secondary tabs-icon-left" style="padding:0;background-color:#F7F7F7 !important;">
         <a class="tab-item small-font thumbs-up" ng-click="thumbsUp(activity.guid)" thumbs="{{activity['thumbs:up:user_guids']}}">
                <i style="padding-left:4px;" class="icon ion-thumbsup"></i>

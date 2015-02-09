@@ -61,10 +61,16 @@ define(function (require) {
      * Discover
      */
    	controllers.controller('DiscoverCtrl', require('controllers/discover/DiscoverCtrl'));
-    
+   	
+   	/**
+   	 * Wallet
+   	 */
+   	controllers.controller('WalletCtrl', require('controllers/wallet/WalletCtrl'));
+   	
 	controllers.run(['$rootScope', 'NODE_URL', 'storage', function ($rootScope, NODE_URL, storage) {
 		$rootScope.node_url = NODE_URL;
 		$rootScope.user_guid = storage.get('user_guid');
+		$rootScope.points = '...';
 		$rootScope.globalCB = Date.now();
 	}]);
     

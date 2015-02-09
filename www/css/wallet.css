@@ -1,0 +1,29 @@
+wallet-counter{
+	display:inline-block;
+	vertical-align: middle;
+	color:green;
+	line-height:38px;
+	font-weight:300;
+}
+
+.transaction{
+	height:65px;
+	padding:8px;
+}
+.transaction .point{
+	float:left;
+	font-size:52px;
+	line-height:50px;
+	color:green;
+	display:block;
+	position:relative;
+}
+.transaction .point.negative{
+	color:red;
+}
+.transaction p {
+} 
+.transaction .ts {
+	color:#888;
+	font-size:11px;
+}

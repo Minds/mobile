@@ -21,6 +21,7 @@ define(function(require) {
 	directives.directive('playVideo', require('directives/playVideo'));
 	directives.directive('subscribe', require('directives/subscribe'));
 	directives.directive('swipe', require('directives/swipe'));
+	directives.directive('walletCounter', require('directives/walletCounter'));
 	
 	return directives;
 }); 

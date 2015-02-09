@@ -1,8 +1,17 @@
 <ion-view title="<img src='img/full_logo.png' class='topbar-logo'/>" ng-controller="NewsfeedCtrl" class="view-bg">
 	
+	<ion-nav-buttons side="left">
+		<!--<a class="button button-clear icon ion-compose" ng-click="composer.show($event)"></a>-->
+		<a class="button button-clear icon icon-bank" href="#/tab/newsfeed/wallet">
+			<wallet-counter></wallet-counter>
+		</a>
+	</ion-nav-buttons>
+	
 	<ion-nav-buttons side="right">
 		<!--<a class="button button-clear icon ion-compose" ng-click="composer.show($event)"></a>-->
-		<a class="button button-clear icon ion-person" href="#/tab/newsfeed/channel/me"></a>
+		<a class="button button-clear" href="#/tab/newsfeed/channel/me">
+			<img class="topbar-user-icon" ng-src="{{$root.node_url}}/icon/{{$root.user_guid}}/small/"/>
+		</a>
 	</ion-nav-buttons>
 
 	<ion-content>
@@ -14,7 +23,7 @@
 				on-refresh="refresh()">
 			</ion-refresher>
 
-			<activity-view ng-repeat="activity in newsfeedItems" swipe swipe-disable-vertical="true" swipe-on-right="thumbsUp(activity.guid)" swipe-on-left="thumbsDown(activity.guid)" id="{{activity.guid}}" class="activity-item list card">
+			<activity-view ng-repeat="activity in newsfeedItems track by activity.guid | limitTo:10" swipe swipe-disable-vertical="true" swipe-on-right="thumbsUp(activity.guid)" swipe-on-left="thumbsDown(activity.guid)" id="{{activity.guid}}" class="activity-item list card">
 			</activity-view>
 
 		</ion-list>

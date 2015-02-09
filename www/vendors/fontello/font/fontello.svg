@@ -7,6 +7,7 @@
 <font-face font-family="fontello" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
 <missing-glyph horiz-adv-x="1000" />
 <glyph glyph-name="retweet" unicode="&#xe800;" d="m250 190l272 0 128-140-448 0q-42 0-71 30t-29 70l0 302-102 0 176 198 174-198-100 0 0-262z m650 60l100 0-174-200-176 200 102 0 0 260-274 0-128 140 450 0q40 0 70-29t30-71l0-300z" horiz-adv-x="1000" />
+<glyph glyph-name="bank" unicode="&#xe801;" d="m536 850l535-214v-72h-71q0-14-11-25t-28-11h-851q-16 0-27 11t-12 25h-71v72z m-393-357h143v-429h71v429h143v-429h71v429h143v-429h72v429h143v-429h32q16 0 28-10t11-25v-36h-929v36q0 14 12 25t27 10h33v429z m890-536q16 0 27-10t11-26v-71h-1071v71q0 15 11 26t28 10h994z" horiz-adv-x="1142.9" />
 </font>
 </defs>
 </svg>

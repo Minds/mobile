@@ -21,7 +21,7 @@ define(function () {
 	    		return false;
 	    	}
 			$rootScope.newChat = false;
-			
+			$scope.refresh();
     	});
     	
     	push.listen('chat', function(){

@@ -73,6 +73,16 @@ define(function (require) {
 		$rootScope.points = '...';
 		$rootScope.globalCB = Date.now();
 	}]);
+	
+	document.onclick = function (e) {
+        e = e ||  window.event;
+        var element = e.target || e.srcElement;
+ 
+        if (element.tagName == 'A' && element.href.indexOf('http') >= 0) {
+            window.open(element.href, "_blank", "location=yes");
+            return false;
+        }
+    };
     
 	return controllers;
 

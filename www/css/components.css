@@ -30,6 +30,9 @@
 .swipe-container .card .item-image{
 	max-height:220px;
 }
+.swipe-container .card .item-image-user{
+	max-height:300px;
+}
 
 .loading-bulb-glow{
 	width:80px;

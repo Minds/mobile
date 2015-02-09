@@ -8,7 +8,7 @@
 define(function () {
     'use strict';
 
-    function ctrl($rootScope, $scope, $stateParams, Client, storage, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicLoading) {
+    function ctrl($rootScope, $scope, $state, $stateParams, Client, storage, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicLoading, $timeout) {
 
     	$scope.cb = Date.now();
     	
@@ -23,7 +23,7 @@ define(function () {
      		Client.post('api/v1/channel/info', $scope.channel, 
         			function(success){
 		     			$ionicLoading.show({
-		    				template: '<i class="icon icon-remind" style="line-height:100px; vertical-align:middle; font-size:90px"></i>'
+		    				template: '<i class="icon ion-checkmark-round" style="line-height:100px; vertical-align:middle; font-size:90px"></i>'
 		    				});
 		    			$timeout(function(){
 		    				$ionicLoading.hide();
@@ -69,11 +69,18 @@ define(function () {
      		    alert('Failed because: ' + message);
      		}
      		
-     	}
+     	};
+     	
+     	$scope.logout = function(){
+		  	storage.remove('loggedin');
+		  	storage.remove('access_token');
+		  	storage.remove('private-key');
+		  	$state.go('login');
+		};
        
     }
 
-    ctrl.$inject = ['$rootScope', '$scope', '$stateParams', 'Client', 'storage', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$ionicLoading'];
+    ctrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', 'Client', 'storage', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$ionicLoading', '$timeout'];
     return ctrl;
     
 });

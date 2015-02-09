@@ -1,11 +1,11 @@
 <ion-view title="<img src='img/full_logo.png' class='topbar-logo'/>" hide-nav-bar="true" class="login-bg">
-	<ion-pane ng-controller="LoginCtrl" croll="false" >
+	<ion-content>
 	
 	   <div class="login-header">
 	       <img src="img/full_logo_white.png" class="login-logo"/>
 	   </div>
 	
-        <form ng-submit="login()" class="list">
+        <form ng-submit="register()" class="list">
             <label class="item item-input">
                 <span class="input-label">Username</span>
                 <input type="text" ng-model="username">
@@ -14,26 +14,15 @@
                 <span class="input-label">Password</span>
                 <input type="password" ng-model="password">
             </label>
+            <label class="item item-input">
+                <span class="input-label">Email</span>
+                <input type="email" ng-model="email">
+            </label>
             
             <div class="padding">
-            <input type="submit" class="button button-block button-positive" value="Login" ng-click="login()"/>
+            <input type="submit" class="button button-block button-positive" value="Register" ng-click="Register()"/>
             </div>
         </form>
 
-        <div class="padding">
-
-           <!-- <div>
-                <button class="button button-block button-positive" ng-click="login()">
-                    Login
-                </button>
-            </div> -->
-            
-            <div class="login-options">
-                <a href="#/register">Create an account</a> 
-                <a href="{{$root.node_url}}forgotpassword">Forgot password</a>
-            </div>
-
-        </div>
-
-    </ion-pane>
+    </ion-content>
 </ion-view>

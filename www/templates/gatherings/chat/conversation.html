@@ -10,9 +10,14 @@
                 on-refresh="loadMore()">
             </ion-refresher>
 
-            <ion-item ng-repeat="message in messages" class="messages" type="item-text-wrap">
-                <owner-brief-view owner="{{message.ownerObj}}" ts="{{message.time_created}}"></owner-brief-view>
-                <decrypt message="{{message.message}}"></decrypt>
+            <ion-item ng-repeat="message in messages" class="message" ng-class="{'message-right': message.owner_guid == $root.user_guid}" type="item-text-wrap">
+				 <img ng-src="{{$root.node_url}}icon/{{message.ownerObj.guid}}/small"/>
+                
+                 <div class="message-content">
+                	<decrypt message="{{message.message}}"></decrypt>
+                 </div>
+                 
+                 <span class="ts">{{message.time_created * 1000 | date:'shortTime'}} - {{message.time_created * 1000 | date:'longDate'}}</p>
             </ion-item>
             
             <div ng-show="messages.length == 0" style="top:100px; left: 50%; margin-left: -40px; position:fixed; text-align:center; font-weight:200; padding-top:50px;">

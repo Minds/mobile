@@ -13,10 +13,10 @@
                 on-refresh="refresh()">
             </ion-refresher>
 
-            <ion-item ng-repeat="conversation in conversations" class="" href="#/tab/gatherings/conversations/{{conversation.guid}}">
+            <ion-item ng-repeat="conversation in conversations" class="conversation" href="#/tab/gatherings/conversations/{{conversation.guid}}">
                 <img image-cache ng-src="{{$root.node_url}}icon/{{conversation.guid}}/small" style="float:left;"/>
-                <h2 style="padding:8px 8px 0 8px;">{{conversation.name}}</h2>
-                <p style="padding-top:0; padding-left:10px">{{conversation.last_msg * 1000 | date:'shortTime'}} - {{conversation.last_msg * 1000 | date:'longDate'}}</p>
+                <h2>{{conversation.name}}</h2>
+                <p>{{conversation.last_msg * 1000 | date:'shortTime'}} - {{conversation.last_msg * 1000 | date:'longDate'}}</p>
                 <span ng-show="conversation.unread == 1" style="position:absolute; top:20px; right:12px; border-radius:100%; display:block; background:green; width:12px; height:12px"></span>
             </ion-item>
 

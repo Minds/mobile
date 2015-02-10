@@ -12,6 +12,7 @@ define(['app'], function (app) {
             function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
             
            	$ionicConfigProvider.platform.android.tabs.position("bottom");
+           	$ionicConfigProvider.navBar.alignTitle('center');
 
             $stateProvider
                 .state('loading', {

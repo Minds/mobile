@@ -73,7 +73,8 @@ define(function () {
 				var type =  'user';
 			}
 			console.log('loading entities...');
-			Client.get('api/v1/entities/' + $scope.filter + '/' + subtype, { 
+			console.log('api/v1/entities/' + $scope.filter + '/' + type + '/' + subtype);
+			Client.get('api/v1/entities/' + $scope.filter + '/' + type + '/' + subtype, { 
 				limit: 16, 
 				offset: $scope.next, 
 				cachebreaker: $scope.cachebreaker 

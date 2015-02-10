@@ -24,12 +24,12 @@ define(function() {
 				email: $scope.data.email
 				}, function(success){
 					
-					if(!success.guid){
+					if(success.status == 'error'){
 						$scope.inprogress = false;
 						
 						var alertPopup = $ionicPopup.alert({
 							title: 'Ooops..',
-							template: 'We couldn\'t register your account. Please try a different username or password.'
+							template: success.message
 						});
 						
 						return false;

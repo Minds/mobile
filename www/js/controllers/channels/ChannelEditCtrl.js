@@ -8,9 +8,10 @@
 define(function () {
     'use strict';
 
-    function ctrl($rootScope, $scope, $state, $stateParams, Client, storage, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicLoading, $timeout) {
+    function ctrl($rootScope, $scope, $state, $stateParams, Client, storage, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicLoading, $timeout, $window) {
 
     	$scope.cb = Date.now();
+    	
     	
      	Client.get('api/v1/channel/'+$stateParams.guid, {cb: $scope.cb}, 
     			function(success){
@@ -75,13 +76,12 @@ define(function () {
 		  	storage.remove('loggedin');
 		  	storage.remove('access_token');
 		  	storage.remove('private-key');
-		  	//$state.go('login');
-		  	window.location.href = "/";
+		  	$state.go('login');
 		};
        
     }
 
-    ctrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', 'Client', 'storage', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$ionicLoading', '$timeout'];
+    ctrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', 'Client', 'storage', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$ionicLoading', '$timeout', '$window'];
     return ctrl;
     
 });

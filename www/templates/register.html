@@ -1,5 +1,5 @@
-<ion-view title="<img src='img/full_logo.png' class='topbar-logo'/>" hide-nav-bar="true" class="login-bg">
-	<ion-content>
+<ion-view title="<img src='img/full_logo.png' class='topbar-logo'/>"  ng-controller="RegisterCtrl" hide-nav-bar="true" class="login-bg">
+	<ion-content >
 	
 	   <div class="login-header">
 	       <img src="img/full_logo_white.png" class="login-logo"/>
@@ -8,15 +8,15 @@
         <form ng-submit="register()" class="list">
             <label class="item item-input">
                 <span class="input-label">Username</span>
-                <input type="text" ng-model="username">
+                <input type="text" ng-model="data.username">
             </label>
             <label class="item item-input">
                 <span class="input-label">Password</span>
-                <input type="password" ng-model="password">
+                <input type="password" ng-model="data.password">
             </label>
             <label class="item item-input">
                 <span class="input-label">Email</span>
-                <input type="email" ng-model="email">
+                <input type="email" ng-model="data.email">
             </label>
             
             <div class="padding">

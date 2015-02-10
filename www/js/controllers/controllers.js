@@ -24,6 +24,8 @@ define(function (require) {
 
 	controllers.controller('LoginCtrl', require('controllers/LoginCtrl'));
 	
+	controllers.controller('RegisterCtrl', require('controllers/RegisterCtrl'));
+	
 	/**
 	 * Newsfeed
 	 */

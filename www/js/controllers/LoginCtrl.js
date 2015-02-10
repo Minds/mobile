@@ -8,7 +8,7 @@
 define(function() {
 	'use strict';
 
-	function ctrl($scope, $state, OAuth, $ionicPopup, storage, push) {
+	function ctrl($rootScope, $scope, $state, OAuth, $ionicPopup, storage, push) {
 	
 		cordova.plugins.Keyboard.disableScroll(true);
 
@@ -18,13 +18,17 @@ define(function() {
 			console.log(storage.get('access_token'));
 			console.log(storage.get('loggedin'));
 
+		$scope.inprogress = false;
 		$scope.login = function() {
-
+			if($scope.inprogress)
+				return false;
+			$scope.inprogress = true;
 			
 			OAuth.login($scope.username, $scope.password, function(success){
 				if(success){
 					//$state.go('tab.newsfeed');
 					push.register();
+					$rootScope.user_guid = storage.get('user_guid');
 					$state.go('tutorial');
 				} else {
 					
@@ -39,6 +43,9 @@ define(function() {
 					});
 
 				}
+				$scope.inprogress = false;
+			}, function(error){
+				$scope.inprogress = false;
 			});
 			
 		};
@@ -46,7 +53,7 @@ define(function() {
 	}
 
 
-	ctrl.$inject = ['$scope', '$state', 'OAuth', '$ionicPopup', 'storage', 'push'];
+	ctrl.$inject = ['$rootScope', '$scope', '$state', 'OAuth', '$ionicPopup', 'storage', 'push'];
 	return ctrl;
 
 }); 

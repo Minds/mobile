@@ -10,6 +10,11 @@ define(function () {
 
     function ctrl($rootScope, $scope,  $ionicScrollDelegate, Cacher, Client, storage, $ionicPopover, $ionicLoading) {
 
+    	$scope.$on('$ionicView.beforeEnter', function(){
+			$rootScope.newNotification = false;
+			$scope.refresh();
+    	});
+    	
 		/** Cached or fresh **/
 		if(Cacher.get('notification.items')){
 			$scope.notificationItems = Cacher.get('notification.items');

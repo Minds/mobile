@@ -8,7 +8,7 @@
 define(function() {
 	'use strict';
 
-	function ctrl($rootScope, $scope, $state, $ionicPopover, storage, push) {
+	function ctrl($rootScope, $scope, $state, $ionicPopover, storage, push, $ionicPlatform) {
 
 		$scope.logout = function(){
 		  	storage.remove('loggedin');
@@ -27,9 +27,22 @@ define(function() {
 			$state.go(tab);
 		};
 		
-		push.listen('chat', function(){
+		push.listen('chat', function(params){
 			$rootScope.newChat = 'minds-yellow';
 			$rootScope.$apply();
+			
+			if(params.changeState){
+			      $state.go('tab.chat');
+			}
+		});
+		
+		push.listen('notification', function(params){
+			$rootScope.newNotification = 'minds-yellow';
+			$rootScope.$apply();
+			
+			if(params.changeState){
+			      $state.go('tab.notifications');
+			}
 		});
 		
 				
@@ -39,7 +52,7 @@ define(function() {
 	}
 
 
-	ctrl.$inject = ['$rootScope', '$scope', '$state', '$ionicPopover', 'storage', 'push'];
+	ctrl.$inject = ['$rootScope', '$scope', '$state', '$ionicPopover', 'storage', 'push', '$ionicPlatform'];
 	return ctrl;
 
 }); 

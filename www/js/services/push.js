@@ -8,7 +8,7 @@
 define(['angular'], function (angular) {
     "use strict";
 
-    var factory = function (storage, Client) {
+    var factory = function (storage, Client, $ionicPlatform) {
 	
 		var listeners = [];
 		var trigger = function(event, data){
@@ -85,6 +85,9 @@ define(['angular'], function (angular) {
 		 */
 		window.onNotificationAPN = function(e){
 			trigger(e.aps['url-args'][0], {service:'ios'});
+			$ionicPlatform.on('resume', function(){
+				trigger(e.aps['url-args'][0], {service:'ios', changeState: true});
+			});
 		}
 		
 		/**
@@ -142,6 +145,6 @@ define(['angular'], function (angular) {
 
     };
 
-    factory.$inject = ['storage', 'Client'];
+    factory.$inject = ['storage', 'Client', '$ionicPlatform'];
     return factory;
 });

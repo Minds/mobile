@@ -8,7 +8,7 @@
 define(function () {
     'use strict';
 
-    function ctrl($rootScope, $scope,  $ionicScrollDelegate, Cacher, Client, storage, $ionicPopover, $ionicLoading) {
+    function ctrl($rootScope, $scope,  $ionicScrollDelegate, Cacher, Client, storage, $ionicPopover, $ionicLoading, $timeout) {
 
     	$scope.$on('$ionicView.beforeEnter', function(){
 			$rootScope.newNotification = false;
@@ -91,10 +91,29 @@ define(function () {
 			
 		};
 		
+		$scope.subscribe = function(notification){
+			notification.ownerObj.subscribed = true;
+			//subscribe to the user
+			Client.post('api/v1/subscribe/' + notification.ownerObj.guid, {},
+					function(){
+						
+					},
+					function(){
+					});
+			
+			//show a quick ui confirmation
+			$ionicLoading.show({
+				template: '<i class="icon ion-person" style="font-size:90px"></i>'
+				});
+			$timeout(function(){
+				$ionicLoading.hide();
+				}, 300);
+		}
+		
 		
     }
 
-    ctrl.$inject = ['$rootScope', '$scope', '$ionicScrollDelegate', 'Cacher', 'Client', 'storage', '$ionicPopover', '$ionicLoading'];
+    ctrl.$inject = ['$rootScope', '$scope', '$ionicScrollDelegate', 'Cacher', 'Client', 'storage', '$ionicPopover', '$ionicLoading', '$timeout'];
     return ctrl;
     
 });

@@ -2,3 +2,10 @@
 	color:#666666;
 	text-decoration:none;
 }
+.notification-user-subscribe{
+	float:right;
+	font-size:32px;
+	color:#4690C3;
+	padding:5px 0 5px 16px;
+	border-left:1px solid #EEE;
+}

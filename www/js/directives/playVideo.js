@@ -3,7 +3,7 @@
 define(['angular'], function (angular) {
     "use strict";
 
-    var directive = function ($ionicScrollDelegate, $interval, Client, $sce, $ionicLoading, $timeout, $ionicGesture, $ionicPosition  ) {
+    var directive = function ($ionicScrollDelegate, $interval, Client, $sce, $ionicLoading, $timeout, $ionicGesture, $ionicPosition, $ionicPlatform  ) {
 	 	return {
        		restrict: 'AE',
 			link: function(scope, el, attrs) {
@@ -79,6 +79,13 @@ define(['angular'], function (angular) {
 	 						scope.$apply();
 	 						console.log('ended full screen');
 	 					});
+	 					video.addEventListener('webkitfullscreenchange', function (e) { 
+	 						scope.showVideo = false;
+	 						scope.$apply();
+	 						if(!document.webkitIsFullScreen){
+	 							video.pause();
+	 						}
+	 					});
 	 					video.addEventListener('ended', function(e){
 	 						scope.showVideo = false;
 	 						scope.$apply();
@@ -115,6 +122,6 @@ define(['angular'], function (angular) {
        	 };
     };
 
-    directive.$inject = ['$ionicScrollDelegate', '$interval', 'Client', '$sce', '$ionicLoading', '$timeout', '$ionicGesture', '$ionicPosition'];
+    directive.$inject = ['$ionicScrollDelegate', '$interval', 'Client', '$sce', '$ionicLoading', '$timeout', '$ionicGesture', '$ionicPosition', '$ionicPlatform'];
     return directive;
 });

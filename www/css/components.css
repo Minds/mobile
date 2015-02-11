@@ -80,6 +80,19 @@
 	margin:118px 8px 0;
 }
 
+
+.impressions-tag{
+	position:absolute; 
+	bottom:-5px; 
+	right:-5px; 
+	background:#4690C3; 
+	color:#FFF; 
+	border-radius:50%; 
+	padding:5px; 
+	font-size:11px; 
+	line-height:11px;
+}
+
 /**
  * Image block
  */

@@ -14,6 +14,7 @@ define(function () {
      		$scope.points = success.count;
      		$scope.satoshi = success.satoshi;
      		$scope.btc = success.btc;
+     		$scope.usd = success.usd;
      	}, function(){});
      	
      	

@@ -11,10 +11,11 @@
         <img ng-src="{{activity.thumbnail_src}}">
     </div>
 
-    <div class="item item-text-wrap" ng-if="activity.blurb" ng-click="openUrl(activity.perma_url)">
+    <div class="item item-text-wrap" ng-if="activity.title" ng-click="openUrl(activity.perma_url)">
         <h3>
           {{activity.title}}
         </h3>
+        <p>{{activity.perma_url}}</p>
     </div>
     
     <!-- Custom type:: batch -->
@@ -59,7 +60,7 @@
         
         <a class="tab-item small-font" ng-click="remind(activity)">
             <i class="icon icon-remind"></i>
-
+            <b ng-show="activity.reminds > 0" style="font-size:14px; padding:2px 0 0">({{activity.reminds}})</b> 
         </a>
       
         <!--<a class="tab-item small-font" ng-click="remove(activity.guid)" ng-if="activity.ownerObj.guid == $root.user_guid">

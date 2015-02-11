@@ -6,12 +6,14 @@
 .message{
 	border:0;
 	background:transparent;
+	margin:15px 5px !important;
+	padding:0 !important;
 }
 .message .message-content {
 	float:left;
 	border-radius:3px;
 	border:0;
-	margin:5px;
+	margin:0 5px;
 	width:auto;
 	max-width:220px;
 	background:#EEE;

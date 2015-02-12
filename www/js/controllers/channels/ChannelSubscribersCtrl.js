@@ -15,7 +15,11 @@ define(function () {
      	$scope.guid = $stateParams.guid;
      	
      	
+     	$scope.inprogress = true;
      	$scope.loadMore = function(){
+     		if($scope.inprogress)
+     			return false;
+     		$scope.inprogress = true;
 
 	     	Client.get('api/v1/subscribe/subscribers/' + $stateParams.guid, { limit: 6, offset: $scope.next }, 
 				function(data){
@@ -36,10 +40,11 @@ define(function () {
 	    			
 	    			$scope.$broadcast('scroll.infiniteScrollComplete');
 	    			$scope.$broadcast('scroll.refreshComplete');
-	
+	    			$scope.inprogress = false;
 	    		}, 
 	    		function(error){ 
 	    			alert('error'); 
+	    			$scope.inprogress = false;
 	    		});
 	 	};
 	 	$scope.loadMore();

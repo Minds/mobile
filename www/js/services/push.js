@@ -115,7 +115,10 @@ define(['angular'], function (angular) {
 			        }
 			    break;
 			    case 'message':
-			    	trigger('chat', {service:'android'});
+			    	trigger(e.payload.uri, {service:'android'});
+			    	$ionicPlatform.on('resume', function(){
+						trigger(e.payload.uri, {service:'android', changeState: true});
+					});
 			    break;
 			    case 'error':
 			       console.log('Notification error:: ' + e.msg);

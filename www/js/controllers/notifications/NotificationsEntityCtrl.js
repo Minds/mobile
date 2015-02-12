@@ -15,7 +15,7 @@ define(function () {
     	$scope.guid = '';
     	$scope.cb = Date.now();
     	$scope.offset = "";
-    	$scope.hasMore = true;
+    	$scope.hasMore = false;
     	$scope.comments = [];
     	$scope.comment = {};
     	$scope.comment.body = '';
@@ -33,13 +33,24 @@ define(function () {
     					$scope.guid = $scope.entity.entityObj.guid;
     				}
     			}
+    			
+    			$scope.hasMore = true;
+    			$scope.offset = "";
+    			$scope.cb = Date.now();
+    			$scope.comments = [];
+    			$scope.getComments();
     	
     		}, 
     		function(error){ 
     			console.log(error);
     		});
 		
+		$scope.inprogress = false;
 		$scope.getComments = function(){
+			if($scope.inprogress){
+				return false
+			}
+			$scope.inprogress = true;
 			/**
 			 * Gather comments
 			 */
@@ -63,10 +74,11 @@ define(function () {
 		    			}
 		    			
 		    			$scope.$broadcast('scroll.infiniteScrollComplete');
-		    	
+		    			$scope.inprogress = false;
 		    		}, 
 		    		function(error){ 
 		    			alert('error'); 
+		    			$scope.inprogress = false;
 		    		});
 			
 		}

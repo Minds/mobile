@@ -9,6 +9,11 @@ define(function () {
     'use strict';
 
     function ctrl($scope, $stateParams, Client, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
+    	
+    	if($stateParams.username == undefined){
+    		$state.go('tab.newsfeed');
+    		return false;
+    	}
 
      	$scope.next = "";
      	$scope.ChannelItems = [];

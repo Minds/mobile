@@ -24,7 +24,7 @@
                     	</a>
                     	<!-- group inivite -->
                         <div ng-switch-when="group_invite">
-                        	<h2>You've been invited to join {{notification.entityObj.name}}</h2>
+                        	<a>You've been invited to join {{notification.entityObj.name}}</a>
                         </div>
                         <!-- comment -->
                         <div ng-switch-when="comment">
@@ -32,7 +32,7 @@
                         	
                         	<div ng-switch="notification.entityObj.type">
                         		<a ng-switch-when="object" href="#/tab/notifications/entity/{{notification.entityObj.guid}}">
-                        			{{notification.fromObj.name}} commented on {{notification.entityObj.title}}
+                        			<p>{{notification.fromObj.name}} commented on {{notification.entityObj.title}}</p>
                         		</a>
                         		<a ng-switch-when="activity" href="#/tab/notifications/entity/{{notification.entityObj.guid}}">
                         			<p ng-if="notification.entityObj.owner_guid == $root.user_guid">
@@ -46,11 +46,18 @@
                        	</div>
                        	<!-- up voted content -->
                         <div ng-switch-when="like">
-                        	<p>{{notification.fromObj.name}} voted up {{notification.entityObj.title}}</p>
+							<a href="#/tab/notifications/entity/{{notification.entityObj.guid}}" ng-if="notification.entityObj.type == 'object'">
+                        		<p>{{notification.fromObj.name}} voted up {{notification.entityObj.title}}</p>
+                        	</a>
+                        	<a href="#/tab/notifications/entity/{{notification.entityObj.guid}}" ng-if="notification.entityObj.type == 'activity'">
+                        		<p>{{notification.fromObj.name}} voted up your activity</p>
+                        	</a>
                         </div>
                         <!-- featured -->
                         <div ng-switch-when="feature">
-                        	<p>{{notification.entityObj.title}} was featured</p>
+                        	<a href="#/tab/notifications/entity/{{notification.entityObj.guid}}">
+                        		<p>{{notification.entityObj.title}} was featured</p>
+                        	</a>
                         </div>
                     </div>
                     

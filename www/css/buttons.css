@@ -12,6 +12,7 @@
 .submit-button{
 	color:#4690D6 !important;
 	font-weight:600 !important;
+	float:right;
 }
 
 .icon-remind:before{

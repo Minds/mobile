@@ -38,6 +38,13 @@
                     <span class="input-label">Description</span>
                     <textarea placeholder="Description" ng-model="form.description"></textarea>
                   </label>
+                   <label class="item item-input">
+                    <span class="input-label">License</span>
+                    <select placeholder="Description" ng-model="form.license">
+                    	<option value="allrightsreserved">All rights reserved</option>
+                    	<option value="attribution-cc">Creative commons (Attribution)</option>
+                    </select>
+                  </label>
                   
                   <div ng-if="guid">
                     <input type="submit" class="button button-block button-positive" value="Save" ng-click="save()" style="width=100%"/>

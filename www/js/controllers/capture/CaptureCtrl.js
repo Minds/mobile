@@ -69,7 +69,12 @@ define(function () {
 				$scope.captured = true;
 				$scope.$apply();
 				console.log(mediaFile);
-				$scope.upload(mediaFile, 'image');
+				if(mediaFile.indexOf('.jpg') > -1 || mediaFile.indexOf('.png') > -1 || mediaFile.indexOf('.bmp') > -1 || mediaFile.indexOf('.jpeg') > -1){
+					$scope.upload(mediaFile, 'image');
+				} else {
+					$scope.upload(mediaFile, 'video');
+				}
+				
 
 			}, function(message){
 				console.log('capture failed');
@@ -77,7 +82,8 @@ define(function () {
 			}, {
 				correctOrientation: true,
 				destinationType: Camera.DestinationType.FILE_URI,
-				sourceType : 0
+				sourceType : 0,
+				mediaType: 2
 			});
 			
 		};

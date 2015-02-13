@@ -136,6 +136,7 @@ define(['app'], function (app) {
                     }
                 })
                 .state('tab.chat-setup', {
+                	cache: false, 
                     url: '/gatherings/key-setup',
                     views: {
                         'chat-tab': {

@@ -2,7 +2,7 @@
     <owner-brief-view owner="{{activity.ownerObj}}" ts="{{activity.time_created}}"></owner-brief-view>
     
     <div class="item item-text-wrap" ng-if="activity.message">
-        <p ng-bind-html="activity.message" class="wrap"></p>
+        <p ng-bind-html="activity.message | linky" class="wrap"></p>
     </div>
     
     <!--Rich content -->

@@ -59,6 +59,12 @@
                         		<p>{{notification.entityObj.title}} was featured</p>
                         	</a>
                         </div>
+                        <!-- mention -->
+                        <div ng-switch-when="tag">
+                        	<a href="#/tab/notifications/entity/{{notification.entityObj.guid}}">
+                        		<p>{{notification.fromObj.name}} tagged you in a post</p>
+                        	</a>
+                        </div>
                     </div>
                     
                     <p>{{time_created}}</p>

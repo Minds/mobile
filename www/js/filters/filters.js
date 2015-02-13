@@ -48,6 +48,23 @@ define(['angular'],
 			    return number;
 			}
 		});
+		
+		filters.filter('linky', function(){
+			return function(text) {
+		
+				 if (!text) return text;
+				  
+				 var replacedText = text;
+				 
+				 var hashtag = /(^|\s)#(\w*[a-zA-Z_]+\w*)/gim;
+				 replacedText = text.replace(hashtag, '$1<a href="#/tab/search">#$2</a>');
+
+				 var tag = /(^|\s)\@(\w*[a-zA-Z_]+\w*)/gim;
+				 replacedText = replacedText.replace(tag, '$1<a class="tag" href="#/tab/newsfeed/channel/$2">@$2</a>');
+				 return replacedText;
+				 
+			}
+         });
 				
 		return filters;
 

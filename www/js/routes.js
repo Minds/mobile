@@ -90,6 +90,14 @@ define(['app'], function (app) {
                         }
                     }
                 })
+                .state('tab.newsfeed-channel-subscriptions', {
+					url: "/newsfeed/channel/:guid/subscriptions",
+					 views: {
+                        'newsfeed-tab': {
+                            templateUrl: 'templates/channels/subscriptions.html'
+                        }
+                    }
+                })
                 .state('tab.newsfeed-compose', {
                     url: '/newsfeed/compose',
                     views: {

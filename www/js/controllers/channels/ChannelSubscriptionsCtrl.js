@@ -11,7 +11,7 @@ define(function () {
     function ctrl($scope, $stateParams, Client, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
 
      	$scope.next = "";
-     	$scope.subscribers = [];
+     	$scope.subscriptions = [];
      	$scope.guid = $stateParams.guid;
      	
      	
@@ -21,10 +21,8 @@ define(function () {
      			return false;
      		$scope.inprogress = true;
 
-	     	Client.get('api/v1/subscribe/subscribers/' + $stateParams.guid, { limit: 6, offset: $scope.next }, 
+	     	Client.get('api/v1/subscribe/subscriptions/' + $stateParams.guid, { limit: 6, offset: $scope.next }, 
 				function(data){
-		    		console.log(data);
-		    		console.log('api/v1/subscribe/subscribers/' + $stateParams.guid);
 	    			if(!data.users){
 	    				$scope.$broadcast('scroll.refreshComplete');
 	    				$scope.hasMoreData = false;
@@ -34,7 +32,7 @@ define(function () {
 	    				$scope.hasMoreData = true;
 	    			};
 	    			
-	    			$scope.subscribers = $scope.subscribers.concat(data.users);
+	    			$scope.subscriptions = $scope.subscriptions.concat(data.users);
 	
 	    			$scope.next = data['load-next'];
 	    			

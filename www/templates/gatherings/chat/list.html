@@ -9,7 +9,7 @@
                 on-refresh="refresh()">
             </ion-refresher>
 
-            <ion-item ng-repeat="conversation in conversations" class="conversation" href="#/tab/gatherings/conversations/{{conversation.guid}}">
+            <ion-item ng-repeat="conversation in conversations" class="conversation" href="#/tab/gatherings/conversations/{{conversation.guid}}/{{conversation.name}}">
                 <img image-cache ng-src="{{$root.node_url}}icon/{{conversation.guid}}/small" style="float:left;"/>
                 <h2>{{conversation.name}}</h2>
                 <p>{{conversation.last_msg * 1000 | date:'shortTime'}} - {{conversation.last_msg * 1000 | date:'longDate'}}</p>

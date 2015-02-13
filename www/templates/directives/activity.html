@@ -10,13 +10,6 @@
     <div class="item item-image" ng-if="activity.thumbnail_src" ng-click="openUrl(activity.perma_url)">
         <img ng-src="{{activity.thumbnail_src}}">
     </div>
-
-    <div class="item item-text-wrap" ng-if="activity.title" ng-click="openUrl(activity.perma_url)">
-        <h3>
-          {{activity.title}}
-        </h3>
-        <p>{{activity.perma_url}}</p>
-    </div>
     
     <!-- Custom type:: batch -->
     <div class="item item-image" ng-if="activity.custom_type == 'batch'">
@@ -36,6 +29,13 @@
     <!-- custom type:: remind @todo this leads to memory leaks.. -->
     <div class="item item-text-wrap" ng-if="activity.remind_object">
     	<div ng-include src="'templates/directives/activity.html'" onload="activity = activity.remind_object" class="hide-tabs"></div>
+    </div>
+    
+	<div class="item item-text-wrap" ng-if="activity.title" ng-click="activity.perma_url ? openUrl(activity.perma_url) : false">
+        <h3>
+          {{activity.title}}
+        </h3>
+        <p ng-show="activity.perma_url">{{activity.perma_url}}</p>
     </div>
     
     <div class="item tabs tabs-secondary tabs-icon-left" style="padding:0;background-color:#F7F7F7 !important;">

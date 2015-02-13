@@ -12,6 +12,9 @@ define(function () {
     
     	cordova.plugins.Keyboard.disableScroll(false);
     
+    	$scope.guid = $stateParams.username;
+    	$scope.name = $stateParams.name;
+    	
     	$scope.messages = [];
     	$scope.next  = "";
     	$scope.previous = "";

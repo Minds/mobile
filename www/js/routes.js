@@ -119,7 +119,7 @@ define(['app'], function (app) {
                 })
                 .state('tab.chat-conversation', {
                 	cache: false,
-                    url: '/gatherings/conversations/:username',
+                    url: '/gatherings/conversations/:username/:name',
                     views: {
                         'chat-tab': {
                             templateUrl: 'templates/gatherings/chat/conversation.html',

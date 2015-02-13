@@ -32,6 +32,7 @@ define(function (require) {
 	controllers.controller('NewsfeedCtrl', require('controllers/newsfeed/NewsfeedCtrl'));
 	controllers.controller('NewsfeedComposerCtrl', require('controllers/newsfeed/NewsfeedCompoerCtrl'));
 	controllers.controller('NewsfeedViewCtrl', require('controllers/newsfeed/NewsfeedViewCtrl'));
+	controllers.controller('NewsfeedBoostCtrl', require('controllers/newsfeed/NewsfeedBoostCtrl'));
 	
 	/**
 	 * Gatherings (chat)
@@ -68,6 +69,7 @@ define(function (require) {
    	 * Wallet
    	 */
    	controllers.controller('WalletCtrl', require('controllers/wallet/WalletCtrl'));
+   	controllers.controller('WalletDepositCtrl', require('controllers/wallet/WalletDepositCtrl'));
    	
 	controllers.run(['$rootScope', 'NODE_URL', 'storage', function ($rootScope, NODE_URL, storage) {
 		$rootScope.node_url = NODE_URL;

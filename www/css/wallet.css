@@ -5,6 +5,68 @@ wallet-counter{
 	line-height:38px;
 	font-weight:300;
 }
+.wallet-points-input{
+	display:table;
+	vertical-align:middle;
+	padding:28px 0;
+}
+.wallet-points-input .cell{
+	display:table-cell;
+	vertical-align: middle;
+	width:60%;
+	padding:8px;
+}
+.wallet-points-input input{
+	background:#EEE;
+	border:0;
+	border-radius:0;
+	font-size:42px;
+	height:auto;
+	font-weight:bold;
+	text-align:right;
+	padding:8px;
+	-webkit-box-shadow:  inset 0 0 3px #888;
+	box-shadow: inset 0 0 3px #888;
+}
+.wallet-points-input label{
+	font-weight:200;
+	font-size:22px;
+}
+.wallet-purchase-button{
+	width: auto;
+	margin: 8px auto;
+	display: block;
+	background: green;
+	color: #FFF;
+	border: 0;
+	padding: 8px 32px;
+}
+
+.wallet-card-input{
+	background: #FFF;
+}
+.wallet-card-input .expiry{
+	width:72px;
+	margin:0 8px;
+	display:inline-block;
+}
+
+.wallet-buttons{
+	width:240px;
+	height:60px;
+	margin:auto;
+	display:block;
+}
+.wallet-button{
+	float:left;
+	width:auto;
+	margin:5px;
+	padding:16px 28px;
+	border:0;
+	box-shadow:0 0 3px #888;
+	border-radius:3px;
+	text-decoration:none;
+}
 
 .transaction{
 	height:65px;
@@ -17,6 +79,7 @@ wallet-counter{
 	color:green;
 	display:block;
 	position:relative;
+	padding-right:8px;
 }
 .transaction .point.negative{
 	color:red;

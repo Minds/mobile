@@ -30,7 +30,6 @@ define(function () {
     		
     		Client.get('api/v1/wallet/transactions', { limit: 12, offset: $scope.next, cachebreaker: Date.now() }, 
     			function(data){
-    				console.log(data);
 	    			if(!data.transactions){
 	    				$scope.hasMoreData = false;
 	    				return false;
@@ -51,6 +50,7 @@ define(function () {
 	    		
     	};
     	$scope.loadMore();
+ 
        
     }
 

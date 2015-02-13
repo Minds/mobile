@@ -1,0 +1,77 @@
+<ion-view title="Wallet" ng-controller="WalletDepositCtrl" class="view-bg">
+
+	<ion-nav-buttons side="left">
+		<a class="button button-clear" href="#/tab/newsfeed/wallet">Wallet</a>
+	</ion-nav-buttons>
+
+	<ion-content>
+
+		<div class="quote" ng-if="step == 'quote'">
+			<div class="wallet-points-input">
+				<div class="cell">
+					<input type="number" ng-model="data.points" /> 
+				</div>
+				<div class="cell">
+					<label>Points</label>
+				</div>
+			</div>
+			
+			<div class="wallet-points-input">
+				<div class="cell">
+					<input type="text" ng-model="data.usd" disabled /> 
+				</div>
+				<div class="cell">
+					<label>$ USD</label>
+				</div>
+			</div>
+			
+			<button class="button wallet-purchase-button" ng-click="changeStep('purchase')">Purchase Points</button>
+		</div>
+		
+		<div ng-if="step == 'purchase'">
+			<div class="list wallet-card-input">
+			  <label class="item item-input item-stacked-label">
+			    <span class="input-label">Card number</span>
+			    <input type="number" ng-model="card.number"  placeholder="type here.."/>
+			  </label>
+			  <label class="item item-input item-stacked-label">
+			    <span class="input-label">Card Type</span>
+			   	<select ng-model="card.type">
+			   		<option>visa</option>
+			   		<option>mastercard</option>
+			   		<option>amex</option>
+			   	</select>
+			  </label>
+			  <label class="item item-input item-stacked-label">
+			    <span class="input-label">Expiry Month</span>
+				<input type="number" ng-model="card.month" placeholder="MM" class="expiry"/>
+			  </label>
+		      <label class="item item-input item-stacked-label">
+			    <span class="input-label">Expiry Year</span>
+				<input type="number" ng-model="card.year" placeholder="YYYY" class="expiry"/>
+			  </label>
+			  <label class="item item-input item-stacked-label">
+			    <span class="input-label">Security (CCV/SEC)</span>
+			    <input type="number" ng-model="card.sec" placeholder="3 digit security (usually on back of card)."/>
+			  </label>
+			  <label class="item item-input item-stacked-label">
+			    <span class="input-label">First name</span>
+			    <input type="text" ng-model="card.name"  placeholder="type here.."/>
+			  </label>
+			  <label class="item item-input item-stacked-label">
+			    <span class="input-label">First name</span>
+			  	<input type="text" ng-model="card.name2" placeholder="type here.."/>
+			  </label>
+			  
+			  <button class="button wallet-purchase-button" ng-click="process()">Confirm</button>
+			  
+			</div>
+				
+		</div>
+		
+		<div ng-if="step == 'complete'">
+			<h3 style="color:green; text-align:center">Congratulations!</h3>
+		</div>
+
+	</ion-content>
+</ion-view>

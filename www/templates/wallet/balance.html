@@ -2,7 +2,7 @@
 
 	<ion-nav-buttons side="left">
 		<!--<a class="button button-clear icon ion-compose" ng-click="composer.show($event)"></a>-->
-		<a class="button button-clear" style="color:red;" href="#/tab/newsfeed/wallet/withdraw">
+		<a class="button button-clear" style="color:red;" href="#/tab/newsfeed/wallet">
 			Withdraw
 		</a>
 	</ion-nav-buttons>
@@ -21,11 +21,16 @@
 		<p style="text-align:center"><i class="icon ion-social-bitcoin"></i> {{btc}}</p>
 		<p style="text-align:center"><i class="icon ion-social-usd"></i> {{usd}}</p>
 		
+		<!--<div class="wallet-buttons">
+			<a href="#/tab/newsfeed/wallet/" class="wallet-button" style="background:red;color:#FFF;">Withdraw</a>
+			<a href="#/tab/newsfeed/wallet/deposit" class="wallet-button" style="background:green;color:#FFF;">Deposit</a>
+		</div>-->
+		
 		
 		<ion-list>
 			<a class="item card transaction" ng-repeat="transaction in transactions">
-				<span class="point" ng-show="transaction.points > 0">+{{transaction.points}}</span>
-				<span class="point negative" ng-show="transaction.points < 0">{{transaction.points}}</span>
+				<span class="point" ng-show="transaction.points > 0">+{{transaction.points | abbr }}</span>
+				<span class="point negative" ng-show="transaction.points < 0">{{transaction.points | abbr}}</span>
 				<p>{{transaction.description}}</p>
 				<p class="ts">{{transaction.time_created * 1000 | date:"MM/dd/yyyy 'at' h:mma"}}</p>
 			</a>

@@ -8,7 +8,7 @@
 define(function () {
     'use strict';
 
-    function ctrl( $rootScope, $scope, $state, $stateParams, NewsfeedAPI, $filter, $ionicScrollDelegate, Cacher, Client, storage, $ionicPopover, $ionicLoading, $timeout, $ionicActionSheet) {
+    function ctrl( $rootScope, $scope, $state, $stateParams, NewsfeedAPI, $filter, $ionicScrollDelegate, Cacher, Client, storage, $ionicPopover, $ionicLoading, $timeout, $ionicActionSheet, $ionicModal) {
 
     	//if same tab click, refresh and go to top
     	$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
@@ -328,6 +328,14 @@ define(function () {
 			     buttonClicked: function(index) {
 			    	 switch(index){
 			    	 	case 0:
+			    	 		$ionicModal.fromTemplateUrl('templates/newsfeed/boost.html', {
+			    	 		    scope: $scope,
+			    	 		    animation: 'slide-in-up'
+			    	 		  }).then(function(modal) {
+			    	 		    $scope.modal = modal;
+			    	 		    $scope.modal.show();
+			    	 		  });
+			    	 		  
 			    	 		break;
 			    	 	case 1:
 			    	 		window.location.href = "mailto:report@minds.com?subject=Report " + guid + "&body=This content violates the terms and conditions";
@@ -340,7 +348,7 @@ define(function () {
 		
     }
 
-    ctrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', 'NewsfeedAPI', '$filter', '$ionicScrollDelegate', 'Cacher', 'Client', 'storage', '$ionicPopover', '$ionicLoading', '$timeout', '$ionicActionSheet'];
+    ctrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', 'NewsfeedAPI', '$filter', '$ionicScrollDelegate', 'Cacher', 'Client', 'storage', '$ionicPopover', '$ionicLoading', '$timeout', '$ionicActionSheet', '$ionicModal'];
     return ctrl;
     
 });

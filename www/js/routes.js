@@ -57,6 +57,15 @@ define(['app'], function (app) {
                         }
                     }
                 })
+                .state('tab.newsfeed-wallet-deposit', {
+                    url: '/newsfeed/wallet/deposit',
+                    cache: false,
+                    views: {
+                        'newsfeed-tab': {
+                            templateUrl: 'templates/wallet/deposit.html',
+                        }
+                    }
+                })
                 .state('tab.newsfeed-channel', {
 					url: "/newsfeed/channel/:username",
 					 views: {

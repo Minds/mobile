@@ -32,8 +32,10 @@ define(function () {
     		
     		Client.get('api/v1/conversations/'+$stateParams.username, { limit: 6, offset: $scope.next, cachebreak: Date.now()}, 
     			function(data){
-    			    		
-	    			if(!data.messages){
+    				//now update the public keys
+					$scope.publickeys = data.publickeys;	
+	    			
+					if(!data.messages){
 	    				$scope.hasMoreData = false;
 	    				return false;
 	    			} else {
@@ -54,8 +56,7 @@ define(function () {
 	    			poll = true;
 	    			
 	    			
-	    			//now update the public keys
-					$scope.publickeys = data.publickeys;
+	    			
 	    		}, 
 	    		function(error){ 
 	    			console.log(error);

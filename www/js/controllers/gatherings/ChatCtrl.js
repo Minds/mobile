@@ -17,7 +17,7 @@ define(function () {
 		
     	$scope.$on('$ionicView.beforeEnter', function(){
 			if(!storage.get('private-key')){
-	    		$state.go('tab.chat-setup');
+	    	//	$state.go('tab.chat-setup');
 	    		return false;
 	    	}
 			$rootScope.newChat = false;
@@ -34,10 +34,12 @@ define(function () {
     	/**
     	 * Load more posts
     	 */
+    	$scope.inprogress = false;
     	$scope.loadMore = function(refresh){
-
-    		console.log('loading next');
-    		console.log($scope.next);
+    		if($scope.inprogress){
+    			return false;
+    		}
+    		$scope.inprogress = true;
     		
     		Client.get('api/v1/conversations', { 
     				limit: 12, 
@@ -45,7 +47,7 @@ define(function () {
     				cb: $scope.cb
     			}, 
     			function(data){
-    		
+
 	    			if(!data.conversations){
 	    				$scope.hasMoreData = false;
 	    				return false;
@@ -63,13 +65,27 @@ define(function () {
 	    			
 	    			$scope.$broadcast('scroll.infiniteScrollComplete');
 	    			$scope.$broadcast('scroll.refreshComplete');
-	
+	    			$scope.inprogress = false;
+	    				
 	    		}, 
 	    		function(error){ 
 	    			alert('error'); 
+	    			$scope.inprogress = true;
 	    		});
 	    		
     	};
+    	
+    	$scope.search = {};
+    	$scope.doSearch = function(){
+    		if(!$scope.search.query){
+    			$scope.refresh();
+    			return true;
+    		}
+    		console.log('doing search for ' + $scope.search.query);
+    		Client.get('search', {q: $scope.search.query, type:'user', view:'json'}, function(success){
+    			$scope.conversations = success.user[0];
+    		});
+    	}
         
         $scope.$on('$stateChangeSuccess', function() {
         	console.log('state changed..');
@@ -77,6 +93,8 @@ define(function () {
 		});
 		
 		$scope.refresh = function(){
+			$scope.search = {};
+			$scope.inprogress = false;
 			$scope.next = "";
 			$scope.previous = "";
 			$scope.cb = Date.now();

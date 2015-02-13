@@ -1,4 +1,13 @@
-
+.chat-search-bar{
+	background:#EEE;
+	padding:16px;
+}
+.chat-search-bar input{
+	border-radius:0;
+	border:0;
+	box-shadow:0;
+	padding:5px;
+}
 .messages .item-avatar{
 	box-shadow:0 !important;
 	border:0 !important;

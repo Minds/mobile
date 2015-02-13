@@ -1,10 +1,6 @@
 <ion-view title="Conversations" ng-controller="ChatCtrl" class="view-bg">
-
+		
     <ion-content>
-    
-    	<div class="tabs-striped tabs-icon-top tabs-top tabs-background-white tabs-color-light">
-	        SEARCH BOX TO GO HERE
-		</div>
 	
         <ion-list>
         
@@ -12,14 +8,20 @@
                 pulling-text="Pull to refresh..."
                 on-refresh="refresh()">
             </ion-refresher>
+            
+            
+			<div class="chat-search-bar">
+				<input placeholder="Search for users..." ng-model="search.query" ng-keyup="doSearch()"/>
+			</div>
+            
 
             <ion-item ng-repeat="conversation in conversations" class="conversation" href="#/tab/gatherings/conversations/{{conversation.guid}}/{{conversation.name}}">
                 <img image-cache ng-src="{{$root.node_url}}icon/{{conversation.guid}}/small" style="float:left;"/>
                 <h2>{{conversation.name}}</h2>
-                <p>{{conversation.last_msg * 1000 | date:'shortTime'}} - {{conversation.last_msg * 1000 | date:'longDate'}}</p>
+                <p ng-show="conversation.last_msg">{{conversation.last_msg * 1000 | date:'shortTime'}} - {{conversation.last_msg * 1000 | date:'longDate'}}</p>
                 <span ng-show="conversation.unread == 1" style="position:absolute; top:20px; right:12px; border-radius:100%; display:block; background:green; width:12px; height:12px"></span>
             </ion-item>
-
+            
         </ion-list>
         
         <ion-infinite-scroll 

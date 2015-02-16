@@ -1,8 +1,34 @@
-<ion-view title="{{activity.title}}">
-    <ion-content padding="true">
-        <p>{{ activity.description }}</p>
-        <p>
-            <a class="button button-small icon ion-arrow-left-b" href="#/tab/newsfeed">Back</a>
-        </p>
+<ion-view ng-controller="NewsfeedViewCtrl" class="view-bg">
+
+	<ion-nav-buttons side="left">
+        <a class="button button-clear icon ion-arrow-left-b" href="#/tab/newsfeed"></a>
+    </ion-nav-buttons>
+
+    <ion-content>
+    	
+    	<activity-view ng-if="activity.guid" id="{{activity.guid}}" class="activity-item list card"></activity-view>
+    	
+    	<!-- show comments here -->
+		<ion-list>
+			<div ng-repeat="comment in comments" class="list card">
+				<owner-brief-view owner="{{comment.ownerObj}}" ts="{{comment.time_created}}"></owner-brief-view>
+				<div class="item item-text-wrap">
+					{{comment.description}}
+				</div>
+			</div>	
+		</ion-list>
+		<div class="list card">
+			<div class="item item-input-inset">
+			 	<label class="item-input-wrapper" style="background:transparent">
+					<textarea placeholder="Type your comment here..." ng-model="comment.body">
+					</textarea>
+				</label>
+				<button class="button button-clear" ng-click="submit()">
+					Comment
+				</button>
+			</div>
+		</div>
+		<ion-infinite-scroll on-infinite="getComments()" distance="1%" ng-if="hasMore"></ion-infinite-scroll>
+
     </ion-content>
 </ion-view>

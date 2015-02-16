@@ -8,7 +8,7 @@
 define(function () {
     'use strict';
 
-    function ctrl($scope, $stateParams, Client, Cacher, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicLoading, $timeout) {
+    function ctrl($scope, $stateParams, Client, Cacher, $ionicPopup, $ionicScrollDelegate, $ionicLoading, $timeout) {
 
 		$scope.entities = [];
 		if(Cacher.get('entities.next')){
@@ -269,6 +269,25 @@ define(function () {
 			$timeout(function(){
 				$ionicLoading.hide();
 				}, 300);
+			
+			if(entity.subscriber){
+				$ionicPopup.alert({
+				     title: 'Match!',
+				     subTitle: entity.name + ' subscribed to you too!',
+				     buttons: [
+		               
+		               {
+		                 text: '<b>Send Message</b>',
+		                 type: 'button-positive',
+		                 onTap: function(e) {
+		                	 window.location.href = "#/tab/gatherings/conversations/" + entity.guid + '/' + entity.name;
+		                 }
+		               },
+		               
+		               { text: 'Continue...' },
+		             ]
+				   });
+			}
 		}
 		
 		/**
@@ -324,7 +343,7 @@ define(function () {
 
     }
 
-    ctrl.$inject = ['$scope', '$stateParams', 'Client', 'Cacher', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$ionicLoading', '$timeout'];
+    ctrl.$inject = ['$scope', '$stateParams', 'Client', 'Cacher', '$ionicPopup', '$ionicScrollDelegate', '$ionicLoading', '$timeout'];
     return ctrl;
     
 });

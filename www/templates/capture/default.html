@@ -19,7 +19,7 @@
                 </ion-item>
                 
                 <ion-item ng-click="library()">
-                    <h1 class="icon ion-images"></h1>
+                    <h1 class="icon ion-ios7-albums"></h1>
                 </ion-item>
     
             </ion-list>
@@ -30,20 +30,20 @@
                  
                <progress max="100" value="{{progress}}"> </progress>
                <div class="list">
-                  <label class="item item-input item-floating-label">
+                  <label class="item item-input item-stacked-label">
                     <span class="input-label">Title</span>
                     <input type="text" placeholder="Title" ng-model="form.title">
                   </label>
-                  <label class="item item-input item-floating-label">
+                 <!-- <label class="item item-input item-stacked-label">
                     <span class="input-label">Description</span>
                     <textarea placeholder="Description" ng-model="form.description"></textarea>
-                  </label>
-                   <label class="item item-input">
-                    <span class="input-label">License</span>
-                    <select placeholder="Description" ng-model="form.license">
-                    	<option value="allrightsreserved">All rights reserved</option>
-                    	<option value="attribution-cc">Creative commons (Attribution)</option>
-                    </select>
+                  </label>-->
+                   <label class="item item-input item-select">
+	                    <span class="input-label">License</span>
+	                    <select ng-model="form.license">
+	                    	<option value="allrightsreserved">All rights reserved</option>
+	                    	<option value="attribution-cc">Creative commons (Attribution)</option>
+	                    </select>
                   </label>
                   
                   <div ng-if="guid">

@@ -1,6 +1,10 @@
 .activity-item{
 	display:block;
 }
+.activity-item .item h3{
+	font-size:16px;
+	/*font-family:"Georgia";*/
+}
 .activity-item .owner-brief{
 	display:block;
 	overflow:visible;

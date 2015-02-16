@@ -55,6 +55,10 @@
                         {
                             "xml": "<feature name=\"Clipboard\"><param name=\"ios-package\" value=\"CDVClipboard\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Contacts\"><param name=\"ios-package\" value=\"CDVContacts\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -76,7 +80,7 @@
                     "CoreGraphics.framework": [
                         {
                             "xml": "false",
-                            "count": 4
+                            "count": 5
                         }
                     ],
                     "AssetsLibrary.framework": [
@@ -89,6 +93,18 @@
                         {
                             "xml": "false",
                             "count": 3
+                        }
+                    ],
+                    "AddressBook.framework": [
+                        {
+                            "xml": "true",
+                            "count": 1
+                        }
+                    ],
+                    "AddressBookUI.framework": [
+                        {
+                            "xml": "true",
+                            "count": 1
                         }
                     ]
                 }
@@ -137,6 +153,9 @@
             "PACKAGE_NAME": "com.minds.mobile"
         },
         "com.verso.cordova.clipboard": {
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
+        "org.apache.cordova.contacts": {
             "PACKAGE_NAME": "com.minds.mobile"
         }
     },

@@ -32,9 +32,7 @@
     </div>
     
 	<div class="item item-text-wrap" ng-if="activity.title" ng-click="activity.perma_url ? openUrl(activity.perma_url) : false">
-        <h3>
-          {{activity.title | linky}}
-        </h3>
+        <h3 ng-bind-html="activity.title | linky"></h3>
         <p ng-show="activity.perma_url">{{activity.perma_url}}</p>
     </div>
     

@@ -1,0 +1,24 @@
+<ion-modal-view ng-controller="InviteCtrl" class="view-bg">
+	
+	<ion-header-bar>
+		<div class="buttons">
+	    	<button class="button button-clear" ng-click="modal.remove()">Cancel</button>
+	 	 </div>
+	  	<h1 class="title">Invite contacts</h1>
+	  	<div class="buttons">
+	    	<button class="button button-positive" ng-click="invite()">Invite Selected</button>
+	 	 </div>
+	</ion-header-bar>
+	
+	<ion-content>
+		<div class="list">
+			<div ng-repeat="contact in contacts" class="item item-button-right" ng-click="select(contact)">
+				<h3>{{contact.name.formatted}}</h3>
+				<p>{{contact.emails[0].value}}</p>
+				<button class="button" ng-class="{'button-positive' : isSelected(contact)}" ng-click="select(contact)">
+				  <i class="icon ion-checkmark-round"></i>
+				</button>
+			</div>
+		</div>
+	</ion-content>
+</ion-modal-view>

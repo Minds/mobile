@@ -21,19 +21,12 @@ define(function () {
 			}
 		});
     	
+    	$rootScope.$on('newsfeed:updated', function() {
+    	    $scope.refresh();
+    	});
+    	
     	$scope.newsfeedItems =  [];
     	$scope.next  = "";
-    	
-		/*if(Cacher.get('newsfeed.items')){
-			$scope.newsfeedItems = Cacher.get('newsfeed.items');
-		}else{
-    		$scope.newsfeedItems =  [];
-    	}*/
-    	
-    	/*if(Cacher.get('newsfeed.next'))
-    		$scope.next = Cacher.get('newsfeed.next');
-    	else
-    		$scope.next  = "";*/
     	
     	$scope.hasMoreData = true;
     	

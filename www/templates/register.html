@@ -20,7 +20,11 @@
             </label>
             
             <div class="padding">
-            <input type="submit" class="button button-block button-positive" value="Register" ng-click="Register()"/>
+            	<div>
+					<input id="terms" type="checkbox" checked="checked">
+				    <label for="terms">I accept the</label> <a style="color:#4690C3; font-weight:bold;text-decoration:none;" href="{{node_url}}p/terms">Terms and Conditions</a>
+				</div>
+           	 <input type="submit" class="button button-block button-positive" value="Register" ng-click="Register()"/>
             </div>
         </form>
 

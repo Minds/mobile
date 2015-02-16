@@ -47,6 +47,10 @@
                         {
                             "xml": "<feature name=\"Clipboard\"><param name=\"android-package\" value=\"com.verso.cordova.clipboard.Clipboard\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Contacts\"><param name=\"android-package\" value=\"org.apache.cordova.contacts.ContactManager\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -109,6 +113,18 @@
                         {
                             "xml": "<uses-permission android:name=\"android.permission.RECORD_VIDEO\" />",
                             "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.READ_CONTACTS\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.WRITE_CONTACTS\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\" />",
+                            "count": 1
                         }
                     ]
                 }
@@ -147,6 +163,9 @@
             "PACKAGE_NAME": "com.minds.mobile"
         },
         "com.verso.cordova.clipboard": {
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
+        "org.apache.cordova.contacts": {
             "PACKAGE_NAME": "com.minds.mobile"
         }
     },

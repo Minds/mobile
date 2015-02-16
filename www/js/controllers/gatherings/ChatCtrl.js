@@ -8,7 +8,7 @@
 define(function () {
     'use strict';
 
-    function ctrl($rootScope, $scope, $state, Client, storage, push) {
+    function ctrl($rootScope, $scope, $state, Client, storage, push, $ionicModal) {
     	
     	$scope.conversations = [];
     	$scope.next  = "";
@@ -101,9 +101,23 @@ define(function () {
 			$scope.loadMore(true);
 		};
 		
+		
+		$scope.invite = function(){
+			
+			$ionicModal.fromTemplateUrl('templates/invite/invite.html', {
+	 		    scope: $scope,
+	 		    animation: 'slide-in-up'
+	 		  }).then(function(modal) {
+	 		    $scope.modal = modal;
+	 		    $scope.modal.show();
+	 		  });
+	 		  
+			
+		};
+		
     }
 
-    ctrl.$inject = ['$rootScope', '$scope', '$state', 'Client', 'storage', 'push'];
+    ctrl.$inject = ['$rootScope', '$scope', '$state', 'Client', 'storage', 'push', '$ionicModal'];
     return ctrl;
     
 });

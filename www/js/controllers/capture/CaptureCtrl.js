@@ -12,7 +12,9 @@ define(function () {
     
     	$scope.captured = false;
     	$scope.progress = 0;
-    	$scope.form = {};
+    	$scope.form = {
+    			license: 'attribution-cc'
+    	};
 
 		$scope.video = function(){
 			navigator.device.capture.captureVideo(function(mediaFiles){
@@ -133,10 +135,12 @@ define(function () {
 					description: $scope.form.description
 				},
 				function(success){
-					$ionicPopup.alert({
+					/*$ionicPopup.alert({
 					     title: 'Complete.',
 					     template: ''
-					   });
+					   });*/
+					$state.go('tab.newsfeed', {}, {reload:true});
+					$scope.$emit('newsfeed:updated');
 					$scope.reset();
 					$ionicLoading.hide();
 				}, 

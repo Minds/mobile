@@ -91,7 +91,8 @@ define(function () {
 	
 	    			$scope.next = data['load-next'];
 	    			
-	    			Cacher.put('newsfeed.cachebreaker', Date.now);
+	    			$scope.cachebreaker = Date.now();
+	    			Cacher.put('newsfeed.cachebreaker', Date.now());
 	    			
 	    			$scope.$broadcast('scroll.refreshComplete');
 	

@@ -17,7 +17,7 @@ define(function () {
 		
     	$scope.$on('$ionicView.beforeEnter', function(){
 			if(!storage.get('private-key')){
-	    	//	$state.go('tab.chat-setup');
+	    		$state.go('tab.chat-setup');
 	    		return false;
 	    	}
 			$rootScope.newChat = false;

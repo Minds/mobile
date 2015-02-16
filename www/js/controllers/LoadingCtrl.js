@@ -16,7 +16,7 @@ define(function() {
 			} else {
 				$state.go('login');
 			}
-		}, 1000);
+		}, 500);
 
 		/**
 		 * Push notification setup

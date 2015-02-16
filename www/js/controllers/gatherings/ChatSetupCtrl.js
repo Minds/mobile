@@ -24,7 +24,7 @@ define(function () {
     
     	$scope.unlock = function(password){
 
-    		Client.post('api/v1/keys/unlock', { password: $scope.password, new_password: 'abc123' }, 
+    		Client.get('api/v1/keys', { password: $scope.data.password, new_password: 'abc123' }, 
     			function(data){
     				if(data.key){
     					storage.set('private-key', data.key);

@@ -26,7 +26,7 @@
                  <span class="ts">{{message.time_created * 1000 | date:'shortTime'}} - {{message.time_created * 1000 | date:'longDate'}}</p>
             </ion-item>
             
-            <div ng-show="messages.length == 0" style="top:100px; left: 50%; margin-left: -40px; position:fixed; text-align:center; font-weight:200; padding-top:50px; z-index:999">
+            <div ng-show="messages.length == 0 && inProgress" style="top:100px; left: 50%; margin-left: -40px; position:fixed; text-align:center; font-weight:200; padding-top:50px; z-index:999">
 				<img src="img/logo-transparent.png" class="loading-bulb-glow"/> <br/>
 				downloading..
 			</div>

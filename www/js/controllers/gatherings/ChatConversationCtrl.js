@@ -20,6 +20,7 @@ define(function () {
     	$scope.previous = "";
     	$scope.hasMoreData = true;
     	$scope.publickeys = {};
+    	$scope.inProgress = false;
     	var poll = true;
     	var timeout;
     	
@@ -27,11 +28,12 @@ define(function () {
     	 * Load more posts
     	 */
     	$scope.loadMore = function(){
-
+    		$scope.inProgress  = true;
     		console.log('loading messages from:' + $scope.next);
     		
     		Client.get('api/v1/conversations/'+$stateParams.username, { limit: 6, offset: $scope.next, cachebreak: Date.now()}, 
     			function(data){
+    				$scope.inProgress  = false;
     				//now update the public keys
 					$scope.publickeys = data.publickeys;	
 	    			
@@ -59,6 +61,7 @@ define(function () {
 	    			
 	    		}, 
 	    		function(error){ 
+	    			$scope.inProgress = false;
 	    			console.log(error);
 	    			alert('error'); 
 	    		});

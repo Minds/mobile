@@ -51,6 +51,10 @@
                         {
                             "xml": "<feature name=\"Capture\"><param name=\"ios-package\" value=\"CDVCapture\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Clipboard\"><param name=\"ios-package\" value=\"CDVClipboard\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -130,6 +134,9 @@
             "PACKAGE_NAME": "com.minds.mobile"
         },
         "org.apache.cordova.media-capture": {
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
+        "com.verso.cordova.clipboard": {
             "PACKAGE_NAME": "com.minds.mobile"
         }
     },

@@ -8,7 +8,7 @@
 define(function () {
     'use strict';
 
-    function ctrl($scope, $stateParams, Client, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
+    function ctrl($rootScope, $scope, $state, $stateParams, Client, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
     	
     	if($stateParams.username == undefined){
     		$state.go('tab.newsfeed');
@@ -18,7 +18,17 @@ define(function () {
      	$scope.next = "";
      	$scope.ChannelItems = [];
      	
-		Client.get('api/v1/channel/'+$stateParams.username, {}, 
+     	$scope.cb = Date.now();
+     	$rootScope.$on('$stateChangeSuccess', function (event, to, toParams, from, fromParams) {
+     		if(from.name == 'tab.newsfeed-channel-edit'){
+     			$scope.cb = Date.now();
+     			$scope.init();
+     		}
+     	});
+     	
+		$scope.init = function(){
+			Client.get('api/v1/channel/'+$stateParams.username, { cb: $scope.cb }, 
+		
 			function(success){
 				$scope.channel = success.channel;
 				$ionicSlideBoxDelegate.update();
@@ -27,6 +37,8 @@ define(function () {
 			},
 			function(error){
 			});
+		};
+		$scope.init();
      
      	/*setInterval(function(){
      		 var top = $ionicScrollDelegate.getScrollPosition().top;
@@ -86,7 +98,7 @@ define(function () {
        
     }
 
-    ctrl.$inject = ['$scope', '$stateParams', 'Client', '$ionicSlideBoxDelegate', '$ionicScrollDelegate'];
+    ctrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', 'Client', '$ionicSlideBoxDelegate', '$ionicScrollDelegate'];
     return ctrl;
     
 });

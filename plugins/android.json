@@ -43,6 +43,10 @@
                         {
                             "xml": "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Clipboard\"><param name=\"android-package\" value=\"com.verso.cordova.clipboard.Clipboard\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -140,6 +144,9 @@
             "PACKAGE_NAME": "com.minds.mobile"
         },
         "org.apache.cordova.camera": {
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
+        "com.verso.cordova.clipboard": {
             "PACKAGE_NAME": "com.minds.mobile"
         }
     },

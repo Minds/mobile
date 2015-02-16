@@ -1,6 +1,12 @@
 <ion-view title="Conversations" ng-controller="ChatCtrl" class="view-bg">
 		
-    <ion-content>
+	<div class="chat-search-bar tabs-top">
+		<div class="tabs">
+			<input placeholder="Search for users..." ng-model="search.query" ng-keyup="doSearch()"/>
+		</div>
+	</div>
+		
+    <ion-content style="padding-top:50px;">
 	
         <ion-list>
         
@@ -8,11 +14,6 @@
                 pulling-text="Pull to refresh..."
                 on-refresh="refresh()">
             </ion-refresher>
-            
-            
-			<div class="chat-search-bar">
-				<input placeholder="Search for users..." ng-model="search.query" ng-keyup="doSearch()"/>
-			</div>
             
 
             <ion-item ng-repeat="conversation in conversations" class="conversation" href="#/tab/gatherings/conversations/{{conversation.guid}}/{{conversation.name}}">

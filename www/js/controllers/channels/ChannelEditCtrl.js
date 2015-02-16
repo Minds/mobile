@@ -29,6 +29,7 @@ define(function () {
 		    			$timeout(function(){
 		    				$ionicLoading.hide();
 		    				}, 1000);
+		    			$state.go('tab.newsfeed-channel', {username: 'me', refresh:true});
         			},
         			function(error){
         			});

@@ -313,6 +313,7 @@ define(function () {
 			     buttons: [
 			       //{ text: '<b>Share</b> This' },
 			       { text: 'Boost' },
+			       { text: '<b>Share</b>' },
 			       { text: 'Report this' }
 			     ],
 			     destructiveText: 'Delete',
@@ -338,6 +339,15 @@ define(function () {
 			    	 		  
 			    	 		break;
 			    	 	case 1:
+			    	 		cordova.plugins.clipboard.copy($rootScope.node_url + '/newsfeed/' + guid);
+			    	 		$ionicLoading.show({
+			    				template: '<p> Copied to clipboard </p>'
+			    				});
+			    			$timeout(function(){
+			    				$ionicLoading.hide();
+			    				}, 1000);
+			    	 		break;
+			    	 	case 2:
 			    	 		window.location.href = "mailto:report@minds.com?subject=Report " + guid + "&body=This content violates the terms and conditions";
 			    	 }
 			       return true;

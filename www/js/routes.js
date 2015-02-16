@@ -40,7 +40,7 @@ define(['app'], function (app) {
                 })
                 .state('tab.newsfeed', {
                     url: '/newsfeed',
-                    cache: false, //don't cache until we can handle large lists well
+                    //cache: false, //don't cache until we can handle large lists well
                     views: {
                         'newsfeed-tab': {
                             templateUrl: 'templates/newsfeed/list.html',

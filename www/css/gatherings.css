@@ -1,6 +1,9 @@
 .chat-search-bar{
-	background:#EEE;
-	padding:16px;
+
+}
+.chat-search-bar .tabs{
+	padding: 8px;
+	background: #EEE !important;
 }
 .chat-search-bar input{
 	border-radius:0;

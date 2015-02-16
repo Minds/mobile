@@ -19,6 +19,7 @@ define(['angular'], function (angular) {
 				 * Initialises the playback.
 				 */
 				scope.play = function(){
+				
 					scope.$digest();
 					$ionicLoading.show({
 						template: 'Loading...'
@@ -27,7 +28,6 @@ define(['angular'], function (angular) {
 						$ionicLoading.hide();
 					}, 3000);
 					
-					//scope.srcFull = $sce.trustAsResourceUrl(attrs);
 					scope.showVideo = true;
 					if ( device.platform == 'android' || device.platform == 'Android' ){
 						scope.showVideo = false;
@@ -36,9 +36,12 @@ define(['angular'], function (angular) {
 					
 					var video = el[0].querySelector('#video');
 					video.src = scope.srcFull;
-
+					
 					video.play();
- 					video.webkitEnterFullscreen();
+					video.webkitRequestFullscreen();
+					//video.webkitEnterFullscreen();
+					
+ 					//video.webkitEnterFullscreen();
  					
  					video.onplaying  = function(){
  						$ionicLoading.hide();

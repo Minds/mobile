@@ -14,8 +14,13 @@
     
         <div class="inner">
 
-            <img image-cache ng-src="{{channel.avatar_url.large}}/{{$root.globalCB}}" style="width:140px;"/>
-            <h1>{{channel.name}}</h1>
+			<div class="cell">
+           		<img image-cache ng-src="{{channel.avatar_url.large}}/{{$root.globalCB}}" style="width:140px;"/>
+            </div>
+            <div class="cell">
+	            <h1>{{channel.name}}</h1>
+	            <a href="{{channel.website}}">{{channel.website}}</a>
+            </div>
         
         </div>
         

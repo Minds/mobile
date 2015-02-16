@@ -13,10 +13,6 @@
 				<div class="item item-avatar item-text-wrap">
                    	<img ng-src="{{$root.node_url}}icon/{{notification.from_guid}}">
 
-					<i class="icon ion-person-add notification-user-subscribe" 
-						ng-if="notification.ownerObj.subscribed == false"
-						ng-click="subscribe(notification)"> </i>
-
                     <div ng-switch="notification.notification_view">
                     	<!-- subscribed -->
                         <a href="#/tab/newsfeed/channel/{{notification.fromObj.guid}}" ng-switch-when="friends">
@@ -67,8 +63,10 @@
                         </div>
                     </div>
                     
-                    <p>{{time_created}}</p>
-                    
+                    <i class="icon ion-person-add notification-user-subscribe" 
+						ng-if="notification.ownerObj.subscribed == false"
+						ng-click="subscribe(notification)"> </i>
+                   
                  </div>
 			</div>
 

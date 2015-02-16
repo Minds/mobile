@@ -30,7 +30,7 @@ define(function () {
 			}, function(){
 				console.log('capture failed');
 			}, {
-				limit: 2, 
+				limit: 1, 
 				duration:30
 			});
 		};

@@ -1,7 +1,12 @@
+.notification-item div{
+	display:flex;
+	flex:1;
+}
 .notification-item a{
 	color:#666666;
 	text-decoration:none;
-	display:block;
+	display:flex;
+	flex:1;
 }
 .notification-user-subscribe{
 	float:right;

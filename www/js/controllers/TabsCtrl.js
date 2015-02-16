@@ -31,7 +31,7 @@ define(function() {
 			$rootScope.newChat = 'minds-yellow';
 			$rootScope.$apply();
 			
-			if(params.changeState){
+			if(params.changeState  && $state.current.name != 'tab.chat'){
 			      $state.go('tab.chat');
 			}
 		});
@@ -40,7 +40,7 @@ define(function() {
 			$rootScope.newNotification = 'minds-yellow';
 			$rootScope.$apply();
 			
-			if(params.changeState){
+			if(params.changeState && $state.current.name != 'tab.notifications'){
 			      $state.go('tab.notifications');
 			}
 		});

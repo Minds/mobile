@@ -20,7 +20,8 @@ define(function () {
     	$scope.comment = {};
     	$scope.comment.body = '';
 			
-		Client.get('api/v1/entities/entity/' + $stateParams.guid, { cb: $scope.cb }, 
+		$scope.init = function(){
+			Client.get('api/v1/entities/entity/' + $stateParams.guid, { cb: $scope.cb }, 
 			function(data){
 		
     			$scope.entity = data.entity;
@@ -44,6 +45,8 @@ define(function () {
     		function(error){ 
     			console.log(error);
     		});
+		};
+		$scope.init();
 		
 		$scope.inprogress = false;
 		$scope.getComments = function(){

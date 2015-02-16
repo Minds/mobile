@@ -4,19 +4,20 @@ Minds Mobile App
 The minds mobile apps source code repository.
 
 ##Platforms
-- iOS
 - Android
+- iOS
+
 
 ##Features
 
 ####Encrypted Chat 
-####Newsfeed
-####Capture (Video, Audio, Photos)
-####Democratized Voting
+####News Feed 
+####Capture (Video, Photos, Attach from library)
+####Voting
 ####Followers
-####Discover (Search and swipe to connect)
-####Profiles
-####Wallets
+####Discover (Search and swipe to vote and connect)
+####Profile
+####Wallet (Earn or buy poins and spend for viral reach)
 ####Notifications
 ####Comments
 
@@ -36,6 +37,15 @@ _RequireJS is a file and module loader used to improve speed and quality of code
 
 #####neo4j (http://neo4j.com)
 _neo4j is the World’s Leading Graph Database._
+
+##Contributors
+
+Mark Harding - Engineering & Design
+Bill Ottman - Design
+
+##License
+
+This project is licensed under the AGPLv3 software license. See license for full text. 
 
 ##Contributing
 

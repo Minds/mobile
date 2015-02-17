@@ -37,11 +37,10 @@ define(['angular'], function (angular) {
 					var video = el[0].querySelector('#video');
 					video.src = scope.srcFull;
 					
+					video.load();
 					video.play();
 					video.webkitRequestFullscreen();
-					//video.webkitEnterFullscreen();
-					
- 					//video.webkitEnterFullscreen();
+					//video.enterFullscreen();
  					
  					video.onplaying  = function(){
  						$ionicLoading.hide();
@@ -49,11 +48,9 @@ define(['angular'], function (angular) {
  					video.onerror = function(){
  						alert('error in playing');
  					};
- 					video.onended = function(){
- 						scope.showVideo = false;
- 					}
  					
  					video.addEventListener('webkitendfullscreen', function (e) { 
+ 						video.pause();
  						scope.showVideo = false;
  						scope.$apply();
  						console.log('ended full screen');
@@ -66,6 +63,8 @@ define(['angular'], function (angular) {
  						}
  					});
  					video.addEventListener('ended', function(e){
+ 						video.pause();
+ 						//document.webkitExitFullscreen();
  						scope.showVideo = false;
  						scope.$apply();
  						}, false);

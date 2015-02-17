@@ -84,6 +84,10 @@
 	
 }*/
 
+html:-webkit-full-screen {
+ background: red;
+} 
+
 a.tag{
 	color:#4690C3;
 	text-decoration:none;

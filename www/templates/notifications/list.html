@@ -38,6 +38,11 @@
                         			{{notification.fromObj.name}} commented on {{notification.entityObj.ownerObj.name}}'s activity
                         			</p>
                         		</a>
+                        		<a ng-switch-default>
+                        			<p style="font-style:italic">
+                        			There was an error viewing this notification.
+                        			</p>
+                        		</a>
                         	</div>
                        	</div>
                        	<!-- up voted content -->
@@ -60,6 +65,9 @@
                         	<a href="#/tab/notifications/entity/{{notification.entityObj.guid}}">
                         		<p>{{notification.fromObj.name}} tagged you in a post</p>
                         	</a>
+                        </div>
+                        <div ng-switch-default>
+                        	<i>Sorry, there was an error viewing this notification</i>
                         </div>
                     </div>
                     

@@ -22,6 +22,7 @@ define(function () {
 		});
     	
     	$rootScope.$on('newsfeed:updated', function() {
+    		$ionicScrollDelegate.scrollTop();
     	    $scope.refresh();
     	});
     	

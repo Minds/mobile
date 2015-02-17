@@ -8,15 +8,40 @@
 define(function () {
     'use strict';
 
-    function ctrl( $rootScope, $scope, $state, $stateParams, $ionicLoading, Client) {
+    function ctrl( $rootScope, $scope, $state, $stateParams, $ionicLoading, Client, $timeout) {
 
     	$scope.contacts = [];
     	$scope.selected = [];
     	
-    	var fields = [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
+    	/*var fields = [navigator.contacts.fieldType.emails];
+    	var options = {};
+    	options.filter = "@";
+    	//options.multiple = true;
     	navigator.contacts.find(fields, function(success){
-    		$scope.contacts = success;
-    	});
+    		var contacts = success;
+    		console.log(contacts);
+    		for(var i=0; i < contacts.length; i++){
+    			if(contacts[i].emails){
+    				$scope.contacts.push(contacts[i]);
+    			}
+    		}
+    		$scope.$apply();
+    	}, function(error){}, options);*/
+    	
+    	navigator.contacts.pickContact(function(contact){
+    		Client.post('api/v1/invite', {contact: contact}, function(success){
+    		}, function(error){
+    		});
+            $scope.modal.remove();
+            $ionicLoading.show({
+				template: '<p> Invited ' + contact.name.formatted + '</p>'
+				});
+			$timeout(function(){
+				$ionicLoading.hide();
+				}, 1000);
+        },function(err){
+            console.log('Error: ' + err);
+        });
     	
     	$scope.isSelected = function(contact){
     		for(var i = 0; i < $scope.selected.length; i++) {
@@ -59,7 +84,7 @@ define(function () {
     	
     }
 
-    ctrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', '$ionicLoading', 'Client'];
+    ctrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', '$ionicLoading', 'Client', '$timeout'];
     return ctrl;
     
 });

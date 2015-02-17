@@ -13,7 +13,7 @@
 			<div ng-repeat="comment in comments" class="list card">
 				<owner-brief-view owner="{{comment.ownerObj}}" ts="{{comment.time_created}}"></owner-brief-view>
 				<div class="item item-text-wrap">
-					{{comment.description}}
+					{{comment.description | linky}}
 				</div>
 			</div>	
 		</ion-list>

@@ -71,7 +71,7 @@ define(function () {
     	};
 		
 		$scope.refresh = function(){
-			
+			$rootScope.newNotification = false;
 			Client.get('api/v1/notifications', { limit: 12, offset: '', cache_break: Date.now() }, 
 				function(data){
     		

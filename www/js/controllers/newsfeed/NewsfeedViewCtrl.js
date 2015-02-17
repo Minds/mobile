@@ -20,8 +20,8 @@ define(function () {
     	Client.get('api/v1/newsfeed/single/' + $stateParams.guid, {},
         	function(success){
     			$scope.activity = success.activity;
-    			if($scope.activity.entityObj){
-					$scope.guid = $scope.activity.entityObj.guid;
+    			if($scope.activity.entity_guid){
+					$scope.guid = $scope.activity.entity_guid;
 				} else {
 					$scope.guid = $scope.activity.guid;
 				}

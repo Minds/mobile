@@ -13,6 +13,22 @@
                             "count": 1
                         },
                         {
+                            "xml": "<feature name=\"PushPlugin\"><param name=\"android-package\" value=\"com.plugin.gcm.PushPlugin\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Clipboard\"><param name=\"android-package\" value=\"com.verso.cordova.clipboard.Clipboard\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Contacts\"><param name=\"android-package\" value=\"org.apache.cordova.contacts.ContactManager\" /></feature>",
+                            "count": 1
+                        },
+                        {
                             "xml": "<feature name=\"Crypt\"><param name=\"android-package\" value=\"org.apache.cordova.crypt.Crypt\" /></feature>",
                             "count": 1
                         },
@@ -34,22 +50,6 @@
                         },
                         {
                             "xml": "<feature name=\"Capture\"><param name=\"android-package\" value=\"org.apache.cordova.mediacapture.Capture\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"PushPlugin\"><param name=\"android-package\" value=\"com.plugin.gcm.PushPlugin\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Clipboard\"><param name=\"android-package\" value=\"com.verso.cordova.clipboard.Clipboard\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Contacts\"><param name=\"android-package\" value=\"org.apache.cordova.contacts.ContactManager\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -107,14 +107,6 @@
                             "count": 4
                         },
                         {
-                            "xml": "<uses-permission android:name=\"android.permission.RECORD_AUDIO\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<uses-permission android:name=\"android.permission.RECORD_VIDEO\" />",
-                            "count": 1
-                        },
-                        {
                             "xml": "<uses-permission android:name=\"android.permission.READ_CONTACTS\" />",
                             "count": 1
                         },
@@ -124,6 +116,14 @@
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.RECORD_AUDIO\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.RECORD_VIDEO\" />",
                             "count": 1
                         }
                     ]
@@ -135,7 +135,19 @@
         "com.ionic.keyboard": {
             "PACKAGE_NAME": "com.minds.mobile"
         },
+        "com.phonegap.plugins.PushPlugin": {
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
+        "com.verso.cordova.clipboard": {
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
+        "org.apache.cordova.camera": {
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
         "org.apache.cordova.console": {
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
+        "org.apache.cordova.contacts": {
             "PACKAGE_NAME": "com.minds.mobile"
         },
         "org.apache.cordova.crypt": {
@@ -154,18 +166,6 @@
             "PACKAGE_NAME": "com.minds.mobile"
         },
         "org.apache.cordova.media-capture": {
-            "PACKAGE_NAME": "com.minds.mobile"
-        },
-        "com.phonegap.plugins.PushPlugin": {
-            "PACKAGE_NAME": "com.minds.mobile"
-        },
-        "org.apache.cordova.camera": {
-            "PACKAGE_NAME": "com.minds.mobile"
-        },
-        "com.verso.cordova.clipboard": {
-            "PACKAGE_NAME": "com.minds.mobile"
-        },
-        "org.apache.cordova.contacts": {
             "PACKAGE_NAME": "com.minds.mobile"
         }
     },

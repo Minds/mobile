@@ -8,7 +8,7 @@
 define(function () {
     'use strict';
 
-    function ctrl($scope, $stateParams, $state, $rootScope, Client, OAuth, storage, $ionicLoading, $ionicPopup) {
+    function ctrl($scope, $stateParams, $state, $rootScope, Client, OAuth, storage, $ionicLoading, $ionicPopup, $ionicModal) {
     
     	$scope.captured = false;
     	$scope.progress = 0;
@@ -153,10 +153,34 @@ define(function () {
 					$ionicLoading.hide();
 				});
 		};
+		
+		$scope.postStatus = function(){
+			$ionicLoading.show({
+				template: '<p>Please wait...</p>'
+				});
+
+			Client.post('api/v1/newsfeed', {message: $scope.form.status}, function(success){
+				$ionicLoading.hide();
+				$scope.modal.remove();
+				$state.go('tab.newsfeed', {}, {reload:true});
+				$scope.$emit('newsfeed:updated');
+			});
+			
+		};
+		
+		$scope.activity = function(){
+			$ionicModal.fromTemplateUrl('templates/capture/status.html', {
+	 		    scope: $scope,
+	 		    animation: 'slide-in-up'
+	 		  }).then(function(modal) {
+	 		    $scope.modal = modal;
+	 		    $scope.modal.show();
+	 		  });
+		}
        
     }
 
-    ctrl.$inject = ['$scope', '$stateParams', '$state', '$rootScope', 'Client', 'OAuth', 'storage', '$ionicLoading', '$ionicPopup'];
+    ctrl.$inject = ['$scope', '$stateParams', '$state', '$rootScope', 'Client', 'OAuth', 'storage', '$ionicLoading', '$ionicPopup', '$ionicModal'];
     return ctrl;
     
 });

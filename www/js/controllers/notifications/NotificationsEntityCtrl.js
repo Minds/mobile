@@ -8,7 +8,7 @@
 define(function () {
     'use strict';
 
-    function ctrl($rootScope, $scope, $stateParams,  $ionicScrollDelegate, Cacher, Client, storage, $ionicPopover, $ionicLoading) {
+    function ctrl($rootScope, $scope, $stateParams,  $ionicScrollDelegate, Cacher, Client, storage, $ionicPopover, $ionicLoading, $ionicActionSheet) {
     	
     	console.log('guid is... ' + $stateParams.guid);
     	
@@ -103,11 +103,41 @@ define(function () {
 	    		});
 			$scope.comment.body = '';
 		}
+		
+		$scope.removeComment = function(guid){
+			
+			$ionicActionSheet.show({
+			     buttons: [
+			     ],
+			     destructiveText: 'Delete',
+			     destructiveButtonClicked: function(){
+			    	 if(confirm("are you sure?")){
+			    		 
+			    		 Client.delete('api/v1/comments/' + guid, function(success){
+			    			 
+			    		 });
+			    		 $scope.comments.forEach(function(item, index, array){
+								if(item.guid == guid){
+									console.log('removed');
+									array.splice(index, 1);
+								}
+							});
+			    	 }
+			    	 return true;
+			     },
+			     cancelText: 'Cancel',
+			     cancel: function() {
+			          // add cancel code..
+			        }
+			});
+			
+			
+		}
 					
 		
     }
 
-    ctrl.$inject = ['$rootScope', '$scope', '$stateParams', '$ionicScrollDelegate', 'Cacher', 'Client', 'storage', '$ionicPopover', '$ionicLoading'];
+    ctrl.$inject = ['$rootScope', '$scope', '$stateParams', '$ionicScrollDelegate', 'Cacher', 'Client', 'storage', '$ionicPopover', '$ionicLoading', '$ionicActionSheet'];
     return ctrl;
     
 });

@@ -87,6 +87,7 @@ define(['angular'], function (angular) {
 			trigger(e.aps['url-args'][0], {service:'ios'});
 			$ionicPlatform.on('resume', function(){
 				trigger(e.aps['url-args'][0], {service:'ios', changeState: true});
+				document.removeEventListener('resume', this);
 			});
 		}
 		
@@ -116,9 +117,12 @@ define(['angular'], function (angular) {
 			    break;
 			    case 'message':
 			    	trigger(e.payload.uri, {service:'android'});
-			    	$ionicPlatform.on('resume', function(){
+			    	
+			    	var resume = function(){
 						trigger(e.payload.uri, {service:'android', changeState: true});
-					});
+						document.removeEventListener('resume', resume);
+					};
+			    	document.addEventListener('resume', resume);
 			    break;
 			    case 'error':
 			       console.log('Notification error:: ' + e.msg);

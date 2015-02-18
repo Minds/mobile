@@ -8,7 +8,7 @@
 define(function () {
     'use strict';
 
-    function ctrl( $rootScope, $scope, $state, $stateParams, $ionicLoading, Client) {
+    function ctrl( $rootScope, $scope, $state, $stateParams, $ionicLoading, $ionicPopup, $timeout, Client) {
 
     	$scope.data = {
     		points: 500,
@@ -30,9 +30,39 @@ define(function () {
     			$ionicLoading.hide();
     			if(success.count > $scope.data.points){
     				//commence the boost
-    				$scope.modal.remove();
+    				Client.post('api/v1/boost/newsfeed/' + $scope.guid, { impressions: $scope.data.impressions }, function(success){
+    					if(success.status == 'success'){
+    						$scope.modal.remove();
+    						$ionicLoading.show({
+								template: 'Boost request submitted.'
+								});
+    						$timeout(function(){
+    							$ionicLoading.hide();
+    						}, 500);
+    						
+    					} else {
+    						alert('sorry, something went wrong');
+    					}
+    				});
+    				
     			} else {
-    				alert('sorry, you don\'t have enough points!');
+    				$ionicPopup.alert({
+   				     title: 'Ooops!',
+   				     subTitle: 'You don\;t have enough points',
+   				     buttons: [
+   		               
+   		               {
+   		                 text: '<b>Buy points</b>',
+   		                 type: 'button-positive',
+   		                 onTap: function(e) {
+   		                	 $state.go('tab.newsfeed-wallet-deposit');
+   		                	 $scope.modal.remove();
+   		                 }
+   		               },
+   		               
+   		               { text: 'Close.' },
+   		             ]
+   				   });
     			}
     		}, function(error){
     			
@@ -42,7 +72,7 @@ define(function () {
     	
     }
 
-    ctrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', '$ionicLoading', 'Client'];
+    ctrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', '$ionicLoading', '$ionicPopup', '$timeout', 'Client'];
     return ctrl;
     
 });

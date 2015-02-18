@@ -6,14 +6,13 @@
 
     <ion-content>
     	
-    	<activity-view ng-if="activity.guid" id="{{activity.guid}}" class="activity-item list card"></activity-view>
+    	<activity-view ng-if="activity.guid" id="{{activity.guid}}" class="activity-item list card" ng-controller="NewsfeedCtrl"></activity-view>
     	
     	<!-- show comments here -->
 		<ion-list>
 			<div ng-repeat="comment in comments" class="list card">
 				<owner-brief-view owner="{{comment.ownerObj}}" ts="{{comment.time_created}}"></owner-brief-view>
-				<div class="item item-text-wrap">
-					{{comment.description | linky}}
+				<div class="item item-text-wrap" ng-bind-html="comment.description | linky" ng-click="removeComment(comment.guid)">
 				</div>
 			</div>	
 		</ion-list>

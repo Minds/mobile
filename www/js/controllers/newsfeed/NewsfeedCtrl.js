@@ -302,13 +302,14 @@ define(function () {
 			window.open(url, '_blank', {toolbarposition:'top'});
 		};
 		
-		$scope.openActions = function(guid){
-			
+		$scope.openActions = function(activity){
+			var guid = activity.guid;
 			$ionicActionSheet.show({
 			     buttons: [
 			       //{ text: '<b>Share</b> This' },
 			       { text: 'Boost' },
 			       { text: '<b>Share</b>' },
+			       { text: 'Download' },
 			       { text: 'Report this' }
 			     ],
 			     destructiveText: 'Delete',
@@ -329,6 +330,7 @@ define(function () {
 			    	 		    animation: 'slide-in-up'
 			    	 		  }).then(function(modal) {
 			    	 		    $scope.modal = modal;
+			    	 		    $scope.guid = guid;
 			    	 		    $scope.modal.show();
 			    	 		  });
 			    	 		  
@@ -343,6 +345,27 @@ define(function () {
 			    				}, 1000);
 			    	 		break;
 			    	 	case 2:
+			    	 		
+			    	 		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fs){
+			    	 			var ft = new FileTransfer();
+			    	 			console.log(fs.root.toURL());
+			    	 			fs.root.getDirectory('minds', { create: true, exclusive: false }, function(){}, function(){}); 
+				    	 		ft.download(
+				    	 			    activity.custom_data[0].src,
+				    	 			    fs.root.toURL() + "minds/" + guid + '.jpg',
+				    	 			    function(entry) {
+				    	 			        console.log("download complete: " + entry.toURL());
+				    	 			    },
+				    	 			    function(error) {
+				    	 			        console.log("download error source " + error.source);
+				    	 			        console.log("download error target " + error.target);
+				    	 			        console.log("upload error code" + error.code);
+				    	 			    },
+				    	 			    false
+				    	 			);
+			    	 			});
+			    	 		break;
+			    	 	case 3:
 			    	 		window.location.href = "mailto:report@minds.com?subject=Report " + guid + "&body=This content violates the terms and conditions";
 			    	 }
 			       return true;

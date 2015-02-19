@@ -53,7 +53,7 @@
 				discovering..
 			</div>
     
-			<div ng-repeat="entity in entities" class="swipe-container">
+			<div ng-repeat="entity in entities" class="swipe-container" ng-if="filter == 'search'">
 			
 	            <div ng-switch="entity.type">
 	            

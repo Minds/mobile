@@ -1,7 +1,7 @@
 <owner-brief-view owner="{{entity.ownerObj}}" ts="{{entity.time_created}}"></owner-brief-view>
 
 <!-- Video -->
-<div class="item item-image item-image-video" ng-show="entity.subtype == 'video'" play-video playsrc="{{entity.src['360.mp4']}}">
+<div class="item item-image item-image-video" ng-if="entity.subtype == 'video'" play-video playsrc="{{entity.src['360.mp4']}}">
           
 	<img ng-src="{{entity.thumbnail_src}}">
      <i class="icon ion-play"></i>
@@ -14,12 +14,12 @@
 </div>
 
 <!-- Image -->
-<div class="item item-image" ng-show="entity.subtype == 'image'">
+<div class="item item-image" ng-if="entity.subtype == 'image'">
    <img ng-src="{{entity.thumbnail_src}}">
 </div>
 
 <!-- Article/blog -->
-<div class="item item-image" ng-show="entity.subtype == 'blog'">
+<div class="item item-image" ng-if="entity.subtype == 'blog'">
    <img ng-src="{{entity.thumbnail_src}}">
 </div>
 <div class="item item-wrap-content" ng-show="entity.subtype == 'blog'">

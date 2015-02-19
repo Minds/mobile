@@ -35,7 +35,6 @@ define(function () {
 
 		
 		$scope.changeFilter = function(filter){
-			console.log('chaning filter');
 			if(filter == 'suggested'){
 				$scope.view = 'swipe';
 				$scope.infinite = false;
@@ -48,7 +47,8 @@ define(function () {
 			$scope.entities = [];
 			$scope.passed = [];
 			$scope.next = "";
-			$scope.load();
+			//run on next digest
+			$timeout($scope.load); 
 		};
 		
 		$scope.changeType = function(type){
@@ -80,15 +80,20 @@ define(function () {
 				cachebreaker: $scope.cachebreaker 
 				}, 
     			function(data){
-					//console.log(data); 
-    				if(!data.entities){
+					console.log('got it!');
+
+					if(!data.entities){
 	    				$scope.hasMoreData = false;
 	    				return false;
 	    			} else {
 	    				$scope.hasMoreData = true;
 	    			}
 	    			
-	    			$scope.entities = $scope.entities.concat(data.entities);
+					if($scope.entities.length == 0){
+						$scope.entities = data.entities;
+					} else {
+						$scope.entities = $scope.entities.concat(data.entities);
+					}
 	    			
 	    			//scan for duplicates..
 	    			/*$scope.passed.forEach(function(item, index, array){
@@ -100,32 +105,25 @@ define(function () {
 	    				});
 	    			});*/
 	    			
-	    			
-	    			
-	    			Cacher.put('entities.data', $scope.entities);
+	    			//Cacher.put('entities.data', $scope.entities);
 	
 	    			$scope.next = data['load-next'];
 	    			//Cacher.put('entities.next', $scope.next);
 	    			
-	    			Cacher.put('entities.cb', Date.now());
-					$scope.cachebreaker = Date.now();
-					
-					console.log('got it!');
-					//$scope.$apply();
+	    			//Cacher.put('entities.cb', Date.now());
+					if($scope.filter == 'suggested'){
+						$scope.cachebreaker = Date.now();
+					}
 	    			
 	    			//$scope.$broadcast('scroll.infiniteScrollComplete');
 	    		}, 
 	    		function(error){ 
 	    			alert('error'); 
 	    		});
-	    	//console.log('api/v1/entities/' + $scope.filter);
-
 	    	
 		};
 		$scope.load();
-		//var data = {"status":"success","entities":[{"guid":"100000000000019544","type":"user","subtype":false,"time_created":"1356598391","time_updated":"1356598392","container_guid":"0","owner_guid":"100000000000000000","site_guid":"1","access_id":"2","name":"Kosumosu Koi","username":"kosumosukoi","language":"en","icontime":false,"legacy_guid":"19544","featured_id":false,"subscribed":false},{"guid":"100000000000019551","type":"user","subtype":false,"time_created":"1356598638","time_updated":"1356598723","container_guid":"0","owner_guid":"100000000000000000","site_guid":"1","access_id":"2","name":"dongtingqiu","username":"dongtingqiu","language":"en","icontime":false,"legacy_guid":"19551","featured_id":false,"subscribed":false},{"guid":"100000000000019558","type":"user","subtype":false,"time_created":"1356598747","time_updated":"1356598747","container_guid":"0","owner_guid":"100000000000000000","site_guid":"1","access_id":"2","name":"Nigar Gafarova","username":"nigargafarova","language":"en","icontime":false,"legacy_guid":"19558","featured_id":false,"subscribed":false},{"guid":"100000000000019565","type":"user","subtype":false,"time_created":"1356598763","time_updated":"1356598763","container_guid":"0","owner_guid":"100000000000000000","site_guid":"1","access_id":"2","name":"Petra Guina Goddard","username":"petraguinagoddard","language":"en","icontime":false,"legacy_guid":"19565","featured_id":false,"subscribed":false},{"guid":"100000000000019572","type":"user","subtype":false,"time_created":"1356598774","time_updated":"1356598775","container_guid":"0","owner_guid":"100000000000000000","site_guid":"1","access_id":"2","name":"Em West","username":"emwest","language":"en","icontime":false,"legacy_guid":"19572","featured_id":false,"subscribed":false},{"guid":"100000000000019579","type":"user","subtype":false,"time_created":"1356598930","time_updated":"1356599435","container_guid":"0","owner_guid":"100000000000000000","site_guid":"1","access_id":"2","name":"Lyndon Britts","username":"raapidd","language":"en","icontime":false,"legacy_guid":"19579","featured_id":false,"subscribed":false},{"guid":"100000000000019586","type":"user","subtype":false,"time_created":"1356599011","time_updated":"1357673291","container_guid":"0","owner_guid":"100000000000000000","site_guid":"1","access_id":"2","name":"Elena Gagliardi","username":"elenagagliardi","language":"en","icontime":false,"legacy_guid":"19586","featured_id":false,"subscribed":false},{"guid":"100000000000019605","type":"user","subtype":false,"time_created":"1356599765","time_updated":"1356599765","container_guid":"0","owner_guid":"100000000000000000","site_guid":"1","access_id":"2","name":"Amna Kazi","username":"amnakazi","language":"en","icontime":false,"legacy_guid":"19605","featured_id":false,"subscribed":false},{"guid":"100000000000019612","type":"user","subtype":false,"time_created":"1356599809","time_updated":"1356599809","container_guid":"0","owner_guid":"100000000000000000","site_guid":"1","access_id":"2","name":"Egl? Fisien?","username":"egl?fisien?","language":"en","icontime":false,"legacy_guid":"19612","featured_id":false,"subscribed":false},{"guid":"100000000000019619","type":"user","subtype":false,"time_created":"1356599964","time_updated":"1356599964","container_guid":"0","owner_guid":"100000000000000000","site_guid":"1","access_id":"2","name":"Gurbaz Singh Tiwana","username":"gurbazsinghtiwana","language":"en","icontime":false,"legacy_guid":"19619","featured_id":false,"subscribed":false},{"guid":"100000000000019626","type":"user","subtype":false,"time_created":"1356600088","time_updated":"1356600089","container_guid":"0","owner_guid":"100000000000000000","site_guid":"1","access_id":"2","name":"Crystal Regina Nadal","username":"crystalreginanadal","language":"en","icontime":false,"legacy_guid":"19626","featured_id":false,"subscribed":false},{"guid":"100000000000019648","type":"user","subtype":false,"time_created":"1356601197","time_updated":"1356601267","container_guid":"0","owner_guid":"100000000000000000","site_guid":"1","access_id":"2","name":"Yun Astronaut","username":"yunastronaut","language":"en","icontime":false,"legacy_guid":"19648","featured_id":false,"subscribed":false}],"load-next":"100000000000019648","load-previous":""};
-		//$scope.entities = data.entities;		
-		
+
 		$scope.refresh = function(){
 			$scope.next = "";
 			if($scope.type != 'channel'){
@@ -171,47 +169,43 @@ define(function () {
 				var subtype = '';
 				var type = 'user';
 			}
-			if($scope.query.string.length > 3){
-				$scope.entities = [];
-				console.log({ 
-					type: type,
-					subtype: subtype,
-					q: $scope.query.string,
-					limit: 24, 
-					offset: $scope.next, 
-					cachebreaker: Date.now(),
-					view: 'json'
-					});
-				Client.get('search', { 
-					type: type,
-					subtype: subtype,
-					q: $scope.query.string,
-					limit: 24, 
-					offset: $scope.next, 
-					cachebreaker: Date.now(),
-					view: 'json'
-					}, 
-	    			function(data){
-						
-						if(type == 'user'){
-							$scope.entities = data[type][0];
-							console.log($scope.entities);
-						} else {
-							$scope.entities = data[type][subtype];
-						}
-						
-						
-		    			Cacher.put('entities.data', $scope.entities);
-		
-		    			$scope.next = data['load-next'];
-		    			//Cacher.put('entities.next', $scope.next);
-		    			
-		    			$scope.$broadcast('scroll.infiniteScrollComplete');
-		    		}, 
-		    		function(error){ 
-		    			alert('error'); 
-		    		});
-			}
+			$timeout(function(){
+				
+			
+				if($scope.query.string.length > 3){
+					$scope.entities = [];
+					
+					Client.get('search', { 
+						type: type,
+						subtype: subtype,
+						q: $scope.query.string,
+						limit: 24, 
+						offset: $scope.next, 
+						cachebreaker: Date.now(),
+						view: 'json'
+						}, 
+		    			function(data){
+							
+							if(type == 'user'){
+								$scope.entities = data[type][0];
+								console.log($scope.entities);
+							} else {
+								$scope.entities = data[type][subtype];
+							}
+							
+							
+			    			Cacher.put('entities.data', $scope.entities);
+			
+			    			$scope.next = data['load-next'];
+			    			//Cacher.put('entities.next', $scope.next);
+			    			
+			    			$scope.$broadcast('scroll.infiniteScrollComplete');
+			    		}, 
+			    		function(error){ 
+			    			alert('error'); 
+			    		});
+				}
+			});
 			
 		};
 		

@@ -8,7 +8,7 @@
 define(function () {
     'use strict';
 
-    function ctrl($rootScope, $scope, $state, $stateParams, Client, storage, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicLoading, $timeout, $window) {
+    function ctrl($rootScope, $scope, $state, $stateParams, Client, storage, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicLoading, $timeout, $window, $ionicModal) {
 
     	$scope.cb = Date.now();
     	
@@ -73,6 +73,16 @@ define(function () {
      		
      	};
      	
+     	$scope.invite = function(){
+     		$ionicModal.fromTemplateUrl('templates/invite/invite.html', {
+	 		    scope: $scope,
+	 		    animation: 'slide-in-up'
+	 		  }).then(function(modal) {
+	 		    $scope.modal = modal;
+	 		    $scope.modal.show();
+	 		  });
+     	};
+     	
      	$scope.logout = function(){
 		  	storage.remove('loggedin');
 		  	storage.remove('access_token');
@@ -82,7 +92,7 @@ define(function () {
        
     }
 
-    ctrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', 'Client', 'storage', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$ionicLoading', '$timeout', '$window'];
+    ctrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', 'Client', 'storage', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$ionicLoading', '$timeout', '$window', '$ionicModal'];
     return ctrl;
     
 });

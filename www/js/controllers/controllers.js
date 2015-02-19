@@ -94,6 +94,16 @@ define(function (require) {
         }
     };
     
+    window.addEventListener('keypress', function (e) {
+
+        if (e.keyCode == 13) {
+
+        	cordova.plugins.Keyboard.close();
+
+        }
+
+    }, false);
+    
 	return controllers;
 
 });

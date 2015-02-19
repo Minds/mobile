@@ -85,10 +85,11 @@ define(['angular'], function (angular) {
 		 */
 		window.onNotificationAPN = function(e){
 			trigger(e.aps['url-args'][0], {service:'ios'});
-			$ionicPlatform.on('resume', function(){
+			var resume = function(){
 				trigger(e.aps['url-args'][0], {service:'ios', changeState: true});
-				document.removeEventListener('resume', this);
-			});
+				document.removeEventListener('resume', resume);
+			};
+	    	document.addEventListener('resume', resume);
 		}
 		
 		/**

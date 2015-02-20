@@ -6,13 +6,25 @@
 	    	<button class="button button-clear" ng-click="modal.remove()">Cancel</button>
 	 	 </div>
 	  	<h1 class="title">Status Post</h1>
+	  	<div class="buttons">
+	    	<button class="button button-clear minds-blue" ng-click="postStatus()">Post</button>
+	 	 </div>
 	</ion-header-bar>
 	
 	<ion-pane style="margin-top:50px">
 	
 		 <form ng-submit="postStatus()">
-            <textarea placeholder="Enter a message here..." ng-model="form.status" autofocus style="padding:32px 16px;">
+            <textarea placeholder="Enter a message here..." ng-model="form.status" ng-change="getStatusPreview()" style="padding:32px 16px;">
             </textarea>
+            
+            <div class="rich-embed" ng-show="form.meta">
+            
+            	<img ng-src="{{form.links[0].href}}" />	
+            	<h3>{{form.meta.title}}</h3>
+            	<p>{{form.meta.description}}</p>
+            	
+            </div>
+            
             <input type="submit" value="Post" class="button button-positive ion-paper-airplane-hide" style="float:right; margin-top:10px; margin-right:10px;"/>
         </form>
 	

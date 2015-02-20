@@ -8,7 +8,7 @@
 define(function () {
     'use strict';
 
-    function ctrl($scope, $stateParams, $state, $rootScope, Client, OAuth, storage, $ionicLoading, $ionicPopup, $ionicModal) {
+    function ctrl($scope, $stateParams, $state, $rootScope, Client, OAuth, storage, $ionicLoading, $ionicPopup, $ionicModal, $http) {
     
     	$scope.captured = false;
     	$scope.progress = 0;
@@ -159,7 +159,7 @@ define(function () {
 				template: '<p>Please wait...</p>'
 				});
 
-			Client.post('api/v1/newsfeed', {message: $scope.form.status}, function(success){
+			Client.post('api/v1/newsfeed', {message: $scope.form.status, meta: $scope.form.meta, links: $scope.form.links, url: $scope.form.url }, function(success){
 				$ionicLoading.hide();
 				$scope.modal.remove();
 				$state.go('tab.newsfeed', {}, {reload:true});
@@ -177,10 +177,46 @@ define(function () {
 	 		    $scope.modal.show();
 	 		  });
 		}
+		
+		$scope.getStatusPreview = function(){
+			var text = $scope.form.status;
+			var match = text.match(/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig);
+			console.log(text);
+			console.log(match);
+			if (!match)
+				return;
+	
+			if (match instanceof Array) {
+				var url = match[0];
+			} else {
+				var url = match;
+			}
+			
+			if (!url.length)
+				return;
+			
+			url = url.replace("http://", '');
+			url = url.replace("https://", '');
+			$scope.form.url = url;
+			$http({
+				method: 'GET',
+				url: 'https://iframely.com/iframely',
+				params: { uri: url},
+				cache: true
+				}).
+			      success(function(data){
+					$scope.form.meta = data.meta;
+					$scope.form.links = data.links;
+				  }).
+				  error(function(data){
+					console.log(data);
+				  });
+			
+		}
        
     }
 
-    ctrl.$inject = ['$scope', '$stateParams', '$state', '$rootScope', 'Client', 'OAuth', 'storage', '$ionicLoading', '$ionicPopup', '$ionicModal'];
+    ctrl.$inject = ['$scope', '$stateParams', '$state', '$rootScope', 'Client', 'OAuth', 'storage', '$ionicLoading', '$ionicPopup', '$ionicModal', '$http'];
     return ctrl;
     
 });

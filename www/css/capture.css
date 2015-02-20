@@ -12,3 +12,32 @@
 	margin:0;
 	border:0;
 }
+
+
+.rich-embed{
+	padding: 16px;
+	background:#EEE;
+	border:1px solid #DDD;
+}
+.rich-embed img{
+	float:left;
+	width:100px;
+	display:block;
+}
+.rich-embed h3{
+	font-size:16px;
+	padding: 0 8px;
+	margin:0;
+	display:block;
+	/* float:left; */
+	overflow:hidden;
+	height:58px;
+	/* white-space:nowrap; */
+	text-overflow: ellipsis;
+}
+.rich-embed p{
+	padding:12px 0;
+	/* height:40px; */
+	/* width:140px; */
+	clear:both;
+}

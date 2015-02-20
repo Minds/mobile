@@ -288,6 +288,14 @@ define(function () {
 							array.splice(index, 1);
 						}
 					});
+					if($scope.ChannelItems){
+						$scope.ChannelItems.forEach(function(item, index, array){
+							if(item.guid == guid){
+								console.log('removed');
+								array.splice(index, 1);
+							}
+						});
+					}
 				}, function(error){
 					console.log('error');
 				});
@@ -331,6 +339,7 @@ define(function () {
 			    	 		  }).then(function(modal) {
 			    	 		    $scope.modal = modal;
 			    	 		    $scope.guid = guid;
+			    	 		    $scope.owner_guid = activity.owner_guid;
 			    	 		    $scope.modal.show();
 			    	 		  });
 			    	 		  

@@ -30,7 +30,7 @@ define(function () {
     			$ionicLoading.hide();
     			if(success.count > $scope.data.points){
     				//commence the boost
-    				Client.post('api/v1/boost/newsfeed/' + $scope.guid, { impressions: $scope.data.impressions }, function(success){
+    				Client.post('api/v1/boost/newsfeed/' + $scope.guid + '/' + $scope.owner_guid, { impressions: $scope.data.impressions }, function(success){
     					if(success.status == 'success'){
     						$scope.modal.remove();
     						$ionicLoading.show({

@@ -70,8 +70,8 @@ define(function () {
 				
 				$scope.captured = true;
 				$scope.$apply();
-				console.log(mediaFile);
-				if(mediaFile.indexOf('.jpg') > -1 || mediaFile.indexOf('.png') > -1 || mediaFile.indexOf('.bmp') > -1 || mediaFile.indexOf('.jpeg') > -1){
+				
+				if(mediaFile.indexOf('document/image') || mediaFile.indexOf('.jpg') > -1 || mediaFile.indexOf('.png') > -1 || mediaFile.indexOf('.bmp') > -1 || mediaFile.indexOf('.jpeg') > -1){
 					$scope.upload(mediaFile, 'image');
 				} else {
 					$scope.upload(mediaFile, 'video');
@@ -194,10 +194,10 @@ define(function () {
 			
 			if (!url.length)
 				return;
-			
+			$scope.form.url = url;
 			url = url.replace("http://", '');
 			url = url.replace("https://", '');
-			$scope.form.url = url;
+			
 			$http({
 				method: 'GET',
 				url: 'https://iframely.com/iframely',

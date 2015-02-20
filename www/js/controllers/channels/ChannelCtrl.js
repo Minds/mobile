@@ -56,7 +56,7 @@ define(function () {
      			return false;
      		}
      		console.log('getting a users feed');
-	     	Client.get('api/v1/newsfeed/personal/' + $scope.channel.guid, { limit: 6, offset: $scope.next }, 
+	     	Client.get('api/v1/newsfeed/personal/' + $scope.channel.guid, { limit: 6, offset: $scope.next, cb: Date.now() }, 
 				function(data){
 	    		
 	    			if(!data.activity){

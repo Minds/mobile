@@ -44,27 +44,44 @@ define(['angular'],
 			             break;
 			        }
 			    }
-			    console.log(number);
 			    return number;
 			}
 		});
 		
-		filters.filter('linky', function(){
+		filters.filter('linky', function($sce){
 			return function(text) {
 		
 				 if (!text) return text;
 				  
 				 var replacedText = text;
 				 
+				 var url = /(\b(https?|http|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
+				 replacedText = text.replace(url, '<a href="$1">$1</a>');
+				 
 				 var hashtag = /(^|\s)#(\w*[a-zA-Z_]+\w*)/gim;
-				 replacedText = text.replace(hashtag, '$1<a href="#/tab/search">#$2</a>');
+				 replacedText = replacedText.replace(hashtag, '$1<a href="#/tab/search">#$2</a>');
 
 				 var tag = /(^|\s)\@(\w*[a-zA-Z_]+\w*)/gim;
 				 replacedText = replacedText.replace(tag, '$1<a class="tag" href="#/tab/newsfeed/channel/$2">@$2</a>');
-				 return replacedText;
+				 return $sce.trustAsHtml(replacedText);
 				 
 			}
          });
+		
+		filters.filter( 'domain', function () {
+			return function ( input ) {
+				var matches,
+					output = "",
+			    urls = /\w+:\/\/([\w|\.]+)/;
+			
+			    matches = urls.exec( input );
+			
+			    if ( matches !== null ) 
+			    	output = matches[1];
+			
+			    return output;
+			};
+		});
 				
 		return filters;
 

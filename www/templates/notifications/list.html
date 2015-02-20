@@ -66,6 +66,11 @@
                         		<p>{{notification.fromObj.name}} tagged you in a post</p>
                         	</a>
                         </div>
+                         <div ng-switch-when="boost_gift">
+                        	<a href="#/tab/notifications/entity/{{notification.entityObj.guid}}">
+                        		<p>{{notification.fromObj.name}} gifted you {{notification.params.impressions}} impressions for {{notification.entityObj.title}}</p>
+                        	</a>
+                        </div>
                         <div ng-switch-default>
                         	<i>Sorry, there was an error viewing this notification</i>
                         </div>

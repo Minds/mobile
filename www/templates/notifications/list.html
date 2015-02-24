@@ -51,7 +51,8 @@
                         		<p>{{notification.fromObj.name}} voted up {{notification.entityObj.title}}</p>
                         	</a>
                         	<a href="#/tab/notifications/entity/{{notification.entityObj.guid}}" ng-if="notification.entityObj.type == 'activity'">
-                        		<p>{{notification.fromObj.name}} voted up your activity</p>
+                        		<p ng-if="notification.title">{{notification.fromObj.name}} voted up {{notification.title}}</p>
+                        		<p ng-if="!notification.title">{{notification.fromObj.name}} voted up your activity</p>
                         	</a>
                         </div>
                         <!-- featured -->

@@ -6,6 +6,9 @@
     
 	<ion-content>
 		<!-- kind of mish-mashy... -->
+		<div class="loading">
+				<i class="icon ion-loading-d" ng-if="!entity.guid"></i>
+			</div>
 		
 		<div ng-switch="entity.type">
 			<div ng-switch-when="object">
@@ -18,13 +21,20 @@
 		
 		<!-- show comments here -->
 		<ion-list>
-			<div ng-repeat="comment in comments" class="list card">
-				<owner-brief-view owner="{{comment.ownerObj}}" ts="{{comment.time_created}}"></owner-brief-view>
-				<div class="item item-text-wrap" ng-bind-html="comment.description | linky" ng-click="removeComment(comment.guid)">
+			<div class="loading">
+				<i class="icon ion-loading-d" ng-if="comments.length == 0"></i>
+			</div>
+			<div ng-repeat="comment in comments" class="comment-item" ng-class="$even ? 'even' : 'odd'">
+				
+				<a href="#/tab/newsfeed/channel/{{comment.ownerObj.guid}}">
+					<img ng-src="{{$root.node_url}}icon/{{comment.ownerObj.guid}}/small"/>
+				</a>
+				
+				<div class="content item-text-wrap" ng-bind-html="comment.description | linky" ng-click="removeComment(comment.guid)">
 				</div>
 			</div>	
 		</ion-list>
-		<div class="list card">
+		<div class="list card" style="clear:both; margin-top:15px;">
 			<div class="item item-input-inset">
 			 	<label class="item-input-wrapper" style="background:transparent">
 					<textarea placeholder="Type your comment here..." ng-model="comment.body">

@@ -25,7 +25,7 @@ define(function () {
 				function(data){
 		    		console.log(data);
 		    		console.log('api/v1/subscribe/subscribers/' + $stateParams.guid);
-	    			if(!data.users){
+	    			if(!data.users || !data['load-next']){
 	    				$scope.$broadcast('scroll.refreshComplete');
 	    				$scope.hasMoreData = false;
 	    				return false;

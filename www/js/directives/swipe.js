@@ -50,7 +50,7 @@ define(['angular'], function (angular) {
 					}
 					
 					element.css('webkitTransform', 'translate3d(' + x + 'px, ' + y + 'px, 0) rotate(' + (rotationAngle || 0) + 'rad)');
-					//element.css('z-index', 99999999);
+					element.css('z-index', 99999999);
 					
 				}, element);
 				

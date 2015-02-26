@@ -22,7 +22,9 @@
 }
 
 .swipe-container .card{
-	margin-bottom:1000px;
+	/*margin-bottom:1000px;
+	 */
+	margin-bottom:8px;
 }
 .forced-scroll .swipe-container .card{
 	margin-bottom:0;
@@ -33,7 +35,12 @@
 .swipe-container .card .item-image-user{
 	max-height:300px;
 }
-
+.loading{
+	text-align:center;
+}
+.loading > i{
+	font-size:24px;
+}
 .loading-bulb-glow{
 	width:80px;
 	text-align:center;

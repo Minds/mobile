@@ -36,6 +36,10 @@
         <p ng-show="activity.perma_url">{{activity.perma_url | domain}}</p>
     </div>
     
+    <div class="boosted-bar" ng-show="activity.boosted">
+        <i class="icon ion-arrow-graph-up-right"></i> Boosted
+    </div>
+    
     <div class="item tabs tabs-secondary tabs-icon-left" style="padding:0;background-color:#F7F7F7 !important;">
         <a class="tab-item small-font thumbs-up" ng-click="thumbsUp(activity.guid)" thumbs="{{activity['thumbs:up:user_guids']}}">
                <i style="padding-left:4px;" class="icon ion-thumbsup"></i>

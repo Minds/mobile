@@ -20,3 +20,8 @@
 	margin:2px;
 	box-shadow: 0 0 3px #888;
 }
+
+.boosted-bar{
+	padding:4px;
+	color:#888;
+}

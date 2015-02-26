@@ -20,10 +20,11 @@ define(function () {
      		if($scope.inprogress)
      			return false;
      		$scope.inprogress = true;
-
+     		console.log($scope.next);
+     		console.log($stateParams.guid);
 	     	Client.get('api/v1/subscribe/subscriptions/' + $stateParams.guid, { limit: 6, offset: $scope.next }, 
 				function(data){
-	    			if(!data.users){
+	    			if(!data.users.length || !data['load-next']){
 	    				$scope.$broadcast('scroll.refreshComplete');
 	    				$scope.hasMoreData = false;
 	    				return false;

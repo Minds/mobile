@@ -53,7 +53,6 @@ define(function () {
 			    }
 			}, function(){
 				console.log('capture failed');
-				alert('Uploading to Minds will be here soon!');
 			}, {
 				limit: 1,
 				correctOrientation: true,
@@ -80,7 +79,6 @@ define(function () {
 
 			}, function(message){
 				console.log('capture failed');
-				alert('Uploading to Minds will be here soon!');
 			}, {
 				correctOrientation: true,
 				destinationType: Camera.DestinationType.FILE_URI,
@@ -159,7 +157,13 @@ define(function () {
 				template: '<p>Please wait...</p>'
 				});
 
-			Client.post('api/v1/newsfeed', {message: $scope.form.status, meta: $scope.form.meta, links: $scope.form.links, url: $scope.form.url }, function(success){
+			Client.post('api/v1/newsfeed', {
+					message: $scope.form.status, 
+					title: $scope.form.meta.title, 
+					description: $scope.form.meta.description,
+					thumbnail: $scope.form.links[0].href, 
+					url: $scope.form.url 
+			}, function(success){
 				$ionicLoading.hide();
 				$scope.modal.remove();
 				$state.go('tab.newsfeed', {}, {reload:true});

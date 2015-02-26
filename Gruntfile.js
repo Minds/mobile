@@ -14,7 +14,8 @@ module.exports = function (grunt) {
                         'www/css/gatherings.css',
                         'www/css/notifications.css',
 			'www/css/capture.css',
-			'www/css/wallet.css'
+			'www/css/wallet.css',
+			'www/css/comments.css'
                     ]
                 }
             }

@@ -31,11 +31,15 @@
                         			<p>{{notification.fromObj.name}} commented on {{notification.entityObj.title}}</p>
                         		</a>
                         		<a ng-switch-when="activity" href="#/tab/notifications/entity/{{notification.entityObj.guid}}">
-                        			<p ng-if="notification.entityObj.owner_guid == $root.user_guid">
+                        			<p ng-if="notification.entityObj.owner_guid == $root.user_guid && !notification.entityObj.title">
                         				{{notification.fromObj.name}} commented on your activity
                         			</p>
-                        			<p ng-if="notification.entityObj.owner_guid != $root.user_guid">
+                        			<p ng-if="notification.entityObj.owner_guid != $root.user_guid  && !notification.entityObj.title">
                         			{{notification.fromObj.name}} commented on {{notification.entityObj.ownerObj.name}}'s activity
+                        			</p>
+                        			
+                        			<p ng-if="notification.entityObj.title">
+                        			{{notification.fromObj.name}} commented on {{notification.entityObj.title}}
                         			</p>
                         		</a>
                         		<a ng-switch-default>
@@ -51,8 +55,8 @@
                         		<p>{{notification.fromObj.name}} voted up {{notification.entityObj.title}}</p>
                         	</a>
                         	<a href="#/tab/notifications/entity/{{notification.entityObj.guid}}" ng-if="notification.entityObj.type == 'activity'">
-                        		<p ng-if="notification.title">{{notification.fromObj.name}} voted up {{notification.title}}</p>
-                        		<p ng-if="!notification.title">{{notification.fromObj.name}} voted up your activity</p>
+                        		<p ng-if="notification.params.title">{{notification.fromObj.name}} voted up {{notification.params.title}}</p>
+                        		<p ng-if="!notification.params.title">{{notification.fromObj.name}} voted up your activity</p>
                         	</a>
                         </div>
                         <!-- featured -->
@@ -70,6 +74,26 @@
                          <div ng-switch-when="boost_gift">
                         	<a href="#/tab/notifications/entity/{{notification.entityObj.guid}}">
                         		<p>{{notification.fromObj.name}} gifted you {{notification.params.impressions}} impressions for {{notification.entityObj.title}}</p>
+                        	</a>
+                        </div>
+	                     <div ng-switch-when="boost_submitted">
+	                    	<a href="#/tab/notifications/entity/{{notification.entityObj.guid}}">
+	                    		<p>{{notification.params.impressions}} impressions for {{notification.entityObj.title}} is awaiting approval.</p>
+	                    	</a>
+                        </div>
+                         <div ng-switch-when="boost_rejected">
+                        	<a href="#/tab/notifications/entity/{{notification.entityObj.guid}}">
+                        		<p>{{notification.params.impressions}} impressions for {{notification.entityObj.title}} was rejected. Your points have been credited back to your wallet.</p>
+                        	</a>
+                        </div>
+                         <div ng-switch-when="boost_accepted">
+                        	<a href="#/tab/notifications/entity/{{notification.entityObj.guid}}">
+                        		<p>{{notification.params.impressions}} impressions for {{notification.entityObj.title}} were accepted.</p>
+                        	</a>
+                        </div>
+                        <div ng-switch-when="boost_completed">
+                        	<a href="#/tab/notifications/entity/{{notification.entityObj.guid}}">
+                        		<p>{{notification.params.impressions}}/{{notification.params.impressions}} impressions for {{notification.entityObj.title}} have been met.</p>
                         	</a>
                         </div>
                         <div ng-switch-default>

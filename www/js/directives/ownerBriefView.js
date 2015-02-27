@@ -3,7 +3,7 @@
 define(['angular'], function (angular) {
     "use strict";
 
-    var directive = function ($rootScope, $filter) {
+    var directive = function ($rootScope, $filter, Client) {
 	 	return {
        		restrict: 'E',
 			templateUrl: function(elem, attr){
@@ -20,10 +20,21 @@ define(['angular'], function (angular) {
 				} else {
 					scope.ts = '';
 				}
+				
+				scope.subscribe = function(){
+					scope.user.subscribed = true;
+					Client.post('api/v1/subscribe/' + scope.user.guid, {},
+							function(){
+								
+							},
+							function(){
+							});
+					
+				};
 			}
        	 };
     };
 
-    directive.$inject = ['$rootScope', '$filter'];
+    directive.$inject = ['$rootScope', '$filter', 'Client'];
     return directive;
 });

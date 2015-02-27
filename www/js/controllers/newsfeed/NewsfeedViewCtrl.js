@@ -8,7 +8,7 @@
 define(function () {
     'use strict';
 
-    function ctrl($scope, $stateParams, Client, $ionicActionSheet) {
+    function ctrl($scope, $stateParams, Client, $ionicLoading, $ionicActionSheet) {
     	
     	$scope.guid = "";
     	$scope.cb = Date.now();
@@ -69,12 +69,15 @@ define(function () {
 		
 		$scope.submit = function(){
 			
+			$ionicLoading.show({
+				template: '<i class="icon ion-loading-d"></i>'
+				});
 			
 			Client.post('api/v1/comments/' + $scope.guid, { 
 					comment: $scope.comment.body
 				}, 
 				function(data){
-					
+					$ionicLoading.hide();
 	    			$scope.comments.push(data.comment);
 	    			$scope.cb = Date.now();
 	    	
@@ -115,7 +118,7 @@ define(function () {
 		
     }
 
-    ctrl.$inject = ['$scope', '$stateParams', 'Client', '$ionicActionSheet'];
+    ctrl.$inject = ['$scope', '$stateParams', 'Client', '$ionicLoading', '$ionicActionSheet'];
     return ctrl;
     
 });

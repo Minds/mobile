@@ -5,9 +5,7 @@
     </ion-nav-buttons>
 
     <ion-content>
-    	<div class="loading">
-			<i class="icon ion-loading-d" ng-if="!activity.guid"></i>
-		</div>
+    	
     	<activity-view ng-if="activity.guid" id="{{activity.guid}}" class="activity-item list card" ng-controller="NewsfeedCtrl"></activity-view>
     	
     	<!-- show comments here -->
@@ -15,7 +13,7 @@
 			<div class="loading">
 				<i class="icon ion-loading-d" ng-if="comments.length == 0"></i>
 			</div>
-			<div ng-repeat="comment in comments" class="comment-item" ng-class="$even ? 'odd' : 'even'">
+			<div ng-repeat="comment in comments" class="comment-item" ng-class-future="$even ? 'odd' : 'even'">
 				
 				<a href="#/tab/newsfeed/channel/{{comment.ownerObj.guid}}">
 					<img ng-src="{{$root.node_url}}icon/{{comment.ownerObj.guid}}/small"/>

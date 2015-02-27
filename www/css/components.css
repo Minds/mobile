@@ -39,7 +39,7 @@
 	text-align:center;
 }
 .loading > i{
-	font-size:24px;
+	font-size:36px;
 }
 .loading-bulb-glow{
 	width:80px;
@@ -151,9 +151,10 @@ progress[value] {
 }
 
 .card .item-image{
+	background:#FAFAFA;
 	overflow:hidden !important;
 	height:auto;
-	min-height:180px;
+	min-height:150px;
 	margin-left:-5px !important;
 	width:calc(100% + 10px) !important;
 	border:0;

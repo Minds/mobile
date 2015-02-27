@@ -1,5 +1,12 @@
 <a class="item item-avatar" href="#/tab/newsfeed/channel/{{user.guid}}">
     <img image-cache ng-src="{{node_url}}icon/{{user.guid}}/small"/>
-    <h2>{{user.name}}</h2>
+    
+     <i class="icon ion-person-add channel-user-subscribe" 
+			ng-if="user.subscribed == false"
+			ng-click="$event.preventDefault(); subscribe()"> </i>
+
+    
+    <h2 style="font-weight:400;">{{user.name}}</h2>
     <p>{{ts}}</p>
+   
 </a>

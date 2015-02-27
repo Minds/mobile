@@ -89,7 +89,10 @@ define(['angular'], function (angular) {
 				trigger(e.aps['url-args'][0], {service:'ios', changeState: true});
 				document.removeEventListener('resume', resume);
 			};
-	    	document.addEventListener('resume', resume);
+			//delay this (fyi this is bad code!!) so that the remove listener does not interfere..
+			setTimeout(function(){
+				document.addEventListener('resume', resume);
+			}, 300); 
 		}
 		
 		/**
@@ -123,7 +126,10 @@ define(['angular'], function (angular) {
 						trigger(e.payload.uri, {service:'android', changeState: true});
 						document.removeEventListener('resume', resume);
 					};
-			    	document.addEventListener('resume', resume);
+					//delay this (fyi this is bad code!!) so that the remove listener does not interfere..
+					setTimeout(function(){
+						document.addEventListener('resume', resume);
+					}, 300); 
 			    break;
 			    case 'error':
 			       console.log('Notification error:: ' + e.msg);

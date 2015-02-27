@@ -25,7 +25,7 @@ define(['angular'], function (angular) {
 						template: 'Loading...'
 					});
 					$timeout(function(){
-						$ionicLoading.hide();
+					//	$ionicLoading.hide();
 					}, 3000);
 					
 					scope.showVideo = true;
@@ -36,7 +36,7 @@ define(['angular'], function (angular) {
 					
 					var video = el[0].querySelector('#video');
 					video.src = scope.srcFull;
-					
+					console.log("trying to play:: " + video.src);
 					video.load();
 					video.play();
 					video.webkitRequestFullscreen();
@@ -46,6 +46,7 @@ define(['angular'], function (angular) {
  						$ionicLoading.hide();
  					};
  					video.onerror = function(){
+ 						$ionicLoading.hide();
  						alert('error in playing');
  					};
  					

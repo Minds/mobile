@@ -70,7 +70,7 @@ define(function () {
 				$scope.captured = true;
 				$scope.$apply();
 				
-				if(mediaFile.indexOf('document/image') || mediaFile.indexOf('.jpg') > -1 || mediaFile.indexOf('.png') > -1 || mediaFile.indexOf('.bmp') > -1 || mediaFile.indexOf('.jpeg') > -1){
+				if(mediaFile.indexOf('document/image') > -1 || mediaFile.indexOf('.jpg') > -1 || mediaFile.indexOf('.png') > -1 || mediaFile.indexOf('.bmp') > -1 || mediaFile.indexOf('.jpeg') > -1){
 					$scope.upload(mediaFile, 'image');
 				} else {
 					$scope.upload(mediaFile, 'video');

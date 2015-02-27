@@ -6,10 +6,7 @@
     
 	<ion-content>
 		<!-- kind of mish-mashy... -->
-		<div class="loading">
-				<i class="icon ion-loading-d" ng-if="!entity.guid"></i>
-			</div>
-		
+
 		<div ng-switch="entity.type">
 			<div ng-switch-when="object">
 				<div class="list card tabs-background-white " ng-include src="'templates/discover/entities/object.html'"></div>
@@ -24,7 +21,7 @@
 			<div class="loading">
 				<i class="icon ion-loading-d" ng-if="comments.length == 0"></i>
 			</div>
-			<div ng-repeat="comment in comments" class="comment-item" ng-class="$even ? 'even' : 'odd'">
+			<div ng-repeat="comment in comments" class="comment-item" ng-class-future="$even ? 'even' : 'odd'">
 				
 				<a href="#/tab/newsfeed/channel/{{comment.ownerObj.guid}}">
 					<img ng-src="{{$root.node_url}}icon/{{comment.ownerObj.guid}}/small"/>

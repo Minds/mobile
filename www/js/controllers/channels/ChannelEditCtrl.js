@@ -73,6 +73,45 @@ define(function () {
      		
      	};
      	
+     	
+     	$scope.addBanner = function(){
+     		
+     		navigator.camera.getPicture(onSuccess, onFail, { 
+     			quality: 50,
+     		    destinationType: Camera.DestinationType.FILE_URI,
+     		    sourceType : 0,
+     		   correctOrientation: true
+     		});
+
+     		function onSuccess(imageData) {
+     		    //var image = document.getElementById('avatar');
+     		    //image.src = imageData;
+     		    
+     		    var ft = new FileTransfer();
+	   	        var options = new FileUploadOptions();
+	   	        //options.httpMethod = 'PUT';
+	   	        options.headers = {"Authorization": "Bearer " + storage.get('access_token') };
+	   	        console.log(imageData);
+	   	      	ft.upload(imageData, encodeURI($rootScope.node_url + 'api/v1/channel/banner'), 
+	   	      		function(success){
+			   	      $rootScope.globalCB = Date.now();
+	   	      		}, 
+	   	      		function(error){
+	   	      			console.log('error');
+	   	      			console.log(error);
+	   	      		}, 
+	   	      		options
+	   	      		);
+
+     		    
+     		}
+
+     		function onFail(message) {
+     		    alert('Failed because: ' + message);
+     		}
+     		
+     	};
+     	
      	$scope.invite = function(){
      		$ionicModal.fromTemplateUrl('templates/invite/invite.html', {
 	 		    scope: $scope,

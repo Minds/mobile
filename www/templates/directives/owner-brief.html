@@ -2,7 +2,7 @@
     <img image-cache ng-src="{{node_url}}icon/{{user.guid}}/small"/>
     
      <i class="icon ion-person-add channel-user-subscribe" 
-			ng-if="user.subscribed == false"
+			ng-if="user.subscribed == false && showSubscribeButton"
 			ng-click="$event.preventDefault(); subscribe()"> </i>
 
     

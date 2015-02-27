@@ -21,6 +21,10 @@ define(['angular'], function (angular) {
 					scope.ts = '';
 				}
 				
+				if(attrs.showSubscribeButton){
+					scope.showSubscribeButton = true;
+				}
+				
 				scope.subscribe = function(){
 					scope.user.subscribed = true;
 					Client.post('api/v1/subscribe/' + scope.user.guid, {},

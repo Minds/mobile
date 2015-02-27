@@ -25,8 +25,8 @@ define(['angular'], function (angular) {
 						template: 'Loading...'
 					});
 					$timeout(function(){
-					//	$ionicLoading.hide();
-					}, 3000);
+						$ionicLoading.hide();
+					}, 5000);
 					
 					scope.showVideo = true;
 					if ( device.platform == 'android' || device.platform == 'Android' ){

@@ -57,13 +57,15 @@
               <icon src="res/android/dpi.png" density="hdpi" />
               <icon src="res/android/dpi.png" density="xhdpi" />
 
-	<splash src="res/android/screen-dpi.png" density="land-hdpi"/>
- 	<splash src="res/android/screen-dpi.png" density="land-ldpi"/>
-	<splash src="res/android/screen-dpi.png" density="land-mdpi"/>
-	<splash src="res/android/screen-dpi.png" density="land-xhdpi"/>
+	<splash src="res/android/screen-dpi.png" density="port-hdpi"/>
+ 	<splash src="res/android/screen-dpi.png" density="port-ldpi"/>
+	<splash src="res/android/screen-dpi.png" density="port-mdpi"/>
+	<splash src="res/android/screen-dpi.png" density="port-xhdpi"/>
 
      </platform>
 
+	<preference name="SplashScreen" value="screen" />
+<preference name="SplashScreenDelay" value="3000" />
 
     <feature name="StatusBar">
             <param name="ios-package" value="CDVStatusBar" onload="true" />

@@ -179,6 +179,16 @@ progress[value] {
 	opacity:0.75;
 }
 
+.boost-tab{
+	margin:-24px auto 0;
+	width:50px;
+	text-align:center;
+}
+.boost-tab > i{
+	font-size:26px;
+	color:#666;
+}
+
 /**
  * Search
  */

@@ -8,7 +8,7 @@
 define(function () {
     'use strict';
 
-    function ctrl($scope, $stateParams, Client, Cacher, $ionicPopup, $ionicScrollDelegate, $ionicLoading, $timeout) {
+    function ctrl($scope, $stateParams, Client, Cacher, $ionicPopup, $ionicScrollDelegate, $ionicLoading, $ionicModal, $ionicActionSheet, $timeout) {
 
 		$scope.entities = [];
 		if(Cacher.get('entities.next')){
@@ -334,10 +334,66 @@ define(function () {
 				$ionicLoading.hide();
 				}, 300);
 		}
+		
+		$scope.boost = function(entity){
+			$ionicModal.fromTemplateUrl('templates/wallet/boost.html', {
+	 		    scope: $scope,
+	 		    animation: 'slide-in-up'
+	 		  }).then(function(modal) {
+	 		    $scope.modal = modal;
+	 		    $scope.type = 'suggested';
+	 		    $scope.entity = entity;
+	 		    $scope.modal.show();
+	 		  });
+			
+		};
+		
+		$scope.openActions = function(entity){
+			$ionicActionSheet.show({
+			     buttons: [
+			       { text: 'Boost' },
+			       { text: '<b>Share</b>' },
+			       { text: 'Report this' }
+			     ],
+			     cancelText: 'Cancel',
+			     cancel: function() {
+			          // add cancel code..
+			        },
+			     buttonClicked: function(index) {
+			    	 switch(index){
+			    	 	case 0:
+			    	 		$ionicModal.fromTemplateUrl('templates/wallet/boost.html', {
+			    	 		    scope: $scope,
+			    	 		    animation: 'slide-in-up'
+			    	 		  }).then(function(modal) {
+			    	 		    $scope.modal = modal;
+			    	 		    $scope.type = 'suggested';
+			    	 		    $scope.entity = entity;
+			    	 		    $scope.modal.show();
+			    	 		  });
+			    	 		  
+			    	 		break;
+			    	 	case 1:
+			    	 		//cordova.plugins.clipboard.copy($rootScope.node_url + '/newsfeed/' + guid);
+			    	 		$ionicLoading.show({
+			    				template: '<p> Copied to clipboard </p>'
+			    				});
+			    			$timeout(function(){
+			    				$ionicLoading.hide();
+			    				}, 1000);
+			    	 		break;
+			    	 	case 3:
+			    	 		window.location.href = "mailto:report@minds.com?subject=Report " + entity.guid + "&body=This content violates the terms and conditions";
+			    	 }
+			       return true;
+			     }
+			   });
+			
+		}
 
     }
 
-    ctrl.$inject = ['$scope', '$stateParams', 'Client', 'Cacher', '$ionicPopup', '$ionicScrollDelegate', '$ionicLoading', '$timeout'];
+    ctrl.$inject = ['$scope', '$stateParams', 'Client', 'Cacher', '$ionicPopup', '$ionicScrollDelegate', '$ionicLoading', '$ionicModal',  '$ionicActionSheet', '$timeout'];
     return ctrl;
     
 });

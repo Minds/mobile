@@ -1,0 +1,34 @@
+<ion-modal-view ng-controller="BoostCtrl" class="view-bg">
+	
+
+	<ion-header-bar>
+		<div class="buttons">
+	    	<button class="button button-clear" ng-click="modal.remove()">Cancel</button>
+	 	 </div>
+	  	<h1 class="title">Boost</h1>
+	</ion-header-bar>
+	
+	<ion-content>
+	
+		<div class="wallet-points-input">
+			<div class="cell">
+				<input type="number" ng-model="data.points" /> 
+			</div>
+			<div class="cell">
+				<label>Points</label>
+			</div>
+		</div>
+		
+		<div class="wallet-points-input">
+			<div class="cell">
+				<input type="number" ng-model="data.impressions" disabled/> 
+			</div>
+			<div class="cell">
+				<label>Impressions</label>
+			</div>
+		</div>
+		
+		<button class="button wallet-purchase-button" ng-click="boost()">Boost!</button>
+	
+	</ion-content>
+</ion-modal-view>

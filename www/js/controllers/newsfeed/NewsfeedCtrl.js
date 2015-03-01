@@ -307,7 +307,8 @@ define(function () {
 		};
 		
 		$scope.openUrl = function(url){
-			window.open(url, '_blank', {toolbarposition:'top'});
+			console.log(url);
+			window.open(url, "_blank", "location=yes");
 		};
 		
 		$scope.openActions = function(activity){

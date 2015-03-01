@@ -65,12 +65,14 @@ define(function (require) {
      * Discover
      */
    	controllers.controller('DiscoverCtrl', require('controllers/discover/DiscoverCtrl'));
+	
    	
    	/**
    	 * Wallet
    	 */
    	controllers.controller('WalletCtrl', require('controllers/wallet/WalletCtrl'));
    	controllers.controller('WalletDepositCtrl', require('controllers/wallet/WalletDepositCtrl'));
+   	controllers.controller('BoostCtrl', require('controllers/wallet/BoostCtrl'));
    	
    	/**
    	 * Invite

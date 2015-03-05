@@ -3,7 +3,7 @@
 <!-- Video -->
 <div class="item item-image item-image-video" ng-if="entity.subtype == 'video'" play-video playsrc="{{entity.src['360.mp4']}}">
           
-	<img ng-src="{{entity.thumbnail_src}}">
+	<img ng-src="{{entity.thumbnail_src}}" onerror="this.src='img/img-placeholder.png'">
      <i class="icon ion-play"></i>
      <div class="overlay">
     	<h2>{{entity.title}}</h2>

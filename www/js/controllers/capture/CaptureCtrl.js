@@ -156,18 +156,20 @@ define(function () {
 			$ionicLoading.show({
 				template: '<p>Please wait...</p>'
 				});
-
+console.log($scope.form.links[0].href);
 			Client.post('api/v1/newsfeed', {
 					message: $scope.form.status, 
 					title: $scope.form.meta.title, 
 					description: $scope.form.meta.description,
-					thumbnail: $scope.form.links[0].href, 
-					url: $scope.form.url 
+					thumbnail: encodeURIComponent($scope.form.links[0].href), 
+					url: $scope.form.meta.canonical
 			}, function(success){
 				$ionicLoading.hide();
 				$scope.modal.remove();
 				$state.go('tab.newsfeed', {}, {reload:true});
 				$scope.$emit('newsfeed:updated');
+			}, function(error){
+				$ionicLoading.hide();
 			});
 			
 		};
@@ -213,6 +215,7 @@ define(function () {
 				cache: true
 				}).
 			      success(function(data){
+			     
 					$scope.form.meta = data.meta;
 					$scope.form.links = data.links;
 				  }).

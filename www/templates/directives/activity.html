@@ -12,18 +12,18 @@
     <!--Rich content -->
 
     <div class="item item-image" ng-if="activity.thumbnail_src" ng-click="openUrl(activity.perma_url)">
-        <img ng-src="{{activity.thumbnail_src}}">
+        <img ng-src="{{activity.thumbnail_src}}"  onerror="this.src='img/img-placeholder.png'">
     </div>
     
     <!-- Custom type:: batch -->
     <div class="item item-image" ng-if="activity.custom_type == 'batch'">
-        <img ng-repeat="data in activity.custom_data" ng-src="{{data.src}}">
+        <img ng-repeat="data in activity.custom_data" ng-src="{{data.src}}"  onerror="this.src='img/img-placeholder.png'">
     </div>
     
     <!-- Custom type:: video -->
     <div class="item item-image item-image-video" ng-if="activity.custom_type == 'video'" play-video playsrc="{{node_url}}api/v1/archive/{{activity.custom_data.guid}}/play">
               
-         <img ng-src="{{activity.custom_data.thumbnail_src}}">
+         <img ng-src="{{activity.custom_data.thumbnail_src}}" onerror="this.src='img/img-placeholder.png'">
          <i class="icon ion-play"></i>
          
           <video id="video" ng-show="showVideo" width="300px" height="300px;" style="background:#000;" preload="auto" loop controls></video>

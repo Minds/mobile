@@ -46,7 +46,7 @@ define(function () {
     		
     		Client.get('api/v1/notifications', { limit: 12, offset: $scope.next, cachebreaker: $scope.cachebreaker }, 
     			function(data){
-    		
+    	
 	    			if(!data.notifications){
 	    				$scope.hasMoreData = false;
 	    				return false;

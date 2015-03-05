@@ -63,6 +63,8 @@ define(function () {
 						offset: $scope.offset
 					}, 
 					function(data){
+					
+						$scope.inprogress = false;
 
 						if(!data.comments || data.comments.length == 0){
 							$scope.hasMore = false;
@@ -77,14 +79,13 @@ define(function () {
 		    			}
 		    			
 		    			$scope.$broadcast('scroll.infiniteScrollComplete');
-		    			$scope.inprogress = false;
 		    		}, 
 		    		function(error){ 
 		    			alert('error'); 
 		    			$scope.inprogress = false;
 		    		});
 			
-		}
+		};
 		
 		$scope.submit = function(){
 			
@@ -102,7 +103,7 @@ define(function () {
 	    			alert('error'); 
 	    		});
 			$scope.comment.body = '';
-		}
+		};
 		
 		$scope.removeComment = function(guid){
 			
@@ -132,7 +133,7 @@ define(function () {
 			});
 			
 			
-		}
+		};
 					
 		
     }

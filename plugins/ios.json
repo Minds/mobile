@@ -13,7 +13,15 @@
                             "count": 1
                         },
                         {
+                            "xml": "<feature name=\"PayPalMobile\"><param name=\"ios-package\" onload=\"true\" value=\"PayPalMobileCordovaPlugin\" /></feature>",
+                            "count": 1
+                        },
+                        {
                             "xml": "<feature name=\"PushPlugin\"><param name=\"ios-package\" value=\"PushPlugin\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Clipboard\"><param name=\"ios-package\" value=\"CDVClipboard\" /></feature>",
                             "count": 1
                         },
                         {
@@ -26,6 +34,10 @@
                         },
                         {
                             "xml": "<feature name=\"Console\"><param name=\"ios-package\" value=\"CDVLogger\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Contacts\"><param name=\"ios-package\" value=\"CDVContacts\" /></feature>",
                             "count": 1
                         },
                         {
@@ -51,70 +63,12 @@
                         {
                             "xml": "<feature name=\"Capture\"><param name=\"ios-package\" value=\"CDVCapture\" /></feature>",
                             "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Clipboard\"><param name=\"ios-package\" value=\"CDVClipboard\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Contacts\"><param name=\"ios-package\" value=\"CDVContacts\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"PayPalMobile\"><param name=\"ios-package\" onload=\"true\" value=\"PayPalMobileCordovaPlugin\" /></feature>",
-                            "count": 1
                         }
                     ]
                 }
             },
             "framework": {
                 "parents": {
-                    "ImageIO.framework": [
-                        {
-                            "xml": "true",
-                            "count": 1
-                        }
-                    ],
-                    "CoreLocation.framework": [
-                        {
-                            "xml": "false",
-                            "count": 1
-                        },
-                        {
-                            "xml": "true",
-                            "count": 1
-                        }
-                    ],
-                    "CoreGraphics.framework": [
-                        {
-                            "xml": "false",
-                            "count": 6
-                        }
-                    ],
-                    "AssetsLibrary.framework": [
-                        {
-                            "xml": "false",
-                            "count": 3
-                        }
-                    ],
-                    "MobileCoreServices.framework": [
-                        {
-                            "xml": "false",
-                            "count": 4
-                        }
-                    ],
-                    "AddressBook.framework": [
-                        {
-                            "xml": "true",
-                            "count": 1
-                        }
-                    ],
-                    "AddressBookUI.framework": [
-                        {
-                            "xml": "true",
-                            "count": 1
-                        }
-                    ],
                     "AudioToolbox.framework": [
                         {
                             "xml": "false",
@@ -128,6 +82,22 @@
                         }
                     ],
                     "CFNetwork.framework": [
+                        {
+                            "xml": "false",
+                            "count": 1
+                        }
+                    ],
+                    "CoreGraphics.framework": [
+                        {
+                            "xml": "false",
+                            "count": 6
+                        }
+                    ],
+                    "CoreLocation.framework": [
+                        {
+                            "xml": "true",
+                            "count": 1
+                        },
                         {
                             "xml": "false",
                             "count": 1
@@ -155,6 +125,12 @@
                         {
                             "xml": "false",
                             "count": 1
+                        }
+                    ],
+                    "MobileCoreServices.framework": [
+                        {
+                            "xml": "false",
+                            "count": 4
                         }
                     ],
                     "Security.framework": [
@@ -192,6 +168,30 @@
                             "xml": "false",
                             "count": 1
                         }
+                    ],
+                    "ImageIO.framework": [
+                        {
+                            "xml": "true",
+                            "count": 1
+                        }
+                    ],
+                    "AssetsLibrary.framework": [
+                        {
+                            "xml": "false",
+                            "count": 3
+                        }
+                    ],
+                    "AddressBook.framework": [
+                        {
+                            "xml": "true",
+                            "count": 1
+                        }
+                    ],
+                    "AddressBookUI.framework": [
+                        {
+                            "xml": "true",
+                            "count": 1
+                        }
                     ]
                 }
             },
@@ -211,13 +211,22 @@
         "com.ionic.keyboard": {
             "PACKAGE_NAME": "com.minds.mobile"
         },
+        "com.paypal.cordova.mobilesdk": {
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
         "com.phonegap.plugins.PushPlugin": {
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
+        "com.verso.cordova.clipboard": {
             "PACKAGE_NAME": "com.minds.mobile"
         },
         "org.apache.cordova.camera": {
             "PACKAGE_NAME": "com.minds.mobile"
         },
         "org.apache.cordova.console": {
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
+        "org.apache.cordova.contacts": {
             "PACKAGE_NAME": "com.minds.mobile"
         },
         "org.apache.cordova.crypt": {
@@ -236,15 +245,6 @@
             "PACKAGE_NAME": "com.minds.mobile"
         },
         "org.apache.cordova.media-capture": {
-            "PACKAGE_NAME": "com.minds.mobile"
-        },
-        "com.verso.cordova.clipboard": {
-            "PACKAGE_NAME": "com.minds.mobile"
-        },
-        "org.apache.cordova.contacts": {
-            "PACKAGE_NAME": "com.minds.mobile"
-        },
-        "com.paypal.cordova.mobilesdk": {
             "PACKAGE_NAME": "com.minds.mobile"
         }
     },

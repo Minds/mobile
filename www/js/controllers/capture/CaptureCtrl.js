@@ -180,7 +180,11 @@ define(function () {
 	 		    $scope.modal = modal;
 	 		    $scope.modal.show();
 	 		  });
-		}
+		};
+		
+		$scope.$on('modal.removed', function() {
+		    $scope.form = {};
+		});
 		
 		$scope.getStatusPreview = function(){
 			var text = $scope.form.status;
@@ -216,7 +220,7 @@ define(function () {
 					console.log(data);
 				  });
 			
-		}
+		};
        
     }
 

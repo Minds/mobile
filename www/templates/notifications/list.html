@@ -28,18 +28,20 @@
                         	
                         	<div ng-switch="notification.entityObj.type">
                         		<a ng-switch-when="object" href="#/tab/notifications/entity/{{notification.entityObj.guid}}">
-                        			<p>{{notification.fromObj.name}} commented on {{notification.entityObj.title}}</p>
+                        			<p>
+                        			 {{notification.fromObj.name}} commented on <span class="minds-blue">{{notification.entityObj.title}}</span>
+                        			</p>
                         		</a>
                         		<a ng-switch-when="activity" href="#/tab/notifications/entity/{{notification.entityObj.guid}}">
                         			<p ng-if="notification.entityObj.owner_guid == $root.user_guid && !notification.entityObj.title">
-                        				{{notification.fromObj.name}} commented on your activity
+                        				{{notification.fromObj.name}} commented on <span class="minds-blue">your activity</span>
                         			</p>
                         			<p ng-if="notification.entityObj.owner_guid != $root.user_guid  && !notification.entityObj.title">
-                        			{{notification.fromObj.name}} commented on {{notification.entityObj.ownerObj.name}}'s activity
+                        			{{notification.fromObj.name}} commented on <span class="minds-blue">{{notification.entityObj.ownerObj.name}}'s activity</span>
                         			</p>
                         			
                         			<p ng-if="notification.entityObj.title">
-                        			{{notification.fromObj.name}} commented on {{notification.entityObj.title}}
+                        			{{notification.fromObj.name}} commented on <span class="minds-blue">{{notification.entityObj.title}}</span>
                         			</p>
                         		</a>
                         		<a ng-switch-default>
@@ -55,8 +57,12 @@
                         		<p>{{notification.fromObj.name}} voted up {{notification.entityObj.title}}</p>
                         	</a>
                         	<a href="#/tab/notifications/entity/{{notification.entityObj.guid}}" ng-if="notification.entityObj.type == 'activity'">
-                        		<p ng-if="notification.params.title">{{notification.fromObj.name}} voted up {{notification.params.title}}</p>
-                        		<p ng-if="!notification.params.title">{{notification.fromObj.name}} voted up your activity</p>
+                        		<p ng-if="notification.entityObj.title">
+                        		  {{notification.fromObj.name}} voted up <span class="minds-blue">{{notification.entityObj.title}}</span>
+                        		</p>
+                        		<p ng-if="!notification.entityObj.title">
+                        		  {{notification.fromObj.name}} voted up <span class="minds-blue">your activity</span>
+                        		</p>
                         	</a>
                         </div>
                         <!-- featured -->
@@ -67,33 +73,37 @@
                         </div>
                         <!-- mention -->
                         <div ng-switch-when="tag">
-                        	<a href="#/tab/notifications/entity/{{notification.entityObj.guid}}">
+                            <!-- tags from comments link differently -->
+                        	<a href="#/tab/notifications/entity/{{notification.entityObj.guid}}" ng-if="notification.entityObj.type != 'comment'">
                         		<p>{{notification.fromObj.name}} tagged you in a post</p>
                         	</a>
+                        	<a href="#/tab/notifications/entity/{{notification.entityObj.parent_guid}}" ng-if="notification.entityObj.type == 'comment'">
+                                <p>{{notification.fromObj.name}} tagged you in a comment</p>
+                            </a>
                         </div>
                          <div ng-switch-when="boost_gift">
                         	<a href="#/tab/notifications/entity/{{notification.entityObj.guid}}">
-                        		<p>{{notification.fromObj.name}} gifted you {{notification.params.impressions}} impressions for {{notification.entityObj.title}}</p>
+                        		<p>{{notification.fromObj.name}} gifted you {{notification.params.impressions}} impressions for <span class="minds-blue">{{notification.entityObj.title}}</span></p>
                         	</a>
                         </div>
 	                     <div ng-switch-when="boost_submitted">
 	                    	<a href="#/tab/notifications/entity/{{notification.entityObj.guid}}">
-	                    		<p>{{notification.params.impressions}} impressions for {{notification.entityObj.title}} is awaiting approval.</p>
+	                    		<p>{{notification.params.impressions}} impressions for <span class="minds-blue">{{notification.entityObj.title}}</span> is awaiting approval.</p>
 	                    	</a>
                         </div>
                          <div ng-switch-when="boost_rejected">
                         	<a href="#/tab/notifications/entity/{{notification.entityObj.guid}}">
-                        		<p>{{notification.params.impressions}} impressions for {{notification.entityObj.title}} was rejected. Your points have been credited back to your wallet.</p>
+                        		<p>{{notification.params.impressions}} impressions for <span class="minds-blue">{{notification.entityObj.title}}</span> was rejected. Your points have been credited back to your wallet.</p>
                         	</a>
                         </div>
                          <div ng-switch-when="boost_accepted">
                         	<a href="#/tab/notifications/entity/{{notification.entityObj.guid}}">
-                        		<p>{{notification.params.impressions}} impressions for {{notification.entityObj.title}} were accepted.</p>
+                        		<p>{{notification.params.impressions}} impressions for <span class="minds-blue">{{notification.entityObj.title}}</span> were accepted.</p>
                         	</a>
                         </div>
                         <div ng-switch-when="boost_completed">
                         	<a href="#/tab/notifications/entity/{{notification.entityObj.guid}}">
-                        		<p>{{notification.params.impressions}}/{{notification.params.impressions}} impressions for {{notification.entityObj.title}} have been met.</p>
+                        		<p>{{notification.params.impressions}}/{{notification.params.impressions}} impressions for <span class="minds-blue">{{notification.entityObj.title}}</span> have been met.</p>
                         	</a>
                         </div>
                         <div ng-switch-default>

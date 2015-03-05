@@ -17,6 +17,7 @@ define(['app'], function (app) {
             $stateProvider
                 .state('loading', {
                     url: "/loading",
+                    cache: true,
                     templateUrl: "templates/loading.html",
                   //  controller: 'LoginCtrl'
                 })

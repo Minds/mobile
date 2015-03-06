@@ -8,7 +8,7 @@
 define(function () {
     'use strict';
 
-    function ctrl($scope, $stateParams, $state, $rootScope, Client, OAuth, storage, $ionicLoading, $ionicPopup, $ionicModal, $http) {
+    function ctrl($scope, $stateParams, $state, $rootScope, Client, OAuth, storage, $ionicLoading, $ionicPopup, $ionicModal, $http, $timeout) {
     
     	$scope.captured = false;
     	$scope.progress = 0;
@@ -70,7 +70,7 @@ define(function () {
 				$scope.captured = true;
 				$scope.$apply();
 				
-				if(mediaFile.indexOf('document/image') > -1 || mediaFile.indexOf('.jpg') > -1 || mediaFile.indexOf('.png') > -1 || mediaFile.indexOf('.bmp') > -1 || mediaFile.indexOf('.jpeg') > -1){
+				if(mediaFile.indexOf('images') > -1 || mediaFile.indexOf('document/image') > -1 || mediaFile.indexOf('.jpg') > -1 || mediaFile.indexOf('.png') > -1 || mediaFile.indexOf('.bmp') > -1 || mediaFile.indexOf('.jpeg') > -1){
 					$scope.upload(mediaFile, 'image');
 				} else {
 					$scope.upload(mediaFile, 'video');
@@ -122,10 +122,12 @@ define(function () {
 		};
 		
 		$scope.save = function(){
-		
-			$ionicLoading.show({
-		      template: 'Please wait a moment...'
-		    });
+			
+			$timeout(function(){
+				$ionicLoading.show({
+			      template: 'Please wait a moment...'
+			    });
+		    }, 5000);
 
 			Client.post('api/v1/archive/' + $scope.guid, {
 					album_title: 'Mobile',
@@ -153,6 +155,7 @@ define(function () {
 		};
 		
 		$scope.postStatus = function(){
+			
 			$ionicLoading.show({
 				template: '<p>Please wait...</p>'
 				});
@@ -227,7 +230,7 @@ console.log($scope.form.links[0].href);
        
     }
 
-    ctrl.$inject = ['$scope', '$stateParams', '$state', '$rootScope', 'Client', 'OAuth', 'storage', '$ionicLoading', '$ionicPopup', '$ionicModal', '$http'];
+    ctrl.$inject = ['$scope', '$stateParams', '$state', '$rootScope', 'Client', 'OAuth', 'storage', '$ionicLoading', '$ionicPopup', '$ionicModal', '$http', '$timeout'];
     return ctrl;
     
 });

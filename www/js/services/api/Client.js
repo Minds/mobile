@@ -10,7 +10,7 @@
 define(['angular'], function (angular) {
     "use strict";
 
-    var factory = function (OAuth, $rootScope, $http) {
+    var factory = function (OAuth, $rootScope, $http, storage, $state) {
 
         return {
         
@@ -23,9 +23,23 @@ define(['angular'], function (angular) {
 					cache: true
 					}).
 				      success(function(data){
+				        if(data.code == 401){
+				        	//go to login
+				        	storage.remove('access_token');
+				        	storage.remove('loggedin');
+				        	$state.go('login');
+				        	return false;
+				        }
 						success_callback(data);
 					  }).
 					  error(function(data){
+					 	if(data.code == 401){
+				        	//go to login
+				        	storage.remove('access_token');
+				        	storage.remove('loggedin');
+				        	$state.go('login');
+				        	return false;
+				        }
 						error_callback(data);
 					  });
 						
@@ -85,6 +99,6 @@ define(['angular'], function (angular) {
 
     };
 
-    factory.$inject = ['OAuth', '$rootScope', '$http'];
+    factory.$inject = ['OAuth', '$rootScope', '$http', 'storage', '$state'];
     return factory;
 });

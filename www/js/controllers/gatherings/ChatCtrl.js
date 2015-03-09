@@ -8,7 +8,7 @@
 define(function () {
     'use strict';
 
-    function ctrl($rootScope, $scope, $state, Client, storage, push, $ionicModal) {
+    function ctrl($rootScope, $scope, $state, Client, storage, push, $ionicModal, $ionicPopup) {
     	
     	$scope.conversations = [];
     	$scope.next  = "";
@@ -85,7 +85,7 @@ define(function () {
     		Client.get('search', {q: $scope.search.query, type:'user', view:'json'}, function(success){
     			$scope.conversations = success.user[0];
     		});
-    	}
+    	};
         
         $scope.$on('$stateChangeSuccess', function() {
         	console.log('state changed..');
@@ -99,6 +99,23 @@ define(function () {
 			$scope.previous = "";
 			$scope.cb = Date.now();
 			$scope.loadMore(true);
+		};
+		
+		$scope.subscribe = function($index){
+			$scope.conversations[$index].subscribed = true;
+			if(!$scope.conversations[$index].subscriber){
+				$ionicPopup.alert({
+					title: 'Subscribed',
+					template: 'You can chat with ' + $scope.conversations[$index].name + ' when they subscribe to you too'
+				});
+			} else {
+				window.location.href = '#/tab/gatherings/conversations/' +  $scope.conversations[$index].guid + '/' +  $scope.conversations[$index].name;
+			}
+			Client.post('api/v1/subscribe/' + $scope.conversations[$index].guid, {},
+					function(){
+					},
+					function(){
+					});
 		};
 		
 		
@@ -117,7 +134,7 @@ define(function () {
 		
     }
 
-    ctrl.$inject = ['$rootScope', '$scope', '$state', 'Client', 'storage', 'push', '$ionicModal'];
+    ctrl.$inject = ['$rootScope', '$scope', '$state', 'Client', 'storage', 'push', '$ionicModal', '$ionicPopup'];
     return ctrl;
     
 });

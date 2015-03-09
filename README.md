@@ -10,16 +10,16 @@ The minds mobile apps source code repository.
 
 ##Features
 
-####Encrypted Chat 
-####News Feed 
-####Capture (Video, Photos, Attach from library)
-####Voting
-####Followers
-####Discover (Search and swipe to vote and connect)
-####Profile
-####Wallet (Earn or buy poins and spend for viral reach)
-####Notifications
-####Comments
+- Encrypted Chat 
+- News Feed 
+- Capture (Video, Photos, Attach from library)
+- Voting
+- Followers
+- Discover (Search and swipe to vote and connect)
+- Profile
+- Wallet (Earn or buy poins and spend for viral reach)
+- Notifications
+- Comments
 
 ##Tech
 
@@ -81,26 +81,10 @@ npm install
 
 ### Compiling / Building
 
-You will need to run the following command to compile the css files.
+Run `cordova build`
 
-```
-grunt compile
-```
+### Environment configurations
 
-##TODO:
+Minds supports multiple environments. See `config/config-example.js` for an example. 
 
-- [x] Architect the base stucture
-- [x] Create controllers and views for:
-  - [x] Newsfeed
-  - [x] Chat/Gatherings
-  - [x] Profile
-  - [x] Archive
-    - [x] Capture
-    - [ ] View
-- [x] Build services to interact with API
-  - [x] Newsfeed
-  - [x] Chat/Gatherings
-  - [x] Profile
-  - [x] Archive
-- [x] Improve UI/UX
-- [ ] Unit tests
+To run a production build run `export config_target=prod; cordova build`

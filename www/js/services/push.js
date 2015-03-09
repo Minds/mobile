@@ -79,21 +79,28 @@ define(['angular'], function (angular) {
 				}
 			
 		};
+		
+		var active = false;
+		document.addEventListener('resume', function(){
+			//give the app time to load
+			setTimeout(function(){
+				active = true;
+				}, 1000);
+		});
+		document.addEventListener('pause', function(){
+			active = false;
+		});
 
 		/**
 		 * iOS Specific callback
 		 */
 		window.onNotificationAPN = function(e){
 			trigger(e.aps['url-args'][0], {service:'ios'});
-			var resume = function(){
+			
+			if(!active){
 				trigger(e.aps['url-args'][0], {service:'ios', changeState: true});
-				document.removeEventListener('resume', resume);
-			};
-			//delay this (fyi this is bad code!!) so that the remove listener does not interfere..
-			setTimeout(function(){
-				document.addEventListener('resume', resume);
-			}, 300); 
-		}
+			}
+		};
 		
 		/**
 		 * Android specific callback
@@ -126,6 +133,7 @@ define(['angular'], function (angular) {
 						trigger(e.payload.uri, {service:'android', changeState: true});
 						document.removeEventListener('resume', resume);
 					};
+					
 					//delay this (fyi this is bad code!!) so that the remove listener does not interfere..
 					setTimeout(function(){
 						document.addEventListener('resume', resume);

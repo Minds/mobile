@@ -20,6 +20,9 @@ DerivedData
 platforms/*
 !platforms/README.md
 
+config/*
+!config/config-example.js
+
 node_modules
 npm-debug.log
 tmp

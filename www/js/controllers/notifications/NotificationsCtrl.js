@@ -8,12 +8,17 @@
 define(function () {
     'use strict';
 
-    function ctrl($rootScope, $scope,  $ionicScrollDelegate, Cacher, Client, storage, $ionicPopover, $ionicLoading, $timeout) {
+    function ctrl($rootScope, $scope,  $ionicScrollDelegate, Cacher, Client, storage, $ionicPopover, $ionicLoading, $timeout, push) {
 
     	$scope.$on('$ionicView.beforeEnter', function(){
 			$rootScope.newNotification = false;
 			$scope.refresh();
     	});
+    	
+    	push.listen('notification', function(params){
+    		$rootScope.newNotification = false;
+			$scope.refresh();
+		});
     	
 		/** Cached or fresh **/
 		if(Cacher.get('notification.items')){
@@ -113,7 +118,7 @@ define(function () {
 		
     }
 
-    ctrl.$inject = ['$rootScope', '$scope', '$ionicScrollDelegate', 'Cacher', 'Client', 'storage', '$ionicPopover', '$ionicLoading', '$timeout'];
+    ctrl.$inject = ['$rootScope', '$scope', '$ionicScrollDelegate', 'Cacher', 'Client', 'storage', '$ionicPopover', '$ionicLoading', '$timeout', 'push'];
     return ctrl;
     
 });

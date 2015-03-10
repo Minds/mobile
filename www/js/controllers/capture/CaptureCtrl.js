@@ -33,7 +33,7 @@ define(function () {
 				console.log('capture failed');
 			}, {
 				limit: 1, 
-				duration:30
+				duration: 360
 			});
 		};
 		
@@ -159,14 +159,21 @@ define(function () {
 			$ionicLoading.show({
 				template: '<p>Please wait...</p>'
 				});
-console.log($scope.form.links[0].href);
-			Client.post('api/v1/newsfeed', {
+				
+			var data = {
+					message: $scope.form.status, 
+					};
+			if($scope.form.meta){
+				data = {
 					message: $scope.form.status, 
 					title: $scope.form.meta.title, 
 					description: $scope.form.meta.description,
 					thumbnail: encodeURIComponent($scope.form.links[0].href), 
 					url: $scope.form.meta.canonical
-			}, function(success){
+				};
+			}
+
+			Client.post('api/v1/newsfeed', data, function(success){
 				$ionicLoading.hide();
 				$scope.modal.remove();
 				$state.go('tab.newsfeed', {}, {reload:true});

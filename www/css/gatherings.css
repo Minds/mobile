@@ -40,6 +40,11 @@
 	float:right;
 	color:#FFF;
 }
+.message.message-right .message-content a.tag{
+	color:#EEE;
+	text-decoration:none;
+	font-weight:bold;
+}
 
 .message img{
 	float:left;

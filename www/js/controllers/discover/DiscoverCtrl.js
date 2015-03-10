@@ -172,7 +172,7 @@ define(function () {
 			$timeout(function(){
 				
 			
-				if($scope.query.string.length > 3){
+				if($scope.query.string.length > 2){
 					$scope.entities = [];
 					
 					Client.get('search', { 

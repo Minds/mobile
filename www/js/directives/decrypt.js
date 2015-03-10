@@ -16,7 +16,7 @@ define(['angular', 'JSEncrypt'], function (angular, JSEncrypt) {
 				crypt.setPrivateKey(storage.get('private-key'));
 				
 				crypt.decrypt(attrs.message, function(success){
-		    			scope.message = linkify(success);
+		    			scope.message = $filter('linky')(success);
 		    			//scope.$apply();
 						element.html($sce.getTrustedHtml(scope.message));
 				});

@@ -70,7 +70,9 @@ define(function () {
 		};
 		
 		$scope.submit = function(){
-			
+			if(!$scope.comment.body){
+				return;
+			}
 			$ionicLoading.show({
 				template: '<i class="icon ion-loading-d"></i>'
 				});

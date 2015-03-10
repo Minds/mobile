@@ -65,6 +65,20 @@
                         		</p>
                         	</a>
                         </div>
+                        <!-- Remind --> 
+                        <div ng-switch-when="remind">
+                            <a href="#/tab/notifications/entity/{{notification.entityObj.guid}}" ng-if="notification.entityObj.type == 'object'">
+                                <p>{{notification.fromObj.name}} reminded up {{notification.entityObj.title}}</p>
+                            </a>
+                            <a href="#/tab/notifications/entity/{{notification.entityObj.guid}}" ng-if="notification.entityObj.type == 'activity'">
+                                <p ng-if="notification.entityObj.title">
+                                  {{notification.fromObj.name}} reminded <span class="minds-blue">{{notification.entityObj.title}}</span>
+                                </p>
+                                <p ng-if="!notification.entityObj.title">
+                                  {{notification.fromObj.name}} reminded <span class="minds-blue">your activity</span>
+                                </p>
+                            </a>
+                        </div>
                         <!-- featured -->
                         <div ng-switch-when="feature">
                         	<a href="#/tab/notifications/entity/{{notification.entityObj.guid}}">
@@ -112,7 +126,7 @@
                     </div>
                     
                     <i class="icon ion-person-add notification-user-subscribe" 
-						ng-if="notification.ownerObj.subscribed == false"
+						ng-if="notification.ownerObj.subscribed == false && $root.user_guid != notification.ownerObj.guid"
 						ng-click="subscribe(notification)"> </i>
                    
                  </div>

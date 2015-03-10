@@ -26,7 +26,7 @@ define(function () {
 		
     			$scope.entity = data.entity;
     			$scope.activity = data.entity;
-    			
+    			    			
     			$scope.guid = $scope.entity.guid;
     			
     			if($scope.entity.type == 'activity'){
@@ -88,7 +88,9 @@ define(function () {
 		};
 		
 		$scope.submit = function(){
-			
+			if(!$scope.comment.body){
+				return;
+			}
 			
 			Client.post('api/v1/comments/' + $scope.guid, { 
 					comment: $scope.comment.body

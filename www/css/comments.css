@@ -6,10 +6,10 @@
 	margin:15px 5px !important;
 	padding:0 !important;
 }
-.comment-item a{
+.comment-item > a{
 	float:left;
 }
-.comment-item a img{
+.comment-item > a img{
 	width:24px;
 	margin:8px 4px;
 	border-radius:3px;
@@ -19,9 +19,9 @@
 	float:left;
 	border-radius:3px;
 	border:0;
-	margin:0 5px;
+	margin:0 5px 12px;
 	width:auto;
-	max-width:220px;
+	max-width:calc(100% - 50px);
 	background:#EEE;
 	padding:10px;
 	box-shadow:0 0 3px #888;

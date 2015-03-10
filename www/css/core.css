@@ -38,7 +38,7 @@
 	text-align:center;
 	padding:50px 0;
 	
-	background:url('../img/splash.jpg') no-repeat center center fixed;
+	/*background:url('../img/splash.jpg') no-repeat center center fixed;*/
 	-webkit-background-size: cover;
   	-moz-background-size: cover;
  	-o-background-size: cover;
@@ -92,6 +92,15 @@ a.tag{
 	color:#4690C3;
 	text-decoration:none;
 	font-weight:bold;
+}
+
+.allow-select img{
+    -webkit-user-select: auto !important;
+        -khtml-user-select: auto !important;
+        -moz-user-select: auto !important;
+        -ms-user-select: auto !important;
+        -o-user-select: auto !important;
+        user-select: auto !important;  
 }
 
 .minds-yellow{

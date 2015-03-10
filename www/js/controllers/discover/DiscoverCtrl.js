@@ -185,6 +185,8 @@ define(function () {
 						view: 'json'
 						}, 
 		    			function(data){
+		    			
+		    				$ionicScrollDelegate.scrollTop();
 							
 							if(type == 'user'){
 								$scope.entities = data[type][0];

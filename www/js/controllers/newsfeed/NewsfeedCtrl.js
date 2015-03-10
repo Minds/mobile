@@ -108,6 +108,9 @@ define(function () {
 			//increment count
 			$rootScope.points = $rootScope.points + 1;
 			
+			if($scope.ChannelItems)
+				$scope.newsfeedItems = $scope.ChannelItems;
+			
 			Client.put('api/v1/thumbs/'+guid+'/up', {},
 				function(success){
 					$scope.newsfeedItems.forEach(function(item, index, array){
@@ -146,6 +149,9 @@ define(function () {
 		$scope.thumbsDown = function(guid){
 			//increment count
 			$rootScope.points = $rootScope.points + 1;
+			
+			if($scope.ChannelItems)
+				$scope.newsfeedItems = $scope.ChannelItems;
 			
 			Client.put('api/v1/thumbs/'+guid+'/down', {},
 				function(success){
@@ -382,7 +388,7 @@ define(function () {
 			     }
 			   });
 			
-		}
+		};
 		
     }
 

@@ -30,8 +30,16 @@ define(function () {
     		Client.get('api/v1/wallet/count', { cb: Date.now() }, function(success){
     			$ionicLoading.hide();
     			if(success.count > $scope.data.points){
+    				var endpoint = 'api/v1/boost/newsfeed/' + $scope.guid + '/' + $scope.owner_guid;
+    				if($scope.data.destination){
+    					endpoint = 'api/v1/boost/channel/' + $scope.guid + '/' + $scope.owner_guid;
+    				}
     				//commence the boost
-    				Client.post('api/v1/boost/newsfeed/' + $scope.guid + '/' + $scope.owner_guid, { impressions: $scope.data.impressions }, function(success){
+    				Client.post(endpoint, { 
+    						impressions: $scope.data.impressions,
+    						destination: $scope.data.destination
+    					
+    					}, function(success){
     					if(success.status == 'success'){
     						$scope.modal.remove();
     						$ionicLoading.show({
@@ -42,7 +50,12 @@ define(function () {
     						}, 500);
     						
     					} else {
-    						alert('sorry, something went wrong');
+    						$ionicLoading.show({
+								template: 'Sorry, something went wrong.'
+								});
+    						$timeout(function(){
+    							$ionicLoading.hide();
+    						}, 500);
     					}
     				});
     				

@@ -53,7 +53,7 @@ wallet-counter{
 	padding:8px;
 	font-size:22px;
 	font-weight:bold;
-	text-align:right;
+	text-align:left;
 }
 .wallet-users-list > div img{
 	vertical-align: middle;

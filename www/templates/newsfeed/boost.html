@@ -9,6 +9,23 @@
 	</ion-header-bar>
 	
 	<ion-content>
+	   
+	   <div class="wallet-points-input wallet-destination-input">
+	       <div class="cell destination">
+                    <input type="text" ng-model="data.destination" placeholder="Global (All)" ng-keyup="changeDestination($event)" /> 
+            </div>
+            <div class="cell">
+                <label>Destination</label>
+            </div>
+	       
+	       <div class="wallet-users-list" ng-show="searching">
+	           <div ng-repeat="user in results" ng-click="selectDestination(user)">
+	               
+	                <img src="{{$root.node_url}}icon/{{user.guid}}/small" />
+	                 @{{user.username}}
+	           </div>
+	       </div>
+	   </div>
 	
 		<div class="wallet-points-input">
 			<div class="cell">

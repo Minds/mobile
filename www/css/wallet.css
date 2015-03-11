@@ -8,7 +8,7 @@ wallet-counter{
 .wallet-points-input{
 	display:table;
 	vertical-align:middle;
-	padding:28px 0;
+	padding:18px 0;
 }
 .wallet-points-input .cell{
 	display:table-cell;
@@ -32,6 +32,39 @@ wallet-counter{
 	font-weight:200;
 	font-size:22px;
 }
+.wallet-points-input .destination > input{
+	line-height:46px;
+	background:#EEE;
+	font-size:22px;
+	-webkit-box-shadow:  inset 0 0 3px #888;
+	box-shadow: inset 0 0 3px #888;
+}
+.wallet-users-list{
+	position: absolute;
+	margin-top: 60px;
+	left: 8px;
+	width: calc(100% - 16px);
+	background: #EEE;
+	opacity:1;
+	z-index:9;
+	box-shadow: 0 0 3px #888;
+}
+.wallet-users-list > div{
+	padding:8px;
+	font-size:22px;
+	font-weight:bold;
+	text-align:right;
+}
+.wallet-users-list > div img{
+	vertical-align: middle;
+	border-radius:2px;
+	box-shadow:0 0 3px #888;
+	width:35px;
+	height:35px;
+	overflow:hidden;
+	position:relative;
+}
+	
 .wallet-purchase-button{
 	width: auto;
 	margin: 8px auto;

@@ -11,6 +11,7 @@ define(function () {
     function ctrl( $rootScope, $scope, $state, $stateParams, $ionicLoading, $ionicPopup, $timeout, Client) {
 
     	$scope.data = {
+    		destination: '',
     		points: 500,
     		impressions: 500 * 1
     	};
@@ -68,6 +69,35 @@ define(function () {
     			
     		});
 
+    	};
+    	
+    	$scope.searching = false;
+    	$scope.results = [];
+    	$scope.changeDestination = function(e){
+    		$scope.searching = true;
+    		if($scope.data.destination.charAt(0) != '@' && $scope.data.destination.length != 0){
+    			$scope.data.destination = '@' + $scope.data.destination;
+    		}
+    		if(e.keyCode == 13){
+    			$scope.searching = false;
+    		}
+    		
+    		var query = $scope.data.destination;
+    		if(query.charAt(0) == '@'){
+    			query = query.substr(1);
+    		}
+    		
+    		Client.get('search', {q: query, type:'user', view:'json', limit:5}, 
+    			function(success){
+    				$scope.results = success.user[0];
+    			});
+    		
+    		console.log('changing');
+    	};
+    	
+    	$scope.selectDestination = function(user){
+    		$scope.searching = false;
+    		$scope.data.destination = '@' + user.username;
     	};
     	
     }

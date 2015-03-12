@@ -8,7 +8,7 @@
 define(function () {
     'use strict';
 
-    function ctrl($rootScope, $scope,  $ionicScrollDelegate, Cacher, Client, storage, $ionicPopover, $ionicLoading, $timeout, push) {
+    function ctrl($rootScope, $scope,  $ionicScrollDelegate, Cacher, Client, storage, $ionicPopover, $ionicLoading, $ionicModal,  $timeout, push) {
 
     	$scope.$on('$ionicView.beforeEnter', function(){
 			$rootScope.newNotification = false;
@@ -113,12 +113,24 @@ define(function () {
 			$timeout(function(){
 				$ionicLoading.hide();
 				}, 300);
-		}
+		};
+		
+		
+		$scope.loadBoostReview = function(guid){
+			$ionicModal.fromTemplateUrl('templates/wallet/review_boost.html', {
+	 		    scope: $scope,
+	 		    animation: 'slide-in-up'
+	 		  }).then(function(modal) {
+	 		    $scope.modal = modal;
+	 		    $scope.guid = guid;
+	 		    $scope.modal.show();
+	 		  });
+		};
 		
 		
     }
 
-    ctrl.$inject = ['$rootScope', '$scope', '$ionicScrollDelegate', 'Cacher', 'Client', 'storage', '$ionicPopover', '$ionicLoading', '$timeout', 'push'];
+    ctrl.$inject = ['$rootScope', '$scope', '$ionicScrollDelegate', 'Cacher', 'Client', 'storage', '$ionicPopover', '$ionicLoading', '$ionicModal', '$timeout', 'push'];
     return ctrl;
     
 });

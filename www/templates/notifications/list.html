@@ -105,6 +105,11 @@
 	                    		<p>{{notification.params.impressions}} impressions for <span class="minds-blue">{{notification.entityObj.title}}</span> is awaiting approval.</p>
 	                    	</a>
                         </div>
+                        <div ng-switch-when="boost_request">
+                            <a ng-click="loadBoostReview(notification.fromObj.guid)">
+                                <p>{{notification.fromObj.name}} is offering you {{notification.params.points}} points to boost <span class="minds-blue">{{notification.entityObj.title}}</span></p>
+                            </a>
+                        </div>
                          <div ng-switch-when="boost_rejected">
                         	<a href="#/tab/notifications/entity/{{notification.entityObj.guid}}">
                         		<p>{{notification.params.impressions}} impressions for <span class="minds-blue">{{notification.entityObj.title}}</span> was rejected. Your points have been credited back to your wallet.</p>

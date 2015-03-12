@@ -73,6 +73,7 @@ define(function (require) {
    	controllers.controller('WalletCtrl', require('controllers/wallet/WalletCtrl'));
    	controllers.controller('WalletDepositCtrl', require('controllers/wallet/WalletDepositCtrl'));
    	controllers.controller('BoostCtrl', require('controllers/wallet/BoostCtrl'));
+   	controllers.controller('BoostReviewCtrl', require('controllers/wallet/BoostReviewCtrl'));
    	
    	/**
    	 * Invite

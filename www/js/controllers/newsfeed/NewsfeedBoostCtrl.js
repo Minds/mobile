@@ -34,11 +34,11 @@ define(function () {
     				if($scope.data.destination){
     					endpoint = 'api/v1/boost/channel/' + $scope.guid + '/' + $scope.owner_guid;
     				}
+
     				//commence the boost
     				Client.post(endpoint, { 
     						impressions: $scope.data.impressions,
-    						destination: $scope.data.destination
-    					
+    						destination: $scope.data.destination.charAt(0) == '@' ? $scope.data.destination.substr(1) : $scope.data.destination
     					}, function(success){
     					if(success.status == 'success'){
     						$scope.modal.remove();

@@ -117,6 +117,7 @@ define(function () {
 		
 		
 		$scope.loadBoostReview = function(guid){
+			$scope.guid = guid;
 			$ionicModal.fromTemplateUrl('templates/wallet/review_boost.html', {
 	 		    scope: $scope,
 	 		    animation: 'slide-in-up'

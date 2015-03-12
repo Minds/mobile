@@ -9,8 +9,39 @@
 	</ion-header-bar>
 	
 	<ion-content>
+	
+	   <div ng-if="error">
+	       We couldn't load this post.
+	   </div>
+	
+        <div class="wallet-points-input">
+            <div class="cell">
+                <input type="text" value="+ {{points}}" disabled/> 
+            </div>
+            <div class="cell">
+                <label>Points</label>
+            </div>
+        </div>
 	   
-	   ACCEPT OR REJECT
+        <div class="wallet-points-input" style="width:100%;">
+            <div class="cell">
+                <div class="button" style="width:100%; background:green; color:#FFF;" ng-click="accept()">Accept</div>
+            </div>
+            <div class="cell">
+               <div class="button" style="width:100%; background:red; color:#FFF;" ng-click="reject()">Reject</div>
+            </div>
+        </div>
+	   
+	
+	   <div ng-switch="entity.type">
+            <div ng-switch-when="object">
+                <div class="list card tabs-background-white " ng-include src="'templates/discover/entities/object.html'"></div>
+            </div>
+            <div ng-switch-when="activity">
+                <activity-view class="activity-item list card"></activity-view>
+            </div>
+        </div>
+        
 	
 	</ion-content>
 </ion-modal-view>

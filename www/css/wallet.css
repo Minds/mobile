@@ -8,7 +8,7 @@ wallet-counter{
 .wallet-points-input{
 	display:table;
 	vertical-align:middle;
-	padding:18px 0;
+	padding:5px 0;
 }
 .wallet-points-input .cell{
 	display:table-cell;

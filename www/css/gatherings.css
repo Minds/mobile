@@ -34,7 +34,9 @@
 }
 .message .message-content:before {
 }
-	
+.message .message-content .decrypting {
+	padding:12px 0 ;
+}
 .message.message-right .message-content{
 	background:#4690D6;
 	float:right;

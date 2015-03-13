@@ -36,13 +36,23 @@
 			</div>
 		</div>
 		
-		<div class="wallet-points-input">
+		<div class="wallet-points-input" ng-if="!data.destination">
 			<div class="cell">
 				<input type="number" ng-model="data.impressions" disabled/> 
 			</div>
 			<div class="cell">
 				<label>Impressions</label>
 			</div>
+		</div>
+		
+		<div class="wallet-points-input" ng-if="!data.destination">
+		  <p style="color:#888;
+padding:0 16px;
+font-size:11px;">
+		      Transactions are non-refundable. 
+		      You will be notified when your post reaches the requested number of impressions. 
+		      The amount of time this will take depends on site activity, so don't worry if you don't hear from us for a while; we will keep it in circulation until it reaches the goal!
+		  </p>
 		</div>
 		
 		<button class="button wallet-purchase-button" ng-click="boost()">Boost!</button>

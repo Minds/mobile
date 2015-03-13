@@ -13,12 +13,17 @@ define(function () {
     	$scope.data = {
     		destination: '',
     		points: 500,
-    		impressions: 500 * 1
+    		impressions: 500 * 1,
+    		rate: 1
     	};
     	
     	$scope.$watch('data.points', function(){
-    		$scope.data.impressions = $scope.data.points * 1;
+    		$scope.data.impressions = $scope.data.points * $scope.data.rate;
     	}, true);
+    	
+    	Client.get('api/v1/boost/rates', { cb: Date.now() }, function(success){
+    		$scope.data.rate = success.rate;
+    	});
     	
     	$scope.boost = function(){
     		
@@ -60,23 +65,43 @@ define(function () {
     				});
     				
     			} else {
-    				$ionicPopup.alert({
-   				     title: 'Ooops!',
-   				     subTitle: 'You don\;t have enough points',
-   				     buttons: [
-   		               
-   		               {
-   		                 text: '<b>Buy points</b>',
-   		                 type: 'button-positive',
-   		                 onTap: function(e) {
-   		                	 $state.go('tab.newsfeed-wallet-deposit');
-   		                	 $scope.modal.remove();
-   		                 }
-   		               },
-   		               
-   		               { text: 'Close.' },
-   		             ]
-   				   });
+    				if(success.count > $scope.data.points){
+	    				$ionicPopup.alert({
+	   				     title: 'Ooops!',
+	   				     subTitle: 'You don\;t have enough points',
+	   				     buttons: [
+	   		               
+	   		               {
+	   		                 text: '<b>Buy points</b>',
+	   		                 type: 'button-positive',
+	   		                 onTap: function(e) {
+	   		                	 $state.go('tab.newsfeed-wallet-deposit');
+	   		                	 $scope.modal.remove();
+	   		                 }
+	   		               },
+	   		               
+	   		               { text: 'Close.' },
+	   		             ]
+	   				   });
+   				   }
+   				   if($scope.data.points > success.cap)  {
+						$ionicPopup.alert({
+						     title: 'Ooops!',
+						     subTitle: 'Sorry, there is a limit on how many points can be spent. ',
+						     buttons: [
+						       
+						       {
+						         text: '<b>Lower rate</b>',
+						         type: 'button-positive',
+						         onTap: function(e) {
+						        	 $scope.data.points  = success.cap - 1;
+						         }
+						       },
+						       
+						       { text: 'Close.' },
+						     ]
+						   });
+	   				}
     			}
     		}, function(error){
     			
@@ -106,6 +131,10 @@ define(function () {
     			});
     		
     		console.log('changing');
+    		
+    		if(!$scope.data.destination){
+    			$scope.searching = false;
+    		}
     	};
     	
     	$scope.selectDestination = function(user){

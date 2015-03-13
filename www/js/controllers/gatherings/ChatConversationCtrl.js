@@ -44,16 +44,27 @@ define(function () {
 	    				$scope.hasMoreData = true;
 	    			};
 	    			
+	    			if($scope.messages.length == 0){
+	    				var first = true;
+	    			} else {
+	    				var first = false;
+	    			}
+	    			
 	    			$scope.messages = data.messages.concat($scope.messages);
 	    			
-	    			if($scope.next == "")
-						$ionicScrollDelegate.scrollBottom();
+	    			
 						
 	    			console.log("------ MESSAGES ARE LOADED ------");
 	
 	    			$scope.next = data['load-previous'];
 	    			$scope.previous = data['load-next'];
 	    			$scope.$broadcast('scroll.refreshComplete');
+	    			
+	    			if(first){
+	    				$timeout(function(){
+							$ionicScrollDelegate.scrollBottom();
+						}, 1000);
+					}
 	    			
 	    			poll = true;
 	    			
@@ -196,7 +207,7 @@ define(function () {
 		
     }
 
-    ctrl.$inject = ['$rootScope', '$scope', '$stateParams', '$state', 'Client', 'storage', '$ionicScrollDelegate', '$interval', '$ionicLoading', 'push'];
+    ctrl.$inject = ['$rootScope', '$scope', '$stateParams', '$state', 'Client', 'storage', '$ionicScrollDelegate', '$timeout', '$ionicLoading', 'push'];
     return ctrl;
     
 });

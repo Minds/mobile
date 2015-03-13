@@ -11,8 +11,8 @@ define(['angular', 'JSEncrypt'], function (angular, JSEncrypt) {
 			scope: true,
 			link: function(scope, element, attrs) {
 				//console.log(attrs.message);
-				scope.message = 'decrypting..';
-				
+				element.html($sce.getTrustedHtml('<div class="decrypting"> decrypting... </div>'));
+
 				crypt.setPrivateKey(storage.get('private-key'));
 				
 				crypt.decrypt(attrs.message, function(success){

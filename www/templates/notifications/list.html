@@ -107,7 +107,10 @@
                         </div>
                         <div ng-switch-when="boost_request">
                             <a ng-click="loadBoostReview(notification.entityObj.guid)">
-                                <p>{{notification.fromObj.name}} is offering you {{notification.params.points}} points to boost <span class="minds-blue">{{notification.entityObj.title}}</span></p>
+                                <p>{{notification.fromObj.name}} is offering you {{notification.params.points}} points to boost 
+                                    <span class="minds-blue">{{notification.entityObj.title}}</span>
+                                    <span class="minds-blue" ng-if="!notification.entityObj.title">their activity</span>
+                               </p>
                             </a>
                         </div>
                          <div ng-switch-when="boost_rejected">

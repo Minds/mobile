@@ -209,6 +209,7 @@ progress[value] {
 .tutorial .box > i{
 	font-size:150px;
 	margin:20px 0;
+	line-height:175px;
 }
 .tutorial .box > p{
 	padding:16px;
@@ -217,6 +218,9 @@ progress[value] {
 	overflow:hidden;
 	width:100%;
 	height:300px;
+}
+.tutorial .box div{
+	text-align:left;
 }
 
 /**

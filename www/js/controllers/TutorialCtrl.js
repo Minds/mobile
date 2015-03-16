@@ -19,10 +19,21 @@ define(function() {
 			};
 		
 		$scope.slideHasChanged = function($index){
-			if($index == 4){
+			if($index == 8){
 				$state.go('tab.discover');
 			}
 		};
+		
+		$scope.news = [
+			{ guid: 63,
+			  user: "Mark Harding",
+			  message: "Welcome to the Minds app!"
+			},
+			{ guid: 341,
+			  user: "Bill Ottman",
+			  message: "Share your videos, photos statuses."
+			}
+		];
 
 	}
 

@@ -2,7 +2,7 @@
 	<ion-pane ng-controller="TutorialCtrl" class="tutorial">
 	
 		
-	<ion-slide-box on-slide-changed="slideHasChanged($index)" show-pager="true">
+	<ion-slide-box on-slide-changed="slideHasChanged($index)" show-pager="true" does-continue="true" slide-interval="3000" >
 	  <ion-slide>
 	    <div class="box">
 	    	<img src="img/full_logo.png" style="text-align:center; width:75%; margin:32px; 0"/>
@@ -12,18 +12,80 @@
 	  
 	  <ion-slide>
 	    <div class="box">
-	    	<h1>Vote on content</h1>
+	    	<h1>News</h1>
 	    	
-	    	<!--<i class="icon ion-thumbsup"></i>-->
+	    	<div class="list card activity-item" ng-repeat="story in news">
+	    	   <a class="item item-avatar">
+                    <img image-cache ng-src="{{node_url}}icon/{{story.guid}}/small"/>
+            
+                    <h2 style="font-weight:400;">{{story.user}}</h2>
+                    <p>now</p>
+                   
+                </a>
+                
+                <div class="item item-text-wrap" >
+                    <p class="wrap">{{story.message}} </p>
+                </div>
+                
+                <div class="item tabs tabs-secondary tabs-icon-left" style="padding:0;background-color:#F7F7F7 !important;">
+                    <a class="tab-item small-font thumbs-up">
+                           <i style="padding-left:4px;" class="icon ion-thumbsup"></i>
+                    </a>
+                    <a class="tab-item small-font thumbs-down">
+                        <i class="icon ion-thumbsdown"></i>
+                    </a>
+                    <a class="tab-item  small-font">
+                        <i class="icon ion-chatbox"></i>
+                    </a>
+                    <a class="tab-item small-font">
+                        <i class="icon icon-remind"></i>
+                    </a>
+                    <a class="tab-item small-font">
+                        <i class="icon ion-more"></i>
+                    </a>
+                </div>
+	    	</div>
+    	
 	    	
-	    		    	
-	    	<p>Swipe to subscribe</p>
 	    </div>
 	  </ion-slide>
 	  
+	   <ion-slide>
+            <div class="box">
+                <h1>Capture & Share</h1>
+                
+                
+                <div ng-hide="captured">
+               <ion-list class="capture-options tutorial">
+                
+                   
+                    <ion-item >
+                        <h1 class="icon ion-ios7-videocam"></h1>
+                    </ion-item>
+                    
+                    <ion-item >
+                        <h1 class="icon ion-camera"></h1>
+                    </ion-item>
+                    
+                    <ion-item >
+                        <h1 class="icon ion-compose"></h1>
+                    </ion-item>
+                    
+                    <ion-item >
+                        <h1 class="icon ion-ios7-albums"></h1>
+                    </ion-item>
+        
+                </ion-list>
+            </div>
+            <br/>
+            <p>Share great moments and ideas.</p>
+            
+        </div>
+      </ion-slide>
+	  
 	  <ion-slide>
 	    <div class="box">
-	    	<h1>Match</h1>
+	    	<h1>Subscribe</h1>
 	    	
 	    	<div class="swipe-container">
 				<div class="list card tabs-background-white animation-mock-swipe">
@@ -45,27 +107,108 @@
 				</div>
 			</div>
 	    		    	
-	    	<p>Swipe right to vote up. Swipe left to vote down. Press pass to pass.</p>
+	    	<p>Swipe right to subscribe or left to pass. If someone subscribes back, you can chat. </p>
 	    </div>
 	  </ion-slide>
 	  
 	  <ion-slide>
+        <div class="box">
+            <h1>Discover</h1>
+            
+            <div class="swipe-container">
+                <div class="list card tabs-background-white animation-mock-swipe">
+                    <div class="item item-image">
+                        <img ng-src="http://upload.wikimedia.org/wikipedia/commons/a/a2/Main_stage_crowd_shot.jpg">
+                        <div class="overlay">
+                            <h1>Minds</h1>
+                        </div>
+                    </div>
+                    
+                    <div class="item tabs tabs-secondary tabs-icon-left">
+                        <a class="tab-item discover-button discover-button-pass" href="#">
+                            <i class="icon">Pass</i>
+                        </a>
+                        <a class="tab-item discover-button discover-button-down" href="#">
+                            <i class="icon ion-thumbsdown"></i>
+                        </a>
+                        <a class="tab-item discover-button discover-button-up" href="#" >
+                          <i class="icon ion-thumbsup"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+                        
+            <p>Vote to make trends. </p>
+        </div>
+      </ion-slide>
+      
+      <ion-slide>
+        <div class="box">
+            <h1>Encrypted Chat</h1>
+            
+            <ion-list>
+                <ion-item  class="message" type="item-text-wrap">
+                    <img ng-src="{{$root.node_url}}icon/63/small"/>
+                
+                     <div class="message-content">
+                        Hello.
+                     </div>
+               
+                </ion-item>
+                <ion-item  class="message message-right" type="item-text-wrap">
+                    <img ng-src="{{$root.node_url}}icon/341/small"/>
+                
+                     <div class="message-content">
+                        Hey!
+                     </div>
+               
+                </ion-item>
+                <ion-item  class="message" type="item-text-wrap">
+                    <img ng-src="{{$root.node_url}}icon/63/small"/>
+                
+                     <div class="message-content item-text-wrap">
+                        It's great how we can chat without being spied on
+                     </div>
+               
+                </ion-item>
+                <ion-item  class="message message-right" type="item-text-wrap">
+                    <img ng-src="{{$root.node_url}}icon/341/small"/>
+                
+                     <div class="message-content">
+                        Yeah!
+                     </div>
+               
+                </ion-item>
+            </ion-list>
+                        
+            <p>Message securely with matches.</p>
+        </div>
+      </ion-slide>
+	  
+	  <ion-slide>
 	    <div class="box">
-	    	<h1>Capture and share</h1>
+	    	<h1>Points</h1>
 	    	
-	    	<i class="icon ion-camera" style="font-size:120px;"></i>
-	    		    	
-	    	<p></p>
+	    	<i class="icon icon-bank"></i>
+	    	
+	    	<p>Be rewarded for every interaction.</p>
+	    	
 	    </div>
 	  </ion-slide>
 	  
 	  <ion-slide>
-	    <div class="box">
-	    	
-	    	
-	    	
-	    </div>
-	  </ion-slide>
+        <div class="box">
+            <h1>Boost</h1>
+            <p>Use your points to go viral by boosting to the news feed or other channels.</p>
+            
+        </div>
+      </ion-slide>
+      
+      <ion-slide>
+        <div class="box">
+            
+        </div>
+      </ion-slide>
 	</ion-slide-box>
 
     </ion-pane>

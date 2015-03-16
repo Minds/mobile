@@ -12,7 +12,7 @@ define(function() {
 	
 		$timeout(function(){
 			if(storage.get('access_token') && storage.get('loggedin')){
-				$state.go('tab.newsfeed');
+				$state.go('tutorial');
 			} else {
 				$state.go('login');
 			}

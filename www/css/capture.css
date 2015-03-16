@@ -12,7 +12,9 @@
 	margin:0;
 	border:0;
 }
-
+.capture-options.tutorial ion-item{
+	height:150px;
+}
 
 .rich-embed{
 	padding: 16px;

@@ -227,7 +227,7 @@ define(function () {
 			}
 			
 			//$scope.$digest();
-		}
+		};
 		
 		/**
 		 * User specific actions
@@ -249,14 +249,35 @@ define(function () {
 		};
 		$scope.subscribe = function(entity){
 			//remove the entity from the list	
-			$scope.pop(entity);
+			if($scope.filter != 'search'){
+				$scope.pop(entity);
+			}
 			console.log('api/v1/subscribe/' + entity.guid);
-			//subscribe to the user
-			Client.post('api/v1/subscribe/' + entity.guid, {},
+			
+			if(entity.subscribed){
+				//unsubscribe
+				Client.delete('api/v1/subscribe/' + entity.guid, {},
 					function(){
 					},
 					function(){
 					});
+			} else {
+				 Client.post('api/v1/subscribe/' + entity.guid, {},
+					function(){
+					},
+					function(){
+					});
+			}
+			
+			//update the ui
+			$scope.entities.forEach(function(item, index, array){
+				if(item.guid == entity.guid){
+					if(entity.subscribed)
+						array[index].subscribed = false;
+					else
+						array[index].subscribed = true;
+				} 
+			});
 			
 			//show a quick ui confirmation
 			$ionicLoading.show({
@@ -266,7 +287,7 @@ define(function () {
 				$ionicLoading.hide();
 				}, 300);
 			
-			if(entity.subscriber){
+			if(entity.subscriber && entity.subscribed){
 				$ionicPopup.alert({
 				     title: 'Match!',
 				     subTitle: entity.name + ' subscribed to you too!',
@@ -284,7 +305,7 @@ define(function () {
 		             ]
 				   });
 			}
-		}
+		};
 		
 		/**
 		 * Object specific actions
@@ -335,7 +356,7 @@ define(function () {
 			$timeout(function(){
 				$ionicLoading.hide();
 				}, 300);
-		}
+		};
 		
 		$scope.boost = function(entity){
 			$ionicModal.fromTemplateUrl('templates/wallet/boost.html', {
@@ -391,7 +412,7 @@ define(function () {
 			     }
 			   });
 			
-		}
+		};
 
     }
 

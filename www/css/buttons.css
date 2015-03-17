@@ -64,3 +64,6 @@
 .discover-button-subscribe > i.icon, .discover-button-up > i.icon{
 	color:green !important;
 }
+.discover-button-subscribe-subscribed > i.icon{
+	color:#4690C3 !important;
+}

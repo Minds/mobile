@@ -6,7 +6,7 @@
 	<img ng-src="{{entity.thumbnail_src}}" onerror="this.src='img/img-placeholder.png'">
      <i class="icon ion-play"></i>
      <div class="overlay">
-    	<h2>{{entity.title}}</h2>
+    	<h2  ng-bind-html="entity.title"></h2>
      </div>
 
      <video id="video" ng-show="showVideo" width="100%" height="100%" style="background:#000;" loop preload="auto"></video>
@@ -23,7 +23,7 @@
    <img ng-src="{{entity.thumbnail_src}}">
 </div>
 <div class="item item-wrap-content" ng-show="entity.subtype == 'blog'">
-   <h3>{{entity.title}}</h3>
+   <h3 ng-bind-html="entity.title"></h3>
    <p>{{entity.perma_url}}</p>
 </div>
 

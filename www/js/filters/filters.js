@@ -45,7 +45,7 @@ define(['angular'],
 			        }
 			    }
 			    return number;
-			}
+			};
 		});
 		
 		filters.filter('linky', function($sce){
@@ -65,20 +65,27 @@ define(['angular'],
 				 replacedText = replacedText.replace(tag, '$1<a class="tag" href="#/tab/newsfeed/channel/$2">@$2</a>');
 				 return $sce.trustAsHtml(replacedText);
 				 
-			}
+			};
          });
 		
 		filters.filter( 'domain', function () {
 			return function ( input ) {
+				if(!input)
+					return;
+					
 				var matches,
-					output = "",
+					output = input,
 			    urls = /\w+:\/\/([\w|\.]+)/;
 			
 			    matches = urls.exec( input );
 			
 			    if ( matches !== null ) 
 			    	output = matches[1];
-			
+
+			   	if(output.indexOf('www.') > -1)
+			   		output = output.split('www.').pop();
+			   	
+				console.log(output);
 			    return output;
 			};
 		});

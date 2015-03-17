@@ -123,11 +123,11 @@ define(function () {
 		
 		$scope.save = function(){
 			
-			$timeout(function(){
+			//$timeout(function(){
 				$ionicLoading.show({
 			      template: 'Please wait a moment...'
 			    });
-		    }, 5000);
+		   // }, 5000);
 
 			Client.post('api/v1/archive/' + $scope.guid, {
 					album_title: 'Mobile',

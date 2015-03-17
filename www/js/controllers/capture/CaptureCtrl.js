@@ -13,7 +13,8 @@ define(function () {
     	$scope.captured = false;
     	$scope.progress = 0;
     	$scope.form = {
-    			license: 'attribution-cc'
+    		album_title: 'Mobile',
+			license: 'attribution-cc'
     	};
 
 		$scope.video = function(){
@@ -129,11 +130,7 @@ define(function () {
 			    });
 		   // }, 5000);
 
-			Client.post('api/v1/archive/' + $scope.guid, {
-					album_title: 'Mobile',
-					title: $scope.form.title,
-					description: $scope.form.description
-				},
+			Client.post('api/v1/archive/' + $scope.guid, $scope.form,
 				function(success){
 					/*$ionicPopup.alert({
 					     title: 'Complete.',
@@ -233,6 +230,42 @@ define(function () {
 					console.log(data);
 				  });
 			
+		};
+		
+		$scope.fb = function(){
+			if($scope.form.facebook){
+				$scope.form.facebook = false;
+				return;
+			}
+			if(!storage.get('facebook')){
+				var ref = window.open($rootScope.node_url + 'plugin/social/authorize/facebook?access_token=' + storage.get('access_token') + '&client_id=' + OAuth.client_id, '_blank', 'location=yes');
+				ref.addEventListener('loadstart', function(event) { 
+					var url = event.url;
+					if(url.indexOf($rootScope.node_url + 'plugin/social/redirect') > -1){
+						ref.close();
+					}
+				});
+			}
+			
+			$scope.form.facebook = true;
+		};
+		
+		$scope.twitter = function(){
+			if($scope.form.twitter){
+				$scope.form.twitter = false;
+				return;
+			}
+			if(!storage.get('twitter')){
+				var ref = window.open($rootScope.node_url + 'plugin/social/authorize/twitter?access_token=' + storage.get('access_token') + '&client_id=' + OAuth.client_id, '_blank', 'location=yes');
+				ref.addEventListener('loadstart', function(event) { 
+					var url = event.url;
+					if(url.indexOf($rootScope.node_url + 'plugin/social/redirect') > -1){
+						ref.close();
+					}
+				});
+			}
+			
+			$scope.form.twitter =  true;
 		};
        
     }

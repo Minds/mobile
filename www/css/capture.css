@@ -43,3 +43,14 @@
 	/* width:140px; */
 	clear:both;
 }
+
+.social-options{}
+.social-options > div{
+	padding:8px;
+	float:left;
+	vertical-align: middle;
+}
+.social-options > div i{
+	font-size:34px;
+	vertical-align: middle;
+}

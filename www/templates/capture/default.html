@@ -46,6 +46,15 @@
 	                    </select>
                   </label>
                   
+                  <div class="social-options">
+                    <div class="facebook" ng-class="{'minds-blue': form.facebook}" ng-click="fb()">
+                        <i class="icon ion-social-facebook"></i> Facebook
+                    </div>
+                    <div class="twitter" ng-class="{'minds-blue': form.twitter}"  ng-click="twitter()">
+                        <i class="icon ion-social-twitter" ></i> Twitter
+                    </div>
+                  </div>
+                  
                   <div ng-if="guid">
                     <input type="submit" class="button button-block button-positive" value="Save" ng-click="save()" style="width=100%"/>
                   </div>

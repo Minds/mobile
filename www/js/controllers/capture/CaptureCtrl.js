@@ -160,14 +160,14 @@ define(function () {
 				});
 				
 			var data = {
-					message: $scope.form.status, 
+					message: $scope.form.status
 					};
 			if($scope.form.meta){
 				data = {
 					message: $scope.form.status, 
 					title: $scope.form.meta.title, 
 					description: $scope.form.meta.description,
-					thumbnail: encodeURIComponent($scope.form.links[0].href), 
+					thumbnail: encodeURIComponent($scope.form.thumbnail), 
 					url: $scope.form.meta.canonical
 				};
 			}
@@ -224,9 +224,15 @@ define(function () {
 				cache: true
 				}).
 			      success(function(data){
-			     
+			     	console.log(data);
 					$scope.form.meta = data.meta;
-					$scope.form.links = data.links;
+					
+					for(var i = 0; i < data.links.length; i++){
+						if(data.links[i].rel.indexOf('thumbnail') > -1){
+							console.log(data.links[i]);
+							$scope.form.thumbnail = data.links[i].href;
+						}
+					}
 				  }).
 				  error(function(data){
 					console.log(data);

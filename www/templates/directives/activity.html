@@ -17,7 +17,8 @@
     
     <!-- Custom type:: batch -->
     <div class="item item-image allow-select" ng-if="activity.custom_type == 'batch'">
-        <img ng-repeat="data in activity.custom_data" ng-src="{{data.src}}"  onerror="this.src='img/img-placeholder.png'">
+    {{data.src}}
+        <img ng-repeat="data in activity.custom_data" ng-src="{{data.src}}" src="{{data.src}}" onerror="this.src='img/img-placeholder.png'">
     </div>
     
     <!-- Custom type:: video -->

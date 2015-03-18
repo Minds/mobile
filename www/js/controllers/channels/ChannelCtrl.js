@@ -95,6 +95,20 @@ define(function () {
 					});
 	 		
 	 	};
+	 	
+	 	$scope.unSubscribe = function(channel){
+	 		
+	 		$scope.channel.subscribed = false;
+	 		$scope.channel.subscribers_count = $scope.channel.subscribers_count - 1;
+	 		Client.delete('api/v1/subscribe/' + channel.guid, {},
+					function(){
+					},
+					function(){
+						$scope.channel.subscribed = true;
+						$scope.channel.subscribers_count = $scope.channel.subscribers_count + 1;
+					});
+	 		
+	 	};
        
     }
 

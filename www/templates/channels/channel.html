@@ -49,7 +49,7 @@
 		        <a class="tab-item small-font" ng-click="subscribe(channel)" ng-if="channel.guid != $root.user_guid && channel.subscribed == false">
 		            <i class="icon ion-person-add"></i> Subscribe
 		        </a>
-		        <a class="tab-item small-font minds-blue" style="color:#4690C3 !important;" ng-click="subscribe(channel)" ng-if="channel.guid != $root.user_guid && channel.subscribed == true">
+		        <a class="tab-item small-font minds-blue" style="color:#4690C3 !important;" ng-click="unSubscribe(channel)" ng-if="channel.guid != $root.user_guid && channel.subscribed == true">
 		            <i class="icon ion-person-add"></i> Subscribed
 		        </a>
 		        

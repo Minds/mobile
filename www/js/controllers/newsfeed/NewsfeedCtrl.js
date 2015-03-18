@@ -8,8 +8,14 @@
 define(function () {
     'use strict';
 
-    function ctrl( $rootScope, $scope, $state, $stateParams, NewsfeedAPI, $filter, $ionicScrollDelegate, Cacher, Client, storage, $ionicPopover, $ionicLoading, $timeout, $ionicActionSheet, $ionicModal) {
+    function ctrl( $rootScope, $scope, $state, $stateParams, NewsfeedAPI, $filter, $ionicScrollDelegate, Cacher, Client, storage, $ionicPopover, $ionicLoading, $timeout, $ionicActionSheet, $ionicModal, $ionicPlatform) {
 
+		$ionicPlatform.registerBackButtonAction(function (e) {
+			if($state.current.name == 'tab.newsfeed'){
+		  		e.preventDefault();
+		  	}
+		}, 100);
+			
     	//if same tab click, refresh and go to top
     	$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
 			if(toState.name == fromState.name){
@@ -396,7 +402,7 @@ define(function () {
 		
     }
 
-    ctrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', 'NewsfeedAPI', '$filter', '$ionicScrollDelegate', 'Cacher', 'Client', 'storage', '$ionicPopover', '$ionicLoading', '$timeout', '$ionicActionSheet', '$ionicModal'];
+    ctrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', 'NewsfeedAPI', '$filter', '$ionicScrollDelegate', 'Cacher', 'Client', 'storage', '$ionicPopover', '$ionicLoading', '$timeout', '$ionicActionSheet', '$ionicModal', '$ionicPlatform'];
     return ctrl;
     
 });

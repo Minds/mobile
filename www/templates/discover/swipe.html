@@ -3,7 +3,7 @@
     <ion-nav-title>
        <div class="bar bar-header item-input-inset">
           <label class="item-input-wrapper">
-            <i class="icon ion-ios7-search placeholder-icon"></i>
+            <i class="icon ion-ios-search placeholder-icon"></i>
             <input type="search" placeholder="Search" ng-model="query.string" ng-keyup="search()">
           </label>
           <button class="button button-clear" ng-show="search.q" style="display:none;">
@@ -29,7 +29,7 @@
             Featured
           </a>
           <a class="tab-item" ng-class="{active: type == 'video'}" ng-click="changeType('video')">
-            <i class="icon ion-ios7-videocam"></i>
+            <i class="icon ion-ios-videocam"></i>
             Videos
           </a>
           <a class="tab-item" ng-class="{active: type == 'image'}" ng-click="changeType('image')">
@@ -67,6 +67,10 @@
 	                    <div class="list card tabs-background-white" ng-include src="'templates/discover/entities/user.html'" swipe swipe-disable-vertical="true" swipe-on-left="ignore(entity)" swipe-on-right="subscribe(entity)"></div>
 	                </div>
 	                
+	                 <div class="boost-tab" style="margin-top:12px">
+                        <i class="icon ion-more" ng-click="openActions(entity)"></i>
+                    </div>
+	                
 	            </div>
 			</div>
 	</ion-content>
@@ -78,7 +82,7 @@
 			Discovering..
 		</div>
 
-		<div ng-repeat="entity in entities" class="swipe-container" ng-show="$index <= 1">
+		<div ng-repeat="entity in entities" class="swipe-container" ng-show="$index <= 1" data-instantActivate >
 		
             <div ng-switch="entity.type">
             

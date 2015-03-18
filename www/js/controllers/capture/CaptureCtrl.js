@@ -98,7 +98,9 @@ define(function () {
 			var ft = new FileTransfer();
 	        var options = new FileUploadOptions();
 	        options.httpMethod = 'PUT';
-	        options.headers = {"Authorization": "Bearer " + storage.get('access_token') };
+	        options.headers = {
+	        	"Authorization": "Bearer " + storage.get('access_token')
+	        };
 	        console.log(path);
 	      	ft.upload(path, encodeURI($rootScope.node_url + 'api/v1/archive/'+type), 
 	      		function(success){

@@ -9,6 +9,10 @@
   font-style: normal;
 }
 
+.platform-android h1, .platform-android h2, .platform-android h3, .platform-android h4{
+	font-weight:600!important;
+}
+
 .view-bg, .grey-bg{
 	background-color: #d2d5da;
 }

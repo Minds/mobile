@@ -7,7 +7,7 @@
 			ng-click="$event.preventDefault(); subscribe()"> </i>
 
     
-    <h2 style="font-weight:400;">{{user.name}}</h2>
+    <h2 style="font-weight:400;" ng-bind-html="user.name"></h2>
     <p>{{ts}}</p>
    
 </a>

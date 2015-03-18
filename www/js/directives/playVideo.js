@@ -36,6 +36,7 @@ define(['angular'], function (angular) {
 					
 					var video = el[0].querySelector('#video');
 					video.src = scope.srcFull;
+					console.log("video src == " + video.src);
 					console.log("trying to play:: " + video.src);
 					video.load();
 					video.play();

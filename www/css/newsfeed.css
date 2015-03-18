@@ -5,6 +5,10 @@
 	font-size:15px;
 	/*font-family:"Georgia";*/
 }
+.platform-android .activity-item .item h3{
+	font-weight:600;
+}
+
 .activity-item .owner-brief{
 	display:block;
 	overflow:visible;

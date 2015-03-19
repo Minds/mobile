@@ -127,6 +127,8 @@ define(function () {
 		  	storage.remove('access_token');
 		  	storage.remove('private-key');
 		  	$state.go('login');
+		  	
+		  	ionic.Platform.exitApp();
 		};
        
     }

@@ -115,13 +115,20 @@
                         </div>
                          <div ng-switch-when="boost_rejected">
                         	<a href="#/tab/notifications/entity/{{notification.entityObj.guid}}">
-                        		<p>{{notification.params.impressions}} impressions for <span class="minds-blue"  ng-bind-html="notification.entityObj.title"></span> was rejected. Your points have been credited back to your wallet.</p>
+                        		<p>{{notification.params.impressions}} impressions for <span class="minds-blue" ng-bind-html="notification.entityObj.title"></span> was rejected. Your points have been credited back to your wallet.</p>
                         	</a>
                         </div>
                          <div ng-switch-when="boost_accepted">
                         	<a href="#/tab/notifications/entity/{{notification.entityObj.guid}}">
-                        		<p ng-if="notification.params.impressions">{{notification.params.impressions}} impressions for <span class="minds-blue"  ng-bind-html="notification.entityObj.title"></span> were accepted.</p>
-                        		<p ng-if="notification.params.points">{{notification.params.points}} points for <span class="minds-blue"  ng-bind-html="notification.entityObj.title"></span> were accepted.</p>
+                        		<p ng-if="notification.params.impressions">{{notification.params.impressions}} impressions for 
+                        		  <span class="minds-blue" ng-if="notification.entityObj.title" ng-bind-html="notification.entityObj.title"></span> 
+                        		  <span class="minds-blue" ng-if="!notification.entityObj.title">your post</span> 
+                        		  were accepted.
+                        		</p>
+                        		<p ng-if="notification.params.points">{{notification.params.points}} points for 
+                        		  <span class="minds-blue" ng-if="notification.entityObj.title" ng-bind-html="notification.entityObj.title"></span> 
+                                  <span class="minds-blue" ng-if="!notification.entityObj.title">your post</span> 
+                                   were accepted.</p>
                         	</a>
                         </div>
                         <div ng-switch-when="boost_completed">

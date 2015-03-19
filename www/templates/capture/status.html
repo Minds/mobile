@@ -17,6 +17,15 @@
             <textarea placeholder="Enter a message here..." ng-model="form.status" ng-change="getStatusPreview()" style="padding:32px 16px;">
             </textarea>
             
+            <div class="social-options">
+                <div class="facebook" ng-class="{'minds-blue': form.facebook}" ng-click="fb()">
+                    <i class="icon ion-social-facebook"></i> Facebook
+                </div>
+                <div class="twitter" ng-class="{'minds-blue': form.twitter}"  ng-click="twitter()">
+                    <i class="icon ion-social-twitter" ></i> Twitter
+                </div>
+              </div>
+            
             <div class="rich-embed" ng-show="form.meta">
             
             	<img ng-src="{{form.thumbnail}}" />	
@@ -24,6 +33,8 @@
             	<p>{{form.meta.description}}</p>
             	
             </div>
+            
+            
             
             <input type="submit" value="Post" class="button button-positive ion-paper-airplane-hide" style="float:right; margin-top:10px; margin-right:10px;"/>
         </form>

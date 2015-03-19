@@ -10,6 +10,7 @@
 	border:0;
 	box-shadow:0;
 	padding:5px;
+	width:100%;
 }
 .messages .item-avatar{
 	box-shadow:0 !important;

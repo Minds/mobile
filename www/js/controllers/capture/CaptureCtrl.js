@@ -160,8 +160,10 @@ define(function () {
 				});
 				
 			var data = {
-					message: $scope.form.status
-					};
+				message: $scope.form.status,
+				facebook: $scope.form.facebook,
+				twitter: $scope.form.twitter
+			};
 			if($scope.form.meta){
 				data = {
 					message: $scope.form.status, 
@@ -245,6 +247,15 @@ define(function () {
 				$scope.form.facebook = false;
 				return;
 			}
+			
+			function clearListCookies(){
+				var cookies = document.cookie.split(";");
+		        for (var i = 0; i < cookies.length; i++){   
+		            var spcook =  cookies[i].split("=");
+		            document.cookie = spcook[0] + "=;expires=Thu, 21 Sep 1979 00:00:01 UTC;";                                
+		        }
+		    }
+		
 			if(!storage.get('facebook')){
 				var ref = window.open($rootScope.node_url + 'plugin/social/authorize/facebook?access_token=' + storage.get('access_token') + '&client_id=' + OAuth.client_id, '_blank', 'location=yes');
 				ref.addEventListener('loadstart', function(event) { 

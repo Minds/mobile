@@ -63,6 +63,34 @@
                         {
                             "xml": "<feature name=\"Capture\"><param name=\"ios-package\" value=\"CDVCapture\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"FacebookConnectPlugin\"><param name=\"ios-package\" value=\"FacebookConnectPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<plugin name=\"FacebookConnectPlugin\" value=\"FacebookConnectPlugin\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<access origin=\"https://m.facebook.com\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<access origin=\"https://graph.facebook.com\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<access origin=\"https://api.facebook.com\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<access origin=\"https://*.fbcdn.net\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<access origin=\"https://*.akamaihd.net\" />",
+                            "count": 1
                         }
                     ]
                 }
@@ -137,6 +165,10 @@
                         {
                             "xml": "false",
                             "count": 1
+                        },
+                        {
+                            "xml": "true",
+                            "count": 1
                         }
                     ],
                     "SystemConfiguration.framework": [
@@ -192,6 +224,24 @@
                             "xml": "true",
                             "count": 1
                         }
+                    ],
+                    "libsqlite3.dylib": [
+                        {
+                            "xml": "false",
+                            "count": 1
+                        }
+                    ],
+                    "Social.framework": [
+                        {
+                            "xml": "true",
+                            "count": 1
+                        }
+                    ],
+                    "Accounts.framework": [
+                        {
+                            "xml": "true",
+                            "count": 1
+                        }
                     ]
                 }
             },
@@ -200,6 +250,24 @@
                     "NSLocationWhenInUseUsageDescription": [
                         {
                             "xml": "<string />",
+                            "count": 1
+                        }
+                    ],
+                    "FacebookAppID": [
+                        {
+                            "xml": "<string>184865748231073</string>",
+                            "count": 1
+                        }
+                    ],
+                    "FacebookDisplayName": [
+                        {
+                            "xml": "<string>Minds</string>",
+                            "count": 1
+                        }
+                    ],
+                    "CFBundleURLTypes": [
+                        {
+                            "xml": "<array><dict><key>CFBundleURLSchemes</key><array><string>fb184865748231073</string></array></dict></array>",
                             "count": 1
                         }
                     ]
@@ -245,6 +313,11 @@
             "PACKAGE_NAME": "com.minds.mobile"
         },
         "org.apache.cordova.media-capture": {
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
+        "com.phonegap.plugins.facebookconnect": {
+            "APP_ID": "184865748231073",
+            "APP_NAME": "Minds",
             "PACKAGE_NAME": "com.minds.mobile"
         }
     },

@@ -10,7 +10,7 @@
 }
 
 .platform-android h1, .platform-android h2, .platform-android h3, .platform-android h4{
-	font-weight:600!important;
+	font-weight:700!important;
 }
 
 .view-bg, .grey-bg{
@@ -87,6 +87,14 @@
 	color:#EEE;
 	
 }*/
+
+
+.platform-android .action-sheet{
+	margin:0 24px;
+}
+.platform-android .action-sheet button{
+	padding:0 16px;
+}
 
 html:-webkit-full-screen {
  background: red;

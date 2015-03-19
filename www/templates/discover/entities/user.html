@@ -10,8 +10,11 @@
     <a class="tab-item discover-button discover-button-no" href="#" ng-click="ignore(entity)">
 		<i class="icon ion-close"></i>
     </a>
-    <a class="tab-item small-font discover-button discover-button-subscribe"  ng-class="{'discover-button-subscribe-subscribed': entity.subscribed}" href="#" ng-click="subscribe(entity)">
+    <a class="tab-item small-font discover-button discover-button-subscribe" ng-if="!entity.subscribed" href="#" ng-click="subscribe(entity)">
       <i class="icon ion-person-add"></i> <b>{{entity.subscribers_count}}</b>
+    </a>
+    <a class="tab-item small-font discover-button discover-button-subscribe" ng-if="entity.subscribed" href="#" ng-click="subscribe(entity)">
+      Un-Subscribe
     </a>
 </div>
 <div class="item" ng-show="entity.description">

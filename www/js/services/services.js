@@ -20,6 +20,7 @@ define(function(require) {
 	services.factory('Client', require('services/api/Client'));
 	services.factory('NewsfeedAPI', require('services/api/Newsfeed'));
 	services.factory('wallet', require('services/wallet'));
+	services.factory('fbService', require('services/fb'));
 
 	return services;
 

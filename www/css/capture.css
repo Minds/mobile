@@ -44,7 +44,12 @@
 	clear:both;
 }
 
-.social-options{}
+.social-options{
+	width:100%;
+	clear:both;
+	display:block;
+	height:50px;
+}
 .social-options > div{
 	padding:8px;
 	float:left;

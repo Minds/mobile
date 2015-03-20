@@ -1,10 +1,12 @@
 .notification-item div{
+	display:-webkit-flex;
 	display:flex;
 	flex:1;
 }
 .notification-item a{
 	color:#666666;
 	text-decoration:none;
+	display:-webkit-flex;
 	display:flex;
 	flex:1;
 }

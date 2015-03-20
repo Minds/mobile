@@ -34,7 +34,8 @@ define(function () {
 				console.log('capture failed');
 			}, {
 				limit: 1, 
-				duration: 360
+				duration: 360,
+				saveToPhotoAlbum: true
 			});
 		};
 		

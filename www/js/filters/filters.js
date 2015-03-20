@@ -58,8 +58,8 @@ define(['angular'],
 				 var url = /(\b(https?|http|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
 				 replacedText = text.replace(url, '<a href="$1">$1</a>');
 				 
-				 var hashtag = /(^|\s)#(\w*[a-zA-Z_]+\w*)/gim;
-				 replacedText = replacedText.replace(hashtag, '$1<a href="#/tab/search">#$2</a>');
+				 //var hashtag = /(^|\s)#(\w*[a-zA-Z_]+\w*)/gim;
+				 //replacedText = replacedText.replace(hashtag, '$1<a href="#/tab/search">#$2</a>');
 
 				 var tag = /(^|\s)\@(\w*[a-zA-Z_]+\w*)/gim;
 				 replacedText = replacedText.replace(tag, '$1<a class="tag" href="#/tab/newsfeed/channel/$2">@$2</a>');

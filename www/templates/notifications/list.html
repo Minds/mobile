@@ -97,7 +97,10 @@
                         </div>
                          <div ng-switch-when="boost_gift">
                         	<a href="#/tab/notifications/entity/{{notification.entityObj.guid}}">
-                        		<p>{{notification.fromObj.name}} gifted you {{notification.params.impressions}} impressions for <span class="minds-blue" ng-bind-html="notification.entityObj.title"></span></p>
+                        		<p>{{notification.fromObj.name}} gifted you {{notification.params.impressions}} impressions for 
+                        		  <span class="minds-blue" ng-bind-html="notification.entityObj.title"></span>
+                        		  <span class="minds-blue" ng-bind-html="notification.entityObj.title"></span>
+                        		</p>
                         	</a>
                         </div>
 	                     <div ng-switch-when="boost_submitted">

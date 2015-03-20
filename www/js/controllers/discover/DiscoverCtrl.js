@@ -21,6 +21,7 @@ define(function () {
 		};
 		$scope.passed = []; //we keep this so that on loading new items, there are not conflicts. 
 		$scope.acted = [];
+		$scope.offset = 0;
 		
 		$scope.hasMoreData = true;
 		if(Cacher.get('entities.cb')){
@@ -77,7 +78,8 @@ define(function () {
 			Client.get('api/v1/entities/' + $scope.filter + '/' + type + '/' + subtype, { 
 				limit: 16, 
 				offset: $scope.next, 
-				cachebreaker: $scope.cachebreaker 
+				cachebreaker: $scope.cachebreaker,
+				skip: $scope.offset
 				}, 
     			function(data){
 					console.log('got it!');
@@ -223,6 +225,7 @@ define(function () {
 			if($scope.entities.length < 3){
 				console.log('loading new...');
 				Cacher.put('entities.cb', Date.now());
+				$scope.offset = 3;
 				$scope.load();
 			}
 			

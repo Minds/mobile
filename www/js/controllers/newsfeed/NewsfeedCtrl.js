@@ -9,12 +9,6 @@ define(function () {
     'use strict';
 
     function ctrl( $rootScope, $scope, $state, $stateParams, NewsfeedAPI, $filter, $ionicScrollDelegate, Cacher, Client, storage, $ionicPopover, $ionicLoading, $timeout, $ionicActionSheet, $ionicModal, $ionicPlatform) {
-
-		$ionicPlatform.registerBackButtonAction(function (e) {
-			if($state.current.name == 'tab.newsfeed'){
-		  		e.preventDefault();
-		  	}
-		}, 100);
 			
     	//if same tab click, refresh and go to top
     	$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
@@ -339,9 +333,18 @@ define(function () {
 			     ],
 			     destructiveText: 'Delete',
 			     destructiveButtonClicked: function(){
+			     	if(activity.p2p_boosted){
+			     		$ionicLoading.show({
+			    				template: 'Sorry, you can not delete a boosted post.'
+			    				});
+			    			$timeout(function(){
+			    				$ionicLoading.hide();
+			    				}, 1000);
+			     	} else {
 			    	 if(confirm("are you sure?"))
 			    		 $scope.remove(guid);
 			    	 return true;
+			    	 }
 			     },
 			     cancelText: 'Cancel',
 			     cancel: function() {

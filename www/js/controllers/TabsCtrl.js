@@ -49,6 +49,15 @@ define(function() {
 		$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){ 
 		});
 		
+		
+		$ionicPlatform.registerBackButtonAction(function (e) {
+			if($state.current.name == 'tab.newsfeed'){
+		  		e.preventDefault();
+		  	} else {
+		  		navigator.app.backHistory();
+		  	}
+		}, 100);
+		
 	}
 
 

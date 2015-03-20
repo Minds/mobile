@@ -15,7 +15,13 @@ define(function () {
 		Client.get('api/v1/boost/' + $scope.guid, { 
     			cb: Date.now() 
     		}, function(success){
-    			
+    		
+	    		if(success.status == 'error'){
+	    			$ionicLoading.hide();
+	    			$scope.modal.remove();
+	    			return;
+	    		}
+	    			
     			$ionicLoading.hide();
     			
     			$scope.entity = success.entity;
@@ -30,15 +36,17 @@ define(function () {
     	
     	
     	$scope.accept = function(){
+    	
+    		$scope.modal.remove();
     		
     		Client.put('api/v1/boost/' + $scope.guid, { 
     			cb: Date.now() 
     		}, function(success){
     			
-    			$scope.modal.remove();
+    		//	$scope.modal.remove();
     			
     		}, function(error){
-    			$scope.modal.remove();
+    		//	$scope.modal.remove();
     		});
 
     	};
@@ -46,14 +54,16 @@ define(function () {
     	
     	$scope.reject = function(){
     		
+    		$scope.modal.remove();
+    		
     		Client.delete('api/v1/boost/' + $scope.guid, { 
     			cb: Date.now() 
     		}, function(success){
     			
-    			$scope.modal.remove();
+    		//	$scope.modal.remove();
     			
     		}, function(error){
-    			$scope.modal.remove();
+    		//	$scope.modal.remove();
     		});
 
     	};

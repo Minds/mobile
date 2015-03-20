@@ -59,7 +59,7 @@
 	            
 	                <!-- Objects -->
 	                <div ng-switch-when="object">
-	                    <div class="list card tabs-background-white " ng-include src="'templates/discover/entities/object.html'" swipe swipe-disable-vertical="true" swipe-on-down="down(entity)" swipe-on-left="pass(entity)" swipe-on-right="up(entity)"></div>
+	                    <div class="list card tabs-background-white {{entity.subtype}}" ng-include src="'templates/discover/entities/object.html'" swipe swipe-disable-vertical="true" swipe-on-down="down(entity)" swipe-on-left="pass(entity)" swipe-on-right="up(entity)"></div>
 	                </div>
 	                
 	                <!-- USERS -->
@@ -88,7 +88,7 @@
             
                 <!-- Objects -->
                 <div ng-switch-when="object">
-                    <div class="list card tabs-background-white " ng-include src="'templates/discover/entities/object.html'" swipe swipe-on-down="down(entity)" swipe-on-left="pass(entity)" swipe-on-right="up(entity)"></div>
+                    <div class="list card tabs-background-white {{entity.subtype}}" ng-include src="'templates/discover/entities/object.html'" swipe swipe-on-down="down(entity)" swipe-on-left="pass(entity)" swipe-on-right="up(entity)"></div>
                 </div>
                 
                 <!-- USERS -->

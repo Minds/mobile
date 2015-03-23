@@ -40,9 +40,21 @@ wallet-counter{
 	-webkit-box-shadow:  inset 0 0 3px #888;
 	box-shadow: inset 0 0 3px #888;
 }
+.wallet-destination-select{
+	padding:32px;
+	}
+.wallet-destination-select > input{
+	line-height:46px;
+	font-size:25px;
+	text-align:left;
+	margin-bottom:12px;
+}
+.wallet-destination-select:first-of-type{
+	border-bottom: 1px solid #BBB;
+}
 .wallet-users-list{
 	position: absolute;
-	margin-top: 60px;
+	margin-top: -60px;
 	left: 8px;
 	width: calc(100% - 16px);
 	background: #EEE;

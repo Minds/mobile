@@ -25,7 +25,7 @@
                 <ion-item class="conversation" ng-if="conversation.subscribed && conversation.subscriber" href="#/tab/gatherings/conversations/{{conversation.guid}}/{{conversation.name}}">
                     <img image-cache ng-src="{{$root.node_url}}icon/{{conversation.guid}}/small" style="float:left;"/>
                     
-                    <h2>{{conversation.name}}</h2>
+                    <h2 ng-bind-html="conversation.name"></h2>
                     <p ng-show="conversation.last_msg">{{conversation.last_msg * 1000 | date:'shortTime'}} - {{conversation.last_msg * 1000 | date:'longDate'}}</p>
                     <span ng-show="conversation.unread == 1" style="position:absolute; top:20px; right:12px; border-radius:100%; display:block; background:green; width:12px; height:12px"></span>
                 </ion-item>

@@ -150,7 +150,7 @@ define(function () {
 		    });
     		
     		var encrypted = {};
-    		
+    		console.log( $scope.publickeys);
     		for(var index in $scope.publickeys){
     			(function(i){ //prevent async callback using wrong index
 	    			crypt.setPublicKey($scope.publickeys[i]);

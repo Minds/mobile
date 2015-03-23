@@ -14,7 +14,8 @@ define(function () {
     		destination: '',
     		points: 500,
     		impressions: 500 * 1,
-    		rate: 1
+    		rate: 1,
+    		step: 1
     	};
     	
     	$scope.$watch('data.points', function(){
@@ -140,6 +141,11 @@ define(function () {
     	$scope.selectDestination = function(user){
     		$scope.searching = false;
     		$scope.data.destination = '@' + user.username;
+    		$scope.nextStep();
+    	};
+    	
+    	$scope.nextStep = function(){
+    		$scope.data.step = 2;
     	};
     	
     }

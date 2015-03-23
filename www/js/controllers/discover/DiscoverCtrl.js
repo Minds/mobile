@@ -83,6 +83,7 @@ define(function () {
 				}, 
     			function(data){
 					console.log('got it!');
+					console.log(data);
 
 					if(!data.entities){
 	    				$scope.hasMoreData = false;

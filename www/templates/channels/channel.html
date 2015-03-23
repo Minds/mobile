@@ -22,7 +22,7 @@
            		<img image-cache ng-src="{{channel.avatar_url.large}}/{{$root.globalCB}}" style="width:140px;"/>
             </div>
             <div class="cell">
-	            <h1>{{channel.name}}</h1>
+	            <h1 ng-bind-html="channel.name"></h1>
 	            <a href="http://{{channel.website}}" ng-show="channel.website" class="wrap" style="width:85%">{{channel.website | domain}}</a>
             </div>
         

@@ -12,28 +12,28 @@
 	
 	   <div ng-if="data.step == 1">
 	   
+	       <div class="wallet-points-input wallet-destination-select">
+           
+               <h3>Channel</h3>
+                <input type="text" ng-model="data.destination" placeholder="Tap to search..." ng-keyup="changeDestination($event)" /> 
+                <p>Select a channel above to have your post distributed to their followers.</p>
+               
+               <div class="wallet-users-list" ng-show="searching">
+                   <div ng-repeat="user in results" ng-click="selectDestination(user);">
+                       
+                        <img src="{{$root.node_url}}icon/{{user.guid}}/small" />
+                         @{{user.username}}
+                   </div>
+               </div>
+           </div>
+	   
 	        <div class="wallet-points-input wallet-destination-select" ng-click="nextStep()">
                
                <h3>Newsfeeds</h3>
                <p>Your post will appear at the top of everyones newsfeed until your impressions are met.</p>
 
            </div>
-	   
-    	   <div class="wallet-points-input wallet-destination-select">
-    	   
-    	       <h3>Channel</h3>
-                <input type="text" ng-model="data.destination" placeholder="Tap to search..." ng-keyup="changeDestination($event)" /> 
-                <p>Select a channel above to have your post distributed to their followers.</p>
-    	       
-    	       <div class="wallet-users-list" ng-show="searching">
-    	           <div ng-repeat="user in results" ng-click="selectDestination(user);">
-    	               
-    	                <img src="{{$root.node_url}}icon/{{user.guid}}/small" />
-    	                 @{{user.username}}
-    	           </div>
-    	       </div>
-    	   </div>
-    	   
+	       	   
 	   </div>
 	   
 	   <div ng-if="data.step == 2">
@@ -70,7 +70,7 @@
               <p style="color:#888;
                         padding:0 16px;
                         font-size:11px;">
-                  You will be notified if you post is accepted or rejected by @{{data.destination}}. Once they accept, this post will not be able to be deleted.
+                  You will be notified if you post is accepted or rejected by {{data.destination}}. Once they accept, this post will not be able to be deleted.
               </p>
             </div>
     		

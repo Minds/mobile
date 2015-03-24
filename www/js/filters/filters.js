@@ -85,7 +85,6 @@ define(['angular'],
 			   	if(output.indexOf('www.') > -1)
 			   		output = output.split('www.').pop();
 			   	
-				console.log(output);
 			    return output;
 			};
 		});

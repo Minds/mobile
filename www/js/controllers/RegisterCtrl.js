@@ -8,7 +8,7 @@
 define(function() {
 	'use strict';
 
-	function ctrl($rootScope, $scope, $state, OAuth, Client, $ionicPopup, storage, push) {
+	function ctrl($rootScope, $scope, $state, OAuth, Client, $ionicPopup, storage, push, $ionicModal, $ionicLoading) {
 	
 		$scope.data = {};
 
@@ -18,11 +18,17 @@ define(function() {
 				return false;
 			$scope.inprogress = true;
 			
+			$ionicLoading.show({
+				template: 'Please wait a moment...'
+				});
+				
+			
 			Client.post('api/v1/register', {
 				username: $scope.data.username,
 				password: $scope.data.password,
 				email: $scope.data.email
 				}, function(success){
+					$ionicLoading.hide();
 					
 					if(success.status == 'error'){
 						$scope.inprogress = false;
@@ -35,11 +41,27 @@ define(function() {
 						return false;
 					}
 					
+					$ionicLoading.show({
+						template: 'Logging in...'
+						});
+					
+					
 					OAuth.login($scope.data.username, $scope.data.password, function(success){
+						$ionicLoading.hide();
 						if(success){
 							//$state.go('tab.newsfeed');
 							push.register();
 							$rootScope.user_guid = storage.get('user_guid');
+							
+							//load popup so we upload avatar
+							$ionicModal.fromTemplateUrl('templates/modals/avatar.html', {
+			    	 		    scope: $scope,
+			    	 		    animation: 'slide-in-up'
+			    	 		  }).then(function(modal) {
+			    	 		    $scope.modal = modal;
+			    	 		    $scope.modal.show();
+			    	 		  });
+							
 							$state.go('tutorial');
 						} else {
 							
@@ -56,10 +78,12 @@ define(function() {
 						}
 						$scope.inprogress = false;
 					}, function(error){
+						$ionicLoading.hide();	
 						$scope.inprogress = false;
 					});
 			}, function(error){
 				$scope.inprogress = false;
+				$ionicLoading.hide();
 				var alertPopup = $ionicPopup.alert({
 					title: 'Ooops..',
 					template: 'Something went wrong.. Try again later.'
@@ -71,7 +95,7 @@ define(function() {
 	}
 
 
-	ctrl.$inject = ['$rootScope', '$scope', '$state', 'OAuth', 'Client', '$ionicPopup', 'storage', 'push'];
+	ctrl.$inject = ['$rootScope', '$scope', '$state', 'OAuth', 'Client', '$ionicPopup', 'storage', 'push', '$ionicModal', '$ionicLoading'];
 	return ctrl;
 
 }); 

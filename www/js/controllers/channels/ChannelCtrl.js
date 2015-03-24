@@ -31,7 +31,12 @@ define(function () {
 		
 			function(success){
 				$scope.channel = success.channel;
+				$scope.$apply();
 				$ionicSlideBoxDelegate.update();
+				setInterval(function(){
+					$ionicSlideBoxDelegate.slide(0);
+				}, 3000 * success.channel.carousels.length);
+				
 				if($scope.ChannelItems.length == 0)
 					$scope.loadMore();
 			},

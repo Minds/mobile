@@ -1,0 +1,20 @@
+<ion-modal-view ng-controller="ChannelEditCtrl" class="view-bg">
+	
+
+	<ion-header-bar>
+		<div class="buttons">
+	    	<button class="button button-clear" ng-click="modal.remove()">Skip</button>
+	 	 </div>
+	  	<h1 class="title">Avatar</h1>
+	  	<div class="buttons">
+            <button class="button button-clear minds-blue" ng-click="modal.remove()">Save</button>
+         </div>
+	</ion-header-bar>
+	
+	<ion-content>
+	
+		 <img id="avatar" ng-src="{{$root.node_url}}icon/{{$root.user_guid}}/{{$root.globalCB}}" style="width: calc(100% - 32px); margin:16px; height: auto; box-shadow:0 0 3px #888;" ng-click="changeAvatar();"/>
+	       <p style="padding:0 20px;">Select the image above to select an avatar</p>
+	
+	</ion-content>
+</ion-modal-view>

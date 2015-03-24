@@ -29,7 +29,9 @@
                         	<div ng-switch="notification.entityObj.type">
                         		<a ng-switch-when="object" href="#/tab/notifications/entity/{{notification.entityObj.guid}}">
                         			<p>
-                        			 {{notification.fromObj.name}} commented on <span class="minds-blue"  ng-bind-html="notification.entityObj.title"></span>
+                        			 {{notification.fromObj.name}} commented on 
+                        			     <span class="minds-blue" ng-if="notification.entityObj.title" ng-bind-html="notification.entityObj.title"></span>
+                        			     <span class="minds-blue" ng-if="!notification.entityObj.title">your {{notification.entityObj.subtype</span>
                         			</p>
                         		</a>
                         		<a ng-switch-when="activity" href="#/tab/notifications/entity/{{notification.entityObj.guid}}">
@@ -54,7 +56,10 @@
                        	<!-- up voted content -->
                         <div ng-switch-when="like">
 							<a href="#/tab/notifications/entity/{{notification.entityObj.guid}}" ng-if="notification.entityObj.type == 'object'">
-                        		<p>{{notification.fromObj.name}} voted up {{notification.entityObj.title}}</p>
+                        		<p>{{notification.fromObj.name}} voted up 
+                        		      <span class="minds-blue" ng-if="notification.entityObj.title" ng-bind-html="notification.entityObj.title"></span>
+                        		      <span class="minds-blue" ng-if="!notification.entityObj.title">your {{notification.entityObj.subtype}}</span>
+                        		</p>
                         	</a>
                         	<a href="#/tab/notifications/entity/{{notification.entityObj.guid}}" ng-if="notification.entityObj.type == 'activity'">
                         		<p ng-if="notification.entityObj.title">
@@ -68,7 +73,10 @@
                         <!-- Remind --> 
                         <div ng-switch-when="remind">
                             <a href="#/tab/notifications/entity/{{notification.entityObj.guid}}" ng-if="notification.entityObj.type == 'object'">
-                                <p>{{notification.fromObj.name}} reminded up {{notification.entityObj.title}}</p>
+                                <p>{{notification.fromObj.name}} reminded  
+                                    <span class="minds-blue"  ng-if="notification.entityObj.title" ng-bind-html="notification.entityObj.title"></span>
+                                    <span class="minds-blue"  ng-if="!notification.entityObj.title">your {{notification.entityObj.subtype}}</span>
+                               </p>
                             </a>
                             <a href="#/tab/notifications/entity/{{notification.entityObj.guid}}" ng-if="notification.entityObj.type == 'activity'">
                                 <p ng-if="notification.entityObj.title">
@@ -136,7 +144,10 @@
                         </div>
                         <div ng-switch-when="boost_completed">
                         	<a href="#/tab/notifications/entity/{{notification.entityObj.guid}}">
-                        		<p>{{notification.params.impressions}}/{{notification.params.impressions}} impressions for <span class="minds-blue"  ng-bind-html="notification.entityObj.title"></span> have been met.</p>
+                        		<p>{{notification.params.impressions}}/{{notification.params.impressions}} impressions for 
+                        		  <span class="minds-blue"  ng-if="notification.entityObj.title" ng-bind-html="notification.entityObj.title"></span> 
+                        		  <span class="minds-blue" ng-if="!notification.entityObj.title">your post</span> 
+                        		  have been met.</p>
                         	</a>
                         </div>
                         <div ng-switch-default>

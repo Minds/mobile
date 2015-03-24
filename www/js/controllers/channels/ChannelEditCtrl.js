@@ -33,7 +33,7 @@ define(function () {
         			},
         			function(error){
         			});
-     	}
+     	};
      	
      	$scope.changeAvatar = function(){
      		
@@ -48,6 +48,10 @@ define(function () {
      		    var image = document.getElementById('avatar');
      		    image.src = imageData;
      		    
+     		    $ionicLoading.show({
+    				template: 'Uploading...'
+    				});
+     		    
      		    var ft = new FileTransfer();
 	   	        var options = new FileUploadOptions();
 	   	        //options.httpMethod = 'PUT';
@@ -55,9 +59,13 @@ define(function () {
 	   	        console.log(imageData);
 	   	      	ft.upload(imageData, encodeURI($rootScope.node_url + 'api/v1/channel/avatar'), 
 	   	      		function(success){
+	   	      			$ionicLoading.hide();
 			   	      $rootScope.globalCB = Date.now();
+			   	      if($scope.modal)
+			   	      	$scope.modal.remove();
 	   	      		}, 
 	   	      		function(error){
+	   	      			$ionicLoading.hide();
 	   	      			console.log('error');
 	   	      			console.log(error);
 	   	      		}, 

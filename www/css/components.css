@@ -230,6 +230,8 @@ progress[value] {
 }
 .tutorial .box > p{
 	padding:16px;
+	font-size:16px;
+	line-height:22px;
 }
 .tutorial .box > .swipe-container{
 	overflow:hidden;
@@ -238,6 +240,9 @@ progress[value] {
 }
 .tutorial .box div{
 	text-align:left;
+}
+.tutorial .box .overlay h1{
+	text-align:center;
 }
 
 /**

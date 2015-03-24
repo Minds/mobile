@@ -52,7 +52,7 @@ define(function () {
 	    				$scope.hasMoreData = false;
 	    				return false;
 	    			} else {
-	    				$scope.hasMoreData = false;
+	    				$scope.hasMoreData = true;
 	    			};
 	    			
 	    			if(refresh){
@@ -98,6 +98,7 @@ define(function () {
 			$scope.next = "";
 			$scope.previous = "";
 			$scope.cb = Date.now();
+			$scope.hasMoreData = true;
 			$scope.loadMore(true);
 		};
 		

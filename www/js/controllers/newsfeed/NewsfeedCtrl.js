@@ -56,8 +56,13 @@ define(function () {
 	    				$scope.hasMoreData = true;
 	    			};
 	    			
-	    			$scope.newsfeedItems = $scope.newsfeedItems.concat(data.activity);
-	    			//if($scope.newsfeedItems.length < 30){	    			
+	    			if($scope.newsfeedItems.length > 50){
+	    				$ionicScrollDelegate.scrollTop();
+	    				$scope.newsfeedItems = data.activity;
+	    			} else {
+	   			
+	    				$scope.newsfeedItems = $scope.newsfeedItems.concat(data.activity);
+	     			}	    			
 	    				//Cacher.put('newsfeed.items', $scope.newsfeedItems);
 	    			//} else {
 	    			//	Cacher.put('newsfeed.items', data.activity);

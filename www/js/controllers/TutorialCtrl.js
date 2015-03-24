@@ -31,7 +31,7 @@ define(function() {
 			},
 			{ guid: 341,
 			  user: "Bill Ottman",
-			  message: "Share your videos, photos statuses."
+			  message: "Share your videos, photos & status."
 			}
 		];
 

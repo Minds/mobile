@@ -4,9 +4,11 @@
         <a class="button button-clear icon ion-arrow-left-b" href="#/tab/newsfeed"></a>
     </ion-nav-buttons>
 
-    <ion-content>
+    <ion-content >
     	
-    	<activity-view ng-if="activity.guid" id="{{activity.guid}}" class="activity-item list card" ng-controller="NewsfeedCtrl"></activity-view>
+    	<div ng-controller="NewsfeedCtrl">
+    	   <activity-view ng-if="activity.guid" id="{{activity.guid}}" class="activity-item list card" ng-controller="NewsfeedCtrl"></activity-view>
+    	</div>
     	
     	<!-- show comments here -->
 		<ion-list>

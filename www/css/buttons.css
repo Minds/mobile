@@ -56,13 +56,13 @@
 	color:#FFF !important;
 }
 .discover-button-no > i.icon, .discover-button-down > i.icon{
-	color:red !important;
+	color:red;
 }
 .discover-button-subscribe, .discover-button-up{
 	/*background:green;*/
 }
 .discover-button-subscribe > i.icon, .discover-button-up > i.icon{
-	color:green !important;
+	color:green;
 }
 .discover-button-subscribe-subscribed > i.icon{
 	color:#4690C3 !important;

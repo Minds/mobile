@@ -33,6 +33,7 @@ define(function () {
     		
     		Client.get('api/v1/conversations/'+$stateParams.username, { limit: 6, offset: $scope.next, cachebreak: Date.now()}, 
     			function(data){
+    				$rootScope.newChat = false;
     				$scope.inProgress  = false;
     				//now update the public keys
 					$scope.publickeys = data.publickeys;	
@@ -126,7 +127,7 @@ define(function () {
     		console.log('think you got a new message');
     		Client.get('api/v1/conversations/'+$stateParams.username, { limit: 1000, start: $scope.previous, cachebreak: Date.now()}, 
     			function(data){
-					
+					$rootScope.newChat = false;
 					if(data && data.messages){
 	    			
 		    			$scope.messages = $scope.messages.concat(data.messages);

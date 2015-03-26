@@ -8,8 +8,12 @@
 define(function () {
     'use strict';
 
-    function ctrl($scope, $stateParams, Client, Cacher, $ionicPopup, $ionicScrollDelegate, $ionicLoading, $ionicModal, $ionicActionSheet, $timeout) {
-
+    function ctrl($scope, $stateParams, Client, Cacher, $ionicPopup, $ionicScrollDelegate, $ionicLoading, $ionicModal, $ionicActionSheet, $timeout, $q) {
+		var search_timeout,
+			timeout,
+			request,
+			search_request;
+			
 		$scope.entities = [];
 		if(Cacher.get('entities.next')){
 			$scope.next = Cacher.get('entities.next');
@@ -39,17 +43,18 @@ define(function () {
 			if(filter == 'suggested'){
 				$scope.view = 'swipe';
 				$scope.infinite = false;
-				Cacher.put('entities.cb', Date.now());
+				//Cacher.put('entities.cb', Date.now());
 				$scope.cachebreaker = Date.now();
 			} else {
 				$scope.view = 'list';
 			}
+			$scope.query.string = '';
 			$scope.filter = filter;
 			$scope.entities = [];
 			$scope.passed = [];
 			$scope.next = "";
 			//run on next digest
-			$timeout($scope.load); 
+			$scope.load();
 		};
 		
 		$scope.changeType = function(type){
@@ -66,64 +71,57 @@ define(function () {
 		};
 		
 		$scope.load = function(){
-			if($scope.type != 'channel'){
-				var subtype = $scope.type;
-				var type = 'object';
-			} else {
-				var subtype = '';
-				var type =  'user';
-			}
-			console.log('loading entities...');
-
-			Client.get('api/v1/entities/' + $scope.filter + '/' + type + '/' + subtype, { 
-				limit: 16, 
-				offset: $scope.next, 
-				cachebreaker: $scope.cachebreaker,
-				skip: $scope.offset
-				}, 
-    			function(data){
-					console.log('got it!');
-					console.log(data);
-
-					if(!data.entities){
-	    				$scope.hasMoreData = false;
-	    				return false;
-	    			} else {
-	    				$scope.hasMoreData = true;
-	    			}
-	    			
-					if($scope.entities.length == 0){
-						$scope.entities = data.entities;
-					} else {
-						$scope.entities = $scope.entities.concat(data.entities);
-					}
-	    			
-	    			//scan for duplicates..
-	    			/*$scope.passed.forEach(function(item, index, array){
-	    				$scope.entities.forEach(function(eitem, eindex, earray){
-	    					if(item == eitem){
-	    						console.log('found duplicate, attempting to remove');
-	    						earray.splice(index, 1);
-	    					}
-	    				});
-	    			});*/
-	    			
-	    			//Cacher.put('entities.data', $scope.entities);
+			$timeout.cancel(timeout);
+			if(request)
+				request.cancel(); //cancel previous requests..
+			if(search_request)
+				search_request.cancel();
+				
+			timeout = $timeout(function(){
+				
+				
+				if($scope.type != 'channel'){
+					var subtype = $scope.type;
+					var type = 'object';
+				} else {
+					var subtype = '';
+					var type =  'user';
+				}
+				console.log('loading entities...');
 	
-	    			$scope.next = data['load-next'];
-	    			//Cacher.put('entities.next', $scope.next);
-	    			
-	    			//Cacher.put('entities.cb', Date.now());
-					if($scope.filter == 'suggested'){
-						$scope.cachebreaker = Date.now();
-					}
-	    			
-	    			//$scope.$broadcast('scroll.infiniteScrollComplete');
-	    		}, 
-	    		function(error){ 
-	    			alert('error'); 
-	    		});
-	    	
+				request = Client.get('api/v1/entities/' + $scope.filter + '/' + type + '/' + subtype, { 
+					limit: 16, 
+					offset: $scope.next, 
+					cachebreaker: $scope.cachebreaker,
+					skip: $scope.offset
+					}, 
+	    			function(data){
+	
+						if(!data.entities){
+		    				$scope.hasMoreData = false;
+		    				return false;
+		    			} else {
+		    				$scope.hasMoreData = true;
+		    			}
+		    			
+						if($scope.entities.length == 0){
+							$scope.entities = data.entities;
+						} else {
+							$scope.entities = $scope.entities.concat(data.entities);
+						}
+
+		
+		    			$scope.next = data['load-next'];
+
+						if($scope.filter == 'suggested'){
+							$scope.cachebreaker = Date.now();
+						}
+
+		    		}, 
+		    		function(error){ 
+		    			alert('error'); 
+		    		});
+	    	}, 600);
 		};
 		$scope.load();
 
@@ -162,7 +160,16 @@ define(function () {
 	    		});
 		};
 		
+		
 		$scope.search = function(){
+			$timeout.cancel(search_timeout);
+			$timeout.cancel(timeout);
+			
+			if(search_request)
+				search_request.cancel();
+			if(request)
+				request.cancel();
+		
 			$scope.next = "";
 			$scope.filter = 'search';
 			if($scope.type != 'channel'){
@@ -172,13 +179,13 @@ define(function () {
 				var subtype = '';
 				var type = 'user';
 			}
-			$timeout(function(){
-				
 			
+			search_timeout = $timeout(function(){
+	
 				if($scope.query.string.length > 2){
 					$scope.entities = [];
 					
-					Client.get('search', { 
+					search_request = Client.get('search', { 
 						type: type,
 						subtype: subtype,
 						q: $scope.query.string,
@@ -210,7 +217,7 @@ define(function () {
 			    			alert('error'); 
 			    		});
 				}
-			});
+			}, 600);
 			
 		};
 		
@@ -242,6 +249,7 @@ define(function () {
 
 			//notify the suggested that we have decided to ignore
 			Client.post('api/v1/entities/suggested/pass/' + entity.guid, {}, function(){}, function(){});
+			$scope.acted(entity);
 			
 			//show a quick ui confirmation
 			$ionicLoading.show({
@@ -283,6 +291,8 @@ define(function () {
 				} 
 			});
 			
+			$scope.acted(entity);
+			
 			//show a quick ui confirmation
 			$ionicLoading.show({
 				template: '<i class="icon ion-person" style="font-size:90px"></i>'
@@ -320,6 +330,7 @@ define(function () {
 
 			//notify the suggested that we have decided to ignore
 			Client.post('api/v1/entities/suggested/pass/' + entity.guid, {}, function(){}, function(){});
+			$scope.acted(entity);
 			
 			//show a quick ui confirmation
 			$ionicLoading.show({
@@ -328,6 +339,8 @@ define(function () {
 			$timeout(function(){
 				$ionicLoading.hide();
 				}, 300);
+			
+			$scope.cachebreaker = Date.now();
 		};
 		
 		$scope.down = function(entity){
@@ -337,6 +350,7 @@ define(function () {
 			Client.put('api/v1/thumbs/'+entity.guid+'/down', {}, 
 					function(success){},
 					function(error){});
+			$scope.acted(entity);
 			
 			$ionicLoading.show({
 				template: '<i class="icon ion-thumbsdown" style="font-size:90px"></i>'
@@ -344,6 +358,8 @@ define(function () {
 			$timeout(function(){
 				$ionicLoading.hide();
 				}, 300);
+				
+			$scope.cachebreaker = Date.now();
 		};
 		
 		$scope.up = function(entity){
@@ -353,6 +369,8 @@ define(function () {
 			Client.put('api/v1/thumbs/'+entity.guid+'/up', {}, 
 					function(success){},
 					function(error){});
+					
+			$scope.acted(entity);
 			
 			$ionicLoading.show({
 				template: '<i class="icon ion-thumbsup" style="font-size:90px"></i>'
@@ -360,6 +378,8 @@ define(function () {
 			$timeout(function(){
 				$ionicLoading.hide();
 				}, 300);
+				
+			$scope.cachebreaker = Date.now();
 		};
 		
 		$scope.boost = function(entity){
@@ -373,6 +393,14 @@ define(function () {
 	 		    $scope.modal.show();
 	 		  });
 			
+		};
+		
+		$scope.acted = function(entity){
+			if(entity.boosted){
+				Client.post('api/v1/entities/suggested/acted/'+entity.guid, {}, 
+					function(success){},
+					function(error){});
+			}
 		};
 		
 		$scope.openActions = function(entity){
@@ -420,7 +448,7 @@ define(function () {
 
     }
 
-    ctrl.$inject = ['$scope', '$stateParams', 'Client', 'Cacher', '$ionicPopup', '$ionicScrollDelegate', '$ionicLoading', '$ionicModal',  '$ionicActionSheet', '$timeout'];
+    ctrl.$inject = ['$scope', '$stateParams', 'Client', 'Cacher', '$ionicPopup', '$ionicScrollDelegate', '$ionicLoading', '$ionicModal',  '$ionicActionSheet', '$timeout', '$q'];
     return ctrl;
     
 });

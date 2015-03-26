@@ -51,7 +51,7 @@ define(function() {
 		
 		
 		$ionicPlatform.registerBackButtonAction(function (e) {
-			if($state.current.name == 'tab.newsfeed'){
+			if($state.current.name == 'tab.newsfeed' || $state.current.name == 'login'){
 		  		e.preventDefault();
 		  	} else {
 		  		navigator.app.backHistory();

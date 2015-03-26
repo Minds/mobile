@@ -10,17 +10,20 @@
 define(['angular'], function (angular) {
     "use strict";
 
-    var factory = function (OAuth, $rootScope, $http, storage, $state) {
+    var factory = function (OAuth, $rootScope, $http, storage, $state, $q) {
 
         return {
         
             get: function (endpoint, options, success_callback, error_callback) {
-            
+            	
+            	var canceler = $q.defer();
+				
 				$http({
 					method: 'GET',
 					url: $rootScope.node_url + endpoint,
 					params: OAuth.buildParams(options),
-					cache: true
+					cache: true,
+					timeout: canceler.promise
 					}).
 				      success(function(data){
 				        if(data.code == 401){
@@ -42,6 +45,13 @@ define(['angular'], function (angular) {
 				        }
 						error_callback(data);
 					  });
+					  
+					return {
+						cancel: function(){
+							console.log('canceled a $http GET request');
+							canceler.resolve(); 
+						}
+					};
 						
             },
             
@@ -99,6 +109,6 @@ define(['angular'], function (angular) {
 
     };
 
-    factory.$inject = ['OAuth', '$rootScope', '$http', 'storage', '$state'];
+    factory.$inject = ['OAuth', '$rootScope', '$http', 'storage', '$state', '$q'];
     return factory;
 });

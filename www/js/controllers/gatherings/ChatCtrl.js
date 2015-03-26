@@ -8,7 +8,7 @@
 define(function () {
     'use strict';
 
-    function ctrl($rootScope, $scope, $state, Client, storage, push, $ionicModal, $ionicPopup) {
+    function ctrl($rootScope, $scope, $state, Client, storage, push, $ionicModal, $ionicPopup, $ionicScrollDelegate) {
     	
     	$scope.conversations = [];
     	$scope.next  = "";
@@ -28,6 +28,7 @@ define(function () {
     		console.log('new message!');
     		$scope.cb = Date.now();
     		$scope.refresh();
+    		$ionicScrollDelegate.scrollTop();
 			
     	});
     	
@@ -135,7 +136,7 @@ define(function () {
 		
     }
 
-    ctrl.$inject = ['$rootScope', '$scope', '$state', 'Client', 'storage', 'push', '$ionicModal', '$ionicPopup'];
+    ctrl.$inject = ['$rootScope', '$scope', '$state', 'Client', 'storage', 'push', '$ionicModal', '$ionicPopup', '$ionicScrollDelegate'];
     return ctrl;
     
 });

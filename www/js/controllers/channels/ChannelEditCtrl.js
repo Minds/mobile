@@ -134,6 +134,7 @@ define(function () {
 		  	storage.remove('loggedin');
 		  	storage.remove('access_token');
 		  	storage.remove('private-key');
+		  	storage.remove('push-token');
 		  	$state.go('login');
 		  	
 		  	ionic.Platform.exitApp();

@@ -118,13 +118,16 @@
                         </div>
 	                     <div ng-switch-when="boost_submitted">
 	                    	<a href="#/tab/notifications/entity/{{notification.entityObj.guid}}">
-	                    		<p>{{notification.params.impressions}} impressions for <span class="minds-blue"  ng-bind-html="notification.entityObj.title"></span> is awaiting approval.</p>
+	                    		<p>{{notification.params.impressions}} impressions for 
+	                    		 <span class="minds-blue" ng-if="notification.entityObj.title" ng-bind-html="notification.entityObj.title"></span> 
+	                    		 <span class="minds-blue" ng-if="!notification.entityObj.title">your post</span>
+	                    		 is awaiting approval.</p>
 	                    	</a>
                         </div>
                         <div ng-switch-when="boost_request">
                             <a ng-click="loadBoostReview(notification.entityObj.guid)">
                                 <p>{{notification.fromObj.name}} is offering you {{notification.params.points}} points to boost 
-                                    <span class="minds-blue"  ng-bind-html="notification.entityObj.title"></span>
+                                    <span class="minds-blue" ng-if="!notification.entityObj.title" ng-bind-html="notification.entityObj.title"></span>
                                     <span class="minds-blue" ng-if="!notification.entityObj.title">their activity</span>
                                </p>
                             </a>

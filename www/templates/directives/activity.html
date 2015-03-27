@@ -1,7 +1,7 @@
 
     <owner-brief-view owner="{{activity.ownerObj}}" ts="{{activity.time_created}}"></owner-brief-view>
     
-    <div class="item item-text-wrap" ng-if="activity.message">
+    <div class="item item-text-wrap" ng-if="activity.message && activity.custom_type != 'batch'">
         <p ng-bind-html="activity.message | linky" class="wrap"></p>
     </div>
     

@@ -50,8 +50,8 @@ define(function() {
 						$ionicLoading.hide();
 						if(success){
 							//$state.go('tab.newsfeed');
-							push.register();
 							$rootScope.user_guid = storage.get('user_guid');
+							push.register();
 							
 							//load popup so we upload avatar
 							$ionicModal.fromTemplateUrl('templates/modals/avatar.html', {

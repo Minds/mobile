@@ -241,6 +241,22 @@ define(function () {
 						alert('failed..');
 					});
 			
+			/**
+			 * @todo improve this way of updating!
+			 */		
+			$scope.newsfeedItems.forEach(function(item, index, array){
+				if(item.guid == activity.guid){
+					array[index].reminds = array[index].reminds + 1;
+				}
+			});
+			if($scope.ChannelItems){
+				$scope.ChannelItems.forEach(function(item, index, array){
+					if(item.guid == activity.guid){
+						array[index].reminds = array[index].reminds + 1;
+					}
+				});
+			}
+			
 			//increment count
 			$rootScope.points = $rootScope.points + 1;
 			

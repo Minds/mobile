@@ -17,7 +17,7 @@ define(['angular'], function (angular) {
         			listeners[i].callback(data);
         		}
         	}
-		}
+		};
 		
 		/**
 		 * REGISTER A DEVICES ID
@@ -159,7 +159,7 @@ define(['angular'], function (angular) {
             	//listeners = [];
             	for(var i=0; i < listeners.length; i++) {
             		if(listeners[i].event == event && listeners[i].id == id){
-            			listeners.splice(i, 1)
+            			listeners.splice(i, 1);
             		}
             	}
             }

@@ -46,14 +46,14 @@
     </div>
 
     <!-- Scroll view -->
-    <ion-content class="forced-scroll" ng-show="filter == 'search'" style="padding-top:80px" scroll="true">
+    <ion-content class="forced-scroll" ng-show="filter != 'suggested'" style="padding-top:80px" scroll="true">
     		
     		<div ng-show="entities.length == 0" style="text-align:center; font-weight:200; padding-top:50px;">
 				<img src="img/logo-transparent.png" class="loading-bulb-glow"/> <br/>
 				Discovering..
 			</div>
     
-			<div ng-repeat="entity in entities" class="swipe-container" ng-if="filter == 'search'">
+			<div ng-repeat="entity in entities" class="swipe-container" ng-if="filter != 'suggested'">
 			
 	            <div ng-switch="entity.type">
 	            
@@ -73,9 +73,12 @@
 	                
 	            </div>
 			</div>
+			
+			<ion-infinite-scroll on-infinite="load()" distance="1%" ng-if="hasMoreData"></ion-infinite-scroll>
+			
 	</ion-content>
-    
-	<ion-pane style="padding-top:102px" style="-webkit-transform: translate3d(0px, 0px, 0px);" ng-if="filter != 'search'">
+	    
+	<ion-pane style="padding-top:102px" style="-webkit-transform: translate3d(0px, 0px, 0px);" ng-if="filter == 'suggested'">
 
 		<div ng-show="entities.length == 0" style="text-align:center; font-weight:200; padding-top:50px;">
 			<img src="img/logo-transparent.png" class="loading-bulb-glow"/> <br/>

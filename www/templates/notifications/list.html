@@ -69,6 +69,11 @@
                         		  {{notification.fromObj.name}} voted up <span class="minds-blue">your activity</span>
                         		</p>
                         	</a>
+                        	<a href="#/tab/notifications/entity/{{notification.entityObj.parent_guid}}" ng-if="notification.entityObj.type == 'comment'">
+                                <p>
+                                  {{notification.fromObj.name}} voted up <span class="minds-blue"> your comment </span>
+                                </p>
+                            </a>
                         	<a href="#/tab/notifications/entity/{{notification.entityObj.guid}}" ng-if="!notification.entityObj">
                         	  <p style="font-style:italic">
                                     This post was deleted.
@@ -110,15 +115,15 @@
                         </div>
                          <div ng-switch-when="boost_gift">
                         	<a href="#/tab/notifications/entity/{{notification.entityObj.guid}}">
-                        		<p>{{notification.fromObj.name}} gifted you {{notification.params.impressions}} impressions for 
-                        		  <span class="minds-blue" ng-bind-html="notification.entityObj.title"></span>
-                        		  <span class="minds-blue" ng-bind-html="notification.entityObj.title"></span>
+                        		<p>{{notification.fromObj.name}} gifted you {{notification.params.impressions}} views for 
+                        		  <span class="minds-blue" ng-if="notification.entityObj.title" ng-bind-html="notification.entityObj.title"></span>
+                        		  <span class="minds-blue" ng-if="!notification.entityObj.title"> your post</span>
                         		</p>
                         	</a>
                         </div>
 	                     <div ng-switch-when="boost_submitted">
 	                    	<a href="#/tab/notifications/entity/{{notification.entityObj.guid}}">
-	                    		<p>{{notification.params.impressions}} impressions for 
+	                    		<p>{{notification.params.impressions}} views for 
 	                    		 <span class="minds-blue" ng-if="notification.entityObj.title" ng-bind-html="notification.entityObj.title"></span> 
 	                    		 <span class="minds-blue" ng-if="!notification.entityObj.title">your post</span>
 	                    		 is awaiting approval.</p>
@@ -134,15 +139,15 @@
                         </div>
                          <div ng-switch-when="boost_rejected">
                         	<a href="#/tab/notifications/entity/{{notification.entityObj.guid}}">
-                        		<p>{{notification.params.impressions}} impressions for 
-                        		  <span class="minds-blue" ng-bind-html="notification.entityObj.title"></span> 
+                        		<p>{{notification.params.impressions}} views for 
+                        		  <span class="minds-blue" ng-if="notification.entityObj.title" ng-bind-html="notification.entityObj.title"></span> 
                         		   <span class="minds-blue" ng-if="!notification.entityObj.title">your post</span> 
                         		  were rejected. Your points have been credited back to your wallet.</p>
                         	</a>
                         </div>
                          <div ng-switch-when="boost_accepted">
                         	<a href="#/tab/notifications/entity/{{notification.entityObj.guid}}">
-                        		<p ng-if="notification.params.impressions">{{notification.params.impressions}} impressions for 
+                        		<p ng-if="notification.params.impressions">{{notification.params.impressions}} views for 
                         		  <span class="minds-blue" ng-if="notification.entityObj.title" ng-bind-html="notification.entityObj.title"></span> 
                         		  <span class="minds-blue" ng-if="!notification.entityObj.title">your post</span> 
                         		  were accepted.
@@ -155,7 +160,7 @@
                         </div>
                         <div ng-switch-when="boost_completed">
                         	<a href="#/tab/notifications/entity/{{notification.entityObj.guid}}">
-                        		<p>{{notification.params.impressions}}/{{notification.params.impressions}} impressions for 
+                        		<p>{{notification.params.impressions}}/{{notification.params.impressions}} views for 
                         		  <span class="minds-blue"  ng-if="notification.entityObj.title" ng-bind-html="notification.entityObj.title"></span> 
                         		  <span class="minds-blue" ng-if="!notification.entityObj.title">your post</span> 
                         		  have been met.</p>

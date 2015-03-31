@@ -1,7 +1,7 @@
 
     <owner-brief-view owner="{{activity.ownerObj}}" ts="{{activity.time_created}}"></owner-brief-view>
     
-    <div class="item item-text-wrap" ng-if="activity.message && activity.custom_type != 'batch'">
+    <div class="item item-text-wrap" ng-if="activity.message">
         <p ng-bind-html="activity.message | linky" class="wrap"></p>
     </div>
     
@@ -17,8 +17,7 @@
     
     <!-- Custom type:: batch -->
     <div class="item item-image allow-select" ng-if="activity.custom_type == 'batch'">
-    {{data.src}}
-        <img ng-repeat="data in activity.custom_data" ng-src="{{data.src}}" src="{{data.src}}" onerror="this.src='img/img-placeholder.png'">
+        <img ng-repeat="data in activity.custom_data" ng-src="{{data.src}}" src="{{data.src}}" onerror="this.src='img/img-placeholder.png'" style="width:100%">
     </div>
     
     <!-- Custom type:: video -->
@@ -64,9 +63,13 @@
             <b ng-show="activity.reminds > 0" style="font-size:14px; padding:2px 0 0">({{activity.reminds}})</b> 
         </a>
         
-        <a class="tab-item small-font" ng-click="openActions(activity)">
-            <i class="icon ion-more"></i>
+        <a class="tab-item small-font" ng-click="boost(activity)">
+            <i class="icon ion-arrow-graph-up-right minds-blue"></i>
         </a>
+        
+        <!--<a class="tab-item small-font" ng-click="openActions(activity)">
+            <i class="icon ion-more"></i>
+        </a>-->
         
         <span class="impressions-tag">{{activity.impressions}}</span>
     </div>

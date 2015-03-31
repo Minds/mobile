@@ -8,7 +8,7 @@
 define(function() {
 	'use strict';
 
-	function ctrl($rootScope, $scope, $state, $ionicPopover, storage, push, $ionicPlatform) {
+	function ctrl($rootScope, $scope, $state, $ionicPopover, storage, push, $ionicPlatform, analytics) {
 
 		$scope.logout = function(){
 		  	storage.remove('loggedin');
@@ -45,6 +45,9 @@ define(function() {
 			}
 		});
 		
+		//Call the analytics service.
+		analytics.init();
+		
 				
 		$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){ 
 		});
@@ -61,7 +64,7 @@ define(function() {
 	}
 
 
-	ctrl.$inject = ['$rootScope', '$scope', '$state', '$ionicPopover', 'storage', 'push', '$ionicPlatform'];
+	ctrl.$inject = ['$rootScope', '$scope', '$state', '$ionicPopover', 'storage', 'push', '$ionicPlatform', 'analytics'];
 	return ctrl;
 
 }); 

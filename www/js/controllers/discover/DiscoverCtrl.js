@@ -53,7 +53,7 @@ define(function () {
 			$scope.entities = [];
 			$scope.passed = [];
 			$scope.next = "";
-			//run on next digest
+			$ionicScrollDelegate.scrollTop();
 			$scope.load();
 		};
 		
@@ -67,6 +67,7 @@ define(function () {
 			$scope.type = type;
 			$scope.entities = [];
 			$scope.next = "";
+			$ionicScrollDelegate.scrollTop();
 			$scope.load();
 		};
 		

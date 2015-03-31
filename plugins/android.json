@@ -79,6 +79,10 @@
                         {
                             "xml": "<access origin=\"https://*.akamaihd.net\" />",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"StatusBar\"><param name=\"android-package\" value=\"org.apache.cordova.statusbar.StatusBar\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -294,6 +298,9 @@
         "com.phonegap.plugins.facebookconnect": {
             "APP_ID": "184865748231073",
             "APP_NAME": "Minds",
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
+        "org.apache.cordova.statusbar": {
             "PACKAGE_NAME": "com.minds.mobile"
         }
     },

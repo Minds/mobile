@@ -36,7 +36,7 @@ define(['angular'], function (angular) {
 						success_callback(data);
 					  }).
 					  error(function(data){
-					 	if(data.code == 401){
+					 	if(data && data.code == 401){
 				        	//go to login
 				        	storage.remove('access_token');
 				        	storage.remove('loggedin');

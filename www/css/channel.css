@@ -60,6 +60,9 @@
 	text-decoration:none;
 	float:left;
 }
+.channel-content ion-list > .list{
+	min-height:300px;
+}
     
 .slider {
     height: 100%;

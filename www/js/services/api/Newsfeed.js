@@ -24,6 +24,8 @@ define(['angular'], function (angular) {
             
             	Client.get('api/v1/newsfeed', options, function(data){
             		return success_callback(data); 
+            	}, function(error){
+            		return error_callback(error);
             	});
             	
             },

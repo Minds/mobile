@@ -21,6 +21,9 @@ define(['angular'], function (angular) {
 				scope.play = function(){
 				
 					scope.$digest();
+					
+					StatusBar.hide();
+					
 					$ionicLoading.show({
 						template: 'Loading...'
 					});
@@ -56,12 +59,15 @@ define(['angular'], function (angular) {
  						scope.showVideo = false;
  						scope.$apply();
  						console.log('ended full screen');
+ 						StatusBar.show();
  					});
  					video.addEventListener('webkitfullscreenchange', function (e) { 
  						scope.showVideo = false;
  						scope.$apply();
+ 						
  						if(!document.webkitIsFullScreen){
  							video.pause();
+ 							StatusBar.show();
  						}
  					});
  					video.addEventListener('ended', function(e){
@@ -69,6 +75,7 @@ define(['angular'], function (angular) {
  						//document.webkitExitFullscreen();
  						scope.showVideo = false;
  						scope.$apply();
+ 						StatusBar.show();
  						}, false);
 	 					
 				};

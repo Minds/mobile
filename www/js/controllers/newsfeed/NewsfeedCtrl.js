@@ -50,7 +50,8 @@ define(function () {
     			function(data){
     		
 	    			if(!data.activity){
-	    				$scope.hasMoreData = false;
+	    				//$scope.hasMoreData = false;
+	    				$scope.$broadcast('scroll.infiniteScrollComplete');
 	    				return false;
 	    			} else {
 	    				$scope.hasMoreData = true;
@@ -69,13 +70,15 @@ define(function () {
 	    			//}
 	
 	    			$scope.next = data['load-next'];
+	    			console.log("next is:: " + $scope.next);
 	    			//Cacher.put('newsfeed.item', $scope.next);
 	    			
 	    			$scope.$broadcast('scroll.infiniteScrollComplete');
 	
 	    		}, 
 	    		function(error){ 
-	    			alert('error'); 
+	    			$scope.$broadcast('scroll.infiniteScrollComplete');
+	    			//alert('error'); 
 	    		});
 	    		
     	};
@@ -342,6 +345,18 @@ define(function () {
 			window.open(url, "_blank", "location=yes");
 		};
 		
+		$scope.boost = function(activity){
+			$ionicModal.fromTemplateUrl('templates/newsfeed/boost.html', {
+			    	 		    scope: $scope,
+			    	 		    animation: 'slide-in-up'
+			    	 		  }).then(function(modal) {
+			    	 		    $scope.modal = modal;
+			    	 		    $scope.guid = activity.guid;
+			    	 		    $scope.owner_guid = activity.owner_guid;
+			    	 		    $scope.modal.show();
+			    	 		  });
+		};
+		
 		$scope.openActions = function(activity){
 			var guid = activity.guid;
 			$ionicActionSheet.show({
@@ -374,19 +389,11 @@ define(function () {
 			     buttonClicked: function(index) {
 			    	 switch(index){
 			    	 	case 0:
-			    	 		$ionicModal.fromTemplateUrl('templates/newsfeed/boost.html', {
-			    	 		    scope: $scope,
-			    	 		    animation: 'slide-in-up'
-			    	 		  }).then(function(modal) {
-			    	 		    $scope.modal = modal;
-			    	 		    $scope.guid = guid;
-			    	 		    $scope.owner_guid = activity.owner_guid;
-			    	 		    $scope.modal.show();
-			    	 		  });
+			    	 		$scope.boost(activity);
 			    	 		  
 			    	 		break;
 			    	 	case 1:
-			    	 		cordova.plugins.clipboard.copy($rootScope.node_url + '/newsfeed/' + guid);
+			    	 		cordova.plugins.clipboard.copy($rootScope.node_url + 'newsfeed/' + guid);
 			    	 		$ionicLoading.show({
 			    				template: '<p> Copied to clipboard </p>'
 			    				});

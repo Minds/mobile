@@ -16,7 +16,8 @@
                     <div ng-switch="notification.notification_view">
                     	<!-- subscribed -->
                         <a href="#/tab/newsfeed/channel/{{notification.fromObj.guid}}" ng-switch-when="friends">
-                    		<p>{{notification.fromObj.name}} subscribed to you</p>
+                    		<p ng-if="notification.fromObj.subscribed">You have a match!. {{notification.fromObj.name}} subscribed to you</p>
+                    		<p ng-if="!notification.fromObj.subscribed">{{notification.fromObj.name}} subscribed to you</p>
                     	</a>
                     	<!-- group inivite -->
                         <div ng-switch-when="group_invite">

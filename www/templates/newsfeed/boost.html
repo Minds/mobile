@@ -16,7 +16,7 @@
            
                <h3>Channel</h3>
                 <input type="text" ng-model="data.destination" placeholder="Tap to search..." ng-keyup="changeDestination($event)" /> 
-                <p>Select a channel above to have your post distributed to their followers.</p>
+                <p>Select a channel above to have your post distributed to their subscribers in exchange for points.</p>
                
                <div class="wallet-users-list" ng-show="searching">
                    <div ng-repeat="user in results" ng-click="selectDestination(user);">
@@ -29,8 +29,9 @@
 	   
 	        <div class="wallet-points-input wallet-destination-select" ng-click="nextStep()">
                
-               <h3>Newsfeeds</h3>
+               <h3>Full Network</h3>
                <p>Your post will appear at the top of everyones newsfeed until your views are met.</p>
+               <a class="button button-positive" ng-click="nextStep()" style="width:100%;">Select</a>
 
            </div>
 	       	   

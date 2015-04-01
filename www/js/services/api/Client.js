@@ -10,13 +10,14 @@
 define(['angular'], function (angular) {
     "use strict";
 
-    var factory = function (OAuth, $rootScope, $http, storage, $state, $q) {
+    var factory = function (OAuth, $rootScope, $http, storage, $state, $q, $ionicPopup, $timeout) {
 
         return {
         
             get: function (endpoint, options, success_callback, error_callback) {
             	
             	var canceler = $q.defer();
+				$rootScope.popup;
 				
 				$http({
 					method: 'GET',
@@ -33,9 +34,43 @@ define(['angular'], function (angular) {
 				        	$state.go('login');
 				        	return false;
 				        }
-						success_callback(data);
+				        if(success_callback)
+							success_callback(data);
 					  }).
-					  error(function(data){
+					  error(function(data, status){
+
+					  	switch(status){
+					  		case 0:
+					  			if($rootScope.popup){
+					  				$rootScope.popup.close();
+					  				$rootScope.popup = null;
+					  			}
+								$rootScope.popup = $ionicPopup.alert({
+								     title: 'Ooops..',
+								     subTitle: 'Sorry, there was a connectivity error. Please try again later.',
+								     buttons: [
+						              
+						               { text: 'Close.' },
+						             ]
+								   });
+									
+					  		break;
+					  		case 500:
+					  			if($rootScope.popup){
+					  				$rootScope.popup.close();
+					  				$rootScope.popup = null;
+					  			}
+					  			$rootScope.popup = $ionicPopup.alert({
+								     title: 'Ooops..',
+								     subTitle: 'There was a server error. Please try again later.',
+								     buttons: [
+						              
+						               { text: 'Close.' },
+						             ]
+								   });
+							break;
+					  	}
+					  
 					 	if(data && data.code == 401){
 				        	//go to login
 				        	storage.remove('access_token');
@@ -43,7 +78,8 @@ define(['angular'], function (angular) {
 				        	$state.go('login');
 				        	return false;
 				        }
-						error_callback(data);
+				        if(error_callback)
+							error_callback(data);
 					  });
 					  
 					return {
@@ -64,10 +100,12 @@ define(['angular'], function (angular) {
 					headers : {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'}
 					}).
 					  success(function(data){
-						success_callback(data);
+					  	if(success_callback)
+							success_callback(data);
 					  }).
 					  error(function(data){
-						error_callback(data);
+					  	if(error_callback)
+							error_callback(data);
 					  });
 						
             },
@@ -81,10 +119,12 @@ define(['angular'], function (angular) {
 					data: data
 					}).
 					  success(function(data){
-						success_callback(data);
+					  	if(success_callback)
+							success_callback(data);
 					  }).
 					  error(function(data){
-						error_callback(data);
+					  	if(error_callback)
+							error_callback(data);
 					  });
 						
             },
@@ -97,10 +137,12 @@ define(['angular'], function (angular) {
 					params: OAuth.buildParams(data)
 					}).
 					  success(function(data){
-						success_callback(data);
+					  	if(success_callback)
+							success_callback(data);
 					  }).
 					  error(function(data){
-						error_callback(data);
+					  	if(error_callback)
+							error_callback(data);
 					  });
 						
             }
@@ -109,6 +151,6 @@ define(['angular'], function (angular) {
 
     };
 
-    factory.$inject = ['OAuth', '$rootScope', '$http', 'storage', '$state', '$q'];
+    factory.$inject = ['OAuth', '$rootScope', '$http', 'storage', '$state', '$q', '$ionicPopup', '$timeout'];
     return factory;
 });

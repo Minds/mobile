@@ -70,7 +70,6 @@ define(function () {
 	
 	    		}, 
 	    		function(error){ 
-	    			alert('error'); 
 	    		});
 	    		
     	};
@@ -91,7 +90,6 @@ define(function () {
 	
 	    		}, 
 	    		function(error){ 
-	    			alert('error'); 
 	    		});
 			
 		};

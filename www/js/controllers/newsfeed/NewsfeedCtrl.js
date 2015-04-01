@@ -50,7 +50,7 @@ define(function () {
     			function(data){
     		
 	    			if(!data.activity){
-	    				//$scope.hasMoreData = false;
+	    				$scope.hasMoreData = false;
 	    				$scope.$broadcast('scroll.infiniteScrollComplete');
 	    				return false;
 	    			} else {
@@ -77,14 +77,15 @@ define(function () {
 	
 	    		}, 
 	    		function(error){ 
+	    			$scope.hasMoreData = false;
 	    			$scope.$broadcast('scroll.infiniteScrollComplete');
-	    			//alert('error'); 
 	    		});
 	    		
     	};
 
 		$scope.refresh = function(){
 			console.log("=== refreshing ===");
+			$scope.hasMoreData = true;
 			NewsfeedAPI.all({ limit: 12, offset: '', cache_break: Date.now() }, 
 				function(data){
     		
@@ -100,7 +101,7 @@ define(function () {
 	
 	    		}, 
 	    		function(error){ 
-	    			alert('error'); 
+	    			$scope.$broadcast('scroll.refreshComplete');
 	    		});
 			
 		};

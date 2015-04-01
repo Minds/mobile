@@ -37,7 +37,7 @@ define(function () {
     	 */
     	$scope.inprogress = false;
     	$scope.loadMore = function(refresh){
-    		if($scope.inprogress){
+    		if($scope.inprogress || !storage.get('private-key')){
     			return false;
     		}
     		$scope.inprogress = true;
@@ -70,7 +70,6 @@ define(function () {
 	    				
 	    		}, 
 	    		function(error){ 
-	    			alert('error'); 
 	    			$scope.inprogress = true;
 	    		});
 	    		

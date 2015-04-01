@@ -63,7 +63,6 @@ define(function () {
 		    			
 		    		}, 
 		    		function(error){ 
-		    			alert('error'); 
 		    			$scope.inprogress = false;
 		    		});
 			
@@ -87,7 +86,6 @@ define(function () {
 	    	
 	    		}, 
 	    		function(error){ 
-	    			alert('error'); 
 	    		});
 			$scope.comment.body = '';
 		};

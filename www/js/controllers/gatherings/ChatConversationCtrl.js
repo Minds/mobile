@@ -74,8 +74,6 @@ define(function () {
 	    		}, 
 	    		function(error){ 
 	    			$scope.inProgress = false;
-	    			console.log(error);
-	    			alert('error'); 
 	    		});
 	    		
     	};

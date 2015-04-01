@@ -82,8 +82,9 @@ define(function () {
 	    			$scope.$broadcast('scroll.refreshComplete');
 	
 	    		}, 
-	    		function(error){ 
-	    			alert('error'); 
+	    		function(error){
+	    			$scope.$broadcast('scroll.infiniteScrollComplete');
+	    			$scope.$broadcast('scroll.refreshComplete');
 	    		});
 	 	};
 	 	

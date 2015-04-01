@@ -120,7 +120,6 @@ define(function () {
 
 		    		}, 
 		    		function(error){ 
-		    			alert('error'); 
 		    		});
 	    	}, 600);
 		};
@@ -157,7 +156,6 @@ define(function () {
 	    			$scope.$broadcast('scroll.infiniteScrollComplete');
 	    		}, 
 	    		function(error){ 
-	    			alert('error'); 
 	    		});
 		};
 		
@@ -215,7 +213,6 @@ define(function () {
 			    			$scope.$broadcast('scroll.infiniteScrollComplete');
 			    		}, 
 			    		function(error){ 
-			    			alert('error'); 
 			    		});
 				}
 			}, 600);

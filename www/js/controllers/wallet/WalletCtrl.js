@@ -45,7 +45,6 @@ define(function () {
 	
 	    		}, 
 	    		function(error){ 
-	    			alert('error'); 
 	    		});
 	    		
     	};

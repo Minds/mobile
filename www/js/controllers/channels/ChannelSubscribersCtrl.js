@@ -43,7 +43,6 @@ define(function () {
 	    			$scope.inprogress = false;
 	    		}, 
 	    		function(error){ 
-	    			alert('error'); 
 	    			$scope.inprogress = false;
 	    		});
 	 	};

@@ -70,6 +70,8 @@
     <feature name="StatusBar">
             <param name="ios-package" value="CDVStatusBar" onload="true" />
         </feature>
+    <preference name="StatusBarStyle" value="blacktranslucent" />
+
 
     <feature name="Console">
            <param name="ios-package" value="CDVLogger" />

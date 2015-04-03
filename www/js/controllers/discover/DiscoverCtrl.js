@@ -78,6 +78,12 @@ define(function () {
 			if(search_request)
 				search_request.cancel();
 				
+			if($scope.filter == 'search'){
+				$scope.search();
+				return;
+			}
+					
+				
 			timeout = $timeout(function(){
 				
 				

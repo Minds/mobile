@@ -98,7 +98,10 @@ define(function () {
 		$scope.upload = function(path, type){
 			var ft = new FileTransfer();
 	        var options = new FileUploadOptions();
-	        options.httpMethod = 'PUT';
+	        if(type == 'image')
+	        	options.httpMethod = 'PUT';
+	        else
+	       		options.httpMethod = 'POST';
 	        options.headers = {
 	        	"Authorization": "Bearer " + storage.get('access_token')
 	        };

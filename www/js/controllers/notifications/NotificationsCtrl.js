@@ -64,6 +64,8 @@ define(function () {
 	    		
 	
 	    			$scope.next = data['load-next'];
+	    			if(!$scope.next)
+	    				$scope.hasMoreData = false;
 	    			Cacher.put('notification.next', $scope.next);
 	    			
 	    			$scope.$broadcast('scroll.infiniteScrollComplete');
@@ -78,7 +80,7 @@ define(function () {
 			$rootScope.newNotification = false;
 			Client.get('api/v1/notifications', { limit: 12, offset: '', cache_break: Date.now() }, 
 				function(data){
-    		
+				    		
 	    			$scope.notificationItems = data.notifications;
 	    			Cacher.put('notification.items', $scope.notificationItems);
 	

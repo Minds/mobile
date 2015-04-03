@@ -17,7 +17,7 @@ define(['angular'], function (angular) {
             get: function (endpoint, options, success_callback, error_callback) {
             	
             	var canceler = $q.defer();
-				$rootScope.popup;
+       			$rootScope.popup;
 				
 				$http({
 					method: 'GET',
@@ -38,6 +38,11 @@ define(['angular'], function (angular) {
 							success_callback(data);
 					  }).
 					  error(function(data, status){
+					  
+					  	//a hack to detect if the request was canceled or nor
+					  	if (status === 0 && canceler.promise.$$state.status === 1) {
+		                    status = 499;
+		                }
 
 					  	switch(status){
 					  		case 0:
@@ -85,6 +90,7 @@ define(['angular'], function (angular) {
 					return {
 						cancel: function(){
 							console.log('canceled a $http GET request');
+							canceler.promise.status = 499;
 							canceler.resolve(); 
 						}
 					};

@@ -112,7 +112,7 @@ define(['angular'], function (angular) {
 			    case 'registered':
 			        if ( e.regid.length > 0 ){
 			        	console.log(e.regid);
-			            if(storage.get('push-token') !=  e.regid || !storage.get('push-token')){
+			            if(storage.get('user_guid') && (storage.get('push-token') !=  e.regid || !storage.get('push-token'))){
 				            Client.post('api/v1/notifications', {
 					    		service: 'google',
 					    		token: e.regid

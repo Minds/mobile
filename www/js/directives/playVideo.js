@@ -22,7 +22,9 @@ define(['angular'], function (angular) {
 				
 					scope.$digest();
 					
-					StatusBar.hide();
+					if ( device.platform == 'android' || device.platform == 'Android' || device.platform == "amazon-fireos" ){
+						StatusBar.hide();
+					}
 					
 					$ionicLoading.show({
 						template: 'Loading...'

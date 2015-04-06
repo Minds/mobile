@@ -10,7 +10,7 @@ define(function () {
 
     function ctrl($rootScope, $scope, $stateParams, $state, Client, storage, $ionicScrollDelegate, $timeout, $ionicLoading, push) {
     
-    	cordova.plugins.Keyboard.disableScroll(false);
+    	cordova.plugins.Keyboard.close();
     
     	$scope.guid = $stateParams.username;
     	$scope.name = $stateParams.name;

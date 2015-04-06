@@ -92,6 +92,9 @@
 	
 }*/
 
+.item-input-wrapper > textarea.cloned-text-input{
+	display:none;
+}
 
 .platform-android .action-sheet{
 	margin:0 24px;

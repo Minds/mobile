@@ -12,6 +12,8 @@ define(function () {
     	
     	console.log('guid is... ' + $stateParams.guid);
     	
+    	cordova.plugins.Keyboard.disableScroll(true);
+    	
     	$scope.guid = '';
     	$scope.cb = Date.now();
     	$scope.offset = "";

@@ -73,6 +73,13 @@
 	                
 	            </div>
 			</div>
+			
+			<ion-infinite-scroll 
+                on-infinite="load()" 
+                distance="1%" 
+                ng-if="entities.length > 0 && hasMoreData == true && filter != 'search' && filter != 'suggested'">
+        
+            </ion-infinite-scroll>
 						
 	</ion-content>
 	    
@@ -95,16 +102,16 @@
                 <!-- USERS -->
                 <div ng-switch-when="user">
                     <div class="list card tabs-background-white" ng-include src="'templates/discover/entities/user.html'" swipe swipe-on-left="ignore(entity)" swipe-on-right="subscribe(entity)"></div>
-                </div>
                 
-                <div class="boost-tab">
-               		<i class="icon ion-more" ng-click="openActions(entity)"></i>
+                
+                    <div class="boost-tab">
+                   		<i class="icon ion-more" ng-click="openActions(entity)"></i>
+                    </div>
                 </div>
                 
             </div>
 		</div>
     			                
 	</ion-pane>
-	
 	
 </ion-view>

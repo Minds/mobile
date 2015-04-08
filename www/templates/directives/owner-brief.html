@@ -6,7 +6,7 @@
 			ng-if="user.subscribed == false && showSubscribeButton"
 			ng-click="$event.preventDefault(); subscribe()"> </i>
 
-    <i class="icon ion-android-more-vertical owner-brief-more" style="float: right; font-size: 45px; color: #999;padding:0 8px;" ng-click="$event.preventDefault(); openActions(activity)"></i>
+    <i class="icon ion-android-more-vertical owner-brief-more" style="float: right; font-size: 45px; color: #999;padding:0 8px 0 20px;" ng-click="$event.preventDefault(); openActions(activity)"></i>
     
     <h2 style="font-weight:400;" ng-bind-html="user.name"></h2>
     <p ng-bind="ts"></p>

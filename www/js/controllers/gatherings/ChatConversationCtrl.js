@@ -139,7 +139,8 @@ define(function () {
     	});
     	
     	window.addEventListener('native.keyboardshow', function(){
-    		$ionicScrollDelegate.scrollBottom();
+    		if($state.current.name == 'tab.chat-conversation')
+    			$ionicScrollDelegate.scrollBottom();
     	});
     	
     	$scope.send = function(){

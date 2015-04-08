@@ -114,7 +114,8 @@
                                 <p>{{notification.fromObj.name}} tagged you in a comment</p>
                             </a>
                         </div>
-                         <div ng-switch-when="boost_gift">
+                        
+                        <div ng-switch-when="boost_gift">
                         	<a href="#/tab/notifications/entity/{{notification.entityObj.guid}}">
                         		<p>{{notification.fromObj.name}} gifted you {{notification.params.impressions}} views for 
                         		  <span class="minds-blue" ng-if="notification.entityObj.title" ng-bind-html="notification.entityObj.title"></span>
@@ -122,7 +123,9 @@
                         		</p>
                         	</a>
                         </div>
-	                     <div ng-switch-when="boost_submitted">
+                        
+                        <!-- Standard boost notification for owner -->
+	                    <div ng-switch-when="boost_submitted">
 	                    	<a href="#/tab/notifications/entity/{{notification.entityObj.guid}}">
 	                    		<p>{{notification.params.impressions}} views for 
 	                    		 <span class="minds-blue" ng-if="notification.entityObj.title" ng-bind-html="notification.entityObj.title"></span> 
@@ -130,6 +133,18 @@
 	                    		 is awaiting approval.</p>
 	                    	</a>
                         </div>
+                        
+                        <!-- P2P boost submitted -->
+                        <div ng-switch-when="boost_submitted_p2p">
+                            <a href="#/tab/notifications/entity/{{notification.entityObj.guid}}">
+                                <p>{{notification.params.points}} points for 
+                                 <span class="minds-blue" ng-if="notification.entityObj.title" ng-bind-html="notification.entityObj.title"></span> 
+                                 <span class="minds-blue" ng-if="!notification.entityObj.title">your post</span>
+                                 is awaiting approval by <span class="minds-blue">@{{notification.params.channel}}</span></p>
+                            </a>
+                        </div>
+                        
+                        <!-- P2P Boost Request -->
                         <div ng-switch-when="boost_request">
                             <a ng-click="loadBoostReview(notification.entityObj.guid)">
                                 <p>{{notification.fromObj.name}} is offering you {{notification.params.points}} points to boost 
@@ -138,6 +153,7 @@
                                </p>
                             </a>
                         </div>
+                        
                          <div ng-switch-when="boost_rejected">
                         	<a href="#/tab/notifications/entity/{{notification.entityObj.guid}}">
                         		<p>{{notification.params.impressions}} views for 

@@ -3,8 +3,14 @@
     <img ng-src="{{$root.node_url}}icon/{{entity.guid}}/large">
     <div class="overlay">
     	<h1>{{entity.name}}</h1>
+    	<p ng-show="entity.briefdescription">
+            {{entity.briefdescription}}
+        </p>
     </div>
 </a>
+
+
+
 
 <div class="boosted-bar" ng-show="entity.boosted">
     <i class="icon ion-arrow-graph-up-right"></i> Boosted
@@ -20,7 +26,4 @@
     <a class="tab-item small-font discover-button discover-button-subscribe" ng-if="entity.subscribed" href="#" ng-click="subscribe(entity)">
       Un-Subscribe
     </a>
-</div>
-<div class="item" ng-show="entity.description">
-	{{entity.description}}
 </div>

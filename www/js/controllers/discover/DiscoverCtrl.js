@@ -72,6 +72,7 @@ define(function () {
 		};
 		
 		$scope.load = function(){
+		console.log('load triggered');
 			$timeout.cancel(timeout);
 			if(request)
 				request.cancel(); //cancel previous requests..
@@ -122,7 +123,10 @@ define(function () {
 
 						if($scope.filter == 'suggested'){
 							$scope.cachebreaker = Date.now();
+						} else if($scope.filter == 'trending'){
+							$scope.next = $scope.entities.length;
 						}
+						$scope.$broadcast('scroll.infiniteScrollComplete');
 
 		    		}, 
 		    		function(error){ 

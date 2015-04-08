@@ -12,8 +12,8 @@ define(function () {
 
     	$scope.data = {
     		destination: '',
-    		points: 500,
-    		impressions: 500 * 1,
+    		points: null,
+    		impressions: 0,
     		rate: 1,
     		step: 1
     	};
@@ -66,7 +66,7 @@ define(function () {
     				});
     				
     			} else {
-    				if(success.count > $scope.data.points){
+    				if(success.count < $scope.data.points){
 	    				$ionicPopup.alert({
 	   				     title: 'Ooops!',
 	   				     subTitle: 'You don\;t have enough points',

@@ -81,6 +81,9 @@ define(['angular'], function (angular) {
 		};
 		
 		var active = false;
+		setTimeout(function(){
+			active = true;
+			}, 1000);
 		document.addEventListener('resume', function(){
 			//give the app time to load
 			setTimeout(function(){
@@ -112,7 +115,10 @@ define(['angular'], function (angular) {
 			    case 'registered':
 			        if ( e.regid.length > 0 ){
 			        	console.log(e.regid);
-			            if(storage.get('user_guid') && (storage.get('push-token') !=  e.regid || !storage.get('push-token'))){
+			        	console.log(storage.get('user_guid'));
+			        	console.log(storage.get('push-token'));
+			            if(storage.get('user_guid') != false && (storage.get('push-token') !=  e.regid || !storage.get('push-token'))){
+			            	console.log('submitting our push token');
 				            Client.post('api/v1/notifications', {
 					    		service: 'google',
 					    		token: e.regid
@@ -127,17 +133,13 @@ define(['angular'], function (angular) {
 			        }
 			    break;
 			    case 'message':
+			    
 			    	trigger(e.payload.uri, {service:'android'});
-			    	
-			    	var resume = function(){
+			    	console.log(active);
+			    	if(!active){
 						trigger(e.payload.uri, {service:'android', changeState: true});
-						document.removeEventListener('resume', resume);
 					};
 					
-					//delay this (fyi this is bad code!!) so that the remove listener does not interfere..
-					setTimeout(function(){
-						document.addEventListener('resume', resume);
-					}, 300); 
 			    break;
 			    case 'error':
 			       console.log('Notification error:: ' + e.msg);

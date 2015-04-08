@@ -132,6 +132,7 @@ define(function () {
      	
      	$scope.logout = function(){
 		  	storage.remove('loggedin');
+		  	storage.remove('user_guid');
 		  	storage.remove('access_token');
 		  	storage.remove('private-key');
 		  	storage.remove('push-token');

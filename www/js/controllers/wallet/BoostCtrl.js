@@ -11,8 +11,8 @@ define(function () {
     function ctrl( $rootScope, $scope, $state, $stateParams, $ionicLoading, $ionicPopup, $timeout, Client) {
 
     	$scope.data = {
-    		points: 500,
-    		impressions: 500 * 1
+    		points: null,
+    		impressions: 0 * 1
     	};
     	
     	$scope.$watch('data.points', function(){

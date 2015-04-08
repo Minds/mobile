@@ -24,9 +24,12 @@ define(function () {
      			$scope.cb = Date.now();
      			$scope.init();
      		}
+     		//$scope.cb = Date.now();
+     		//$scope.init();
      	});
      	
 		$scope.init = function(){
+			console.log('init called');
 			Client.get('api/v1/channel/'+$stateParams.username, { cb: $scope.cb }, 
 		
 			function(success){

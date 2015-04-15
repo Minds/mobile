@@ -136,6 +136,61 @@ define(function () {
 			
 			
 		};
+		
+		
+		
+		$scope.pass = function(){
+			Client.post('api/v1/entities/suggested/pass/' + $scope.entity.guid, {}, function(){}, function(){});
+			$scope.entity['thumbs:pass:count'] = 1;
+		};
+		
+		$scope.down = function(){
+			Client.put('api/v1/thumbs/'+$scope.entity.guid+'/down', {}, 
+					function(success){},
+					function(error){});
+					
+			for(var key in $scope.entity['thumbs:down:user_guids']){
+				if($scope.entity['thumbs:down:user_guids'][key] === storage.get('user_guid')){
+				
+					delete $scope.entity['thumbs:down:user_guids'][key];
+					$scope.entity['thumbs:down:count'] =  $scope.entity['thumbs:down:count'] - 1;
+					
+					return true;
+				} 
+			};
+					
+			if($scope.entity['thumbs:down:count'])
+				$scope.entity['thumbs:down:count'] = $scope.entity['thumbs:down:count'] + 1;
+			else
+				$scope.entity['thumbs:down:count'] = 1;
+				
+			$scope.entity['thumbs:down:user_guids'][1] = storage.get('user_guid');
+			
+		};
+		
+		$scope.up = function(){
+
+			Client.put('api/v1/thumbs/'+$scope.entity.guid+'/up', {}, 
+					function(success){},
+					function(error){});
+					
+			for(var key in $scope.entity['thumbs:up:user_guids']){
+				if($scope.entity['thumbs:up:user_guids'][key] === storage.get('user_guid')){
+				
+					delete $scope.entity['thumbs:up:user_guids'][key];
+					$scope.entity['thumbs:up:count'] =  $scope.entity['thumbs:up:count'] - 1;
+					
+					return true;
+				} 
+			};
+					
+			if($scope.entity['thumbs:up:count'])
+				$scope.entity['thumbs:up:count'] = $scope.entity['thumbs:up:count'] + 1;
+			else
+				$scope.entity['thumbs:up:count'] = 1;
+				
+			$scope.entity['thumbs:up:user_guids'][1] = storage.get('user_guid');
+		};
 					
 		
     }

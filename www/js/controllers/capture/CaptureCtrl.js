@@ -252,25 +252,55 @@ define(function () {
 				return;
 			}
 			
-			function clearListCookies(){
-				var cookies = document.cookie.split(";");
-		        for (var i = 0; i < cookies.length; i++){   
-		            var spcook =  cookies[i].split("=");
-		            document.cookie = spcook[0] + "=;expires=Thu, 21 Sep 1979 00:00:01 UTC;";                                
-		        }
-		    }
-		
-			if(!storage.get('facebook')){
-				var ref = window.open($rootScope.node_url + 'plugin/social/authorize/facebook?access_token=' + storage.get('access_token') + '&client_id=' + OAuth.client_id, '_blank', 'location=yes');
-				ref.addEventListener('loadstart', function(event) { 
-					var url = event.url;
-					if(url.indexOf($rootScope.node_url + 'plugin/social/redirect') > -1){
-						ref.close();
-					}
-				});
-			}
 			
-			$scope.form.facebook = true;
+			facebookConnectPlugin.getLoginStatus(function(status){
+
+					if(status.status != 'connected'){
+						//user not connected, so get an access token
+						facebookConnectPlugin.login(["public_profile"], 
+							function(userData){ 
+								
+								facebookConnectPlugin.login(["publish_actions"], function(){
+								
+									facebookConnectPlugin.getAccessToken(function(token) {
+										//$scope.form.facebook = true;
+								        $scope.form.facebook = token;
+								        $scope.$apply();
+								        
+								    }, function(err) {
+								        alert("Could not get access token: " + err);
+								    });
+								    
+							    },
+							    function(error){
+							    }); 
+							    
+							}, 
+							function(err){ 
+								alert('error ' + err); 
+							});
+							
+						return true;
+					}
+					
+					//$scope.form.facebook = true;
+					$scope.form.facebook = status.authResponse.accessToken;
+					$scope.$apply();
+					//upload 
+				
+				}, 
+				function(error){
+					$scope.fb();
+				});
+			/*facebookConnectPlugin.login(["public_profile"], 
+				function(userData){ 
+					$scope.form.facebook = true;
+					console.log(userData);
+				}, 
+				function(err){ 
+					alert('error ' + err); 
+				});*/
+			
 		};
 		
 		$scope.twitter = function(){

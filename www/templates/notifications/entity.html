@@ -7,7 +7,7 @@
 	<ion-content>
 		<!-- kind of mish-mashy... -->
 
-		<div ng-switch="entity.type">
+		<div ng-switch="entity.type" style="margin-bottom:-42px">
 			<div ng-switch-when="object">
 				<div class="list card tabs-background-white " ng-include src="'templates/discover/entities/object.html'"></div>
 			</div>
@@ -31,7 +31,7 @@
 				</div>
 			</div>	
 		</ion-list>
-		<div class="list card" style="clear:both; margin-top:15px;">
+		<div class="list card" style="clear:both;">
 			<div class="item item-input-inset">
 
 			 	<label class="item-input-wrapper" style="background:transparent">

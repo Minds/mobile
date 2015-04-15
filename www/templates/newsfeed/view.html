@@ -6,7 +6,7 @@
 
     <ion-content >
     	
-    	<div ng-controller="NewsfeedCtrl">
+    	<div ng-controller="NewsfeedCtrl" style="margin-bottom:-42px">
     	   <activity-view ng-if="activity.guid" id="{{activity.guid}}" class="activity-item list card" ng-controller="NewsfeedCtrl"></activity-view>
     	</div>
     	
@@ -26,7 +26,7 @@
 			</div>	
 		</ion-list>
 		
-		<div class="list card" style="clear:both; margin-top:15px">
+		<div class="list card" style="clear:both;" >
 			<div class="item item-input-inset">
 			 	<label class="item-input-wrapper" style="background:transparent">
 					<textarea placeholder="Type your comment here..." ng-model="comment.body">

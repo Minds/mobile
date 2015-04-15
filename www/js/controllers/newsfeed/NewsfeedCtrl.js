@@ -120,21 +120,27 @@ define(function () {
 			if($scope.ChannelItems)
 				$scope.newsfeedItems = $scope.ChannelItems;
 				
+			if($scope.activity)
+				$scope.newsfeedItems[0] = $scope.activity;	
+				
 			$scope.newsfeedItems.forEach(function(item, index, array){
 				if(item.guid == guid){
 					if(!array[index].hasOwnProperty('thumbs:up:user_guids') || !array[index]['thumbs:up:user_guids'])
 						array[index]['thumbs:up:user_guids'] = [];
 						
-					if(array[index]['thumbs:up:user_guids'].indexOf(storage.get('user_guid')) > -1){
-						var pos = array[index]['thumbs:up:user_guids'].indexOf(storage.get('user_guid'));
-						array[index]['thumbs:up:user_guids'].splice(pos, 1);
-						array[index]['thumbs:up:count'] = array[index]['thumbs:up:count'] -1;
-						//remove count
-						$rootScope.points = $rootScope.points - 2;
-					} else {
-						array[index]['thumbs:up:user_guids'].push(storage.get('user_guid'));
-						array[index]['thumbs:up:count'] = array[index]['thumbs:up:count'] +1;
+					for(var key in array[index]['thumbs:up:user_guids']){
+							if(array[index]['thumbs:up:user_guids'][key] === storage.get('user_guid')){
+								delete array[index]['thumbs:up:user_guids'][key];
+								array[index]['thumbs:up:count'] = array[index]['thumbs:up:count'] -1;
+								//remove count
+								$rootScope.points = $rootScope.points - 2;
+								return true;
+							}
 					}
+					
+					array[index]['thumbs:up:user_guids'][1] = storage.get('user_guid');
+					array[index]['thumbs:up:count'] = array[index]['thumbs:up:count'] +1;
+					
 				}
 			});
 			
@@ -164,19 +170,26 @@ define(function () {
 			if($scope.ChannelItems)
 				$scope.newsfeedItems = $scope.ChannelItems;
 				
+			if($scope.activity)
+				$scope.newsfeedItems[0] = $scope.activity;
+				
 			$scope.newsfeedItems.forEach(function(item, index, array){
 				if(item.guid == guid){
 					if(!array[index].hasOwnProperty('thumbs:down:user_guids') || !array[index]['thumbs:down:user_guids'])
 						array[index]['thumbs:down:user_guids'] = [];
-					
-					if(array[index]['thumbs:down:user_guids'].indexOf(storage.get('user_guid')) > -1){
-						var pos = array[index]['thumbs:up:user_guids'].indexOf(storage.get('user_guid'));
-						array[index]['thumbs:down:user_guids'].splice(pos, 1);
-						//remove count
-						$rootScope.points = $rootScope.points -2;
-					} else {
-						array[index]['thumbs:down:user_guids'].push(storage.get('user_guid'));
+
+					for(var key in array[index]['thumbs:down:user_guids']){
+						if(array[index]['thumbs:down:user_guids'][key] === storage.get('user_guid')){
+							delete array[index]['thumbs:down:user_guids'][key];
+							array[index]['thumbs:down:count'] = array[index]['thumbs:down:count'] -1;
+							//remove count
+							$rootScope.points = $rootScope.points - 2;
+							return true;
+						}
 					}
+					
+					array[index]['thumbs:down:user_guids'][1] = storage.get('user_guid');
+					
 				}
 			});
 			
@@ -259,6 +272,10 @@ define(function () {
 						array[index].reminds = array[index].reminds + 1;
 					}
 				});
+			}
+			
+			if($scope.activity){
+				$scope.activity.reminds = $scope.activity.reminds + 1;
 			}
 			
 			//increment count

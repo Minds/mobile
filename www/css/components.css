@@ -107,15 +107,16 @@
 
 
 .impressions-tag{
-	position:absolute; 
-	bottom:-5px; 
-	right:-5px; 
-	background:#4690C3; 
-	color:#FFF; 
-	border-radius:50%; 
-	padding:5px; 
-	font-size:11px; 
-	line-height:11px;
+	position: absolute;
+	bottom: -7px;
+	right: -7px;
+	background: #888;
+	color: #FFF;
+	border-radius: 3px;
+	padding: 4px;
+	font-size: 9px;
+	line-height: 7px;
+	font-weight: bold;
 }
 
 /**
@@ -201,7 +202,7 @@ progress[value] {
 }
 
 .boost-tab{
-	margin:-24px auto 0;
+	margin:15px auto 0;
 	width:50px;
 	text-align:center;
 }

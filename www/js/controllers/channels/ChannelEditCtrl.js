@@ -131,6 +131,9 @@ define(function () {
      	};
      	
      	$scope.logout = function(){
+     	
+     		Client.post('api/v1/logout', {}, function(){}, function(){});
+     	
 		  	storage.remove('loggedin');
 		  	storage.remove('user_guid');
 		  	storage.remove('access_token');

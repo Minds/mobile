@@ -27,7 +27,29 @@ define(function () {
     	});
     	
     	$scope.boost = function(){
+
+    		if($scope.data.points % 1 !== 0){
+    			$scope.data.points = Math.round($scope.data.points);
+    			$ionicLoading.show({
+					template: 'Sorry, you must enter a whole point.'
+					});
+				$timeout(function(){
+					$ionicLoading.hide();
+				}, 800);
+    			return false;
+    		}
     		
+    		if($scope.data.points == 0){
+    			$scope.data.points = 1;
+    			$ionicLoading.show({
+					template: 'Sorry, you must enter a whole point.'
+					});
+				$timeout(function(){
+					$ionicLoading.hide();
+				}, 800);
+    			return false;
+    		}
+
     		$ionicLoading.show({
 				template: 'Please wait a moment.'
 				});
@@ -146,6 +168,11 @@ define(function () {
     	
     	$scope.nextStep = function(){
     		$scope.data.step = 2;
+    	};
+    	
+    	$scope.purchase = function(){
+    		$state.go('tab.newsfeed-wallet-deposit');
+    		$scope.modal.remove();
     	};
     	
     }

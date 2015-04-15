@@ -63,7 +63,7 @@
 		    </div>
 	        <ion-list style="min-height:300px;">
 	        
-	           <a style="text-align:center; font-weight:200; padding-top:50px; display:block; color:#333; text-decoration: none;" ng-if="channel.guid == $root.user_guid && ChannelItems.length == 0" href="#/tab/capture">
+	           <a style="text-align:center; font-weight:200; padding-top:50px; display:block; color:#333; text-decoration: none;" ng-if="channel.guid == $root.user_guid && ChannelItems.length == 0 && loaded == true" href="#/tab/capture">
                 <img src="img/logo-transparent.png" class="loading-bulb-glow"/> <br/>
                 Your wall is empty! Click to upload content.
              </a>

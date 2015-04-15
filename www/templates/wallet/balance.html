@@ -8,7 +8,7 @@
 	
 	<ion-nav-buttons side="right">
 		<a class="button button-clear" style="color:green;" href="#/tab/newsfeed/wallet/deposit">
-			Deposit
+			Purchase
 		</a>
 	</ion-nav-buttons>
 
@@ -19,6 +19,7 @@
 		<h3 style="text-align:center; color:green">{{points}} points</h3>
 		<!--<p style="text-align:center"><i class="icon ion-social-bitcoin"></i> {{btc}}</p>
 		<p style="text-align:center"><i class="icon ion-social-usd"></i> {{usd}}</p>-->
+		<p style="text-align:center">1 point = {{boost_rate}} view<span ng-if="boost_rate != 1">s</span></p>		
 		
 		<!--<div class="wallet-buttons">
 			<a href="#/tab/newsfeed/wallet/" class="wallet-button" style="background:red;color:#FFF;">Withdraw</a>

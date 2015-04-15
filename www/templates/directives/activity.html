@@ -1,5 +1,5 @@
 
-    <owner-brief-view owner="{{activity.ownerObj}}" ts="{{activity.time_created}}"></owner-brief-view>
+    <owner-brief-view owner="{{activity.ownerObj}}" ts="{{activity.time_created}}" show-more-button="true"></owner-brief-view>
     
     <div class="item item-text-wrap" ng-if="activity.message">
         <p ng-bind-html="activity.message | linky" class="wrap"></p>
@@ -63,13 +63,13 @@
             <b ng-show="activity.reminds > 0" style="font-size:14px; padding:2px 0 0">({{activity.reminds}})</b> 
         </a>
         
-        <a class="tab-item small-font" ng-click="boost(activity)">
-            <i class="icon ion-arrow-graph-up-right" style="color:green;"></i>
+        <a class="tab-item small-font" ng-click="boost(activity)" style="opacity:1;">
+           <span style="color: #FFF;font-weight: 800;background: #4690C3;padding: 6px 8px;border-radius: 3px;">Boost</span>
         </a>
         
         <!--<a class="tab-item small-font" ng-click="openActions(activity)">
             <i class="icon ion-more"></i>
         </a>-->
         
-        <span class="impressions-tag">{{activity.impressions}}</span>
+        <span class="impressions-tag">{{activity.impressions}} views</span>
     </div>

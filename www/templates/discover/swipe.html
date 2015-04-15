@@ -28,7 +28,7 @@
             <i class="icon ion-star"></i>
             Featured
           </a>
-          <a class="tab-item" ng-class="{active: type == 'video'}" ng-click="changeType('video')">
+          <a class="tab-item" ng-class="{active: type == 'video'}" ng-click="changeType('video')" style="border-left:1px solid #EEE !important;">
             <i class="icon ion-ios-videocam"></i>
             Videos
           </a>
@@ -65,11 +65,13 @@
 	                <!-- USERS -->
 	                <div ng-switch-when="user">
 	                    <div class="list card tabs-background-white" ng-include src="'templates/discover/entities/user.html'" swipe swipe-disable-vertical="true" swipe-on-left="ignore(entity)" swipe-on-right="subscribe(entity)"></div>
-	                </div>
+	               
+	                     <div class="boost-tab" style="margin-top:12px">
+                            <i class="icon ion-more" ng-click="openActions(entity)"></i>
+                        </div>
+	               </div>
 	                
-	                 <div class="boost-tab" style="margin-top:12px">
-                        <i class="icon ion-more" ng-click="openActions(entity)"></i>
-                    </div>
+	                 
 	                
 	            </div>
 			</div>

@@ -8,8 +8,9 @@
 define(function () {
     'use strict';
 
-    function ctrl($rootScope, $scope, $stateParams, $state, Client, storage, $ionicScrollDelegate, $timeout, $ionicLoading, push) {
+    function ctrl($rootScope, $scope, $stateParams, $state, Client, storage, $ionicScrollDelegate, $timeout, $ionicLoading, push, $ionicPopup) {
     
+    	cordova.plugins.Keyboard.disableScroll(false);
     	cordova.plugins.Keyboard.close();
     
     	$scope.guid = $stateParams.username;
@@ -24,6 +25,7 @@ define(function () {
     	var poll = true;
     	var timeout;
     	
+
     	/**
     	 * Load more posts
     	 */
@@ -37,6 +39,15 @@ define(function () {
     				$scope.inProgress  = false;
     				//now update the public keys
 					$scope.publickeys = data.publickeys;	
+					
+					if(!$scope.publickeys[$scope.guid]){
+						$ionicPopup.alert({
+							title: 'Sorry!',
+							template: $scope.name + " has not yet configured their encrypted chat yet."
+						});
+						$state.go('tab.chat');
+						return true;	
+					}
 	    			
 					if(!data.messages){
 	    				$scope.hasMoreData = false;
@@ -207,7 +218,7 @@ define(function () {
 		
     }
 
-    ctrl.$inject = ['$rootScope', '$scope', '$stateParams', '$state', 'Client', 'storage', '$ionicScrollDelegate', '$timeout', '$ionicLoading', 'push'];
+    ctrl.$inject = ['$rootScope', '$scope', '$stateParams', '$state', 'Client', 'storage', '$ionicScrollDelegate', '$timeout', '$ionicLoading', 'push', '$ionicPopup'];
     return ctrl;
     
 });

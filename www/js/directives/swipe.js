@@ -33,20 +33,26 @@ define(['angular'], function (angular) {
 						var x = (e.gesture.deltaX * 0.8);
 						var y = (e.gesture.deltaY * 0.8);
 						
-						if(scope.$eval(attrs.swipeDisableVertical)){
-							y = 0;
-						}
-	
+						
+						
 						if(scope.$eval(attrs.swipeDisableVertical)){
 							
 							if(!(x < -15 || x > 15)){
 								return false;
 							}
 							
+							//if(y < -15 || y > 15){
+							//	return false;
+							//}
+							
 							if( device.platform == 'android' || device.platform == 'Android' ){
 								return false;
 							}
 							
+						}
+						
+						if(scope.$eval(attrs.swipeDisableVertical)){
+							y = 0;
 						}
 						
 						element.css('webkitTransform', 'translate3d(' + x + 'px, ' + y + 'px, 0) rotate(' + (rotationAngle || 0) + 'rad)');
@@ -63,6 +69,15 @@ define(['angular'], function (angular) {
 						var left_threshold = -100;
 						var up_threshold = -140;
 						var down_threshold = 140;
+						
+						/*if(scope.$eval(attrs.swipeDisableVertical)){
+							console.log("Y:" + e.gesture.deltaY + " X:" +e.gesture.deltaX );
+							if(e.gesture.deltaY < -15 || e.gesture.deltaY > 15){
+								console.log("under threshold, not firing");
+								return false;
+							}
+							
+						}*/
 						
 						if(e.gesture.deltaX > right_threshold){
 							//console.log('you swiped right');

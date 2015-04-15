@@ -15,6 +15,7 @@ define(function () {
      		$scope.satoshi = success.satoshi;
      		$scope.btc = success.btc;
      		$scope.usd = success.usd;
+     		$scope.boost_rate = success.boost_rate;
      	}, function(){});
      	
      	

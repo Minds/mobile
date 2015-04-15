@@ -3,8 +3,7 @@
     <img ng-src="{{$root.node_url}}icon/{{entity.guid}}/large">
     <div class="overlay">
     	<h1>{{entity.name}}</h1>
-    	<p ng-show="entity.briefdescription">
-            {{entity.briefdescription}}
+    	<p ng-show="entity.briefdescription" ng-bind-html="entity.briefdescription">
         </p>
     </div>
 </a>

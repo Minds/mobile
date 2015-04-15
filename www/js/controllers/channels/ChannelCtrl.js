@@ -15,6 +15,7 @@ define(function () {
     		return false;
     	}
 
+		$scope.loaded = false;
      	$scope.next = "";
      	$scope.ChannelItems = [];
      	
@@ -70,6 +71,7 @@ define(function () {
      		console.log('getting a users feed');
 	     	Client.get('api/v1/newsfeed/personal/' + $scope.channel.guid, { limit: 6, offset: $scope.next, cb: Date.now() }, 
 				function(data){
+					$scope.loaded = true;
 	    		
 	    			if(!data.activity){
 	    				console.log('users feed not found');

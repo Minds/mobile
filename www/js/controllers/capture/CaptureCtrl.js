@@ -16,8 +16,10 @@ define(function () {
     		album_title: 'Mobile',
 			license: 'attribution-cc'
     	};
+    	$scope.type;
 
 		$scope.video = function(){
+			$scope.type = 'video';
 			navigator.device.capture.captureVideo(function(mediaFiles){
 				
 				$scope.captured = true;
@@ -40,7 +42,7 @@ define(function () {
 		};
 		
 		$scope.photo= function(){
-			
+			$scope.type = 'image';
 			navigator.device.capture.captureImage(function(mediaFiles){
 				
 				$scope.captured = true;
@@ -74,8 +76,10 @@ define(function () {
 				
 				if(mediaFile.indexOf('images') > -1 || mediaFile.indexOf('document/image') > -1 || mediaFile.indexOf('.jpg') > -1 || mediaFile.indexOf('.png') > -1 || mediaFile.indexOf('.bmp') > -1 || mediaFile.indexOf('.jpeg') > -1){
 					$scope.upload(mediaFile, 'image');
+					$scope.type = 'image';
 				} else {
 					$scope.upload(mediaFile, 'video');
+					$scope.type = 'video';
 				}
 				
 
@@ -174,7 +178,9 @@ define(function () {
 					title: $scope.form.meta.title, 
 					description: $scope.form.meta.description,
 					thumbnail: encodeURIComponent($scope.form.thumbnail), 
-					url: $scope.form.meta.canonical
+					url: $scope.form.meta.canonical,
+					facebook: $scope.form.facebook,
+					twitter: $scope.form.twitter
 				};
 			}
 

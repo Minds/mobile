@@ -20,7 +20,7 @@ define(function() {
 		
 		$scope.slideHasChanged = function($index){
 			if($index == 8){
-				$state.go('tab.discover');
+				$state.go('tab.newsfeed');
 			}
 		};
 		

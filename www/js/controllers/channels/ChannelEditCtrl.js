@@ -8,7 +8,7 @@
 define(function () {
     'use strict';
 
-    function ctrl($rootScope, $scope, $state, $stateParams, Client, storage, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicLoading, $timeout, $window, $ionicModal) {
+    function ctrl($rootScope, $scope, $state, $stateParams, Client, storage, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicLoading, $timeout, $window, $ionicModal, $ionicHistory) {
 
     	$scope.cb = Date.now();
     	
@@ -139,14 +139,18 @@ define(function () {
 		  	storage.remove('access_token');
 		  	storage.remove('private-key');
 		  	storage.remove('push-token');
-		  	$state.go('login');
 		  	
 		  	ionic.Platform.exitApp();
+		  	
+		  	$ionicHistory.clearCache();
+		  	$state.go('login');
+		  	
+		  	
 		};
        
     }
 
-    ctrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', 'Client', 'storage', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$ionicLoading', '$timeout', '$window', '$ionicModal'];
+    ctrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', 'Client', 'storage', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$ionicLoading', '$timeout', '$window', '$ionicModal', '$ionicHistory'];
     return ctrl;
     
 });

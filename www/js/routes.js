@@ -13,6 +13,7 @@ define(['app'], function (app) {
             
            	$ionicConfigProvider.platform.android.tabs.position("bottom");
            	$ionicConfigProvider.navBar.alignTitle('center');
+           	$ionicConfigProvider.views.swipeBackEnabled(false);
 
             $stateProvider
                 .state('loading', {
@@ -158,6 +159,7 @@ define(['app'], function (app) {
                 })
                 .state('tab.discover', {
 					url: "/discover",
+					cache: false, 
 					 views: {
                         'discover-tab': {
                             templateUrl: 'templates/discover/swipe.html'

@@ -8,7 +8,7 @@
 define(function () {
     'use strict';
 
-    function ctrl($rootScope, $scope,  $ionicScrollDelegate, Cacher, Client, storage, $ionicPopover, $ionicLoading, $ionicModal,  $timeout, push) {
+    function ctrl($rootScope, $scope,  $ionicScrollDelegate, Cacher, Client, storage, $ionicPopover, $ionicLoading, $ionicModal, $ionicPopup, $timeout, push) {
 
     	$scope.$on('$ionicView.beforeEnter', function(){
 			$rootScope.newNotification = false;
@@ -113,6 +113,25 @@ define(function () {
 			$timeout(function(){
 				$ionicLoading.hide();
 				}, 300);
+				
+			if(notification.ownerObj.subscriber && notification.ownerObj.subscribed){
+				$ionicPopup.alert({
+				     title: 'Match!',
+				     subTitle: notification.ownerObj + ' subscribed to you too!',
+				     buttons: [
+		               
+		               {
+		                 text: '<b>Send Message</b>',
+		                 type: 'button-positive',
+		                 onTap: function(e) {
+		                	 window.location.href = "#/tab/gatherings/conversations/" + notification.ownerObj.guid + '/' + notification.ownerObj.name;
+		                 }
+		               },
+		               
+		               { text: 'Continue...' },
+		             ]
+				   });
+			}
 		};
 		
 		
@@ -131,7 +150,7 @@ define(function () {
 		
     }
 
-    ctrl.$inject = ['$rootScope', '$scope', '$ionicScrollDelegate', 'Cacher', 'Client', 'storage', '$ionicPopover', '$ionicLoading', '$ionicModal', '$timeout', 'push'];
+    ctrl.$inject = ['$rootScope', '$scope', '$ionicScrollDelegate', 'Cacher', 'Client', 'storage', '$ionicPopover', '$ionicLoading', '$ionicModal', '$ionicPopup', '$timeout', 'push'];
     return ctrl;
     
 });

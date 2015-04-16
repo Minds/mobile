@@ -3,13 +3,12 @@
 define(['angular'], function (angular) {
     "use strict";
 
-    var directive = function ($ionicScrollDelegate, $interval, Client, $sce, $ionicLoading, $timeout, $ionicGesture, $ionicPosition, $ionicPlatform  ) {
+    var directive = function ($ionicScrollDelegate, $interval, Client, $sce, $ionicLoading, $timeout, $ionicGesture, $ionicPosition, $ionicPlatform, $rootScope) {
 	 	return {
        		restrict: 'AE',
 			link: function(scope, el, attrs) {
 
             	scope.showVideo = false;
-            	var playing = false;
             	
             	attrs.$observe('playsrc', function(src){
             		scope.srcFull = $sce.trustAsResourceUrl(src);
@@ -20,6 +19,12 @@ define(['angular'], function (angular) {
 				 */
 				scope.play = function(){
 				
+					if($rootScope.playing &&  (device.platform == 'android' || device.platform == 'Android') ){
+						return false;
+					}
+
+					$rootScope.playing = true;
+
 					scope.$digest();
 					
 					if ( device.platform == 'android' || device.platform == 'Android' || device.platform == "amazon-fireos" ){
@@ -53,12 +58,14 @@ define(['angular'], function (angular) {
  					};
  					video.onerror = function(){
  						$ionicLoading.hide();
+ 						$rootScope.playing = false;
  						alert('error in playing');
  					};
  					
  					video.addEventListener('webkitendfullscreen', function (e) { 
  						video.pause();
  						scope.showVideo = false;
+ 						$rootScope.playing = false;
  						scope.$apply();
  						console.log('ended full screen');
  						StatusBar.show();
@@ -69,6 +76,7 @@ define(['angular'], function (angular) {
  						
  						if(!document.webkitIsFullScreen){
  							video.pause();
+ 							$rootScope.playing = false;
  							StatusBar.show();
  						}
  					});
@@ -76,6 +84,7 @@ define(['angular'], function (angular) {
  						video.pause();
  						//document.webkitExitFullscreen();
  						scope.showVideo = false;
+ 						$rootScope.playing = false;
  						scope.$apply();
  						StatusBar.show();
  						}, false);
@@ -88,6 +97,6 @@ define(['angular'], function (angular) {
        	 };
     };
 
-    directive.$inject = ['$ionicScrollDelegate', '$interval', 'Client', '$sce', '$ionicLoading', '$timeout', '$ionicGesture', '$ionicPosition', '$ionicPlatform'];
+    directive.$inject = ['$ionicScrollDelegate', '$interval', 'Client', '$sce', '$ionicLoading', '$timeout', '$ionicGesture', '$ionicPosition', '$ionicPlatform', '$rootScope'];
     return directive;
 });

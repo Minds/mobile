@@ -4,20 +4,20 @@
        <div class="bar bar-header item-input-inset">
           <label class="item-input-wrapper">
             <i class="icon ion-ios-search placeholder-icon"></i>
-            <input type="search" placeholder="Search">
+            <input type="search" placeholder="Search" ng-model="query.string" ng-keyup="search()">
           </label>
-          <button class="button button-clear" ng-show="search.q">
+          <button class="button button-clear" ng-show="search.q" style="display:none;">
             Cancel
           </button>
         </div>
     </ion-nav-title>
 
-    <div class="tabs-striped tabs-top tabs-background-white tabs-color-light">
+    <div class="tabs-striped tabs-icon-top tabs-top tabs-background-white tabs-color-light">
         <div class="tabs">
           
          
           <a class="tab-item" ng-class="{active: filter == 'suggested'}" ng-click="changeFilter('suggested')">
-            <i class="icon ion-lightbulb"></i>
+            <i class="icon ion-shuffle"></i>
             Suggested
           </a>
           <a class="tab-item" ng-class="{active: filter == 'trending'}" ng-click="changeFilter('trending')">
@@ -28,7 +28,7 @@
             <i class="icon ion-star"></i>
             Featured
           </a>
-          <a class="tab-item" ng-class="{active: type == 'video'}" ng-click="changeType('video')">
+          <a class="tab-item" ng-class="{active: type == 'video'}" ng-click="changeType('video')" style="border-left:1px solid #EEE !important;">
             <i class="icon ion-ios-videocam"></i>
             Videos
           </a>
@@ -45,37 +45,42 @@
       </div>
     </div>
 
-    <!-- List view -->
-	<ion-content style="padding-top:50px" scroll="{{infinite}}">
-
-		<ion-list>
-		
-			<ion-refresher
-				pulling-text="Pull to refresh..."
-				on-refresh="refresh()">
-			</ion-refresher>
-
-			<div ng-repeat="entity in entities" ng-class="{stack: view == 'swipe'}">
+    <!-- Scroll view -->
+    <ion-content class="forced-scroll" style="padding-top:80px">
+            
+            <div ng-show="entities.length == 0" style="text-align:center; font-weight:200; padding-top:50px;">
+                <img src="img/logo-transparent.png" class="loading-bulb-glow"/> <br/>
+                Discovering..
+            </div>
+    
+            <div ng-repeat="entity in entities" class="swipe-container" ng-if="filter != 'suggested'">
+            
                 <div ng-switch="entity.type">
                 
                     <!-- Objects -->
                     <div ng-switch-when="object">
-                        <div class="list card" ng-include src="'templates/discover/entities/object.html'"></div>
+                        <div class="list card tabs-background-white {{entity.subtype}}" ng-include src="'templates/discover/entities/object.html'" swipe swipe-disable-vertical="true" swipe-on-down="down(entity)" swipe-on-left="pass(entity)" swipe-on-right="up(entity)"></div>
                     </div>
                     
                     <!-- USERS -->
                     <div ng-switch-when="user">
-                        <div class="list card" ng-include src="'templates/discover/entities/user.html'" subscribe></div>
-                    </div>
+                        <div class="list card tabs-background-white" ng-include src="'templates/discover/entities/user.html'" swipe swipe-disable-vertical="true" swipe-on-left="ignore(entity)" swipe-on-right="subscribe(entity)"></div>
+                   
+                         <div class="boost-tab" style="margin-top:12px">
+                            <i class="icon ion-more" ng-click="openActions(entity)"></i>
+                        </div>
+                   </div>
                     
                 </div>
-			</div>
-    			                
-		</ion-list>
-		
-		<ion-infinite-scroll on-infinite="load()" distance="1%" ng-if="hasMoreData && infinite"></ion-infinite-scroll>
-
-	</ion-content>
-	
-	
+            </div>
+            
+            <ion-infinite-scroll 
+                on-infinite="load()" 
+                distance="1%" 
+                ng-if="entities.length > 0 && hasMoreData == true && filter != 'search' && filter != 'suggested'">
+        
+            </ion-infinite-scroll>
+                        
+    </ion-content>
+    
 </ion-view>

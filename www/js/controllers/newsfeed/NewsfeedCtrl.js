@@ -43,8 +43,9 @@ define(function () {
     	$scope.loadMore = function(){
     		console.log('==== loading more ====');
     	
-    		if(!$scope.hasMoreData)
+    		if(!$scope.hasMoreData){
     			return;
+    		}
     		
     		NewsfeedAPI.all({ limit: 12, offset: $scope.next, cachebreaker: $scope.cachebreaker }, 
     			function(data){

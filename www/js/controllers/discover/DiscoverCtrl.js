@@ -72,7 +72,7 @@ define(function () {
 		};
 		
 		$scope.load = function(){
-		console.log('load triggered');
+			console.log('load triggered');
 			$timeout.cancel(timeout);
 			if(request)
 				request.cancel(); //cancel previous requests..

@@ -34,6 +34,12 @@ define(function () {
 			Client.get('api/v1/channel/'+$stateParams.username, { cb: $scope.cb }, 
 		
 			function(success){
+			
+				if(success.status == 'error'){
+					$state.go('tab.newsfeed');
+					return true;
+				}
+			
 				$scope.channel = success.channel;
 				$scope.$apply();
 				

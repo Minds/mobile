@@ -162,6 +162,14 @@ define(function () {
 		};
 		
 		$scope.postStatus = function(){
+		
+			if(!$scope.form.status){
+				$ionicPopup.alert({
+				     title: 'Ooopss.',
+				     template: 'You need to enter status before you can post.'
+				   });
+				return true;
+			}
 			
 			$ionicLoading.show({
 				template: '<p>Please wait...</p>'

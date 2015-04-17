@@ -8,7 +8,7 @@
 define(function () {
     'use strict';
 
-    function ctrl($rootScope, $scope, $state, $stateParams, Client, storage, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicLoading, $timeout, $window, $ionicModal, $ionicHistory) {
+    function ctrl($rootScope, $scope, $state, $stateParams, Client, storage, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicLoading, $timeout, $window, $ionicModal, $ionicHistory, $ionicPopup) {
 
     	$scope.cb = Date.now();
     	
@@ -21,6 +21,17 @@ define(function () {
     			});
      	
      	$scope.update = function(){
+     	
+     		if(!$scope.channel.name){
+     		
+     			$ionicPopup.alert({
+					title: 'Oooops...',
+					template: "Your need a name!"
+				});
+     		
+     			return false;
+     		}
+     	
      		Client.post('api/v1/channel/info', $scope.channel, 
         			function(success){
 		     			$ionicLoading.show({
@@ -150,7 +161,7 @@ define(function () {
        
     }
 
-    ctrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', 'Client', 'storage', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$ionicLoading', '$timeout', '$window', '$ionicModal', '$ionicHistory'];
+    ctrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', 'Client', 'storage', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$ionicLoading', '$timeout', '$window', '$ionicModal', '$ionicHistory', '$ionicPopup'];
     return ctrl;
     
 });

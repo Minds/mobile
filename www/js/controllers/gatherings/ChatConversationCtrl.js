@@ -220,10 +220,12 @@ define(function () {
     		
     	};
     	
+    	//let the page load first
+    	$timeout(function(){
+    		window.addEventListener('native.keyboardhide', keyboardhide);
+    	}, 100);
     	
-    	window.addEventListener('native.keyboardhide', keyboardhide);
-    	
-    	function heyboardhide(){
+    	function keyboardhide(){
     		$ionicScrollDelegate.scrollBottom();
     	};
 

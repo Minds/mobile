@@ -117,7 +117,7 @@ define(function () {
 			if(notification.ownerObj.subscriber && notification.ownerObj.subscribed){
 				$ionicPopup.alert({
 				     title: 'Match!',
-				     subTitle: notification.ownerObj + ' subscribed to you too!',
+				     subTitle: notification.ownerObj.name + ' subscribed to you too!',
 				     buttons: [
 		               
 		               {

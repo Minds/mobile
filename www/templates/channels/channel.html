@@ -1,8 +1,8 @@
 <ion-view title="Channel" ng-controller="ChannelCtrl" hide-nav-bar="true">
 
     <div class="carousel {{carousel_class}}">
-        <a ng-if="channel.guid == $root.user_guid && !channel.carousels"style="position: fixed;width: 100%;top: 12px; padding:12px; z-index:999999; left: 0;font-weight: bold; color:#333; text-decoration:none;" href="#/tab/newsfeed/channel/{{channel.guid}}/edit">Add banner in settings</a>
-      <ion-slide-box auto-play="true" does-continue="true" slide-interval="3000" show-pager="false">
+        <a ng-if="channel.guid == $root.user_guid && !channel.carousels"style="position: absolute;width: 100%;top: 12px; padding:12px; z-index:999999; left: 0;font-weight: bold; color:#333; text-decoration:none;" href="#/tab/newsfeed/channel/{{channel.guid}}/edit">Add banner in settings</a>
+      <ion-slide-box auto-play="true" does-continue="true" slide-interval="3000" delegate-handle="channel-banners" show-pager="false">
        
           <ion-slide ng-repeat="carousel in channel.carousels">
             <div class="box blue">

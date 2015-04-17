@@ -155,6 +155,18 @@ define(function () {
     	});
     	
     	$scope.send = function(){
+    		
+    		if(!$scope.message){
+    		
+    			$ionicPopup.alert({
+					title: 'Oooops...',
+					template: "You need to enter a message before you can send."
+				});
+				
+				return false;
+    		
+    		}
+    	
     	
     		$ionicLoading.show({
 		      template: 'Sending...'

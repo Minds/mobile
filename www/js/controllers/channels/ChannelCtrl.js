@@ -8,7 +8,7 @@
 define(function () {
     'use strict';
 
-    function ctrl($rootScope, $scope, $state, $stateParams, Client, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
+    function ctrl($rootScope, $scope, $state, $stateParams, Client, $ionicSlideBoxDelegate, $ionicScrollDelegate, $interval) {
     	
     	if($stateParams.username == undefined){
     		$state.go('tab.newsfeed');
@@ -48,8 +48,8 @@ define(function () {
 				
 				if(success.channel.carousels){
 					$ionicSlideBoxDelegate.update();
-					setInterval(function(){
-						$ionicSlideBoxDelegate.slide(0);
+					$interval(function(){
+						$ionicSlideBoxDelegate.$getByHandle('channel-banners').slide(0);
 					}, 3000 * success.channel.carousels.length);
 				}
 	
@@ -133,7 +133,7 @@ define(function () {
        
     }
 
-    ctrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', 'Client', '$ionicSlideBoxDelegate', '$ionicScrollDelegate'];
+    ctrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', 'Client', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$interval'];
     return ctrl;
     
 });

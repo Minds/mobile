@@ -219,11 +219,19 @@ define(function () {
     		}, 100);
     		
     	};
+    	
+    	
+    	window.addEventListener('native.keyboardhide', keyboardhide);
+    	
+    	function heyboardhide(){
+    		$ionicScrollDelegate.scrollBottom();
+    	};
 
         $scope.$on('$destroy', function() {
         	
         	clearTimeout($scope.timeout);
         	push.unlisten('chat', push_listen_id);
+        	window.removeEventListener('native.keyboardhide',heyboardhide);
         	
         });
 

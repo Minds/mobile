@@ -76,7 +76,7 @@ define(function () {
      		}
 
      		function onFail(message) {
-     		    alert('Failed because: ' + message);
+     		    //alert('Failed because: ' + message);
      		}
      		
      	};
@@ -115,7 +115,7 @@ define(function () {
      		}
 
      		function onFail(message) {
-     		    alert('Failed because: ' + message);
+     		    //alert('Failed because: ' + message);
      		}
      		
      	};

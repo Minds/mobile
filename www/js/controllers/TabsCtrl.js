@@ -8,7 +8,7 @@
 define(function() {
 	'use strict';
 
-	function ctrl($rootScope, $scope, $state, $ionicPopover, storage, push, $ionicPlatform, analytics) {
+	function ctrl($rootScope, $scope, $state, $ionicPopover, storage, push, $ionicPlatform, analytics, $ionicHistory) {
 
 		$scope.logout = function(){
 		  	storage.remove('loggedin');
@@ -37,6 +37,7 @@ define(function() {
 		});
 		
 		push.listen('notification', function(params){
+		
 			$rootScope.newNotification = 'minds-yellow';
 			$rootScope.$apply();
 			
@@ -55,16 +56,16 @@ define(function() {
 		
 		$ionicPlatform.registerBackButtonAction(function (e) {
 			if($state.current.name == 'tab.newsfeed' || $state.current.name == 'login'){
-		  		e.preventDefault();
+				navigator.app.exitApp();
 		  	} else {
-		  		navigator.app.backHistory();
+		  		$ionicHistory.goBack();
 		  	}
 		}, 100);
 		
 	}
 
 
-	ctrl.$inject = ['$rootScope', '$scope', '$state', '$ionicPopover', 'storage', 'push', '$ionicPlatform', 'analytics'];
+	ctrl.$inject = ['$rootScope', '$scope', '$state', '$ionicPopover', 'storage', 'push', '$ionicPlatform', 'analytics', '$ionicHistory'];
 	return ctrl;
 
 }); 

@@ -57,7 +57,7 @@ define(function () {
     		//validate our points
     		Client.get('api/v1/wallet/count', { cb: Date.now() }, function(success){
     			$ionicLoading.hide();
-    			if(success.count > $scope.data.points){
+    			if(success.count >= $scope.data.points){
     				var endpoint = 'api/v1/boost/newsfeed/' + $scope.guid + '/' + $scope.owner_guid;
     				if($scope.data.destination){
     					endpoint = 'api/v1/boost/channel/' + $scope.guid + '/' + $scope.owner_guid;

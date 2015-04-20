@@ -83,6 +83,10 @@
                         {
                             "xml": "<access origin=\"https://*.akamaihd.net\" />",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SocialSharing\"><param name=\"android-package\" value=\"nl.xservices.plugins.SocialSharing\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -204,7 +208,7 @@
                     "/*": [
                         {
                             "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
-                            "count": 4
+                            "count": 5
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.READ_CONTACTS\" />",
@@ -301,6 +305,9 @@
         "com.phonegap.plugins.facebookconnect": {
             "APP_ID": "184865748231073",
             "APP_NAME": "Minds",
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
+        "nl.x-services.plugins.socialsharing": {
             "PACKAGE_NAME": "com.minds.mobile"
         }
     },

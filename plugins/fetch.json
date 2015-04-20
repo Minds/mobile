@@ -5,5 +5,12 @@
             "url": "https://github.com/Wizcorp/phonegap-facebook-plugin.git",
             "subdir": "."
         }
+    },
+    "nl.x-services.plugins.socialsharing": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin.git",
+            "subdir": "."
+        }
     }
 }

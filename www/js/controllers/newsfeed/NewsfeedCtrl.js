@@ -190,6 +190,7 @@ define(function () {
 					}
 					
 					array[index]['thumbs:down:user_guids'][1] = storage.get('user_guid');
+					array[index]['thumbs:down:count'] = array[index]['thumbs:down:count'] +1;
 					
 				}
 			});
@@ -412,14 +413,15 @@ define(function () {
 			    	 		  
 			    	 		break;
 			    	 	case 1:
-			    	 		cordova.plugins.clipboard.copy($rootScope.node_url + 'newsfeed/' + guid);
+			    	 		/*cordova.plugins.clipboard.copy($rootScope.node_url + 'newsfeed/' + guid);
 			    	 		$ionicLoading.show({
 			    				template: '<p> Copied to clipboard </p>'
 			    				});
 			    			$timeout(function(){
 			    				$ionicLoading.hide();
 			    				}, 1000);
-			    	 		break;
+			    	 		break;*/
+			    	 		window.plugins.socialsharing.share('via minds', null, null, $rootScope.node_url + 'newsfeed/' + guid);
 			    	 	case 2:
 			    	 		
 			    	 		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fs){

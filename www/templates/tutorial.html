@@ -11,6 +11,67 @@
 	  </ion-slide>
 	  
 	  <ion-slide>
+        <div class="box">
+            <h1>Subscribe</h1>
+            
+            <div class="swipe-container">
+                <div class="list card tabs-background-white animation-mock-swipe">
+                    <div class="item item-image">
+                        <img ng-src="http://cdn2.business2community.com/wp-content/uploads/2013/11/albert-einstein.jpg">
+                        <div class="overlay">
+                            <h1>{{entity.name}}</h1>
+                        </div>
+                    </div>
+                    
+                    <div class="item tabs tabs-secondary tabs-icon-left">
+                        <a class="tab-item" href="#" ng-click="ignore(entity)">
+                            <i class="icon ion-close"></i>
+                        </a>
+                        <a class="tab-item" href="#" ng-click="subscribe(entity)">
+                          <i class="icon ion-person-add"></i> 
+                        </a>
+                    </div>
+                </div>
+            </div>
+                        
+            <p>Swipe right to subscribe or left to pass. If someone subscribes back you match and can chat.</p>
+        </div>
+      </ion-slide>
+      
+      <ion-slide>
+            <div class="box">
+                <h1>Capture & Share</h1>
+                
+                
+                <div ng-hide="captured" style="height:320px">
+               <ion-list class="capture-options tutorial">
+                
+                   
+                    <ion-item >
+                        <h1 class="icon ion-ios-videocam"></h1>
+                    </ion-item>
+                    
+                    <ion-item >
+                        <h1 class="icon ion-camera"></h1>
+                    </ion-item>
+                    
+                    <ion-item >
+                        <h1 class="icon ion-compose"></h1>
+                    </ion-item>
+                    
+                    <ion-item >
+                        <h1 class="icon ion-upload"></h1>
+                    </ion-item>
+        
+                </ion-list>
+            </div>
+            <br/>
+            <p>Share great moments and ideas.</p>
+            
+        </div>
+      </ion-slide>
+	  
+	  <ion-slide>
 	    <div class="box">
 	    	<h1>News</h1>
 	    	
@@ -50,66 +111,7 @@
 	    </div>
 	  </ion-slide>
 	  
-	   <ion-slide>
-            <div class="box">
-                <h1>Capture & Share</h1>
-                
-                
-                <div ng-hide="captured" style="height:320px">
-               <ion-list class="capture-options tutorial">
-                
-                   
-                    <ion-item >
-                        <h1 class="icon ion-ios-videocam"></h1>
-                    </ion-item>
-                    
-                    <ion-item >
-                        <h1 class="icon ion-camera"></h1>
-                    </ion-item>
-                    
-                    <ion-item >
-                        <h1 class="icon ion-compose"></h1>
-                    </ion-item>
-                    
-                    <ion-item >
-                        <h1 class="icon ion-upload"></h1>
-                    </ion-item>
-        
-                </ion-list>
-            </div>
-            <br/>
-            <p>Share great moments and ideas.</p>
-            
-        </div>
-      </ion-slide>
-	  
-	  <ion-slide>
-	    <div class="box">
-	    	<h1>Subscribe</h1>
-	    	
-	    	<div class="swipe-container">
-				<div class="list card tabs-background-white animation-mock-swipe">
-					<div class="item item-image">
-					    <img ng-src="http://cdn2.business2community.com/wp-content/uploads/2013/11/albert-einstein.jpg">
-					    <div class="overlay">
-					    	<h1>{{entity.name}}</h1>
-					    </div>
-					</div>
-					
-					<div class="item tabs tabs-secondary tabs-icon-left">
-					    <a class="tab-item" href="#" ng-click="ignore(entity)">
-							<i class="icon ion-close"></i>
-					    </a>
-					    <a class="tab-item" href="#" ng-click="subscribe(entity)">
-					      <i class="icon ion-person-add"></i> 
-					    </a>
-					</div>
-				</div>
-			</div>
-	    		    	
-	    	<p>Swipe right to subscribe or left to pass. If someone subscribes back you match and can chat.</p>
-	    </div>
-	  </ion-slide>
+	   
 	  
 	  <ion-slide>
         <div class="box">

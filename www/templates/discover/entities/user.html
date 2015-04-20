@@ -2,7 +2,7 @@
 <a class="item item-image item-image-user" href="#/tab/newsfeed/channel/{{entity.guid}}">
     <img ng-src="{{$root.node_url}}icon/{{entity.guid}}/large">
     <div class="overlay">
-    	<h1>{{entity.name}}</h1>
+    	<h1 ng-bind-html="entity.name"></h1>
     	<p ng-show="entity.briefdescription" ng-bind-html="entity.briefdescription">
         </p>
     </div>

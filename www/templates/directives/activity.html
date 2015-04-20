@@ -52,7 +52,7 @@
         </a>
         <a class="tab-item small-font thumbs-down" ng-click="thumbsDown(activity.guid)" thumbs="{{activity['thumbs:down:user_guids']}}">
             <i class="icon ion-thumbsdown"></i>
-
+            <b ng-show="activity['thumbs:down:count']" style="font-size:14px; padding:2px 0 0">({{activity['thumbs:down:count']}})</b> 
         </a>
         <a class="tab-item  small-font" href="#/tab/newsfeed/{{activity.guid}}">
             <i class="icon ion-chatbox"></i>

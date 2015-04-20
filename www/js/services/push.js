@@ -98,10 +98,14 @@ define(['angular'], function (angular) {
 		 * iOS Specific callback
 		 */
 		window.onNotificationAPN = function(e){
-			trigger(e.aps['url-args'][0], {service:'ios'});
+			
 			
 			if(!active){
-				trigger(e.aps['url-args'][0], {service:'ios', changeState: true});
+				setTimeout(function(){
+					trigger(e.aps['url-args'][0], {service:'ios', changeState: true});
+				}, 1500);
+			} else {
+				trigger(e.aps['url-args'][0], {service:'ios'});
 			}
 		};
 		
@@ -133,12 +137,15 @@ define(['angular'], function (angular) {
 			        }
 			    break;
 			    case 'message':
-			    
-			    	trigger(e.payload.uri, {service:'android'});
-			    	console.log(active);
+			    	
 			    	if(!active){
-						trigger(e.payload.uri, {service:'android', changeState: true});
-					};
+			    		//allow 1.5 second fpr the app to open and then go to listeners
+			    		setTimeout(function(){
+							trigger(e.payload.uri, {service:'android', changeState: true});
+						}, 1500);
+					} else {
+						trigger(e.payload.uri, {service:'android'});
+					}
 					
 			    break;
 			    case 'error':

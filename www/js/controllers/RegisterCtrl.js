@@ -18,6 +18,32 @@ define(function() {
 				return false;
 			$scope.inprogress = true;
 			
+			if(!$scope.data.username){
+				$ionicPopup.alert({
+					title: 'Ooops..',
+					template: "You need to enter a username"
+				});
+				return true;
+			}
+			
+			if(!$scope.data.password){
+				$ionicPopup.alert({
+					title: 'Ooops..',
+					template: "You need to enter a password"
+				});
+				return true;
+			}
+			
+			if(!$scope.data.email){
+				$ionicPopup.alert({
+					title: 'Ooops..',
+					template: "You need to enter an email address"
+				});
+				return true;
+			}
+			
+			
+			
 			$ionicLoading.show({
 				template: 'Please wait a moment...'
 				});

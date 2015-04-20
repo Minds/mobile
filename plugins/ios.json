@@ -103,6 +103,10 @@
                         {
                             "xml": "<access origin=\"https://*.akamaihd.net\" />",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SocialSharing\"><param name=\"ios-package\" value=\"SocialSharing\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -158,6 +162,10 @@
                     "MessageUI.framework": [
                         {
                             "xml": false,
+                            "count": 1
+                        },
+                        {
+                            "xml": true,
                             "count": 1
                         }
                     ],
@@ -246,7 +254,7 @@
                     "Social.framework": [
                         {
                             "xml": true,
-                            "count": 1
+                            "count": 2
                         }
                     ],
                     "Accounts.framework": [
@@ -333,6 +341,9 @@
         "com.phonegap.plugins.facebookconnect": {
             "APP_ID": "184865748231073",
             "APP_NAME": "Minds",
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
+        "nl.x-services.plugins.socialsharing": {
             "PACKAGE_NAME": "com.minds.mobile"
         }
     },

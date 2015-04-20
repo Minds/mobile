@@ -166,6 +166,17 @@ define(function () {
 				return false;
     		
     		}
+    		
+    		if($scope.message.length > 180){
+    			
+    			$ionicPopup.alert({
+					title: 'Oooops...',
+					template: "Your message is too long. It must be less than 180 characters"
+				});
+				
+    		
+    			return false;
+    		}
     	
     	
     		$ionicLoading.show({

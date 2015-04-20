@@ -73,11 +73,19 @@ define(function () {
 				
 				$scope.captured = true;
 				$scope.$apply();
+				var uploading = false;
+			
+				var image = ["images", "document/image", '.jpg', '.JPG', '.jpeg', '.JPEG', '.png', '.PNG', '.bmp', '.BMP', '.gif', '.GIF'];
+				for(var i = 0; i < image.length; i++){
+					if(mediaFile.indexOf(image[i]) > -1){
+						$scope.upload(mediaFile, 'image');
+						$scope.type = 'image';
+						uploading = true;
+						break;
+					}
+				}
 				
-				if(mediaFile.indexOf('images') > -1 || mediaFile.indexOf('document/image') > -1 || mediaFile.indexOf('.jpg') > -1 || mediaFile.indexOf('.png') > -1 || mediaFile.indexOf('.bmp') > -1 || mediaFile.indexOf('.jpeg') > -1){
-					$scope.upload(mediaFile, 'image');
-					$scope.type = 'image';
-				} else {
+				if(!uploading){
 					$scope.upload(mediaFile, 'video');
 					$scope.type = 'video';
 				}

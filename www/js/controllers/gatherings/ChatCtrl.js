@@ -26,9 +26,12 @@ define(function () {
     	
     	push.listen('chat', function(){
     		console.log('new message!');
-    		$scope.cb = Date.now();
-    		$scope.refresh();
-    		$ionicScrollDelegate.scrollTop();
+    		if($state.current.name == 'tab.chat'){
+	    		$scope.cb = Date.now();
+	    		$rootScope.newChat = false;
+	    		$scope.refresh();
+	    		$ionicScrollDelegate.scrollTop();
+    		}
 			
     	});
     	

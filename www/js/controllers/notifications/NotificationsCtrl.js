@@ -8,7 +8,7 @@
 define(function () {
     'use strict';
 
-    function ctrl($rootScope, $scope,  $ionicScrollDelegate, Cacher, Client, storage, $ionicPopover, $ionicLoading, $ionicModal, $ionicPopup, $timeout, push) {
+    function ctrl($rootScope, $scope, $state, $ionicScrollDelegate, Cacher, Client, storage, $ionicPopover, $ionicLoading, $ionicModal, $ionicPopup, $timeout, push) {
 
     	$scope.$on('$ionicView.beforeEnter', function(){
 			$rootScope.newNotification = false;
@@ -16,8 +16,10 @@ define(function () {
     	});
     	
     	push.listen('notification', function(params){
-    		$rootScope.newNotification = false;
-			$scope.refresh();
+    		if($state.current.name == 'tab.notifications'){
+    			$rootScope.newNotification = false;
+				$scope.refresh();
+			}
 		});
     	
 		/** Cached or fresh **/
@@ -150,7 +152,7 @@ define(function () {
 		
     }
 
-    ctrl.$inject = ['$rootScope', '$scope', '$ionicScrollDelegate', 'Cacher', 'Client', 'storage', '$ionicPopover', '$ionicLoading', '$ionicModal', '$ionicPopup', '$timeout', 'push'];
+    ctrl.$inject = ['$rootScope', '$scope', '$state', '$ionicScrollDelegate', 'Cacher', 'Client', 'storage', '$ionicPopover', '$ionicLoading', '$ionicModal', '$ionicPopup', '$timeout', 'push'];
     return ctrl;
     
 });

@@ -18,6 +18,7 @@
 .channel-content {
 	padding-top:80px;
 	width:100%;
+	bottom:-50px;
 }
 .channel-content .inner{
     /*background:#FFF;*/

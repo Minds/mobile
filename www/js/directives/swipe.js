@@ -13,7 +13,9 @@ define(['angular'], function (angular) {
        			swipeOnDown: '&swipeOnDown'
        		},
 			link: function(scope, element, attrs) {
-				
+			
+				element.css('transform', 'translate3d(0px, 0px, 0)');
+				element.css('webkitTransform', 'translate3d(0px, 0px, 0)');
 
 				$ionicGesture.on('dragstart', function(e){
 					e.preventDefault();
@@ -22,6 +24,7 @@ define(['angular'], function (angular) {
 					var point = window.innerWidth / 2 + 1 * (width / 2);
 					var distance = Math.abs(point - e.gesture.touches[0].pageX);// - window.innerWidth/2);
 					//console.log(width, point, distance);
+
 				}, element);
 				
 				$ionicGesture.on('drag', function(e){
@@ -55,7 +58,13 @@ define(['angular'], function (angular) {
 							y = 0;
 						}
 						
-						element.css('webkitTransform', 'translate3d(' + x + 'px, ' + y + 'px, 0) rotate(' + (rotationAngle || 0) + 'rad)');
+						ionic.requestAnimationFrame(function(){
+							element.css('transform', 'translate3d(' + x + 'px, ' + y + 'px, 0) rotate(' + (rotationAngle || 0) + 'rad)');
+							element.css('webkitTransform', 'translate3d(' + x + 'px, ' + y + 'px, 0) rotate(' + (rotationAngle || 0) + 'rad)');
+						});
+						
+						
+						
 						element.css('z-index', 99999999);
 					});
 					
@@ -63,7 +72,8 @@ define(['angular'], function (angular) {
 				
 				$ionicGesture.on('dragend', function(e){
 					ionic.requestAnimationFrame(function() { 		
-						element.css('webkitTransform', 'none');
+						element.css('webkitTransform', 'translate3d(0, 0, 0)');
+						element.css('transform',  'translate3d(0, 0, 0)');
 						
 						var right_threshold = 100;
 						var left_threshold = -100;

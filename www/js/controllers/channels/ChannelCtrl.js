@@ -18,6 +18,7 @@ define(function () {
 		$scope.loaded = false;
      	$scope.next = "";
      	$scope.ChannelItems = [];
+     	var interval;
      	
      	$scope.cb = Date.now();
      	$rootScope.$on('$stateChangeSuccess', function (event, to, toParams, from, fromParams) {
@@ -25,6 +26,12 @@ define(function () {
      			$scope.cb = Date.now();
      			$scope.init();
      		}
+     		
+     		if(from.name == 'tab.newsfeed-channel'){
+     			if(interval)
+     				$interval.cancel(interval);
+     		}
+     		
      		//$scope.cb = Date.now();
      		//$scope.init();
      	});
@@ -48,7 +55,7 @@ define(function () {
 				
 				if(success.channel.carousels){
 					$ionicSlideBoxDelegate.update();
-					$interval(function(){
+					interval = $interval(function(){
 						$ionicSlideBoxDelegate.$getByHandle('channel-banners').slide(0);
 					}, 3000 * success.channel.carousels.length);
 				}

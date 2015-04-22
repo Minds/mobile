@@ -63,7 +63,7 @@
             <b ng-show="activity.reminds > 0" style="font-size:14px; padding:2px 0 0">({{activity.reminds}})</b> 
         </a>
         
-        <a class="tab-item small-font" ng-click="boost(activity)" style="opacity:1;">
+        <a class="tab-item small-font" ng-click="boost(activity)" style="opacity:1;" ng-if="activity.owner_guid == $root.user_guid">
            <span style="color: #FFF;font-weight: 800;background: #4690C3;padding: 6px 8px;border-radius: 3px;">Boost</span>
         </a>
         

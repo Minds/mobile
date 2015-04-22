@@ -6,6 +6,10 @@
     
 	<ion-content>
 		<!-- kind of mish-mashy... -->
+		
+		<div class="loading" ng-if="!entity" style="margin:50px;">
+            <ion-spinner></ion-spinner>
+        </div>
 
 		<div ng-switch="entity.type" style="margin-bottom:-42px">
 			<div ng-switch-when="object">
@@ -19,7 +23,7 @@
 		<!-- show comments here -->
 		<ion-list>
 			<div class="loading">
-				<i class="icon ion-loading-d" ng-if="comments.length == 0 && inprogress"></i>
+				<ion-spinner ng-if="comments.length == 0 && inprogress"></ion-spinner> 
 			</div>
 			<div ng-repeat="comment in comments" class="comment-item" ng-class-future="$even ? 'even' : 'odd'">
 				

@@ -31,11 +31,9 @@ define(function () {
     			    			
     			$scope.guid = $scope.entity.guid;
     			
-    			if($scope.entity.type == 'activity'){
-    				if($scope.entity.entityObj){
-    					$scope.guid = $scope.entity.entityObj.guid;
-    				}
-    			}
+    			if($scope.entity.entity_guid){
+    				$scope.guid = $scope.entity.entity_guid;
+    			} 
     			
     			$scope.hasMore = true;
     			$scope.offset = "";
@@ -107,7 +105,10 @@ define(function () {
 			$scope.comment.body = '';
 		};
 		
-		$scope.removeComment = function(guid){
+		$scope.removeComment = function(comment){
+			var guid = comment.guid;
+			if(comment.owner_guid != $rootScope.user_guid)
+				return false;
 			
 			$ionicActionSheet.show({
 			     buttons: [

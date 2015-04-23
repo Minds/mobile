@@ -8,7 +8,7 @@
 define(function () {
     'use strict';
 
-    function ctrl($scope, $stateParams, Client, $ionicLoading, $ionicActionSheet) {
+    function ctrl($rootScope, $scope, $stateParams, Client, $ionicLoading, $ionicActionSheet) {
     	
     	$scope.guid = "";
     	$scope.cb = Date.now();
@@ -90,8 +90,11 @@ define(function () {
 			$scope.comment.body = '';
 		};
 		
-		$scope.removeComment = function(guid){
-			
+		$scope.removeComment = function(comment){
+			var guid = comment.guid;
+			if(comment.owner_guid != $rootScope.user_guid)
+				return false;
+				
 			$ionicActionSheet.show({
 			     buttons: [
 			     ],
@@ -120,7 +123,7 @@ define(function () {
 		
     }
 
-    ctrl.$inject = ['$scope', '$stateParams', 'Client', '$ionicLoading', '$ionicActionSheet'];
+    ctrl.$inject = ['$rootScope', '$scope', '$stateParams', 'Client', '$ionicLoading', '$ionicActionSheet'];
     return ctrl;
     
 });

@@ -16,7 +16,7 @@ define(function() {
 		$scope.register = function() {
 			if($scope.inprogress)
 				return false;
-			$scope.inprogress = true;
+			
 			
 			if(!$scope.data.username){
 				$ionicPopup.alert({
@@ -43,7 +43,7 @@ define(function() {
 			}
 			
 			
-			
+			$scope.inprogress = true;
 			$ionicLoading.show({
 				template: 'Please wait a moment...'
 				});

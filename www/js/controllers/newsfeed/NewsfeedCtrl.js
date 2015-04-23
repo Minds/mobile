@@ -396,11 +396,26 @@ define(function () {
 			    			$timeout(function(){
 			    				$ionicLoading.hide();
 			    				}, 1000);
-			     	} else {
-			    	 if(confirm("are you sure?"))
+			    		return false;
+			     	}
+			     	
+			     	if(activity.owner_guid != $rootScope.user_guid){
+			     	
+			     		$ionicLoading.show({
+			    				template: 'Sorry, you can not delete posts that are not yourss.'
+			    				});
+			    			$timeout(function(){
+			    				$ionicLoading.hide();
+			    				}, 1000);
+			    				
+			    		return false;
+			     	
+			     	}
+			     	
+			     	if(confirm("are you sure?"))
 			    		 $scope.remove(guid);
 			    	 return true;
-			    	 }
+			    	 
 			     },
 			     cancelText: 'Cancel',
 			     cancel: function() {

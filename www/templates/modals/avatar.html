@@ -5,16 +5,25 @@
 		<div class="buttons">
 	    	<button class="button button-clear" ng-click="modal.remove()">Skip</button>
 	 	 </div>
-	  	<h1 class="title">Avatar</h1>
+	  	<h1 class="title">Setup</h1>
 	  	<div class="buttons">
-            <button class="button button-clear minds-blue" style="color:#4690C3"  ng-click="modal.remove()">Save</button>
+            <button class="button button-clear minds-blue" style="color:#4690C3"  ng-click="update(false); modal.remove()">Save</button>
          </div>
 	</ion-header-bar>
 	
 	<ion-content>
 	
-		 <img id="avatar" ng-src="{{$root.node_url}}icon/{{$root.user_guid}}/large/{{$root.globalCB}}" style="width: calc(100% - 32px); margin:16px; height: auto; box-shadow:0 0 3px #888;" onerror="this.src='img/avatar.png'" ng-click="changeAvatar();"/>
-	       <p style="padding:0 20px; text-align:center;">Select the image above to select an avatar</p>
+	     <div class="list">
+           <label class="item item-input" style="padding:16px">
+                <span class="input-label">Bio</span>
+                <input type="text" ng-model="channel.briefdescription" placeholder="Enter a brief description here">
+            </label>
+        </div>
+	
+		 <img id="avatar" ng-src="{{$root.node_url}}icon/{{$root.user_guid}}/large/{{$root.globalCB}}" style="width: calc(75% - 32px); margin:16px auto; display:block; height: auto; box-shadow:0 0 3px #888;" onerror="this.src='img/avatar.png'" ng-click="changeAvatar();"/>
+	     <p style="padding:0 20px; text-align:center;">Select the image above to select an avatar</p>
+	     
+        
 	
 	</ion-content>
 </ion-modal-view>

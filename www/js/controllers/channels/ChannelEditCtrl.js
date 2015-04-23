@@ -12,6 +12,8 @@ define(function () {
 
     	$scope.cb = Date.now();
     	
+    	if(!$stateParams.guid)
+    		$stateParams.guid = $rootScope.user_guid;
     	
      	Client.get('api/v1/channel/'+$stateParams.guid, {cb: $scope.cb}, 
     			function(success){
@@ -20,7 +22,8 @@ define(function () {
     			function(error){
     			});
      	
-     	$scope.update = function(){
+     	$scope.update = function(forward){
+     		
      	
      		if(!$scope.channel.name){
      		
@@ -40,7 +43,8 @@ define(function () {
 		    			$timeout(function(){
 		    				$ionicLoading.hide();
 		    				}, 1000);
-		    			$state.go('tab.newsfeed-channel', {username: 'me', refresh:true});
+		    			if(forward)
+		    				$state.go('tab.newsfeed-channel', {username: 'me', refresh:true});
         			},
         			function(error){
         			});
@@ -72,8 +76,8 @@ define(function () {
 	   	      		function(success){
 	   	      			$ionicLoading.hide();
 			   	      $rootScope.globalCB = Date.now();
-			   	      if($scope.modal)
-			   	      	$scope.modal.remove();
+			   	     // if($scope.modal)
+			   	      //	$scope.modal.remove();
 	   	      		}, 
 	   	      		function(error){
 	   	      			$ionicLoading.hide();

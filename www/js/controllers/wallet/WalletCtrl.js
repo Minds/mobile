@@ -33,6 +33,7 @@ define(function () {
     			function(data){
 	    			if(!data.transactions){
 	    				$scope.hasMoreData = false;
+	    				$scope.$broadcast('scroll.infiniteScrollComplete');
 	    				return false;
 	    			} else {
 	    				$scope.hasMoreData = true;
@@ -49,7 +50,7 @@ define(function () {
 	    		});
 	    		
     	};
-    	$scope.loadMore();
+    	//$scope.loadMore();
  
        
     }

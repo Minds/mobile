@@ -10,6 +10,8 @@ define(function () {
 
     function ctrl($rootScope, $scope, $state, $ionicScrollDelegate, Cacher, Client, storage, $ionicPopover, $ionicLoading, $ionicModal, $ionicPopup, $timeout, push) {
 
+		$scope.inprogress = false;
+
     	$scope.$on('$ionicView.beforeEnter', function(){
 			$rootScope.newNotification = false;
 			$scope.refresh();
@@ -46,6 +48,12 @@ define(function () {
 
     	/** Load more notifications **/
     	$scope.loadMore = function(){
+    	
+    		if($scope.inprogress)
+    			return false;
+    			
+    		$scope.inprogress = true;
+    	
     		console.log('==== loading more notifications ====');
     	
     		if(!$scope.hasMoreData)
@@ -53,9 +61,12 @@ define(function () {
     		
     		Client.get('api/v1/notifications', { limit: 12, offset: $scope.next, cachebreaker: $scope.cachebreaker }, 
     			function(data){
-    	
+    				
+    				$scope.inprogress = false;
+    				
 	    			if(!data.notifications){
 	    				$scope.hasMoreData = false;
+	    				$scope.$broadcast('scroll.infiniteScrollComplete');
 	    				return false;
 	    			} else {
 	    				$scope.hasMoreData = true;
@@ -74,11 +85,19 @@ define(function () {
 	
 	    		}, 
 	    		function(error){ 
+	    			$scope.inprogress = false;
+	    			$scope.$broadcast('scroll.infiniteScrollComplete');
 	    		});
 	    		
     	};
 		
 		$scope.refresh = function(){
+		
+			if($scope.inprogress)
+				return false;
+				
+			$scope.inprogress = true;
+		
 			$rootScope.newNotification = false;
 			Client.get('api/v1/notifications', { limit: 12, offset: '', cache_break: Date.now() }, 
 				function(data){
@@ -91,9 +110,12 @@ define(function () {
 	    			Cacher.put('notification.cachebreaker', Date.now);
 	    			
 	    			$scope.$broadcast('scroll.refreshComplete');
+	    			
+	    			$scope.inprogress = false;
 	
 	    		}, 
 	    		function(error){ 
+	    			$scope.inprogress = false;
 	    		});
 			
 		};

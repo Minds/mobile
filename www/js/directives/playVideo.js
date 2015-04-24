@@ -59,7 +59,7 @@ define(['angular'], function (angular) {
  					video.onerror = function(){
  						$ionicLoading.hide();
  						$rootScope.playing = false;
- 						alert('error in playing');
+ 						alert('Sorry, there was a problem playing this video. Please try again in a few minutes.');
  					};
  					
  					video.addEventListener('webkitendfullscreen', function (e) { 

@@ -3,11 +3,11 @@
 
 	<ion-header-bar>
 		<div class="buttons">
-	    	<button class="button button-clear" ng-click="modal.remove()">Skip</button>
+	    	<button class="button button-clear" ng-click="modal.remove(); modal2.show();">Skip</button>
 	 	 </div>
 	  	<h1 class="title">Setup</h1>
 	  	<div class="buttons">
-            <button class="button button-clear minds-blue" style="color:#4690C3"  ng-click="update(false); modal.remove()">Save</button>
+            <button class="button button-clear minds-blue" style="color:#4690C3"  ng-click="update(false); modal.remove(); modal2.show();">Save</button>
          </div>
 	</ion-header-bar>
 	
@@ -20,7 +20,7 @@
             </label>
         </div>
 	
-		 <img id="avatar" ng-src="{{$root.node_url}}icon/{{$root.user_guid}}/large/{{$root.globalCB}}" style="width: calc(75% - 32px); margin:16px auto; display:block; height: auto; box-shadow:0 0 3px #888;" onerror="this.src='img/avatar.png'" ng-click="changeAvatar();"/>
+		 <img id="avatar" ng-src="{{$root.node_url}}icon/{{$root.user_guid}}/large/{{$root.globalCB}}/{{cb}}" style="width: calc(75% - 32px); margin:16px auto; display:block; height: auto; box-shadow:0 0 3px #888;" onerror="this.src='img/avatar.png'" ng-click="changeAvatar();"/>
 	     <p style="padding:0 20px; text-align:center;">Select the image above to select an avatar</p>
 	     
         

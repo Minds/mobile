@@ -1,0 +1,36 @@
+<ion-modal-view ng-controller="ChannelEditCtrl" class="view-bg">
+	
+
+	<ion-header-bar>
+		<div class="buttons">
+	    	<button class="button button-clear" ng-click="modal2.remove()">Skip</button>
+	 	 </div>
+	  	<h1 class="title">Optional</h1>
+	  	<div class="buttons">
+            <button class="button button-clear minds-blue" style="color:#4690C3"  ng-click="update(false); modal2.remove()">Save</button>
+         </div>
+	</ion-header-bar>
+	
+	<ion-content>
+	
+	     <div class="list">
+	     
+	       <div class="item item-input gender-input">
+                <span class="input-label">Gender</span>
+                
+                <a ng-class="{'minds-blue': channel.gender == 'male'}"  ng-click="changeGender('male')">Male</a> / 
+                <a ng-class="{'minds-blue': channel.gender == 'female'}" ng-click="changeGender('female')">Female</a> / 
+                <a ng-class="{'minds-blue': channel.gender == null}" ng-click="changeGender(null)">Private</a>
+            </div>
+            <label class="item item-input">
+              <span class="input-label">Date of Birth</span>
+              <input type="text" ng-model="channel.dob" onclick="(this.type='month')"  onblur="(this.type='text')" placeholder="Optional. This will be public.">
+            </label>
+             <label class="item item-input">
+              <span class="input-label">Zip/Post Code</span>
+              <input type="text" ng-model="channel.zip" placeholder="Optional. This will be public.">
+            </label>
+        </div>
+
+	</ion-content>
+</ion-modal-view>

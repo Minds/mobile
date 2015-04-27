@@ -87,6 +87,14 @@ define(function() {
 			    	 		    $scope.modal = modal;
 			    	 		    $scope.modal.show();
 			    	 		  });
+			    	 		  
+			    	 		//optional slide
+			    	 		$ionicModal.fromTemplateUrl('templates/modals/optional.html', {
+			    	 		    scope: $scope,
+			    	 		    animation: 'slide-in-up'
+			    	 		  }).then(function(modal) {
+			    	 		    $scope.modal2 = modal;
+			    	 		  });
 							
 							$state.go('tutorial');
 						} else {

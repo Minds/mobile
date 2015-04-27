@@ -76,6 +76,8 @@ define(function () {
 	   	      		function(success){
 	   	      			$ionicLoading.hide();
 			   	      $rootScope.globalCB = Date.now();
+			   	      $rootScope.$apply();
+			   	      $scope.channel.cb = Date.now();
 			   	     // if($scope.modal)
 			   	      //	$scope.modal.remove();
 	   	      		}, 
@@ -133,6 +135,10 @@ define(function () {
      		    //alert('Failed because: ' + message);
      		}
      		
+     	};
+     	
+     	$scope.changeGender = function(gender){
+     		$scope.channel.gender = gender;
      	};
      	
      	$scope.invite = function(){

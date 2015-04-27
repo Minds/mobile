@@ -122,6 +122,10 @@ a.tag{
         user-select: auto !important;  
 }
 
+.gender-input  a{
+	padding:0 4px;
+}
+
 .minds-yellow{
 	color:#FFCC00;
 }

@@ -44,6 +44,7 @@ define(function () {
     		console.log('==== loading more ====');
     	
     		if(!$scope.hasMoreData){
+    			$scope.$broadcast('scroll.infiniteScrollComplete');
     			return;
     		}
     		
@@ -360,9 +361,13 @@ define(function () {
 			$state.go('tab.more-notifications', {}, {reload:true});
 		};
 		
+		var timeout;
 		$scope.openUrl = function(url){
-			console.log(url);
-			window.open(url, "_blank", "location=yes");
+			$timeout.cancel(timeout);
+			
+			timeout = $timeout( function(){
+				window.open(url, "_blank", "location=yes");
+			}, 300);
 		};
 		
 		$scope.boost = function(activity){

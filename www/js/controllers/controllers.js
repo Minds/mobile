@@ -80,23 +80,29 @@ define(function (require) {
    	 */
    	controllers.controller('InviteCtrl', require('controllers/invite/InviteCtrl'));
    	
-	controllers.run(['$rootScope', 'NODE_URL', 'storage', function ($rootScope, NODE_URL, storage) {
+	controllers.run(['$rootScope', 'NODE_URL', 'storage', '$timeout', function ($rootScope, NODE_URL, storage, $timeout) {
 		$rootScope.node_url = NODE_URL;
 		$rootScope.user_guid = storage.get('user_guid');
 		$rootScope.points = '...';
 		$rootScope.globalCB = Date.now();
+		
+		var click;
+		document.onclick = function (e) {
+	        e = e ||  window.event;
+	        var element = e.target || e.srcElement;
+	        
+	        $timeout.cancel(click);
+	 
+	 		click = $timeout(function(){
+		        if (element.tagName == 'A' && element.href.indexOf('http') >= 0) {
+					window.open(element.href, "_blank", "location=yes");
+		            return false;
+		        }
+		    }, 300);
+	    };
 	}]);
 	
-	document.onclick = function (e) {
-        e = e ||  window.event;
-        var element = e.target || e.srcElement;
- 
-        if (element.tagName == 'A' && element.href.indexOf('http') >= 0) {
-            window.open(element.href, "_blank", "location=yes");
-            return false;
-        }
-    };
-    
+	    
     window.addEventListener('keypress', function (e) {
 
         if (e.keyCode == 13) {

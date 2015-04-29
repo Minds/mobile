@@ -3,11 +3,11 @@
 
 	<ion-header-bar>
 		<div class="buttons">
-	    	<button class="button button-clear" ng-click="modal2.remove()">Skip</button>
+	    	<button class="button button-clear" ng-click="toTutorial(); modal2.remove(); ">Skip</button>
 	 	 </div>
 	  	<h1 class="title">Optional</h1>
 	  	<div class="buttons">
-            <button class="button button-clear minds-blue" style="color:#4690C3"  ng-click="update(false); modal2.remove()">Save</button>
+            <button class="button button-clear minds-blue" style="color:#4690C3"  ng-click="update(false); toTutorial(); modal2.remove(); ">Save</button>
          </div>
 	</ion-header-bar>
 	
@@ -17,19 +17,21 @@
 	     
 	       <div class="item item-input gender-input">
                 <span class="input-label">Gender</span>
-                
-                <a ng-class="{'minds-blue': channel.gender == 'male'}"  ng-click="changeGender('male')">Male</a> / 
-                <a ng-class="{'minds-blue': channel.gender == 'female'}" ng-click="changeGender('female')">Female</a> / 
-                <a ng-class="{'minds-blue': channel.gender == null}" ng-click="changeGender(null)">Private</a>
+               
+                <a ng-class="{'minds-blue': channel.gender == 'male'}"  ng-click="channel.gender = 'male'">Male</a> / 
+                <a ng-class="{'minds-blue': channel.gender == 'female'}" ng-click="channel.gender = 'female'">Female</a> / 
+                <a ng-class="{'minds-blue': channel.gender == null}" ng-click="channel.gender = null">Private</a>
             </div>
             <label class="item item-input">
               <span class="input-label">Date of Birth</span>
               <input type="text" ng-model="channel.dob" onclick="(this.type='month')"  onblur="(this.type='text')" placeholder="Optional. This will be public.">
             </label>
              <label class="item item-input">
-              <span class="input-label">Zip/Post Code</span>
-              <input type="text" ng-model="channel.zip" placeholder="Optional. This will be public.">
+              <span class="input-label">City</span>
+              <input type="text" ng-model="channel.city" placeholder="Optional. This will be public." ng-change="cityInput()">
             </label>
+            
+            <img ng-if="channel.coordinates" ng-src="http://staticmap.openstreetmap.de/staticmap.php?center={{channel.coordinates}}&zoom=9&size=400x150&maptype=mapnik" style="width:100%"/>
         </div>
 
 	</ion-content>

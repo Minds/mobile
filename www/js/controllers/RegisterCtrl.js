@@ -13,6 +13,11 @@ define(function() {
 		$scope.data = {};
 
 		$scope.inprogress = false;
+		
+		$scope.toTutorial = function(){
+			$state.go('tutorial');
+		};
+		
 		$scope.register = function() {
 			if($scope.inprogress)
 				return false;
@@ -95,8 +100,7 @@ define(function() {
 			    	 		  }).then(function(modal) {
 			    	 		    $scope.modal2 = modal;
 			    	 		  });
-							
-							$state.go('tutorial');
+
 						} else {
 							
 							var alertPopup = $ionicPopup.alert({

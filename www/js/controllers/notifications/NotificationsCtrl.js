@@ -10,11 +10,17 @@ define(function () {
 
     function ctrl($rootScope, $scope, $state, $ionicScrollDelegate, Cacher, Client, storage, $ionicPopover, $ionicLoading, $ionicModal, $ionicPopup, $timeout, push) {
 
+		$scope.next  = "";
+    	$scope.hasMoreData = true;
+		$scope.cachebreaker = Date.now();
 		$scope.inprogress = false;
+		$scope.notificationItems =  [];
 
     	$scope.$on('$ionicView.beforeEnter', function(){
 			$rootScope.newNotification = false;
-			$scope.refresh();
+			if($scope.notificationItems.length > 0){
+				$scope.refresh();
+			}
     	});
     	
     	push.listen('notification', function(params){
@@ -23,41 +29,23 @@ define(function () {
 				$scope.refresh();
 			}
 		});
-    	
-		/** Cached or fresh **/
-		if(Cacher.get('notification.items')){
-			$scope.notificationItems = Cacher.get('notification.items');
-		}else{
-    		$scope.notificationItems =  [];
-    	}
-    	
-    	/** What to load next **/
-    	if(Cacher.get('notification.next'))
-    		$scope.next = Cacher.get('notification.next');
-    	else
-    		$scope.next  = "";
-    	
-    	$scope.hasMoreData = true;
-    	
-    	/** The cache breaker **/
-    	if(Cacher.get('notification.cachebreaker')){
-    		$scope.cachebreaker = Cacher.get('notification.cachebreaker');
-    	} else {
-    		$scope.cachebreaker = 0;
-    	}
+		
 
     	/** Load more notifications **/
     	$scope.loadMore = function(){
-    	
+    		console.log('==== loading more notifications ====');
+
     		if($scope.inprogress)
     			return false;
     			
     		$scope.inprogress = true;
     	
-    		console.log('==== loading more notifications ====');
+    		
     	
-    		if(!$scope.hasMoreData)
+    		if(!$scope.hasMoreData){
+    			$scope.inprogress = false;
     			return;
+    		}
     		
     		Client.get('api/v1/notifications', { limit: 12, offset: $scope.next, cachebreaker: $scope.cachebreaker }, 
     			function(data){
@@ -77,8 +65,8 @@ define(function () {
 	    		
 	
 	    			$scope.next = data['load-next'];
-	    			if(!$scope.next)
-	    				$scope.hasMoreData = false;
+	    			//if(!$scope.next)
+	    			//	$scope.hasMoreData = false;
 	    			Cacher.put('notification.next', $scope.next);
 	    			
 	    			$scope.$broadcast('scroll.infiniteScrollComplete');
@@ -92,7 +80,7 @@ define(function () {
     	};
 		
 		$scope.refresh = function(){
-		
+
 			if($scope.inprogress)
 				return false;
 				

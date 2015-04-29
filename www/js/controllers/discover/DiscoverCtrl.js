@@ -8,7 +8,7 @@
 define(function () {
     'use strict';
 
-    function ctrl($scope, $stateParams, Client, Cacher, $ionicPopup, $ionicScrollDelegate, $ionicLoading, $ionicModal, $ionicActionSheet, $timeout, $q) {
+    function ctrl($scope, $stateParams, Client, Cacher, $ionicPopup, $ionicScrollDelegate, $ionicLoading, $ionicModal, $ionicActionSheet, $timeout, $q, storage) {
 		var search_timeout,
 			timeout,
 			request,
@@ -27,6 +27,19 @@ define(function () {
 		$scope.acted = [];
 		$scope.offset = 0;
 		
+		$scope.city = storage.get('city');
+		if($scope.city)
+			$scope.nearby = true;
+		else
+			$scope.nearby = false;
+		
+		$scope.location = {
+			distance: {
+				name: '25 miles',
+				miles: 25
+			}
+		};
+		
 		$scope.hasMoreData = true;
 		if(Cacher.get('entities.cb')){
 			$scope.cachebreaker = Cacher.get('entities.cb');
@@ -37,7 +50,18 @@ define(function () {
 		$scope.type = 'channel';
 		$scope.view = 'list';
 		$scope.infinite = true;
-
+		
+		$scope.setNearby = function(value){
+			$scope.nearby = value;
+			$scope.cachebreaker = Date.now();
+			$scope.entities = [];
+			$scope.load();
+		};
+		
+		$scope.distanceChanged = function(){
+			$scope.entities = [];
+			$scope.load();
+		};
 		
 		$scope.changeFilter = function(filter){
 			if(filter == 'suggested'){
@@ -101,11 +125,19 @@ define(function () {
 					limit: 16, 
 					offset: $scope.next, 
 					cachebreaker: $scope.cachebreaker,
-					skip: $scope.offset
+					skip: $scope.offset, 
+					coordinates: storage.get('coordinates'),
+					nearby: $scope.nearby,
+					distance: $scope.location.distance.miles
 					}, 
 	    			function(data){
 	
 						if(!data.entities){
+							//no one nearby? load normal suggested
+							if($scope.nearby){
+								$scope.nearby = false;
+								$scope.load();
+							}
 		    				$scope.hasMoreData = false;
 		    				return false;
 		    			} else {
@@ -456,7 +488,7 @@ define(function () {
 
     }
 
-    ctrl.$inject = ['$scope', '$stateParams', 'Client', 'Cacher', '$ionicPopup', '$ionicScrollDelegate', '$ionicLoading', '$ionicModal',  '$ionicActionSheet', '$timeout', '$q'];
+    ctrl.$inject = ['$scope', '$stateParams', 'Client', 'Cacher', '$ionicPopup', '$ionicScrollDelegate', '$ionicLoading', '$ionicModal',  '$ionicActionSheet', '$timeout', '$q', 'storage'];
     return ctrl;
     
 });

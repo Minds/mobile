@@ -18,6 +18,10 @@
                 <span class="input-label">Bio</span>
                 <input type="text" ng-model="channel.briefdescription">
             </label>
+            <label class="item item-input">
+                <span class="input-label">City</span>
+                <input type="text" ng-model="channel.city" ng-change="cityInput()">
+            </label>
             <label class="item item-input" ng-click="changeAvatar()">
                 <span class="input-label">Avatar</span>
                 <img id="avatar" ng-src="{{channel.avatar_url.large}}/{{cb}}" style="width:60%; height:auto;"/>

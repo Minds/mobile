@@ -11,6 +11,7 @@ define(function () {
     function ctrl($rootScope, $scope, $state, $stateParams, Client, storage, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicLoading, $timeout, $window, $ionicModal, $ionicHistory, $ionicPopup) {
 
     	$scope.cb = Date.now();
+    	var timeout;
     	
     	if(!$stateParams.guid)
     		$stateParams.guid = $rootScope.user_guid;
@@ -48,6 +49,18 @@ define(function () {
         			},
         			function(error){
         			});
+     	};
+     	
+     	$scope.cityInput = function(){
+     		$timeout.cancel(timeout);
+     		timeout = $timeout(function(){
+     			Client.get("api/v1/geolocation", { q: $scope.channel.city }, function(success){ 
+     					$scope.channel.coordinates = success.coordinates;
+     					$scope.update();
+     					storage.set('city', $scope.channel.city);
+     					storage.set('coordinates', $scope.channel.coordinates);
+     				}, function(error){});
+     		}, 600);
      	};
      	
      	$scope.changeAvatar = function(){
@@ -139,6 +152,7 @@ define(function () {
      	
      	$scope.changeGender = function(gender){
      		$scope.channel.gender = gender;
+     		$scope.$apply();
      	};
      	
      	$scope.invite = function(){

@@ -57,7 +57,7 @@
 	
 	text-align:left;
 }
-.channel-content .inner a{
+.channel-content .inner a, .channel-content .inner p{
 	color:#FFF;
 	text-decoration:none;
 	float:left;
@@ -81,7 +81,6 @@
 .slider-pager{
     /*display:none;*/
 }
-
 
 .channel-user-subscribe{
 	float:right;

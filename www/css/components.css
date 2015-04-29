@@ -33,7 +33,7 @@
 	max-height:220px;
 }
 .swipe-container .card .item-image-user{
-	max-height:300px;
+	max-height:275px;
 }
 .card.image .item-image{
 	background:#333;
@@ -88,6 +88,7 @@
 }
 
 .overlay h1, .overlay h2{
+	display:inline-block;
 	font-size:18px;
 	font-weight:400;
 	padding:0;
@@ -103,6 +104,17 @@
 .overlay p{
 	color:#FFF;
 	line-height:15px;
+}
+
+.overlay .city{
+	color: #FFF;
+	line-height: 15px;
+	font-size: 11px;
+	vertical-align: text-top;
+}
+
+.platform-ios .city{
+	vertical-align: baseline;
 }
 
 
@@ -209,6 +221,12 @@ progress[value] {
 .boost-tab > i{
 	font-size:26px;
 	color:#666;
+}
+
+.platform-ios .location-bar{
+	margin-top:	16px;
+	margin-bottom:-12px;
+	padding-left:12px;
 }
 
 /**

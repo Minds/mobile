@@ -2,14 +2,10 @@
 <a class="item item-image item-image-user" href="#/tab/newsfeed/channel/{{entity.guid}}">
     <img ng-src="{{$root.node_url}}icon/{{entity.guid}}/large">
     <div class="overlay">
-    	<h1 ng-bind-html="entity.name"></h1>
-    	<p ng-show="entity.briefdescription" ng-bind-html="entity.briefdescription">
-        </p>
+    	<h1 ng-bind-html="entity.name"></h1> <span class="city" ng-if="entity.city">{{entity.city}}</span>
+    	<p ng-show="entity.briefdescription" ng-bind-html="entity.briefdescription" style="margin-top:-4px"></p>
     </div>
 </a>
-
-
-
 
 <div class="boosted-bar" ng-show="entity.boosted">
     <i class="icon ion-arrow-graph-up-right"></i> Boosted

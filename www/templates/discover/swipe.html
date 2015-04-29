@@ -60,18 +60,20 @@
 	                <!-- Objects -->
 	                <div ng-switch-when="object">
 	                    <div class="list card tabs-background-white {{entity.subtype}}" ng-include src="'templates/discover/entities/object.html'" swipe swipe-disable-vertical="true" swipe-on-down="down(entity)" swipe-on-left="pass(entity)" swipe-on-right="up(entity)"></div>
+	                    <a g-click="boost(entity)" style="opacity: 1; margin: 12px auto; display: block; width: 56px;" ng-if="entity.owner_guid == $root.user_guid">
+                           <span style="color: #FFF;font-weight: 800;background: #4690C3;padding: 6px 8px;border-radius: 3px;">Boost</span>
+                        </a>
 	                </div>
 	                
 	                <!-- USERS -->
 	                <div ng-switch-when="user">
 	                    <div class="list card tabs-background-white" ng-include src="'templates/discover/entities/user.html'" swipe swipe-disable-vertical="true" swipe-on-left="ignore(entity)" swipe-on-right="subscribe(entity)"></div>
-	               
-	                     <div class="boost-tab" style="margin-top:12px">
-                            <i class="icon ion-more" ng-click="openActions(entity)"></i>
-                        </div>
+                        
+                        <a g-click="boost(entity)" style="opacity: 1; margin: 12px auto; display: block; width: 56px;" ng-if="entity.guid == $root.user_guid">
+                           <span style="color: #FFF;font-weight: 800;background: #4690C3;padding: 6px 8px;border-radius: 3px;">Boost</span>
+                        </a>
+
 	               </div>
-	                
-	                 
 	                
 	            </div>
 			</div>
@@ -86,10 +88,19 @@
 	</ion-content>
 	    
 	<ion-pane style="padding-top:102px" style="-webkit-transform: translate3d(0px, 0px, 0px);" ng-if="filter == 'suggested'">
+	
+	   <div ng-if="type == 'channel'" class="location-bar" style="padding-left:12px;">
+	       <span ng-if="!nearby" ng-click="setNearby(true);" style="background: #EEE; border: 1px solid #DDD; border-radius: 3px; padding: 0 5px;">off</span>
+           <span ng-if="nearby" ng-click="setNearby(false);" style="background: #4690C3; border: 1px solid #4690C3; border-radius: 3px; padding: 0 5px; color:#FFF;">on</span>
+	       Within 
+	       <select style="-webkit-appearance: none; color:#4690C3; background:#FAFAFA; border: 1px solid #EEE; border-radius:3px;" ng-change="distanceChanged()" ng-model="location.distance" ng-options="d.name for d in [{name:'5 miles', miles: 5}, {name:'25 miles', miles: 25}, {name:'50 miles', miles: 50}, {name:'100 miles', miles: 100}] track by d.miles"></select>
+           
+           of <b>{{city}}</b> 
+	   </div>
 
 		<div ng-show="entities.length == 0" style="text-align:center; font-weight:200; padding-top:50px;">
 			<img src="img/logo-transparent.png" class="loading-bulb-glow"/> <br/>
-			Discovering..
+			Discovering<span ng-if="nearby"> near you</span>...
 		</div>
 
 		<div ng-repeat="entity in entities" class="swipe-container" ng-show="$index <= 1" data-instantActivate >

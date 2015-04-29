@@ -26,7 +26,7 @@
             </div>
             <div class="cell">
 	            <h1 ng-bind-html="channel.name"></h1>
-	            <a href="http://{{channel.website}}" ng-show="channel.website" class="wrap" style="width:85%">{{channel.website | domain}}</a>
+	            <p ng-show="channel.briefdescription" class="wrap" style="width:85% color:#FFF; font-size:11px;" ng-bind-html="channel.briefdescription"></p>
             </div>
         
         </div>

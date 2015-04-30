@@ -9,7 +9,7 @@ define(function () {
     'use strict';
 
     function ctrl( $rootScope, $scope, $state, $stateParams, NewsfeedAPI, $filter, $ionicScrollDelegate, Cacher, Client, storage, $ionicPopover, $ionicLoading, $timeout, $ionicActionSheet, $ionicModal, $ionicPlatform) {
-			
+
     	//if same tab click, refresh and go to top
     	$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
 			if(toState.name == fromState.name){
@@ -26,6 +26,10 @@ define(function () {
     	    $scope.refresh();
     	});
     	
+    	$rootScope.$on('newsfeed:boost', function($event, v2) {
+    		$scope.boost({guid:v2, owner_guid: $rootScope.user_guid});
+    	});
+
     	$scope.newsfeedItems =  [];
     	$scope.next  = "";
     	

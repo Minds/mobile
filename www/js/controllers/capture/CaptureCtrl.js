@@ -156,6 +156,7 @@ define(function () {
 					   });*/
 					$state.go('tab.newsfeed', {}, {reload:true});
 					$scope.$emit('newsfeed:updated');
+					$scope.$emit('newsfeed:boost', $scope.guid);
 					$scope.reset();
 					$ionicLoading.hide();
 				}, 
@@ -205,6 +206,7 @@ define(function () {
 				$scope.modal.remove();
 				$state.go('tab.newsfeed', {}, {reload:true});
 				$scope.$emit('newsfeed:updated');
+				$scope.$emit('newsfeed:boost', success.guid);
 			}, function(error){
 				$ionicLoading.hide();
 			});
@@ -228,8 +230,7 @@ define(function () {
 		$scope.getStatusPreview = function(){
 			var text = $scope.form.status;
 			var match = text.match(/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig);
-			console.log(text);
-			console.log(match);
+
 			if (!match)
 				return;
 	

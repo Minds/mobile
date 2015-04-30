@@ -51,16 +51,30 @@ define(function () {
         			});
      	};
      	
-     	$scope.cityInput = function(){
+     	var timeout;
+     	$scope.cities = [];
+     	$scope.autoSearchLocation = function(){
      		$timeout.cancel(timeout);
+     		
      		timeout = $timeout(function(){
-     			Client.get("api/v1/geolocation", { q: $scope.channel.city }, function(success){ 
-     					$scope.channel.coordinates = success.coordinates;
-     					$scope.update();
-     					storage.set('city', $scope.channel.city);
-     					storage.set('coordinates', $scope.channel.coordinates);
+     			Client.get("api/v1/geolocation/list", { q: $scope.channel.city }, function(success){ 
+     					$scope.cities = success.results;
+     					console.log($scope.cities);
      				}, function(error){});
-     		}, 600);
+     		}, 300);
+     	};
+     	
+     	$scope.selectSuggestedLocation = function(row){
+     		$scope.cities = [];
+     		$scope.channel.coordinates = row.lat + ',' + row.lon;
+     		
+     		if(row.address.city)
+     			$scope.channel.city = row.address.city;
+     		if(row.address.town)
+     			$scope.channel.city = row.address.town;
+     		
+     		storage.set('city', $scope.channel.city);
+     		storage.set('coordinates', $scope.channel.coordinates);
      	};
      	
      	$scope.changeAvatar = function(){

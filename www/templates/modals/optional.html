@@ -7,8 +7,9 @@
 	 	 </div>
 	  	<h1 class="title">Optional</h1>
 	  	<div class="buttons">
-            <button class="button button-clear minds-blue" style="color:#4690C3"  ng-click="update(false); toTutorial(); modal2.remove(); ">Save</button>
-         </div>
+            <button class="button button-clear minds-blue" style="color:#4690C3" ng-if="!channel.city || (channel.city && channel.coordinates)" ng-click="update(false); toTutorial(); modal2.remove(); ">Save</button>
+            <button class="button button-clear" ng-if="channel.city && !channel.coordinates" ng-click="">Save</button>
+        </div>
 	</ion-header-bar>
 	
 	<ion-content>
@@ -28,8 +29,16 @@
             </label>
              <label class="item item-input">
               <span class="input-label">City</span>
-              <input type="text" ng-model="channel.city" placeholder="Optional. This will be public." ng-change="cityInput()">
+              <input type="text" ng-model="channel.city" placeholder="Optional. This will be public." ng-change="autoSearchLocation()">
             </label>
+                           
+           <div class="suggested-location-list">
+               <div ng-repeat="location in cities" ng-click="selectSuggestedLocation(location)" ng-if="location.address.city || location.address.town">
+                   
+                   {{location.address.town}}{{location.address.city}}, {{location.address.state}}
+                    
+               </div>
+           </div>
             
             <img ng-if="channel.coordinates" ng-src="http://staticmap.openstreetmap.de/staticmap.php?center={{channel.coordinates}}&zoom=9&size=400x150&maptype=mapnik" style="width:100%"/>
         </div>

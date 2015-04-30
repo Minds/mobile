@@ -150,6 +150,24 @@
 	min-height:50px;
 }
 
+.suggested-location-list{
+	position: absolute;
+	margin-top: -5px;
+	right: 8px;
+	width: calc(75% - 16px);
+	background: #EEE;
+	opacity: 1;
+	z-index: 9;
+	box-shadow: 0 0 3px #888;
+}
+.suggested-location-list >div {
+	padding: 8px;
+	font-size: 22px;
+	font-weight: 400;
+	text-align: left;
+	font-size: 12px;
+}
+
 /**
  * Owner block
  */

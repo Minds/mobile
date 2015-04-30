@@ -20,8 +20,17 @@
             </label>
             <label class="item item-input">
                 <span class="input-label">City</span>
-                <input type="text" ng-model="channel.city" ng-change="cityInput()">
+                <input type="text" ng-model="channel.city" ng-change="autoSearchLocation()">
             </label>
+            
+            <div class="suggested-location-list">
+               <div ng-repeat="location in cities" ng-click="selectSuggestedLocation(location)" ng-if="location.address.city || location.address.town">
+                   
+                   {{location.address.town}}{{location.address.city}}, {{location.address.state}}
+                    
+               </div>
+           </div>
+            
             <label class="item item-input" ng-click="changeAvatar()">
                 <span class="input-label">Avatar</span>
                 <img id="avatar" ng-src="{{channel.avatar_url.large}}/{{cb}}" style="width:60%; height:auto;"/>

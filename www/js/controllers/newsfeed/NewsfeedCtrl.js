@@ -27,7 +27,9 @@ define(function () {
     	});
     	
     	$rootScope.$on('newsfeed:boost', function($event, v2) {
-    		$scope.boost({guid:v2, owner_guid: $rootScope.user_guid});
+    		if(v2){
+    			$scope.boost({guid:v2, owner_guid: $rootScope.user_guid});
+    		}
     	});
 
     	$scope.newsfeedItems =  [];

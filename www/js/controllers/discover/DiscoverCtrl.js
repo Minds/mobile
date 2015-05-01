@@ -32,6 +32,9 @@ define(function () {
 			$scope.nearby = true;
 		else
 			$scope.nearby = false;
+			
+		//assume nearby data...
+		$scope.hasNearby = true;
 		
 		$scope.location = {
 			distance: {
@@ -136,6 +139,7 @@ define(function () {
 							//no one nearby? load normal suggested
 							if($scope.nearby){
 								$scope.nearby = false;
+								$scope.hasNearby = false;
 								$scope.load();
 							}
 		    				$scope.hasMoreData = false;

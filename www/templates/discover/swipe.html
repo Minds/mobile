@@ -98,6 +98,9 @@
     	       <select style="-webkit-appearance: none; color:#4690C3; background:#FAFAFA; border: 1px solid #EEE; border-radius:3px;" ng-change="distanceChanged()" ng-model="location.distance" ng-options="d.name for d in [{name:'5 miles', miles: 5}, {name:'25 miles', miles: 25}, {name:'50 miles', miles: 50}, {name:'100 miles', miles: 100}] track by d.miles"></select>
                of <b>{{city}}</b> 
            </span>
+           <span ng-if="!nearby && !hasNearby" style="color:#888;">
+            no nearby results found
+           </span>
 	   </div>
 
 		<div ng-show="entities.length == 0" style="text-align:center; font-weight:200; padding-top:50px;">

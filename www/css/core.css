@@ -22,6 +22,22 @@
 .login-bg{
 	
 }
+.login-header .background-image{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 110%;
+	height: 110%;
+	background: url(../img/bg-1.jpeg) center -600px;
+	background-size:75%;
+	-webkit-filter: blur(6px);
+	filter: blur(1px);
+	z-index: -1;
+	margin: -12px;
+}
+.login-header .background-image-2{
+	background: url(../img/bg-2.jpeg) center -600px;
+}
 
 .small-font {
 	font-size: 13px !important;

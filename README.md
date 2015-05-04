@@ -10,16 +10,16 @@ The minds mobile apps source code repository.
 
 ##Features
 
+- Boost (Exchange your points with Minds or p2p with other users for expanded reach) 
+- Wallet (Earn points just for using the app or purchase them)
 - Encrypted Chat 
-- News Feed 
-- Capture (Video, Photos, Attach from library)
-- Voting
-- Followers
-- Discover (Search and swipe to vote and connect)
-- Profile
-- Wallet (Earn or buy poins and spend for viral reach)
+- Newsfeed 
+- Discovery (Search and swipe to vote on content and connect with channels)
+- Geo-location filter for social discovery and local networking
+- Capture (Video, Photos, Upload from library)
+- Vote, Comment and Remind posts
+- Subscribe to other channels
 - Notifications
-- Comments
 
 ##Tech
 
@@ -38,14 +38,14 @@ _RequireJS is a file and module loader used to improve speed and quality of code
 #####neo4j (http://neo4j.com)
 _neo4j is the World’s Leading Graph Database._
 
-##Contributors
+##Creators
 
 - Mark Harding - Engineering & Design 
 - Bill Ottman - Design
 
 ##License
 
-This project is licensed under the AGPLv3 software license. See license for full text. 
+This project is licensed under the AGPLv3 free software license. See license for full text. 
 
 ##Contributing
 

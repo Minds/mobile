@@ -1,15 +1,27 @@
 {
     "com.phonegap.plugins.facebookconnect": {
         "source": {
-            "type": "git",
-            "url": "https://github.com/Wizcorp/phonegap-facebook-plugin.git",
-            "subdir": "."
+            "type": "local",
+            "path": "../fb-plugin"
         }
     },
     "nl.x-services.plugins.socialsharing": {
         "source": {
             "type": "git",
             "url": "https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin.git",
+            "subdir": "."
+        }
+    },
+    "com.paypal.cordova.mobilesdk": {
+        "source": {
+            "type": "registry",
+            "id": "com.paypal.cordova.mobilesdk"
+        }
+    },
+    "cordova-plugin-inappbrowser": {
+        "source": {
+            "type": "git",
+            "url": "https://git-wip-us.apache.org/repos/asf/cordova-plugin-inappbrowser.git",
             "subdir": "."
         }
     }

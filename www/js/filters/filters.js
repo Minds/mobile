@@ -52,6 +52,8 @@ define(['angular'],
 			return function(text) {
 		
 				 if (!text) return text;
+				 
+				 text = new String(text);
 				  
 				 var replacedText = text;
 				 

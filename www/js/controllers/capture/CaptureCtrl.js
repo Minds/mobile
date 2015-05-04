@@ -8,7 +8,7 @@
 define(function () {
     'use strict';
 
-    function ctrl($scope, $stateParams, $state, $rootScope, Client, OAuth, storage, $ionicLoading, $ionicPopup, $ionicModal, $http, $timeout) {
+    function ctrl($scope, $stateParams, $state, $rootScope, Client, OAuth, storage, $ionicLoading, $ionicPopup, $ionicModal, $http, $timeout, $sanitize) {
     
     	$scope.captured = false;
     	$scope.progress = 0;
@@ -191,7 +191,7 @@ define(function () {
 			};
 			if($scope.form.meta){
 				data = {
-					message: $scope.form.status, 
+					message:encodeURIComponent($scope.form.status), 
 					title: $scope.form.meta.title, 
 					description: $scope.form.meta.description,
 					thumbnail: encodeURIComponent($scope.form.thumbnail), 
@@ -205,8 +205,8 @@ define(function () {
 				$ionicLoading.hide();
 				$scope.modal.remove();
 				$state.go('tab.newsfeed', {}, {reload:true});
-				$scope.$emit('newsfeed:updated');
 				$scope.$emit('newsfeed:boost', success.guid);
+				$scope.$emit('newsfeed:updated');
 			}, function(error){
 				$ionicLoading.hide();
 			});
@@ -346,7 +346,7 @@ define(function () {
        
     }
 
-    ctrl.$inject = ['$scope', '$stateParams', '$state', '$rootScope', 'Client', 'OAuth', 'storage', '$ionicLoading', '$ionicPopup', '$ionicModal', '$http', '$timeout'];
+    ctrl.$inject = ['$scope', '$stateParams', '$state', '$rootScope', 'Client', 'OAuth', 'storage', '$ionicLoading', '$ionicPopup', '$ionicModal', '$http', '$timeout', '$sanitize'];
     return ctrl;
     
 });

@@ -396,7 +396,6 @@ define(function () {
 			$ionicActionSheet.show({
 			     buttons: [
 			       //{ text: '<b>Share</b> This' },
-			       { text: 'Boost' },
 			       { text: '<b>Share</b>' },
 			       { text: 'Download' },
 			       { text: 'Report this' }
@@ -438,10 +437,6 @@ define(function () {
 			     buttonClicked: function(index) {
 			    	 switch(index){
 			    	 	case 0:
-			    	 		$scope.boost(activity);
-			    	 		  
-			    	 		break;
-			    	 	case 1:
 			    	 		/*cordova.plugins.clipboard.copy($rootScope.node_url + 'newsfeed/' + guid);
 			    	 		$ionicLoading.show({
 			    				template: '<p> Copied to clipboard </p>'
@@ -451,7 +446,7 @@ define(function () {
 			    				}, 1000);
 			    	 		break;*/
 			    	 		window.plugins.socialsharing.share('via minds', null, null, $rootScope.node_url + 'newsfeed/' + guid);
-			    	 	case 2:
+			    	 	case 1:
 			    	 		
 			    	 		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fs){
 			    	 			var ft = new FileTransfer();
@@ -472,7 +467,7 @@ define(function () {
 				    	 			);
 			    	 			});
 			    	 		break;
-			    	 	case 3:
+			    	 	case 2:
 			    	 		window.location.href = "mailto:report@minds.com?subject=Report " + guid + "&body=This content violates the terms and conditions";
 			    	 }
 			       return true;

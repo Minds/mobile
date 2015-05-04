@@ -450,7 +450,6 @@ define(function () {
 		$scope.openActions = function(entity){
 			$ionicActionSheet.show({
 			     buttons: [
-			       { text: 'Boost' },
 			       { text: '<b>Share</b>' },
 			       { text: 'Report this' }
 			     ],
@@ -460,19 +459,8 @@ define(function () {
 			        },
 			     buttonClicked: function(index) {
 			    	 switch(index){
+			    	 	
 			    	 	case 0:
-			    	 		$ionicModal.fromTemplateUrl('templates/wallet/boost.html', {
-			    	 		    scope: $scope,
-			    	 		    animation: 'slide-in-up'
-			    	 		  }).then(function(modal) {
-			    	 		    $scope.modal = modal;
-			    	 		    $scope.type = 'suggested';
-			    	 		    $scope.entity = entity;
-			    	 		    $scope.modal.show();
-			    	 		  });
-			    	 		  
-			    	 		break;
-			    	 	case 1:
 			    	 		//cordova.plugins.clipboard.copy($rootScope.node_url + '/newsfeed/' + guid);
 			    	 		$ionicLoading.show({
 			    				template: '<p> Copied to clipboard </p>'
@@ -481,7 +469,7 @@ define(function () {
 			    				$ionicLoading.hide();
 			    				}, 1000);
 			    	 		break;
-			    	 	case 3:
+			    	 	case 1:
 			    	 		window.location.href = "mailto:report@minds.com?subject=Report " + entity.guid + "&body=This content violates the terms and conditions";
 			    	 }
 			       return true;

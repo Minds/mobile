@@ -51,7 +51,7 @@ define(function () {
 		$scope.inprogress = false;
 		$scope.getComments = function(){
 			if($scope.inprogress){
-				return false
+				return false;
 			}
 			$scope.inprogress = true;
 			/**

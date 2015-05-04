@@ -15,6 +15,9 @@
 
 <!-- Image -->
 <div class="item item-image allow-select" ng-if="entity.subtype == 'image'">
+    <div class="overlay">
+        <h2  ng-bind-html="entity.title"></h2>
+     </div>
    <img ng-src="{{entity.thumbnail_src}}">
 </div>
 

@@ -12,7 +12,7 @@
         </div>
 
 		<div ng-switch="entity.type" style="margin-bottom:-42px">
-			<div ng-switch-when="object">
+			<div ng-switch-when="object" ng-controller="DiscoverCtrl">
 				<div class="list card tabs-background-white " ng-include src="'templates/discover/entities/object.html'"></div>
 			</div>
 			<div ng-switch-when="activity" ng-controller="NewsfeedCtrl">

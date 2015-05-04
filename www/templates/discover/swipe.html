@@ -90,16 +90,14 @@
 	<ion-pane style="padding-top:102px" style="-webkit-transform: translate3d(0px, 0px, 0px);" ng-if="filter == 'suggested'">
 	
 	   <div ng-if="type == 'channel'" class="location-bar" style="padding-left:12px;">
-	       <span ng-if="!nearby" ng-click="setNearby(true);" style="background: #EEE; border: 1px solid #DDD; border-radius: 3px; padding: 0 5px;">Location off</span>
+	       <span ng-if="!nearby && hasNearby" ng-click="setNearby(true);" style="background: #EEE; border: 1px solid #DDD; border-radius: 3px; padding: 0 5px;">Location off</span>
            <span ng-if="nearby" ng-click="setNearby(false);" style="background: #4690C3; border: 1px solid #4690C3; border-radius: 3px; padding: 0 5px; color:#FFF;">Locating</span>
+           <span ng-if="!nearby && !hasNearby" ng-click="setNearby(true);" style="background: #EEE; border: 1px solid #DDD; border-radius: 3px; padding: 0 5px;">No results</span>
 	       <!-- only show if locating is on -->
-	       <span ng-if="nearby">
+	       <span ng-if="nearby || (!nearby && !hasNearby)">
     	       within 
     	       <select style="-webkit-appearance: none; color:#4690C3; background:#FAFAFA; border: 1px solid #EEE; border-radius:3px;" ng-change="distanceChanged()" ng-model="location.distance" ng-options="d.name for d in [{name:'5 miles', miles: 5}, {name:'25 miles', miles: 25}, {name:'50 miles', miles: 50}, {name:'100 miles', miles: 100}] track by d.miles"></select>
                of <b>{{city}}</b> 
-           </span>
-           <span ng-if="!nearby && !hasNearby" style="color:#888;">
-            no nearby results found
            </span>
 	   </div>
 

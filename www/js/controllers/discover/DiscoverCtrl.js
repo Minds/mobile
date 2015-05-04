@@ -62,6 +62,7 @@ define(function () {
 		};
 		
 		$scope.distanceChanged = function(){
+			$scope.nearby = true;
 			$scope.entities = [];
 			$scope.load();
 		};

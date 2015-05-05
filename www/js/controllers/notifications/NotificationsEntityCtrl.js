@@ -97,7 +97,7 @@ define(function () {
 				function(data){
 					
 	    			$scope.comments.push(data.comment);
-	    			
+	    			$scope.offset = data.guid;
 	    	
 	    		}, 
 	    		function(error){ 

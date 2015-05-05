@@ -130,7 +130,7 @@ define(function () {
 					offset: $scope.next, 
 					cachebreaker: $scope.cachebreaker,
 					skip: $scope.offset, 
-					coordinates: storage.get('coordinates'),
+					coordinates: storage.get('coordinates') ? storage.get('coordinates') : false,
 					nearby: $scope.nearby,
 					distance: $scope.location.distance.miles
 					}, 

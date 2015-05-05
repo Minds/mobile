@@ -305,12 +305,12 @@
         "com.paypal.cordova.mobilesdk": {
             "PACKAGE_NAME": "com.minds.mobile"
         },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
         "com.phonegap.plugins.facebookconnect": {
             "APP_ID": "184865748231073",
             "APP_NAME": "Minds",
-            "PACKAGE_NAME": "com.minds.mobile"
-        },
-        "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "com.minds.mobile"
         }
     },

@@ -146,6 +146,9 @@ define(function () {
 			}
 		};
 		
+		$scope.goToChannel = function(guid){
+			$state.go('tab.newsfeed-channel', {username: guid});
+		};
 		
 		$scope.loadBoostReview = function(guid){
 			$scope.guid = guid;

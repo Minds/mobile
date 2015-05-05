@@ -8,7 +8,7 @@
 define(function () {
     'use strict';
 
-    function ctrl($rootScope, $scope, $state, $stateParams, Client, $ionicSlideBoxDelegate, $ionicScrollDelegate, $interval) {
+    function ctrl($rootScope, $scope, $state, $stateParams, Client, $ionicSlideBoxDelegate, $ionicScrollDelegate, $interval, storage) {
     	
     	if($stateParams.username == undefined){
     		$state.go('tab.newsfeed');
@@ -49,6 +49,11 @@ define(function () {
 			
 				$scope.channel = success.channel;
 				$scope.$apply();
+				
+				if($rootScope.guid == $scope.channel.guid){
+					storage.set('city', $scope.channel.city);
+	     			storage.set('coordinates', $scope.channel.coordinates);
+     			}
 				
 				if($scope.ChannelItems.length == 0)
 					$scope.loadMore();
@@ -140,7 +145,7 @@ define(function () {
        
     }
 
-    ctrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', 'Client', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$interval'];
+    ctrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', 'Client', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$interval', 'storage'];
     return ctrl;
     
 });

@@ -20,7 +20,8 @@ define(function() {
 		
 		$scope.slideHasChanged = function($index){
 			if($index == 8){
-				$state.go('tab.newsfeed-channel', {username: "me"});
+				//$state.go('tab.newsfeed-channel', {username: "me"});
+				$state.go('tab.newsfeed');
 			}
 		};
 		

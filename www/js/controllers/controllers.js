@@ -91,14 +91,14 @@ define(function (require) {
 	        e = e ||  window.event;
 	        var element = e.target || e.srcElement;
 	        
-	        $timeout.cancel(click);
-	 
-	 		click = $timeout(function(){
-		        if (element.tagName == 'A' && element.href.indexOf('http') >= 0) {
-					window.open(element.href, "_blank", "location=yes");
-		            return false;
-		        }
-		    }, 300);
+	        if (element.tagName == 'A' && element.href.indexOf('http') >= 0) {
+		        $timeout.cancel(click);
+		 		click = $timeout(function(){
+						window.open(element.href, "_blank", "location=yes");
+					}, 300);
+			    return false;
+		    }
+		    
 	    };
 	}]);
 	

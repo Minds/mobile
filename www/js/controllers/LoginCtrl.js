@@ -8,7 +8,7 @@
 define(function() {
 	'use strict';
 
-	function ctrl($rootScope, $scope, $state, OAuth, $ionicPopup, storage, push) {
+	function ctrl($rootScope, $scope, $state, OAuth, Client, $ionicPopup, storage, push, $ionicLoading) {
 	
 		cordova.plugins.Keyboard.disableScroll(true);
 
@@ -22,13 +22,26 @@ define(function() {
 		$scope.login = function() {
 			if($scope.inprogress)
 				return false;
+				
+			$ionicLoading.show({
+				template: '<ion-spinner></ion-spinner>'
+				});
+				
 			$scope.inprogress = true;
 			
 			OAuth.login($scope.username, $scope.password, function(success){
+				$ionicLoading.hide();
 				if(success){
 					//$state.go('tab.newsfeed');
 					push.register();
 					$rootScope.user_guid = storage.get('user_guid');
+					
+					//get our city and other information
+					Client.get('api/v1/channel/me', {}, function(success){
+						storage.set('city', success.channel.city);
+					//	storage.set('coordinates', success.channel.coordinates);
+					}, function(fail){});
+					
 					$state.go('tutorial');
 				} else {
 					
@@ -45,6 +58,7 @@ define(function() {
 				}
 				$scope.inprogress = false;
 			}, function(error){
+				$ionicLoading.hide();
 				$scope.inprogress = false;
 			});
 			
@@ -53,7 +67,7 @@ define(function() {
 	}
 
 
-	ctrl.$inject = ['$rootScope', '$scope', '$state', 'OAuth', '$ionicPopup', 'storage', 'push'];
+	ctrl.$inject = ['$rootScope', '$scope', '$state', 'OAuth', 'Client', '$ionicPopup', 'storage', 'push', '$ionicLoading'];
 	return ctrl;
 
 }); 

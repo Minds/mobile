@@ -204,9 +204,9 @@ define(function () {
 			Client.post('api/v1/newsfeed', data, function(success){
 				$ionicLoading.hide();
 				$scope.modal.remove();
-				$state.go('tab.newsfeed', {}, {reload:true});
 				$scope.$emit('newsfeed:boost', success.guid);
 				$scope.$emit('newsfeed:updated');
+				$state.go('tab.newsfeed', {}, {reload:true});
 			}, function(error){
 				$ionicLoading.hide();
 			});

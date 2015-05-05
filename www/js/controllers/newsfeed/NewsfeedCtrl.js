@@ -20,6 +20,13 @@ define(function () {
 
 			}
 		});
+		
+		$rootScope.$on('newsfeed:boost', function($event, v2) {
+	    		$event.stopPropagation();
+	    		if(v2){
+	    			$scope.boost({guid:v2, owner_guid: $rootScope.user_guid});
+	    		}
+	    	});
     	
     	if($state.current.name == 'tab.newsfeed'){
 	    	$rootScope.$on('newsfeed:updated', function() {
@@ -27,12 +34,7 @@ define(function () {
 	    	    $scope.refresh();
 	    	});
 	    	
-	    	$rootScope.$on('newsfeed:boost', function($event, v2) {
-	    		console.log('boost emit called..');
-	    		if(v2){
-	    			$scope.boost({guid:v2, owner_guid: $rootScope.user_guid});
-	    		}
-	    	});
+	    	
     	}
 
     	$scope.newsfeedItems =  [];

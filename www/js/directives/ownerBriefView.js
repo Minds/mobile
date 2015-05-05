@@ -40,6 +40,17 @@ define(['angular'], function (angular) {
 					
 				};
 				
+				scope.unSubscribe = function(){
+					scope.user.subscribed = false;
+					Client.delete('api/v1/subscribe/' + scope.user.guid, {},
+							function(){
+								
+							},
+							function(){
+							});
+					
+				};
+				
 				
 			}
        	 };

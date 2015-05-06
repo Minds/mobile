@@ -58,6 +58,11 @@ define(function () {
     		Client.get('api/v1/wallet/count', { cb: Date.now() }, function(success){
     			$ionicLoading.hide();
     			if(success.count >= $scope.data.points){
+    			
+    				$ionicLoading.show({
+						template: 'Requesting Boost...'
+						});
+    			
     				var endpoint = 'api/v1/boost/newsfeed/' + $scope.guid + '/' + $scope.owner_guid;
     				if($scope.data.destination){
     					endpoint = 'api/v1/boost/channel/' + $scope.guid + '/' + $scope.owner_guid;
@@ -68,24 +73,34 @@ define(function () {
     						impressions: $scope.data.impressions,
     						destination: $scope.data.destination.charAt(0) == '@' ? $scope.data.destination.substr(1) : $scope.data.destination
     					}, function(success){
-    					if(success.status == 'success'){
-    						$scope.modal.remove();
-    						$ionicLoading.show({
-								template: 'Boost request submitted.'
-								});
-    						$timeout(function(){
-    							$ionicLoading.hide();
-    						}, 500);
-    						
-    					} else {
-    						$ionicLoading.show({
-								template: 'Sorry, something went wrong.'
-								});
-    						$timeout(function(){
-    							$ionicLoading.hide();
-    						}, 500);
-    					}
-    				});
+	    					if(success.status == 'success'){
+	    						$ionicLoading.hide();
+	    						$scope.modal.remove();
+	    						$ionicLoading.show({
+									template: 'Boost request submitted.'
+									});
+	    						$timeout(function(){
+	    							$ionicLoading.hide();
+	    						}, 500);
+	    						
+	    					} else {
+	    						$ionicLoading.hide();
+	    						$ionicLoading.show({
+									template: 'Sorry, something went wrong.'
+									});
+	    						$timeout(function(){
+	    							$ionicLoading.hide();
+	    						}, 500);
+	    					}
+	    				}, function(fail){
+	    					$ionicLoading.hide();
+	    						$ionicLoading.show({
+									template: 'Sorry, something went wrong.'
+									});
+	    						$timeout(function(){
+	    							$ionicLoading.hide();
+	    						}, 500);
+	    				});
     				
     			} else {
     				if(success.count < $scope.data.points){

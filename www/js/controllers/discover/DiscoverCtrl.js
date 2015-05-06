@@ -318,21 +318,24 @@ define(function () {
 					},
 					function(){
 					});
+				entity.subscribed = false;
 			} else {
 				 Client.post('api/v1/subscribe/' + entity.guid, {},
 					function(){
 					},
 					function(){
 					});
+				entity.subscribed = true;
 			}
 			
 			//update the ui
 			$scope.entities.forEach(function(item, index, array){
 				if(item.guid == entity.guid){
-					if(entity.subscribed)
+					if(entity.subscribed){
 						array[index].subscribed = false;
-					else
+					} else {
 						array[index].subscribed = true;
+					}
 				} 
 			});
 			

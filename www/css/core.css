@@ -29,11 +29,12 @@
 	width: 110%;
 	height: 110%;
 	background: url(../img/bg-1.jpeg) center -600px;
-	background-size:75%;
-	-webkit-filter: blur(6px);
-	filter: blur(1px);
+	background-size:100%;
+	/*-webkit-filter: blur(6px);
+	filter: blur(1px);*/
 	z-index: -1;
 	margin: -12px;
+	-webkit-filter: brightness(60%); */
 }
 .login-header .background-image-2{
 	background: url(../img/bg-2.jpeg) center -600px;

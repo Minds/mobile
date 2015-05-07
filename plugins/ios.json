@@ -21,70 +21,6 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"Clipboard\"><param name=\"ios-package\" value=\"CDVClipboard\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"SocialSharing\"><param name=\"ios-package\" value=\"SocialSharing\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Crypt\"><param name=\"ios-package\" value=\"CDVCrypt\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"SplashScreen\"><param name=\"ios-package\" value=\"CDVSplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"File\"><param name=\"ios-package\" value=\"CDVFile\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"StatusBar\"><param name=\"ios-package\" value=\"CDVStatusBar\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<preference name=\"StatusBarOverlaysWebView\" value=\"true\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<preference name=\"StatusBarStyle\" value=\"lightcontent\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Camera\"><param name=\"ios-package\" value=\"CDVCamera\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<preference name=\"CameraUsesGeolocation\" value=\"false\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Console\"><param name=\"ios-package\" value=\"CDVLogger\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Contacts\"><param name=\"ios-package\" value=\"CDVContacts\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"FileTransfer\"><param name=\"ios-package\" value=\"CDVFileTransfer\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Capture\"><param name=\"ios-package\" value=\"CDVCapture\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Media\"><param name=\"ios-package\" value=\"CDVSound\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"FacebookConnectPlugin\"><param name=\"ios-package\" value=\"FacebookConnectPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
                         },
@@ -110,6 +46,74 @@
                         },
                         {
                             "xml": "<access origin=\"https://*.akamaihd.net\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Clipboard\"><param name=\"ios-package\" value=\"CDVClipboard\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Camera\"><param name=\"ios-package\" value=\"CDVCamera\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<preference name=\"CameraUsesGeolocation\" value=\"false\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Console\"><param name=\"ios-package\" value=\"CDVLogger\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Contacts\"><param name=\"ios-package\" value=\"CDVContacts\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"File\"><param name=\"ios-package\" value=\"CDVFile\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"FileTransfer\"><param name=\"ios-package\" value=\"CDVFileTransfer\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"InAppBrowser\"><param name=\"ios-package\" value=\"CDVInAppBrowser\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Media\"><param name=\"ios-package\" value=\"CDVSound\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Capture\"><param name=\"ios-package\" value=\"CDVCapture\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SplashScreen\"><param name=\"ios-package\" value=\"CDVSplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"StatusBar\"><param name=\"ios-package\" value=\"CDVStatusBar\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<preference name=\"StatusBarOverlaysWebView\" value=\"true\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<preference name=\"StatusBarStyle\" value=\"lightcontent\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SocialSharing\"><param name=\"ios-package\" value=\"SocialSharing\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Crypt\"><param name=\"ios-package\" value=\"CDVCrypt\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -138,7 +142,7 @@
                     "CoreGraphics.framework": [
                         {
                             "xml": false,
-                            "count": 6
+                            "count": 7
                         }
                     ],
                     "CoreLocation.framework": [
@@ -225,10 +229,22 @@
                             "count": 1
                         }
                     ],
+                    "libsqlite3.dylib": [
+                        {
+                            "xml": false,
+                            "count": 1
+                        }
+                    ],
                     "Social.framework": [
                         {
                             "xml": true,
                             "count": 2
+                        }
+                    ],
+                    "Accounts.framework": [
+                        {
+                            "xml": true,
+                            "count": 1
                         }
                     ],
                     "ImageIO.framework": [
@@ -254,29 +270,11 @@
                             "xml": true,
                             "count": 1
                         }
-                    ],
-                    "libsqlite3.dylib": [
-                        {
-                            "xml": false,
-                            "count": 1
-                        }
-                    ],
-                    "Accounts.framework": [
-                        {
-                            "xml": true,
-                            "count": 1
-                        }
                     ]
                 }
             },
             "*-Info.plist": {
                 "parents": {
-                    "NSLocationWhenInUseUsageDescription": [
-                        {
-                            "xml": "<string />",
-                            "count": 1
-                        }
-                    ],
                     "FacebookAppID": [
                         {
                             "xml": "<string>184865748231073</string>",
@@ -294,6 +292,12 @@
                             "xml": "<array><dict><key>CFBundleURLSchemes</key><array><string>fb184865748231073</string></array></dict></array>",
                             "count": 1
                         }
+                    ],
+                    "NSLocationWhenInUseUsageDescription": [
+                        {
+                            "xml": "<string />",
+                            "count": 1
+                        }
                     ]
                 }
             }
@@ -309,28 +313,12 @@
         "com.phonegap.plugins.PushPlugin": {
             "PACKAGE_NAME": "com.minds.mobile"
         },
+        "com.phonegap.plugins.facebookconnect": {
+            "APP_ID": "184865748231073",
+            "APP_NAME": "Minds",
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
         "com.verso.cordova.clipboard": {
-            "PACKAGE_NAME": "com.minds.mobile"
-        },
-        "cordova-plugin-inappbrowser": {
-            "PACKAGE_NAME": "com.minds.mobile"
-        },
-        "nl.x-services.plugins.socialsharing": {
-            "PACKAGE_NAME": "com.minds.mobile"
-        },
-        "org.apache.cordova.crypt": {
-            "PACKAGE_NAME": "com.minds.mobile"
-        },
-        "cordova-plugin-splashscreen": {
-            "PACKAGE_NAME": "com.minds.mobile"
-        },
-        "cordova-plugin-file": {
-            "PACKAGE_NAME": "com.minds.mobile"
-        },
-        "cordova-plugin-device": {
-            "PACKAGE_NAME": "com.minds.mobile"
-        },
-        "cordova-plugin-statusbar": {
             "PACKAGE_NAME": "com.minds.mobile"
         },
         "cordova-plugin-camera": {
@@ -342,27 +330,43 @@
         "cordova-plugin-contacts": {
             "PACKAGE_NAME": "com.minds.mobile"
         },
+        "cordova-plugin-crosswalk-webview": {
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
         "cordova-plugin-file-transfer": {
             "PACKAGE_NAME": "com.minds.mobile"
         },
-        "cordova-plugin-media-capture": {
-            "PACKAGE_NAME": "com.minds.mobile"
-        },
-        "cordova-plugin-media": {
+        "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "com.minds.mobile"
         },
         "cordova-plugin-legacy-whitelist": {
             "PACKAGE_NAME": "com.minds.mobile"
         },
+        "cordova-plugin-media": {
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
+        "cordova-plugin-media-capture": {
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.minds.mobile"
         },
-        "cordova-plugin-crosswalk-webview": {
+        "nl.x-services.plugins.socialsharing": {
             "PACKAGE_NAME": "com.minds.mobile"
         },
-        "com.phonegap.plugins.facebookconnect": {
-            "APP_ID": "184865748231073",
-            "APP_NAME": "Minds",
+        "org.apache.cordova.crypt": {
             "PACKAGE_NAME": "com.minds.mobile"
         }
     },

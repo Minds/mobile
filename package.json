@@ -2,7 +2,7 @@
   "name": "minds-mobile",
   "version": "0.0.1",
   "devDependencies": {
-    "cordova": "4.2.0",
+    "cordova": "5.0.0",
     "grunt": "~0.4.5",
     "grunt-contrib-jshint": "~0.10.0",
     "grunt-contrib-nodeunit": "~0.4.1",

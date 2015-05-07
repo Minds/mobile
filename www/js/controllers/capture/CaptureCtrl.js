@@ -327,6 +327,7 @@ define(function () {
 		};
 		
 		$scope.twitter = function(){
+
 			if($scope.form.twitter){
 				$scope.form.twitter = false;
 				return;
@@ -334,14 +335,20 @@ define(function () {
 			if(!storage.get('twitter')){
 				var ref = window.open($rootScope.node_url + 'plugin/social/authorize/twitter?access_token=' + storage.get('access_token') + '&client_id=' + OAuth.client_id, '_blank', 'location=yes');
 				ref.addEventListener('loadstart', function(event) { 
+
 					var url = event.url;
 					if(url.indexOf($rootScope.node_url + 'plugin/social/redirect') > -1){
 						ref.close();
+						var params = url.split('?');
+						Client.get('plugin/social/redirect/twitter?' + params[1], {}, function(success){
+						console.log
+							$scope.form.twitter = success.oauth_token + "&&" + success.oauth_token_secret;
+						});
+						
 					}
 				});
 			}
 			
-			$scope.form.twitter =  true;
 		};
        
     }

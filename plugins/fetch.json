@@ -1,4 +1,108 @@
 {
+    "cordova-plugin-device": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-device@1.0.0"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-file": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-file@2.0.0"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-inappbrowser": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-inappbrowser@1.0.0"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-statusbar": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-statusbar@1.0.0"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-camera": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-camera@1.0.0"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-console": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-console@1.0.0"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-contacts": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-contacts@1.0.0"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-file-transfer": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-file-transfer"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-media-capture": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-media-capture"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-media": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-media"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-legacy-whitelist": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-legacy-whitelist@1.0.0"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-whitelist": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-whitelist"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-crosswalk-webview": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-crosswalk-webview"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
     "com.phonegap.plugins.facebookconnect": {
         "source": {
             "type": "local",
@@ -8,102 +112,6 @@
         "variables": {
             "APP_ID": "184865748231073",
             "APP_NAME": "Minds"
-        }
-    },
-    "nl.x-services.plugins.socialsharing": {
-        "source": {
-            "type": "git",
-            "url": "https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin.git",
-            "subdir": "."
-        }
-    },
-    "com.paypal.cordova.mobilesdk": {
-        "source": {
-            "type": "registry",
-            "id": "com.paypal.cordova.mobilesdk"
-        }
-    },
-    "cordova-plugin-inappbrowser": {
-        "source": {
-            "type": "git",
-            "url": "https://git-wip-us.apache.org/repos/asf/cordova-plugin-inappbrowser.git",
-            "subdir": "."
-        }
-    },
-    "com.ionic.keyboard": {
-        "source": {
-            "type": "git",
-            "url": "https://github.com/driftyco/ionic-plugins-keyboard.git",
-            "subdir": "."
-        }
-    },
-    "com.verso.cordova.clipboard": {
-        "source": {
-            "type": "git",
-            "url": "https://github.com/VersoSolutions/CordovaClipboard",
-            "subdir": "."
-        }
-    },
-    "org.apache.cordova.camera": {
-        "source": {
-            "type": "git",
-            "url": "https://github.com/apache/cordova-plugin-camera",
-            "subdir": "."
-        }
-    },
-    "org.apache.cordova.console": {
-        "source": {
-            "type": "registry",
-            "id": "org.apache.cordova.console"
-        }
-    },
-    "org.apache.cordova.contacts": {
-        "source": {
-            "type": "registry",
-            "id": "org.apache.cordova.contacts"
-        }
-    },
-    "org.apache.cordova.crypt": {
-        "source": {
-            "type": "local",
-            "path": "../../cordova-plugin-crypt"
-        }
-    },
-    "org.apache.cordova.device": {
-        "source": {
-            "type": "registry",
-            "id": "org.apache.cordova.device"
-        }
-    },
-    "org.apache.cordova.file": {
-        "source": {
-            "type": "registry",
-            "id": "org.apache.cordova.file"
-        }
-    },
-    "org.apache.cordova.file-transfer": {
-        "source": {
-            "type": "registry",
-            "id": "org.apache.cordova.file-transfer"
-        }
-    },
-    "org.apache.cordova.inappbrowser": {
-        "source": {
-            "type": "registry",
-            "id": "org.apache.cordova.inappbrowser"
-        }
-    },
-    "org.apache.cordova.media-capture": {
-        "source": {
-            "type": "registry",
-            "id": "org.apache.cordova.media-capture"
-        }
-    },
-    "org.apache.cordova.statusbar": {
-        "source": {
-            "type": "git",
-            "url": "https://github.com/apache/cordova-plugin-statusbar.git",
-            "subdir": "."
         }
     }
 }

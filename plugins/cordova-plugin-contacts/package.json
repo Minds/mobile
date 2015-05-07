@@ -1,0 +1,41 @@
+{
+  "name": "cordova-plugin-contacts",
+  "version": "1.0.0",
+  "description": "Cordova Contacts Plugin",
+  "cordova": {
+    "id": "cordova-plugin-contacts",
+    "platforms": [
+      "android",
+      "amazon-fireos",
+      "ubuntu",
+      "ios",
+      "blackberry10",
+      "wp7",
+      "wp8",
+      "firefoxos",
+      "windows8",
+      "windows"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git-wip-us.apache.org/repos/asf/cordova-plugin-contacts.git"
+  },
+  "keywords": [
+    "cordova",
+    "contacts",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-amazon-fireos",
+    "cordova-ubuntu",
+    "cordova-ios",
+    "cordova-blackberry10",
+    "cordova-wp7",
+    "cordova-wp8",
+    "cordova-firefoxos",
+    "cordova-windows8",
+    "cordova-windows"
+  ],
+  "author": "Apache Software Foundation",
+  "license": "Apache 2.0"
+}

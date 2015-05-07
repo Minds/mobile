@@ -10,7 +10,9 @@ define(function() {
 
 	function ctrl($rootScope, $scope, $state, OAuth, Client, $ionicPopup, storage, push, $ionicModal, $ionicLoading) {
 	
-		$scope.data = {};
+		$scope.data = {
+			referrer: ''
+		};
 
 		$scope.inprogress = false;
 		
@@ -57,7 +59,8 @@ define(function() {
 			Client.post('api/v1/register', {
 				username: $scope.data.username,
 				password: $scope.data.password,
-				email: $scope.data.email
+				email: $scope.data.email,
+				referrer: $scope.data.referrer
 				}, function(success){
 					$ionicLoading.hide();
 					
@@ -129,6 +132,40 @@ define(function() {
 			});
 			
 		};
+		
+		$scope.searching = false;
+		
+		$scope.searchUsers = function($event){
+    		$scope.searching = true;
+    		if($scope.data.referrer.charAt(0) != '@' && $scope.data.referrer.length != 0){
+    			$scope.data.referrer = '@' + $scope.data.referrer;
+    		}
+
+    		//if($event.keyCode == 13){
+    		//	$scope.searching = false;
+    		//}
+    		
+    		var query = $scope.data.referrer;
+    		if(query.charAt(0) == '@'){
+    			query = query.substr(1);
+    		}
+    		
+    		Client.get('search', {q: query, type:'user', view:'json', limit:5}, 
+    			function(success){
+    				$scope.results = success.user[0];
+    			});
+    		
+    		console.log('changing');
+    		
+    		if(!$scope.data.referrer){
+    			$scope.searching = false;
+    		}
+    	};
+    	
+    	$scope.selectReferrer = function(user){
+    		$scope.searching = false;
+    		$scope.data.referrer = '@' + user.username;
+    	};
 
 	}
 

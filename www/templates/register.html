@@ -21,6 +21,21 @@
                 <input type="email" ng-model="data.email">
             </label>
             
+            <label class="item item-input" style="padding-bottom:15px">
+                <span class="input-label">Referrer</span>
+                <input type="text" ng-model="data.referrer" ng-change="searchUsers($event)" placeholder="@channel">
+                <span style="font-size: 10px; position: absolute; left: 16px; top: 38px; color: #888;">We will reward the channel which referred you with 100 points</span>
+            </label>
+            
+            <!-- @todo set our own css class -->
+             <div class="wallet-users-list" ng-show="searching" style="margin-top:0px">
+               <div ng-repeat="user in results" ng-click="selectReferrer(user);">
+                   
+                    <img src="{{$root.node_url}}icon/{{user.guid}}/small" />
+                     @{{user.username}}
+               </div>
+           </div>
+ 
             <div class="padding">
             	<div>
 					<input id="terms" type="checkbox" checked="checked">

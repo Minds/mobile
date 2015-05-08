@@ -43,10 +43,12 @@
 	width:200px;
 }
 .channel-content .inner img{
-	max-width:140px;
-	margin-left:10px;
-	box-shadow:0 0 3px #000;
-    /*margin-top:-72px;*/
+  max-width: 140px;
+  max-height: 180px;
+  width: auto;
+  height: auto;
+  margin: auto;
+  display: block;
 }
 .channel-content h1{
 	color:#FFF;

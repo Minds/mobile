@@ -51,53 +51,59 @@ define(function () {
     	 * Load more posts
     	 */
     	$scope.loadMore = function(){
-    		console.log('==== loading more ====');
-    	
-    		if(!$scope.hasMoreData){
-    			$scope.$broadcast('scroll.infiniteScrollComplete');
-    			return;
-    		}
-    		
-    		NewsfeedAPI.all({ limit: 12, offset: $scope.next, cachebreaker: $scope.cachebreaker }, 
-    			function(data){
-    		
-	    			if(!data.activity){
-	    				$scope.hasMoreData = false;
-	    				$scope.$broadcast('scroll.infiniteScrollComplete');
-	    				return false;
-	    			} else {
-	    				$scope.hasMoreData = true;
-	    			};
-	    			
-	    			if($scope.newsfeedItems.length > 50){
-	    				$ionicScrollDelegate.scrollTop();
-	    				$scope.newsfeedItems = data.activity;
-	    			} else {
-	   			
-	    				$scope.newsfeedItems = $scope.newsfeedItems.concat(data.activity);
-	     			}	    			
-	    				//Cacher.put('newsfeed.items', $scope.newsfeedItems);
-	    			//} else {
-	    			//	Cacher.put('newsfeed.items', data.activity);
-	    			//}
-	
-	    			$scope.next = data['load-next'];
-	    			console.log("next is:: " + $scope.next);
-	    			//Cacher.put('newsfeed.item', $scope.next);
-	    			
+    		$timeout(function(){
+	    		console.log('==== loading more ====');
+	    	
+	    		if(!$scope.hasMoreData){
+	    			console.log('==== canceling no more data ====');
 	    			$scope.$broadcast('scroll.infiniteScrollComplete');
-	
-	    		}, 
-	    		function(error){ 
-	    			$scope.hasMoreData = false;
-	    			$scope.$broadcast('scroll.infiniteScrollComplete');
-	    		});
+	    			return;
+	    		}
+	    		
+	    		NewsfeedAPI.all({ limit: 12, offset: $scope.next, cachebreaker: $scope.cachebreaker }, 
+	    			function(data){
+	    		
+		    			if(!data.activity){
+		    				$scope.hasMoreData = false;
+		    				$scope.$broadcast('scroll.infiniteScrollComplete');
+		    				return false;
+		    			}
+		    			
+		    			if($scope.newsfeedItems.length > 50){
+		    				$ionicScrollDelegate.scrollTop();
+		    				$scope.newsfeedItems = data.activity;
+		    			} else {
+		   			
+		    				$scope.newsfeedItems = $scope.newsfeedItems.concat(data.activity);
+		     			}	    			
+		    				//Cacher.put('newsfeed.items', $scope.newsfeedItems);
+		    			//} else {
+		    			//	Cacher.put('newsfeed.items', data.activity);
+		    			//}
+		
+		    			$scope.next = data['load-next'];
+		    			console.log("next is:: " + $scope.next);
+		    			//Cacher.put('newsfeed.item', $scope.next);
+		    			
+		    			$scope.$broadcast('scroll.infiniteScrollComplete');
+		    			$scope.hasMoreData = true;
+		
+		    		}, 
+		    		function(error){ 
+		    			$scope.hasMoreData = false;
+		    			$scope.$broadcast('scroll.infiniteScrollComplete');
+		    		});
+		    	});
 	    		
     	};
-
+    	$scope.hasMore = function(){
+    		return true;
+    	};
+    	
 		$scope.refresh = function(){
 			console.log("=== refreshing ===");
 			$scope.hasMoreData = true;
+			$scope.$broadcast('scroll.infiniteScrollComplete');
 			NewsfeedAPI.all({ limit: 12, offset: '', cache_break: Date.now() }, 
 				function(data){
     		

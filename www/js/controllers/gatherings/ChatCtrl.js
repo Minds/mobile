@@ -35,6 +35,10 @@ define(function () {
 			
     	});
     	
+    	document.addEventListener('pause', function(){
+    		$state.go('tab.chat');
+    	});
+    	
     	/**
     	 * Load more posts
     	 */

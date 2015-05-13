@@ -19,6 +19,12 @@ module.exports = function (grunt) {
                     ]
                 }
             }
+        },
+        karma: {
+            unit: {
+                configFile: 'karma.conf.js',
+                singleRun: true
+            }
         }
 
 
@@ -26,6 +32,7 @@ module.exports = function (grunt) {
 
     grunt.loadTasks('tasks');
 
+    grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
 
     /**
@@ -33,5 +40,9 @@ module.exports = function (grunt) {
      */
     grunt.registerTask('compile', ['cssmin']);
 
+    /**
+     * Test
+     */
+    grunt.registerTask('test', ['karma']);
 
 }

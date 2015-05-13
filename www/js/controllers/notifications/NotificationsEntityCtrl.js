@@ -92,7 +92,7 @@ define(function () {
 			}
 			
 			Client.post('api/v1/comments/' + $scope.guid, { 
-					comment: $scope.comment.body
+					comment: encodeURIComponent($scope.comment.body)
 				}, 
 				function(data){
 					

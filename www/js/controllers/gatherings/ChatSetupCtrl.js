@@ -53,7 +53,7 @@ define(function () {
     		if($scope.data.password != $scope.data.password2){
     			$ionicPopup.alert({
 					title: 'Ooops..',
-					template: 'You\'re passwords must match.'
+					template: 'Your passwords must match.'
 				});
     			return false;
     		}

@@ -135,7 +135,7 @@ define(function() {
 					distance: $scope.location.distance.miles
 				}, function(data) {
 
-					if (!data.entities) {
+					if (!data.entities || data.entities.length === 0) {
 						//no one nearby? load normal suggested
 						if ($scope.nearby) {
 							$scope.nearby = false;

@@ -231,18 +231,23 @@ define(function() {
 		//let the page load first
 		$timeout(function() {
 			window.addEventListener('native.keyboardhide', keyboardhide);
+			document.addEventListener('pause', goToChat);
 		}, 100);
 
 		function keyboardhide() {
 			$ionicScrollDelegate.scrollBottom();
 		};
 
+		function goToChat() {
+			$state.go('tab.chat');
+		};
+
 		$scope.$on('$destroy', function() {
 
 			clearTimeout($scope.timeout);
 			push.unlisten('chat', push_listen_id);
-			window.removeEventListener('native.keyboardhide', heyboardhide);
-
+			window.removeEventListener('native.keyboardhide', keyboardhide);
+			document.removeEventListener('pause', goToChat);
 		});
 
 	}

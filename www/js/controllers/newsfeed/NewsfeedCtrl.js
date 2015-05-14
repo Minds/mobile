@@ -36,6 +36,7 @@ define(function () {
 	    	
     	}
 
+		$rootScope.newsfeedItems = [];
     	$scope.newsfeedItems =  [];
     	$scope.next  = "";
     	
@@ -69,12 +70,14 @@ define(function () {
 		    				return false;
 		    			}
 		    			
-		    			if($scope.newsfeedItems.length > 50){
+		    			if($scope.newsfeedItems.length > 60){
 		    				$ionicScrollDelegate.scrollTop();
 		    				$scope.newsfeedItems = data.activity;
 		    			} else {
-		   			
-		    				$scope.newsfeedItems = $scope.newsfeedItems.concat(data.activity);
+		   					for(var i in data.activity){
+		   						$scope.newsfeedItems.push(data.activity[i]);
+		   					}
+		    				//$scope.newsfeedItems.concat(data.activity);
 		     			}	    			
 		    				//Cacher.put('newsfeed.items', $scope.newsfeedItems);
 		    			//} else {
@@ -104,11 +107,16 @@ define(function () {
 			console.log("=== refreshing ===");
 			$scope.hasMoreData = true;
 			$scope.$broadcast('scroll.infiniteScrollComplete');
+			
+			//for(var i in $scope.newsfeedItems){
+			//	$scope.newsfeedItems.shift();
+			//}
+			
 			NewsfeedAPI.all({ limit: 12, offset: '', cache_break: Date.now() }, 
 				function(data){
     		
 	    			$scope.newsfeedItems = data.activity;
-	    			Cacher.put('newsfeed.items', $scope.newsfeedItems );
+	    		//	Cacher.put('newsfeed.items', $scope.newsfeedItems );
 	
 	    			$scope.next = data['load-next'];
 	    			
@@ -258,11 +266,11 @@ define(function () {
 				});
 							
 		};
-		$ionicPopover.fromTemplateUrl('templates/comments/list.html', {
+		/*$ionicPopover.fromTemplateUrl('templates/comments/list.html', {
 		    scope: $scope,
 		  }).then(function(popover) {
 		    $scope.comments = popover;
-		  });
+		  });*/
 		
 		/**
 		 * Remind an activity
@@ -311,7 +319,7 @@ define(function () {
 		/**
 		 * Init the composer popover
 		 */
-		$scope.composerData = {};
+		/*$scope.composerData = {};
 		$ionicPopover.fromTemplateUrl('templates/newsfeed/compose.html', {
 		    scope: $scope,
 		  }).then(function(popover) {
@@ -344,7 +352,7 @@ define(function () {
 	    		posting = false;
 	    	});
 	    	
-		};
+		};*/
 		
 		$scope.remove = function(guid){
 			console.log('api/v1/newsfeed/'+guid);
@@ -352,20 +360,21 @@ define(function () {
 					cachebreaker: Date.now
 				}, 
 				function(success){
-					console.log(success);
-					$scope.newsfeedItems.forEach(function(item, index, array){
-						if(item.guid == guid){
-							console.log('removed');
-							array.splice(index, 1);
-						}
-					});
-					if($scope.ChannelItems){
-						$scope.ChannelItems.forEach(function(item, index, array){
+					if(success.status == 'success'){
+						$scope.newsfeedItems.forEach(function(item, index, array){
 							if(item.guid == guid){
 								console.log('removed');
 								array.splice(index, 1);
 							}
 						});
+						if($scope.ChannelItems){
+							$scope.ChannelItems.forEach(function(item, index, array){
+								if(item.guid == guid){
+									console.log('removed');
+									array.splice(index, 1);
+								}
+							});
+						}
 					}
 				}, function(error){
 					console.log('error');

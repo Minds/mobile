@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - '0.10'
 
-script: node_modules/karma/bin/karma start karma.conf.js --single-run 
+script: grunt test 
 
 before_script:
 #- export CHROME_BIN=chromium-browser

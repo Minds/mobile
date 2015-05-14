@@ -1,30 +1,31 @@
 /**
  * Minds::mobile
  * Newsfeed composer
- * 
+ *
  * @author Mark Harding
  */
 
-define(function () {
-    'use strict';
+define(function() {
+	'use strict';
 
-    function ctrl($scope, $state, NewsfeedAPI) {
-    	
-		$scope.post = function(){
+	function ctrl($scope, $state, NewsfeedAPI) {
 
-    		NewsfeedAPI.post({
-    			message: $scope.message
-	    	}, function(success){
-	    		$state.go('tab.newsfeed');
-	    	}, function(error){
-	    		alert('there was an error and we couldn\'t save!');
-	    	});
-	    	
+		$scope.post = function() {
+
+			NewsfeedAPI.post({
+				message: $scope.message
+			}, function(success) {
+				$state.go('tab.newsfeed');
+			}, function(error) {
+				alert('there was an error and we couldn\'t save!');
+			});
+
 		};
-        
-    }
 
-    ctrl.$inject = ['$scope', '$state', 'NewsfeedAPI'];
-    return ctrl;
-    
+	}
+
+
+	ctrl.$inject = ['$scope', '$state', 'NewsfeedAPI'];
+	return ctrl;
+
 });

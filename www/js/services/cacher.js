@@ -1,14 +1,14 @@
 /**
  * Minds::mobile
  * App cacher
- * 
+ *
  * @author Mark Harding
  */
 
-define(['angular'], function (angular) {
+define(['angular'], function(angular) {
     "use strict";
 
-    var factory = function ($cacheFactory) {
+    var factory = function($cacheFactory) {
 		return $cacheFactory('mindscache');
     };
 

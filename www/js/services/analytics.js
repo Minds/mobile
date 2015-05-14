@@ -1,25 +1,25 @@
 /**
  * Minds::mobile
  * Analytics service
- * 
+ *
  * @author Mark Harding
  */
 
-define(['angular'], function (angular) {
+define(['angular'], function(angular) {
     "use strict";
 
-    var factory = function (storage, Client, $ionicPlatform) {
-	
-		var init = function(){
-			document.addEventListener('resume', function(){
+    var factory = function(storage, Client, $ionicPlatform) {
+
+		var init = function() {
+			document.addEventListener('resume', function() {
 				Client.put('api/v1/analytics/open');
 			});
-			document.addEventListener('pause', function(){
+			document.addEventListener('pause', function() {
 			});
 		};
-	
+
         return {
-            init : init
+            init: init
         };
 
     };

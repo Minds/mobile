@@ -1,7 +1,7 @@
 /**
  * Minds::mobile
  * Directives loader
- * 
+ *
  * @author Mark Harding
  */
 
@@ -9,8 +9,8 @@ define(function(require) {
 
 	'use strict';
 
-	var angular = require('angular'), 
-		services = require('services/services'), 
+	var angular = require('angular'),
+		services = require('services/services'),
 		directives = angular.module('app.directives', ['app.services']);
 
 	directives.directive('activityView', require('directives/activityView'));
@@ -22,6 +22,6 @@ define(function(require) {
 	directives.directive('subscribe', require('directives/subscribe'));
 	directives.directive('swipe', require('directives/swipe'));
 	directives.directive('walletCounter', require('directives/walletCounter'));
-	
+
 	return directives;
-}); 
+});

@@ -1,7 +1,7 @@
 /**
  * Minds::mobile
  * Login controller
- * 
+ *
  * @author Mark Harding
  */
 
@@ -9,9 +9,9 @@ define(function() {
 	'use strict';
 
 	function ctrl($scope, $state, OAuth, Client, $ionicPopup, storage, $timeout, push) {
-	
-		$timeout(function(){
-			if(storage.get('access_token') && storage.get('loggedin')){
+
+		$timeout(function() {
+			if (storage.get('access_token') && storage.get('loggedin')) {
 				$state.go('tab.newsfeed');
 			} else {
 				$state.go('login');
@@ -29,4 +29,4 @@ define(function() {
 	ctrl.$inject = ['$scope', '$state', 'OAuth', 'Client', '$ionicPopup', 'storage', '$timeout', 'push'];
 	return ctrl;
 
-}); 
+});

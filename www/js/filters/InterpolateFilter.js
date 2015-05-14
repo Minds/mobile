@@ -11,4 +11,4 @@ define(['angular'], function(angular) {
 
 	filter.$inject = ['VERSION'];
 	return filter;
-}); 
+});

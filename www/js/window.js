@@ -1,3 +1,4 @@
-define(function(){
-   return window;
+define(function() {
+	"use strict";
+	return window;
 });

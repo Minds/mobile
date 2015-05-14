@@ -1,11 +1,11 @@
 /*global define*/
 
-define(['angular', 'JSEncrypt'], function (angular, JSEncrypt) {
-    "use strict";
+define(['angular', 'JSEncrypt'], function(angular, JSEncrypt) {
+	"use strict";
 
-    var directive = function ($rootScope, $filter, storage, $compile, $sce) {
-	  	return {
-       		restrict: 'E',
+	var directive = function($rootScope, $filter, storage, $compile, $sce) {
+		return {
+			restrict: 'E',
 			template: "<div class='item-text-wrap'>{{message}}</div>",
 			replace: true,
 			scope: true,
@@ -14,14 +14,14 @@ define(['angular', 'JSEncrypt'], function (angular, JSEncrypt) {
 				element.html($sce.getTrustedHtml('<div class="decrypting"> decrypting... </div>'));
 
 				crypt.setPrivateKey(storage.get('private-key'));
-				
-				crypt.decrypt(attrs.message, function(success){
-		    			scope.message = $filter('linky')(success);
-		    			//scope.$apply();
-						element.html($sce.getTrustedHtml(scope.message));
+
+				crypt.decrypt(attrs.message, function(success) {
+					scope.message = $filter('linky')(success);
+					//scope.$apply();
+					element.html($sce.getTrustedHtml(scope.message));
 				});
-				
-				var linkify = function (inputText) {
+
+				var linkify = function(inputText) {
 					var replacedText, replacePattern1, replacePattern2, replacePattern3;
 					//URLs starting with http://, https://, or ftp://
 					replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
@@ -35,11 +35,10 @@ define(['angular', 'JSEncrypt'], function (angular, JSEncrypt) {
 					return replacedText;
 				};
 
-			      
 			}
-       	 };
-    };
+		};
+	};
 
-    directive.$inject = ['$rootScope', '$filter', 'storage', '$compile', '$sce'];
-    return directive;
+	directive.$inject = ['$rootScope', '$filter', 'storage', '$compile', '$sce'];
+	return directive;
 });

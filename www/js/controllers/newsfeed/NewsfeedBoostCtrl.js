@@ -8,7 +8,7 @@
 define(function() {
 	'use strict';
 
-	function ctrl($rootScope, $scope, $state, $stateParams, $ionicLoading, $ionicPopup, $timeout, Client) {
+	function ctrl($rootScope, $scope, $state, $stateParams, $ionicLoading, $ionicPopup, $timeout, Client, $q) {
 
 		$scope.data = {
 			destination: '',
@@ -56,11 +56,56 @@ define(function() {
 				template: 'Please wait a moment.'
 			});
 
+			var deferred = $q.defer();
+
 			//validate our points
 			Client.get('api/v1/wallet/count', {
 				cb: Date.now()
 			}, function(success) {
+
 				$ionicLoading.hide();
+
+				//lets deal with the failures first..
+				//not enough points?
+				if (success.count < $scope.data.points) {
+					$ionicPopup.alert({
+						title: 'Ooops!',
+						subTitle: 'You don\;t have enough points',
+						buttons: [{
+							text: '<b>Buy points</b>',
+							type: 'button-positive',
+							onTap: function(e) {
+								$state.go('tab.newsfeed-wallet-deposit');
+								$scope.modal.remove();
+							}
+						}, {
+							text: 'Close.'
+						}]
+					});
+
+					return deferred.resolve(false);
+				}
+
+				//over the cap?
+				if ($scope.data.points > success.cap) {
+					$ionicPopup.alert({
+						title: 'Ooops!',
+						subTitle: 'Sorry, there is a limit on how many points can be spent. ',
+						buttons: [{
+							text: '<b>Lower rate</b>',
+							type: 'button-positive',
+							onTap: function(e) {
+								$scope.data.points = success.cap - 1;
+							}
+						}, {
+							text: 'Close.'
+						}]
+					});
+
+					return deferred.resolve(false);
+				}
+
+				//check if the user has enough points
 				if (success.count >= $scope.data.points) {
 
 					$ionicLoading.show({
@@ -77,7 +122,9 @@ define(function() {
 						impressions: $scope.data.impressions,
 						destination: $scope.data.destination.charAt(0) == '@' ? $scope.data.destination.substr(1) : $scope.data.destination
 					}, function(success) {
+
 						if (success.status == 'success') {
+
 							$ionicLoading.hide();
 							$scope.modal.remove();
 							$ionicLoading.show({
@@ -87,7 +134,10 @@ define(function() {
 								$ionicLoading.hide();
 							}, 500);
 
+							return deferred.resolve(true);
+
 						} else {
+
 							$ionicLoading.hide();
 							$ionicLoading.show({
 								template: 'Sorry, something went wrong.'
@@ -95,8 +145,13 @@ define(function() {
 							$timeout(function() {
 								$ionicLoading.hide();
 							}, 500);
+
+							return deferred.resolve(false);
+
 						}
+
 					}, function(fail) {
+
 						$ionicLoading.hide();
 						$ionicLoading.show({
 							template: 'Sorry, something went wrong.'
@@ -104,45 +159,18 @@ define(function() {
 						$timeout(function() {
 							$ionicLoading.hide();
 						}, 500);
+
+						return deferred.resolve(false);
+
 					});
 
-				} else {
-					if (success.count < $scope.data.points) {
-						$ionicPopup.alert({
-							title: 'Ooops!',
-							subTitle: 'You don\;t have enough points',
-							buttons: [{
-								text: '<b>Buy points</b>',
-								type: 'button-positive',
-								onTap: function(e) {
-									$state.go('tab.newsfeed-wallet-deposit');
-									$scope.modal.remove();
-								}
-							}, {
-								text: 'Close.'
-							}]
-						});
-					}
-					if ($scope.data.points > success.cap) {
-						$ionicPopup.alert({
-							title: 'Ooops!',
-							subTitle: 'Sorry, there is a limit on how many points can be spent. ',
-							buttons: [{
-								text: '<b>Lower rate</b>',
-								type: 'button-positive',
-								onTap: function(e) {
-									$scope.data.points = success.cap - 1;
-								}
-							}, {
-								text: 'Close.'
-							}]
-						});
-					}
 				}
-			}, function(error) {
 
+			}, function(error) {
+				return deferred.resolve(false);
 			});
 
+			return deferred.promise;
 		};
 
 		$scope.searching = false;
@@ -195,7 +223,7 @@ define(function() {
 	}
 
 
-	ctrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', '$ionicLoading', '$ionicPopup', '$timeout', 'Client'];
+	ctrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', '$ionicLoading', '$ionicPopup', '$timeout', 'Client', '$q'];
 	return ctrl;
 
 });

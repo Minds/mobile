@@ -1,6 +1,8 @@
 Minds Mobile App
 ======
 
+[![Build Status](https://magnum.travis-ci.com/Minds/mobile.svg?token=vHzWaxguqXbJqkudCFTn&branch=master)](https://magnum.travis-ci.com/Minds/mobile)
+
 The minds mobile apps source code repository.
 
 ##Platforms

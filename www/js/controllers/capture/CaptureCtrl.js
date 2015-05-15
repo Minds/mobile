@@ -152,7 +152,7 @@ define(function() {
 					reload: true
 				});
 				$scope.$emit('newsfeed:updated');
-				$scope.$emit('newsfeed:boost', $scope.guid);
+				$scope.$emit('newsfeed:boost', success.activity_guid);
 				$scope.reset();
 				$ionicLoading.hide();
 			}, function(error) {

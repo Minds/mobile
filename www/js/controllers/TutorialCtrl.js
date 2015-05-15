@@ -30,8 +30,8 @@ define(function() {
 			user: "Mark Harding",
 			message: "Welcome to the Minds app!"
 		}, {
-			guid: 341,
-			user: "Bill Ottman",
+			guid: 421,
+			user: "Johnny Lagrange",
 			message: "Share your videos, photos & status."
 		}];
 

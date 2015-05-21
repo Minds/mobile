@@ -2,7 +2,7 @@
 
 define(['angular', 'angular-mocks', 'app'], function(angular, mocks, app) {
 
-	describe('Wallet (WalletCtrl)', function() {
+	describe('Wallet Deposit (WalletDespositCtrl)', function() {
 
 		var rootScope, scope, httpBackend, timeout, state, ionicLoading, ionicPopup, q;
 

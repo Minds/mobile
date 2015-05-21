@@ -13,13 +13,13 @@ define(function() {
 		$scope.configured = false;
 		$scope.data = {};
 
-		setTimeout(function() {
+		//setTimeout(function() {
 			Client.get('api/v1/channel/me', {}, function(me) {
 				if (me.channel.chat) {
 					$scope.configured = true;
 				}
 			});
-		}, 10);
+		//}, 10);
 
 		$scope.unlock = function(password) {
 
@@ -48,7 +48,7 @@ define(function() {
 					title: 'Ooops..',
 					template: 'You must enter a password.'
 				});
-				return true;
+				return false;
 			}
 			if ($scope.data.password != $scope.data.password2) {
 				$ionicPopup.alert({

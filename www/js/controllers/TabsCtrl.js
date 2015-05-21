@@ -53,6 +53,11 @@ define(function() {
 		});
 
 		$ionicPlatform.registerBackButtonAction(function(e) {
+			if ($rootScope.playing) {
+				document.webkitExitFullscreen();
+				return false; //do not close if video..
+			}
+
 			if ($state.current.name == 'tab.newsfeed' || $state.current.name == 'login') {
 				navigator.app.exitApp();
 			} else {

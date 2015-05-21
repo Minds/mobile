@@ -110,7 +110,7 @@ define(function() {
 		$scope.refresh = function() {
 			console.log("=== refreshing ===");
 			$scope.hasMoreData = true;
-			$scope.$broadcast('scroll.infiniteScrollComplete');
+			//
 
 			//for(var i in $scope.newsfeedItems){
 			//	$scope.newsfeedItems.shift();
@@ -130,9 +130,11 @@ define(function() {
 				$scope.cachebreaker = Date.now();
 				Cacher.put('newsfeed.cachebreaker', Date.now());
 
+				$scope.$broadcast('scroll.infiniteScrollComplete');
 				$scope.$broadcast('scroll.refreshComplete');
 
 			}, function(error) {
+				$scope.$broadcast('scroll.infiniteScrollComplete');
 				$scope.$broadcast('scroll.refreshComplete');
 			});
 

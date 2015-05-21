@@ -174,6 +174,19 @@ define(function() {
 			});
 		};
 
+		$scope.disable = function() {
+			$ionicLoading.show({
+				template: '<ion-spinner></ion-spinner>'
+			});
+
+			Client.delete('api/v1/channel', {}, function() {
+				$ionicLoading.hide();
+				$scope.logout();
+			}, function() {
+				alert("sorry, we could not delete");
+			});
+		};
+
 		$scope.logout = function() {
 
 			Client.post('api/v1/logout', {}, function() {

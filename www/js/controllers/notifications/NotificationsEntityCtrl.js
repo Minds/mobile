@@ -132,6 +132,16 @@ define(function() {
 
 		};
 
+		$scope.openUrl = function(url) {
+			var timeout;
+			$timeout.cancel(timeout);
+
+			timeout = $timeout(function() {
+				window.open(url, "_blank", "location=yes");
+			}, 300);
+		};
+
+
 		$scope.pass = function() {
 			Client.post('api/v1/entities/suggested/pass/' + $scope.entity.guid, {}, function() {
 			}, function() {

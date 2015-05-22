@@ -89,7 +89,7 @@ define(['angular', 'angular-mocks', 'app'], function(angular, mocks, app) {
 
 	describe('Chat Listings (ChatCtrl)', function() {
 
-		var rootScope, scope, httpBackend, timeout, state, ionicLoading, ionicPopup, q, _storage;
+		var rootScope, scope, httpBackend, timeout, state, ionicLoading, ionicPopup, q, _storage, _push;
 
 		/*
 		 * Setup
@@ -97,7 +97,7 @@ define(['angular', 'angular-mocks', 'app'], function(angular, mocks, app) {
 		beforeEach(module('ionic'));
 		beforeEach(module('app.controllers'));
 
-		beforeEach(inject(function($rootScope, $controller, $timeout, $state, $ionicLoading, $ionicPopup, $q, storage) {
+		beforeEach(inject(function($rootScope, $controller, $timeout, $state, $ionicLoading, $ionicPopup, $q, storage, push) {
 			rootScope = $rootScope;
 			scope = $rootScope.$new();
 			$controller('ChatCtrl', {
@@ -109,8 +109,76 @@ define(['angular', 'angular-mocks', 'app'], function(angular, mocks, app) {
 			ionicLoading = $ionicLoading,
 			ionicPopup = $ionicPopup,
 			q = $q,
-			_storage = storage;
+			_storage = storage,
+			_push = push;
 		}));
+
+		beforeEach(inject(function($httpBackend) {
+			httpBackend = $httpBackend;
+
+			var result = {
+				"status": "success",
+				"conversations": [{},{},{}]
+			};
+
+			httpBackend.when('GET', /.*\/conversations\?.*/).respond(result);
+		}));
+
+		it('should forward to setup if storage not set', function() {
+
+			_storage.remove('private-key');
+
+			state.go = function(tab) {
+				expect(tab).toEqual('tab.chat-setup');
+			};
+
+			rootScope.$broadcast('$ionicView.beforeEnter');
+		});
+
+		it('defaults should be set', function() {
+			expect(scope.conversations).toEqual([]);
+			expect(scope.next).toEqual("");
+			expect(scope.hasMoreData).toEqual(true);
+			expect(scope.inprogress).toEqual(false);
+		});
+
+		it('should not laod list if private key is not set', function() {
+			_storage.remove('private-key');
+
+			var result = scope.loadMore();
+			expect(result).toEqual(false);
+			expect(scope.conversations).toEqual([]);
+			expect(scope.inprogress).toEqual(false);
+
+		});
+
+		it('should laod list', function() {
+			_storage.set('private-key', 123);
+			scope.loadMore();
+			expect(scope.inprogress).toEqual(true);
+
+			httpBackend.flush();
+			expect(scope.conversations.length).toEqual(3);
+			expect(scope.inprogress).toEqual(false);
+
+		});
+
+		it('should refresh on push noticications', function() {
+			_storage.set('private-key', 123);
+			state.current = {
+				name: 'tab.chat'
+			};
+
+			expect(scope.conversations.length).toEqual(0);
+
+			_push.__trigger('chat');
+			scope.$apply();
+			expect(scope.inprogress).toEqual(true);
+			httpBackend.flush();
+			expect(scope.conversations.length).toEqual(3);
+			expect(scope.inprogress).toEqual(false);
+
+		});
 
 	});
 

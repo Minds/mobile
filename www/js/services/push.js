@@ -169,7 +169,8 @@ define(['angular'], function(angular) {
 						listeners.splice(i, 1);
 					}
 				}
-            }
+            },
+            __trigger: trigger
         };
 
     };

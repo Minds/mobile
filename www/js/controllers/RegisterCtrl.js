@@ -29,7 +29,7 @@ define(function() {
 					title: 'Ooops..',
 					template: "You need to enter a username"
 				});
-				return true;
+				return false;
 			}
 
 			if (!$scope.data.password) {
@@ -37,7 +37,7 @@ define(function() {
 					title: 'Ooops..',
 					template: "You need to enter a password"
 				});
-				return true;
+				return false;
 			}
 
 			if (!$scope.data.email) {
@@ -45,7 +45,7 @@ define(function() {
 					title: 'Ooops..',
 					template: "You need to enter an email address"
 				});
-				return true;
+				return false;
 			}
 
 			$scope.inprogress = true;

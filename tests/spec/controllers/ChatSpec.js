@@ -182,4 +182,100 @@ define(['angular', 'angular-mocks', 'app'], function(angular, mocks, app) {
 
 	});
 
+	describe('Chat Conversations (ChatConversationCtrl)', function() {
+
+		var rootScope, scope, httpBackend, timeout, state, ionicLoading, ionicPopup, q, _storage, _push, stateParams;
+
+		/*
+		 * Setup
+		 */
+		beforeEach(module('ionic'));
+		beforeEach(module('app.controllers'));
+
+		beforeEach(inject(function($rootScope, $controller, $timeout, $state, $ionicLoading, $ionicPopup, $q, storage, push) {
+			rootScope = $rootScope;
+			scope = $rootScope.$new();
+			stateParams = {
+				username: "guid1",
+				name: "karma"
+			};
+			$controller('ChatConversationCtrl', {
+				$scope: scope,
+				$stateParams: stateParams
+			});
+
+			timeout = $timeout,
+			state = $state,
+			ionicLoading = $ionicLoading,
+			ionicPopup = $ionicPopup,
+			q = $q,
+			_storage = storage,
+			_push = push;
+		}));
+
+		beforeEach(inject(function($httpBackend) {
+			httpBackend = $httpBackend;
+
+			httpBackend.when('GET', /.*\/conversations\.*/).respond(function() {
+				var result = {
+					"status": "success",
+					"messages": [{},{},{}],
+					"publickeys": {}
+				};
+				result.publickeys[scope.guid] = "publickey";
+				return [200, result];
+			});
+		}));
+
+		it('defaults should be set', function() {
+			expect(scope.guid).toEqual("guid1");
+			expect(scope.name).toEqual("karma");
+			expect(scope.messages).toEqual([]);
+			expect(scope.next).toEqual("");
+			expect(scope.hasMoreData).toEqual(true);
+		});
+
+		it('should load new content', function() {
+			httpBackend.flush();
+			expect(scope.messages.length).toEqual(3);
+		});
+
+		it('should listen to push notification', function() {
+			httpBackend.flush();
+
+			rootScope.newChat = true;
+			_push.__trigger('chat');
+			scope.$apply();
+			httpBackend.flush();
+
+			expect(rootScope.newChat).toEqual(false);
+
+		});
+
+		it('should not send message if empty', function() {
+			expect(scope.send()).toEqual(false);
+		});
+
+		it('should not send message if over 180 characters', function() {
+			scope.message = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." +
+							"Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." +
+							"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur." +
+							"xcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+			expect(scope.send()).toEqual(false);
+		});
+
+		it('should send message', function() {
+			scope.message = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+			scope.send();
+		});
+
+		it('should go back to main listing on view close', function() {
+			timeout.flush();
+			state.go = function(tab) {
+				expect(tab).toEqual('tab.chat');
+			};
+			document.dispatchEvent(new CustomEvent("pause", {}));
+		});
+
+	});
 });

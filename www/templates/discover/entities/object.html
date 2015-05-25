@@ -1,7 +1,7 @@
 <owner-brief-view owner="{{entity.ownerObj}}" ts="{{entity.time_created}}" show-more-button="true"></owner-brief-view>
 
 <!-- Video -->
-<div class="item item-image item-image-video" ng-if="entity.subtype == 'video'" play-video playsrc="{{entity.src['360.mp4']}}">
+<div class="item item-image item-image-video" ng-if="entity.subtype == 'video' || entity.subtype == 'audio'" play-video playsrc="{{entity.src['360.mp4']}}">
           
 	<img ng-src="{{entity.thumbnail_src}}" onerror="this.src='img/img-placeholder.png'">
      <i class="icon ion-play"></i>

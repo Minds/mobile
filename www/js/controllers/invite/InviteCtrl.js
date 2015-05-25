@@ -8,7 +8,7 @@
 define(function() {
 	'use strict';
 
-	function ctrl($rootScope, $scope, $state, $stateParams, $ionicLoading, Client, $timeout) {
+	function ctrl($rootScope, $scope, $state, $stateParams, $ionicLoading, Client, $timeout, $ionicPopup) {
 
 		$scope.contacts = [];
 		$scope.selected = [];
@@ -29,18 +29,27 @@ define(function() {
 		 }, function(error){}, options);*/
 
 		navigator.contacts.pickContact(function(contact) {
-			Client.post('api/v1/invite', {
-				contact: contact
-			}, function(success) {
-			}, function(error) {
-			});
-			$scope.modal.remove();
-			$ionicLoading.show({
-				template: '<p> Invited ' + contact.name.formatted + '</p>'
-			});
-			$timeout(function() {
-				$ionicLoading.hide();
-			}, 1000);
+
+			$ionicPopup.confirm({
+			     title: 'Invite',
+			     template: 'Are you sure you want to invite ' + contact.name.formatted + '?'
+			   }).then(function(res){
+			   		if(res){
+						Client.post('api/v1/invite', {
+							contact: contact
+						}, function(success) {}, function(error) {});
+						$scope.modal.remove();
+						$ionicLoading.show({
+							template: '<p> Invited ' + contact.name.formatted + '</p>'
+						});
+						$timeout(function() {
+							$ionicLoading.hide();
+						}, 1000);
+					} else {
+						$scope.modal.remove();
+					}
+				});
+
 		}, function(err) {
 			console.log('Error: ' + err);
 		});
@@ -86,7 +95,7 @@ define(function() {
 	}
 
 
-	ctrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', '$ionicLoading', 'Client', '$timeout'];
+	ctrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', '$ionicLoading', 'Client', '$timeout', '$ionicPopup'];
 	return ctrl;
 
 });

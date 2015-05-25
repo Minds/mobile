@@ -31,13 +31,14 @@ define(function() {
 		navigator.contacts.pickContact(function(contact) {
 
 			$ionicPopup.confirm({
-			     title: 'Invite',
-			     template: 'Are you sure you want to invite ' + contact.name.formatted + '?'
-			   }).then(function(res){
-			   		if(res){
+				title: 'Invite',
+				template: 'Are you sure you want to invite ' + contact.name.formatted + '?'
+				}).then(function(res) {
+					if (res) {
 						Client.post('api/v1/invite', {
 							contact: contact
-						}, function(success) {}, function(error) {});
+							}, function(success) {}, function(error) {
+							});
 						$scope.modal.remove();
 						$ionicLoading.show({
 							template: '<p> Invited ' + contact.name.formatted + '</p>'

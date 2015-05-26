@@ -107,6 +107,10 @@
                         {
                             "xml": "<feature name=\"Crypt\"><param name=\"android-package\" value=\"org.apache.cordova.crypt.Crypt\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Intents\"><param name=\"android-package\" value=\"org.minds.intents.Intents\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -351,6 +355,9 @@
             "PACKAGE_NAME": "com.minds.mobile"
         },
         "org.apache.cordova.crypt": {
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
+        "cordova-plugin-intents": {
             "PACKAGE_NAME": "com.minds.mobile"
         }
     },

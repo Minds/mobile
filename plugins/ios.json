@@ -368,6 +368,9 @@
         },
         "org.apache.cordova.crypt": {
             "PACKAGE_NAME": "com.minds.mobile"
+        },
+        "cordova-plugin-intents": {
+            "PACKAGE_NAME": "com.minds.mobile"
         }
     },
     "dependent_plugins": {}

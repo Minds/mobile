@@ -113,5 +113,13 @@
             "APP_ID": "184865748231073",
             "APP_NAME": "Minds"
         }
+    },
+    "cordova-plugin-intents": {
+        "source": {
+            "type": "local",
+            "path": "../cordova-plugin-intents"
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }

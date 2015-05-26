@@ -188,7 +188,7 @@ define(function() {
 				data = {
 					message: encodeURIComponent($scope.form.status),
 					title: $scope.form.meta.title,
-					description: $scope.form.meta.description,
+					description: encodeURIComponent($scope.form.meta.description),
 					thumbnail: encodeURIComponent($scope.form.thumbnail),
 					url: $scope.form.meta.canonical,
 					facebook: $scope.form.facebook,
@@ -210,6 +210,14 @@ define(function() {
 
 		};
 
+		intents.onIntent(function(callback){
+			if(callback.type == "text"){
+				$scope.activity();
+				$scope.form.status = callback.data;
+				$scope.getStatusPreview();
+			}
+		});
+			
 		$scope.activity = function() {
 			$ionicModal.fromTemplateUrl('templates/capture/status.html', {
 				scope: $scope,
@@ -222,6 +230,9 @@ define(function() {
 
 		$scope.$on('modal.removed', function() {
 			$scope.form = {};
+			intents.onIntent(function(data){
+				navigator.app.exitApp();
+			});
 		});
 
 		$scope.getStatusPreview = function() {

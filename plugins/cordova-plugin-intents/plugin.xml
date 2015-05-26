@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+            id="cordova-plugin-intents" version="0.0.1">
+        <name>Intents</name>
+        <description>Cordova Intent Listener Plugin</description>
+        <license>TBC</license>
+        <keywords>cordova,minds, intent</keywords>
+        <js-module src="www/intents.js" name="intents">
+            <clobbers target="intents" />
+        </js-module>
+
+        <platform name="android">
+            <config-file target="res/xml/config.xml" parent="/*">
+                <feature name="Intents" >
+                    <param name="android-package" value="org.minds.intents.Intents"/>
+                    <param name="onload" value="true" />
+                </feature>
+            </config-file>
+
+            <source-file src="src/android/Intents.java" target-dir="src/org/minds/intents" />
+        </platform>
+</plugin>

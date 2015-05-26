@@ -8,7 +8,7 @@
 define(function() {
 	'use strict';
 
-	function ctrl($scope, $state, OAuth, Client, $ionicPopup, storage, $timeout, push) {
+	function ctrl($scope, $state, OAuth, Client, $ionicPopup, storage, $timeout, push, $ionicPlatform) {
 
 		var timeout = $timeout(function() {
 			if (storage.get('access_token') && storage.get('loggedin')) {
@@ -17,10 +17,14 @@ define(function() {
 				$state.go('login');
 			}
 		}, 500);
-		
-		intents.onIntent(function(){
+
+		intents.onIntent(function() {
 			$timeout.cancel(timeout);
 			$state.go('tab.capture');
+
+			$ionicPlatform.registerBackButtonAction(function(e) {
+				navigator.app.exitApp();
+			},501);
 		});
 
 		/**
@@ -31,7 +35,7 @@ define(function() {
 	}
 
 
-	ctrl.$inject = ['$scope', '$state', 'OAuth', 'Client', '$ionicPopup', 'storage', '$timeout', 'push'];
+	ctrl.$inject = ['$scope', '$state', 'OAuth', 'Client', '$ionicPopup', 'storage', '$timeout', 'push', '$ionicPlatform'];
 	return ctrl;
 
 });

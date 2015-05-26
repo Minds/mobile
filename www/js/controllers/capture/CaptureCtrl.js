@@ -210,14 +210,14 @@ define(function() {
 
 		};
 
-		intents.onIntent(function(callback){
-			if(callback.type == "text"){
+		intents.onIntent(function(callback) {
+			if (callback.type == "text") {
 				$scope.activity();
 				$scope.form.status = callback.data;
 				$scope.getStatusPreview();
 			}
 		});
-			
+
 		$scope.activity = function() {
 			$ionicModal.fromTemplateUrl('templates/capture/status.html', {
 				scope: $scope,
@@ -230,7 +230,7 @@ define(function() {
 
 		$scope.$on('modal.removed', function() {
 			$scope.form = {};
-			intents.onIntent(function(data){
+			intents.onIntent(function(data) {
 				navigator.app.exitApp();
 			});
 		});

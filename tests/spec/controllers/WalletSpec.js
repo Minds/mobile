@@ -35,7 +35,6 @@ define(['angular', 'angular-mocks', 'app'], function(angular, mocks, app) {
 				"cap":99
 			};
 
-
 			httpBackend.when('GET', /.*\/api\/v1\/wallet\/count\.*/).respond(result);
 		}));
 

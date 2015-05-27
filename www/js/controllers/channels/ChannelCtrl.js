@@ -8,7 +8,7 @@
 define(function() {
 	'use strict';
 
-	function ctrl($rootScope, $scope, $state, $stateParams, Client, $ionicSlideBoxDelegate, $ionicScrollDelegate, $interval, storage) {
+	function ctrl($rootScope, $scope, $state, $stateParams, Client, $ionicSlideBoxDelegate, $ionicScrollDelegate, $interval, $timeout, storage) {
 
 		if ($stateParams.username === undefined) {
 			$state.go('tab.newsfeed');
@@ -48,15 +48,19 @@ define(function() {
 				}
 
 				$scope.channel = success.channel;
-				$scope.$apply();
+				//$scope.$apply();
 
 				if ($rootScope.guid == $scope.channel.guid) {
 					storage.set('city', $scope.channel.city);
 					storage.set('coordinates', $scope.channel.coordinates);
 				}
 
-				if ($scope.ChannelItems.length === 0)
-					$scope.loadMore();
+				if ($scope.ChannelItems.length === 0) {
+					//run on next digest
+					$timeout(function() {
+						$scope.loadMore();
+					});
+				}
 
 				if (success.channel.carousels) {
 					$ionicSlideBoxDelegate.update();
@@ -142,7 +146,7 @@ define(function() {
 	}
 
 
-	ctrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', 'Client', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$interval', 'storage'];
+	ctrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', 'Client', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$interval', '$timeout', 'storage'];
 	return ctrl;
 
 });

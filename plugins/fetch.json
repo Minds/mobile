@@ -121,5 +121,14 @@
         },
         "is_top_level": true,
         "variables": {}
+    },
+    "com.dooble.phonertc": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/alongubkin/phonertc.git",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }

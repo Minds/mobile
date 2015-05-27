@@ -111,6 +111,10 @@
                         {
                             "xml": "<feature name=\"Intents\"><param name=\"android-package\" value=\"org.minds.intents.Intents\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"PhoneRTCPlugin\"><param name=\"android-package\" value=\"com.dooble.phonertc.PhoneRTCPlugin\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -120,7 +124,7 @@
                     "/manifest": [
                         {
                             "xml": "<uses-permission android:name=\"android.permission.CAMERA\" />",
-                            "count": 1
+                            "count": 2
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.VIBRATE\" />",
@@ -144,7 +148,7 @@
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.INTERNET\" />",
-                            "count": 1
+                            "count": 2
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\" />",
@@ -164,6 +168,30 @@
                         },
                         {
                             "xml": "<uses-permission android:name=\"com.minds.mobile.permission.C2D_MESSAGE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-feature android:name=\"android.hardware.camera\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-feature android:name=\"android.hardware.camera.autofocus\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-feature android:glEsVersion=\"0x00020000\" android:required=\"true\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.RECORD_AUDIO\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
                             "count": 1
                         }
                     ],
@@ -358,6 +386,9 @@
             "PACKAGE_NAME": "com.minds.mobile"
         },
         "cordova-plugin-intents": {
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
+        "com.dooble.phonertc": {
             "PACKAGE_NAME": "com.minds.mobile"
         }
     },

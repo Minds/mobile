@@ -8,7 +8,7 @@
 define(function() {
 	'use strict';
 
-	function ctrl($rootScope, $scope, $stateParams, $state, Client, storage, $ionicScrollDelegate, $timeout, $ionicLoading, push, $ionicPopup) {
+	function ctrl($rootScope, $scope, $stateParams, $state, Client, storage, $ionicScrollDelegate, $timeout, $ionicLoading, push, $ionicPopup, $ionicModal) {
 
 		if (window.cordova) {
 			cordova.plugins.Keyboard.disableScroll(false);
@@ -89,6 +89,18 @@ define(function() {
 
 		};
 		$scope.loadMore();
+
+		$scope.startChat = function() {
+			$ionicModal.fromTemplateUrl('templates/gatherings/chat/call.html', {
+				scope: $scope,
+				animation: 'slide-in-up'
+			}).then(function(modal) {
+				$scope.modal = modal;
+				$scope.modal.show();
+				//need to send a signal to our new controller
+				$scope.$emit("call");
+			});
+		};
 
 		/**
 		 * Only do polling if we can't use push notifications
@@ -255,7 +267,7 @@ define(function() {
 	}
 
 
-	ctrl.$inject = ['$rootScope', '$scope', '$stateParams', '$state', 'Client', 'storage', '$ionicScrollDelegate', '$timeout', '$ionicLoading', 'push', '$ionicPopup'];
+	ctrl.$inject = ['$rootScope', '$scope', '$stateParams', '$state', 'Client', 'storage', '$ionicScrollDelegate', '$timeout', '$ionicLoading', 'push', '$ionicPopup', '$ionicModal'];
 	return ctrl;
 
 });

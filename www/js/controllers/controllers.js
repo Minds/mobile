@@ -40,6 +40,7 @@ define(function(require) {
 	controllers.controller('ChatCtrl', require('controllers/gatherings/ChatCtrl'));
 	controllers.controller('ChatConversationCtrl', require('controllers/gatherings/ChatConversationCtrl'));
 	controllers.controller('ChatSetupCtrl', require('controllers/gatherings/ChatSetupCtrl'));
+	controllers.controller('CallCtrl', require('controllers/gatherings/CallCtrl'));
 
 	/**
 	 * Channels

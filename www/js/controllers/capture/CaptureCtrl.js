@@ -32,6 +32,7 @@ define(function() {
 
 					$scope.upload(path, 'video');
 				}
+
 			}, function() {
 				console.log('capture failed');
 			}, {
@@ -172,7 +173,7 @@ define(function() {
 					title: 'Ooopss.',
 					template: 'You need to enter status before you can post.'
 				});
-				return true;
+				return false;
 			}
 
 			$ionicLoading.show({
@@ -210,13 +211,15 @@ define(function() {
 
 		};
 
-		intents.onIntent(function(callback) {
-			if (callback.type == "text") {
-				$scope.activity();
-				$scope.form.status = callback.data;
-				$scope.getStatusPreview();
-			}
-		});
+		if (window.intents) {
+			intents.onIntent(function(callback) {
+				if (callback.type == "text") {
+					$scope.activity();
+					$scope.form.status = callback.data;
+					$scope.getStatusPreview();
+				}
+			});
+		}
 
 		$scope.activity = function() {
 			$ionicModal.fromTemplateUrl('templates/capture/status.html', {

@@ -69,7 +69,7 @@
 	                <div ng-switch-when="user">
 	                    <div class="list card tabs-background-white" ng-include src="'templates/discover/entities/user.html'" swipe swipe-disable-vertical="true" swipe-on-left="ignore(entity)" swipe-on-right="subscribe(entity)"></div>
                         
-                        <a g-click="boost(entity)" style="opacity: 1; margin: 12px auto; display: block; width: 56px;" ng-if="entity.guid == $root.user_guid">
+                        <a ng-click="boost(entity)" style="opacity: 1; margin: 12px auto; display: block; width: 56px;" ng-if="entity.guid == $root.user_guid">
                            <span style="color: #FFF;font-weight: 800;background: #4690C3;padding: 6px 8px;border-radius: 3px;">Boost</span>
                         </a>
 

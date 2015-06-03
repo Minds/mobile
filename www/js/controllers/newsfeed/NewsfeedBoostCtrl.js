@@ -41,7 +41,7 @@ define(function() {
 				return false;
 			}
 
-			if ($scope.data.points === 0) {
+			if ($scope.data.points === 0 || !$scope.data.points) {
 				$scope.data.points = 1;
 				$ionicLoading.show({
 					template: 'Sorry, you must enter a whole point.'

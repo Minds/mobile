@@ -102,3 +102,82 @@
 	padding-left:10px;
 	font-size:10px;
 }
+
+.video-wrappers{
+	position:relative;
+	height:calc(100% - 80px);
+}
+.video-wrappers video.preview{
+	position:absolute;
+	bottom:16px;
+	right:16px;
+	height:134px;
+	width:100px;
+	border-radius: 3px;
+	box-shadow: 0 0 3px #888;
+	z-index:999;
+}
+.video-wrappers video.remote{
+	position: absolute;
+	top: 0;
+	left: -50px;
+	height: 100%;
+	width: calc(100% + 100px);
+	z-index:1;
+
+	background: #000;
+}
+.call-actions{
+	background:#222;
+	height:80px;
+	width:100%;
+	text-align:center;
+}
+.call-actions button{
+	padding: 16px 28px;
+	margin: 8px 2px;
+	font-size: 35px;
+	border-radius: 2px;
+	border: 0;
+	line-height: 0;
+	vertical-align: middle;
+	background: #333;
+	color: #FFF;
+	text-align: center;
+ }
+.call-actions button.hangup{
+	background:#FF0000;
+}
+.call-display-wrapper{
+	display:table;
+	vertical-align:middle;
+	height:100%;
+	width:100%;
+	z-index:99999999;
+	position:absolute;
+	top:0;
+	left:0;
+}
+.call-display-wrapper > div{
+	display:table-cell;
+	vertical-align:middle;
+	text-align:center;
+}
+.call-display-wrapper button{
+	border-radius:2px;
+	border:0;
+	background:0;
+}	
+	
+.incoming button{
+	padding:24px;
+	border:0;
+	background:transparent;
+	font-size:18px;
+}
+.incoming button.answer{
+	color:#008000;
+}
+.incoming button.reject{
+	color:#FF0000;
+}

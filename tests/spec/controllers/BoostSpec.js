@@ -92,6 +92,8 @@ define(['angular', 'angular-mocks', 'app'], function(angular, mocks, app) {
 		it('warns if user has not entered any points', function() {
 			scope.data.points = 0;
 			expect(scope.boost()).toEqual(false);
+			scope.data.points = null;
+			expect(scope.boost()).toEqual(false);
 		});
 
 		it('warns if entered points is a decimal', function() {

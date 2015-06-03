@@ -105,15 +105,11 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"Crypt\"><param name=\"android-package\" value=\"org.apache.cordova.crypt.Crypt\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"Intents\"><param name=\"android-package\" value=\"org.minds.intents.Intents\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"PhoneRTCPlugin\"><param name=\"android-package\" value=\"com.dooble.phonertc.PhoneRTCPlugin\" /></feature>",
+                            "xml": "<feature name=\"Crypt\"><param name=\"android-package\" value=\"org.apache.cordova.crypt.Crypt\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -124,7 +120,7 @@
                     "/manifest": [
                         {
                             "xml": "<uses-permission android:name=\"android.permission.CAMERA\" />",
-                            "count": 2
+                            "count": 1
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.VIBRATE\" />",
@@ -148,7 +144,7 @@
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.INTERNET\" />",
-                            "count": 2
+                            "count": 1
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\" />",
@@ -168,30 +164,6 @@
                         },
                         {
                             "xml": "<uses-permission android:name=\"com.minds.mobile.permission.C2D_MESSAGE\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<uses-feature android:name=\"android.hardware.camera\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<uses-feature android:name=\"android.hardware.camera.autofocus\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<uses-feature android:glEsVersion=\"0x00020000\" android:required=\"true\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<uses-permission android:name=\"android.permission.RECORD_AUDIO\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
                             "count": 1
                         }
                     ],
@@ -382,13 +354,13 @@
         "nl.x-services.plugins.socialsharing": {
             "PACKAGE_NAME": "com.minds.mobile"
         },
-        "org.apache.cordova.crypt": {
-            "PACKAGE_NAME": "com.minds.mobile"
-        },
         "cordova-plugin-intents": {
             "PACKAGE_NAME": "com.minds.mobile"
         },
-        "com.dooble.phonertc": {
+        "org.apache.cordova.crypt": {
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
+        "com.eface2face.iosrtc": {
             "PACKAGE_NAME": "com.minds.mobile"
         }
     },

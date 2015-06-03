@@ -8,7 +8,7 @@
 define(function() {
 	'use strict';
 
-	function ctrl($rootScope, $scope, $state, $ionicPopover, storage, push, $ionicPlatform, analytics, $ionicHistory) {
+	function ctrl($rootScope, $scope, $state, $ionicPopover, storage, push, $ionicPlatform, analytics, $ionicHistory, CallReceiver) {
 
 		$scope.logout = function() {
 			storage.remove('loggedin');
@@ -68,7 +68,7 @@ define(function() {
 	}
 
 
-	ctrl.$inject = ['$rootScope', '$scope', '$state', '$ionicPopover', 'storage', 'push', '$ionicPlatform', 'analytics', '$ionicHistory'];
+	ctrl.$inject = ['$rootScope', '$scope', '$state', '$ionicPopover', 'storage', 'push', '$ionicPlatform', 'analytics', '$ionicHistory', 'socket', 'CallReceiver'];
 	return ctrl;
 
 });

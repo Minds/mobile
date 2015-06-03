@@ -122,10 +122,18 @@
         "is_top_level": true,
         "variables": {}
     },
-    "com.dooble.phonertc": {
+    "org.apache.cordova.crypt": {
+        "source": {
+            "type": "local",
+            "path": "../cordova-plugin-crypt"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "com.eface2face.iosrtc": {
         "source": {
             "type": "git",
-            "url": "https://github.com/alongubkin/phonertc.git",
+            "url": "https://github.com/eface2face/cordova-plugin-iosrtc.git",
             "subdir": "."
         },
         "is_top_level": true,

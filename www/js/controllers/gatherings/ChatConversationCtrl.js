@@ -8,7 +8,7 @@
 define(function() {
 	'use strict';
 
-	function ctrl($rootScope, $scope, $stateParams, $state, Client, storage, $ionicScrollDelegate, $timeout, $ionicLoading, push, $ionicPopup, $ionicModal) {
+	function ctrl($rootScope, $scope, $stateParams, $state, Client, storage, $ionicScrollDelegate, $timeout, $ionicLoading, push, $ionicPopup, $ionicModal, socket, $q) {
 
 		if (window.cordova) {
 			cordova.plugins.Keyboard.disableScroll(false);
@@ -90,15 +90,21 @@ define(function() {
 		};
 		$scope.loadMore();
 
-		$scope.startChat = function() {
-			$ionicModal.fromTemplateUrl('templates/gatherings/chat/call.html', {
-				scope: $scope,
-				animation: 'slide-in-up'
-			}).then(function(modal) {
-				$scope.modal = modal;
-				$scope.modal.show();
-				//need to send a signal to our new controller
-				$scope.$emit("call");
+		$scope.startCall = function() {
+			$scope.callConfig = {
+				initiator: true,
+				guid: $scope.guid
+			};
+			$timeout(function() {
+				$ionicModal.fromTemplateUrl('templates/gatherings/chat/call.html', {
+					scope: $scope,
+					animation: 'slide-in-up'
+				}).then(function(modal) {
+					$scope.modal = modal;
+					$scope.modal.show();
+					//need to send a signal to our new controller
+					$scope.$emit("call");
+				});
 			});
 		};
 
@@ -197,48 +203,52 @@ define(function() {
 				template: 'Sending...'
 			});
 
+			var deferred = $q.defer();
+
 			var encrypted = {};
-			console.log($scope.publickeys);
+			//console.log($scope.publickeys);
 			for (var index in $scope.publickeys) {
 				(function(i) {//prevent async callback using wrong index
 					crypt.setPublicKey($scope.publickeys[i]);
 					crypt.encrypt($scope.message, function(success) {
 						//console.log(success);
 						encrypted[i] = encodeURIComponent(success);
+
+						if (encrypted.length == $scope.publickeys.length) {
+							deferred.resolve(true);
+						}
 					});
 				})(index);
 			}
 
-			/**
-			 * @todo make this into a promise.. interval looping is dumb
-			 */
-			//to make this syncronous we have to loop until we get all the values we need!
-			var sync = setInterval(function() {
-				var pushed = false;
-				if (encrypted.length == $scope.publickeys.length) {
-					clearInterval(sync);
+			var pushed = false;
 
-					var data = {};
-					for (var index in encrypted) {
-						data["message:" + index] = encrypted[index];
-					}
-					Client.post('api/v1/conversations/' + $stateParams.username, data, function(data) {
+			/**
+			 * Because encrypting is asynchronous, we use promises to wait..
+			 */
+			deferred.promise.then(function() {
+				var data = {};
+				for (var index in encrypted) {
+					data["message:" + index] = encrypted[index];
+				}
+
+				Client.post('api/v1/conversations/' + $stateParams.username, data,
+					function(data) {
 						if (!pushed) {
 							$scope.messages.push(data.message);
 							$scope.previous = data.message.guid;
 							pushed = true;
 						}
 						$scope.message = "";
-						$ionicScrollDelegate.scrollBottom();
 						$ionicLoading.hide();
-					}, function(error) {
+						$ionicScrollDelegate.scrollBottom();
+					},
+					function(error) {
 						$ionicLoading.hide();
 						alert('sorry, your message could not be sent');
 						console.log(error);
 					});
-
-				}
-			}, 100);
+			});
 
 		};
 
@@ -267,7 +277,7 @@ define(function() {
 	}
 
 
-	ctrl.$inject = ['$rootScope', '$scope', '$stateParams', '$state', 'Client', 'storage', '$ionicScrollDelegate', '$timeout', '$ionicLoading', 'push', '$ionicPopup', '$ionicModal'];
+	ctrl.$inject = ['$rootScope', '$scope', '$stateParams', '$state', 'Client', 'storage', '$ionicScrollDelegate', '$timeout', '$ionicLoading', 'push', '$ionicPopup', '$ionicModal', 'socket', '$q'];
 	return ctrl;
 
 });

@@ -14,6 +14,8 @@ requirejs.config({
 		ionic: '../vendors/ionic/js/ionic.min',
 		ionicAngular: '../vendors/ionic/js/ionic-angular',
 		text: '../vendors/text',
+		socketio: '../vendors/socket-io/socket-io.min',
+		adapter: '../vendors/webrtc/adapter',
 		JSEncrypt: '../vendors/jsencrypt/jsencrypt',
 		imgcache: '../vendors/imgcache/imgcache',
 		facebook: '../vendors/facebook/sdk'

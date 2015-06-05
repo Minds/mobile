@@ -8,8 +8,8 @@
 define(['ionic', 'angular', 'app', 'routes'], function(ionic, angular, app) {
 	'use strict';
 
-	var $html, onDeviceReady = function() {
-		angular.bootstrap(document, [app.name]);
+	var onDeviceReady = function() {
+	//	angular.bootstrap(document, [app.name]);
 		StatusBar.styleDefault();
 		if (window.device.platform === 'iOS') {
 			cordova.plugins.iosrtc.registerGlobals();
@@ -18,8 +18,8 @@ define(['ionic', 'angular', 'app', 'routes'], function(ionic, angular, app) {
 
 	document.addEventListener("deviceready", onDeviceReady, false);
 
-	if ( typeof cordova === 'undefined') {
-		$html = angular.element(document.getElementsByTagName('html')[0]);
+	//if ( typeof cordova === 'undefined') {
+	var	$html = angular.element(document.getElementsByTagName('html')[0]);
 		angular.element().ready(function() {
 			try {
 				angular.bootstrap(document, [app.name]);
@@ -27,7 +27,7 @@ define(['ionic', 'angular', 'app', 'routes'], function(ionic, angular, app) {
 				console.error(e.stack || e.message || e);
 			}
 		});
-	}
+	//}
 
 	document.ontouchmove = function(event) {
 		event.preventDefault();

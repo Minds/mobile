@@ -5,7 +5,7 @@
  * @author Mark Harding
  */
 
-define(['angular', 'adapter'], function(angular) {
+define(['angular', 'socketio'], function(angular) {
     "use strict";
 
 	var factory = function($rootScope, $timeout, $interval, $ionicModal, socket, push) {

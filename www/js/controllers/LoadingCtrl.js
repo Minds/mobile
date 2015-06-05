@@ -16,7 +16,7 @@ define(function() {
 			} else {
 				$state.go('login');
 			}
-		}, 500);
+		}, 100);
 
 		intents.onIntent(function() {
 			$timeout.cancel(timeout);

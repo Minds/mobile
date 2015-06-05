@@ -70,7 +70,7 @@ And that's all. Now you have `window.RTCPeerConnection`, `navigator.getUserMedia
 
 **Q:** What about `<video>` elements and `video.src = URL.createObjectURL(stream)`? do I need custom HTML tags or functions to display WebRTC videos?
 
-**R:** No. Just use an HTML video element as usual, really. The plugin will properly place a native `UIView` layer on top of it by respecting its properties such as the CSS "opacity", "visibility" or "z-index".
+**R:** No. Just use an HTML video element as usual, really. The plugin will properly place a native `UIView` layer on top of it by respecting its properties such as the CSS `display`, `opacity`, `visibility`, `z-index` and also horizontal mirror effect with `-webkit-transform: scaleX(-1);`.
 
 **Q:** Do I need to call special methods to release/free native WebRTC objects? How are they garbage collected?
 
@@ -84,6 +84,15 @@ And that's all. Now you have `window.RTCPeerConnection`, `navigator.getUserMedia
 ## Documentation
 
 Read the full [documentation](https://github.com/eface2face/cordova-plugin-iosrtc/blob/master/docs/index.md) in the *docs* folder.
+
+
+## Known Issues
+
+### iOS Safari and crash on WebSocket events
+
+Don't call plugin methods within WebSocket events (`onopen`, `onmessage`, etc). There is an issue in iOS Safari (see [issue #12](https://github.com/eface2face/cordova-plugin-iosrtc/issues/12)). Instead run a `setTimeout()` within the WebSocket event if you need to call plugin methods on it.
+
+Or better, just load the provided [ios-websocket-hack.js](https://github.com/eface2face/cordova-plugin-iosrtc/blob/master/extra/ios-websocket-hack.js) script into your Cordova iOS app.
 
 
 ## Author

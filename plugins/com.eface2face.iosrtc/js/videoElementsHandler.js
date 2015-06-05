@@ -43,44 +43,10 @@ var debug = require('debug')('iosrtc:videoElementsHandler'),
 			if (!video.src) {
 				// If this video element was previously handling a MediaStreamRenderer, release it.
 				releaseMediaStreamRenderer(video);
-
 				continue;
 			}
 
 			handleVideo(video);
-		}
-
-		function handleVideo(video) {
-			var xhr = new XMLHttpRequest();
-
-			xhr.open('GET', video.src, true);
-			xhr.responseType = 'blob';
-			xhr.onload = function () {
-				if (xhr.status !== 200) {
-					// If this video element was previously handling a MediaStreamRenderer, release it.
-					releaseMediaStreamRenderer(video);
-
-					return;
-				}
-
-				var reader = new FileReader();
-
-				reader.onloadend = function () {
-					var mediaStreamBlobId = reader.result;
-
-					// The retrieved URL does not point to a MediaStream.
-					if (!mediaStreamBlobId || typeof mediaStreamBlobId !== 'string' || !mediaStreamBlobId.match(MEDIASTREAM_ID_REGEXP)) {
-						// If this video element was previously handling a MediaStreamRenderer, release it.
-						releaseMediaStreamRenderer(video);
-
-						return;
-					}
-
-					provideMediaStreamRenderer(video, mediaStreamBlobId);
-				};
-				reader.readAsText(xhr.response);
-			};
-			xhr.send();
 		}
 	}),
 
@@ -117,6 +83,12 @@ var debug = require('debug')('iosrtc:videoElementsHandler'),
 
 			if (node.nodeName === 'VIDEO') {
 				debug('new video element added');
+
+				// Avoid same node firing more than once (really, may happen in some cases).
+				if (node._iosrtcVideoHandled) {
+					return;
+				}
+				node._iosrtcVideoHandled = true;
 
 				// Observe changes in the video element.
 				observeVideo(node);
@@ -193,6 +165,12 @@ function videoElementsHandler(_mediaStreams, _mediaStreamRenderers) {
  */
 
 function observeVideo(video) {
+	debug('observeVideo() | [class:"%s", src:%s]', video.className, video.src);
+
+	if (video.src) {
+		handleVideo(video);
+	}
+
 	// Add .src observer to the video element.
 	videoObserver.observe(video, {
 		// Set to true if additions and removals of the target node's child elements (including text
@@ -215,6 +193,40 @@ function observeVideo(video) {
 		// TODO: Add srcObject, mozSrcObject
 		attributeFilter: ['src']
 	});
+}
+
+
+function handleVideo(video) {
+	var xhr = new XMLHttpRequest();
+
+	xhr.open('GET', video.src, true);
+	xhr.responseType = 'blob';
+	xhr.onload = function () {
+		if (xhr.status !== 200) {
+			// If this video element was previously handling a MediaStreamRenderer, release it.
+			releaseMediaStreamRenderer(video);
+
+			return;
+		}
+
+		var reader = new FileReader();
+
+		reader.onloadend = function () {
+			var mediaStreamBlobId = reader.result;
+
+			// The retrieved URL does not point to a MediaStream.
+			if (!mediaStreamBlobId || typeof mediaStreamBlobId !== 'string' || !mediaStreamBlobId.match(MEDIASTREAM_ID_REGEXP)) {
+				// If this video element was previously handling a MediaStreamRenderer, release it.
+				releaseMediaStreamRenderer(video);
+
+				return;
+			}
+
+			provideMediaStreamRenderer(video, mediaStreamBlobId);
+		};
+		reader.readAsText(xhr.response);
+	};
+	xhr.send();
 }
 
 

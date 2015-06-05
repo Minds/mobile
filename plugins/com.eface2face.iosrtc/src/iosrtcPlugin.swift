@@ -38,6 +38,16 @@ class iosrtcPlugin : CDVPlugin {
 	}
 
 
+	override func onReset() {
+		NSLog("iosrtcPlugin#onReset() | doing nothing")
+	}
+
+
+	override func onAppTerminate() {
+		NSLog("iosrtcPlugin#onAppTerminate() | doing nothing")
+	}
+
+
 	func new_RTCPeerConnection(command: CDVInvokedUrlCommand) {
 		NSLog("iosrtcPlugin#new_RTCPeerConnection()")
 
@@ -674,6 +684,7 @@ class iosrtcPlugin : CDVPlugin {
 		let visible = command.argumentAtIndex(5) as! Bool
 		let opacity = command.argumentAtIndex(6) as! Float
 		let zIndex = command.argumentAtIndex(7) as! Float
+		let mirrored = command.argumentAtIndex(8) as! Bool
 		let pluginMediaStreamRenderer = self.pluginMediaStreamRenderers[id]
 
 		if pluginMediaStreamRenderer == nil {
@@ -687,7 +698,8 @@ class iosrtcPlugin : CDVPlugin {
 			height: height,
 			visible: visible,
 			opacity: opacity,
-			zIndex: zIndex
+			zIndex: zIndex,
+			mirrored: mirrored
 		)
 	}
 

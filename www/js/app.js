@@ -5,14 +5,15 @@
  * @author Mark Harding
  */
 
-define(['angular', 'uiRouter', 'imgcache', 'window', 'config', 'filters/filters', 'services/services', 'directives/directives', 'controllers/controllers', 'ionicAngular'],
+define(['angular', 'uiRouter', 'imgcache', 'window', 'config', 'templates-compiled', 'filters/filters', 'services/services', 'directives/directives', 'controllers/controllers', 'ionicAngular'],
 	function(angular, uiRouter, imgcache, window) {
 	'use strict';
 
-	var app = angular.module('app', ['ionic', 'app.controllers', 'app.filters', 'app.services', 'app.directives', 'app.config', 'ui.router']);
+	var app = angular.module('app', ['ionic', 'app.templates', 'app.controllers', 'app.filters', 'app.services', 'app.directives', 'app.config', 'ui.router']);
 
 	app.run(function() {
-		try {
+		console.log('angular is ready');
+		/*try {
 			imgcache.options.usePersistentCache = true;
 			imgcache.init(function() {
 				console.log('cache created successfully!');
@@ -21,7 +22,7 @@ define(['angular', 'uiRouter', 'imgcache', 'window', 'config', 'filters/filters'
 			});
 
 		} catch (e) {
-		}
+		}*/
 	});
 
 	return app;

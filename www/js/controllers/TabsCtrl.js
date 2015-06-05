@@ -68,7 +68,7 @@ define(function() {
 	}
 
 
-	ctrl.$inject = ['$rootScope', '$scope', '$state', '$ionicPopover', 'storage', 'push', '$ionicPlatform', 'analytics', '$ionicHistory', 'socket', 'CallReceiver'];
+	ctrl.$inject = ['$rootScope', '$scope', '$state', '$ionicPopover', 'storage', 'push', '$ionicPlatform', 'analytics', '$ionicHistory', 'CallReceiver'];
 	return ctrl;
 
 });

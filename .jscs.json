@@ -1,5 +1,5 @@
 {
-  "excludeFiles": ["tests/spec/angular-mocks.js"],
+  "excludeFiles": ["tests/spec/angular-mocks.js", "www/js/main-built.js", "www/js/templates-compiled.js"],
   "disallowKeywords": ["with"],
   "disallowMixedSpacesAndTabs": true,
   "disallowMultipleLineStrings": true,

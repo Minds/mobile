@@ -52,6 +52,7 @@ define(['angular'], function(angular) {
 					storage.set('user_guid', data.user_id);
 					storage.set('access_token', data.access_token);
 					storage.set('loggedin', true);
+					storage.set('loggedin_', true);
 
 					callback(true);
 				}).error(function(data, status, headers, config) {

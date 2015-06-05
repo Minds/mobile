@@ -40,7 +40,35 @@ module.exports = function(grunt) {
 		    www: {
 		      src: ['www/js/**/*.js', 'www/js/**/**/*.js']
 		    },
-		  }
+		},
+		requirejs: {
+			compile: {
+				options: {
+					baseUrl: "www/js",
+					name: "main",
+					mainConfigFile: "www/js/main.js",
+					out: "www/js/main-built.js",
+					paths:{
+						"config": "empty:",
+						"filters": "empty:"
+					},
+					optimize: "uglify2"
+			    }
+			}
+		},
+		html2js: {
+			options: {
+			  base: 'www',
+			  module: 'app.templates',
+			  AMD: true,
+			  singleModule: true,
+			  useStrict: true
+			},
+			main: {
+			  src: ['www/templates/*.html', 'www/templates/**/*.html'],
+			  dest: 'www/js/templates-compiled.js'
+			},
+		}
 
 	});
 
@@ -49,12 +77,14 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-karma');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-contrib-requirejs');
+	grunt.loadNpmTasks('grunt-html2js');
 	grunt.loadNpmTasks('grunt-jscs');
 
 	/**
 	 * Compile
 	 */
-	grunt.registerTask('compile', ['cssmin']);
+	grunt.registerTask('compile', ['html2js', 'requirejs', 'cssmin']);
 
 	/**
 	 * Test

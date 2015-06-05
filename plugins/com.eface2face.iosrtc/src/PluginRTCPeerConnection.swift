@@ -60,8 +60,6 @@ class PluginRTCPeerConnection : NSObject, RTCPeerConnectionDelegate, RTCSessionD
 
 		let pluginRTCPeerConnectionConstraints = PluginRTCPeerConnectionConstraints(pcConstraints: options)
 
-		NSLog("PluginRTCPeerConnection#createOffer() 1")
-
 		self.onCreateDescriptionSuccessCallback = { (rtcSessionDescription: RTCSessionDescription) -> Void in
 			NSLog("PluginRTCPeerConnection#createOffer() | success callback [type:\(rtcSessionDescription.type)]")
 
@@ -73,15 +71,11 @@ class PluginRTCPeerConnection : NSObject, RTCPeerConnectionDelegate, RTCSessionD
 			callback(data: data)
 		}
 
-		NSLog("PluginRTCPeerConnection#createOffer() 2")
-
 		self.onCreateDescriptionFailureCallback = { (error: NSError) -> Void in
 			NSLog("PluginRTCPeerConnection#createOffer() | failure callback: \(error)")
 
 			errback(error: error)
 		}
-
-		NSLog("PluginRTCPeerConnection#createOffer() 3")
 
 		self.rtcPeerConnection.createOfferWithDelegate(self,
 			constraints: pluginRTCPeerConnectionConstraints.getConstraints())
@@ -421,7 +415,7 @@ class PluginRTCPeerConnection : NSObject, RTCPeerConnectionDelegate, RTCSessionD
 		}
 
 		// Emit an empty candidate if iceGatheringState is "complete".
-		if newState.value == RTCICEGatheringComplete.value {
+		if newState.value == RTCICEGatheringComplete.value && self.rtcPeerConnection.localDescription != nil {
 			self.eventListener(data: [
 				"type": "icecandidate",
 				// NOTE: Cannot set null as value.

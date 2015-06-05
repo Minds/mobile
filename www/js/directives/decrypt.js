@@ -1,6 +1,6 @@
 /*global define*/
 
-define(['angular', 'JSEncrypt'], function(angular, JSEncrypt) {
+define(['angular'], function(angular) {
 	"use strict";
 
 	var directive = function($rootScope, $filter, storage, $compile, $sce) {

@@ -5,7 +5,7 @@
  * @author Mark Harding
  */
 
-define(function() {
+define(['adapter'], function() {
 	'use strict';
 
 	function ctrl($rootScope, $scope, $stateParams, $state, $timeout, $interval, socket, Client, $sce, $q) {
@@ -14,10 +14,10 @@ define(function() {
 		$scope.started = false;
 		$scope.videoCall = true;
 		$scope.camera = true; //show our own camera
-		$scope.muted = true;
+		$scope.muted = false;
 		$rootScope.inCall = true;
 
-		var peer, localStream;
+		var peer, localStream, turnTokenListener;
 
 		$scope.iceServers = null;
 
@@ -43,19 +43,19 @@ define(function() {
 		$scope.startMedia = function() {
 
 			var deferred = $q.defer();
-			navigator.getUserMedia({audio:true, video:$scope.videoCall},
+			navigator.getUserMedia({audio:true, video: true},
 				function(stream) {
 					localStream = stream;
 
 					peer.addStream(localStream);
 
-					/*if($scope.videoCall){
+					if ($scope.videoCall) {
 						var src = window.URL.createObjectURL(localStream);
 						var video = document.getElementById("preview");
 						video.src = src;
 						video.muted = "muted";
 						video.play();
-					}*/
+					}
 
 					deferred.resolve(true);
 				},
@@ -68,8 +68,11 @@ define(function() {
 
 		$scope.start = function() {
 			var deferred = $q.defer();
-			socket.emit('turnToken');
-			socket.on('turnToken', function(token) {
+			socket.emit('turnToken', function(error, message) {
+				console.log('failed to ask for token');
+				deferred.reject(message);
+			});
+			turnTokenListener = socket.on('turnToken', function(token) {
 				peer = new RTCPeerConnection({ iceServers: token.iceServers });
 				console.log(token.iceServers);
 				peer.onicecandidate = $scope.onIceCandidate;
@@ -78,6 +81,7 @@ define(function() {
 				peer.oniceconnectionstatechange = $scope.onIceConnectionChange;
 				//continue once we have media setup
 				deferred.resolve(true);
+				socket.removeListener('turnToken', turnTokenListener);
 			});
 			return deferred.promise;
 		};
@@ -88,6 +92,8 @@ define(function() {
 		$scope.call = function(guid) {
 
 			$scope.status = "pinging";
+			$scope.$apply();
+
 			socket.emit('sendMessage', guid, {type: 'call'});
 
 			//also send a push notifiation
@@ -143,6 +149,9 @@ define(function() {
 						socket.emit('sendMessage', $scope.callConfig.guid, {type: 'OfferAnswer', answer: JSON.stringify(sdp)});
 						$scope.status = "answered";
 						$scope.$apply();
+						if (window.device.platform === 'iOS') {
+							cordova.plugins.iosrtc.refreshVideos();
+						}
 					},
 					function(error) {
 						alert('error sending answer');
@@ -151,6 +160,19 @@ define(function() {
 
 			});
 
+		};
+
+		$scope.hasRemoteDescriptions = function() {
+			var deferred = $q.defer();
+			var interval = $interval(function() {
+				if ($scope.status == "answered") {
+					$interval.cancel(interval);
+					deferred.resolve(true);
+				} else {
+					console.log("status == " + $scope.status);
+				}
+			}, 500);
+			return deferred.promise;
 		};
 
 		$scope.answer = function() {
@@ -245,18 +267,34 @@ define(function() {
 						}
 					);
 
+					if (window.device.platform === 'iOS') {
+						cordova.plugins.iosrtc.refreshVideos();
+					}
+
 					$scope.status = "answered";
 					$scope.$apply();
 					break;
 				case 'reject':
-					$scope.modal.remove();
+					$scope.status = "rejected";
+					$scope.$digest();
+					//something went wrong..
+					$timeout(function() {
+						$scope.modal.remove();
+					}, 3000);
 					break;
 				case 'engaged':
-					$scope.modal.remove();
+					$scope.status = "engaged";
+					$scope.$digest();
+					//something went wrong..
+					$timeout(function() {
+						$scope.modal.remove();
+					}, 3000);
 					break;
 				case 'candidate':
-					if (duplicates.indexOf(message.candidate) === -1 && peer) {
+					//if (duplicates.indexOf(message.candidate) === -1) {
+					$scope.hasRemoteDescriptions().then(function() {
 						var candidate = JSON.parse(message.candidate);
+
 						//console.log('Received candiate');
 						//console.log(candidate);
 						//for testing TURN
@@ -268,7 +306,8 @@ define(function() {
 
 						peer.addIceCandidate(new RTCIceCandidate(candidate));
 						duplicates.push(message.candidate);
-					}
+					});
+					//}
 					break;
 				case 'available':
 					//if ($scope.callConfig.initiator && $scope.status == 'pinging') {
@@ -283,26 +322,35 @@ define(function() {
 
 		socket.on('messageReceived',socketListener);
 
-		$scope.start().then(function() {
-
-			if ($scope.callConfig.initiator) {
-				/**
-				 * Send a call signal to the other use
-				 */
-				$scope.call($scope.callConfig.guid);
-			} else {
-				/**
-				 * Send available signal to the caller
-				 */
-				socket.emit('sendMessage', $scope.callConfig.guid, {type:'available'});
+		$scope.start().then(
+			function() {
+				if ($scope.callConfig.initiator) {
+					/**
+					 * Send a call signal to the other use
+					 */
+					$scope.call($scope.callConfig.guid);
+				} else {
+					/**
+					 * Send available signal to the caller
+					 */
+					socket.emit('sendMessage', $scope.callConfig.guid, {type:'available'});
+				}
+			},
+			function() {
+				$scope.status = "failed_signal";
+				//something went wrong..
+				$timeout(function() {
+					$scope.modal.remove();
+				}, 3000);
 			}
-
-		});
+		);
 
 		$scope.$on('modal.removed', function() {
 			document.getElementById('ringing').pause(); //in case canceled.
 			$rootScope.inCall = false;
 			socket.removeListener('messageReceived', socketListener);
+			if (turnTokenListener)
+				socket.removeListener('turnToken', turnTokenListener);
 			localStream.stop();
 			if (peer) {
 				peer.close();

@@ -14,11 +14,9 @@ requirejs.config({
 		ionic: '../vendors/ionic/js/ionic.min',
 		ionicAngular: '../vendors/ionic/js/ionic-angular',
 		text: '../vendors/text',
-		socketio: '../vendors/socket-io/socket-io.min',
+		socketio: '../vendors/socket-io/socket-io',
 		adapter: '../vendors/webrtc/adapter',
-		JSEncrypt: '../vendors/jsencrypt/jsencrypt',
-		imgcache: '../vendors/imgcache/imgcache',
-		facebook: '../vendors/facebook/sdk'
+		imgcache: '../vendors/imgcache/imgcache'
 	},
 	shim: {
 		angular: {
@@ -39,12 +37,6 @@ requirejs.config({
 		},
 		ionicAngular: {
 			deps: ['angular', 'ionic', 'uiRouter', 'angularAnimate', 'angularSanitize']
-		},
-		JSEncrypt: {
-			exports: 'JSEncrypt'
-		},
-		facebook: {
-			exports: 'FB'
 		}
 	},
 	priority: ['angular', 'ionic'],

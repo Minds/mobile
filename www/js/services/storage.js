@@ -22,6 +22,7 @@ define(['angular'], function(angular) {
 					try {
 						return JSON.parse(val);
 					} catch (e) {
+						console.log(e);
 						return false;
 					}
 				} else {

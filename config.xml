@@ -67,7 +67,7 @@
      </platform>
 
 	<preference name="SplashScreen" value="screen" />
-    <preference name="SplashScreenDelay" value="5000" />
+    <preference name="SplashScreenDelay" value="2750" />
 
     <feature name="StatusBar">
             <param name="ios-package" value="CDVStatusBar" onload="true" />
@@ -103,9 +103,9 @@
     </feature>
 
     <preference name="StatusBarOverlaysWebView" value="true" />
-   <preference name="iosPersistentFileLocation" value="Library" />
-   <preference name="BackupWebStorage" value="none" />
-
+    <preference name="iosPersistentFileLocation" value="Library" />
+    <preference name="BackupWebStorage" value="none" />
+    <preference name="xwalkVersion" value="14" />
 
     <access origin="*"/>
   

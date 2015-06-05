@@ -47,6 +47,7 @@ module.exports = function(grunt) {
 					baseUrl: "www/js",
 					name: "main",
 					mainConfigFile: "www/js/main.js",
+					preserveLicenseComments: false,
 					out: "www/js/main-built.js",
 					paths:{
 						"config": "empty:",

@@ -55,14 +55,6 @@
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-plugin-file-transfer": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-file-transfer"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "cordova-plugin-media-capture": {
         "source": {
             "type": "registry",
@@ -134,6 +126,15 @@
         "source": {
             "type": "git",
             "url": "https://github.com/eface2face/cordova-plugin-iosrtc.git",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-file-transfer": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/apache/cordova-plugin-file-transfer.git",
             "subdir": "."
         },
         "is_top_level": true,

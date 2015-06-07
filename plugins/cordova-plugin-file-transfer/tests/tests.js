@@ -32,7 +32,8 @@ exports.defineAutoTests = function () {
     var DEFAULT_FILESYSTEM_SIZE = 1024*50; //filesystem size in bytes
     var UNKNOWN_HOST = "http://foobar.apache.org";
     var HEADERS_ECHO = "http://whatheaders.com"; // NOTE: this site is very useful!
-    var DOWNLOAD_TIMEOUT = 10000; // download tests sometimes need a higher timeout to complete successfully
+    var DOWNLOAD_TIMEOUT = 2 * 60 * 1000; // download tests sometimes need a higher timeout to complete successfully
+    var UPLOAD_TIMEOUT = 2 * 60 * 1000; // upload tests sometimes need a higher timeout to complete successfully
     var ABORT_DELAY = 100; // for abort() tests
 
     // config for upload test server
@@ -113,7 +114,6 @@ exports.defineAutoTests = function () {
                 function (fileEntry) {
                     fileEntry.remove(
                         function () {
-                            console.log('deleted \'' + name + '\'');
                             done();
                         },
                         function () {
@@ -122,7 +122,6 @@ exports.defineAutoTests = function () {
                     );
                 },
                 function () {
-                    console.log('no \'' + name + '\' to delete; skipping deletion');
                     done();
                 }
             );
@@ -134,7 +133,6 @@ exports.defineAutoTests = function () {
                     fileEntry.createWriter(function (writer) {
 
                         writer.onwrite = function () {
-                            console.log('created test file \'' + name + '\'');
                             success(fileEntry);
                         };
 
@@ -722,7 +720,7 @@ exports.defineAutoTests = function () {
 
                     // NOTE: removing uploadOptions cause Android to timeout
                     transfer.upload(localFilePath, fileURL, uploadWin, unexpectedCallbacks.httpFail, uploadOptions);
-                });
+                }, UPLOAD_TIMEOUT);
 
                 it("filetransfer.spec.19 should be able to upload a file with http basic auth", function (done) {
 
@@ -735,7 +733,7 @@ exports.defineAutoTests = function () {
 
                     // NOTE: removing uploadOptions cause Android to timeout
                     transfer.upload(localFilePath, fileURL, uploadWin, unexpectedCallbacks.httpFail, uploadOptions);
-                });
+                }, UPLOAD_TIMEOUT);
 
                 it("filetransfer.spec.21 should be stopped by abort() right away", function (done) {
 
@@ -768,7 +766,7 @@ exports.defineAutoTests = function () {
                     };
 
                     writeFile(root, fileName, new Array(100000).join('aborttest!'), fileWin);
-                }, 10000); // we are creating a pretty big file here so we need some time
+                }, UPLOAD_TIMEOUT);
 
                 it("filetransfer.spec.22 should get http status and body on failure", function (done) {
 
@@ -781,7 +779,7 @@ exports.defineAutoTests = function () {
                     };
 
                     transfer.upload(localFilePath, fileURL, unexpectedCallbacks.httpWin, uploadFail, uploadOptions);
-                });
+                }, UPLOAD_TIMEOUT);
 
                 it("filetransfer.spec.24 should handle malformed urls", function (done) {
 
@@ -820,7 +818,7 @@ exports.defineAutoTests = function () {
                     };
 
                     transfer.upload('does_not_exist.txt', fileURL, unexpectedCallbacks.httpWin, uploadFail);
-                });
+                }, UPLOAD_TIMEOUT);
 
                 it("filetransfer.spec.26 should handle bad file path", function (done) {
 
@@ -863,7 +861,7 @@ exports.defineAutoTests = function () {
 
                     // NOTE: removing uploadOptions cause Android to timeout
                     transfer.upload(localFilePath, fileURL, uploadWin, unexpectedCallbacks.httpFail, uploadOptions);
-                });
+                }, UPLOAD_TIMEOUT);
 
                 it("filetransfer.spec.29 (compatibility) should be able to upload a file using local paths", function (done) {
 
@@ -893,7 +891,7 @@ exports.defineAutoTests = function () {
                     cordova.exec(function (localPath) {
                         transfer.upload(localPath, fileURL, uploadWin, unexpectedCallbacks.httpFail, uploadOptions);
                     }, unsupported, 'File', '_getLocalFilesystemPath', [internalFilePath]);
-                });
+                }, UPLOAD_TIMEOUT);
             });
         });
     });

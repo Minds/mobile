@@ -69,10 +69,6 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"FileTransfer\"><param name=\"android-package\" value=\"org.apache.cordova.filetransfer.FileTransfer\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"InAppBrowser\"><param name=\"android-package\" value=\"org.apache.cordova.inappbrowser.InAppBrowser\" /></feature>",
                             "count": 1
                         },
@@ -110,6 +106,10 @@
                         },
                         {
                             "xml": "<feature name=\"Crypt\"><param name=\"android-package\" value=\"org.apache.cordova.crypt.Crypt\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"FileTransfer\"><param name=\"android-package\" value=\"org.apache.cordova.filetransfer.FileTransfer\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -327,9 +327,6 @@
         "cordova-plugin-file": {
             "PACKAGE_NAME": "com.minds.mobile"
         },
-        "cordova-plugin-file-transfer": {
-            "PACKAGE_NAME": "com.minds.mobile"
-        },
         "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "com.minds.mobile"
         },
@@ -361,6 +358,9 @@
             "PACKAGE_NAME": "com.minds.mobile"
         },
         "com.eface2face.iosrtc": {
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
+        "cordova-plugin-file-transfer": {
             "PACKAGE_NAME": "com.minds.mobile"
         }
     },

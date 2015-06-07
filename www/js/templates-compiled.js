@@ -1688,7 +1688,7 @@ define(['angular'], function(angular){
     "\n" +
     "		<div ng-switch=\"entity.type\" style=\"margin-bottom:-42px\">\n" +
     "			<div ng-switch-when=\"object\" ng-controller=\"DiscoverCtrl\">\n" +
-    "				<div class=\"list card tabs-background-white \" ng-include src=\"'templates/discover/entities/object.html'\"></div>\n" +
+    "				<div class=\"list card tabs-background-white {{entity.subtype}}\" ng-include src=\"'templates/discover/entities/object.html'\"></div>\n" +
     "			</div>\n" +
     "			<div ng-switch-when=\"activity\" ng-controller=\"NewsfeedCtrl\">\n" +
     "				<activity-view class=\"activity-item list card\"></activity-view>\n" +

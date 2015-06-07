@@ -409,16 +409,20 @@ define(function() {
 
 		$scope.openActions = function(activity) {
 			var guid = activity.guid;
-			$ionicActionSheet.show({
-				buttons: [
-				//{ text: '<b>Share</b> This' },
+			var buttons = [
 				{
 					text: '<b>Share</b>'
-				}, {
-					text: 'Download'
-				}, {
+				}, 
+				{
 					text: 'Report this'
-				}],
+				}
+			];
+
+			if (activity.custom_data && activity.custom_data[0] && activity.custom_data[0].src)
+				buttons.push({ text: 'Download' });
+
+			$ionicActionSheet.show({
+				buttons: buttons,
 				destructiveText: 'Delete',
 				destructiveButtonClicked: function() {
 					if (activity.p2p_boosted) {
@@ -467,7 +471,9 @@ define(function() {
 						window.plugins.socialsharing.share('via minds', null, null, $rootScope.node_url + 'newsfeed/' + guid);
 						break;
 					case 1:
-
+						window.location.href = "mailto:report@minds.com?subject=Report " + guid + "&body=This content violates the terms and conditions";
+						break;
+					case 2:
 						window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fs) {
 							var ft = new FileTransfer();
 							console.log(fs.root.toURL());
@@ -486,8 +492,6 @@ define(function() {
 							}, false);
 						});
 						break;
-					case 2:
-						window.location.href = "mailto:report@minds.com?subject=Report " + guid + "&body=This content violates the terms and conditions";
 					}
 					return true;
 				}

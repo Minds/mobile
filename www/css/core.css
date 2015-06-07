@@ -12,7 +12,9 @@
 .platform-android h1, .platform-android h2, .platform-android h3, .platform-android h4{
 	font-weight:700!important;
 }
-
+.scroll{
+	-webkit-backface-visibility:hidden;
+}
 .view-bg, .grey-bg{
 	background-color: #d2d5da;
 }

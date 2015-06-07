@@ -412,7 +412,7 @@ define(function() {
 			var buttons = [
 				{
 					text: '<b>Share</b>'
-				}, 
+				},
 				{
 					text: 'Report this'
 				}

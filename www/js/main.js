@@ -14,8 +14,6 @@ requirejs.config({
 		ionic: '../vendors/ionic/js/ionic.min',
 		ionicAngular: '../vendors/ionic/js/ionic-angular',
 		text: '../vendors/text',
-		socketio: '../vendors/socket-io/socket-io',
-		adapter: '../vendors/webrtc/adapter',
 		imgcache: '../vendors/imgcache/imgcache'
 	},
 	shim: {

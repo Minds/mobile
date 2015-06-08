@@ -357,9 +357,6 @@
         "org.apache.cordova.crypt": {
             "PACKAGE_NAME": "com.minds.mobile"
         },
-        "com.eface2face.iosrtc": {
-            "PACKAGE_NAME": "com.minds.mobile"
-        },
         "cordova-plugin-file-transfer": {
             "PACKAGE_NAME": "com.minds.mobile"
         }

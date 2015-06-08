@@ -10,71 +10,57 @@
                     "AVFoundation.framework": [
                         {
                             "xml": false,
-                            "count": 2
+                            "count": 1
                         }
                     ],
                     "CoreGraphics.framework": [
                         {
                             "xml": false,
-                            "count": 8
+                            "count": 7
                         }
                     ],
                     "CoreMedia.framework": [
-                        {
-                            "xml": false,
-                            "count": 1
-                        },
                         {
                             "xml": true,
                             "count": 1
                         }
                     ],
-                    "GLKit.framework": [
-                        {
-                            "xml": false,
-                            "count": 1
-                        }
-                    ],
+                    "GLKit.framework": [],
                     "OpenGLES.framework": [
                         {
                             "xml": false,
-                            "count": 2
+                            "count": 1
                         }
                     ],
                     "CoreVideo.framework": [
                         {
                             "xml": false,
-                            "count": 2
+                            "count": 1
                         }
                     ],
-                    "CoreAudio.framework": [
+                    "CoreAudio.framework": [],
+                    "QuartzCore.framework": [
                         {
                             "xml": false,
                             "count": 1
                         }
                     ],
-                    "QuartzCore.framework": [
-                        {
-                            "xml": false,
-                            "count": 2
-                        }
-                    ],
                     "AssetsLibrary.framework": [
                         {
                             "xml": false,
-                            "count": 4
+                            "count": 3
                         }
                     ],
                     "MobileCoreServices.framework": [
                         {
                             "xml": false,
-                            "count": 5
+                            "count": 4
                         }
                     ],
                     "CoreLocation.framework": [
                         {
                             "xml": false,
-                            "count": 2
+                            "count": 1
                         },
                         {
                             "xml": true,
@@ -84,27 +70,17 @@
                     "AudioToolbox.framework": [
                         {
                             "xml": false,
-                            "count": 2
+                            "count": 1
                         }
                     ],
                     "libc++.dylib": [
                         {
                             "xml": false,
-                            "count": 2
-                        }
-                    ],
-                    "libstdc++.dylib": [
-                        {
-                            "xml": false,
                             "count": 1
                         }
                     ],
-                    "libsqlite3.0.dylib": [
-                        {
-                            "xml": false,
-                            "count": 1
-                        }
-                    ],
+                    "libstdc++.dylib": [],
+                    "libsqlite3.0.dylib": [],
                     "CFNetwork.framework": [
                         {
                             "xml": false,
@@ -190,10 +166,6 @@
             "config.xml": {
                 "parents": {
                     "/*": [
-                        {
-                            "xml": "<feature name=\"iosrtcPlugin\"><param name=\"ios-package\" value=\"iosrtcPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
                         {
                             "xml": "<feature name=\"Keyboard\"><param name=\"ios-package\" onload=\"true\" value=\"IonicKeyboard\" /></feature>",
                             "count": 1
@@ -336,9 +308,6 @@
         }
     },
     "installed_plugins": {
-        "com.eface2face.iosrtc": {
-            "PACKAGE_NAME": "com.minds.mobile"
-        },
         "com.ionic.keyboard": {
             "PACKAGE_NAME": "com.minds.mobile"
         },

@@ -8,7 +8,7 @@
 define(function() {
 	'use strict';
 
-	function ctrl($rootScope, $scope, $stateParams, $state, Client, storage, $ionicScrollDelegate, $timeout, $ionicLoading, push, $ionicPopup, $ionicModal, socket, $q) {
+	function ctrl($rootScope, $scope, $stateParams, $state, Client, storage, $ionicScrollDelegate, $timeout, $ionicLoading, push, $ionicPopup, $ionicModal, $q) {
 
 		if (window.cordova) {
 			cordova.plugins.Keyboard.disableScroll(false);
@@ -89,24 +89,6 @@ define(function() {
 
 		};
 		$scope.loadMore();
-
-		$scope.startCall = function() {
-			$scope.callConfig = {
-				initiator: true,
-				guid: $scope.guid
-			};
-			$timeout(function() {
-				$ionicModal.fromTemplateUrl('templates/gatherings/chat/call.html', {
-					scope: $scope,
-					animation: 'slide-in-up'
-				}).then(function(modal) {
-					$scope.modal = modal;
-					$scope.modal.show();
-					//need to send a signal to our new controller
-					$scope.$emit("call");
-				});
-			});
-		};
 
 		/**
 		 * Only do polling if we can't use push notifications
@@ -277,7 +259,7 @@ define(function() {
 	}
 
 
-	ctrl.$inject = ['$rootScope', '$scope', '$stateParams', '$state', 'Client', 'storage', '$ionicScrollDelegate', '$timeout', '$ionicLoading', 'push', '$ionicPopup', '$ionicModal', 'socket', '$q'];
+	ctrl.$inject = ['$rootScope', '$scope', '$stateParams', '$state', 'Client', 'storage', '$ionicScrollDelegate', '$timeout', '$ionicLoading', 'push', '$ionicPopup', '$ionicModal', '$q'];
 	return ctrl;
 
 });

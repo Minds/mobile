@@ -11,9 +11,6 @@ define(['ionic', 'angular', 'app', 'routes'], function(ionic, angular, app) {
 	var onDeviceReady = function() {
 	//	angular.bootstrap(document, [app.name]);
 		StatusBar.styleDefault();
-		if (window.device.platform === 'iOS') {
-			cordova.plugins.iosrtc.registerGlobals();
-		}
 	};
 
 	document.addEventListener("deviceready", onDeviceReady, false);

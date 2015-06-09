@@ -211,7 +211,7 @@ progress[value] {
 	z-index:10;
 	box-shadow:0 0 2px #000;
 }
-.card .item-image img{
+.platform-android .card .item-image img{
 	transform: translateZ(0);
 	-webkit-transform: translateZ(0);
 }

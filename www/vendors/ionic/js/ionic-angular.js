@@ -5353,7 +5353,9 @@ function($scope, $attrs, $element, $timeout) {
       $element[0].classList.add('active');
     });
     self.isLoading = true;
-    $scope.$parent && $scope.$parent.$apply($attrs.onInfinite || '');
+  	$timeout(function(){
+  		$scope.$parent && $scope.$parent.$apply($attrs.onInfinite || '');
+  	});
   }
 
   function finishInfiniteScroll() {

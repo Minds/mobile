@@ -1555,7 +1555,7 @@ define(['angular'], function(angular){
     "<ion-view ng-controller=\"NewsfeedViewCtrl\" class=\"view-bg\">\n" +
     "\n" +
     "	<ion-nav-buttons side=\"left\">\n" +
-    "        <a class=\"button button-clear icon ion-arrow-left-b\" href=\"#/tab/newsfeed\"></a>\n" +
+    "        <a class=\"button button-clear icon ion-arrow-left-b\" ng-click=\"back()\"></a>\n" +
     "    </ion-nav-buttons>\n" +
     "\n" +
     "    <ion-content >\n" +

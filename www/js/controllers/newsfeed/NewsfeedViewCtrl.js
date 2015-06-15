@@ -8,7 +8,7 @@
 define(function() {
 	'use strict';
 
-	function ctrl($rootScope, $scope, $stateParams, Client, $ionicLoading, $ionicActionSheet) {
+	function ctrl($rootScope, $scope, $stateParams, Client, $ionicLoading, $ionicActionSheet, $ionicHistory) {
 
 		$scope.guid = "";
 		$scope.cb = Date.now();
@@ -114,11 +114,15 @@ define(function() {
 				}
 			});
 		};
+		
+		$scope.back = function(){
+			$ionicHistory.goBack();
+		};
 
 	}
 
 
-	ctrl.$inject = ['$rootScope', '$scope', '$stateParams', 'Client', '$ionicLoading', '$ionicActionSheet'];
+	ctrl.$inject = ['$rootScope', '$scope', '$stateParams', 'Client', '$ionicLoading', '$ionicActionSheet', '$ionicHistory'];
 	return ctrl;
 
 });

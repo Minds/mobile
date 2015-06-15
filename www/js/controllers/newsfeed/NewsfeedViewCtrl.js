@@ -114,8 +114,8 @@ define(function() {
 				}
 			});
 		};
-		
-		$scope.back = function(){
+
+		$scope.back = function() {
 			$ionicHistory.goBack();
 		};
 

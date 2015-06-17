@@ -140,6 +140,7 @@ define(function() {
 						if ($scope.nearby) {
 							$scope.nearby = false;
 							$scope.hasNearby = false;
+							$scope.cachebreaker = Date.now();
 							$scope.load();
 						}
 						$scope.hasMoreData = false;

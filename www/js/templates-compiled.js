@@ -862,7 +862,7 @@ define(['angular'], function(angular){
     "<!-- Video -->\n" +
     "<div class=\"item item-image item-image-video\" ng-if=\"entity.subtype == 'video' || entity.subtype == 'audio'\" play-video playsrc=\"{{entity.src['360.mp4']}}\">\n" +
     "          \n" +
-    "	<img ng-src=\"{{entity.thumbnail_src}}\" onerror=\"this.src='img/img-placeholder.png'\" ng-hide=\"iPad\">\n" +
+    "	<img ng-src=\"{{entity.thumbnail_src}}\" onerror=\"this.src='img/img-placeholder.png'\">\n" +
     "     <i class=\"icon ion-play\"></i>\n" +
     "     <div class=\"overlay\">\n" +
     "    	<h2  ng-bind-html=\"entity.title\"></h2>\n" +

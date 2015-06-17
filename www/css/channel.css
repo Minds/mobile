@@ -50,6 +50,18 @@
   margin: auto;
   display: block;
 }
+.channel-content .scroll-refresher{
+	position: absolute;
+	top: -280px;
+	right: 0;
+	left: 0;
+	overflow: hidden;
+	margin: auto;
+	height: 60px;
+	color:#FFF;
+	/* opacity:1; */
+	text-shadow:0 0 2px #FFF;
+}
 .channel-content h1{
 	color:#FFF;
 	line-height:26px;

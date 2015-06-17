@@ -99,8 +99,10 @@ define(function() {
 				Cacher.put('notification.cachebreaker', Date.now);
 
 				$scope.$broadcast('scroll.refreshComplete');
+				$scope.$broadcast('scroll.infiniteScrollComplete');
 
 				$scope.inprogress = false;
+				$scope.hasMoreData = true;
 
 			}, function(error) {
 				$scope.inprogress = false;

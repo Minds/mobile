@@ -19,7 +19,7 @@ define(function() {
 		};
 
 		$scope.$watch('data.points', function() {
-			$scope.data.impressions = $scope.data.points * $scope.data.rate;
+			$scope.data.impressions = Math.round($scope.data.points * $scope.data.rate);
 		}, true);
 
 		Client.get('api/v1/boost/rates', {
@@ -45,6 +45,16 @@ define(function() {
 				$scope.data.points = 1;
 				$ionicLoading.show({
 					template: 'Sorry, you must enter a whole point.'
+				});
+				$timeout(function() {
+					$ionicLoading.hide();
+				}, 800);
+				return false;
+			}
+
+			if ($scope.data.desintation === '' && ($scope.data.impressions === 0 || Math.round($scope.data.impressions) === 0)) {
+				$ionicLoading.show({
+					template: 'Sorry, you must have at least 1 impression.'
 				});
 				$timeout(function() {
 					$ionicLoading.hide();

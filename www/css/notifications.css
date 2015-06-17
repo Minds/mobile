@@ -1,6 +1,7 @@
 .notification-item div{
 	display:-webkit-flex;
 	display:flex;
+	-webkit-flex:1;
 	flex:1;
 }
 .notification-item a{
@@ -8,6 +9,7 @@
 	text-decoration:none;
 	display:-webkit-flex;
 	display:flex;
+	-webkit-flex:1;
 	flex:1;
 }
 .notification-user-subscribe{

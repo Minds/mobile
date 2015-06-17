@@ -50,8 +50,11 @@ define(['angular'], function(angular) {
 					console.log("trying to play:: " + video.src);
 					video.load();
 					video.play();
-					video.webkitRequestFullscreen();
-					//video.enterFullscreen();
+
+					if (device.platform == 'iOS')
+						video.webkitEnterFullscreen();
+					else
+						video.webkitRequestFullscreen();
 
 					video.onplaying = function() {
 						$ionicLoading.hide();

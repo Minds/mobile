@@ -1,0 +1,30 @@
+/**
+ * Tablets require specific changes
+ */
+
+@media only screen and (min-device-width : 768px) { /* 10" tablets and iPad */
+	
+	.card{
+		margin: 20px 82px;
+	}
+	
+	.capture-options ion-item{
+		margin-top:100px;
+	}
+	
+	.swipe-container .card .item-image{
+		max-height:400px;
+	}
+	.swipe-container .card .item-image-user{
+		max-height:400px;
+	}
+	
+	.tutorial .box>.swipe-container{
+		height:500px;
+	}
+	
+	.slider-slide .box{
+		margin:64px;
+	}
+	
+}

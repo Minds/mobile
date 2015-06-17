@@ -104,6 +104,7 @@ define(['angular', 'angular-mocks', 'app'], function(angular, mocks, app) {
 		it('should fail if we don\'t have enough points', function() {
 
 			scope.data.points = 200;
+			scope.$digest();
 			var promise = scope.boost(),
 				resolved;
 
@@ -120,6 +121,7 @@ define(['angular', 'angular-mocks', 'app'], function(angular, mocks, app) {
 		it('should fail if over the cap', function() {
 
 			scope.data.points = 100;
+			scope.$digest();
 			var promise = scope.boost(),
 				resolved;
 
@@ -146,6 +148,7 @@ define(['angular', 'angular-mocks', 'app'], function(angular, mocks, app) {
 			});
 
 			scope.data.points = 50;
+			scope.$digest();
 			var promise = scope.boost(),
 				resolved;
 
@@ -173,6 +176,7 @@ define(['angular', 'angular-mocks', 'app'], function(angular, mocks, app) {
 			});
 
 			scope.data.points = 50;
+			scope.$digest();
 			var promise = scope.boost(),
 				resolved;
 

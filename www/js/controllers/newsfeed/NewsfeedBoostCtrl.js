@@ -19,7 +19,10 @@ define(function() {
 		};
 
 		$scope.$watch('data.points', function() {
-			$scope.data.impressions = Math.round($scope.data.points * $scope.data.rate);
+			if ($scope.data.destination === '')
+				$scope.data.impressions = Math.round($scope.data.points * $scope.data.rate);
+			else
+				$scope.data.impressions = $scope.data.points;
 		}, true);
 
 		Client.get('api/v1/boost/rates', {
@@ -52,7 +55,7 @@ define(function() {
 				return false;
 			}
 
-			if ($scope.data.desintation === '' && ($scope.data.impressions === 0 || Math.round($scope.data.impressions) === 0)) {
+			if ($scope.data.destination === '' && ($scope.data.impressions === 0 || Math.round($scope.data.impressions) === 0)) {
 				$ionicLoading.show({
 					template: 'Sorry, you must have at least 1 impression.'
 				});

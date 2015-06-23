@@ -2,7 +2,7 @@
     <owner-brief-view owner="{{activity.ownerObj}}" ts="{{activity.time_created}}" show-more-button="true"></owner-brief-view>
     
     <div class="item item-text-wrap" ng-if="activity.message">
-        <p ng-bind-html="activity.message | linky" class="wrap"></p>
+        <p ng-bind-html="activity.message | linky" class="wrap" style="white-space: pre;"></p>
     </div>
     
     <div class="item item-text-wrap" ng-if="activity.title && !activity.perma_url">

@@ -105,10 +105,29 @@ define(function() {
 						title: 'Ooops!',
 						subTitle: 'Sorry, there is a limit on how many points can be spent. ',
 						buttons: [{
-							text: '<b>Lower rate</b>',
+							text: '<b>Lower rate?</b>',
 							type: 'button-positive',
 							onTap: function(e) {
 								$scope.data.points = success.cap - 1;
+							}
+						}, {
+							text: 'Close.'
+						}]
+					});
+
+					return deferred.resolve(false);
+				}
+
+				//under the min?
+				if ($scope.data.points < success.min) {
+					$ionicPopup.alert({
+						title: 'Ooops!',
+						subTitle: 'Sorry, you need to enter at least ' + success.min + ' points',
+						buttons: [{
+							text: '<b>Increase?</b>',
+							type: 'button-positive',
+							onTap: function(e) {
+								$scope.data.points = success.min;
 							}
 						}, {
 							text: 'Close.'

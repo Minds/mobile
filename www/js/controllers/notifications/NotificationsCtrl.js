@@ -111,9 +111,17 @@ define(function() {
 		};
 
 		$scope.subscribe = function(notification) {
-			notification.ownerObj.subscribed = true;
+
+			$timeout(function() {
+				for (var $i = 0; $i < $scope.notificationItems.length; $i++) {
+					if ($scope.notificationItems[$i].fromObj.guid == notification.fromObj.guid) {
+						$scope.notificationItems[$i].fromObj.subscribed = true;
+					}
+				}
+			});
+
 			//subscribe to the user
-			Client.post('api/v1/subscribe/' + notification.ownerObj.guid, {}, function() {
+			Client.post('api/v1/subscribe/' + notification.fromObj.guid, {}, function() {
 
 			}, function() {
 			});
@@ -126,15 +134,15 @@ define(function() {
 				$ionicLoading.hide();
 			}, 300);
 
-			if (notification.ownerObj.subscriber && notification.ownerObj.subscribed) {
+			if (notification.fromObj.subscriber && notification.fromObj.subscribed) {
 				$ionicPopup.alert({
 					title: 'Match!',
-					subTitle: notification.ownerObj.name + ' subscribed to you too!',
+					subTitle: notification.fromObj.name + ' subscribed to you too!',
 					buttons: [{
 						text: '<b>Send Message</b>',
 						type: 'button-positive',
 						onTap: function(e) {
-							window.location.href = "#/tab/gatherings/conversations/" + notification.ownerObj.guid + '/' + notification.ownerObj.name;
+							window.location.href = "#/tab/gatherings/conversations/" + notification.fromObj.guid + '/' + notification.fromObj.name;
 						}
 					}, {
 						text: 'Continue...'

@@ -1,5 +1,10 @@
 <ion-view title="Notifications" ng-controller="NotificationsCtrl" class="view-bg">
 
+    <ion-nav-buttons side="left">
+        <!--<a class="button button-clear icon ion-compose" ng-click="composer.show($event)"></a>-->
+        <a class="button button-clear icon ion-arrow-graph-up-right minds-blue" style="color:#4690C3" href="#/tab/notifications/p2p-review"></a>
+    </ion-nav-buttons>
+
 	<ion-content>
 
 		<ion-list>
@@ -215,6 +220,8 @@
                         	<i>Sorry, there was an error viewing this notification</i>
                         </div>
                     </div>
+                    
+                    <span class="ts">{{ notification.time_created * 1000 | date : 'medium' }}</span>
                     
                     <i class="icon ion-person-add notification-user-subscribe" 
 						ng-if="notification.fromObj.subscribed == false && $root.user_guid != notification.fromObj.guid"

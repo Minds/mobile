@@ -12,6 +12,14 @@
 	-webkit-flex:1;
 	flex:1;
 }
+.notification-item span.ts{
+	position: absolute;
+	bottom: -20px;
+	right: 7px;
+	font-size: 8px;
+	/* font-weight: bold; */
+	color: #888;
+}
 .notification-user-subscribe{
 	float:right;
 	font-size:32px;

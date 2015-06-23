@@ -119,6 +119,14 @@ define(function() {
 			});
 		};
 
+		$scope.refresh = function() {
+			if (!$scope.channel) {
+				return false;
+			}
+			$scope.next = "";
+			$scope.laodMore();
+		};
+
 		$scope.subscribe = function(channel) {
 
 			$scope.channel.subscribed = true;

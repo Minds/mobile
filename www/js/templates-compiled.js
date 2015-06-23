@@ -633,7 +633,7 @@ define(['angular'], function(angular){
     "            \n" +
     "            <label class=\"item item-input\" ng-click=\"changeAvatar()\">\n" +
     "                <span class=\"input-label\">Avatar</span>\n" +
-    "                <img id=\"avatar\" ng-src=\"{{channel.avatar_url.large}}/{{cb}}\" style=\"max-width:60%; min-height:100px; display:block; margin:auto;\"/>\n" +
+    "                <img id=\"avatar\" ng-src=\"{{channel.avatar_url.large}}/{{cb}}\" style=\"max-width:60%; min-height:100px; max-height:100px; display:block; margin:auto;\"/>\n" +
     "            </label>\n" +
     "             <label class=\"item item-input\" ng-click=\"addBanner()\">\n" +
     "                <span class=\"input-label\">Add a banner</span>\n" +
@@ -766,7 +766,7 @@ define(['angular'], function(angular){
     "<owner-brief-view owner=\"{{activity.ownerObj}}\" ts=\"{{activity.time_created}}\" show-more-button=\"true\"></owner-brief-view>\n" +
     "    \n" +
     "    <div class=\"item item-text-wrap\" ng-if=\"activity.message\">\n" +
-    "        <p ng-bind-html=\"activity.message | linky\" class=\"wrap\"></p>\n" +
+    "        <p ng-bind-html=\"activity.message | linky\" class=\"wrap\" style=\"white-space: pre;\"></p>\n" +
     "    </div>\n" +
     "    \n" +
     "    <div class=\"item item-text-wrap\" ng-if=\"activity.title && !activity.perma_url\">\n" +
@@ -1652,6 +1652,11 @@ define(['angular'], function(angular){
   $templateCache.put("templates/notifications/list.html",
     "<ion-view title=\"Notifications\" ng-controller=\"NotificationsCtrl\" class=\"view-bg\">\n" +
     "\n" +
+    "    <ion-nav-buttons side=\"left\">\n" +
+    "        <!--<a class=\"button button-clear icon ion-compose\" ng-click=\"composer.show($event)\"></a>-->\n" +
+    "        <a class=\"button button-clear icon ion-arrow-graph-up-right minds-blue\" style=\"color:#4690C3\" href=\"#/tab/notifications/p2p-review\"></a>\n" +
+    "    </ion-nav-buttons>\n" +
+    "\n" +
     "	<ion-content>\n" +
     "\n" +
     "		<ion-list>\n" +
@@ -1868,12 +1873,58 @@ define(['angular'], function(angular){
     "                        </div>\n" +
     "                    </div>\n" +
     "                    \n" +
+    "                    <span class=\"ts\">{{ notification.time_created * 1000 | date : 'medium' }}</span>\n" +
+    "                    \n" +
     "                    <i class=\"icon ion-person-add notification-user-subscribe\" \n" +
     "						ng-if=\"notification.fromObj.subscribed == false && $root.user_guid != notification.fromObj.guid\"\n" +
     "						ng-click=\"subscribe(notification)\"> </i>\n" +
     "                   \n" +
     "                 </div>\n" +
     "			</div>\n" +
+    "\n" +
+    "		</ion-list>\n" +
+    "		\n" +
+    "		<ion-infinite-scroll on-infinite=\"loadMore()\" distance=\"1%\" ng-if=\"hasMoreData\"></ion-infinite-scroll>\n" +
+    "\n" +
+    "	</ion-content>\n" +
+    "</ion-view>");
+  $templateCache.put("templates/notifications/p2p-review.html",
+    "<ion-view title=\"Boost Review\" ng-controller=\"NotificationsP2PReviewCtrl\" class=\"view-bg\">\n" +
+    "\n" +
+    "    <ion-nav-buttons side=\"left\">\n" +
+    "        <a class=\"button button-clear icon ion-arrow-left-b\" href=\"#/tab/notifications\"></a>\n" +
+    "    </ion-nav-buttons>\n" +
+    "\n" +
+    "	<ion-content>\n" +
+    "\n" +
+    "		<ion-list>\n" +
+    "		\n" +
+    "			<ion-refresher\n" +
+    "				pulling-text=\"Pull to refresh...\"\n" +
+    "				on-refresh=\"refresh()\">\n" +
+    "			</ion-refresher>\n" +
+    "			\n" +
+    "			<div class=\"notification-item list card item-text-wrap\" ng-repeat=\"boost in review\">\n" +
+    "				<div class=\"item item-avatar item-text-wrap\">\n" +
+    "				    <img ng-src=\"{{$root.node_url}}icon/{{boost.owner_guid}}\" ng-click=\"goToChannel(boost.owner_guid)\"/>\n" +
+    "				     <a ng-click=\"loadBoostReview(boost.guid)\">\n" +
+    "                        <p>{{boost.ownerObj.name}} is offering you {{boost.points}} points to boost \n" +
+    "                            <span class=\"minds-blue\" ng-if=\"boost.title\" ng-bind-html=\"boost.title\"></span>\n" +
+    "                            <span class=\"minds-blue\" ng-if=\"!boost.title\">their activity</span>\n" +
+    "                       </p>\n" +
+    "                    </a>\n" +
+    "                </div>\n" +
+    "			</div>\n" +
+    "			\n" +
+    "			<div class=\"notification-item list card item-text-wrap\" ng-if=\"!review.length\">\n" +
+    "                <div class=\"item item-text-wrap\">\n" +
+    "                    <a>\n" +
+    "                        <p>\n" +
+    "                            You have no channel boosts to review.\n" +
+    "                        </p>\n" +
+    "                    </a>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
     "\n" +
     "		</ion-list>\n" +
     "		\n" +

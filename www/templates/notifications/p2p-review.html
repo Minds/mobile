@@ -1,0 +1,43 @@
+<ion-view title="Boost Review" ng-controller="NotificationsP2PReviewCtrl" class="view-bg">
+
+    <ion-nav-buttons side="left">
+        <a class="button button-clear icon ion-arrow-left-b" href="#/tab/notifications"></a>
+    </ion-nav-buttons>
+
+	<ion-content>
+
+		<ion-list>
+		
+			<ion-refresher
+				pulling-text="Pull to refresh..."
+				on-refresh="refresh()">
+			</ion-refresher>
+			
+			<div class="notification-item list card item-text-wrap" ng-repeat="boost in review">
+				<div class="item item-avatar item-text-wrap">
+				    <img ng-src="{{$root.node_url}}icon/{{boost.owner_guid}}" ng-click="goToChannel(boost.owner_guid)"/>
+				     <a ng-click="loadBoostReview(boost.guid)">
+                        <p>{{boost.ownerObj.name}} is offering you {{boost.points}} points to boost 
+                            <span class="minds-blue" ng-if="boost.title" ng-bind-html="boost.title"></span>
+                            <span class="minds-blue" ng-if="!boost.title">their activity</span>
+                       </p>
+                    </a>
+                </div>
+			</div>
+			
+			<div class="notification-item list card item-text-wrap" ng-if="!review.length">
+                <div class="item item-text-wrap">
+                    <a>
+                        <p>
+                            You have no channel boosts to review.
+                        </p>
+                    </a>
+                </div>
+            </div>
+
+		</ion-list>
+		
+		<ion-infinite-scroll on-infinite="loadMore()" distance="1%" ng-if="hasMoreData"></ion-infinite-scroll>
+
+	</ion-content>
+</ion-view>

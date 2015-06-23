@@ -174,6 +174,13 @@ define(['app'], function(app) {
 					templateUrl: 'templates/notifications/entity.html'
 				}
 			}
+		}).state('tab.notifications-p2p-review', {
+			url: '/notifications/p2p-review',
+			views: {
+				'notifications-tab': {
+					templateUrl: 'templates/notifications/p2p-review.html'
+				}
+			}
 		});
 
 		$urlRouterProvider.otherwise("/loading");

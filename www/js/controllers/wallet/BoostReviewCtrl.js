@@ -36,6 +36,7 @@ define(function() {
 		$scope.accept = function() {
 
 			$scope.modal.remove();
+			$scope.refresh();
 
 			Client.put('api/v1/boost/' + $scope.guid, {
 				cb: Date.now()
@@ -52,6 +53,7 @@ define(function() {
 		$scope.reject = function() {
 
 			$scope.modal.remove();
+			$scope.refresh();
 
 			Client.delete('api/v1/boost/' + $scope.guid, {
 				cb: Date.now()

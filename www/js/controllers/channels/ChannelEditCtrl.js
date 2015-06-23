@@ -8,7 +8,8 @@
 define(function() {
 	'use strict';
 
-	function ctrl($rootScope, $scope, $state, $stateParams, Client, storage, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicLoading, $timeout, $window, $ionicModal, $ionicHistory, $ionicPopup) {
+	function ctrl($rootScope, $scope, $state, $stateParams, Client, storage, $ionicSlideBoxDelegate, $ionicScrollDelegate,
+		$ionicLoading, $timeout, $window, $ionicModal, $ionicHistory, $ionicPopup, $q) {
 
 		$scope.cb = Date.now();
 		var timeout;
@@ -126,6 +127,29 @@ define(function() {
 
 		$scope.addBanner = function() {
 
+			if ($scope.channel.carousels) {
+				$ionicPopup.alert({
+					title: 'Warning!',
+					subTitle: 'Adding a new banner will replace all existing banners on your channel.',
+					buttons: [{
+							text: 'Close'
+						},
+						{
+							text: '<b>Replace</b>',
+							type: 'button-positive',
+							onTap: function(e) {
+								$scope.selectBanner();
+							}
+						}]
+				});
+			} else {
+				$scope.selectBanner();
+			}
+
+		};
+
+		$scope.selectBanner = function() {
+
 			navigator.camera.getPicture(onSuccess, onFail, {
 				quality: 50,
 				destinationType: Camera.DestinationType.FILE_URI,
@@ -175,16 +199,34 @@ define(function() {
 		};
 
 		$scope.disable = function() {
-			$ionicLoading.show({
-				template: '<ion-spinner></ion-spinner>'
-			});
 
-			Client.delete('api/v1/channel', {}, function() {
-				$ionicLoading.hide();
-				$scope.logout();
-			}, function() {
-				alert("sorry, we could not delete");
-			});
+			var deferred = $q.defer();
+
+			$ionicPopup.alert({
+				title: 'Are you sure?',
+				buttons: [{
+						text: 'No!'
+					},
+					{
+						text: '<b>Yes</b>',
+						type: 'button-positive',
+						onTap: function(e) {
+							$ionicLoading.show({
+								template: '<ion-spinner></ion-spinner>'
+							});
+							Client.delete('api/v1/channel', {}, function() {
+								$ionicLoading.hide();
+								$scope.logout();
+							}, function() {
+								alert("sorry, we could not delete");
+							});
+							deferred.resolve(true);
+						}
+					}]
+				});
+
+			return deferred.promise;
+
 		};
 
 		$scope.logout = function() {
@@ -211,7 +253,7 @@ define(function() {
 
 	ctrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', 'Client',
 					'storage', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$ionicLoading',
-					'$timeout', '$window', '$ionicModal', '$ionicHistory', '$ionicPopup'];
+					'$timeout', '$window', '$ionicModal', '$ionicHistory', '$ionicPopup', '$q'];
 	return ctrl;
 
 });

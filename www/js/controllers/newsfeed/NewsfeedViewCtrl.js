@@ -16,20 +16,27 @@ define(function() {
 		$scope.comments = [];
 		$scope.comment = {};
 		$scope.comment.body = '';
+		
 
-		Client.get('api/v1/newsfeed/single/' + $stateParams.guid, {}, function(success) {
-			$scope.activity = success.activity;
-			if ($scope.activity.entity_guid) {
-				$scope.guid = $scope.activity.entity_guid;
-			} else {
-				$scope.guid = $scope.activity.guid;
-			}
+		$scope.init = function(){
+			Client.get('api/v1/newsfeed/single/' + $stateParams.guid, {}, function(success) {
+				$scope.activity = success.activity;
+				if ($scope.activity.entity_guid) {
+					$scope.guid = $scope.activity.entity_guid;
+				} else {
+					$scope.guid = $scope.activity.guid;
+				}
 
-			$scope.getComments();
-		});
+				$scope.offset = "";
+				$scope.hasMore = true;
+				$scope.getComments();
+			});
+		};
+		$scope.init();
 
 		$scope.inprogress = false;
 		$scope.getComments = function() {
+
 			if ($scope.inprogress) {
 				return false;
 			}
@@ -52,6 +59,7 @@ define(function() {
 
 				$scope.comments = $scope.comments.concat(data.comments);
 				$scope.offset = data['load-next'];
+				console.log($scope.offset);
 
 				if ($scope.offset == null) {
 					$scope.hasMore = false;

@@ -766,7 +766,7 @@ define(['angular'], function(angular){
     "<owner-brief-view owner=\"{{activity.ownerObj}}\" ts=\"{{activity.time_created}}\" show-more-button=\"true\"></owner-brief-view>\n" +
     "    \n" +
     "    <div class=\"item item-text-wrap\" ng-if=\"activity.message\">\n" +
-    "        <p ng-bind-html=\"activity.message | linky\" class=\"wrap\" style=\"white-space: pre;\"></p>\n" +
+    "        <p ng-bind-html=\"activity.message | linky\" class=\"wrap\" style=\"white-space: pre-line;\"></p>\n" +
     "    </div>\n" +
     "    \n" +
     "    <div class=\"item item-text-wrap\" ng-if=\"activity.title && !activity.perma_url\">\n" +
@@ -1591,7 +1591,7 @@ define(['angular'], function(angular){
     "				</button>\n" +
     "			</div>\n" +
     "		</div>\n" +
-    "		<ion-infinite-scroll on-infinite=\"getComments()\" distance=\"1%\" ng-if=\"hasMore\"></ion-infinite-scroll>\n" +
+    "		<ion-infinite-scroll on-infinite=\"getComments()\" distance=\"10%\" ng-if=\"hasMore\"></ion-infinite-scroll>\n" +
     "\n" +
     "    </ion-content>\n" +
     "</ion-view>");
@@ -1645,7 +1645,7 @@ define(['angular'], function(angular){
     "				</button>\n" +
     "			</div>\n" +
     "		</div>\n" +
-    "		<ion-infinite-scroll on-infinite=\"getComments()\" distance=\"1%\" ng-if=\"hasMore\"></ion-infinite-scroll>\n" +
+    "		<ion-infinite-scroll on-infinite=\"getComments()\" distance=\"10%\" ng-if=\"hasMore\"></ion-infinite-scroll>\n" +
     "\n" +
     "	</ion-content>\n" +
     "</ion-view>");

@@ -1,29 +1,29 @@
 
-    <owner-brief-view owner="{{activity.ownerObj}}" ts="{{activity.time_created}}" show-more-button="true"></owner-brief-view>
+    <owner-brief-view owner="{{::activity.ownerObj}}" ts="{{::activity.time_created}}" show-more-button="true"></owner-brief-view>
     
-    <div class="item item-text-wrap" ng-if="activity.message">
-        <p ng-bind-html="activity.message | linky" class="wrap" style="white-space: pre-line;"></p>
+    <div class="item item-text-wrap" ng-if="::activity.message">
+        <p ng-bind-html="::activity.message | linky" class="wrap" style="white-space: pre-line;"></p>
     </div>
     
-    <div class="item item-text-wrap" ng-if="activity.title && !activity.perma_url">
-        <p ng-bind-html="activity.title | linky" class="wrap"></p>
+    <div class="item item-text-wrap" ng-if="::(activity.title && !activity.perma_url)">
+        <p ng-bind-html="::activity.title | linky" class="wrap"></p>
     </div>
     
     <!--Rich content -->
 
-    <div class="item item-image allow-select" ng-if="activity.thumbnail_src" ng-click="openUrl(activity.perma_url)">
-        <img ng-src="{{activity.thumbnail_src}}"  onerror="this.src='img/img-placeholder.png'">
+    <div class="item item-image allow-select" ng-if="::activity.thumbnail_src" ng-click="openUrl(activity.perma_url)">
+        <img ng-src="{{::activity.thumbnail_src}}"  onerror="this.src='img/img-placeholder.png'">
     </div>
     
     <!-- Custom type:: batch -->
-    <div class="item item-image allow-select" ng-if="activity.custom_type == 'batch'">
-        <img ng-repeat="data in activity.custom_data" ng-src="{{data.src}}" src="{{data.src}}" onerror="this.src='img/img-placeholder.png'" style="width:100%">
+    <div class="item item-image allow-select" ng-if="::activity.custom_type == 'batch'">
+        <img ng-repeat="data in ::activity.custom_data" ng-src="{{::data.src}}" src="{{::data.src}}" onerror="this.src='img/img-placeholder.png'" style="width:100%">
     </div>
     
     <!-- Custom type:: video -->
-    <div class="item item-image item-image-video" ng-if="activity.custom_type == 'video'" play-video playsrc="{{node_url}}api/v1/archive/{{activity.custom_data.guid}}/play">
+    <div class="item item-image item-image-video" ng-if="::activity.custom_type == 'video'" play-video playsrc="{{node_url}}api/v1/archive/{{::activity.custom_data.guid}}/play">
               
-         <img ng-src="{{activity.custom_data.thumbnail_src}}" onerror="this.src='img/img-placeholder.png'">
+         <img ng-src="{{::activity.custom_data.thumbnail_src}}" onerror="this.src='img/img-placeholder.png'">
          <i class="icon ion-play"></i>
          
           <video id="video" ng-show="showVideo" width="300px" height="300px;" style="background:#000;" preload="auto" loop controls></video>
@@ -31,17 +31,17 @@
     </div>
     
     <!-- custom type:: remind @todo this leads to memory leaks.. -->
-    <div class="item item-text-wrap remind" ng-if="activity.remind_object">
+    <div class="item item-text-wrap remind" ng-if="::activity.remind_object">
     	<div ng-include src="'templates/directives/activity.html'" onload="activity = activity.remind_object" class="hide-tabs"></div>
     </div>
   
     
-	<div class="rich-embed-output item item-text-wrap" ng-if="activity.title && activity.perma_url" ng-click="activity.perma_url ? openUrl(activity.perma_url) : false">
-        <h3 ng-bind-html="activity.title | linky"></h3>
-        <p ng-show="activity.perma_url">{{activity.perma_url | domain}}</p>
+	<div class="rich-embed-output item item-text-wrap" ng-if="::(activity.title && activity.perma_url)" ng-click="activity.perma_url ? openUrl(activity.perma_url) : false">
+        <h3 ng-bind-html="::activity.title | linky"></h3>
+        <p ng-show="::activity.perma_url">{{::activity.perma_url | domain}}</p>
     </div>
     
-    <div class="boosted-bar" ng-show="activity.boosted">
+    <div class="boosted-bar" ng-show="::activity.boosted">
         <i class="icon ion-arrow-graph-up-right"></i> Boosted
     </div>
     
@@ -71,5 +71,5 @@
             <i class="icon ion-more"></i>
         </a>-->
         
-        <span class="impressions-tag">{{activity.impressions}} views</span>
+        <span class="impressions-tag">{{::activity.impressions}} views</span>
     </div>

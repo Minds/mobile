@@ -15,20 +15,19 @@
 	</ion-nav-buttons>
 
 	<ion-content>
+        <ion-refresher
+            pulling-text="Pull to refresh..."
+            on-refresh="refresh()">
+        </ion-refresher>
 
 		<ion-list>
-		
-			<ion-refresher
-				pulling-text="Pull to refresh..."
-				on-refresh="refresh()">
-			</ion-refresher>
 
-			<activity-view ng-repeat="activity in newsfeedItems track by activity.guid" id="{{activity.guid}}" class="activity-item list card">
+			<activity-view ng-repeat="activity in newsfeedItems" id="{{activity.guid}}" class="activity-item list card">
 			</activity-view>
 
 		</ion-list>
 		
-		<ion-infinite-scroll ng-if="hasMore()" distance="10%" on-infinite="loadMore()"  >
+		<ion-infinite-scroll ng-if="hasMore()" distance="5%" on-infinite="loadMore()"  >
 		</ion-infinite-scroll>
 
 	</ion-content>

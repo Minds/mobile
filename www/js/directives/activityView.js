@@ -3,7 +3,7 @@
 define(['angular'], function(angular) {
 	"use strict";
 
-	var directive = function($ionicScrollDelegate, $ionicGesture, Client) {
+	var directive = function($ionicScrollDelegate, $ionicGesture, $timeout, Client) {
 		return {
 			restrict: 'E',
 			templateUrl: function(elem, attr) {
@@ -33,9 +33,11 @@ define(['angular'], function(angular) {
 				}
 
 				function updateViews() {
-					scope.activity.impressions = scope.activity.impressions + 1;
-					Client.put('api/v1/newsfeed/' + scope.activity.guid + '/view', {}, function() {
-					}, function() {
+					$timeout(function(){
+						scope.activity.impressions = scope.activity.impressions + 1;
+						Client.put('api/v1/newsfeed/' + scope.activity.guid + '/view', {}, function() {
+							}, function() {
+							});
 					});
 				}
 
@@ -43,6 +45,6 @@ define(['angular'], function(angular) {
 		};
 	};
 
-	directive.$inject = ['$ionicScrollDelegate', '$ionicGesture', 'Client'];
+	directive.$inject = ['$ionicScrollDelegate', '$ionicGesture', '$timeout', 'Client'];
 	return directive;
 });

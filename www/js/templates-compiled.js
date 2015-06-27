@@ -579,7 +579,7 @@ define(['angular'], function(angular){
     "	        \n" +
     "                <ion-refresher\n" +
     "                    pulling-text=\"Pull to refresh...\"\n" +
-    "                    on-refresh=\"refresh()\">\n" +
+    "                    on-refresh=\"channelRefresh()\">\n" +
     "                </ion-refresher>\n" +
     "    	\n" +
     "	            <activity-view ng-repeat=\"activity in ChannelItems\" class=\"activity-item list card item-text-wrap\">\n" +
@@ -763,31 +763,31 @@ define(['angular'], function(angular){
     "    </ion-content>\n" +
     "</ion-popover-view>");
   $templateCache.put("templates/directives/activity.html",
-    "<owner-brief-view owner=\"{{activity.ownerObj}}\" ts=\"{{activity.time_created}}\" show-more-button=\"true\"></owner-brief-view>\n" +
+    "<owner-brief-view owner=\"{{::activity.ownerObj}}\" ts=\"{{::activity.time_created}}\" show-more-button=\"true\"></owner-brief-view>\n" +
     "    \n" +
-    "    <div class=\"item item-text-wrap\" ng-if=\"activity.message\">\n" +
-    "        <p ng-bind-html=\"activity.message | linky\" class=\"wrap\" style=\"white-space: pre-line;\"></p>\n" +
+    "    <div class=\"item item-text-wrap\" ng-if=\"::activity.message\">\n" +
+    "        <p ng-bind-html=\"::activity.message | linky\" class=\"wrap\" style=\"white-space: pre-line;\"></p>\n" +
     "    </div>\n" +
     "    \n" +
-    "    <div class=\"item item-text-wrap\" ng-if=\"activity.title && !activity.perma_url\">\n" +
-    "        <p ng-bind-html=\"activity.title | linky\" class=\"wrap\"></p>\n" +
+    "    <div class=\"item item-text-wrap\" ng-if=\"::(activity.title && !activity.perma_url)\">\n" +
+    "        <p ng-bind-html=\"::activity.title | linky\" class=\"wrap\"></p>\n" +
     "    </div>\n" +
     "    \n" +
     "    <!--Rich content -->\n" +
     "\n" +
-    "    <div class=\"item item-image allow-select\" ng-if=\"activity.thumbnail_src\" ng-click=\"openUrl(activity.perma_url)\">\n" +
-    "        <img ng-src=\"{{activity.thumbnail_src}}\"  onerror=\"this.src='img/img-placeholder.png'\">\n" +
+    "    <div class=\"item item-image allow-select\" ng-if=\"::activity.thumbnail_src\" ng-click=\"openUrl(activity.perma_url)\">\n" +
+    "        <img ng-src=\"{{::activity.thumbnail_src}}\"  onerror=\"this.src='img/img-placeholder.png'\">\n" +
     "    </div>\n" +
     "    \n" +
     "    <!-- Custom type:: batch -->\n" +
-    "    <div class=\"item item-image allow-select\" ng-if=\"activity.custom_type == 'batch'\">\n" +
-    "        <img ng-repeat=\"data in activity.custom_data\" ng-src=\"{{data.src}}\" src=\"{{data.src}}\" onerror=\"this.src='img/img-placeholder.png'\" style=\"width:100%\">\n" +
+    "    <div class=\"item item-image allow-select\" ng-if=\"::activity.custom_type == 'batch'\">\n" +
+    "        <img ng-repeat=\"data in ::activity.custom_data\" ng-src=\"{{::data.src}}\" src=\"{{::data.src}}\" onerror=\"this.src='img/img-placeholder.png'\" style=\"width:100%\">\n" +
     "    </div>\n" +
     "    \n" +
     "    <!-- Custom type:: video -->\n" +
-    "    <div class=\"item item-image item-image-video\" ng-if=\"activity.custom_type == 'video'\" play-video playsrc=\"{{node_url}}api/v1/archive/{{activity.custom_data.guid}}/play\">\n" +
+    "    <div class=\"item item-image item-image-video\" ng-if=\"::activity.custom_type == 'video'\" play-video playsrc=\"{{node_url}}api/v1/archive/{{::activity.custom_data.guid}}/play\">\n" +
     "              \n" +
-    "         <img ng-src=\"{{activity.custom_data.thumbnail_src}}\" onerror=\"this.src='img/img-placeholder.png'\">\n" +
+    "         <img ng-src=\"{{::activity.custom_data.thumbnail_src}}\" onerror=\"this.src='img/img-placeholder.png'\">\n" +
     "         <i class=\"icon ion-play\"></i>\n" +
     "         \n" +
     "          <video id=\"video\" ng-show=\"showVideo\" width=\"300px\" height=\"300px;\" style=\"background:#000;\" preload=\"auto\" loop controls></video>\n" +
@@ -795,17 +795,17 @@ define(['angular'], function(angular){
     "    </div>\n" +
     "    \n" +
     "    <!-- custom type:: remind @todo this leads to memory leaks.. -->\n" +
-    "    <div class=\"item item-text-wrap remind\" ng-if=\"activity.remind_object\">\n" +
+    "    <div class=\"item item-text-wrap remind\" ng-if=\"::activity.remind_object\">\n" +
     "    	<div ng-include src=\"'templates/directives/activity.html'\" onload=\"activity = activity.remind_object\" class=\"hide-tabs\"></div>\n" +
     "    </div>\n" +
     "  \n" +
     "    \n" +
-    "	<div class=\"rich-embed-output item item-text-wrap\" ng-if=\"activity.title && activity.perma_url\" ng-click=\"activity.perma_url ? openUrl(activity.perma_url) : false\">\n" +
-    "        <h3 ng-bind-html=\"activity.title | linky\"></h3>\n" +
-    "        <p ng-show=\"activity.perma_url\">{{activity.perma_url | domain}}</p>\n" +
+    "	<div class=\"rich-embed-output item item-text-wrap\" ng-if=\"::(activity.title && activity.perma_url)\" ng-click=\"activity.perma_url ? openUrl(activity.perma_url) : false\">\n" +
+    "        <h3 ng-bind-html=\"::activity.title | linky\"></h3>\n" +
+    "        <p ng-show=\"::activity.perma_url\">{{::activity.perma_url | domain}}</p>\n" +
     "    </div>\n" +
     "    \n" +
-    "    <div class=\"boosted-bar\" ng-show=\"activity.boosted\">\n" +
+    "    <div class=\"boosted-bar\" ng-show=\"::activity.boosted\">\n" +
     "        <i class=\"icon ion-arrow-graph-up-right\"></i> Boosted\n" +
     "    </div>\n" +
     "    \n" +
@@ -835,7 +835,7 @@ define(['angular'], function(angular){
     "            <i class=\"icon ion-more\"></i>\n" +
     "        </a>-->\n" +
     "        \n" +
-    "        <span class=\"impressions-tag\">{{activity.impressions}} views</span>\n" +
+    "        <span class=\"impressions-tag\">{{::activity.impressions}} views</span>\n" +
     "    </div>");
   $templateCache.put("templates/directives/owner-brief.html",
     "<a class=\"item item-avatar\" href=\"#/tab/newsfeed/channel/{{user.guid}}\">\n" +
@@ -852,8 +852,8 @@ define(['angular'], function(angular){
     "    <i class=\"icon ion-android-more-vertical owner-brief-more\" ng-if=\"showMoreButton && activity && activity.type == 'activity'\" style=\"font-size: 45px;color: #999;padding: 14px 26px;position: absolute;right: 0;top: 0;\" ng-click=\"$event.preventDefault(); openActions(activity)\"></i>\n" +
     "    <i class=\"icon ion-android-more-vertical owner-brief-more\" ng-if=\"showMoreButton && entity && entity.type == 'object'\" style=\"font-size: 45px;color: #999;padding: 14px 26px;position: absolute;right: 0;top: 0;\" ng-click=\"$event.preventDefault(); openActions(entity)\"></i>\n" +
     "    \n" +
-    "    <h2 style=\"font-weight:400;\" ng-bind-html=\"user.name\"></h2>\n" +
-    "    <p ng-bind=\"ts\"></p>\n" +
+    "    <h2 style=\"font-weight:400;\" ng-bind-html=\"::user.name\"></h2>\n" +
+    "    <p ng-bind=\"::ts\"></p>\n" +
     "   \n" +
     "</a>");
   $templateCache.put("templates/discover/entities/object.html",
@@ -1533,20 +1533,19 @@ define(['angular'], function(angular){
     "	</ion-nav-buttons>\n" +
     "\n" +
     "	<ion-content>\n" +
+    "        <ion-refresher\n" +
+    "            pulling-text=\"Pull to refresh...\"\n" +
+    "            on-refresh=\"refresh()\">\n" +
+    "        </ion-refresher>\n" +
     "\n" +
     "		<ion-list>\n" +
-    "		\n" +
-    "			<ion-refresher\n" +
-    "				pulling-text=\"Pull to refresh...\"\n" +
-    "				on-refresh=\"refresh()\">\n" +
-    "			</ion-refresher>\n" +
     "\n" +
-    "			<activity-view ng-repeat=\"activity in newsfeedItems track by activity.guid\" id=\"{{activity.guid}}\" class=\"activity-item list card\">\n" +
+    "			<activity-view ng-repeat=\"activity in newsfeedItems\" id=\"{{activity.guid}}\" class=\"activity-item list card\">\n" +
     "			</activity-view>\n" +
     "\n" +
     "		</ion-list>\n" +
     "		\n" +
-    "		<ion-infinite-scroll ng-if=\"hasMore()\" distance=\"10%\" on-infinite=\"loadMore()\"  >\n" +
+    "		<ion-infinite-scroll ng-if=\"hasMore()\" distance=\"5%\" on-infinite=\"loadMore()\"  >\n" +
     "		</ion-infinite-scroll>\n" +
     "\n" +
     "	</ion-content>\n" +

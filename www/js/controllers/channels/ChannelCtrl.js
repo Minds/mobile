@@ -119,12 +119,12 @@ define(function() {
 			});
 		};
 
-		$scope.refresh = function() {
+		$scope.channelRefresh = function() {
 			if (!$scope.channel) {
 				return false;
 			}
 			$scope.next = "";
-			$scope.laodMore();
+			$scope.loadMore();
 		};
 
 		$scope.subscribe = function(channel) {

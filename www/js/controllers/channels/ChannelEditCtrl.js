@@ -189,13 +189,18 @@ define(function() {
 		};
 
 		$scope.invite = function() {
-			$ionicModal.fromTemplateUrl('templates/invite/invite.html', {
+			/*$ionicModal.fromTemplateUrl('templates/invite/invite.html', {
 				scope: $scope,
 				animation: 'slide-in-up'
 			}).then(function(modal) {
 				$scope.modal = modal;
 				$scope.modal.show();
-			});
+			});*/
+			window.plugins.socialsharing.share("Hey! If you install the Minds app and tag me @" + $scope.channel.username + " we both get 100 points! \n\n",
+												'Join Minds and we both get 100 points to go viral!',
+												null,
+												$rootScope.node_url
+												);
 		};
 
 		$scope.disable = function() {

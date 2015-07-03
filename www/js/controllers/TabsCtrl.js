@@ -49,9 +49,6 @@ define(function() {
 		//Call the analytics service.
 		analytics.init();
 
-		$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-		});
-
 		$ionicPlatform.registerBackButtonAction(function(e) {
 			if ($rootScope.playing) {
 				document.webkitExitFullscreen();

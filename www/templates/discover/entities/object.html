@@ -1,4 +1,4 @@
-<owner-brief-view owner="{{entity.ownerObj}}" ts="{{entity.time_created}}" show-more-button="true"></owner-brief-view>
+<owner-brief-view owner="::entity.ownerObj" ts="::entity.time_created" show-more-button="true" open-actions="openActions(entity)"></owner-brief-view>
 
 <!-- Video -->
 <div class="item item-image item-image-video" ng-if="entity.subtype == 'video' || entity.subtype == 'audio'" play-video playsrc="{{entity.src['360.mp4']}}">

@@ -693,7 +693,7 @@ define(['angular'], function(angular){
     "                pulling-text=\"Pull to refresh...\"\n" +
     "                on-refresh=\"refresh()\">\n" +
     "            </ion-refresher>-->\n" +
-    "            <owner-brief-view owner=\"{{user}}\" ng-repeat=\"user in subscribers\" show-subscribe-button=\"true\" >\n" +
+    "            <owner-brief-view owner=\"user\" ng-repeat=\"user in subscribers\" show-subscribe-button=\"true\" >\n" +
     "            	\n" +
     "            </owner-brief-view>\n" +
     "\n" +
@@ -723,7 +723,7 @@ define(['angular'], function(angular){
     "                pulling-text=\"Pull to refresh...\"\n" +
     "                on-refresh=\"refresh()\">\n" +
     "            </ion-refresher>-->\n" +
-    "            <owner-brief-view owner=\"{{user}}\" ng-repeat=\"user in subscriptions\" show-subscribe-button=\"true\">\n" +
+    "            <owner-brief-view owner=\"user\" ng-repeat=\"user in subscriptions\" show-subscribe-button=\"true\">\n" +
     "            	\n" +
     "            </owner-brief-view>\n" +
     "\n" +
@@ -763,7 +763,7 @@ define(['angular'], function(angular){
     "    </ion-content>\n" +
     "</ion-popover-view>");
   $templateCache.put("templates/directives/activity.html",
-    "<owner-brief-view owner=\"{{::activity.ownerObj}}\" ts=\"{{::activity.time_created}}\" show-more-button=\"true\"></owner-brief-view>\n" +
+    "<owner-brief-view owner=\"::activity.ownerObj\" ts=\"::activity.time_created\" show-more-button=\"::(!hideMoreButton)\" open-actions=\"openActions(activity)\"></owner-brief-view>\n" +
     "    \n" +
     "    <div class=\"item item-text-wrap\" ng-if=\"::activity.message\">\n" +
     "        <p ng-bind-html=\"::activity.message | linky\" class=\"wrap\" style=\"white-space: pre-line;\"></p>\n" +
@@ -781,7 +781,7 @@ define(['angular'], function(angular){
     "    \n" +
     "    <!-- Custom type:: batch -->\n" +
     "    <div class=\"item item-image allow-select\" ng-if=\"::activity.custom_type == 'batch'\">\n" +
-    "        <img ng-repeat=\"data in ::activity.custom_data\" ng-src=\"{{::data.src}}\" src=\"{{::data.src}}\" onerror=\"this.src='img/img-placeholder.png'\" style=\"width:100%\">\n" +
+    "        <img ng-src=\"{{::activity.custom_data[0].src}}\" onerror=\"this.src='img/img-placeholder.png'\" style=\"width:100%\">\n" +
     "    </div>\n" +
     "    \n" +
     "    <!-- Custom type:: video -->\n" +
@@ -793,30 +793,30 @@ define(['angular'], function(angular){
     "          <video id=\"video\" ng-show=\"showVideo\" width=\"300px\" height=\"300px;\" style=\"background:#000;\" preload=\"auto\" loop controls></video>\n" +
     "         \n" +
     "    </div>\n" +
-    "    \n" +
-    "    <!-- custom type:: remind @todo this leads to memory leaks.. -->\n" +
+    "\n" +
     "    <div class=\"item item-text-wrap remind\" ng-if=\"::activity.remind_object\">\n" +
-    "    	<div ng-include src=\"'templates/directives/activity.html'\" onload=\"activity = activity.remind_object\" class=\"hide-tabs\"></div>\n" +
+    "        <div>\n" +
+    "            <remind-view activity=\"::activity.remind_object\"></remind-view>\n" +
+    "        </div>\n" +
     "    </div>\n" +
-    "  \n" +
-    "    \n" +
-    "	<div class=\"rich-embed-output item item-text-wrap\" ng-if=\"::(activity.title && activity.perma_url)\" ng-click=\"activity.perma_url ? openUrl(activity.perma_url) : false\">\n" +
+    "\n" +
+    "	<div class=\"rich-embed-output item item-text-wrap\" ng-if=\"::(activity.title && activity.perma_url)\" ng-click=\"::activity.perma_url ? openUrl(activity.perma_url) : false\">\n" +
     "        <h3 ng-bind-html=\"::activity.title | linky\"></h3>\n" +
-    "        <p ng-show=\"::activity.perma_url\">{{::activity.perma_url | domain}}</p>\n" +
+    "        <p ng-if=\"::activity.perma_url\">{{::activity.perma_url | domain}}</p>\n" +
     "    </div>\n" +
     "    \n" +
-    "    <div class=\"boosted-bar\" ng-show=\"::activity.boosted\">\n" +
+    "    <div class=\"boosted-bar\" ng-if=\"::activity.boosted\">\n" +
     "        <i class=\"icon ion-arrow-graph-up-right\"></i> Boosted\n" +
     "    </div>\n" +
     "    \n" +
-    "    <div class=\"item tabs tabs-secondary tabs-icon-left\" style=\"padding:0;background-color:#F7F7F7 !important;\">\n" +
+    "    <div class=\"item tabs tabs-secondary tabs-icon-left\" style=\"padding:0;background-color:#F7F7F7 !important;\" ng-if=\"::(!hideTabs)\">\n" +
     "        <a class=\"tab-item small-font thumbs-up\" ng-click=\"thumbsUp(activity.guid)\" thumbs=\"{{activity['thumbs:up:user_guids']}}\">\n" +
-    "               <i style=\"padding-left:4px;\" class=\"icon ion-thumbsup\"></i>\n" +
-    "                <b ng-show=\"activity['thumbs:up:count']\" style=\"font-size:14px; padding:2px 0 0\">({{activity['thumbs:up:count']}})</b> \n" +
+    "            <i style=\"padding-left:4px;\" class=\"icon ion-thumbsup\"></i>\n" +
+    "            <b ng-if=\"::activity['thumbs:up:count']\" style=\"font-size:14px; padding:2px 0 0\">({{activity['thumbs:up:count']}})</b> \n" +
     "        </a>\n" +
     "        <a class=\"tab-item small-font thumbs-down\" ng-click=\"thumbsDown(activity.guid)\" thumbs=\"{{activity['thumbs:down:user_guids']}}\">\n" +
     "            <i class=\"icon ion-thumbsdown\"></i>\n" +
-    "            <b ng-show=\"activity['thumbs:down:count']\" style=\"font-size:14px; padding:2px 0 0\">({{activity['thumbs:down:count']}})</b> \n" +
+    "            <b ng-if=\"::activity['thumbs:down:count']\" style=\"font-size:14px; padding:2px 0 0\">({{activity['thumbs:down:count']}})</b> \n" +
     "        </a>\n" +
     "        <a class=\"tab-item  small-font\" href=\"#/tab/newsfeed/{{activity.guid}}\">\n" +
     "            <i class=\"icon ion-chatbox\"></i>\n" +
@@ -824,10 +824,10 @@ define(['angular'], function(angular){
     "        \n" +
     "        <a class=\"tab-item small-font\" ng-click=\"remind(activity)\">\n" +
     "            <i class=\"icon icon-remind\"></i>\n" +
-    "            <b ng-show=\"activity.reminds > 0\" style=\"font-size:14px; padding:2px 0 0\">({{activity.reminds}})</b> \n" +
+    "            <b ng-show=\"::activity.reminds > 0\" style=\"font-size:14px; padding:2px 0 0\">({{::activity.reminds}})</b> \n" +
     "        </a>\n" +
     "        \n" +
-    "        <a class=\"tab-item small-font\" ng-click=\"boost(activity)\" style=\"opacity:1;\" ng-if=\"activity.owner_guid == $root.user_guid\">\n" +
+    "        <a class=\"tab-item small-font\" ng-click=\"boost(activity)\" style=\"opacity:1;\" ng-if=\"::activity.owner_guid == $root.user_guid\">\n" +
     "           <span style=\"color: #FFF;font-weight: 800;background: #4690C3;padding: 6px 8px;border-radius: 3px;\">Boost</span>\n" +
     "        </a>\n" +
     "        \n" +
@@ -838,26 +838,25 @@ define(['angular'], function(angular){
     "        <span class=\"impressions-tag\">{{::activity.impressions}} views</span>\n" +
     "    </div>");
   $templateCache.put("templates/directives/owner-brief.html",
-    "<a class=\"item item-avatar\" href=\"#/tab/newsfeed/channel/{{user.guid}}\">\n" +
-    "    <img image-cache ng-src=\"{{node_url}}icon/{{user.guid}}/small\"/>\n" +
+    "<a class=\"item item-avatar\" href=\"#/tab/newsfeed/channel/{{::owner.guid}}\">\n" +
+    "    <img image-cache ng-src=\"{{node_url}}icon/{{::owner.guid}}/small\"/>\n" +
     "    \n" +
     "    \n" +
     "     <i class=\"icon ion-person-add channel-user-subscribe\" \n" +
-    "			ng-if=\"user.subscribed == false && showSubscribeButton\"\n" +
+    "			ng-if=\"owner.subscribed == false && showSubscribeButton\"\n" +
     "			ng-click=\"$event.preventDefault(); subscribe()\"> </i>\n" +
     "			\n" +
-    "    <i class=\"icon ion-android-cancel channel-user-subscribe\" ng-if=\"user.subscribed == true && showSubscribeButton\"\n" +
+    "    <i class=\"icon ion-android-cancel channel-user-subscribe\" ng-if=\"owner.subscribed == true && showSubscribeButton\"\n" +
     "            ng-click=\"$event.preventDefault(); unSubscribe()\"> </i>\n" +
     "\n" +
-    "    <i class=\"icon ion-android-more-vertical owner-brief-more\" ng-if=\"showMoreButton && activity && activity.type == 'activity'\" style=\"font-size: 45px;color: #999;padding: 14px 26px;position: absolute;right: 0;top: 0;\" ng-click=\"$event.preventDefault(); openActions(activity)\"></i>\n" +
-    "    <i class=\"icon ion-android-more-vertical owner-brief-more\" ng-if=\"showMoreButton && entity && entity.type == 'object'\" style=\"font-size: 45px;color: #999;padding: 14px 26px;position: absolute;right: 0;top: 0;\" ng-click=\"$event.preventDefault(); openActions(entity)\"></i>\n" +
+    "    <i class=\"icon ion-android-more-vertical owner-brief-more\" ng-if=\"showMoreButton\" style=\"font-size: 45px;color: #999;padding: 14px 26px;position: absolute;right: 0;top: 0;\" ng-click=\"$event.preventDefault(); openActions()\"></i>\n" +
     "    \n" +
-    "    <h2 style=\"font-weight:400;\" ng-bind-html=\"::user.name\"></h2>\n" +
+    "    <h2 style=\"font-weight:400;\" ng-bind-html=\"::owner.name\"></h2>\n" +
     "    <p ng-bind=\"::ts\"></p>\n" +
     "   \n" +
     "</a>");
   $templateCache.put("templates/discover/entities/object.html",
-    "<owner-brief-view owner=\"{{entity.ownerObj}}\" ts=\"{{entity.time_created}}\" show-more-button=\"true\"></owner-brief-view>\n" +
+    "<owner-brief-view owner=\"::entity.ownerObj\" ts=\"::entity.time_created\" show-more-button=\"true\" open-actions=\"openActions(entity)\"></owner-brief-view>\n" +
     "\n" +
     "<!-- Video -->\n" +
     "<div class=\"item item-image item-image-video\" ng-if=\"entity.subtype == 'video' || entity.subtype == 'audio'\" play-video playsrc=\"{{entity.src['360.mp4']}}\">\n" +
@@ -1528,7 +1527,7 @@ define(['angular'], function(angular){
     "	<ion-nav-buttons side=\"right\">\n" +
     "		<!--<a class=\"button button-clear icon ion-compose\" ng-click=\"composer.show($event)\"></a>-->\n" +
     "		<a class=\"button button-clear\" href=\"#/tab/newsfeed/channel/me\">\n" +
-    "			<img class=\"topbar-user-icon\" ng-src=\"{{$root.node_url}}/icon/{{$root.user_guid}}/small/\"/>\n" +
+    "			<img class=\"topbar-user-icon\" ng-src=\"{{$root.node_url}}icon/{{$root.user_guid}}/small/\"/>\n" +
     "		</a>\n" +
     "	</ion-nav-buttons>\n" +
     "\n" +

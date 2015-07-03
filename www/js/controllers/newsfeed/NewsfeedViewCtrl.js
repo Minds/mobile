@@ -16,9 +16,8 @@ define(function() {
 		$scope.comments = [];
 		$scope.comment = {};
 		$scope.comment.body = '';
-		
 
-		$scope.init = function(){
+		$scope.init = function() {
 			Client.get('api/v1/newsfeed/single/' + $stateParams.guid, {}, function(success) {
 				$scope.activity = success.activity;
 				if ($scope.activity.entity_guid) {

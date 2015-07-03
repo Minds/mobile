@@ -7,11 +7,13 @@ define(['angular'], function(angular) {
 		return {
 			restrict: 'E',
 			template: "{{$root.points}}",
-			scope: true,
+			scope: {},
 			link: function(scope, element, attrs) {
 				//scope.count = $rootScope.points;
 				//timeout, because we
-				wallet.getCount();
+				$timeout(function() {
+					wallet.getCount();
+				});
 			}
 		};
     };

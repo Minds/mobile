@@ -14,6 +14,7 @@ define(function(require) {
 		directives = angular.module('app.directives', ['app.services']);
 
 	directives.directive('activityView', require('directives/activityView'));
+	directives.directive('remindView', require('directives/remindView'));
 	directives.directive('ownerBriefView', require('directives/ownerBriefView'));
 	directives.directive('decrypt', require('directives/decrypt'));
 	directives.directive('imageCache', require('directives/imageCache'));

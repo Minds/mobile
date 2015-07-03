@@ -33,8 +33,8 @@ define(['angular'], function(angular) {
 				}
 
 				function updateViews() {
-					$timeout(function(){
-						scope.activity.impressions = scope.activity.impressions + 1;
+					$timeout(function() {
+					//	scope.activity.impressions = scope.activity.impressions + 1;
 						Client.put('api/v1/newsfeed/' + scope.activity.guid + '/view', {}, function() {
 							}, function() {
 							});

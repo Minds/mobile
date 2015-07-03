@@ -75,7 +75,7 @@ define(function() {
 						return false;
 					}
 
-					if ($scope.newsfeedItems.length > 120) {
+					if ($scope.newsfeedItems.length > 60) {
 						$ionicScrollDelegate.scrollTop();
 						$scope.newsfeedItems = data.activity;
 					} else {

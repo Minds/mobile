@@ -1,18 +1,17 @@
-<a class="item item-avatar" href="#/tab/newsfeed/channel/{{user.guid}}">
-    <img image-cache ng-src="{{node_url}}icon/{{user.guid}}/small"/>
+<a class="item item-avatar" href="#/tab/newsfeed/channel/{{::owner.guid}}">
+    <img image-cache ng-src="{{node_url}}icon/{{::owner.guid}}/small"/>
     
     
      <i class="icon ion-person-add channel-user-subscribe" 
-			ng-if="user.subscribed == false && showSubscribeButton"
+			ng-if="owner.subscribed == false && showSubscribeButton"
 			ng-click="$event.preventDefault(); subscribe()"> </i>
 			
-    <i class="icon ion-android-cancel channel-user-subscribe" ng-if="user.subscribed == true && showSubscribeButton"
+    <i class="icon ion-android-cancel channel-user-subscribe" ng-if="owner.subscribed == true && showSubscribeButton"
             ng-click="$event.preventDefault(); unSubscribe()"> </i>
 
-    <i class="icon ion-android-more-vertical owner-brief-more" ng-if="showMoreButton && activity && activity.type == 'activity'" style="font-size: 45px;color: #999;padding: 14px 26px;position: absolute;right: 0;top: 0;" ng-click="$event.preventDefault(); openActions(activity)"></i>
-    <i class="icon ion-android-more-vertical owner-brief-more" ng-if="showMoreButton && entity && entity.type == 'object'" style="font-size: 45px;color: #999;padding: 14px 26px;position: absolute;right: 0;top: 0;" ng-click="$event.preventDefault(); openActions(entity)"></i>
+    <i class="icon ion-android-more-vertical owner-brief-more" ng-if="showMoreButton" style="font-size: 45px;color: #999;padding: 14px 26px;position: absolute;right: 0;top: 0;" ng-click="$event.preventDefault(); openActions()"></i>
     
-    <h2 style="font-weight:400;" ng-bind-html="::user.name"></h2>
+    <h2 style="font-weight:400;" ng-bind-html="::owner.name"></h2>
     <p ng-bind="::ts"></p>
    
 </a>

@@ -10,8 +10,9 @@ define(['angular'], function(angular) {
 
 				scope.showVideo = false;
 
-				attrs.$observe('playsrc', function(src) {
+				var observer = attrs.$observe('playsrc', function(src) {
 					scope.srcFull = $sce.trustAsResourceUrl(src);
+					observer();
 				});
 
 				/**

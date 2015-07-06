@@ -39,7 +39,16 @@ define(['angular'], function(angular) {
 							}, function() {
 							});
 					});
-				}
+				};
+
+				var timeout;
+				scope.openUrl = function(url) {
+					$timeout.cancel(timeout);
+		
+					timeout = $timeout(function() {
+						window.open(url, "_blank", "location=yes");
+					}, 300);
+				};
 
 			}
 		};

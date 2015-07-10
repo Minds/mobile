@@ -22,7 +22,7 @@
 
 		<ion-list>
 
-			<activity-view ng-repeat="activity in newsfeedItems" id="{{activity.guid}}" class="activity-item list card">
+			<activity-view ng-repeat="activity in newsfeedItems track by $id(activity)" id="{{activity.guid}}" class="activity-item list card">
 			</activity-view>
 
 		</ion-list>

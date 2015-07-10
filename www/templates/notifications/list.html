@@ -86,6 +86,33 @@
                               </p>
                             </a>
                         </div>
+                        <!-- down voted content -->
+                        <div ng-switch-when="downvote">
+                            <a href="#/tab/notifications/entity/{{notification.entityObj.guid}}" ng-if="notification.entityObj.type == 'object'">
+                                <p>{{notification.fromObj.name}} down voted 
+                                      <span class="minds-blue" ng-if="notification.entityObj.title" ng-bind-html="notification.entityObj.title"></span>
+                                      <span class="minds-blue" ng-if="!notification.entityObj.title">your {{notification.entityObj.subtype}}</span>
+                                </p>
+                            </a>
+                            <a href="#/tab/notifications/entity/{{notification.entityObj.guid}}" ng-if="notification.entityObj.type == 'activity'">
+                                <p ng-if="notification.entityObj.title">
+                                  {{notification.fromObj.name}} down voted <span class="minds-blue"  ng-bind-html="notification.entityObj.title"></span>
+                                </p>
+                                <p ng-if="!notification.entityObj.title">
+                                  {{notification.fromObj.name}} down voted <span class="minds-blue">your activity</span>
+                                </p>
+                            </a>
+                            <a href="#/tab/notifications/entity/{{notification.entityObj.parent_guid}}" ng-if="notification.entityObj.type == 'comment'">
+                                <p>
+                                  {{notification.fromObj.name}} down voted <span class="minds-blue"> your comment </span>
+                                </p>
+                            </a>
+                            <a href="#/tab/notifications/entity/{{notification.entityObj.guid}}" ng-if="!notification.entityObj">
+                              <p style="font-style:italic">
+                                    This post was deleted.
+                              </p>
+                            </a>
+                        </div>
                         <!-- Remind --> 
                         <div ng-switch-when="remind">
                             <a href="#/tab/notifications/entity/{{notification.entityObj.guid}}" ng-if="notification.entityObj.type == 'object'">
@@ -188,12 +215,17 @@
                         		  have been met.</p>
                         	</a>
                         </div>
+                        <!-- Points prompt -->
+                        <div ng-switch-when="custom_message">
+                            <a>
+                                <p ng-bind-html="notification.params.message"></p>
+                            </a>
+                        </div>
                         <div ng-switch-when="welcome_points">
                             <a href="#/tab/newsfeed/wallet">
                                 <p>Welcome to Minds. We have given you  <span class="minds-blue">100 points</span> to get you started.</p>
                             </a>
                         </div>
-                        
                         <!-- tutorial/promts -->
                         <div ng-switch-when="welcome_post">
                             <a href="#/tab/capture">

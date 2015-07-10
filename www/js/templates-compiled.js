@@ -1539,7 +1539,7 @@ define(['angular'], function(angular){
     "\n" +
     "		<ion-list>\n" +
     "\n" +
-    "			<activity-view ng-repeat=\"activity in newsfeedItems\" id=\"{{activity.guid}}\" class=\"activity-item list card\">\n" +
+    "			<activity-view ng-repeat=\"activity in newsfeedItems track by $id(activity)\" id=\"{{activity.guid}}\" class=\"activity-item list card\">\n" +
     "			</activity-view>\n" +
     "\n" +
     "		</ion-list>\n" +
@@ -1736,6 +1736,33 @@ define(['angular'], function(angular){
     "                              </p>\n" +
     "                            </a>\n" +
     "                        </div>\n" +
+    "                        <!-- down voted content -->\n" +
+    "                        <div ng-switch-when=\"downvote\">\n" +
+    "                            <a href=\"#/tab/notifications/entity/{{notification.entityObj.guid}}\" ng-if=\"notification.entityObj.type == 'object'\">\n" +
+    "                                <p>{{notification.fromObj.name}} down voted \n" +
+    "                                      <span class=\"minds-blue\" ng-if=\"notification.entityObj.title\" ng-bind-html=\"notification.entityObj.title\"></span>\n" +
+    "                                      <span class=\"minds-blue\" ng-if=\"!notification.entityObj.title\">your {{notification.entityObj.subtype}}</span>\n" +
+    "                                </p>\n" +
+    "                            </a>\n" +
+    "                            <a href=\"#/tab/notifications/entity/{{notification.entityObj.guid}}\" ng-if=\"notification.entityObj.type == 'activity'\">\n" +
+    "                                <p ng-if=\"notification.entityObj.title\">\n" +
+    "                                  {{notification.fromObj.name}} down voted <span class=\"minds-blue\"  ng-bind-html=\"notification.entityObj.title\"></span>\n" +
+    "                                </p>\n" +
+    "                                <p ng-if=\"!notification.entityObj.title\">\n" +
+    "                                  {{notification.fromObj.name}} down voted <span class=\"minds-blue\">your activity</span>\n" +
+    "                                </p>\n" +
+    "                            </a>\n" +
+    "                            <a href=\"#/tab/notifications/entity/{{notification.entityObj.parent_guid}}\" ng-if=\"notification.entityObj.type == 'comment'\">\n" +
+    "                                <p>\n" +
+    "                                  {{notification.fromObj.name}} down voted <span class=\"minds-blue\"> your comment </span>\n" +
+    "                                </p>\n" +
+    "                            </a>\n" +
+    "                            <a href=\"#/tab/notifications/entity/{{notification.entityObj.guid}}\" ng-if=\"!notification.entityObj\">\n" +
+    "                              <p style=\"font-style:italic\">\n" +
+    "                                    This post was deleted.\n" +
+    "                              </p>\n" +
+    "                            </a>\n" +
+    "                        </div>\n" +
     "                        <!-- Remind --> \n" +
     "                        <div ng-switch-when=\"remind\">\n" +
     "                            <a href=\"#/tab/notifications/entity/{{notification.entityObj.guid}}\" ng-if=\"notification.entityObj.type == 'object'\">\n" +
@@ -1838,12 +1865,17 @@ define(['angular'], function(angular){
     "                        		  have been met.</p>\n" +
     "                        	</a>\n" +
     "                        </div>\n" +
+    "                        <!-- Points prompt -->\n" +
+    "                        <div ng-switch-when=\"custom_message\">\n" +
+    "                            <a>\n" +
+    "                                <p ng-bind-html=\"notification.params.message\"></p>\n" +
+    "                            </a>\n" +
+    "                        </div>\n" +
     "                        <div ng-switch-when=\"welcome_points\">\n" +
     "                            <a href=\"#/tab/newsfeed/wallet\">\n" +
     "                                <p>Welcome to Minds. We have given you  <span class=\"minds-blue\">100 points</span> to get you started.</p>\n" +
     "                            </a>\n" +
     "                        </div>\n" +
-    "                        \n" +
     "                        <!-- tutorial/promts -->\n" +
     "                        <div ng-switch-when=\"welcome_post\">\n" +
     "                            <a href=\"#/tab/capture\">\n" +

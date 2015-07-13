@@ -9,10 +9,6 @@
                 "parents": {
                     "/*": [
                         {
-                            "xml": "<feature name=\"Keyboard\"><param name=\"ios-package\" onload=\"true\" value=\"IonicKeyboard\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"PayPalMobile\"><param name=\"ios-package\" onload=\"true\" value=\"PayPalMobileCordovaPlugin\" /></feature>",
                             "count": 1
                         },
@@ -115,6 +111,10 @@
                         {
                             "xml": "<feature name=\"Crypt\"><param name=\"ios-package\" value=\"CDVCrypt\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Keyboard\"><param name=\"ios-package\" onload=\"true\" value=\"IonicKeyboard\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -133,12 +133,7 @@
                             "count": 1
                         }
                     ],
-                    "CFNetwork.framework": [
-                        {
-                            "xml": false,
-                            "count": 1
-                        }
-                    ],
+                    "CFNetwork.framework": [],
                     "CoreGraphics.framework": [
                         {
                             "xml": false,
@@ -186,7 +181,7 @@
                     "MobileCoreServices.framework": [
                         {
                             "xml": false,
-                            "count": 4
+                            "count": 3
                         }
                     ],
                     "Security.framework": [
@@ -199,12 +194,7 @@
                             "count": 1
                         }
                     ],
-                    "SystemConfiguration.framework": [
-                        {
-                            "xml": false,
-                            "count": 1
-                        }
-                    ],
+                    "SystemConfiguration.framework": [],
                     "QuartzCore.framework": [
                         {
                             "xml": false,
@@ -306,9 +296,6 @@
         }
     },
     "installed_plugins": {
-        "com.ionic.keyboard": {
-            "PACKAGE_NAME": "com.minds.mobile"
-        },
         "com.paypal.cordova.mobilesdk": {
             "PACKAGE_NAME": "com.minds.mobile"
         },
@@ -372,6 +359,9 @@
             "PACKAGE_NAME": "com.minds.mobile"
         },
         "org.apache.cordova.crypt": {
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
+        "com.ionic.keyboard": {
             "PACKAGE_NAME": "com.minds.mobile"
         }
     },

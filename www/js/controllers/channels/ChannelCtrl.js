@@ -21,7 +21,7 @@ define(function() {
 		var interval;
 
 		$scope.cb = Date.now();
-		$rootScope.$on('$stateChangeSuccess', function(event, to, toParams, from, fromParams) {
+		var statelistener = $rootScope.$on('$stateChangeSuccess', function(event, to, toParams, from, fromParams) {
 			if (from.name == 'tab.newsfeed-channel-edit') {
 				$scope.cb = Date.now();
 				$scope.init();
@@ -34,6 +34,12 @@ define(function() {
 
 			//$scope.cb = Date.now();
 			//$scope.init();
+		});
+		
+		$scope.$on("$destroy", function(){
+			if (interval)
+				$interval.cancel(interval);
+			statelistener();
 		});
 
 		$scope.init = function() {

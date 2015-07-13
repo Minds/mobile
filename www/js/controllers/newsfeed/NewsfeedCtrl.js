@@ -12,12 +12,16 @@ define(function() {
 	Cacher, Client, storage, $ionicPopover, $ionicLoading, $timeout, $ionicActionSheet, $ionicModal, $ionicPlatform) {
 
 		//if same tab click, refresh and go to top
-		$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+		var statelistener = $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
 			if (toState.name == fromState.name) {
 				$ionicScrollDelegate.scrollTop();
 				$scope.refresh();
 			}
 			//if (toState.name == 'tab.newsfeed') {}
+		});
+		
+		$scope.$on("$destroy", function(){
+			statelistener();
 		});
 
 		if ($state.current.name == 'tab.newsfeed') {
@@ -43,17 +47,13 @@ define(function() {
 		$scope.next = "";
 
 		$scope.hasMoreData = true;
-
-		if (Cacher.get('newsfeed.cachebreaker')) {
-			$scope.cachebreaker = Cacher.get('newsfeed.cachebreaker');
-		} else {
-			$scope.cachebreaker = 0;
-		}
+		$scope.cachebreaker = 0;
 
 		/**
 		 * Load more posts
 		 */
 		$scope.loadMore = function() {
+
 			$timeout(function() {
 				console.log('==== loading more ====');
 
@@ -66,6 +66,7 @@ define(function() {
 				NewsfeedAPI.all({
 					limit: 12,
 					offset: $scope.next,
+					//thumb_guids: false,
 					cachebreaker: $scope.cachebreaker
 				}, function(data) {
 
@@ -84,14 +85,9 @@ define(function() {
 						}
 						//$scope.newsfeedItems.concat(data.activity);
 					}
-					//Cacher.put('newsfeed.items', $scope.newsfeedItems);
-					//} else {
-					//	Cacher.put('newsfeed.items', data.activity);
-					//}
 
 					$scope.next = data['load-next'];
 					console.log("next is:: " + $scope.next);
-					//Cacher.put('newsfeed.item', $scope.next);
 
 					$scope.$broadcast('scroll.infiniteScrollComplete');
 					$scope.hasMoreData = true;
@@ -119,6 +115,7 @@ define(function() {
 			NewsfeedAPI.all({
 				limit: 12,
 				offset: '',
+				//thumb_guids: false,
 				cache_break: Date.now()
 			}, function(data) {
 

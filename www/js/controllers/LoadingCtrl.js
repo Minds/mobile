@@ -10,6 +10,8 @@ define(function() {
 
 	function ctrl($scope, $state, OAuth, Client, $ionicPopup, storage, $timeout, push, $ionicPlatform) {
 
+		navigator.splashscreen.hide();
+
 		var timeout = $timeout(function() {
 			if (storage.get('access_token') && storage.get('loggedin')) {
 				$state.go('tab.newsfeed');

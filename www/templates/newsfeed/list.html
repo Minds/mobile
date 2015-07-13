@@ -22,12 +22,12 @@
 
 		<ion-list>
 
-			<activity-view ng-repeat="activity in newsfeedItems track by $id(activity)" id="{{activity.guid}}" class="activity-item list card">
+			<activity-view ng-repeat="activity in newsfeedItems track by $id(activity.guid + $index)" id="{{::activity.guid}}" class="activity-item list card">
 			</activity-view>
 
 		</ion-list>
 		
-		<ion-infinite-scroll ng-if="hasMore()" distance="5%" on-infinite="loadMore()"  >
+		<ion-infinite-scroll ng-if="hasMore()" distance="1%" on-infinite="loadMore()" >
 		</ion-infinite-scroll>
 
 	</ion-content>

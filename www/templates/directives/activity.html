@@ -1,58 +1,58 @@
 
     <owner-brief-view owner="::activity.ownerObj" ts="::activity.time_created" show-more-button="::(!hideMoreButton)" open-actions="openActions(activity)"></owner-brief-view>
     
-    <div class="item item-text-wrap" ng-if="::activity.message">
+    <div class="item item-text-wrap" ng-if="activity.message">
         <p ng-bind-html="::activity.message | linky" class="wrap" style="white-space: pre-line;"></p>
     </div>
     
-    <div class="item item-text-wrap" ng-if="::(activity.title && !activity.perma_url)">
+    <div class="item item-text-wrap" ng-if="(activity.title && !activity.perma_url)">
         <p ng-bind-html="::activity.title | linky" class="wrap"></p>
     </div>
     
     <!--Rich content -->
 
-    <div class="item item-image allow-select" ng-if="::activity.thumbnail_src" ng-click="openUrl(activity.perma_url)">
+    <div class="item item-image allow-select" ng-if="activity.thumbnail_src" ng-click="openUrl(activity.perma_url)">
         <img ng-src="{{::activity.thumbnail_src}}"  onerror="this.src='img/img-placeholder.png'">
     </div>
     
     <!-- Custom type:: batch -->
-    <div class="item item-image allow-select" ng-if="::activity.custom_type == 'batch'">
-        <img ng-src="{{::activity.custom_data[0].src}}" onerror="this.src='img/img-placeholder.png'" style="width:100%">
+    <div class="item item-image allow-select" ng-if="activity.custom_type == 'batch'">
+        <img ng-src="{{activity.custom_data[0].src}}" onerror="this.src='img/img-placeholder.png'" style="width:100%">
     </div>
     
     <!-- Custom type:: video -->
-    <div class="item item-image item-image-video" ng-if="::activity.custom_type == 'video'" play-video playsrc="{{node_url}}api/v1/archive/{{::activity.custom_data.guid}}/play">
+    <div class="item item-image item-image-video" ng-if="activity.custom_type == 'video'" play-video playsrc="{{node_url}}api/v1/archive/{{activity.custom_data.guid}}/play">
               
-         <img ng-src="{{::activity.custom_data.thumbnail_src}}" onerror="this.src='img/img-placeholder.png'">
+         <img ng-src="{{activity.custom_data.thumbnail_src}}" onerror="this.src='img/img-placeholder.png'">
          <i class="icon ion-play"></i>
          
           <video id="video" ng-show="showVideo" width="300px" height="300px;" style="background:#000;" preload="auto" loop controls></video>
          
     </div>
 
-    <div class="item item-text-wrap remind" ng-if="::activity.remind_object">
+    <div class="item item-text-wrap remind" ng-if="activity.remind_object">
         <div>
             <remind-view activity="::activity.remind_object"></remind-view>
         </div>
     </div>
 
-	<div class="rich-embed-output item item-text-wrap" ng-if="::(activity.title && activity.perma_url)" ng-click="::activity.perma_url ? openUrl(activity.perma_url) : false">
+	<div class="rich-embed-output item item-text-wrap" ng-if="(activity.title && activity.perma_url)" ng-click="::activity.perma_url ? openUrl(activity.perma_url) : false">
         <h3 ng-bind-html="::activity.title | linky"></h3>
-        <p ng-if="::activity.perma_url">{{::activity.perma_url | domain}}</p>
+        <p ng-if="activity.perma_url">{{::activity.perma_url | domain}}</p>
     </div>
     
-    <div class="boosted-bar" ng-if="::activity.boosted">
+    <div class="boosted-bar" ng-if="activity.boosted">
         <i class="icon ion-arrow-graph-up-right"></i> Boosted
     </div>
     
-    <div class="item tabs tabs-secondary tabs-icon-left" style="padding:0;background-color:#F7F7F7 !important;" ng-if="::(!hideTabs)">
+    <div class="item tabs tabs-secondary tabs-icon-left" style="padding:0;background-color:#F7F7F7 !important;" ng-if="(!hideTabs)">
         <a class="tab-item small-font thumbs-up" ng-click="thumbsUp(activity.guid)" thumbs="{{activity['thumbs:up:user_guids']}}">
             <i style="padding-left:4px;" class="icon ion-thumbsup"></i>
-            <b ng-if="::activity['thumbs:up:count']" style="font-size:14px; padding:2px 0 0">({{activity['thumbs:up:count']}})</b> 
+            <b ng-if="activity['thumbs:up:count']" style="font-size:14px; padding:2px 0 0">({{activity['thumbs:up:count']}})</b> 
         </a>
         <a class="tab-item small-font thumbs-down" ng-click="thumbsDown(activity.guid)" thumbs="{{activity['thumbs:down:user_guids']}}">
             <i class="icon ion-thumbsdown"></i>
-            <b ng-if="::activity['thumbs:down:count']" style="font-size:14px; padding:2px 0 0">({{activity['thumbs:down:count']}})</b> 
+            <b ng-if="activity['thumbs:down:count']" style="font-size:14px; padding:2px 0 0">({{activity['thumbs:down:count']}})</b> 
         </a>
         <a class="tab-item  small-font" href="#/tab/newsfeed/{{activity.guid}}">
             <i class="icon ion-chatbox"></i>
@@ -63,7 +63,7 @@
             <b ng-show="::activity.reminds > 0" style="font-size:14px; padding:2px 0 0">({{::activity.reminds}})</b> 
         </a>
         
-        <a class="tab-item small-font" ng-click="boost(activity)" style="opacity:1;" ng-if="::activity.owner_guid == $root.user_guid">
+        <a class="tab-item small-font" ng-click="boost(activity)" style="opacity:1;" ng-if="activity.owner_guid == $root.user_guid">
            <span style="color: #FFF;font-weight: 800;background: #4690C3;padding: 6px 8px;border-radius: 3px;">Boost</span>
         </a>
         

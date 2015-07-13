@@ -211,7 +211,7 @@ define(function() {
 
 		};
 
-		if (window.intents) {
+		if (window.intents && typeof window.intents.onIntent == 'function') {
 			intents.onIntent(function(callback) {
 				if (callback.type == "text") {
 					$scope.activity();

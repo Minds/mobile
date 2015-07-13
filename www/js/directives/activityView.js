@@ -23,22 +23,23 @@ define(['angular'], function(angular) {
 				}
 
 				if (!visible) {
-					var gesture = $ionicGesture.on('dragend', function(e) {
+					var func = function(e) {
 						if (!visible && isVisible()) {
 							visible = true;
 							$ionicGesture.off(gesture, 'dragend', this);
 							updateViews();
 						}
-					}, element.parent());
+					};
+					var gesture = $ionicGesture.on('dragend', func, element.parent());
 				}
 
 				function updateViews() {
-					$timeout(function() {
+					//$timeout(function() {
 					//	scope.activity.impressions = scope.activity.impressions + 1;
 						Client.put('api/v1/newsfeed/' + scope.activity.guid + '/view', {}, function() {
 							}, function() {
 							});
-					});
+					//);
 				};
 
 				var timeout;
@@ -49,6 +50,12 @@ define(['angular'], function(angular) {
 						window.open(url, "_blank", "location=yes");
 					}, 300);
 				};
+				
+				scope.$on("$destroy", function(){
+					if(gesture){
+						$ionicGesture.off(gesture, 'dragend', func);
+					}
+				});
 
 			}
 		};

@@ -7,7 +7,7 @@
     <ion-content >
     	
     	<div ng-controller="NewsfeedCtrl" style="margin-bottom:-42px">
-    	   <activity-view ng-if="activity.guid" id="{{activity.guid}}" class="activity-item list card" ng-controller="NewsfeedCtrl"></activity-view>
+    	   <activity-view ng-if="::activity.guid" id="{{::activity.guid}}" class="activity-item list card" ng-controller="NewsfeedCtrl"></activity-view>
     	</div>
     	
     	<!-- show comments here -->
@@ -17,11 +17,11 @@
 			</div>
 			<div ng-repeat="comment in comments" class="comment-item" ng-class-future="$even ? 'odd' : 'even'">
 				
-				<a href="#/tab/newsfeed/channel/{{comment.ownerObj.guid}}">
-					<img ng-src="{{$root.node_url}}icon/{{comment.ownerObj.guid}}/small"/>
+				<a href="#/tab/newsfeed/channel/{{::comment.ownerObj.guid}}">
+					<img ng-src="{{$root.node_url}}icon/{{::comment.ownerObj.guid}}/small"/>
 				</a>
 				
-				<div class="content item-text-wrap" ng-bind-html="comment.description | linky" ng-click="removeComment(comment)">
+				<div class="content item-text-wrap" ng-bind-html="::comment.description | linky" ng-click="removeComment(comment)">
 				</div>
 			</div>	
 		</ion-list>

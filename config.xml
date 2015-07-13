@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.minds.mobile" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.minds.mobile" version="1.0.17" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Minds</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
@@ -9,85 +9,65 @@
     </author>
     <content src="index.html" />
     <access origin="*" />
+    <preference name="permissions" value="none" />
     <preference name="fullscreen" value="false" />
     <preference name="webviewbounce" value="false" />
     <preference name="UIWebViewBounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="auto-hide-splash-screen" value="false" />
-    <preference name="AllowInlineMediaPlayback" value="true"/>
-    <access origin="mailto:*" launch-external="yes"/>
-    
+    <preference name="AllowInlineMediaPlayback" value="true" />
+    <access launch-external="yes" origin="mailto:*" />
     <platform name="ios">
-              <!-- iOS 8.0+ -->
-              <!-- iPhone 6 Plus  -->
-              <icon src="res/ios/appicon-60@3x.png" width="180" height="180" />
-              <!-- iOS 7.0+ -->
-              <!-- iPhone / iPod Touch  -->
-              <icon src="res/ios/appicon-60.png" width="60" height="60" />
-              <icon src="res/ios/appicon-60@2x.png" width="120" height="120" />
-              <!-- iPad -->
-              <icon src="res/ios/appicon-76.png" width="76" height="76" />
-              <icon src="res/ios/appicon-76@2x.png" width="152" height="152" />
-              <!-- iOS 6.1 -->
-              <!-- Spotlight Icon -->
-              <icon src="res/ios/appicon-40.png" width="40" height="40" />
-              <icon src="res/ios/appicon-40@2x.png" width="80" height="80" />
-              <!-- iPhone / iPod Touch -->
-              <icon src="res/ios/appicon.png" width="57" height="57" />
-              <icon src="res/ios/appicon@2x.png" width="114" height="114" />
-              <!-- iPad -->
-              <icon src="res/ios/appicon-72.png" width="72" height="72" />
-              <icon src="res/ios/appicon-72@2x.png" width="144" height="144" />
-              <!-- iPhone Spotlight and Settings Icon -->
-              <icon src="res/ios/appicon-small.png" width="29" height="29" />
-              <icon src="res/ios/appicon-small@2x.png" width="58" height="58" />
-              <!-- iPad Spotlight and Settings Icon -->
-              <icon src="res/ios/appicon-50.png" width="50" height="50" />
-              <icon src="res/ios/appicon-50@2x.png" width="100" height="100" />
-              
-				<splash src="res/ios/Default.png" width="320" height="480"/>
-				<splash src="res/ios/Default@2x.png" width="640" height="960"/>
-			    <splash src="res/ios/Default-Portrait.png" width="768" height="1024"/>
-			    <splash src="res/ios/Default-Portrait@2x.png" width="1536" height="2048"/>
-			    <splash src="res/ios/Default-568h@2x.png" width="640" height="1136"/>
-			    <splash src="res/ios/Default-667h.png" width="750" height="1334"/>
-			    <splash src="res/ios/Default-Portrait-736h@3x.png" width="1242" height="2208"/>
-     </platform>
-
-	<platform name="android">
-		<icon src="res/android/dpi.png" density="ldpi" />
-		<icon src="res/android/dpi.png" density="mdpi" />
-		<icon src="res/android/dpi.png" density="hdpi" />
-		<icon src="res/android/dpi.png" density="xhdpi" />
-
-		<splash src="res/android/screen-dpi.png" density="port-hdpi"/>
-	 	<splash src="res/android/screen-dpi.png" density="port-ldpi"/>
-		<splash src="res/android/screen-dpi.png" density="port-mdpi"/>
-		<splash src="res/android/screen-dpi.png" density="port-xhdpi"/>
-     </platform>
-
-	<preference name="SplashScreen" value="screen" />
+        <icon height="180" src="res/ios/appicon-60@3x.png" width="180" />
+        <icon height="60" src="res/ios/appicon-60.png" width="60" />
+        <icon height="120" src="res/ios/appicon-60@2x.png" width="120" />
+        <icon height="76" src="res/ios/appicon-76.png" width="76" />
+        <icon height="152" src="res/ios/appicon-76@2x.png" width="152" />
+        <icon height="40" src="res/ios/appicon-40.png" width="40" />
+        <icon height="80" src="res/ios/appicon-40@2x.png" width="80" />
+        <icon height="57" src="res/ios/appicon.png" width="57" />
+        <icon height="114" src="res/ios/appicon@2x.png" width="114" />
+        <icon height="72" src="res/ios/appicon-72.png" width="72" />
+        <icon height="144" src="res/ios/appicon-72@2x.png" width="144" />
+        <icon height="29" src="res/ios/appicon-small.png" width="29" />
+        <icon height="58" src="res/ios/appicon-small@2x.png" width="58" />
+        <icon height="50" src="res/ios/appicon-50.png" width="50" />
+        <icon height="100" src="res/ios/appicon-50@2x.png" width="100" />
+        <splash height="480" src="res/ios/Default.png" width="320" />
+        <splash height="960" src="res/ios/Default@2x.png" width="640" />
+        <splash height="1024" src="res/ios/Default-Portrait.png" width="768" />
+        <splash height="2048" src="res/ios/Default-Portrait@2x.png" width="1536" />
+        <splash height="1136" src="res/ios/Default-568h@2x.png" width="640" />
+        <splash height="1334" src="res/ios/Default-667h.png" width="750" />
+        <splash height="2208" src="res/ios/Default-Portrait-736h@3x.png" width="1242" />
+    </platform>
+    <platform name="android">
+        <icon density="ldpi" src="res/android/dpi.png" />
+        <icon density="mdpi" src="res/android/dpi.png" />
+        <icon density="hdpi" src="res/android/dpi.png" />
+        <icon density="xhdpi" src="res/android/dpi.png" />
+        <splash density="port-hdpi" src="res/android/screen-dpi.png" />
+        <splash density="port-ldpi" src="res/android/screen-dpi.png" />
+        <splash density="port-mdpi" src="res/android/screen-dpi.png" />
+        <splash density="port-xhdpi" src="res/android/screen-dpi.png" />
+    </platform>
+    <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="2750" />
-
     <feature name="StatusBar">
-            <param name="ios-package" value="CDVStatusBar" onload="true" />
-        </feature>
+        <param name="ios-package" onload="true" value="CDVStatusBar" />
+    </feature>
     <preference name="StatusBarStyle" value="blacktranslucent" />
-
-
     <feature name="Console">
-           <param name="ios-package" value="CDVLogger" />
+        <param name="ios-package" value="CDVLogger" />
     </feature>
     <feature name="Device">
         <param name="ios-package" value="CDVDevice" />
         <param name="android-package" value="org.apache.cordova.device.Device" />
     </feature>
-
     <feature name="Capture">
-         <param name="android-package" value="org.apache.cordova.mediacapture.Capture" />
+        <param name="android-package" value="org.apache.cordova.mediacapture.Capture" />
         <param name="ios-package" value="CDVCapture" />
-    </feature>    
-    
+    </feature>
     <feature name="File">
         <param name="ios-package" value="CDVFile" />
         <param name="onload" value="true" />
@@ -97,16 +77,13 @@
         <param name="ios-package" value="CDVFileTransfer" />
         <param name="android-package" value="org.apache.cordova.filetransfer.FileTransfer" />
     </feature>
-
     <feature name="Keyboard">
-        <param name="ios-package" value="IonicKeyboard" onload="true" />
+        <param name="ios-package" onload="true" value="IonicKeyboard" />
     </feature>
-
     <preference name="StatusBarOverlaysWebView" value="true" />
     <preference name="iosPersistentFileLocation" value="Library" />
     <preference name="BackupWebStorage" value="none" />
     <preference name="xwalkVersion" value="14" />
+    <access origin="*" />
 
-    <access origin="*"/>
-  
 </widget>

@@ -97,6 +97,10 @@ define(['angular'], function(angular) {
 
 				el.on('click', scope.play);
 
+				scope.$on("$destroy", function(){
+					el.off('click', scope.play);
+				});
+
 			}
 		};
 	};

@@ -270,7 +270,9 @@
                             "xml": true,
                             "count": 1
                         }
-                    ]
+                    ],
+                    "libz.dylib": [],
+                    "WebKit.framework": []
                 }
             },
             "*-Info.plist": {
@@ -330,6 +332,9 @@
         "cordova-plugin-contacts": {
             "PACKAGE_NAME": "com.minds.mobile"
         },
+        "cordova-plugin-crosswalk-webview": {
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
         "cordova-plugin-device": {
             "PACKAGE_NAME": "com.minds.mobile"
         },
@@ -367,9 +372,6 @@
             "PACKAGE_NAME": "com.minds.mobile"
         },
         "org.apache.cordova.crypt": {
-            "PACKAGE_NAME": "com.minds.mobile"
-        },
-        "cordova-plugin-crosswalk-webview": {
             "PACKAGE_NAME": "com.minds.mobile"
         }
     },

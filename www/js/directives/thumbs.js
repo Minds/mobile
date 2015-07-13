@@ -8,12 +8,16 @@ define(['angular'], function(angular) {
 			restrict: 'A',
 			link: function(scope, element, attrs) {
 
-				attrs.$observe('thumbs', function(value) {
+				var observe = attrs.$observe('thumbs', function(value) {
 					if (value.indexOf(storage.get('user_guid')) > -1) {
 						angular.element(element).addClass('selected');
 					} else {
 						angular.element(element).removeClass('selected');
 					}
+				});
+				
+				scope.$on('$destroy', function() {
+					observe();
 				});
 
 				/*if(attrs.thumbs.indexOf(storage.get('user_guid')) > -1){

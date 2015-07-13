@@ -14,6 +14,7 @@ define(['app'], function(app) {
 		$ionicConfigProvider.platform.android.tabs.position("bottom");
 		$ionicConfigProvider.navBar.alignTitle('center');
 		$ionicConfigProvider.views.swipeBackEnabled(false);
+		$ionicConfigProvider.views.transition('none');
 
 		$stateProvider.state('loading', {
 			url: "/loading",
@@ -60,6 +61,7 @@ define(['app'], function(app) {
 				}
 			}
 		}).state('tab.newsfeed-channel', {
+			cache: false, 
 			url: "/newsfeed/channel/:username",
 			views: {
 				'newsfeed-tab': {
@@ -96,6 +98,7 @@ define(['app'], function(app) {
 				}
 			}
 		}).state('tab.newsfeed-view', {
+			cache: false,
 			url: '/newsfeed/:guid',
 			views: {
 				'newsfeed-tab': {

@@ -158,6 +158,7 @@ define(['angular'], function(angular) {
             register: register,
             listen: function(event, callback) {
 				//console.log(event, callback);
+				console.log('new listener');
 				var id = Date.now();
 				listeners.push({event: event, callback: callback, id: id});
 				return id;

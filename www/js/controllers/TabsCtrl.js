@@ -61,6 +61,11 @@ define(function() {
 				$ionicHistory.goBack();
 			}
 		}, 100);
+		
+		document.addEventListener('memorywarning', function(){
+			console.log('memory warning received');
+			$ionicHistory.clearCache();
+		});
 
 	}
 

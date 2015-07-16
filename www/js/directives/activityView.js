@@ -45,14 +45,14 @@ define(['angular'], function(angular) {
 				var timeout;
 				scope.openUrl = function(url) {
 					$timeout.cancel(timeout);
-		
+
 					timeout = $timeout(function() {
 						window.open(url, "_blank", "location=yes");
 					}, 300);
 				};
-				
-				scope.$on("$destroy", function(){
-					if(gesture){
+
+				scope.$on("$destroy", function() {
+					if (gesture) {
 						$ionicGesture.off(gesture, 'dragend', func);
 					}
 				});

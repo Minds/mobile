@@ -61,7 +61,7 @@ define(['app'], function(app) {
 				}
 			}
 		}).state('tab.newsfeed-channel', {
-			cache: false, 
+			cache: false,
 			url: "/newsfeed/channel/:username",
 			views: {
 				'newsfeed-tab': {

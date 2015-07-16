@@ -15,7 +15,7 @@ define(['angular'], function(angular) {
 						angular.element(element).removeClass('selected');
 					}
 				});
-				
+
 				scope.$on('$destroy', function() {
 					observe();
 				});

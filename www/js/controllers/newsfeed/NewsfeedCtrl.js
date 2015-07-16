@@ -19,8 +19,8 @@ define(function() {
 			}
 			//if (toState.name == 'tab.newsfeed') {}
 		});
-		
-		$scope.$on("$destroy", function(){
+
+		$scope.$on("$destroy", function() {
 			statelistener();
 		});
 

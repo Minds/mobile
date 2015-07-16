@@ -35,8 +35,8 @@ define(function() {
 			//$scope.cb = Date.now();
 			//$scope.init();
 		});
-		
-		$scope.$on("$destroy", function(){
+
+		$scope.$on("$destroy", function() {
 			if (interval)
 				$interval.cancel(interval);
 			statelistener();

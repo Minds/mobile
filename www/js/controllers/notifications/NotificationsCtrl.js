@@ -16,9 +16,9 @@ define(function() {
 		$scope.inprogress = false;
 		$scope.notificationItems = [];
 
-		$scope.$on('$ionicView.beforeEnter', function() {
-			$rootScope.newNotification = false;
-			if ($scope.notificationItems.length > 0) {
+		var statelistener = $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+			if (toState.name == fromState.name) {
+				$ionicScrollDelegate.scrollTop();
 				$scope.refresh();
 			}
 		});
@@ -168,6 +168,10 @@ define(function() {
 				$scope.modal.show();
 			});
 		};
+
+		$scope.$on('$destroy', function(){
+			statelistener();
+		});
 
 	}
 

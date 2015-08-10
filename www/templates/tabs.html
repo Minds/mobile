@@ -7,19 +7,19 @@
     <ion-tab title="Capture" icon="icon ion-ios-videocam" href="#/tab/capture" class="capture-tab-dep">
         <ion-nav-view name="capture-tab" styles="background: #000 !important; color:#FFF;"></ion-nav-view>
     </ion-tab>
-    
+
     <ion-tab title="Discover" icon="icon ion-search" href="#/tab/discover">
         <ion-nav-view name="discover-tab"></ion-nav-view>
     </ion-tab>
-    
+
     <ion-tab title="Chat" icon="icon ion-chatboxes {{$root.newChat}}" href="#/tab/gatherings/conversations">
         <ion-nav-view name="chat-tab"></ion-nav-view>
     </ion-tab>
-    
-	<ion-tab title="Notifications" icon="icon ion-ios-bell {{$root.newNotification}}" href="#/tab/notifications">
+
+	<ion-tab title="Notifications" icon="icon ion-ios-bell {{$root.newNotification}}" href="#/tab/notifications" ng-click="onTabSelect('tab.notifications')">
         <ion-nav-view name="notifications-tab"></ion-nav-view>
     </ion-tab>
-    
+
     <!--<ion-tab title="More" icon="icon ion-navicon" href="#/tab/more/home" ng-click="onTabSelect('tab.more')">
         <ion-nav-view name="more-tab"></ion-nav-view>
     </ion-tab>-->

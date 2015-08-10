@@ -188,10 +188,10 @@ define(function() {
 			if ($scope.form.meta) {
 				data = {
 					message: encodeURIComponent($scope.form.status),
-					title: $scope.form.meta.title,
+					title:  encodeURIComponent($scope.form.meta.title),
 					description: encodeURIComponent($scope.form.meta.description),
 					thumbnail: encodeURIComponent($scope.form.thumbnail),
-					url: $scope.form.meta.canonical,
+					url: encodeURIComponent($scope.form.meta.canonical),
 					facebook: $scope.form.facebook,
 					twitter: $scope.form.twitter
 				};

@@ -140,5 +140,14 @@
         },
         "is_top_level": true,
         "variables": {}
+    },
+    "com.paypal.cordova.mobilesdk": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/paypal/PayPal-Cordova-Plugin.git",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }

@@ -138,29 +138,30 @@ define(['angular'], function(angular){
     "    <ion-tab title=\"Capture\" icon=\"icon ion-ios-videocam\" href=\"#/tab/capture\" class=\"capture-tab-dep\">\n" +
     "        <ion-nav-view name=\"capture-tab\" styles=\"background: #000 !important; color:#FFF;\"></ion-nav-view>\n" +
     "    </ion-tab>\n" +
-    "    \n" +
+    "\n" +
     "    <ion-tab title=\"Discover\" icon=\"icon ion-search\" href=\"#/tab/discover\">\n" +
     "        <ion-nav-view name=\"discover-tab\"></ion-nav-view>\n" +
     "    </ion-tab>\n" +
-    "    \n" +
+    "\n" +
     "    <ion-tab title=\"Chat\" icon=\"icon ion-chatboxes {{$root.newChat}}\" href=\"#/tab/gatherings/conversations\">\n" +
     "        <ion-nav-view name=\"chat-tab\"></ion-nav-view>\n" +
     "    </ion-tab>\n" +
-    "    \n" +
-    "	<ion-tab title=\"Notifications\" icon=\"icon ion-ios-bell {{$root.newNotification}}\" href=\"#/tab/notifications\">\n" +
+    "\n" +
+    "	<ion-tab title=\"Notifications\" icon=\"icon ion-ios-bell {{$root.newNotification}}\" href=\"#/tab/notifications\" ng-click=\"onTabSelect('tab.notifications')\">\n" +
     "        <ion-nav-view name=\"notifications-tab\"></ion-nav-view>\n" +
     "    </ion-tab>\n" +
-    "    \n" +
+    "\n" +
     "    <!--<ion-tab title=\"More\" icon=\"icon ion-navicon\" href=\"#/tab/more/home\" ng-click=\"onTabSelect('tab.more')\">\n" +
     "        <ion-nav-view name=\"more-tab\"></ion-nav-view>\n" +
     "    </ion-tab>-->\n" +
     "\n" +
-    "</ion-tabs>");
+    "</ion-tabs>\n" +
+    "");
   $templateCache.put("templates/tutorial.html",
     "<ion-view hide-nav-bar=\"true\" >\n" +
     "	<ion-pane ng-controller=\"TutorialCtrl\" class=\"tutorial\">\n" +
-    "	\n" +
-    "		\n" +
+    "\n" +
+    "\n" +
     "	<ion-slide-box on-slide-changed=\"slideHasChanged($index)\" show-pager=\"true\" does-continue=\"true\" slide-interval=\"3000\" >\n" +
     "	  <ion-slide>\n" +
     "	    <div class=\"bg-splash\"></div>\n" +
@@ -171,11 +172,11 @@ define(['angular'], function(angular){
     "	    	<p style=\"font-size: 10px;padding: 0;line-height: 10px;\">Swipe right to skip tutorial.</p>\n" +
     "	    </div>\n" +
     "	  </ion-slide>\n" +
-    "	  \n" +
+    "\n" +
     "	  <ion-slide>\n" +
     "        <div class=\"box\">\n" +
     "            <h1>Subscribe</h1>\n" +
-    "            \n" +
+    "\n" +
     "            <div class=\"swipe-container\">\n" +
     "                <div class=\"list card tabs-background-white animation-mock-swipe\">\n" +
     "                    <div class=\"item item-image\">\n" +
@@ -184,72 +185,72 @@ define(['angular'], function(angular){
     "                            <h1>{{entity.name}}</h1>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
-    "                    \n" +
+    "\n" +
     "                    <div class=\"item tabs tabs-secondary tabs-icon-left\">\n" +
     "                        <a class=\"tab-item\" href=\"#\" ng-click=\"ignore(entity)\">\n" +
     "                            <i class=\"icon ion-close\"></i>\n" +
     "                        </a>\n" +
     "                        <a class=\"tab-item\" href=\"#\" ng-click=\"subscribe(entity)\">\n" +
-    "                          <i class=\"icon ion-person-add\"></i> \n" +
+    "                          <i class=\"icon ion-person-add\"></i>\n" +
     "                        </a>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
-    "                        \n" +
+    "\n" +
     "            <p>Swipe right to subscribe or left to pass. If someone subscribes back you match and can chat.</p>\n" +
     "        </div>\n" +
     "      </ion-slide>\n" +
-    "      \n" +
+    "\n" +
     "      <ion-slide>\n" +
     "            <div class=\"box\">\n" +
     "                <h1>Capture & Share</h1>\n" +
-    "                \n" +
-    "                \n" +
+    "\n" +
+    "\n" +
     "                <div ng-hide=\"captured\" style=\"height:320px\">\n" +
     "               <ion-list class=\"capture-options tutorial\">\n" +
-    "                \n" +
-    "                   \n" +
+    "\n" +
+    "\n" +
     "                    <ion-item >\n" +
     "                        <h1 class=\"icon ion-ios-videocam\"></h1>\n" +
     "                    </ion-item>\n" +
-    "                    \n" +
+    "\n" +
     "                    <ion-item >\n" +
     "                        <h1 class=\"icon ion-camera\"></h1>\n" +
     "                    </ion-item>\n" +
-    "                    \n" +
+    "\n" +
     "                    <ion-item >\n" +
     "                        <h1 class=\"icon ion-compose\"></h1>\n" +
     "                    </ion-item>\n" +
-    "                    \n" +
+    "\n" +
     "                    <ion-item >\n" +
     "                        <h1 class=\"icon ion-upload\"></h1>\n" +
     "                    </ion-item>\n" +
-    "        \n" +
+    "\n" +
     "                </ion-list>\n" +
     "            </div>\n" +
     "            <br/>\n" +
     "            <p>Share great moments and ideas.</p>\n" +
-    "            \n" +
+    "\n" +
     "        </div>\n" +
     "      </ion-slide>\n" +
-    "	  \n" +
+    "\n" +
     "	  <ion-slide>\n" +
     "	    <div class=\"box\">\n" +
     "	    	<h1>News</h1>\n" +
-    "	    	\n" +
+    "\n" +
     "	    	<div class=\"list card activity-item\" ng-repeat=\"story in news\">\n" +
     "	    	   <a class=\"item item-avatar\">\n" +
     "                    <img image-cache ng-src=\"{{node_url}}icon/{{story.guid}}/small\"/>\n" +
-    "            \n" +
+    "\n" +
     "                    <h2 style=\"font-weight:400;\">{{story.user}}</h2>\n" +
     "                    <p>now</p>\n" +
-    "                   \n" +
+    "\n" +
     "                </a>\n" +
-    "                \n" +
+    "\n" +
     "                <div class=\"item item-text-wrap\" >\n" +
     "                    <p class=\"wrap\">{{story.message}} </p>\n" +
     "                </div>\n" +
-    "                \n" +
+    "\n" +
     "                <div class=\"item tabs tabs-secondary tabs-icon-left\" style=\"padding:0;background-color:#F7F7F7 !important;\">\n" +
     "                    <a class=\"tab-item small-font thumbs-up\">\n" +
     "                           <i style=\"padding-left:4px;\" class=\"icon ion-thumbsup\"></i>\n" +
@@ -268,26 +269,26 @@ define(['angular'], function(angular){
     "                    </a>\n" +
     "                </div>\n" +
     "	    	</div>\n" +
-    "    	\n" +
-    "	    	\n" +
+    "\n" +
+    "\n" +
     "	    </div>\n" +
     "	  </ion-slide>\n" +
-    "	  \n" +
-    "	   \n" +
-    "	  \n" +
+    "\n" +
+    "\n" +
+    "\n" +
     "	  <ion-slide>\n" +
     "        <div class=\"box\">\n" +
     "            <h1>Discover</h1>\n" +
-    "            \n" +
+    "\n" +
     "            <div class=\"swipe-container\">\n" +
     "                <div class=\"list card tabs-background-white animation-mock-swipe\">\n" +
     "                    <div class=\"item item-image\">\n" +
-    "                        <img ng-src=\"http://upload.wikimedia.org/wikipedia/commons/a/a2/Main_stage_crowd_shot.jpg\">\n" +
+    "                        <img ng-src=\"http://img3.wikia.nocookie.net/__cb20130628164106/weekday/images/thumb/a/a2/Main_stage_crowd_shot.jpg/2000px-Main_stage_crowd_shot.jpg\">\n" +
     "                        <div class=\"overlay\">\n" +
     "                            <h1>Minds</h1>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
-    "                    \n" +
+    "\n" +
     "                    <div class=\"item tabs tabs-secondary tabs-icon-left\">\n" +
     "                        <a class=\"tab-item discover-button discover-button-pass\" href=\"#\">\n" +
     "                            <i class=\"icon\">Pass</i>\n" +
@@ -301,91 +302,92 @@ define(['angular'], function(angular){
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
-    "                        \n" +
+    "\n" +
     "            <p>Vote to make trends. </p>\n" +
     "        </div>\n" +
     "      </ion-slide>\n" +
-    "      \n" +
+    "\n" +
     "      <ion-slide>\n" +
     "        <div class=\"box\">\n" +
     "            <h1>Encrypted Chat</h1>\n" +
-    "            \n" +
+    "\n" +
     "            <ion-list>\n" +
     "                <ion-item  class=\"message\" type=\"item-text-wrap\">\n" +
     "                    <img ng-src=\"{{$root.node_url}}icon/134/small\"/>\n" +
-    "                \n" +
+    "\n" +
     "                     <div class=\"message-content\">\n" +
     "                        Hello.\n" +
     "                     </div>\n" +
-    "               \n" +
+    "\n" +
     "                </ion-item>\n" +
     "                <ion-item  class=\"message message-right\" type=\"item-text-wrap\">\n" +
     "                    <img ng-src=\"{{$root.node_url}}icon/341/small\"/>\n" +
-    "                \n" +
+    "\n" +
     "                     <div class=\"message-content\">\n" +
     "                        Hey!\n" +
     "                     </div>\n" +
-    "               \n" +
+    "\n" +
     "                </ion-item>\n" +
     "                <ion-item  class=\"message\" type=\"item-text-wrap\">\n" +
     "                    <img ng-src=\"{{$root.node_url}}icon/134/small\"/>\n" +
-    "                \n" +
+    "\n" +
     "                     <div class=\"message-content item-text-wrap\">\n" +
     "                        It's great how we can chat without being spied on\n" +
     "                     </div>\n" +
-    "               \n" +
+    "\n" +
     "                </ion-item>\n" +
     "                <ion-item  class=\"message message-right\" type=\"item-text-wrap\">\n" +
     "                    <img ng-src=\"{{$root.node_url}}icon/341/small\"/>\n" +
-    "                \n" +
+    "\n" +
     "                     <div class=\"message-content item-text-wrap\">\n" +
     "                        Yeah! And the app is free and open-source too\n" +
     "                     </div>\n" +
-    "               \n" +
+    "\n" +
     "                </ion-item>\n" +
     "            </ion-list>\n" +
-    "                        \n" +
+    "\n" +
     "            <p style=\"margin-top:16px;\">Message securely with matches.</p>\n" +
     "        </div>\n" +
     "      </ion-slide>\n" +
-    "	  \n" +
+    "\n" +
     "	  <ion-slide>\n" +
     "	    <div class=\"box\">\n" +
     "	    	<h1>Points</h1>\n" +
-    "	    	\n" +
+    "\n" +
     "	    	<i class=\"icon icon-bank\"></i>\n" +
-    "	    	\n" +
+    "\n" +
     "	    	<div style=\"width: 100%; text-align: center;\">\n" +
     "	    	  <i style=\"font-size: 53px; line-height: 78px; color: green; font-weight: bold;\">+1</i>\n" +
     "	    	</div>\n" +
-    "	    	\n" +
+    "\n" +
     "	    	<p> Earn points for every vote, comment, remind, swipe, post and upload. </p>\n" +
-    "	    	\n" +
+    "\n" +
     "	    </div>\n" +
     "	  </ion-slide>\n" +
-    "	  \n" +
+    "\n" +
     "	  <ion-slide>\n" +
     "        <div class=\"box\">\n" +
     "            <h1>Boost</h1>\n" +
-    "            \n" +
+    "\n" +
     "            <i class=\"icon ion-arrow-graph-up-right minds-blue\"></i>\n" +
-    "            \n" +
+    "\n" +
     "            <a style=\"background:#4690C3; padding:12px 16px; color:#FFF; margin:12px auto; display:block; border-radius:3px; width:120px;\">Boost</a>\n" +
-    "            \n" +
+    "\n" +
     "            <p>Use your points to go viral by boosting to the news feed or other channels.</p>\n" +
-    "            \n" +
+    "\n" +
     "        </div>\n" +
     "      </ion-slide>\n" +
-    "      \n" +
+    "\n" +
     "      <ion-slide>\n" +
     "        <div class=\"box\">\n" +
-    "            \n" +
+    "\n" +
     "        </div>\n" +
     "      </ion-slide>\n" +
     "	</ion-slide-box>\n" +
     "\n" +
     "    </ion-pane>\n" +
-    "</ion-view>");
+    "</ion-view>\n" +
+    "");
   $templateCache.put("templates/capture/default.html",
     "<ion-view title=\"Capture\" class=\"white-bg\" ng-controller=\"CaptureCtrl\">\n" +
     "	\n" +

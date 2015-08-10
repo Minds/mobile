@@ -51,7 +51,7 @@ define(['angular', 'angular-mocks', 'app'], function(angular, mocks, app) {
 
 		it('should remove yellow icons on enter', function() {
 			rootScope.newNotification = true;
-			rootScope.$broadcast('$ionicView.beforeEnter');
+			rootScope.$broadcast('$stateChangeStart', {name: 'tab.notifications'}, {},  {name: 'tab.notifications'}, {});
 			expect(rootScope.newNotification).toEqual(false);
 		});
 

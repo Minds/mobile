@@ -1,0 +1,11 @@
+Page {
+  background-color: white;
+}
+TextField {
+  padding: 10;
+  font-size: 13;
+}
+TextField, TextView {
+  background-color:transparent;
+  border-color: transparent;
+}

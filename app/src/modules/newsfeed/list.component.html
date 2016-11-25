@@ -1,0 +1,9 @@
+<PullToRefresh #puller (refresh)="refresh(puller)">
+  <ListView [items]="feed" (loadMoreItems)="loadMore()">
+    <template let-item="item" let-i="index" let-odd="odd" let-even="even">
+      <StackLayout [class.odd]="odd" [class.even]="even">
+        <activity [entity]="item"></activity>
+      </StackLayout>
+    </template>
+  </ListView>
+</PullToRefresh>

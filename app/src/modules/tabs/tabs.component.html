@@ -1,0 +1,24 @@
+<TabView #element [selectedIndex]="selectedIndex" (selectedIndexChange)="changedIndex(element.selectedIndex)">
+  <template tabItem title="Newsfeed">
+    <StackLayout>
+       <newsfeed-list></newsfeed-list>
+    </StackLayout>
+  </template>
+  <template tabItem title="Discovery">
+      <StackLayout>
+        <Label [text]="'index: ' + selectedIndex"></Label>
+        <Button text="Go to newsfeed tab" [nsRouterLink]="['/tab/newsfeed']"></Button>
+         <Label text="discovery tab item"></Label>
+      </StackLayout>
+  </template>
+  <template tabItem title="Messenger">
+    <StackLayout>
+       <Label text="Messenger tab item"></Label>
+    </StackLayout>
+  </template>
+  <template tabItem title="Notifications">
+    <StackLayout>
+       <Label text="Notifications tab item"></Label>
+    </StackLayout>
+  </template>
+</TabView>

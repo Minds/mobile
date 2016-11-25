@@ -20,6 +20,9 @@ DerivedData
 platforms/*
 !platforms/README.md
 
+app/**/*.js
+app/**/*.js.map
+
 config/*
 !config/config-example.js
 

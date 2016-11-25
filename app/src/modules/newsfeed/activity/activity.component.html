@@ -1,0 +1,67 @@
+<AbsoluteLayout style="padding:8" [nsRouterLink]="['/channel/:id', { id: entity.ownerObj.guid }]">
+  <Image *ngIf="entity.ownerObj"
+    [src]="'https://www.minds.com/icon/' + entity.ownerObj.guid + '/medium'"
+    width="50"
+    height="50"
+    stretce="aspectFill"
+    style="border-radius:25;"
+    ></Image>
+    <StackLayout orientation="vertical" left="60">
+      <Label [text]="entity.ownerObj.name" style="font-weight:bold"></Label>
+      <!--<Label [text]='"@" + entity.ownerObj.username +""' style="font-size:11"></Label>-->
+      <Label [text]="entity.time_created * 1000 | date :'medium'" style="font-size:11; color: #888"></Label>
+    </StackLayout>
+</AbsoluteLayout>
+
+<StackLayout orientation="vertical" style="padding-bottom:16">
+
+  <TextView [text]="entity.title || entity.message"
+    *ngIf="entity.title || entity.message"
+    editable="false"
+    ></TextView>
+
+  <!-- Rich content -->
+ <GridLayout rows="auto" columns="*" class="m-rich-embed" *ngIf="entity.perma_url && entity.title">
+  	<!--<minds-rich-embed [src]="activity" [maxheight]="480"></minds-rich-embed>-->
+    <Image *ngIf="entity.thumbnail_src"
+      [src]="entity.thumbnail_src | imageCache"
+      stretch="aspectFill"
+      (error)="entity.thumbnail_src = false"
+      ></Image>
+  </GridLayout>
+
+  <!-- Remind -->
+  <StackLayout *ngIf="entity.remind_object" orientation="vertical" style="padding:16; padding-left:32">
+      <remind [entity]="entity.remind_object" style="border-width:2; border-color: #888"></remind>
+  </StackLayout>
+
+  <!-- Image -->
+  <GridLayout rows="auto" columns="*" *ngIf="entity.thumbnail_src && !entity.perma_url">
+    <Image
+      [src]="entity.thumbnail_src | imageCache"
+      stretce="aspectFill"
+      stretch="aspectFill"
+      (loaded)="onLoaded()"
+      (error)="entity.thumbnail_src = false"
+    >
+    </Image>
+  </GridLayout>
+
+  <!-- Multipart Image -->
+  <GridLayout rows="auto" columns="*" *ngIf="entity.custom_type == 'batch'">
+    <Image
+      [src]="entity.custom_data[0].src | imageCache"
+      stretce="aspectFill"
+      stretch="aspectFill"
+      (loaded)="onLoaded()"
+      (error)="entity.custom_type = 'batch-failed'"
+      image-garbage-collect
+      >
+    </Image>
+  </GridLayout>
+
+  <GridLayout rows="auto" columns="*" *ngIf="entity.custom_type == 'video'">
+    <Label text="video should show here"></Label>
+  </GridLayout>
+
+</StackLayout>

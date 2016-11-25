@@ -1,0 +1,76 @@
+<StackLayout>
+  <StackLayout *ngIf="channel">
+
+    <PullToRefresh #puller (refresh)="refresh(puller)">
+
+      <ScrollView>
+        <StackLayout>
+
+          <StackLayout>
+
+            <AbsoluteLayout>
+              <!-- Banner -->
+              <Image
+                class="m-channel--banner"
+                [src]="'https://www.minds.com/fs/v1/banners/' + channel.guid + '/fat/' + channel.icontime"
+                width="100%"
+                height="225"
+                stretce="aspectFill"
+                stretch="aspectFill"
+                left="0"
+                top="0"
+              ></Image>
+
+
+              <Label [text]="channel.name"
+                class="m-channel--name"
+                left="180"
+                top="100"
+                style="font-weight:bold"
+              ></Label>
+
+              <Image
+                [src]="'https://www.minds.com/icon/' + channel.guid + '/large'"
+                width="150"
+                height="150"
+                stretce="aspectFill"
+                stretch="aspectFill"
+                style="border-radius:75;"
+                top="16"
+                left="16"
+              ></Image>
+
+
+              <DockLayout top="168" class="m-channel--stats-bar" style="text-color:#FFF">
+                <StackLayout orientation="vertical">
+                  <Label text="Feed" style="font-weight:bold"></Label>
+                  <Label [text]="channel.activity_count"></Label>
+                </StackLayout>
+                <StackLayout orientation="vertical" style="padding:8; text-align:center">
+                  <Label text="Subscribers" style="font-weight:bold"></Label>
+                  <Label [text]="channel.subscribers_count"></Label>
+                </StackLayout>
+                <StackLayout orientation="vertical" style="padding:8; text-align:center">
+                  <Label text="Subscriptions" style="font-weight:bold"></Label>
+                  <Label [text]="channel.subscriptions_count"></Label>
+                </StackLayout>
+                <StackLayout orientation="vertical" style="padding:8; text-align:center">
+                  <Label text="Views" style="font-weight:bold"></Label>
+                  <Label [text]="channel.impressions"></Label>
+                </StackLayout>
+              </DockLayout>
+            </AbsoluteLayout>
+          </StackLayout>
+
+
+          <StackLayout *ngIf="feed">
+            <activity [entity]="item" *ngFor="let item of feed"></activity>
+          </StackLayout>
+
+        </StackLayout>
+      </ScrollView>
+    </PullToRefresh>
+
+  </StackLayout>
+
+</StackLayout>

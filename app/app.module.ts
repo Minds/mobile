@@ -10,6 +10,7 @@ import { CacheModule } from './src/common/services/cache/cache.module';
 import { AuthModule } from './src/modules/auth/auth.module';
 import { TabsModule } from './src/modules/tabs/tabs.module';
 import { ChannelModule } from './src/modules/channel/channel.module';
+import { NewsfeedModule } from './src/modules/newsfeed/newsfeed.module';
 import { NotificationsModule } from './src/modules/notifications/notifications.module';
 
 
@@ -40,6 +41,7 @@ registerElement("VideoPlayer", () => require("nativescript-videoplayer").Video);
     AuthModule,
     TabsModule,
     ChannelModule,
+    NewsfeedModule,
     NotificationsModule,
     NativeScriptRouterModule,
     NativeScriptRouterModule.forRoot(routes)

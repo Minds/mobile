@@ -4,7 +4,7 @@ import { NativeScriptModule } from "nativescript-angular/platform";
 
 import { Client } from '../../common/services/api/client';
 import { NewsfeedList } from './list.component';
-import { NewsfeedSingle } from './single';
+import { NewsfeedSingleComponent } from './single.component';
 import { Activity } from './activity/activity.component';
 import { Remind } from './activity/remind.component';
 
@@ -29,7 +29,7 @@ import { ImageGarbageCollectDirective } from '../../common/directives/image-garb
   ]*/
   imports: [ NativeScriptModule, NativeScriptRouterModule ],
   providers: [ Client ],
-  declarations: [ NewsfeedList, NewsfeedSingle, Activity, Remind, ImageCachePipe, ImageGarbageCollectDirective ],
-  exports: [ NewsfeedList, NewsfeedSingle, Activity, Remind ]
+  declarations: [ NewsfeedList, NewsfeedSingleComponent, Activity, Remind, ImageCachePipe, ImageGarbageCollectDirective ],
+  exports: [ NewsfeedList, NewsfeedSingleComponent, Activity, Remind ]
 })
 export class NewsfeedModule { }

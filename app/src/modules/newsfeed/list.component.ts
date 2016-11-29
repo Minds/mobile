@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy } from '@angular/core';
 import { RouterExtensions } from 'nativescript-angular/router';
 import * as appSettings from "application-settings";
 import {registerElement} from "nativescript-angular/element-registry";
@@ -13,7 +13,8 @@ import { Client } from '../../common/services/api/client';
   moduleId: module.id,
   selector: 'newsfeed-list',
   templateUrl: 'list.component.html',
-  styleUrls: ['list.component.css']
+  styleUrls: ['list.component.css'],
+  changeDetection: ChangeDetectionStrategy.Default
 })
 
 export class NewsfeedList {
@@ -31,7 +32,7 @@ export class NewsfeedList {
   loadList(){
     this.client.get('api/v1/newsfeed', { limit: 12, offset: this.offset})
       .then((response : any) => {
-        console.log(response);
+        //console.log(response);
         for(let activity of response.activity){
           this.feed.push(activity);
         }

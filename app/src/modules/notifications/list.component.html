@@ -1,0 +1,11 @@
+
+
+<PullToRefresh #puller (refresh)="refresh(puller)">
+  <ListView [items]="notifications" (loadMoreItems)="loadMore()">
+    <template let-item="item" let-i="index" let-odd="odd" let-even="even">
+      <StackLayout [class.odd]="odd" [class.even]="even">
+        <notification-card [entity]="item"></notification-card>
+      </StackLayout>
+    </template>
+  </ListView>
+</PullToRefresh>

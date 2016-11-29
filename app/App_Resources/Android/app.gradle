@@ -8,7 +8,7 @@
 android {
   defaultConfig {
     generatedDensities = []
-    applicationId = "com.minds.native"  
+    applicationId = "com.minds.native16"  
   }
   aaptOptions {
     additionalParameters "--no-version-vectors"

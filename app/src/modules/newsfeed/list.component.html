@@ -1,3 +1,5 @@
+
+
 <PullToRefresh #puller (refresh)="refresh(puller)">
   <ListView [items]="feed" (loadMoreItems)="loadMore()">
     <template let-item="item" let-i="index" let-odd="odd" let-even="even">

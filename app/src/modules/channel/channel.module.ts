@@ -4,6 +4,7 @@ import { NativeScriptModule } from "nativescript-angular/platform";
 
 import { Client } from '../../common/services/api/client';
 import { ChannelComponent } from './channel.component';
+import { ChannelFeedComponent } from './feed.component';
 import { NewsfeedModule } from '../newsfeed/newsfeed.module';
 
 @NgModule({
@@ -24,7 +25,7 @@ import { NewsfeedModule } from '../newsfeed/newsfeed.module';
   ]*/
   imports: [ NativeScriptModule, NativeScriptRouterModule, NewsfeedModule ],
   providers: [ Client ],
-  declarations: [ ChannelComponent ],
+  declarations: [ ChannelComponent, ChannelFeedComponent ],
   exports: [ ChannelComponent ]
 })
 export class ChannelModule { }

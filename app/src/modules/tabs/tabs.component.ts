@@ -1,7 +1,8 @@
 import {Component} from "@angular/core";
 import { Location } from '@angular/common';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute, Params, NavigationEnd } from '@angular/router';
 import { Page } from 'ui/page';
+import * as applicationModule from "application";
 
 @Component({
   moduleId: module.id,
@@ -13,27 +14,32 @@ export class TabsComponent {
 
   selectedIndex = 0;
 
+  android = applicationModule.android;
+
   constructor(page : Page, private route: ActivatedRoute, private router : Router, private location: Location){
-    //page.actionBarHidden = true;
+    page.actionBarHidden = true;
   }
 
   //Yikes: talk about a hack!
 
   ngOnInit(){
 
-    this.route.params.subscribe(params => {
-      //console.log('tab should be ' + params['id']);
-      switch(params['id']){
-        case 'newsfeed':
+    this.router.events.subscribe(state => {
+      if (!state instanceof NavigationEnd) {
+        return;
+      }
+      console.log('tab should be ' + state.urlAfterRedirects);
+      switch(state.urlAfterRedirects){
+        case '/tab/newsfeed':
           this.selectedIndex = 0;
           break;
-        case 'discovery':
+        case '/tab/discovery':
           this.selectedIndex = 1;
           break;
-        case 'messenger':
+        case '/tab/messenger':
           this.selectedIndex = 2;
           break;
-        case 'notifications':
+        case '/tab/notifications':
           this.selectedIndex = 3;
           break;
       }

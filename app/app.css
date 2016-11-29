@@ -1,0 +1,21 @@
+@import 'node_modules/nativescript-theme-core/css/core.light.css';
+
+Page {
+  background-color: white;
+}
+TextField {
+  padding: 10;
+  font-size: 13;
+}
+TextView {
+  background-color:#000;
+  border-color: #FFF;
+  border-width:0;
+  min-height:0;
+  padding:0;
+}
+
+
+.material-icon {
+   font-family: 'MaterialIcons-Regular';
+}

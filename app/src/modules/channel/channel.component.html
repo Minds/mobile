@@ -1,4 +1,9 @@
 <StackLayout>
+  <StackLayout *ngIf="!channel">
+    <Label text="One moment..."
+      style="font-weight:bold"
+    ></Label>
+  </StackLayout>
   <StackLayout *ngIf="channel">
 
     <PullToRefresh #puller (refresh)="refresh(puller)">
@@ -8,7 +13,7 @@
 
           <StackLayout>
 
-            <AbsoluteLayout>
+            <AbsoluteLayout style="background-color: #333">
               <!-- Banner -->
               <Image
                 class="m-channel--banner"
@@ -63,8 +68,8 @@
           </StackLayout>
 
 
-          <StackLayout *ngIf="feed">
-            <activity [entity]="item" *ngFor="let item of feed"></activity>
+          <StackLayout>
+            <channel-feed [channel]="channel"></channel-feed>
           </StackLayout>
 
         </StackLayout>

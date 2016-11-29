@@ -1,24 +1,25 @@
-<TabView #element [selectedIndex]="selectedIndex" (selectedIndexChange)="changedIndex(element.selectedIndex)">
-  <template tabItem title="Newsfeed">
+
+<TabView #element [selectedIndex]="selectedIndex" (selectedIndexChange)="changedIndex(element.selectedIndex)"
+  tabsBackgroundColor="#37474f" selectedColor="#FFFFFF" style="background-color:white" iosIconRenderingMode="alwaysOriginal">
+  <template tabItem iconSource="res://ic_home_white_24dp" [title]="android ? '' : 'Newsfeed'">
     <StackLayout>
        <newsfeed-list></newsfeed-list>
     </StackLayout>
   </template>
-  <template tabItem title="Discovery">
+  <template tabItem iconSource="res://ic_search_white_24dp" [title]="android ? '' : 'Discovery'">
       <StackLayout>
-        <Label [text]="'index: ' + selectedIndex"></Label>
         <Button text="Go to newsfeed tab" [nsRouterLink]="['/tab/newsfeed']"></Button>
          <Label text="discovery tab item"></Label>
       </StackLayout>
   </template>
-  <template tabItem title="Messenger">
+  <template tabItem iconSource="res://ic_chat_bubble_white_24dp" [title]="android ? '' : 'Messenger'">
     <StackLayout>
        <Label text="Messenger tab item"></Label>
     </StackLayout>
   </template>
-  <template tabItem title="Notifications">
+  <template tabItem iconSource="res://ic_notifications_white_24dp" [title]="android ? '' : 'Notifications'">
     <StackLayout>
-       <Label text="Notifications tab item"></Label>
+       <notifications-list></notifications-list>
     </StackLayout>
   </template>
 </TabView>

@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Page } from "ui/page";
 import { Client } from '../../common/services/api/client';
+import { CacheService } from '../../common/services/cache/cache.service';
+import * as applicationModule from "application";
 
 @Component({
   moduleId: module.id,
@@ -16,8 +18,9 @@ export class ChannelComponent {
   guid : string = "me";
   channel;
 
-  constructor(private client : Client, private route: ActivatedRoute, page : Page){
-    page.actionBarHidden = false;
+  constructor(private client : Client, private route: ActivatedRoute, page : Page, private cache : CacheService){
+    if(applicationModule.android)
+      page.actionBarHidden = true;
   }
 
   ngOnInit(){
@@ -26,25 +29,25 @@ export class ChannelComponent {
       this.feed = [];
       this.guid = params['id'];
       this.load();
-      this.loadFeed();
+
     });
   }
 
+  //ngAfterViewInit() {
+    //this.loadFeed();
+  //}
+
   load(){
+    let _channel = this.cache.get('channel:' + this.guid);
+    if(_channel){
+      this.channel = _channel;
+      return true;
+    }
+
     this.client.get('api/v1/channel/' + this.guid)
       .then((response : any) => {
         this.channel = response.channel;
-      });
-  }
-
-  loadFeed(){
-    this.client.get('api/v1/newsfeed/personal/' + this.guid, { limit: 12, offset: ""})
-      .then((response : any) => {
-        console.log(response);
-        for(let activity of response.activity){
-          this.feed.push(activity);
-        }
-        //this.offset = response['load-next'];
+        this.cache.set('channel:' + this.guid, this.channel, true);
       });
   }
 

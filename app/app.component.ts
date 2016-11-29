@@ -1,4 +1,6 @@
 import {Component} from "@angular/core";
+import { Page } from "ui/page";
+
 
 @Component({
   selector: "minds-native-app",
@@ -7,6 +9,10 @@ import {Component} from "@angular/core";
 })
 
 export class MindsNativeApp {
+
+  constructor(page : Page){
+    page.actionBarHidden = true;
+  }
 
   selectedIndex = 1;
 

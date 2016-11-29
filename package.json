@@ -27,29 +27,32 @@
     "nativescript-fresco": "^1.0.12",
     "nativescript-intl": "^0.0.4",
     "nativescript-pulltorefresh": "^1.1.8",
+    "nativescript-theme-core": "^1.0.1",
+    "nativescript-videoplayer": "^1.1.4",
     "rxjs": "5.0.0-beta.12",
-    "tns-core-modules": "^2.5.0-2016-11-24-4860",
+    "tns-core-modules": "^2.5.0-2016-11-29-4890",
     "tns-core-modules-widgets": "^2.5.0-2016-11-21-158"
   },
   "devDependencies": {
-    "zone.js": "~0.6.21",
     "babel-traverse": "6.9.0",
     "babel-types": "6.10.0",
     "babylon": "6.8.1",
     "filewalker": "0.1.2",
     "lazy": "1.0.11",
+    "nativescript-dev-android-snapshot": "0.0.3",
     "nativescript-dev-typescript": "^0.3.1",
     "nativescript-dev-webpack": "0.0.13",
     "shelljs": "^0.7.0",
-    "typescript": "^2.0.2"
+    "typescript": "^2.0.2",
+    "zone.js": "~0.6.21"
   },
   "nativescript": {
-    "id": "com.minds.native",
-    "tns-ios": {
-      "version": "2.4.0"
-    },
+    "id": "com.minds.native16",
     "tns-android": {
-      "version": "2.4.1"
+      "version": "2.5.0-next-2016-11-28-1432"
+    },
+    "tns-ios": {
+      "version": "2.5.0-2016-11-25-1"
     }
   }
 }

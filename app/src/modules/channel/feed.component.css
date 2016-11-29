@@ -1,0 +1,15 @@
+.m-channel--banner{
+  background:#EEE;
+}
+.m-channel--name{
+  color:#FFF;
+  font-size:24;
+}
+
+.m-channel--stats-bar StackLayout{
+  padding:8;
+  text-align:center;
+}
+.m-channel--stats-bar StackLayout label{
+  color:#FFF;
+}

@@ -1,0 +1,21 @@
+TextView {
+  background-color:#FFF;
+  border-color: #FFF;
+  border-width:0;
+  min-height:0;
+  padding:0;
+}
+
+
+.m-native--activity--message{
+  padding:8;
+  font-size:14;
+}
+
+/*.m-native--activity--rich-embed{
+
+}*/
+
+.m-native--activity--rich-embed--meta{
+  padding:8;
+}

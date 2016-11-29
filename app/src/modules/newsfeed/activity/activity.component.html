@@ -1,4 +1,4 @@
-<AbsoluteLayout style="padding:8" [nsRouterLink]="['/channel/:id', { id: entity.ownerObj.guid }]">
+<AbsoluteLayout style="padding:8" [nsRouterLink]="['/channel/:id', { id: entity.ownerObj.guid }]" *ngIf="!entity.remind_object" >
   <Image *ngIf="entity.ownerObj"
     [src]="'https://www.minds.com/icon/' + entity.ownerObj.guid + '/medium'"
     width="50"
@@ -18,50 +18,110 @@
   <TextView [text]="entity.title || entity.message"
     *ngIf="entity.title || entity.message"
     editable="false"
+    class="m-native--activity--message"
     ></TextView>
 
   <!-- Rich content -->
- <GridLayout rows="auto" columns="*" class="m-rich-embed" *ngIf="entity.perma_url && entity.title">
-  	<!--<minds-rich-embed [src]="activity" [maxheight]="480"></minds-rich-embed>-->
-    <Image *ngIf="entity.thumbnail_src"
-      [src]="entity.thumbnail_src | imageCache"
-      stretch="aspectFill"
-      (error)="entity.thumbnail_src = false"
-      ></Image>
-  </GridLayout>
+<StackLayout *ngIf="entity.perma_url && entity.title" class="m-native--activity--rich-embed">
+  <GridLayout rows="auto" columns="*" class="m-rich-embed" *ngIf="entity.thumbnail_src">
+      <android *ngIf="android">
+        <FrescoDrawee
+          [imageUri]="entity.thumbnail_src"
+          actualImageScaleType="focusCrop"
+          verticalAlignment="top"
+          showProgressBar="false"
+          progressBarColor="#AB5400"
+          width="100%"
+          aspectRatio="1.3"
+        ></FrescoDrawee>
+      </android>
+      <ios>
+        <Image *ngIf="entity.thumbnail_src"
+          [src]="entity.thumbnail_src"
+          stretch="aspectFill"
+          width="100%"
+          height="200"
+        ></Image>
+      </ios>
+    </GridLayout>
+    <StackLayout class="m-native--activity--rich-embed--meta">
+      <Label [text]="entity.title" style="font-weight:bold"></Label>
+      <TextView [text]="entity.description"
+        editable="false"
+        *ngIf="entity.description"
+        ></TextView>
+      <Label [text]="entity.perma_url" style="font-size:11; color: #888"></Label>
+    </StackLayout>
+  </StackLayout>
 
   <!-- Remind -->
-  <StackLayout *ngIf="entity.remind_object" orientation="vertical" style="padding:16; padding-left:32">
+  <StackLayout *ngIf="entity.remind_object" orientation="vertical" style="padding:16 0; padding-left:0">
       <remind [entity]="entity.remind_object" style="border-width:2; border-color: #888"></remind>
   </StackLayout>
 
   <!-- Image -->
   <GridLayout rows="auto" columns="*" *ngIf="entity.thumbnail_src && !entity.perma_url">
-    <Image
-      [src]="entity.thumbnail_src | imageCache"
-      stretce="aspectFill"
-      stretch="aspectFill"
-      (loaded)="onLoaded()"
-      (error)="entity.thumbnail_src = false"
-    >
-    </Image>
+    <android *ngIf="android">
+      <FrescoDrawee
+        [imageUri]="entity.thumbnail_src"
+        actualImageScaleType="focusCrop"
+        verticalAlignment="top"
+        showProgressBar="false"
+        progressBarColor="#AB5400"
+        width="100%"
+        aspectRatio="1.3"
+      ></FrescoDrawee>
+    </android>
+
+    <ios>
+      <Image
+        [src]="entity.thumbnail_src"
+        stretce="aspectFill"
+        stretch="aspectFill"
+        width="100%"
+        height="300"
+      >
+      </Image>
+    </ios>
   </GridLayout>
 
   <!-- Multipart Image -->
   <GridLayout rows="auto" columns="*" *ngIf="entity.custom_type == 'batch'">
-    <Image
-      [src]="entity.custom_data[0].src | imageCache"
-      stretce="aspectFill"
-      stretch="aspectFill"
-      (loaded)="onLoaded()"
-      (error)="entity.custom_type = 'batch-failed'"
-      image-garbage-collect
-      >
-    </Image>
+    <android *ngIf="android">
+
+      <FrescoDrawee
+        [imageUri]="entity.custom_data[0].src"
+        actualImageScaleType="focusCrop"
+        verticalAlignment="top"
+        showProgressBar="false"
+        progressBarColor="#AB5400"
+        width="100%"
+        aspectRatio="1.3"
+      ></FrescoDrawee>
+
+    </android>
+
+    <ios>
+      <Image
+        [src]="entity.custom_data[0].src"
+        stretce="aspectFill"
+        stretch="aspectFill"
+        width="100%"
+        height="300"
+        >
+      </Image>
+    </ios>
   </GridLayout>
 
-  <GridLayout rows="auto" columns="*" *ngIf="entity.custom_type == 'video'">
-    <Label text="video should show here"></Label>
-  </GridLayout>
+  <StackLayout *ngIf="entity.custom_type == 'video' && false">
+    <VideoPlayer
+      controls="true"
+      autoplay="false"
+      muted="false"
+      loop="true" height="280"
+      [src]="'https://www.minds.com/api/v1/archive/' + entity.custom_data.guid + '/play'"
+    ></VideoPlayer>
+    <Label text="this is a video" style="font-size:11; color: #888; padding:8"></Label>
+  </StackLayout>
 
 </StackLayout>

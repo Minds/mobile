@@ -1,0 +1,29 @@
+
+<StackLayout orientation="vertical" style="padding-bottom:16">
+
+  <GridLayout class="list-group-item" rows="*" columns="auto, *" style="padding:8">
+    <Image
+      *ngIf="entity.fromObj"
+      row="0"
+      col="0"
+      [src]="'https://www.minds.com/icon/' + entity.fromObj.guid + '/medium'"
+      width="50"
+      height="50"
+      stretce="aspectFill"
+      style="border-radius:25;"
+      [nsRouterLink]="['/channel/:id', { id: entity.fromObj.guid }]"
+    ></Image>
+
+    <StackLayout [ngSwitch]="entity.notification_view" row="0" col="1" style="padding:8">
+      <!-- subscribed -->
+      <template ngSwitchCase="friends">
+        <Label *ngIf="entity.fromObj.subscribed" [text]="'You have a match! ' + entity.fromObj.name + ' subscribed to you'"></Label>
+        <Label *ngIf="!entity.fromObj.subscribed" [text]="entity.fromObj.name + 'subscribed to you'"></Label>
+      </template>
+
+
+    </StackLayout>
+
+
+  </GridLayout>
+</StackLayout>

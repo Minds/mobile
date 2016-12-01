@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Page } from "ui/page";
 import { Client } from '../../common/services/api/client';
@@ -9,29 +9,35 @@ import * as applicationModule from "application";
   moduleId: module.id,
   selector: 'channel-feed',
   templateUrl: 'feed.component.html',
-  styleUrls: [ 'feed.component.css' ]
+  styleUrls: [ 'feed.component.css' ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class ChannelFeedComponent {
 
   feed : Array<any> = [];
-  @Input() channel;
 
-  constructor(private client : Client, private cache : CacheService){ }
+  constructor(private client : Client, private cache : CacheService, private cd : ChangeDetectorRef){ }
 
-  ngOnInit(){
-    this.loadFeed();
-  }
+  @Input() set channel(channel : string){
+    this.feed = [];
 
+    let _feed = this.cache.get('feed:' + channel.guid);
+    if(_feed){
+      this.feed = _feed;
+      return true;
+    }
 
-  loadFeed(){
-    this.client.get('api/v1/newsfeed/personal/' + this.channel.guid, { limit: 12, offset: ""})
+    this.client.get('api/v1/newsfeed/personal/' + channel.guid, { limit: 12, offset: ""})
       .then((response : any) => {
         //console.log(response);
         for(let activity of response.activity){
           this.feed.push(activity);
         }
-        //this.offset = response['load-next'];
+
+        this.cache.set('feed:' + channel.guid, this.feed, true);
+        this.cd.markForCheck();
+        this.cd.detectChanges();
       });
   }
 

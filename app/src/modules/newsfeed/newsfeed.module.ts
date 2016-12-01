@@ -7,9 +7,9 @@ import { NewsfeedList } from './list.component';
 import { NewsfeedSingleComponent } from './single.component';
 import { Activity } from './activity/activity.component';
 import { Remind } from './activity/remind.component';
+import { ButtonsModule } from '../buttons/buttons.module';
 
 import { ImageCachePipe } from '../../common/pipes/image-cache.pipe';
-import { ImageGarbageCollectDirective } from '../../common/directives/image-garbage-collect.directive';
 
 @NgModule({
   /*imports: [
@@ -27,9 +27,9 @@ import { ImageGarbageCollectDirective } from '../../common/directives/image-garb
   exports: [
     RouterModule
   ]*/
-  imports: [ NativeScriptModule, NativeScriptRouterModule ],
+  imports: [ NativeScriptModule, NativeScriptRouterModule, ButtonsModule ],
   providers: [ Client ],
-  declarations: [ NewsfeedList, NewsfeedSingleComponent, Activity, Remind, ImageCachePipe, ImageGarbageCollectDirective ],
+  declarations: [ NewsfeedList, NewsfeedSingleComponent, Activity, Remind, ImageCachePipe ],
   exports: [ NewsfeedList, NewsfeedSingleComponent, Activity, Remind ]
 })
 export class NewsfeedModule { }

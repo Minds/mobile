@@ -4,6 +4,7 @@ import { NativeScriptModule } from "nativescript-angular/platform";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
 
 import { TabsComponent } from './tabs.component';
+import { ChannelModule } from '../channel/channel.module';
 import { NewsfeedModule } from '../newsfeed/newsfeed.module';
 import { NotificationsModule } from '../notifications/notifications.module';
 
@@ -12,6 +13,7 @@ import { NotificationsModule } from '../notifications/notifications.module';
   imports: [
     NativeScriptModule,
     NativeScriptRouterModule,
+    ChannelModule,
     NewsfeedModule,
     NotificationsModule
   ],

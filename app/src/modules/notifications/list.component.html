@@ -1,4 +1,11 @@
-
+<StackLayout
+  minHeight="300"
+  horizontalAlignment="center"
+  verticalAlignment="center"
+  *ngIf="inProgress && !notifications.length"
+  >
+  <ActivityIndicator busy="true" style="color: #888"></ActivityIndicator>
+</StackLayout>
 
 <PullToRefresh #puller (refresh)="refresh(puller)">
   <ListView [items]="notifications" (loadMoreItems)="loadMore()">

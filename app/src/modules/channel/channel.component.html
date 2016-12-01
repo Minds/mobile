@@ -1,8 +1,6 @@
 <StackLayout>
   <StackLayout *ngIf="!channel">
-    <Label text="One moment..."
-      style="font-weight:bold"
-    ></Label>
+    <ActivityIndicator busy="true" style="color: #888"></ActivityIndicator>
   </StackLayout>
   <StackLayout *ngIf="channel">
 

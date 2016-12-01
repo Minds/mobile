@@ -44,6 +44,7 @@ export class OAuth2{
 
           var data = res.json();
           appSettings.setString('access_token', data.access_token);
+          appSettings.setString('user_guid', data.user_id);
           //storage.set('user_id', data.user_id);
           //storage.set('user_guid', data.user_id);
           //storage.set('access_token', data.access_token);

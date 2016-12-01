@@ -1,3 +1,11 @@
+<StackLayout
+  minHeight="300"
+  horizontalAlignment="center"
+  verticalAlignment="center"
+  *ngIf="inProgress && feed.length == 0"
+  >
+  <ActivityIndicator busy="true" style="color: #888"></ActivityIndicator>
+</StackLayout>
 
 
 <PullToRefresh #puller (refresh)="refresh(puller)">

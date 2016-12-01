@@ -25,6 +25,7 @@ export class Remind {
 
   @Input('entity') set _entity(entity){
     this.entity = entity;
+    this.entity.isRemind = true;
     this.cache.set('channel:' + entity.ownerObj.guid, entity.ownerObj, false);
   }
 

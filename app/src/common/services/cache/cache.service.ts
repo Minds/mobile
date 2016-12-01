@@ -7,11 +7,10 @@ export class CacheService {
   }
 
   set(key, value, replace: boolean = true){
-    //if(key in this.data && !replace)
-    //  return; //already cached and can't update
-    //alert('set');
+    if(key in this.data && !replace)
+      return; //already cached and can't update
     this.data[key] = value;
-    
+
   }
 
   destroy(key){

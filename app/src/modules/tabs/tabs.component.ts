@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import { Component, ChangeDection, ChangeDetectionStrategy } from "@angular/core";
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute, Params, NavigationEnd } from '@angular/router';
 import { Page } from 'ui/page';
@@ -7,12 +7,14 @@ import * as applicationModule from "application";
 @Component({
   moduleId: module.id,
   selector: "minds-tabs",
-  templateUrl: "tabs.component.html"
+  templateUrl: "tabs.component.html",
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class TabsComponent {
 
   selectedIndex = 0;
+  initializedRoutes = {};
 
   android = applicationModule.android;
 
@@ -42,6 +44,9 @@ export class TabsComponent {
         case '/tab/notifications':
           this.selectedIndex = 3;
           break;
+        case '/tab/channel':
+          this.selectedIndex = 4;
+          break;
       }
     });
   }
@@ -61,6 +66,11 @@ export class TabsComponent {
         break;
       case 3:
         this.router.navigate(['/tab/notifications']);
+        this.initializedRoutes['/tab/notifications'] = true;
+        break;
+      case 4:
+        this.router.navigate(['/tab/channel']);
+        this.initializedRoutes['/tab/channel'] = true;
         break;
       default:
         this.location.replaceState('/tab/default');

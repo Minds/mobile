@@ -19,7 +19,12 @@
   </template>
   <template tabItem iconSource="res://ic_notifications_white_24dp" [title]="android ? '' : 'Notifications'">
     <StackLayout>
-       <notifications-list></notifications-list>
+       <notifications-list *ngIf="initializedRoutes['/tab/notifications']"></notifications-list>
+    </StackLayout>
+  </template>
+  <template tabItem iconSource="res://ic_person_white_24dp" [title]="android ? '' : 'Channel'">
+    <StackLayout>
+       <channel username="me" *ngIf="initializedRoutes['/tab/channel']"></channel>
     </StackLayout>
   </template>
 </TabView>

@@ -14,9 +14,4 @@ export class MindsNativeApp {
     page.actionBarHidden = true;
   }
 
-  selectedIndex = 1;
-
-  changedIndex(index){
-    console.log(index);
-  }
 }

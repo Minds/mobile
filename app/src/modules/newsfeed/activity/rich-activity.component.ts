@@ -7,14 +7,14 @@ import * as applicationModule from "application";
 
 @Component({
   moduleId: module.id,
-  selector: 'activity',
-  templateUrl: 'activity.component.html',
+  selector: 'rich-activity',
+  templateUrl: 'rich-activity.component.html',
   styleUrls: ['activity.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
   //styleUrls: ['activity.component.css']
 })
 
-export class Activity {
+export class RichActivity {
 
   entity;
   android = applicationModule.android;
@@ -24,13 +24,7 @@ export class Activity {
   }
 
   @Input('entity') set _entity(entity){
-
-    if(entity.remind_object){
-      this.entity = entity.remind_object;
-      this.entity.remind_object = false; //stop remind looping, if it even happens
-    } else {
-      this.entity = entity;
-    }
+    this.entity = entity;
     this.cache.set('channel:' + entity.ownerObj.guid, entity.ownerObj, false);
   }
 

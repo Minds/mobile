@@ -36,6 +36,9 @@ export class NewsfeedList {
         .then((response : any) => {
           //console.log(response);
           for(let activity of response.activity){
+            if(activity.remind_object){
+              activity = activity.remind_object;
+            }
             this.feed.push(activity);
           }
           this.inProgress = false;
@@ -63,6 +66,26 @@ export class NewsfeedList {
   logout(){
     appSettings.clear();
     this.routerExtensions.navigate(['/login'], { clearHistory: true });
+  }
+
+  public templateSelector = (entity, index: number, items: any) => {
+    let key = 'default';
+    if(entity.perma_url && entity.title){
+      key = "rich-activity";
+    }
+    else if (entity.thumbnail_src && !entity.perma_url) {
+      key = "image-activity";
+    }
+    else if (entity.custom_type == 'batch') {
+      key = "batch-activity";
+    }
+
+    console.log(key);
+
+    // else if (entity.custom_type == 'video' ){
+    //   return "video";
+    // }
+    return key;
   }
 
 }

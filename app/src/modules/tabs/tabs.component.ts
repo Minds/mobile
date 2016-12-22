@@ -8,6 +8,7 @@ import * as applicationModule from "application";
   moduleId: module.id,
   selector: "minds-tabs",
   templateUrl: "tabs.component.html",
+  styleUrls: [ 'tabs.component.css' ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
@@ -19,7 +20,7 @@ export class TabsComponent {
   android = applicationModule.android;
 
   constructor(page : Page, private route: ActivatedRoute, private router : Router, private location: Location){
-    page.actionBarHidden = true;
+    page.actionBarHidden = false;
   }
 
   //Yikes: talk about a hack!
@@ -30,8 +31,7 @@ export class TabsComponent {
       if (!state instanceof NavigationEnd) {
         return;
       }
-      console.log('tab should be ' + state.urlAfterRedirects);
-      switch(state.urlAfterRedirects){
+      switch((<any>state).urlAfterRedirects){
         case '/tab/newsfeed':
           this.selectedIndex = 0;
           break;

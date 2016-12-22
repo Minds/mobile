@@ -9,7 +9,8 @@ import { Client } from '../../common/services/api/client';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
       <Label class="material-icon selected" text="thumb_up"></Label>
-  `
+  `,
+  styleUrls: [ 'buttons.css' ]
 })
 
 export class ThumbsUpComponent {
@@ -34,7 +35,7 @@ export class ThumbsUpComponent {
   thumb(){
     var self = this;
 
-    if(!this.session.isLoggedIn()){
+    /*if(!this.session.isLoggedIn()){
       this.modal.setSubtitle("You need to have a channel to vote").open();
       this.showModal = true;
       return false;
@@ -57,14 +58,14 @@ export class ThumbsUpComponent {
       if (this.session.getLoggedInUser().guid != this.object.owner_guid) {
         self.wallet.decrement();
       }
-    }
+    }*/
   }
 
   has(){
-    for(var guid of this.entity['thumbs:up:user_guids']){
+    /*for(var guid of this.entity['thumbs:up:user_guids']){
       //if(guid == this.session.getLoggedInUser().guid)
       //  return true;
-    }
+    }*/
     return false;
   }
 

@@ -19,3 +19,8 @@ TextView {
 .m-native--activity--rich-embed--meta{
   padding:8;
 }
+
+
+.m-native--activity--buttons Label{
+  font-size:34;
+}

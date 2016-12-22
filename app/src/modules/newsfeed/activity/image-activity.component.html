@@ -17,7 +17,7 @@
 
 <StackLayout orientation="vertical" style="padding-bottom:8">
 
-  <Label text="default" style="font-weight:bold"></Label>
+  <Label text="image" style="font-weight:bold"></Label>
 
   <TextView [text]="entity.title || entity.message"
     *ngIf="entity.title || entity.message"
@@ -25,39 +25,32 @@
     class="m-native--activity--message"
     ></TextView>
 
-  <!-- Remind -->
-  <!--<StackLayout *ngIf="entity.remind_object" orientation="vertical" style="padding:16 0; padding-left:0">
-    <AbsoluteLayout style="padding: 0" [nsRouterLink]="['/channel/:id', { id: entity.ownerObj.guid }]" *ngIf="entity.remind_object" >
 
-        <StackLayout orientation="horizontal" left="8">
-          <Label text="repeat" class="material-icon" style="color:#4690D7; font-size: 18;  padding-right: 8"></Label>
-          <Image *ngIf="entity.ownerObj"
-            [src]="'https://www.minds.com/icon/' + entity.remind_object.ownerObj.guid + '/medium'"
-            width="18"
-            height="18"
-            stretce="aspectFill"
-            style="border-radius:9;"
-            ></Image>
-          <Label [text]="entity.remind_object.ownerObj.name"
-            style="font-weight:bold; font-size: 14; text-transform:uppercase; color:#888; padding-left: 8"></Label>
+  <!-- Image -->
+  <GridLayout rows="auto" columns="*">
+    <android>
+      <FrescoDrawee
+        [imageUri]="entity.thumbnail_src"
+        actualImageScaleType="focusCrop"
+        verticalAlignment="top"
+        showProgressBar="false"
+        progressBarColor="#AB5400"
+        width="100%"
+        aspectRatio="1.3"
+      ></FrescoDrawee>
+    </android>
 
-
-        </StackLayout>
-    </AbsoluteLayout>
-    <remind [entity]="entity.remind_object" style="border-width:2; border-color: #888"></remind>
-  </StackLayout>-->
-
-  <StackLayout *ngIf="entity.custom_type == 'video' && false">
-    <VideoPlayer
-      controls="true"
-      autoplay="false"
-      muted="false"
-      loop="true" height="280"
-      [src]="'https://www.minds.com/api/v1/archive/' + entity.custom_data.guid + '/play'"
-    ></VideoPlayer>
-    <Label text="this is a video" style="font-size:11; color: #888; padding:8"></Label>
-  </StackLayout>
-
+    <ios>
+      <Image
+        [src]="entity.thumbnail_src"
+        stretce="aspectFill"
+        stretch="aspectFill"
+        width="100%"
+        height="300"
+      >
+      </Image>
+    </ios>
+  </GridLayout>
 
   <FlexboxLayout flexDirection="row" *ngIf="!entity.remind_object" style="padding:8; text-align:center; color:#888">
     <StackLayout flexGrow="1">

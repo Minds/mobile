@@ -7,6 +7,6 @@ export const routes = [
     { path: "", redirectTo: "/login", pathMatch: "full", terminal: true },
     { path: "login", component: LoginComponent },
     { path: "tab/:id", component: TabsComponent },
-    { path: "newsfeed/:id", component: NewsfeedSingleComponent }
+    { path: "newsfeed/:id", component: NewsfeedSingleComponent },
     { path: "channel/:id", component: ChannelComponent }
 ];

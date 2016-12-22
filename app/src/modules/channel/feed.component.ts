@@ -16,16 +16,19 @@ import * as applicationModule from "application";
 export class ChannelFeedComponent {
 
   feed : Array<any> = [];
+  inProgress : boolean = true;
 
   constructor(private client : Client, private cache : CacheService, private cd : ChangeDetectorRef){ }
 
-  @Input() set channel(channel : string){
+  @Input() set channel(channel : any){
+    this.inProgress = true;
     this.feed = [];
 
     let _feed = this.cache.get('feed:' + channel.guid);
     if(_feed){
       this.feed = _feed;
-      return true;
+      this.inProgress = false;
+      return;
     }
 
     this.client.get('api/v1/newsfeed/personal/' + channel.guid, { limit: 12, offset: ""})
@@ -36,6 +39,7 @@ export class ChannelFeedComponent {
         }
 
         this.cache.set('feed:' + channel.guid, this.feed, true);
+        this.inProgress = false;
         this.cd.markForCheck();
         this.cd.detectChanges();
       });

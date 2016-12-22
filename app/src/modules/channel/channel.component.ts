@@ -21,8 +21,8 @@ export class ChannelComponent {
 
   constructor(private client : Client, private route: ActivatedRoute, private router: Router, page : Page,  private cache : CacheService,
     private cd: ChangeDetectorRef){
-    if(applicationModule.android)
-      page.actionBarHidden = true;
+    //if(applicationModule.android)
+    //  page.actionBarHidden = true;
   }
 
   ngOnInit(){

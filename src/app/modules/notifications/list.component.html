@@ -1,0 +1,41 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      <img src="https://www.minds.com/icon/me/small"
+        width="32"
+        height="32"
+        style="border-radius:50%"
+        [navPush]="components.channel"
+        [navParams]="{ guid: 'me' }"
+        />
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-refresher (ionRefresh)="refresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list>
+
+    <!--<div class="list card item-text-wrap m-tip m-tip-boosting">
+      <p>Tip: use your points to boost to more people's newsfeeds. <a >OK!</a></p>
+    </div>-->
+
+    <ion-item *ngFor="let notification of notifications" no-padding>
+  		<notification-card [entity]="notification">
+  		</notification-card>
+    </ion-item>
+
+	</ion-list>
+
+
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+
+</ion-content>

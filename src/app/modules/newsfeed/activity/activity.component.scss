@@ -1,0 +1,50 @@
+.m-ionic-owner-block{
+  display:flex;
+  align-items: center;
+
+  > div {
+    padding:8px;
+  }
+
+  a{
+    color: #333;
+    text-decoration:none;
+  }
+}
+
+.m-ionic-avatar{
+
+  img{
+
+    width:50px;
+    border-radius:50%;
+  }
+}
+
+
+.m-ionic-body{
+  a{ display:block }
+}
+
+.m-ionic-image{
+  img{
+    width:100%;
+  }
+}
+
+.m-ionic-message{
+  padding:8px;
+  //font-size:11px;
+}
+
+
+.m-ionic-tabs{
+  display:flex;
+
+  > * {
+    flex:1;
+    padding:8px 0;
+    color:#888;
+    text-align:center;
+  }
+}

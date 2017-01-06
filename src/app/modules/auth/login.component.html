@@ -1,0 +1,28 @@
+
+<div class="login-header">
+   <div class="background-image background-image-2"></div>
+   <img src="assets/full_logo.png" class="login-logo"/>
+</div>
+
+  <ion-list>
+    <ion-item>
+      <ion-input #username type="text" placeholder="Username"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input #password type="password" placeholder="Password"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <button ion-button value="Login" (click)="login(username, password, $event)"> Login </button>
+    </ion-item>
+  </ion-list>
+
+  <!--<div class="padding">
+
+    <div class="login-options">
+        <a href="#/register">Don't have a channel? Signup.</a>
+        <a href="#/forgotpassword">Forgot password</a>
+    </div>
+
+  </div>-->

@@ -1,0 +1,143 @@
+<!-- Owner block -->
+<div class="m-ionic-owner-block" *ngIf="entity.ownerObj && entity.ownerObj.username">
+
+	<div class="m-ionic-avatar">
+		<a>
+			<img [src]="minds.cdn_url + '/icon/' + entity.ownerObj.guid + '/medium/' + entity.ownerObj.icontime"
+        class="mdl-shadow--2dp"
+        [navPush]="components.channel"
+        [navParams]="{ guid: entity.ownerObj.guid}"
+        />
+		</a>
+	</div>
+
+	<div class="m-ionic-body">
+		<a [navPush]="components.channel" [navParams]="{ guid: entity.ownerObj.guid}">
+			<strong>{{entity.ownerObj.name}}</strong>
+		</a>
+    <a *ngIf="entity.containerObj && entity.containerObj.type == 'group'"
+      class="mdl-color-text--blue-grey-300">
+      <strong>({{entity.containerObj.name}})</strong>
+    </a>
+		<a>
+			<span>{{entity.time_created * 1000 | date:'medium'}}</span>
+		</a>
+        <a [navPush]="components.channel"
+            [navParams]="{ guid: entity.ownerObj.guid}"
+            *ngIf="!entity.guid && entity.entity_guid">
+            <span>{{entity.time_created * 1000 | date:'medium'}}</span>
+        </a>
+	</div>
+
+</div>
+
+<!-- PayWall -->
+<!--<minds-paywall class="m-paywall" [(entity)]="activity" *ngIf="entity.paywall">
+</minds-paywall>-->
+<!-- END: PayWall -->
+
+<!-- Messages -->
+<div class="m-ionic-message m-mature-message" [hidden]="!entity.message || editing">
+
+	<span class="m-mature-message-content"
+	  [innerHtml]="entity.message"
+	  (click)="entity.mature && !entity.mature_visibility ? entity.mature_visibility = !entity.mature_visibility : null">
+    </span>
+</div>
+
+<!--<m-translate
+  [open]="translateToggle"
+  [entity]="activity"
+  [translateEvent]="translateEvent"
+  (onTranslateInit)="propagateTranslation($event)"
+  (onTranslate)="translateToggle = false"
+  (onTranslateError)="translateToggle = false"
+  #translate
+></m-translate>-->
+
+<div class="minds-editable-container" *ngIf="editing && (!entity.custom_type || (entity.custom_type && !entity.title))">
+	<!-- Please not the intentional single way binding for ngModel, we want to be able to cancel our changes -->
+	<textarea class="mdl-card__supporting-text message" name="message" [ngModel]="entity.message" #messageEdit></textarea>
+	<button class="mdl-button mdl-button--raised mdl-color--blue-grey-100" (click)="messageEdit.value = entity.message; editing=false;" i18n>Cancel</button>
+	<button class="mdl-button mdl-button--colored mdl-button--raised" (click)="entity.message = messageEdit.value; save();" i18n>Save</button>
+</div>
+
+<!-- Rich content -->
+<div class="m-rich-embed"
+  *ngIf="entity.perma_url && entity.title"
+  >
+	<!--<minds-rich-embed [src]="activity" [maxheight]="480"></minds-rich-embed>-->
+</div>
+
+<div class="mdl-card__supporting-text m-ionic-message" [hidden]="!entity.title || entity.perma_url || editing" [innerHtml]="entity.title"></div>
+<!-- Translation -->
+<div *ngIf="translate && translate.translation && translate.translation.translated && translate.translation.title" class="m-translation-wrapper">
+  <div class="mdl-card__supporting-text message" [hidden]="!translate.translation.title">
+    <span [innerHtml]="translate.translation.title"></span>
+  </div>
+</div>
+<!-- End translation -->
+
+<div class="minds-editable-container" *ngIf="editing && entity.custom_type && entity.title">
+	<!-- Please not the intentional single way binding for ngModel, we want to be able to cancel our changes -->
+	<textarea class="mdl-card__supporting-text message" name="title" [ngModel]="entity.title" #titleEdit></textarea>
+	<button class="mdl-button mdl-button--raised mdl-color--blue-grey-100" (click)="titleEdit.value = entity.title; editing=false;" i18n>Cancel</button>
+	<button class="mdl-button mdl-button--colored mdl-button--raised" (click)="entity.title = titleEdit.value; save();" i18n>Save</button>
+</div>
+
+<div class="item item-image item-image-video"
+  *ngIf="entity.custom_type == 'video'">
+    Videos are coming soon
+		 <!--<minds-video
+				width="100%"
+				height="300px"
+				style="background:#000;"
+				loop="true"
+				controls="true"
+				muted="true"
+				[poster]="entity.custom_data.thumbnail_src"
+				[src]="[{ 'res': '720', 'uri': 'api/v1/archive/' + entity.custom_data.guid + '/play', 'type': 'video/mp4' }]"
+        [guid]="entity.custom_data.guid"
+				[playCount]="activity['play:count']"
+				#player>
+				<video-ads [player]="player" *ngIf="entity.monetized"></video-ads>
+		</minds-video>-->
+ </div>
+
+<!-- Images -->
+<div class="m-ionic-image allow-select"
+ *ngIf="entity.thumbnail_src && !entity.perma_url">
+	<a>
+		<img [src]="entity.thumbnail_src" (error)="entity.thumbnail_src = null">
+	</a>
+</div>
+
+<!-- Custom type:: batch -->
+<div class="m-ionic-image allow-select"
+ *ngIf="entity.custom_type == 'batch'">
+
+	<a>
+		<img [src]="entity.custom_data[0].src" style="width:100%"
+      (error)="entity.custom_data[0].src = 'https://www.minds.com/assets/logos/medium.png'"
+      *ngIf="entity.custom_data"
+    >
+	</a>
+</div>
+
+<!-- Reminds -->
+<div *ngIf="entity.remind_object">
+  <remind [entity]="entity.remind_object"></remind>
+</div>
+
+<div class="mdl-card__supporting-text is-boosted" *ngIf="entity.boosted && false">
+	<i class="material-icons">trending_up</i>
+	<a i18n>Boosted</a>
+</div>
+
+
+<div class="m-ionic-tabs">
+  <minds-button-thumbs-up [entity]="entity" ></minds-button-thumbs-up>
+  <minds-button-thumbs-down [entity]="entity" ></minds-button-thumbs-down>
+  <minds-button-comment [entity]="entity" ></minds-button-comment>
+  <minds-button-remind [entity]="entity" ></minds-button-remind>
+</div>

@@ -1,9 +1,9 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      <img src="https://www.minds.com/icon/me/small"
-        width="32"
-        height="32"
+      <img [src]="'https://www.minds.com/icon/' + storage.get('user_guid') +'/small'"
+        width="40"
+        height="40"
         style="border-radius:50%"
         [navPush]="components.channel"
         [navParams]="{ guid: 'me' }"/>

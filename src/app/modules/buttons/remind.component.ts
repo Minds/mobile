@@ -18,7 +18,6 @@ export class RemindButtonComponent {
   entity = {
     'guid': null,
     'owner_guid': null,
-    'thumbs:up:user_guids': []
   };
 
   constructor(public client : Client) {
@@ -28,8 +27,6 @@ export class RemindButtonComponent {
     if(!value)
       return;
     this.entity = value;
-    if(!this.entity['thumbs:up:user_guids'])
-      this.entity['thumbs:up:user_guids'] = [];
   }
 
 

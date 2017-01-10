@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDet
 
 import { ChannelComponent } from '../channel/channel.component';
 import { Client } from '../../common/services/api/client';
+import { Storage } from '../../common/services/storage';
+
 
 @Component({
   moduleId: 'module.id',
@@ -16,6 +18,8 @@ export class NewsfeedList {
   feed : Array<any> = [];
   offset : string = "";
   inProgress : boolean = true;
+
+  storage = new Storage();
 
   components = {
     channel: ChannelComponent

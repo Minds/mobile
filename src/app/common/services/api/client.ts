@@ -8,6 +8,8 @@ export class Client {
 	base : string = "https://edge.minds.com/";
   oauth2;
 
+  storage = new Storage();
+
 	constructor(public http : Http){
     this.oauth2 = new OAuth2(http);
 	}
@@ -34,7 +36,9 @@ export class Client {
 				});*/
 
     var Objecti : any = Object;
-		return Objecti.assign(options, {});
+		return Objecti.assign(options, {
+      access_token: this.storage.get('access_token')
+    });
 	}
 
 	/**
@@ -102,6 +106,7 @@ export class Client {
 	 */
 	put(endpoint : string, data : Object = {}, options: Object = {}){
 		var self = this;
+    endpoint += "?" + this.buildParams({});
 		return new Promise((resolve, reject) => {
 			self.http.put(
 					self.base + endpoint,
@@ -133,6 +138,7 @@ export class Client {
 	 */
 	delete(endpoint : string, data : Object = {}, options: Object = {}){
 		var self = this;
+    endpoint += "?" + this.buildParams({});
 		return new Promise((resolve, reject) => {
 			self.http.delete(
 					self.base + endpoint,

@@ -6,16 +6,24 @@
 
   <div class="m-ionic-channel--header" *ngIf="channel">
 
-    <img
-       class="m-ionic-channel--header-banner"
-       [src]="'https://www.minds.com/fs/v1/banners/' + channel.guid + '/fat/' + channel.icontime"
-       width="100%"
-       height="225px">
+    <div class="m-ionic-channel--header-banner">
+      <img
+          #banner
+         [src]="'https://www.minds.com/fs/v1/banners/' + channel.guid + '/fat/' + channel.icontime"
+         (error)="banner.hide = true"
+         width="100%"
+         [hidden]="banner.hide"
+         height="225px"
+
+         >
+     </div>
 
     <img
+      class="m-ionic-channel--avatar"
       [src]="'https://www.minds.com/icon/' + channel.guid + '/large'"
       width="150px"
-      height="150px">
+      height="150px"
+      >
 
     <h1>  {{channel.name}} </h1>
 

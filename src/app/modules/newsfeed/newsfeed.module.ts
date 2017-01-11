@@ -13,6 +13,7 @@ import { Remind } from './activity/remind.component';
 import { ButtonsModule } from '../buttons/buttons.module';
 
 import { ImageCachePipe } from '../../common/pipes/image-cache.pipe';
+import { DomainPipe } from '../../common/pipes/domain.pipe';
 
 @NgModule({
   /*imports: [
@@ -32,8 +33,8 @@ import { ImageCachePipe } from '../../common/pipes/image-cache.pipe';
   ]*/
   imports: [ IonicModule, ButtonsModule ],
   providers: [ Client ],
-  declarations: [ NewsfeedList, NewsfeedSingleComponent, Activity, ImageActivity, BatchActivity, RichActivity, Remind, ImageCachePipe ],
+  declarations: [ NewsfeedList, NewsfeedSingleComponent, Activity, ImageActivity, BatchActivity, RichActivity, Remind, ImageCachePipe, DomainPipe ],
   exports: [ NewsfeedList, NewsfeedSingleComponent, Activity, ImageActivity, BatchActivity, RichActivity, Remind ],
-  entryComponents: [ NewsfeedList, NewsfeedSingleComponent ] 
+  entryComponents: [ NewsfeedList, NewsfeedSingleComponent ]
 })
 export class NewsfeedModule { }

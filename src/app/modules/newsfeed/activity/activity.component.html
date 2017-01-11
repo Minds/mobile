@@ -22,11 +22,6 @@
 		<a>
 			<span>{{entity.time_created * 1000 | date:'medium'}}</span>
 		</a>
-        <a [navPush]="components.channel"
-            [navParams]="{ guid: entity.ownerObj.guid}"
-            *ngIf="!entity.guid && entity.entity_guid">
-            <span>{{entity.time_created * 1000 | date:'medium'}}</span>
-        </a>
 	</div>
 
 </div>
@@ -63,10 +58,12 @@
 </div>
 
 <!-- Rich content -->
-<div class="m-rich-embed"
+<div class="m-ionic-rich-embed"
   *ngIf="entity.perma_url && entity.title"
   >
-	<!--<minds-rich-embed [src]="activity" [maxheight]="480"></minds-rich-embed>-->
+	<img [src]="entity.thumbnail_src" (error)="entity.thumbnail_src = null">
+  <h3>{{entity.title}}</h3>
+  <p>{{entity.perma_url | domain }}</p>
 </div>
 
 <div class="mdl-card__supporting-text m-ionic-message" [hidden]="!entity.title || entity.perma_url || editing" [innerHtml]="entity.title"></div>

@@ -29,6 +29,10 @@
 
   </div>
 
-  <channel-feed [channel]="channel"></channel-feed>
+  <channel-feed [channel]="channel" #feed [loadMore]="feed.scroller"></channel-feed>
+
+  <ion-infinite-scroll (ionInfinite)="feed.scroller = $event">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
 </ion-content>

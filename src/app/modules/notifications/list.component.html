@@ -1,15 +1,22 @@
-
 <ion-header>
   <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>
-      <img src="https://www.minds.com/icon/me/small"
-        width="32"
-        height="32"
-        style="border-radius:50%"
-        [navPush]="components.channel"
-        [navParams]="{ guid: 'me' }"
-        />
+
     </ion-title>
+    <ion-buttons right>
+      <button ion-button
+        [navPush]="components.channel"
+        [navParams]="{ guid: 'me' }">
+        <img [src]="'https://www.minds.com/icon/' + storage.get('user_guid') +'/small'"
+          width="36"
+          height="36"
+          style="margin: 0px; border-radius:50%;"
+          />
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 

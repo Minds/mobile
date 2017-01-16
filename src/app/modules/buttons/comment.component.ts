@@ -1,35 +1,32 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 
 import { Client } from '../../common/services/api/client';
+import { CommentsList } from '../comments/list.component';
 
 
 @Component({
   moduleId: 'module.id',
   selector: 'minds-button-comment',
   changeDetection: ChangeDetectionStrategy.OnPush,
+
   template: `
-    <ion-icon name="md-chatbubbles" class="m-ionic-icon"></ion-icon>
+    <div [navPush]="components.comments" [navParams]="{ guid: entity.entity_guid ? entity.entity_guid : entity.guid }">
+      <ion-icon name="md-chatbubbles" class="m-ionic-icon" [class.selected]="entity['comments:count'] > 0" ></ion-icon>
+      <span *ngIf="entity['comments:count'] > 0">{{entity['comments:count']}}</span>
+    </div>
   `,
   //styleUrls: ['buttons.css']
 })
 
 export class CommentButtonComponent {
 
-  entity = {
-    'guid': null,
-    'owner_guid': null,
-    'thumbs:up:user_guids': []
-  };
+  @Input() entity;
 
-  constructor(public client : Client) {
+  components = {
+    comments: CommentsList
   }
 
-  @Input('entity') set _entity(value : any){
-    if(!value)
-      return;
-    this.entity = value;
-    if(!this.entity['thumbs:up:user_guids'])
-      this.entity['thumbs:up:user_guids'] = [];
+  constructor(public client : Client) {
   }
 
 }

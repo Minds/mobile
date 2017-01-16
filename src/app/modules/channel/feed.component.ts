@@ -10,12 +10,16 @@ import { CacheService } from '../../common/services/cache/cache.service';
   selector: 'channel-feed',
   templateUrl: 'feed.component.html',
   //styleUrls: [ 'feed.component.css' ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  //changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class ChannelFeedComponent {
 
+
+  guid;
+
   feed : Array<any> = [];
+  offset : string = "";
   inProgress : boolean = true;
 
   constructor(private client : Client, private cache : CacheService, private cd : ChangeDetectorRef){ }
@@ -24,24 +28,43 @@ export class ChannelFeedComponent {
     this.inProgress = true;
     this.feed = [];
 
-    let _feed = this.cache.get('feed:' + channel.guid);
-    if(_feed){
-      this.feed = _feed;
-      this.inProgress = false;
+    //let _feed = this.cache.get('feed:' + channel.guid);
+    //if(_feed){
+    //  this.feed = _feed;
+    //  this.inProgress = false;
+    //  return;
+    //}
+
+    this.guid = channel.guid;
+    this.loadList();
+  }
+
+  loadList(){
+    return new Promise((resolve, reject) => {
+      this.client.get('api/v1/newsfeed/personal/' + this.guid, { limit: 12, offset: ""})
+        .then((response : any) => {
+          //console.log(response);
+          for(let activity of response.activity){
+            this.feed.push(activity);
+          }
+
+          //this.cache.set('feed:' + channel.guid, this.feed, true);
+          this.inProgress = false;
+          this.offset = response['load-next'];
+          resolve();
+          this.cd.markForCheck();
+          this.cd.detectChanges();
+        });
+    });
+  }
+
+  @Input() set loadMore(e){
+    if(!e)
       return;
-    }
-
-    this.client.get('api/v1/newsfeed/personal/' + channel.guid, { limit: 12, offset: ""})
-      .then((response : any) => {
-        //console.log(response);
-        for(let activity of response.activity){
-          this.feed.push(activity);
-        }
-
-        this.cache.set('feed:' + channel.guid, this.feed, true);
-        this.inProgress = false;
-        this.cd.markForCheck();
-        this.cd.detectChanges();
+    this.loadList()
+      .then(() => {
+        e.complete();
+        e = null;
       });
   }
 

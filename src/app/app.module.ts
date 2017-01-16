@@ -8,6 +8,7 @@ import { CacheModule } from './common/services/cache/cache.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { TabsModule } from './modules/tabs/tabs.module';
 import { ChannelModule } from './modules/channel/channel.module';
+import { CommentsModule } from './modules/comments/comments.module';
 import { NewsfeedModule } from './modules/newsfeed/newsfeed.module';
 import { NotificationsModule } from './modules/notifications/notifications.module';
 
@@ -33,6 +34,7 @@ import { routes } from "./app.routes";
     AuthModule,
     TabsModule,
     ChannelModule,
+    CommentsModule,
     NewsfeedModule,
     NotificationsModule
   ],

@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy } from "@angular/core";
 
+import { MessengerList } from "../messenger/list.component";
 import { NewsfeedList } from "../newsfeed/list.component";
 import { NotificationsList } from "../notifications/list.component";
 
@@ -18,7 +19,8 @@ export class TabsComponent {
 
   tabs = {
     newsfeed: NewsfeedList,
-    notifications: NotificationsList
+    notifications: NotificationsList,
+    messenger: MessengerList
   }
 
 

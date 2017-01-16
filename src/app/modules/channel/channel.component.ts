@@ -16,7 +16,7 @@ export class ChannelComponent {
 
 
   guid : string = "me";
-  channel = {};
+  channel : any = {};
 
   constructor(private client : Client, private params: NavParams, private cache : CacheService,
     private cd: ChangeDetectorRef){
@@ -26,6 +26,14 @@ export class ChannelComponent {
 
   ngOnInit(){
     this.guid = this.params.get('guid');
+    if(this.params.get('channel')){
+      this.channel = this.params.get('channel');
+      if(this.channel){
+        this.guid = this.channel.guid;
+        return;
+      }
+    }
+
     this.load();
   }
 

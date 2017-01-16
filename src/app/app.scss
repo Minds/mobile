@@ -4,3 +4,22 @@ $tabbar-md-background: #37474f;
 img{
   background:#333;
 }
+
+
+
+.m-ionic-avatar{
+
+  img{
+
+    min-width:50px;
+    min-height:50px;
+    max-width:50px;
+    max-height:50px;
+    border-radius:50%;
+  }
+}
+
+
+.m-ionic-body{
+  a{ display:block }
+}

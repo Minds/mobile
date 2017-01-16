@@ -1,7 +1,8 @@
 import { Pipe, Inject, Renderer }  from '@angular/core';
 
 @Pipe({
-  name: 'domain'
+  name: 'domain',
+  pure: false
 })
 
 export class DomainPipe {

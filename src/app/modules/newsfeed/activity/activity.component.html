@@ -6,7 +6,7 @@
 			<img [src]="minds.cdn_url + '/icon/' + entity.ownerObj.guid + '/medium/' + entity.ownerObj.icontime"
         class="mdl-shadow--2dp"
         [navPush]="components.channel"
-        [navParams]="{ guid: entity.ownerObj.guid}"
+        [navParams]="{ channel: entity.ownerObj }"
         />
 		</a>
 	</div>

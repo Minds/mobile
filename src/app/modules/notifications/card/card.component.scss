@@ -1,0 +1,14 @@
+notification-card{
+  display:flex;
+  align-items:center;
+  padding:8px;
+}
+
+
+.m-ionic-notifications--card-body{
+  padding-left:16px;
+
+  span{
+    font-size: 11px;
+  }
+}

@@ -16,20 +16,6 @@
   }
 }
 
-.m-ionic-avatar{
-
-  img{
-
-    width:50px;
-    border-radius:50%;
-  }
-}
-
-
-.m-ionic-body{
-  a{ display:block }
-}
-
 .m-ionic-image{
   img{
     width:100%;
@@ -42,6 +28,9 @@
 }
 
 .m-ionic-rich-embed{
+  img{
+    width:100%;
+  }
   h3{
     font-size:16px;
     padding:8px;

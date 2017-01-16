@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDet
 
 import { ChannelComponent } from '../channel/channel.component';
 import { Client } from '../../common/services/api/client';
+import { Storage } from '../../common/services/storage';
+
 
 @Component({
   moduleId: 'module.id',
@@ -20,6 +22,8 @@ export class NotificationsList {
   components = {
     channel: ChannelComponent
   }
+
+  storage = new Storage();
 
 
   constructor(private client : Client, private cd : ChangeDetectorRef){}

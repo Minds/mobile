@@ -23,7 +23,7 @@ export class RichActivity {
 
   @Input('entity') set _entity(entity){
     this.entity = entity;
-    this.cache.set('channel:' + entity.ownerObj.guid, entity.ownerObj, false);
+    //this.cache.set('channel:' + entity.ownerObj.guid, entity.ownerObj, false);
   }
 
   onLoaded(){

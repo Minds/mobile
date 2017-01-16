@@ -1,0 +1,42 @@
+.m-ionic-comments--comment{
+  display:flex;
+  align-items:column;
+  padding:8px;
+
+  .m-ionic-body{
+    margin-left:8px;
+  }
+
+  p{
+    margin:0;
+    padding:0;
+  }
+}
+
+
+.m-ionic-comments--composer{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: column;
+  padding: 8px;
+  width: 100%;
+  border-top: 1px solid #EEE;
+
+  .m-ionic-body{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-flow: row;
+  }
+
+  textarea{
+    width: 100%;
+    border: 0;
+    min-height: 0;
+    height: auto;
+    padding: 8px;
+    resize: none;
+  }
+}

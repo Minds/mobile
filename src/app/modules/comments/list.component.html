@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+
+    </ion-title>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-refresher (ionRefresh)="refresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list>
+
+    <div *ngFor="let comment of comments" class="m-ionic-comments--list">
+      <div class="m-ionic-comments--comment">
+        <div class="m-ionic-avatar">
+          <img [src]="'https://www.minds.com/icon/' +  comment.ownerObj.guid + '/medium'" class="mdl-shadow--2dp"/>
+        </div>
+        <div class="m-ionic-body">
+          <b>{{comment.ownerObj.name}} (@ {{comment.ownerObj.name}})</b>
+          <p>{{comment.description}}</p>
+        </div>
+      </div>
+
+    </div>
+
+	</ion-list>
+
+
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <div class="m-ionic-comments--composer">
+    <div class="m-ionic-avatar">
+      <img [src]="'https://www.minds.com/icon/' +  storage.get('user_guid') + '/medium'" class="mdl-shadow--2dp"/>
+    </div>
+    <div class="m-ionic-body">
+      <textarea placeholder="Write your comment..." rows="0"></textarea>
+    </div>
+  </div>
+
+</ion-content>

@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+
+    </ion-title>
+    <ion-buttons right>
+      <button ion-button
+        [navPush]="components.channel"
+        [navParams]="{ guid: 'me' }">
+        <img [src]="'https://www.minds.com/icon/' + storage.get('user_guid') +'/small'"
+          width="36"
+          height="36"
+          style="margin: 0px; border-radius:50%;"
+          />
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-refresher (ionRefresh)="refresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list>
+
+    <div *ngFor="let convo of conversations">
+      <div class="m-ionic-messenger--conversation"
+        [navPush]="components.view"
+        [navParams]="{ conversation: convo }">
+        <div class="m-ionic-avatar">
+          <img [src]="'https://www.minds.com/icon/' +  convo.participants[0].guid+ '/medium'" class="mdl-shadow--2dp"/>
+        </div>
+        <div class="m-ionic-body">
+          <h3>{{convo.username}}</h3>
+        </div>
+      </div>
+
+    </div>
+
+	</ion-list>
+
+
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+
+</ion-content>

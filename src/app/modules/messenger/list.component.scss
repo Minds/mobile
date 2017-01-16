@@ -1,0 +1,18 @@
+.m-ionic-messenger--conversation{
+  display:flex;
+  align-items: center;
+  padding:8px 16px;
+
+
+  .m-ionic-body{
+    padding-left:16px;
+
+    h3{
+      margin:0;
+      padding:0;
+      font-size:13px;
+      text-transform:uppercase;
+    }
+  }
+
+}

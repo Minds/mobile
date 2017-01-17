@@ -1,0 +1,31 @@
+.m-auth-login-grid{
+  /*padding: 16;*/
+}
+
+.m-ionic-login--header{
+  text-align:center;
+  width:100%;
+  overflow: hidden;
+  position: relative;
+  max-height: 300px;
+
+}
+
+.m-ionic-login--bg{
+  position: absolute;
+	top: 0;
+	left: 0;
+	width: 110%;
+	height: 110%;
+	background: url('../assets/bg-1.jpeg') center 0;
+	background-size:100%;
+	z-index: -1;
+	margin: -12px;
+  -webkit-filter: brightness(60%);
+}
+
+.m-ionic-login--logo{
+  width:200px;
+  margin:50px 0;
+  background:transparent;
+}

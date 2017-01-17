@@ -40,8 +40,5 @@ export class Activity {
     //this.cache.set('channel:' + entity.ownerObj.guid, entity.ownerObj, false);
   }
 
-  onLoaded(){
-    console.log('fully loaded');
-  }
 
 }

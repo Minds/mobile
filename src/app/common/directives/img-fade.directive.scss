@@ -1,0 +1,17 @@
+img[imgFade]{
+  -webkit-transition: -webkit-filter 1s ease-in;
+          transition: filter 1s ease-in;
+
+  background:#666;
+  -webkit-filter:
+    //blur(1px)
+    opacity(0%);
+
+  drop-shadow:0 0 3px #EEE;
+}
+
+img.m-imgFade--loaded{
+  -webkit-filter:
+    //blur(0)
+    opacity(100%);
+}

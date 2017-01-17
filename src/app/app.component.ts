@@ -1,8 +1,9 @@
 import { Component, ViewChild } from "@angular/core";
 import { Nav } from 'ionic-angular';
 
-import { TabsComponent } from "./modules/tabs/tabs.component"
-import { LoginComponent } from "./modules/auth/login.component"
+import { TabsComponent } from "./modules/tabs/tabs.component";
+import { LoginComponent } from "./modules/auth/login.component";
+import { NewsfeedList } from "./modules/newsfeed/list.component";
 import { OAuth2 } from "./common/services/api/oauth2";
 
 @Component({
@@ -18,13 +19,13 @@ export class MindsApp {
   rootPage : any = LoginComponent;
 
   constructor(private oauth2 : OAuth2){
+    if(this.oauth2.hasAccessToken()){
+      this.rootPage = TabsComponent;
+    }
   }
 
   ngOnInit(){
-    if(this.oauth2.hasAccessToken()){
-      //this.nav.setRoot(LoginComponent);
-      this.rootPage = LoginComponent;
-    }
+
   }
 
   logout(){

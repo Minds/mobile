@@ -13,6 +13,7 @@
         <img [src]="'https://www.minds.com/icon/' + storage.get('user_guid') +'/small'"
           width="36"
           height="36"
+          imgFade
           style="margin: 0px; border-radius:50%;"
           />
       </button>
@@ -22,13 +23,15 @@
 
 <ion-content>
 
+  <newsfeed-poster></newsfeed-poster>
+
   <ion-refresher (ionRefresh)="refresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
   <ion-list>
 
-    <div *ngFor="let activity of feed">
+    <div *ngFor="let activity of feed" class="m-ionic-activity">
   		<activity [entity]="activity" class="activity-item list card">
   		</activity>
     </div>

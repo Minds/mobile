@@ -9,11 +9,12 @@ import { Activity } from './activity/activity.component';
 import { BatchActivity } from './activity/batch-activity.component';
 import { ImageActivity } from './activity/image-activity.component';
 import { RichActivity } from './activity/rich-activity.component';
+import { PosterComponent } from './poster/poster.component';
 import { Remind } from './activity/remind.component';
 import { ButtonsModule } from '../buttons/buttons.module';
 
 import { ImageCachePipe } from '../../common/pipes/image-cache.pipe';
-import { DomainPipe } from '../../common/pipes/domain.pipe';
+import { CommonModule } from '../../common/common.module';
 
 @NgModule({
   /*imports: [
@@ -31,10 +32,10 @@ import { DomainPipe } from '../../common/pipes/domain.pipe';
   exports: [
     RouterModule
   ]*/
-  imports: [ IonicModule, ButtonsModule ],
+  imports: [ IonicModule, CommonModule, ButtonsModule,  ],
   providers: [ Client ],
-  declarations: [ NewsfeedList, NewsfeedSingleComponent, Activity, ImageActivity, BatchActivity, RichActivity, Remind, ImageCachePipe, DomainPipe ],
-  exports: [ NewsfeedList, NewsfeedSingleComponent, Activity, ImageActivity, BatchActivity, RichActivity, Remind ],
+  declarations: [ NewsfeedList, NewsfeedSingleComponent, Activity, ImageActivity, BatchActivity, RichActivity, Remind, PosterComponent, ImageCachePipe ],
+  exports: [ NewsfeedList, NewsfeedSingleComponent, Activity, ImageActivity, BatchActivity, RichActivity, Remind, PosterComponent ],
   entryComponents: [ NewsfeedList, NewsfeedSingleComponent ]
 })
 export class NewsfeedModule { }

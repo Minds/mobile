@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, LoadingController, AlertController } from 'ionic-angular';
 
 
 import { TabsComponent } from '../tabs/tabs.component';
@@ -14,7 +14,7 @@ import { OAuth2 } from '../../common/services/api/oauth2';
 
 export class LoginComponent {
 
-  constructor(private oauth2 : OAuth2, private nav : NavController){
+  constructor(private oauth2 : OAuth2, private nav : NavController, public loadingCtrl: LoadingController, private alertCtrl: AlertController){
   }
 
   ngOnInit(){
@@ -25,16 +25,23 @@ export class LoginComponent {
 
   login(username, password, e){
     e.preventDefault();
-    console.log('clicked login');
-    console.log('username: ', username.value);
-    console.log('password: ', password.value);
+
+    let loader = this.loadingCtrl.create({
+      content: "Please wait...",
+    });
+    loader.present();
+
     this.oauth2.login(username.value, password.value, (success) => {
-      console.log('login callback called');
-      console.log(success);
+      loader.dismiss();
       if(success){
         this.nav.push(TabsComponent);
       } else {
-        alert('Please try again');
+        let alert = this.alertCtrl.create({
+          title: 'Sorry!',
+          subTitle: "We could not log you in. Please check your credentials",
+          buttons: ['Try again']
+        });
+        alert.present();
       }
     });
     //this.routerExtensions.navigate(['/tab/newsfeed'], { clearHistory: true });

@@ -5,6 +5,7 @@ import { Client } from '../../common/services/api/client';
 import { ChannelComponent } from './channel.component';
 import { ChannelFeedComponent } from './feed.component';
 import { NewsfeedModule } from '../newsfeed/newsfeed.module';
+import { CommonModule } from '../../common/common.module';
 
 @NgModule({
   /*imports: [
@@ -22,7 +23,7 @@ import { NewsfeedModule } from '../newsfeed/newsfeed.module';
   exports: [
     RouterModule
   ]*/
-  imports: [ IonicModule, NewsfeedModule ],
+  imports: [ IonicModule, NewsfeedModule, CommonModule ],
   providers: [ Client ],
   declarations: [ ChannelComponent, ChannelFeedComponent ],
   exports: [ ChannelComponent ],

@@ -1,3 +1,8 @@
+.m-ionic-comments--list{
+  margin-bottom:100px;
+}
+
+
 .m-ionic-comments--comment{
   display:flex;
   align-items:column;
@@ -23,6 +28,8 @@
   padding: 8px;
   width: 100%;
   border-top: 1px solid #EEE;
+  background:#FFF;
+  z-index:9999;
 
   .m-ionic-body{
     width: 100%;

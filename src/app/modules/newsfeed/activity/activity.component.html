@@ -7,6 +7,7 @@
         class="mdl-shadow--2dp"
         [navPush]="components.channel"
         [navParams]="{ channel: entity.ownerObj }"
+        imgFade
         />
 		</a>
 	</div>
@@ -61,7 +62,7 @@
 <div class="m-ionic-rich-embed"
   *ngIf="entity.perma_url && entity.title"
   >
-	<img [src]="entity.thumbnail_src" (error)="entity.thumbnail_src = null">
+	<img [src]="entity.thumbnail_src" (error)="entity.thumbnail_src = null" imgFade>
   <h3>{{entity.title}}</h3>
   <p>{{entity.perma_url | domain }}</p>
 </div>
@@ -105,7 +106,7 @@
 <div class="m-ionic-image allow-select"
  *ngIf="entity.thumbnail_src && !entity.perma_url">
 	<a>
-		<img [src]="entity.thumbnail_src" (error)="entity.thumbnail_src = null">
+		<img [src]="entity.thumbnail_src" (error)="entity.thumbnail_src = null" imgFade>
 	</a>
 </div>
 
@@ -116,6 +117,7 @@
 	<a>
 		<img [src]="entity.custom_data[0].src" style="width:100%"
       (error)="entity.custom_data[0].src = 'https://www.minds.com/assets/logos/medium.png'"
+      imgFade
       *ngIf="entity.custom_data"
     >
 	</a>

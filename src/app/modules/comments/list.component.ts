@@ -29,20 +29,24 @@ export class CommentsList {
   constructor(private client : Client, private cd : ChangeDetectorRef,  private params: NavParams){}
 
   ngOnInit(){
-    this.loadList();
+    this.loadList()
+      .then(() => {
+
+      });
   }
 
   loadList(){
     return new Promise((res, err) => {
       this.inProgress = true;
-      this.client.get('api/v1/comments/' + this.params.get('guid'), { limit: 12, offset: this.offset})
+      this.client.get('api/v1/comments/' + this.params.get('guid'), { limit: 12, offset: this.offset, reversed: true})
         .then((response : any) => {
-          //console.log(response);
-          for(let comment of response.comments){
-            this.comments.push(comment);
-          }
+
+          if (response.comments && response.comments.length >= 1) {
+  					this.comments = response.comments.concat(this.comments);
+            this.offset = response['load-previous'];
+				  }
+
           this.inProgress = false;
-          this.offset = response['load-next'];
           res();
           this.cd.markForCheck();
           this.cd.detectChanges();
@@ -50,21 +54,12 @@ export class CommentsList {
     });
   }
 
-  refresh(puller){
-    puller.complete();
-    this.offset = "";
-    this.comments = [];
+  loadEarlier(puller){
     this.loadList()
       .then(() => {
         puller.complete();
       });
   }
 
-  loadMore(e){
-    this.loadList()
-      .then(() => {
-        e.complete();
-      });
-  }
 
 }

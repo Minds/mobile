@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.minds.mobile.dev" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.minds.mobile.dev" version="0.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Minds (2.0)</name>
     <description>The next gen Minds app</description>
     <author email="mark@minds.com" href="http://minds.com/mark">Minds Inc.</author>
@@ -23,6 +23,7 @@
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="16" />
     <preference name="BackupWebStorage" value="none" />
+    <preference name="loadUrlTimeoutValue" value="700000" />
 
     <!--
       Change these to configure how the splashscreen displays and fades in/out.

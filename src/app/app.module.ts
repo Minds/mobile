@@ -5,6 +5,8 @@ import { MindsApp } from './app.component';
 import { ApiModule } from './common/services/api.module';
 import { CacheModule } from './common/services/cache/cache.module';
 
+import { CommonModule } from './common/common.module';
+
 import { AuthModule } from './modules/auth/auth.module';
 import { TabsModule } from './modules/tabs/tabs.module';
 import { ChannelModule } from './modules/channel/channel.module';
@@ -25,10 +27,11 @@ import { routes } from "./app.routes";
       tabsPlacement: 'bottom',
       platforms: {
         android: {
-          tabsPlacement: 'top'
+          tabsPlacement: 'bottom'
         }
       }
     }),
+    CommonModule,
     ApiModule,
     CacheModule,
     AuthModule,

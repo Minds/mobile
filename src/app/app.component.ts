@@ -1,5 +1,6 @@
 import { Component, ViewChild } from "@angular/core";
-import { Nav } from 'ionic-angular';
+import { Nav, Platform } from 'ionic-angular';
+import { StatusBar } from 'ionic-native';
 
 import { TabsComponent } from "./modules/tabs/tabs.component";
 import { LoginComponent } from "./modules/auth/login.component";
@@ -18,7 +19,10 @@ export class MindsApp {
 
   rootPage : any = LoginComponent;
 
-  constructor(private oauth2 : OAuth2){
+  constructor(private oauth2 : OAuth2, private platform : Platform){
+    platform.ready().then(() => {
+      StatusBar.backgroundColorByHexString('#333333');
+    });
     if(this.oauth2.hasAccessToken()){
       this.rootPage = TabsComponent;
     }

@@ -33,7 +33,7 @@
         [navPush]="components.view"
         [navParams]="{ conversation: convo }">
         <div class="m-ionic-avatar">
-          <img [src]="'https://www.minds.com/icon/' +  convo.participants[0].guid+ '/medium'" class="mdl-shadow--2dp"/>
+          <img [src]="'https://www.minds.com/icon/' +  convo.participants[0].guid+ '/medium'" class="mdl-shadow--2dp" imgFade />
         </div>
         <div class="m-ionic-body">
           <h3>{{convo.username}}</h3>

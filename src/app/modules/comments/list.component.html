@@ -21,7 +21,7 @@
     <div *ngFor="let comment of comments">
       <div class="m-ionic-comments--comment">
         <div class="m-ionic-avatar">
-          <img [src]="'https://www.minds.com/icon/' +  comment.ownerObj.guid + '/medium'" class="mdl-shadow--2dp"/>
+          <img [src]="'https://www.minds.com/icon/' +  comment.ownerObj.guid + '/medium'" class="mdl-shadow--2dp" imgFade/>
         </div>
         <div class="m-ionic-body">
           <b>{{comment.ownerObj.name}} (@ {{comment.ownerObj.name}})</b>

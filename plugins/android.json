@@ -32,7 +32,23 @@
         },
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "com.minds.mobile.dev"
+        },
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "com.minds.mobile.dev"
+        },
+        "cordova-plugin-media-capture": {
+            "PACKAGE_NAME": "com.minds.mobile.dev"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "com.minds.mobile.dev"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "com.minds.mobile.dev"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.minds.mobile.dev"
+        }
+    }
 }

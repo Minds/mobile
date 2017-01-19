@@ -5,6 +5,11 @@ img{
 
 }
 
+.m-ionic-owner-block{
+  display:flex;
+  align-items: center;
+
+}
 
 
 .m-ionic-avatar{
@@ -21,5 +26,6 @@ img{
 
 
 .m-ionic-body{
+  padding-left:12px;
   a{ display:block }
 }

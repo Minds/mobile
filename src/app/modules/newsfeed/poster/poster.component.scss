@@ -33,3 +33,30 @@
   }
 
 }
+
+.m-ionic-poster--actions{
+
+  display: block;
+  opacity:0;
+  height:auto;
+  max-height:0;
+  overflow: hidden;
+
+  -webkit-transition: opacity 1s ease-out, max-height 1s ease-out;
+          transition: opacity 1s ease-out, max-height 1s ease-out;
+
+
+
+  text-align:right;
+  padding:8px;
+
+}
+.m-ionic-poster--actions-show{
+
+  display: block;
+  opacity:1;
+
+  height:auto;
+  max-height: 300px;
+
+}

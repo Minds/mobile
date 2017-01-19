@@ -26,19 +26,14 @@ export class Client {
 	 */
 	private buildOptions(options : Object){
     //TODO: for shared library need to support XSRF AND OAUTH2
-		/*var XSRF_TOKEN = this.cookie.get('XSRF-TOKEN');
+
 		var headers = new Headers();
-		headers.append('X-XSRF-TOKEN', XSRF_TOKEN);
+		headers.append('Authorization', 'Bearer ' + this.storage.get('access_token'));
 		var Objecti : any = Object;
 		return Objecti.assign(options, {
-					headers: headers,
-					cache: true
-				});*/
-
-    var Objecti : any = Object;
-		return Objecti.assign(options, {
-      access_token: this.storage.get('access_token')
-    });
+			headers: headers,
+			cache: false
+		});
 	}
 
 	/**
@@ -49,8 +44,7 @@ export class Client {
 		endpoint += "?" + this.buildParams(data);
 		return new Promise((resolve, reject) => {
 			self.http.get(
-					self.base + endpoint,
-					this.buildOptions(options)
+					self.base + endpoint
 				)
 				.subscribe(
           res => {

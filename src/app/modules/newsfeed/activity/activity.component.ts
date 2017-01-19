@@ -40,5 +40,9 @@ export class Activity {
     //this.cache.set('channel:' + entity.ownerObj.guid, entity.ownerObj, false);
   }
 
+  openInBrowser(url){
+    (<any>window).open(url, "_system");
+  }
+
 
 }

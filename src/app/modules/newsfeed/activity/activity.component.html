@@ -61,6 +61,7 @@
 <!-- Rich content -->
 <div class="m-ionic-rich-embed"
   *ngIf="entity.perma_url && entity.title"
+  (click)="openInBrowser(entity.perma_url)"
   >
 	<img [src]="entity.thumbnail_src" (error)="entity.thumbnail_src = null" imgFade>
   <h3>{{entity.title}}</h3>

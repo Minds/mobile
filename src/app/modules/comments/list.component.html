@@ -10,7 +10,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content #scrollArea>
 
   <ion-refresher (ionRefresh)="loadEarlier($event)">
     <ion-refresher-content *ngIf="inProgress"></ion-refresher-content>
@@ -20,7 +20,7 @@
 
     <div *ngFor="let comment of comments">
       <div class="m-ionic-comments--comment">
-        <div class="m-ionic-avatar">
+        <div class="m-ionic-avatar" [navPush]="components.channel" [navParams]="{ channel: comment.ownerObj }">
           <img [src]="'https://www.minds.com/icon/' +  comment.ownerObj.guid + '/medium'" class="mdl-shadow--2dp" imgFade/>
         </div>
         <div class="m-ionic-body">
@@ -45,5 +45,8 @@
   </div>
   <div class="m-ionic-body">
     <textarea placeholder="Write your comment..." rows="0"></textarea>
+  </div>
+  <div class="m-ionic-actions">
+    <ion-icon name="md-send" (click)="post()"></ion-icon>
   </div>
 </div>

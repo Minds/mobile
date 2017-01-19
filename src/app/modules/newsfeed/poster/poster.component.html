@@ -11,12 +11,19 @@
 	</div>
 
 	<div class="m-ionic-body">
-    <div contenteditable="true">Enter your status here</div>
+    <m-textarea placeholder="Enter your status here" [(mModel)]="message"></m-textarea>
 
 	</div>
 
   <div class="m-ionic-poster--icons">
-    <ion-icon name="md-camera"></ion-icon>
+    <ion-icon name="md-camera" (click)="openCamera()"></ion-icon>
   </div>
+
+</div>
+
+
+<div class="m-ionic-poster--actions" [class.m-ionic-poster--actions-show]="message || attachment.meta.attachment_guid">
+
+  <button ion-button round (click)="post()">Post</button>
 
 </div>

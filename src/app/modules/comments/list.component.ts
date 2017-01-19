@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { NavParams } from 'ionic-angular';
+import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { NavParams, Content } from 'ionic-angular';
 
 import { ChannelComponent } from '../channel/channel.component';
 import { Client } from '../../common/services/api/client';
@@ -19,6 +19,7 @@ export class CommentsList {
   comments : Array<any> = [];
   offset : string = "";
   inProgress : boolean = true;
+  @ViewChild('scrollArea') scrollArea : Content;
 
   storage = new Storage();
 
@@ -36,6 +37,11 @@ export class CommentsList {
   }
 
   loadList(){
+    let scrollPosition = 0; //bottom
+
+    if(this.offset)
+      scrollPosition = this.scrollArea.scrollHeight;
+
     return new Promise((res, err) => {
       this.inProgress = true;
       this.client.get('api/v1/comments/' + this.params.get('guid'), { limit: 12, offset: this.offset, reversed: true})
@@ -46,15 +52,29 @@ export class CommentsList {
             this.offset = response['load-previous'];
 				  }
 
+
+
           this.inProgress = false;
           res();
           this.cd.markForCheck();
           this.cd.detectChanges();
+
+          //console.log('old height: ' + scrollPosition);
+          //console.log('new height: ' + this.scrollArea.scrollHeight);
+          //console.log('scroll to: ' + (this.scrollArea.scrollHeight - scrollPosition));
+          //console.log(this.scrollArea);
+
+          if(scrollPosition){
+          //  this.scrollArea.scrollTo(this.scrollArea.scrollHeight - scrollPosition, 0, 100);
+          } else {
+            this.scrollArea.scrollToBottom(300);
+          }
         });
     });
   }
 
   loadEarlier(puller){
+    //console.log(puller);
     this.loadList()
       .then(() => {
         puller.complete();

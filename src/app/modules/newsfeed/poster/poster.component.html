@@ -11,7 +11,7 @@
 	</div>
 
 	<div class="m-ionic-body">
-    <m-textarea placeholder="Enter your status here" [(mModel)]="message"></m-textarea>
+    <m-textarea placeholder="Enter your status here" [(mModel)]="meta.message"></m-textarea>
 
 	</div>
 
@@ -21,9 +21,13 @@
 
 </div>
 
+<div class="m-ionic--progress-bar" *ngIf="progress > 0">
+  <div class="m-ionic--progress-bar-progress" [style.width]="progress + '%'"></div>
+</div>
 
-<div class="m-ionic-poster--actions" [class.m-ionic-poster--actions-show]="message || attachment.meta.attachment_guid">
 
-  <button ion-button round (click)="post()">Post</button>
+<div class="m-ionic-poster--actions" [class.m-ionic-poster--actions-show]="meta.message || meta.attachment_guid">
+
+  <button ion-button round (click)="post()" [disabled]="progress > 0 && progress < 100">Post</button>
 
 </div>

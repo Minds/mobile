@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { ActionSheetController, LoadingController } from 'ionic-angular';
 
 import { Client } from '../../../common/services/api/client';
@@ -10,7 +10,7 @@ import { AttachmentService } from '../../attachments/attachment.service';
   moduleId: 'module.id',
   selector: 'newsfeed-poster',
   templateUrl: 'poster.component.html',
-  //changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class PosterComponent {
@@ -26,12 +26,29 @@ export class PosterComponent {
   }
 
   message : string = "";
+  progress : number = 0;
+
+  meta = {
+    message: '',
+    attachment_guid: null
+  };
+
+  @Output('prepend') prepend : EventEmitter<any> = new EventEmitter();
 
   storage = new Storage();
 
-  constructor(public client : Client, public actionSheetCtrl: ActionSheetController, private attachment : AttachmentService, private loadingCtrl : LoadingController,
+  constructor(public client : Client, public actionSheetCtrl: ActionSheetController, public attachment : AttachmentService, private loadingCtrl : LoadingController,
     private cd : ChangeDetectorRef){
 
+  }
+
+  ngOnInit(){
+    this.attachment.emitter.subscribe((response : any) => {
+      this.progress = response.progress;
+      this.meta.attachment_guid = response.guid;
+      this.cd.markForCheck();
+      this.cd.detectChanges();
+    });
   }
 
   openCamera(){
@@ -42,14 +59,14 @@ export class PosterComponent {
           text: 'Take a photo',
           icon: 'md-camera',
           handler: () => {
-            this.attachment.takePicture();
+            this.attachment.takePicture()
           }
         },
         {
           text: 'Record a video',
           icon: 'md-videocam',
           handler: () => {
-            this.attachment.takeVideo();
+            this.attachment.takeVideo()
           }
         },
         {
@@ -75,14 +92,12 @@ export class PosterComponent {
     });
     loader.present();
 
-    let data = Object.assign({
-      message: this.message
-    }, this.attachment.meta);
-
-    this.client.post('api/v1/newsfeed', data)
-      .then(() => {
-        this.message = "";
-
+    this.client.post('api/v1/newsfeed', this.meta)
+      .then((response : any) => {
+        this.meta.attachment_guid = "";
+        this.meta.message = "";
+        this.progress = 0;
+        this.prepend.next(response.activity);
         this.cd.markForCheck();
         this.cd.detectChanges();
         loader.dismiss();

@@ -1,3 +1,4 @@
+import { EventEmitter } from '@angular/core';
 import { Camera, MediaCapture, MediaFile, CaptureError, CaptureImageOptions } from 'ionic-native';
 
 import { Upload } from '../../common/services/api/upload';
@@ -7,11 +8,15 @@ export class AttachmentService{
   meta :any = {
   }
 
+  emitter = new EventEmitter();
+  progress : number = 0;
+
   constructor(private client : Upload){
     this.client = new Upload();
   }
 
   takePicture(){
+
     MediaCapture.captureImage({
         limit: 1,
         //correctOrientation: true,
@@ -21,7 +26,7 @@ export class AttachmentService{
         //saveToPhotoAlbum: true
       })
       .then((data : MediaFile[]) => {
-          this.upload(data[0].fullPath);
+          this.upload(data[0].fullPath, 'image');
   			},
         (err) => {
   				console.log('capture failed');
@@ -35,7 +40,7 @@ export class AttachmentService{
       //saveToPhotoAlbum: true
     })
     .then((data : MediaFile[]) => {
-        this.upload(data[0].fullPath);
+        this.upload(data[0].fullPath, 'video');
 			},
       (err) => {
 				console.log('capture failed');
@@ -50,19 +55,24 @@ export class AttachmentService{
         mediaType: 2
       })
       .then((data) => {
-        this.upload(data[0].fullPath);
+        this.upload(data, '');
       }, (err) => {
 
       });
   }
 
-  upload(file){
-    this.client.post('api/v1/archive', [ file ], {}, (progress) => {
+  upload(file, type : string = ''){
+
+    this.client.post('api/v1/archive/' + type, [ file ], {}, (progress) => {
         console.log('progress: ' + progress);
+        this.progress = progress;
+        this.emitter.next({ progress: progress});
       })
       .then((response : any) => {
+        this.progress = 100;
         this.meta.attachment_guid = response.guid;
         console.log(response);
+        this.emitter.next({ progress: 100, guid: response.guid });
       });
   }
 

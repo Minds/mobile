@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<plugin id="com-sarriaroman-photoviewer" version="1.1.10" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+	<name>PhotoViewer</name>
+	<description>This plugin is intended to show a picture from an URL into a Photo Viewer with zoom features.</description>
+	<js-module name="PhotoViewer" src="www/PhotoViewer.js">
+		<clobbers target="PhotoViewer" />
+	</js-module>
+	<platform name="android">
+		<config-file parent="/*" target="res/xml/config.xml">
+			<feature name="PhotoViewer">
+				<param name="android-package" value="com.sarriaroman.PhotoViewer.PhotoViewer" />
+			</feature>
+		</config-file>
+		<config-file parent="/*" target="AndroidManifest.xml" />
+
+		<config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <activity android:name="com.sarriaroman.PhotoViewer.PhotoActivity" android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" />
+        </config-file>
+
+		<config-file parent="/manifest" target="AndroidManifest.xml">
+			<uses-permission android:name="android.permission.INTERNET" />
+			<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+			<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+		</config-file>
+
+		<source-file src="src/android/PhotoViewer.java" target-dir="src/com/sarriaroman/PhotoViewer" />
+		<source-file src="src/android/PhotoActivity.java" target-dir="src/com/sarriaroman/PhotoViewer" />
+
+		<source-file src="src/android/layout/activity_photo.xml" target-dir="res/layout" />
+
+		<framework src="src/android/photoviewer.gradle" custom="true" type="gradleReference" />
+	</platform>
+	<platform name="ios">
+		<config-file parent="/*" target="config.xml">
+			<feature name="PhotoViewer">
+				<param name="ios-package" value="PhotoViewer" />
+			</feature>
+		</config-file>
+		<source-file src="src/ios/PhotoViewer.m" />
+	</platform>
+</plugin>

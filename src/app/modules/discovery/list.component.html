@@ -1,0 +1,25 @@
+<ion-header>
+  <m-header></m-header>
+</ion-header>
+
+<ion-content>
+
+  <ion-refresher (ionRefresh)="refresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list style="line-height:0;">
+
+    <div *ngFor="let entity of feed" class="m-ionic-discovery--tile">
+  	    <img [src]="'https://edge.minds.com/api/v1/archive/thumbnails/' + entity.guid + '/medium'" (click)="openImage(entity)" imgFade/>
+    </div>
+
+	</ion-list>
+
+
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+
+</ion-content>

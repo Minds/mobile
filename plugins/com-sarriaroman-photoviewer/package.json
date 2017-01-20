@@ -1,0 +1,39 @@
+{
+  "name": "com-sarriaroman-photoviewer",
+  "version": "1.1.10",
+  "description": "This plugin is intended to show a picture from an URL into a Photo Viewer with zoom features.",
+  "cordova": {
+    "id": "com-sarriaroman-photoviewer",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sarriaroman/photoviewer"
+  },
+  "keywords": [
+    "cordova",
+    "photoviewer",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=4.0.0"
+    },
+    {
+      "name": "cordova-android",
+      "version": ">=4"
+    },
+    {
+      "name": "cordova-plugman",
+      "version": ">=4.2.0"
+    }
+  ],
+  "author": "Román A. Sarria",
+  "license": "MIT"
+}

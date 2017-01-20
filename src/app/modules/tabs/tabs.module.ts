@@ -4,6 +4,7 @@ import { IonicModule } from 'ionic-angular';
 
 import { TabsComponent } from './tabs.component';
 import { ChannelModule } from '../channel/channel.module';
+import { DiscoveryModule } from '../discovery/discovery.module';
 import { MessengerModule } from '../messenger/messenger.module';
 import { NewsfeedModule } from '../newsfeed/newsfeed.module';
 import { NotificationsModule } from '../notifications/notifications.module';
@@ -13,6 +14,7 @@ import { NotificationsModule } from '../notifications/notifications.module';
   imports: [
     IonicModule,
     ChannelModule,
+    DiscoveryModule,
     MessengerModule,
     NewsfeedModule,
     NotificationsModule

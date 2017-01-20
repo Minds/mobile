@@ -22,6 +22,7 @@ export class CommentsList {
   @ViewChild('scrollArea') scrollArea : Content;
 
   storage = new Storage();
+  message : string = "";
 
   components = {
     channel: ChannelComponent
@@ -79,6 +80,10 @@ export class CommentsList {
       .then(() => {
         puller.complete();
       });
+  }
+
+  post(){
+    
   }
 
 

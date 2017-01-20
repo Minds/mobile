@@ -100,11 +100,11 @@ export class Client {
 	 */
 	put(endpoint : string, data : Object = {}, options: Object = {}){
 		var self = this;
-    endpoint += "?" + this.buildParams({});
+
 		return new Promise((resolve, reject) => {
 			self.http.put(
 					self.base + endpoint,
-					JSON.stringify(data),
+          data,
 					this.buildOptions(options)
 				)
 				.subscribe(
@@ -132,7 +132,7 @@ export class Client {
 	 */
 	delete(endpoint : string, data : Object = {}, options: Object = {}){
 		var self = this;
-    endpoint += "?" + this.buildParams({});
+
 		return new Promise((resolve, reject) => {
 			self.http.delete(
 					self.base + endpoint,

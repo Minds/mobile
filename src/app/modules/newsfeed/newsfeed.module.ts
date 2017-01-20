@@ -15,6 +15,7 @@ import { ButtonsModule } from '../buttons/buttons.module';
 
 import { ImageCachePipe } from '../../common/pipes/image-cache.pipe';
 import { CommonModule } from '../../common/common.module';
+import { HeaderModule } from '../header/header.module';
 import { AttachmentModule } from '../attachments/attachment.module';
 
 @NgModule({
@@ -33,7 +34,7 @@ import { AttachmentModule } from '../attachments/attachment.module';
   exports: [
     RouterModule
   ]*/
-  imports: [ IonicModule, CommonModule, ButtonsModule, AttachmentModule ],
+  imports: [ IonicModule, CommonModule, ButtonsModule, AttachmentModule, HeaderModule ],
   providers: [ Client ],
   declarations: [ NewsfeedList, NewsfeedSingleComponent, Activity, ImageActivity, BatchActivity, RichActivity, Remind, PosterComponent, ImageCachePipe ],
   exports: [ NewsfeedList, NewsfeedSingleComponent, Activity, ImageActivity, BatchActivity, RichActivity, Remind, PosterComponent ],

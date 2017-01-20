@@ -44,9 +44,9 @@
     <img [src]="'https://www.minds.com/icon/' +  storage.get('user_guid') + '/medium'" class="mdl-shadow--2dp"/>
   </div>
   <div class="m-ionic-body">
-    <textarea placeholder="Write your comment..." rows="0"></textarea>
+    <m-textarea placeholder="Write your comment..." [(mModel)]="message"></m-textarea>
   </div>
-  <div class="m-ionic-actions">
+  <div class="m-ionic-comments--actions">
     <ion-icon name="md-send" (click)="post()"></ion-icon>
   </div>
 </div>

@@ -46,7 +46,7 @@
   <div class="m-ionic-body">
     <m-textarea placeholder="Write your comment..." [(mModel)]="message"></m-textarea>
   </div>
-  <div class="m-ionic-comments--actions">
+  <div class="m-ionic-comments--actions" *ngIf="message">
     <ion-icon name="md-send" (click)="post()"></ion-icon>
   </div>
 </div>

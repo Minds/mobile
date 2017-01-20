@@ -83,7 +83,16 @@ export class CommentsList {
   }
 
   post(){
-    
+    this.client.post('api/v1/comments/' +  this.params.get('guid'), {
+        comment: this.message
+      })
+      .then((response : any) => {
+        this.message = "";
+        this.comments.push(response.comment);
+        this.cd.markForCheck();
+        this.cd.detectChanges();
+        this.scrollArea.scrollToBottom(300);
+      });
   }
 
 

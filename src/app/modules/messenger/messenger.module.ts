@@ -7,12 +7,15 @@ import { Client } from '../../common/services/api/client';
 
 import { MessengerList } from './list.component';
 import { MessengerView } from './view.component';
+import { MessengerSetup } from './setup.component';
+import { DecryptionComponent } from './decryption.component';
+import { DecryptionPipe } from './decryption.pipe';
 
 @NgModule({
   imports: [ IonicModule, CommonModule, HeaderModule ],
   providers: [ Client ],
-  declarations: [ MessengerList, MessengerView ],
+  declarations: [ MessengerList, MessengerView, MessengerSetup, DecryptionComponent, DecryptionPipe ],
   exports: [ MessengerList ],
-  entryComponents: [ MessengerList, MessengerView ]
+  entryComponents: [ MessengerList, MessengerView, MessengerSetup ]
 })
 export class MessengerModule { }

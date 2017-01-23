@@ -1,9 +1,11 @@
 import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { NavController } from 'ionic-angular';
 
 import { ChannelComponent } from '../channel/channel.component';
 import { Client } from '../../common/services/api/client';
 import { Storage } from '../../common/services/storage';
 
+import { MessengerSetup } from './setup.component';
 import { MessengerView } from './view.component';
 
 @Component({
@@ -27,9 +29,13 @@ export class MessengerList {
     channel: ChannelComponent
   }
 
-  constructor(private client : Client, private cd : ChangeDetectorRef){}
+  constructor(private client : Client, private cd : ChangeDetectorRef, private nav : NavController){}
 
   ngOnInit(){
+    if(!this.storage.get('private-key')){
+      return this.nav.push(MessengerSetup);
+    }
+
     this.loadList();
   }
 

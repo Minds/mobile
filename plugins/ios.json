@@ -36,6 +36,12 @@
         },
         "cordova-plugin-file-transfer": {
             "PACKAGE_NAME": "com.minds.mobile.dev"
+        },
+        "com-sarriaroman-photoviewer": {
+            "PACKAGE_NAME": "com.minds.mobile.dev"
+        },
+        "org.apache.cordova.crypt": {
+            "PACKAGE_NAME": "com.minds.mobile.dev"
         }
     },
     "dependent_plugins": {

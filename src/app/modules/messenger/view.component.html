@@ -1,8 +1,39 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
 
+    </ion-title>
 
-<ion-content>
+  </ion-navbar>
+</ion-header>
 
-Message view
+<ion-content #scrollArea>
 
+  <ion-refresher (ionRefresh)="loadEarlier($event)">
+    <ion-refresher-content *ngIf="inProgress"></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-spinner *ngIf="inProgress"></ion-spinner>
+
+  <ion-list class="m-ionic-messenger--list">
+    <div class="m-ionic-messenger--message" *ngFor="let message of messages">
+      <m-decrypt [message]="message.message"></m-decrypt>
+    </div>
+	</ion-list>
 
 </ion-content>
+
+<div class="m-ionic-messenger--composer">
+  <div class="m-ionic-avatar">
+    <img [src]="'https://www.minds.com/icon/' +  storage.get('user_guid') + '/medium'" class="mdl-shadow--2dp"/>
+  </div>
+  <div class="m-ionic-body">
+    <m-textarea placeholder="Type your message..." [(mModel)]="message"></m-textarea>
+  </div>
+  <div class="m-ionic-messenger--actions" *ngIf="message">
+    <ion-icon name="md-send" (click)="send()"></ion-icon>
+  </div>
+</div>

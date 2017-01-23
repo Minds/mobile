@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { NavParams } from 'ionic-angular';
 
 import { ChannelComponent } from '../channel/channel.component';
 import { Client } from '../../common/services/api/client';
@@ -20,17 +21,23 @@ export class MessengerView {
   offset : string = "";
   messages : Array<any> = [];
 
+  message : string = "";
+
   components = {
     channel: ChannelComponent
   }
 
-  constructor(private client : Client, private cd : ChangeDetectorRef){}
+  storage = new Storage();
+
+  constructor(private client : Client, private cd : ChangeDetectorRef, private params: NavParams ){}
 
   ngOnInit(){
-    //this.load();
+    this.conversation = this.params.get('conversation');
+    this.load();
   }
 
   load(){
+    this.inProgress = true;
     this.client.get('api/v2/conversations/' + this.conversation.guid)
       .then((response : any) => {
         this.inProgress = false;
@@ -55,12 +62,24 @@ export class MessengerView {
           this.offset = response['load-previous'];
         //}
 
+        this.cd.markForCheck();
+        this.cd.detectChanges();
+
         //this.blocked = !!response.blocked;
         //this.unavailable = !!response.unavailable;
       })
       .catch(() => {
         this.inProgress = false;
       });
+  }
+
+  loadEarlier(puller){
+    puller.complete();
+    this.load();
+  }
+
+  send(){
+
   }
 
 

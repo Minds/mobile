@@ -4,7 +4,7 @@
 
 <ion-content>
 
-  <newsfeed-poster></newsfeed-poster>
+  <newsfeed-poster (prepend)="feed.unshift($event)"></newsfeed-poster>
 
   <ion-refresher (ionRefresh)="refresh($event)">
     <ion-refresher-content></ion-refresher-content>

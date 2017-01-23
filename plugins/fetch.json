@@ -94,5 +94,21 @@
         },
         "is_top_level": true,
         "variables": {}
+    },
+    "com-sarriaroman-photoviewer": {
+        "source": {
+            "type": "registry",
+            "id": "com-sarriaroman-photoviewer"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "org.apache.cordova.crypt": {
+        "source": {
+            "type": "local",
+            "path": "../cordova-plugin-crypt"
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }

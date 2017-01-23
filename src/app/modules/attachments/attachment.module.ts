@@ -6,6 +6,9 @@ import { Upload } from '../../common/services/api/upload';
 
 @NgModule({
   imports: [ IonicModule ],
-  providers: [ AttachmentService, Upload ]
+  providers: [
+    AttachmentService,
+    Upload
+  ]
 })
 export class AttachmentModule { }

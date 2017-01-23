@@ -83,5 +83,6 @@
   <plugin name="cordova-plugin-statusbar" spec="2.2.1"/>
   <plugin name="cordova-plugin-device" spec="1.1.4"/>
   <plugin name="cordova-plugin-splashscreen" spec="~4.0.1"/>
+  <plugin name="minds-plugin-crypt" spec="~4.0.1"/>
   <icon src="resources/android/icon/drawable-xhdpi-icon.png"/>
 </widget>

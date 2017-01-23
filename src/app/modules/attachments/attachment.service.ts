@@ -1,8 +1,9 @@
-import { EventEmitter } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Camera, MediaCapture, MediaFile, CaptureError, CaptureImageOptions } from 'ionic-native';
 
 import { Upload } from '../../common/services/api/upload';
 
+@Injectable()
 export class AttachmentService{
 
   meta :any = {
@@ -12,7 +13,6 @@ export class AttachmentService{
   progress : number = 0;
 
   constructor(private client : Upload){
-    this.client = new Upload();
   }
 
   takePicture(){

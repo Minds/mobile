@@ -11,7 +11,7 @@
   <ion-list style="line-height:0;">
 
     <div *ngFor="let entity of feed" class="m-ionic-discovery--tile">
-  	    <img [src]="'https://edge.minds.com/api/v1/archive/thumbnails/' + entity.guid + '/medium'" (click)="openImage(entity)" imgFade/>
+  	    <img [src]="'https://edge.minds.com/api/v1/archive/thumbnails/' + entity.guid + '/medium'" (click)="openImage(entity)"/>
     </div>
 
 	</ion-list>

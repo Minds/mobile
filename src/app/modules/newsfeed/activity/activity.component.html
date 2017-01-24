@@ -41,7 +41,7 @@
 		</a>
 	</div>
 	<div class="m-ionic-body">
-		<a [navPush]="components.channel" [navParams]="{ guid: entity.reminderOwnerObj.guid}">
+		<a [navPush]="components.channel" [navParams]="{ channel: entity.reminderOwnerObj }">
 			<strong>{{entity.reminderOwnerObj.name}}</strong>
 		</a>
 	</div>

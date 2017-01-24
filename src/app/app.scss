@@ -5,6 +5,10 @@ img{
 
 }
 
+*[allow-text-select]{
+  user-select: text;
+}
+
 .m-ionic-owner-block{
   display:flex;
   align-items: center;

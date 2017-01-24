@@ -13,7 +13,7 @@ import { Component, ElementRef, Input, Output, EventEmitter, ViewChild, OnChange
       (paste)="change()"
     ></div>
     <span
-      *ngIf="placeholder && model.length === 0"
+      *ngIf="placeholder && editor.innerText.length === 0"
       class="m-placeholder"
     >{{ placeholder }}</span>
   `

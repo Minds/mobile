@@ -30,7 +30,7 @@ export class ChannelComponent {
       this.channel = this.params.get('channel');
       if(this.channel){
         this.guid = this.channel.guid;
-        return;
+        //return;
       }
     }
 
@@ -49,11 +49,11 @@ export class ChannelComponent {
 
   load(){
     let _channel = this.cache.get('channel:' + this.guid);
-    if(_channel){
+    if(_channel && !this.channel){
       this.channel = _channel;
       this.cd.markForCheck();
       this.cd.detectChanges();
-      return true;
+      //return true;
     }
 
     this.client.get('api/v1/channel/' + this.guid)

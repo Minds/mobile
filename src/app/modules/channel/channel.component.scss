@@ -20,4 +20,23 @@
 
   }
 
+  .m-ionic-channel--stats {
+    display:flex;
+    color:#777;
+
+    > * {
+      flex: 1;
+      text-align: center;
+      padding: 8px;
+
+      label{
+        display:block;
+        font-weight:600;
+        width:100%;
+        padding: 8px 0;
+        letter-spacing: 1px;
+      }
+    }
+  }
+
 }

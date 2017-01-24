@@ -28,6 +28,25 @@
 
     <h1>  {{channel.name}} </h1>
 
+    <div class="m-ionic-channel--stats">
+      <div class="m-ionic-channel--stats-stat" *ngIf="!channel.supporters_count && channel.activity_count">
+        <label>Feed</label>
+        <span>{{channel.activity_count}}</span>
+      </div>
+      <div class="m-ionic-channel--stats-stat" *ngIf="channel.supporters_count">
+        <label>Supporters</label>
+        <span>{{channel.supporters_count}}</span>
+      </div>
+      <div class="m-ionic-channel--stats-stat">
+        <label>Subscribers</label>
+        <span>{{channel.subscribers_count}}</span>
+      </div>
+      <div class="m-ionic-channel--stats-stat">
+        <label>Views</label>
+        <span>{{channel.impressions}}</span>
+      </div>
+    </div>
+
   </div>
 
   <channel-feed [channel]="channel" #feed [loadMore]="feed.scroller"></channel-feed>

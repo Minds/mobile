@@ -25,6 +25,27 @@
   }
 }
 
+.m-ionic-remind-owner-block{
+
+  padding:0 12px;
+
+  ion-icon{
+    color: #4690D7;
+    font-size: 18px;
+  }
+
+  img{
+    max-width:24px;
+    min-width:24px;
+    max-height:24px;
+    min-height:24px;
+  }
+  .m-ionic-body{
+    font-size:12px;
+    padding:0;
+  }
+}
+
 .m-ionic-image{
   img{
     width:100%;

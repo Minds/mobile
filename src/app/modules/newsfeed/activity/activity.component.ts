@@ -33,6 +33,7 @@ export class Activity {
 
     if(entity.remind_object){
       this.entity = entity.remind_object;
+      this.entity.reminderOwnerObj = entity.ownerObj;
       this.entity.remind_object = false; //stop remind looping, if it even happens
     } else {
       this.entity = entity;

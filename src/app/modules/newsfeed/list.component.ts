@@ -38,9 +38,6 @@ export class NewsfeedList {
         .then((response : any) => {
           //console.log(response);
           for(let activity of response.activity){
-            if(activity.remind_object){
-              activity = activity.remind_object;
-            }
             this.feed.push(activity);
           }
           this.inProgress = false;

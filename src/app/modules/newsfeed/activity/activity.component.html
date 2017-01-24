@@ -27,6 +27,26 @@
 
 </div>
 
+<!-- RemindOwner block -->
+<div class="m-ionic-owner-block m-ionic-remind-owner-block" *ngIf="entity.reminderOwnerObj && entity.reminderOwnerObj.username">
+	<ion-icon name="md-repeat"></ion-icon>
+	<div class="m-ionic-avatar">
+		<a>
+			<img [src]="minds.cdn_url + '/icon/' + entity.reminderOwnerObj.guid + '/medium/' + entity.reminderOwnerObj.icontime"
+        class="mdl-shadow--2dp"
+        [navPush]="components.channel"
+        [navParams]="{ channel: entity.ownerObj }"
+        imgFade
+        />
+		</a>
+	</div>
+	<div class="m-ionic-body">
+		<a [navPush]="components.channel" [navParams]="{ guid: entity.reminderOwnerObj.guid}">
+			<strong>{{entity.reminderOwnerObj.name}}</strong>
+		</a>
+	</div>
+</div>
+
 <!-- PayWall -->
 <!--<minds-paywall class="m-paywall" [(entity)]="activity" *ngIf="entity.paywall">
 </minds-paywall>-->
@@ -37,7 +57,8 @@
 
 	<span class="m-mature-message-content"
 	  [innerHtml]="entity.message"
-	  (click)="entity.mature && !entity.mature_visibility ? entity.mature_visibility = !entity.mature_visibility : null">
+	  (click)="entity.mature && !entity.mature_visibility ? entity.mature_visibility = !entity.mature_visibility : null"
+		allow-text-select>
     </span>
 </div>
 
@@ -68,7 +89,7 @@
   <p>{{entity.perma_url | domain }}</p>
 </div>
 
-<div class="mdl-card__supporting-text m-ionic-message" [hidden]="!entity.title || entity.perma_url || editing" [innerHtml]="entity.title"></div>
+<div class="mdl-card__supporting-text m-ionic-message" [hidden]="!entity.title || entity.perma_url || editing" [innerHtml]="entity.title" allow-text-select></div>
 <!-- Translation -->
 <div *ngIf="translate && translate.translation && translate.translation.translated && translate.translation.title" class="m-translation-wrapper">
   <div class="mdl-card__supporting-text message" [hidden]="!translate.translation.title">
@@ -133,11 +154,6 @@
       *ngIf="entity.custom_data"
     >
 	</a>
-</div>
-
-<!-- Reminds -->
-<div *ngIf="entity.remind_object">
-  <remind [entity]="entity.remind_object"></remind>
 </div>
 
 <div class="mdl-card__supporting-text is-boosted" *ngIf="entity.boosted && false">

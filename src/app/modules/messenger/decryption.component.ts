@@ -1,36 +1,38 @@
-import { Component, Input, ChangeDetectorRef }  from '@angular/core';
+import { Component, Input, ChangeDetectorRef, NgZone }  from '@angular/core';
 
 import { Storage } from '../../common/services/storage';
 
 @Component({
   selector: 'm-decrypt',
   template: `
-    {{message}}
+    {{decrypted}}
   `
 })
 
 export class DecryptionComponent {
 
-  message : string = "decrypting...";
+  @Input('message') message : string;
+  decrypted : string = "decrypting...";
 
   storage = new Storage();
 
-  constructor(private cd : ChangeDetectorRef) {
+  constructor(private cd : ChangeDetectorRef, private zone : NgZone) {
   }
 
+  ngAfterViewInit(){
+    this.decrypt();
+  }
 
-  @Input('message') set encrypted(value: string) {
+  decrypt() {
 
-    (<any>window).Crypt.setPrivateKey(this.storage.get('private-key'));
+      (<any>window).Crypt.setPrivateKey(this.storage.get('private-key'));
 
-    (<any>window).Crypt.decrypt(value, (success) => {
-
-			this.message = success;
-      this.cd.markForCheck();
-      this.cd.detectChanges();
-
-
-		});
+      (<any>window).Crypt.decrypt(this.message, (success) => {
+          this.decrypted = success;
+          //console.log('decrypted ' + success);
+          this.cd.markForCheck();
+          this.cd.detectChanges();
+  		});
 
   }
 

@@ -1,9 +1,11 @@
-import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { NavParams } from 'ionic-angular';
+import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { Content, NavParams } from 'ionic-angular';
 
 import { ChannelComponent } from '../channel/channel.component';
 import { Client } from '../../common/services/api/client';
 import { Storage } from '../../common/services/storage';
+
+import { MessengerViewService } from './view.service';
 
 @Component({
   moduleId: 'module.id',
@@ -15,6 +17,7 @@ import { Storage } from '../../common/services/storage';
 
 export class MessengerView {
 
+  @ViewChild('scrollArea') scrollArea : Content;
   @Input() conversation : any;
 
   inProgress : boolean = false;
@@ -29,48 +32,49 @@ export class MessengerView {
 
   storage = new Storage();
 
-  constructor(private client : Client, private cd : ChangeDetectorRef, private params: NavParams ){}
+  constructor(private client : Client, private cd : ChangeDetectorRef, private params: NavParams,
+    private service : MessengerViewService){}
 
   ngOnInit(){
     this.conversation = this.params.get('conversation');
-    this.load();
+    this.service.setGuid(this.conversation.guid);
+    setTimeout(() => {
+      this.load();
+    }, 300);
   }
 
   load(){
+
     this.inProgress = true;
-    this.client.get('api/v2/conversations/' + this.conversation.guid)
-      .then((response : any) => {
+
+    let offset = "";
+    if(this.messages.length > 0)
+      offset = this.messages[0].guid;
+
+    this.service.getFromRemote(12, offset)
+      .then((messages : Array<any>) => {
         this.inProgress = false;
-        if(!response.messages){
-          return false;
+
+        if(offset){
+          messages.shift();
         }
 
-        //if (opts.finish) {
-        //  this.messages = this.messages.concat(response.messages);
-        //  this.scrollEmitter.next(true);
-        //} else if(opts.offset){
-        //  let scrollTop = scrollView.scrollTop;
-        //  let scrollHeight = scrollView.scrollHeight;
-        //  response.messages.shift();
-        //  this.messages = response.messages.concat(this.messages);
-        //  this.offset = response['load-previous'];
-        //  setTimeout(() => {
-        //    scrollView.scrollTop = scrollTop + scrollView.scrollHeight - scrollHeight +60;
-        //  });
-      //} else {
-          this.messages = response.messages;
-          this.offset = response['load-previous'];
-        //}
+        this.messages = messages.concat(this.messages);
 
         this.cd.markForCheck();
         this.cd.detectChanges();
 
-        //this.blocked = !!response.blocked;
-        //this.unavailable = !!response.unavailable;
+        if(!offset){
+          this.scrollArea.scrollToBottom();
+          setTimeout(() => {
+            this.scrollArea.scrollToBottom();
+          }, 1000);
+        }
       })
       .catch(() => {
-        this.inProgress = false;
-      });
+        //failure to get any messages
+      })
+
   }
 
   loadEarlier(puller){

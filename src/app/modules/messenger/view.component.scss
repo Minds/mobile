@@ -4,17 +4,30 @@
 
 
 .m-ionic-messenger--message{
-  display:flex;
-  align-items:column;
-  padding:8px;
+  position: relative;
+  text-align: right;
+  display: block;
+  width: 100%;
+  padding:16px;
 
-  .m-ionic-body{
-    margin-left:8px;
+  &.odd{
+    text-align:left;
   }
 
-  p{
-    margin:0;
-    padding:0;
+  .m-ionic-messenger--message-bubble{
+    padding: 8px 16px;
+    margin: 0 12px;
+    font-size:18px;
+    background: #EEE;
+    border-radius: 3px;
+    max-width:65%;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  img{
+    vertical-align: middle;
+    border-radius: 50%;
   }
 }
 

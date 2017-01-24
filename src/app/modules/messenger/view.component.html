@@ -19,8 +19,24 @@
   <ion-spinner *ngIf="inProgress"></ion-spinner>
 
   <ion-list class="m-ionic-messenger--list">
-    <div class="m-ionic-messenger--message" *ngFor="let message of messages">
-      <m-decrypt [message]="message.message"></m-decrypt>
+    <div class="m-ionic-messenger--message"
+      *ngFor="let message of messages"
+      [class.odd]="message.owner.guid == storage.get('user_guid')"
+      >
+      <img [src]="'https://edge.minds.com/icon/' + message.owner.guid + '/small'"
+        *ngIf="message.owner.guid == storage.get('user_guid')">
+
+      <div class="m-ionic-messenger--message-bubble">
+        <m-decrypt [message]="message.message" allow-text-select></m-decrypt>
+      </div>
+
+
+      <img [src]="'https://edge.minds.com/icon/' + message.owner.guid + '/small'"
+        *ngIf="message.owner.guid != storage.get('user_guid')">
+
+      <div class="m-ionic-messenger--message-ts">
+        {{ message.time_created * 1000 | date: 'medium' }}
+      </div>
     </div>
 	</ion-list>
 

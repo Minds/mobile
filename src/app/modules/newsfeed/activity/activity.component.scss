@@ -57,6 +57,16 @@
   //font-size:11px;
 }
 
+.m-ionic-editable-container{
+  padding:8px;
+  text-align:right;
+
+  m-textarea{
+    text-align:left;
+    margin-bottom:16px;
+  }
+}
+
 .m-ionic-rich-embed{
   img{
     width:100%;

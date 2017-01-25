@@ -72,11 +72,11 @@
   #translate
 ></m-translate>-->
 
-<div class="minds-editable-container" *ngIf="editing && (!entity.custom_type || (entity.custom_type && !entity.title))">
-	<!-- Please not the intentional single way binding for ngModel, we want to be able to cancel our changes -->
-	<textarea class="mdl-card__supporting-text message" name="message" [ngModel]="entity.message" #messageEdit></textarea>
-	<button class="mdl-button mdl-button--raised mdl-color--blue-grey-100" (click)="messageEdit.value = entity.message; editing=false;" i18n>Cancel</button>
-	<button class="mdl-button mdl-button--colored mdl-button--raised" (click)="entity.message = messageEdit.value; save();" i18n>Save</button>
+<div class="m-ionic-editable-container" *ngIf="editing && (!entity.custom_type || (entity.custom_type && !entity.title))">
+	<!-- NOTE the intentional single way binding for ngModel, we want to be able to cancel our changes -->
+	<m-textarea class="mdl-card__supporting-text message" name="message" #messageEdit [mModel]="entity.message" (mModelChange)="messageEdit.value = $event"></m-textarea>
+	<button ion-button (click)="messageEdit.value = entity.message; editing=false;" i18n>Cancel</button>
+	<button ion-button (click)="entity.message = messageEdit.value; save();" i18n>Save</button>
 </div>
 
 <!-- Rich content -->

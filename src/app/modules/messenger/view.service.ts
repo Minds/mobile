@@ -10,6 +10,7 @@ export class MessengerViewService {
   db : SQLite;
   guid : string;
   offset : string = "";
+  publickeys = {};
 
   messages : Array<any> = [];
 
@@ -89,13 +90,17 @@ export class MessengerViewService {
     return new Promise((resolve, reject) => {
       this.client.get('api/v2/conversations/' + this.guid, {
           limit: 8,
-          offset: this.offset
+          offset: offset
         })
         .then((response : any) => {
           if(!response.messages){
             reject("No results on remote");
             return false;
           }
+
+          //if(!response.publickeys){
+          this.publickeys = response.publickeys;
+          //}
 
           let messages = response.messages;
 

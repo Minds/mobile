@@ -23,6 +23,7 @@ export class MessengerView {
   inProgress : boolean = false;
   offset : string = "";
   messages : Array<any> = [];
+  publickeys : any = {};
 
   message : string = "";
 
@@ -83,6 +84,51 @@ export class MessengerView {
   }
 
   send(){
+    console.log('waiting to send');
+    let encrypted = {};
+
+    let encrypt = new Promise((resolve, reject) => {
+
+      for(let guid in this.service.publickeys){
+
+        (<any>window).Crypt.setPublicKey(this.service.publickeys[guid]);
+
+        (<any>window).Crypt.encrypt(this.message, (success) => {
+
+          encrypted[guid] = success;
+          if(Object.keys(encrypted).length == Object.keys(this.service.publickeys).length){
+            resolve(true);
+          }
+
+          if(guid == this.storage.get('user_guid')){
+            this.messages.push({
+              guid: '',
+              message: success,
+              owner: {
+                guid: guid
+              },
+              time_created: Date.now()
+            });
+            this.scrollArea.scrollToBottom();
+          }
+        });
+      }
+    });
+
+    encrypt.then(() => {
+
+      let data = {};
+      for (var index in encrypted) {
+				data["message:" + index] = encrypted[index];
+			}
+
+      this.client.post('api/v2/conversations/' + this.conversation.guid, data)
+        .then(() => {
+          this.message = "";
+          this.cd.markForCheck();
+          this.cd.detectChanges();
+        })
+    })
 
   }
 

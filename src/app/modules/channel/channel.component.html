@@ -26,7 +26,11 @@
       imgFade
       >
 
-    <h1>  {{channel.name}} </h1>
+    <div class="m-ionic-channel--name" [class.editing]="editing.name">
+      <h1 [attr.contentEditable]="editing.name" [(contenteditableModel)]="channel.name">  {{channel.name}} </h1>
+      <ion-icon name="create" *ngIf="!editing.name && channel.guid == this.storage.get('user_guid')" (click)="editing.name = true"></ion-icon>
+      <ion-icon name="checkmark-circle" *ngIf="editing.name" (click)="editing.name = false; save({name: channel.name})"></ion-icon>
+    </div>
 
     <div class="m-ionic-channel--stats">
       <div class="m-ionic-channel--stats-stat" *ngIf="!channel.supporters_count && channel.activity_count">

@@ -16,7 +16,25 @@
     margin-top:-75px;
   }
 
-  h1{
+  .m-ionic-channel--name{
+    padding: 8px 0;
+
+    h1{
+      width: auto;
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0;
+      padding: 4px 16px;
+    }
+
+    &.editing h1{
+      border: 1px solid #EEE;
+    }
+
+    ion-icon{
+      vertical-align: middle;
+      color: #888;
+    }
 
   }
 

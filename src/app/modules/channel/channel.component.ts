@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDet
 import { NavParams } from 'ionic-angular';
 import { Client } from '../../common/services/api/client';
 import { CacheService } from '../../common/services/cache/cache.service';
-
+import { Storage } from '../../common/services/storage';
 
 @Component({
   moduleId: 'module.id',
@@ -18,8 +18,13 @@ export class ChannelComponent {
   guid : string = "me";
   channel : any = {};
 
+  editing = {
+    name: false,
+    avatar: false
+  };
+
   constructor(private client : Client, private params: NavParams, private cache : CacheService,
-    private cd: ChangeDetectorRef){
+    private cd: ChangeDetectorRef, private storage : Storage){
     //if(applicationModule.android)
     //  page.actionBarHidden = true;
   }
@@ -63,6 +68,11 @@ export class ChannelComponent {
         this.cd.markForCheck();
         this.cd.detectChanges();
       });
+  }
+
+  save(data : any){
+    this.client.post('api/v1/channel/' + this.guid, data)
+      .then(() => {});
   }
 
   refresh(){

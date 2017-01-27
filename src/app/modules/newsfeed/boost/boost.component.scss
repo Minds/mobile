@@ -1,0 +1,50 @@
+.m-ionic-boost--option {
+  text-align: center;
+  padding: 65px;
+  display: inline-block;
+  vertical-align: middle;
+  border-bottom: 1px solid #EEE;
+
+  h3{
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+}
+
+.m-ionic-boost--points-wrapper{
+  padding-top:16px;
+}
+
+.m-ionic-boost--points-input {
+  text-align: center;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+
+  input {
+    padding: 16px;
+    border-radius: 3px;
+    background: rgba(0,0,0,0.1);
+    -webkit-appearance: none;
+    box-shadow: none;
+    border: 0;
+    letter-spacing: 2px;
+    text-align: right;
+  }
+
+  label {
+    padding: 8px;
+    letter-spacing: 2px;
+  }
+}
+
+.m-ionic-boost--button{
+  border-radius: 3px;
+  padding: 16px;
+  width: calc(100% - 32px);
+  margin: 16px;
+  box-sizing: border-box;
+  background: #4690D6;
+  color: #FFF;
+  letter-spacing: 2px;
+}

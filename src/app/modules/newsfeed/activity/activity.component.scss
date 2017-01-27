@@ -83,6 +83,21 @@
   }
 }
 
+.m-ionic-boosted-tag{
+  right: 0;
+  position: absolute;
+  padding: 22px 8px 0;
+  text-transform: uppercase;
+  line-height: 1;
+  font-size:10px;
+
+  ion-icon{
+    font-size:14px;
+    vertical-align: middle;
+  }
+
+}
+
 .m-ionic-tabs{
   display:flex;
 
@@ -91,5 +106,17 @@
     padding:8px 0;
     color:#888;
     text-align:center;
+  }
+
+  .m-ionic-boost-button{
+    background-color: #4690D6 !important;
+    color: #FFF;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-right: 8px;
+    padding: 0;
+    -webkit-appearance: none;
+    height: 30px;
+    vertical-align: middle;
   }
 }

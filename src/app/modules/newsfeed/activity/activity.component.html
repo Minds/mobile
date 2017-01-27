@@ -1,3 +1,28 @@
+<div class="m-ionic-boosted-tag" *ngIf="entity.boosted">
+	<ion-icon name="trending-up"></ion-icon>
+	<a i18n>Boosted</a>
+</div>
+
+<!-- RemindOwner block -->
+<div class="m-ionic-owner-block m-ionic-remind-owner-block" *ngIf="entity.reminderOwnerObj && entity.reminderOwnerObj.username">
+	<ion-icon name="md-repeat"></ion-icon>
+	<div class="m-ionic-avatar">
+		<a>
+			<img [src]="minds.cdn_url + '/icon/' + entity.reminderOwnerObj.guid + '/medium/' + entity.reminderOwnerObj.icontime"
+        class="mdl-shadow--2dp"
+        [navPush]="components.channel"
+        [navParams]="{ channel: entity.ownerObj }"
+        imgFade
+        />
+		</a>
+	</div>
+	<div class="m-ionic-body">
+		<a [navPush]="components.channel" [navParams]="{ channel: entity.reminderOwnerObj }">
+			<strong>{{entity.reminderOwnerObj.name}}</strong>
+		</a>
+	</div>
+</div>
+
 <!-- Owner block -->
 <div class="m-ionic-owner-block" *ngIf="entity.ownerObj && entity.ownerObj.username">
 
@@ -25,26 +50,6 @@
 		</a>
 	</div>
 
-</div>
-
-<!-- RemindOwner block -->
-<div class="m-ionic-owner-block m-ionic-remind-owner-block" *ngIf="entity.reminderOwnerObj && entity.reminderOwnerObj.username">
-	<ion-icon name="md-repeat"></ion-icon>
-	<div class="m-ionic-avatar">
-		<a>
-			<img [src]="minds.cdn_url + '/icon/' + entity.reminderOwnerObj.guid + '/medium/' + entity.reminderOwnerObj.icontime"
-        class="mdl-shadow--2dp"
-        [navPush]="components.channel"
-        [navParams]="{ channel: entity.ownerObj }"
-        imgFade
-        />
-		</a>
-	</div>
-	<div class="m-ionic-body">
-		<a [navPush]="components.channel" [navParams]="{ channel: entity.reminderOwnerObj }">
-			<strong>{{entity.reminderOwnerObj.name}}</strong>
-		</a>
-	</div>
 </div>
 
 <!-- PayWall -->
@@ -156,15 +161,13 @@
 	</a>
 </div>
 
-<div class="mdl-card__supporting-text is-boosted" *ngIf="entity.boosted && false">
-	<i class="material-icons">trending_up</i>
-	<a i18n>Boosted</a>
-</div>
-
-
 <div class="m-ionic-tabs">
   <minds-button-thumbs-up [entity]="entity" ></minds-button-thumbs-up>
   <minds-button-thumbs-down [entity]="entity" ></minds-button-thumbs-down>
   <minds-button-comment [entity]="entity" ></minds-button-comment>
   <minds-button-remind [entity]="entity" ></minds-button-remind>
+	<button class="m-ionic-boost-button" (click)="boost()"
+		*ngIf="entity.owner_guid == storage.get('user_guid')">
+		Boost
+	</button>
 </div>

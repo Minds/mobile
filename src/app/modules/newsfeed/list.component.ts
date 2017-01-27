@@ -19,13 +19,11 @@ export class NewsfeedList {
   offset : string = "";
   inProgress : boolean = true;
 
-  storage = new Storage();
-
   components = {
     channel: ChannelComponent
   }
 
-  constructor(private client : Client, private cd : ChangeDetectorRef){}
+  constructor(private client : Client, private cd : ChangeDetectorRef, private storage : Storage){}
 
   ngOnInit(){
     this.loadList();

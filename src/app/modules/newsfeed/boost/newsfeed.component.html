@@ -1,0 +1,50 @@
+<ion-header>
+</ion-header>
+
+<ion-content>
+
+
+  <div class="m-ionic-boost--points-wrapper">
+    <div class="m-ionic-boost--points-input">
+      <div class="cell">
+        <input
+          type="number"
+          min="0"
+          #points
+          placeholder="Enter here"
+          name="points"
+          [(ngModel)]= "data.points"
+          (change)="calculateImpressions()"
+          (keyup)="calculateImpressions()"
+          />
+        </div>
+        <div class="cell">
+  				<label i18n>Points</label>
+  			</div>
+      </div>
+      <div class="m-ionic-boost--points-input">
+        <div class="cell">
+          <input
+            type="number"
+            min="0"
+            #impressions
+            placeholder="Views"
+            name="impressions"
+            [(ngModel)] = "data.impressions"
+            (change)="calculatePoints()"
+            (keyup)="calculatePoints()"
+          />
+        </div>
+        <div class="cell">
+          <label i18n>Views</label>
+        </div>
+      </div>
+  </div>
+
+  <button class="m-ionic-boost--button" (click)="boost()">Boost</button>
+
+  <p style="color:#888; font-size:11px; padding:16px;">
+     <!-- i18n -->Transactions are non-refundable. You will be notified when your post reaches the requested number of views. The amount of time this will take depends on site activity, so don't worry if you don't hear from us for a while; we will keep it in circulation until it reaches the goal!<!-- /i18n -->
+  </p>
+
+</ion-content>

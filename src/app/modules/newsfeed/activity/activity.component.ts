@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef, HostListener } from '@angular/core';
-import { ActionSheetController } from 'ionic-angular'
+import { ActionSheetController, ModalController } from 'ionic-angular'
 import { CacheService } from '../../../common/services/cache/cache.service';
 import { Storage } from '../../../common/services/storage';
 import { Client } from '../../../common/services/api/client';
 import { ChannelComponent } from '../../channel/channel.component';
+import { BoostComponent } from '../boost/boost.component';
 
 
 @Component({
@@ -28,10 +29,8 @@ export class Activity {
     channel: ChannelComponent
   }
 
-  storage = new Storage();
-
   constructor(private client : Client, public cache : CacheService, public actionSheetCtrl: ActionSheetController,
-    private cd : ChangeDetectorRef){
+    private cd : ChangeDetectorRef, private storage : Storage, private modalCtrl : ModalController){
 
   }
 
@@ -41,6 +40,7 @@ export class Activity {
       this.entity = entity.remind_object;
       this.entity.reminderOwnerObj = entity.ownerObj;
       this.entity.remind_object = false; //stop remind looping, if it even happens
+      this.entity.boosted = entity.boosted;
     } else {
       this.entity = entity;
     }
@@ -115,6 +115,11 @@ export class Activity {
     this.editing = false;
     this.cd.markForCheck();
     this.cd.detectChanges();
+  }
+
+  boost(){
+    this.modalCtrl.create(BoostComponent, { entity: this.entity })
+      .present();
   }
 
 

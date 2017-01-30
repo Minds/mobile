@@ -1,0 +1,50 @@
+<ion-header>
+</ion-header>
+
+<ion-content>
+
+
+
+  <ion-refresher (ionRefresh)="refresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list>
+
+    <div class="m-ionic-wallet--total">
+      <ion-icon name="md-trophy" ></ion-icon>
+      <span class="m-ionic-wallet--total-count">{{points}}</span>
+    </div>
+
+
+    <div *ngFor="let transaction of transactions" class="m-ionic-wallet--transaction">
+
+        <div class="m-ionic-wallet--transaction-details">
+          <p>
+            {{transaction.description}}
+          </p>
+          <div class="m-ionic-wallet--transaction-details-ts">
+            <ion-icon name="time"></ion-icon>
+            <p class="ts mdl-color-text--grey-400">{{transaction.time_created * 1000 | date:'medium'}}</p>
+          </div>
+        </div>
+
+        <div class="m-ionic-wallet--transaction-points">
+          <span [hidden]="transaction.points < 0" class="positive">
+            + {{transaction.points}}
+          </span>
+          <span [hidden]="transaction.points >= 0" class="negative">
+            {{transaction.points}}
+          </span>
+        </div>
+
+    </div>
+
+	</ion-list>
+
+
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>

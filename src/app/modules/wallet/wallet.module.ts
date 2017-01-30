@@ -4,12 +4,13 @@ import { IonicModule } from 'ionic-angular';
 
 import { WalletCounterComponent } from './counter.component';
 import { CommonModule } from '../../common/common.module';
+import { WalletComponent } from './wallet.component';
 import { WalletService } from './wallet.service';
 import { Client } from '../../common/services/api/client';
 
 @NgModule({
   imports: [ IonicModule, CommonModule ],
-  declarations: [ WalletCounterComponent ],
+  declarations: [ WalletCounterComponent, WalletComponent ],
   providers: [
     {
       provide: WalletService,
@@ -17,6 +18,7 @@ import { Client } from '../../common/services/api/client';
       deps: [ Client ]
     }
   ],
-  exports: [ WalletCounterComponent ]
+  exports: [ WalletCounterComponent, WalletComponent ],
+  entryComponents: [ WalletComponent ]
 })
 export class WalletModule { }

@@ -1,0 +1,64 @@
+.m-ionic-wallet--total{
+  text-align: center;
+  margin-top: 10vh;
+
+
+  ion-icon{
+    width: 100%;
+    font-size: 100px;
+    color: rgba(0,0,0,0.6);
+  }
+
+  .m-ionic-wallet--total-count{
+    letter-spacing: 3px;
+    font-size: 36px;
+    font-weight: 400;
+    color: green;
+    padding: 16px 0;
+    display: block;
+  }
+}
+
+.m-ionic-wallet--transaction {
+    display: flex;
+    align-items: center;
+    padding:0;
+}
+
+.m-ionic-wallet--transaction-points {
+    padding: 16px;
+    font-size: 24px;
+    text-align: right;
+
+    .positive{
+      color:green;
+    }
+    .negative{
+      color:red;
+    }
+}
+
+.m-ionic-wallet--transaction-details {
+    flex: 1;
+    padding:16px;
+
+    > p {
+      font-weight: 500;
+      letter-spacing: 1px;
+      padding:0;
+      margin:0;
+    }
+}
+
+.m-ionic-wallet--transaction-details-ts{
+  display: flex;
+  align-items: center;
+  color: #888;
+  padding: 8px 0;
+  font-size:11px;
+
+  p{
+    padding: 0;
+    margin: 0 8px;
+  }
+}

@@ -1,11 +1,16 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from "@angular/core";
+import { ModalController } from 'ionic-angular';
 
+import { WalletComponent } from './wallet.component';
 import { WalletService } from './wallet.service';
 
 @Component({
   moduleId: 'module.id',
   selector: "wallet-counter",
   templateUrl: "counter.component.html",
+  host: {
+    '(click)': 'open()'
+  },
   //styleUrls: [ 'tabs.component.css' ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -15,7 +20,7 @@ export class WalletCounterComponent {
   subscription;
   points : number;
 
-  constructor(public service : WalletService, private cd : ChangeDetectorRef){
+  constructor(public service : WalletService, private cd : ChangeDetectorRef, private modalCtrl : ModalController){
   }
 
   ngOnInit(){
@@ -26,6 +31,11 @@ export class WalletCounterComponent {
           this.cd.markForCheck();
           this.cd.detectChanges();
         });
+  }
+
+  open(e){
+    this.modalCtrl.create(WalletComponent)
+      .present();
   }
 
 }

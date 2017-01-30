@@ -1,0 +1,72 @@
+import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef, HostListener } from '@angular/core';
+import { ModalController, NavParams, ViewController, LoadingController } from 'ionic-angular'
+import { Client } from '../../common/services/api/client';
+import { CacheService } from '../../common/services/cache/cache.service';
+import { Storage } from '../../common/services/storage';
+
+import { WalletService } from './wallet.service';
+
+
+@Component({
+  moduleId: 'module.id',
+  selector: 'wallet',
+  templateUrl: 'wallet.component.html',
+  //styleUrls: ['activity.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
+  ////styleUrls: ['activity.component.css']
+})
+
+export class WalletComponent {
+
+  minds = {
+    cdn_url: 'https://edge.minds.com/'
+  }
+
+  inProgress : boolean = false;
+  transactions : Array<any> = [];
+  limit : number = 12;
+  offset : string = "";
+  subscription;
+  points : number = 0;
+
+  constructor(public client : Client, public modalCtrl: ModalController, private params : NavParams,
+    private viewCtrl : ViewController, private loadingCtrl : LoadingController, private cd : ChangeDetectorRef,
+    private storage : Storage, private service : WalletService){
+
+  }
+
+  ngOnInit(){
+    this.load();
+    this.subscription = this.service.getCount()
+      .subscribe((count : number) => {
+          this.points = count;
+          this.cd.markForCheck();
+          this.cd.detectChanges();
+        });
+  }
+
+  load(){
+    return new Promise((resolve, reject) => {
+      this.client.get('api/v1/wallet/transactions', { limit: 12, offset: this.offset})
+        .then((response : any) => {
+          this.transactions = this.transactions.concat(response.transactions);
+          this.offset = response['load-next'];
+          resolve(true);
+          this.cd.markForCheck();
+          this.cd.detectChanges();
+
+        });
+    });
+  }
+
+  loadMore(loader){
+    this.load()
+      .then((success) => {
+        loader.complete();
+      });
+  }
+
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
+  }
+}

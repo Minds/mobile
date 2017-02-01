@@ -1,0 +1,40 @@
+
+
+<ion-content>
+
+
+
+  <div class="m-ionic-group--header" *ngIf="group">
+
+    <div class="m-ionic-group--header-banner">
+      <img
+          #banner
+         [src]="'https://www.minds.com/fs/v1/banners/' + group.guid + '/fat/' + group.icontime"
+         (error)="banner.hide = true"
+         width="100%"
+         [hidden]="banner.hide"
+         height="225px"
+         imgFade
+         >
+     </div>
+
+    <img
+      class="m-ionic-group--avatar"
+      [src]="'https://www.minds.com/fs/v1/avatars/' + group.guid + '/large'"
+      width="150px"
+      height="150px"
+      imgFade
+      >
+
+    <div class="m-ionic-group--name" [class.editing]="editing.name">
+      <h1 [attr.contentEditable]="editing.name" [(contenteditableModel)]="group.name">  {{group.name}} </h1>
+      <ion-icon name="create" *ngIf="!editing.name && group.guid == this.storage.get('user_guid')" (click)="editing.name = true"></ion-icon>
+      <ion-icon name="checkmark-circle" *ngIf="editing.name" (click)="editing.name = false; save({name: group.name})"></ion-icon>
+    </div>
+
+  </div>
+
+  <group-feed [group]="group"></group-feed>
+
+
+</ion-content>

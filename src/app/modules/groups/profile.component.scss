@@ -1,0 +1,60 @@
+.m-ionic-group--header-banner{
+  background:#333;
+  top:0;
+  left:0;
+  width:100%;
+  height:175px;
+  overflow:hidden;
+}
+
+.m-ionic-group--header{
+
+  text-align:center;
+
+  .m-ionic-group--avatar{
+    border-radius:50%;
+    margin-top:-75px;
+  }
+
+  .m-ionic-group--name{
+    padding: 8px 0;
+
+    h1{
+      width: auto;
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0;
+      padding: 4px 16px;
+    }
+
+    &.editing h1{
+      border: 1px solid #EEE;
+    }
+
+    ion-icon{
+      vertical-align: middle;
+      color: #888;
+    }
+
+  }
+
+  .m-ionic-group--stats {
+    display:flex;
+    color:#777;
+
+    > * {
+      flex: 1;
+      text-align: center;
+      padding: 8px;
+
+      label{
+        display:block;
+        font-weight:600;
+        width:100%;
+        padding: 8px 0;
+        letter-spacing: 1px;
+      }
+    }
+  }
+
+}

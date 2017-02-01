@@ -1,0 +1,33 @@
+.m-ionic-capture--post-button{
+  ion-icon{
+    padding-left:8px;
+  }
+}
+
+.m-ionic-capture{
+  padding:16px 8px;
+
+  .m-ionic-body{
+    flex:1;
+  }
+}
+.m-ionic-capture--options{
+  display:flex;
+  align-items: center;
+
+  .m-ionic-capture--options-option {
+    flex: 1;
+    text-align: center;
+
+    ion-icon{
+      display: block;
+      font-size: 36px;
+      padding: 12px 0;
+      color: #888;
+    }
+
+    label{
+      letter-spacing: 1px;
+    }
+  }
+}

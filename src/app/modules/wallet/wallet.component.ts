@@ -63,6 +63,19 @@ export class WalletComponent {
     this.load()
       .then((success) => {
         loader.complete();
+        this.cd.markForCheck();
+        this.cd.detectChanges();
+      });
+  }
+
+  refresh(puller){
+    this.offset = "";
+    this.transactions = [];
+    this.load()
+      .then((success) => {
+        puller.complete();
+        this.cd.markForCheck();
+        this.cd.detectChanges();
       });
   }
 

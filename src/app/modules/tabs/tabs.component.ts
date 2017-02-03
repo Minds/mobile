@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from "@angular/core";
-import { ModalController } from 'ionic-angular';
+import { ModalController, MenuController } from 'ionic-angular';
 
 import { CaptureComponent } from '../capture/capture.component';
 import { MessengerList } from "../messenger/list.component";
@@ -28,12 +28,16 @@ export class TabsComponent {
   }
 
 
-  constructor(private modalCtrl : ModalController){
+  constructor(private modalCtrl : ModalController, private menuCtrl : MenuController){
   }
 
   openCapture(){
     this.modalCtrl.create(CaptureComponent)
       .present();
+  }
+
+  openMenu(){
+    this.menuCtrl.open();
   }
 
 }

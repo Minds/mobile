@@ -10,12 +10,16 @@
     </div>
 
     <div class="m-ionic-login--field">
+      <input #email type="text" placeholder="Email"/>
+    </div>
+
+    <div class="m-ionic-login--field">
       <input #password type="password" placeholder="Password"/>
     </div>
 
     <div class="m-ionic-login--field">
-      <button ion-button value="Login" (click)="register()"> Create a Channel </button>
-      <button ion-button value="Login" (click)="login(username, password, $event)"> Login </button>
+      <button ion-button (click)="nav.pop()"> Go back </button>
+      <button ion-button (click)="register(username, email, password, $event)"> Register </button>
     </div>
   </div>
 

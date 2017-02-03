@@ -2,26 +2,58 @@
   /*padding: 16;*/
 }
 
-.m-ionic-login--header{
-  text-align:center;
-  width:100%;
+.m-ionic-login{
+  text-align: center;
+  width: 100%;
   overflow: hidden;
   position: relative;
-  max-height: 300px;
+  min-height: 110%;
+  border: 0;
 
+
+  ion-list, ion-item{
+    background-color:transparent;
+  }
+
+  .m-ionic-login--fields{
+    padding:16px;
+    text-align: right;
+  }
+
+  input{
+    color: #FFF;
+    background: rgba(0,0,0, 0.055);
+    border-radius: 5px;
+    border: 0;
+    font-size: 16px;
+    margin: 8px 0;
+    padding: 16px;
+    width: 100%;
+    letter-spacing: 2px;
+
+    &::placeholder{
+      color:#FFF;
+    }
+  }
+  button{
+    background: rgba(0,0,0, 0.3);
+    box-shadow: none;
+  }
 }
 
 .m-ionic-login--bg{
   position: absolute;
-	top: 0;
-	left: 0;
-	width: 110%;
-	height: 110%;
-	background: url('../assets/bg-1.jpeg') center 0;
-	background-size:100%;
-	z-index: -1;
-	margin: -12px;
-  -webkit-filter: brightness(60%);
+  top: 0;
+  left: 0;
+  width: 110%;
+  height: 110%;
+  background: url(../assets/bg-1.png) center 0;
+  background-color: #666;
+  background-size: cover;
+  z-index: -1;
+  margin: 0 0;
+  //-webkit-filter: blur(50px) contrast(148%) brightness(80%) saturate(250%);
+  border: 0;
 }
 
 .m-ionic-login--logo{

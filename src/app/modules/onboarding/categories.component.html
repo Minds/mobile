@@ -1,0 +1,43 @@
+<!-- Select categories -->
+<div class="m-category-selector" *ngIf="!inProgress && channels.length == 0">
+  <div class="m-category-selector-header">
+    <h3>What are you interested in?</h3>
+    <span>Select from the categories below to see suggested channels</span>
+  </div>
+  <div class="m-category-selector-categories">
+    <div class="m-category-selector-category mdl-color-text--grey-600"
+      *ngFor="let category of categories"
+      (click)="category.selected = !category.selected"
+      [ngClass]="{'selected': category.selected}"
+      >
+      {{category.label}}
+    </div>
+  </div>
+  <button ion-button color="#4690D6" clear (click)="findChannels()">Continue</button>
+</div>
+
+
+
+<!-- now show a selection of users -->
+<div class="m-category-channels" *ngIf="channels.length && !inProgress">
+  <div class="m-category-selector-header">
+    <h3>Subscribe to some channels</h3>
+    <span>Based on what you're interested in, we think you'll love these channels</span>
+  </div>
+  <div class="m-category-channels-list">
+    <div class="m-category-channels-channel mdl-color-text--grey-600"
+      *ngFor="let channel of channels"
+      (click)="channel.selected = !channel.selected"
+      >
+      <div class="m-category-channels-channel-avatar">
+        <img [src]="minds.cdn_url + 'icon/' + channel.guid + '/small'">
+      </div>
+      <div class="m-category-channels-channel-body">
+        <h3>{{channel.name}}</h3>
+        <span>@ {{channel.username}}</span>
+      </div>
+      <input type="checkbox" [(ngModel)]="channel.selected" (click)="$event.stopPropagation()"/>
+    </div>
+  </div>
+  <button ion-button color="#4690D6" clear (click)="subscribe()">Subscribe</button>
+</div>

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NavController, LoadingController, AlertController } from 'ionic-angular';
 
-
+import { RegisterComponent } from './register.component';
 import { TabsComponent } from '../tabs/tabs.component';
 import { OAuth2 } from '../../common/services/api/oauth2';
 
@@ -45,6 +45,10 @@ export class LoginComponent {
       }
     });
     //this.routerExtensions.navigate(['/tab/newsfeed'], { clearHistory: true });
+  }
+
+  register(){
+    this.nav.push(RegisterComponent);
   }
 
 }

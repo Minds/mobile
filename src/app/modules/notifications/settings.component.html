@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-navbar></ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <ion-item *ngFor="let toggle of toggles">
+      <ion-icon [name]="toggle.icon"></ion-icon>
+      <ion-label>{{toggle.name}}</ion-label>
+      <ion-toggle [checked]="toggle.toggle" (ionChange)="toggle.toggle = $event; setToggle(toggle);" [disabled]="inProgress"></ion-toggle>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

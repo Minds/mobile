@@ -8,7 +8,11 @@ notification-card{
 .m-ionic-notifications--card-body{
   padding-left:16px;
 
-  span{
+  a {
+    text-decoration: none;
+  }
+
+  span.ts{
     font-size: 11px;
   }
 }

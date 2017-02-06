@@ -34,7 +34,7 @@
   <!-- group activity -->
   <template ngSwitchCase="group_activity">
     <a [navPush]="components.activity"
-        [navParams]="{ guid: entity.guid}">
+        [navParams]="{ guid: entity.entityObj.guid }">
       <p>
         <!-- i18n --><span class="pseudo-link mdl-color-text--blue-grey-400">{{entity.fromObj.name}}</span> posted in <span class="pseudo-link mdl-color-text--blue-grey-400">{{entity.params.group.name}}</span><!-- /i18n -->
       </p>
@@ -48,7 +48,7 @@
       <!-- Activity -->
       <a *ngIf="entity.entityObj.type == 'activity'"
           [navPush]="components.activity"
-          [navParams]="{ guid: entity.guid}">
+          [navParams]="{ guid: entity.entityObj.guid }">
         <p *ngIf="entity.entityObj.owner_guid == session.getLoggedInUser().guid && !entity.entityObj.title">
           <!-- i18n -->{{entity.fromObj.name}} commented on <span class="pseudo-link mdl-color-text--blue-grey-400">your activity</span><!-- /i18n -->
         </p>

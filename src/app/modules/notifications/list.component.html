@@ -1,5 +1,12 @@
 <ion-header>
-  <m-header></m-header>
+  <ion-navbar>
+    <ion-buttons right >
+      <button ion-button [navPush]="components.settings">
+        <ion-icon name="md-options"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
 </ion-header>
 
 <ion-content>
@@ -14,7 +21,7 @@
       <p>Tip: use your points to boost to more people's newsfeeds. <a >OK!</a></p>
     </div>-->
 
-    <ion-item *ngFor="let notification of notifications" no-padding>
+    <ion-item *ngFor="let notification of notifications" no-padding text-wrap>
   		<notification-card [entity]="notification">
   		</notification-card>
     </ion-item>

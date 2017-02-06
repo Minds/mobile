@@ -1,0 +1,19 @@
+notifications-counter{
+  display: inline-block;
+  pointer-events: auto;
+  vertical-align: middle;
+  line-height: 1;
+  vertical-align: -webkit-baseline-middle;
+
+  ion-icon{
+    font-size:18px;
+    color:#888;
+  }
+  span{
+    padding-left:4px;
+  }
+  ion-icon, span{
+    vertical-align:middle;
+    line-height:1;
+  }
+}

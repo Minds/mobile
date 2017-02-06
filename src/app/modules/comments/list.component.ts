@@ -20,6 +20,7 @@ export class CommentsList {
   offset : string = "";
   inProgress : boolean = true;
   @ViewChild('scrollArea') scrollArea : Content;
+  autofocus : boolean = false;
 
   storage = new Storage();
   message : string = "";

@@ -2,19 +2,30 @@
   margin-bottom:100px;
 }
 
+.m-ionic-comments--owner-block{
+  padding-left:8px;
+
+  img{
+    max-width:32px;
+    min-width:32px;
+    max-height:32px;
+    min-height:32px;
+  }
+
+  .m-ionic-tabs{
+    width: 100px;
+  }
+}
 
 .m-ionic-comments--comment{
-  display:flex;
-  align-items:column;
-  padding:8px;
-
-  .m-ionic-body{
-    margin-left:8px;
-  }
+  display:block;
+  padding: 0 16px 16px;
 
   p{
     margin:0;
     padding:0;
+    letter-spacing:0.3px;
+    line-height: 18px;
   }
 }
 

@@ -19,16 +19,28 @@
   <ion-list class="m-ionic-comments--list">
 
     <div *ngFor="let comment of comments">
-      <div class="m-ionic-comments--comment">
+
+      <div class="m-ionic-comments--owner-block m-ionic-owner-block">
         <div class="m-ionic-avatar" [navPush]="components.channel" [navParams]="{ channel: comment.ownerObj }">
           <img [src]="'https://www.minds.com/icon/' +  comment.ownerObj.guid + '/medium'" class="mdl-shadow--2dp" imgFade/>
         </div>
         <div class="m-ionic-body">
-          <b>{{comment.ownerObj.name}} (@ {{comment.ownerObj.name}})</b>
-          <p allow-text-select>{{comment.description}}</p>
+          <a [navPush]="components.channel" [navParams]="{ guid: comment.ownerObj.guid}">
+      			<strong>@{{comment.ownerObj.username}}</strong>
+      		</a>
+      		<a>
+      			<span>{{comment.time_created * 1000 | date:'medium'}}</span>
+      		</a>
+        </div>
+        <div class="m-ionic-tabs">
+          <minds-button-thumbs-up [entity]="comment"></minds-button-thumbs-up>
+          <minds-button-thumbs-down [entity]="comment"></minds-button-thumbs-down>
         </div>
       </div>
 
+      <div class="m-ionic-comments--comment">
+        <p allow-text-select>{{comment.description}}</p>
+      </div>
     </div>
 
 	</ion-list>

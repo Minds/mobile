@@ -1,10 +1,13 @@
 import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { PopoverController } from 'ionic-angular';
 import { PhotoViewer } from 'ionic-native';
 
 import { ChannelComponent } from '../channel/channel.component';
 import { Client } from '../../common/services/api/client';
 import { Storage } from '../../common/services/storage';
 
+import { DiscoveryOptionsComponent } from './options.component';
+import { DiscoveryService } from './discovery.service';
 
 @Component({
   moduleId: 'module.id',
@@ -18,6 +21,8 @@ export class DiscoveryList {
 
   filter : string = 'featured';
   type : string = 'images';
+  layout : string = 'tiles';
+
   feed : Array<any> = [];
   offset : string = "";
   inProgress : boolean = true;
@@ -28,45 +33,46 @@ export class DiscoveryList {
     channel: ChannelComponent
   }
 
-  constructor(private client : Client, private cd : ChangeDetectorRef){}
+  constructor(private client : Client, private popoverCtrl : PopoverController, private cd : ChangeDetectorRef,
+    private service : DiscoveryService){}
 
   ngOnInit(){
     this.loadList();
-  }
-
-  loadList(){
-    return new Promise((res, err) => {
-      this.inProgress = true;
-      this.client.get('api/v1/entities/' + this.filter + '/' + this.type, { limit: 15, offset: this.offset})
-        .then((response : any) => {
-          //console.log(response);
-          for(let entity of response.entities){
-            this.feed.push(entity);
-          }
-          this.inProgress = false;
-          this.offset = response['load-next'];
-          res();
-          this.cd.markForCheck();
-          this.cd.detectChanges();
-        });
+    this.service.emitter.subscribe(() => {
+      this.cd.markForCheck();
+      this.cd.detectChanges();
     });
   }
 
+  loadList(){
+    this.service.get();
+  }
+
   refresh(puller){
-    puller.complete();
-    this.offset = "";
-    this.feed = [];
-    this.loadList()
+    this.service.get(true)
       .then(() => {
         puller.complete();
+        this.cd.markForCheck();
+        this.cd.detectChanges();
       });
   }
 
   loadMore(e){
-    this.loadList()
+    this.service.get()
       .then(() => {
         e.complete();
+        this.cd.markForCheck();
+        this.cd.detectChanges();
       });
+  }
+
+  openOptions(){
+    this.popoverCtrl.create(DiscoveryOptionsComponent, {
+      callback: (data) => {
+        console.log(data);
+      }
+    })
+    .present();
   }
 
   openImage(entity : any){

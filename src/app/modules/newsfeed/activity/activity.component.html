@@ -1,6 +1,6 @@
 <div class="m-ionic-boosted-tag" *ngIf="entity.boosted">
 	<ion-icon name="trending-up"></ion-icon>
-	<a i18n>Boosted</a>
+	<a style="color:#999" i18n>Boosted</a>
 </div>
 
 <!-- RemindOwner block -->
@@ -48,6 +48,10 @@
 		<a>
 			<span>{{entity.time_created * 1000 | date:'medium'}}</span>
 		</a>
+	</div>
+
+	<div class="m-ionic-actions">
+		<ion-icon name="md-more" (click)="openSettings()"></ion-icon>
 	</div>
 
 </div>
@@ -121,6 +125,7 @@
       style="background:#000;"
       [poster]="entity.custom_data.thumbnail_src"
       controls="true"
+			playsinline webkit-playsinline
       >
       <source [src]="'https://edge.minds.com/api/v1/archive/' + entity.custom_data.guid + '/play'" type="video/mp4" />
     </video>
@@ -167,7 +172,7 @@
   <minds-button-comment [entity]="entity" ></minds-button-comment>
   <minds-button-remind [entity]="entity" ></minds-button-remind>
 	<button class="m-ionic-boost-button" (click)="boost()"
-		*ngIf="entity.owner_guid == storage.get('user_guid')">
+		*ngIf="entity.owner_guid == storage.get('user_guid') || (entity.reminderOwnerObj  && entity.reminderOwnerObj.guid == storage.get('user_guid'))">
 		Boost
 	</button>
 </div>

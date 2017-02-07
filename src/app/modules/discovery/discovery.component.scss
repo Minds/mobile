@@ -1,3 +1,28 @@
+.m-ionic-discovery--search{
+  display: flex;
+  align-items: center;
+  position: fixed;
+  background: #FFF;
+  width: 100%;
+
+  ion-icon{
+    padding-left: 16px;
+    vertical-align: middle;
+  }
+
+  ion-icon:last-child{
+    padding-left:0;
+    padding-right:16px;
+  }
+
+  input{
+    border: 0;
+    -webkit-appearance: none;
+    padding: 16px;
+    width: 100%;
+  }
+}
+
 .m-ionic-discovery--tile{
   width: calc(100vw / 3);
   height: calc(100vw / 3);
@@ -21,5 +46,46 @@
 
     -webkit-transition: background-image 1s ease-in;
             transition: background-image 1s ease-in;
+  }
+}
+
+.m-ionic-discovery--card{
+  display: flex;
+  align-items: center;
+  padding:4px;
+
+  .m-ionic-discovery--card-avatar{
+    padding:8px;
+    img{
+      width:75px;
+      height:75px;
+      border-radius:50%;
+    }
+  }
+  .m-ionic-discovery--card-body{
+    padding:8px;
+
+    h3{
+      padding:0;
+      margin:0;
+      font-size: 18px;
+      letter-spacing: 1px;
+    }
+
+    .m-ionic-discovery--card-body-stats{
+      display:flex;
+      flex-align:column;
+
+      .m-ionic-discovery--card-body-stat{
+        padding: 4px 8px 0 0;
+        font-size: 12px;
+        letter-spacing: 0.5px;
+
+        label{
+          font-weight: 500;
+        }
+      }
+
+    }
   }
 }

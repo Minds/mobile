@@ -5,7 +5,7 @@ import { Storage } from '../../../common/services/storage';
 import { Client } from '../../../common/services/api/client';
 import { ChannelComponent } from '../../channel/channel.component';
 import { BoostComponent } from '../boost/boost.component';
-
+import { BlogView } from '../../blog/view.component';
 
 @Component({
   moduleId: 'module.id',
@@ -48,10 +48,16 @@ export class Activity {
   }
 
   openInBrowser(url){
+    if(url.indexOf('minds.com/blog/view') > -1){
+      let parts = url.split('/');
+      this.modalCtrl.create(BlogView, { guid: parts[parts.length-1]})
+        .present();
+      return;
+    }
     (<any>window).open(url, "_system");
   }
 
-  @HostListener('press', ['$event'])
+  //@HostListener('press', ['$event'])
   openSettings(e){
     let buttons = [];
 

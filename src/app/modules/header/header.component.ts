@@ -12,13 +12,11 @@ import { ChannelComponent } from '../channel/channel.component';
 
 export class HeaderComponent {
 
-  storage = new Storage();
-
   components = {
     channel : ChannelComponent
   }
 
-  constructor(){
+  constructor(private storage : Storage){
   }
 
 }

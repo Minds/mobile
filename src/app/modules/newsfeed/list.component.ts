@@ -29,12 +29,15 @@ export class NewsfeedList {
     this.loadList();
   }
 
-  loadList(){
+  loadList(refresh : boolean = false){
     return new Promise((res, err) => {
       this.inProgress = true;
       this.client.get('api/v1/newsfeed', { limit: 12, offset: this.offset})
         .then((response : any) => {
-          //console.log(response);
+
+          if(refresh)
+            this.feed = [];
+
           for(let activity of response.activity){
             this.feed.push(activity);
           }
@@ -48,12 +51,12 @@ export class NewsfeedList {
   }
 
   refresh(puller){
-    puller.complete();
     this.offset = "";
-    this.feed = [];
-    this.loadList()
+    this.loadList(true)
       .then(() => {
         puller.complete();
+        this.cd.markForCheck();
+        this.cd.detectChanges();
       });
   }
 

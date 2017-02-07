@@ -1,0 +1,12 @@
+
+<ion-list>
+  <ion-item-group>
+    <button ion-item (click)="setFilter('trending')">Trending</button>
+    <button ion-item (click)="setFilter('featured')">Featured</button>
+  </ion-item-group>
+  <ion-item-group>
+    <button ion-item (click)="setType('object/video')">Videos</button>
+    <button ion-item (click)="setType('object/image')">Images</button>
+    <button ion-item (click)="setType('user')">Channels</button>
+  </ion-item-group>
+</ion-list>

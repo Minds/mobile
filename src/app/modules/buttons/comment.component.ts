@@ -12,7 +12,7 @@ import { CommentsList } from '../comments/list.component';
   template: `
     <div [navPush]="components.comments" [navParams]="{ guid: entity.entity_guid ? entity.entity_guid : entity.guid }">
       <ion-icon name="md-chatbubbles" class="m-ionic-icon" [class.selected]="entity['comments:count'] > 0" ></ion-icon>
-      <span *ngIf="entity['comments:count'] > 0">{{entity['comments:count']}}</span>
+      <span class="m-ionic-icon--counter" *ngIf="entity['comments:count'] > 0">({{entity['comments:count']}})</span>
     </div>
   `,
   //styleUrls: ['buttons.css']

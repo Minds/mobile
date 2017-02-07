@@ -21,6 +21,8 @@ export class BlogView {
   @Input() guid : string;
   blog = {};
 
+  loader;
+
   constructor(private client : Client, private params : NavParams, private viewCtrl : ViewController,
     private loadingCtrl : LoadingController, private storage : Storage, private cd : ChangeDetectorRef){
 
@@ -28,20 +30,36 @@ export class BlogView {
 
   ngOnInit(){
     this.guid = this.params.get('guid');
+    this.loader = this.loadingCtrl.create({
+      content: "Please wait...",
+    });
     this.load();
   }
 
   load(){
+    setTimeout(() => {
+      this.loader.present();
+    }, 100);
     this.client.get('api/v1/blog/' + this.guid)
       .then((response : any) => {
         this.blog = response.blog;
+        this.loader.dismiss();
         this.cd.detectChanges();
         this.cd.markForCheck();
-      });
+      })
+      .catch(() => {
+        this.dismiss();
+      })
   }
 
   dismiss(){
     this.viewCtrl.dismiss();
+  }
+
+  ngOnDestroy(){
+    if(this.loader){
+      this.loader.dismiss();
+    }
   }
 
 }

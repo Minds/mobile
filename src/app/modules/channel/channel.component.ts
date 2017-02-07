@@ -1,6 +1,9 @@
 import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { NavParams } from 'ionic-angular';
+import { NavParams, LoadingController } from 'ionic-angular';
+import { Camera } from 'ionic-native';
+
 import { Client } from '../../common/services/api/client';
+import { Upload } from '../../common/services/api/upload';
 import { CacheService } from '../../common/services/cache/cache.service';
 import { Storage } from '../../common/services/storage';
 
@@ -23,8 +26,8 @@ export class ChannelComponent {
     avatar: false
   };
 
-  constructor(private client : Client, private params: NavParams, private cache : CacheService,
-    private cd: ChangeDetectorRef, private storage : Storage){
+  constructor(private client : Client, private upload : Upload, private params: NavParams, private cache : CacheService,
+    private cd: ChangeDetectorRef, private loadingCtrl : LoadingController, private storage : Storage){
     //if(applicationModule.android)
     //  page.actionBarHidden = true;
   }
@@ -73,6 +76,37 @@ export class ChannelComponent {
   save(data : any){
     this.client.post('api/v1/channel/' + this.guid, data)
       .then(() => {});
+  }
+
+  changeAvatar(){
+    //can change?
+    if(this.channel.guid != this.storage.get('user_guid'))
+      return;
+
+    Camera.getPicture({
+        correctOrientation: true,
+        destinationType: Camera.DestinationType.FILE_URI,
+        sourceType: 0,
+        mediaType: 2
+      })
+      .then((data) => {
+        let loader = this.loadingCtrl.create({
+          content: "Please wait...",
+        });
+        loader.present();
+
+        this.upload.post('api/v1/channel/avatar', [ data ])
+          .then((response : any) => {
+            loader.dismiss();
+            this.channel.icontime = Date.now();
+            this.cd.markForCheck();
+            this.cd.detectChanges();
+          })
+          .catch((exception)=>{
+            loader.dismiss();
+          });
+      }, (err) => { });
+
   }
 
   refresh(){

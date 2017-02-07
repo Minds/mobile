@@ -18,17 +18,15 @@
          >
      </div>
 
-    <img
-      class="m-ionic-channel--avatar"
-      [src]="'https://www.minds.com/icon/' + channel.guid + '/large'"
-      width="150px"
-      height="150px"
-      imgFade
+     <div class="m-ionic-channel--avatar"
+      [style.background-image]="'url(https://www.minds.com/icon/' + channel.guid + '/large/' + channel.icontime + ')'"
+      (click)="changeAvatar()"
       >
+     </div>
 
     <div class="m-ionic-channel--name" [class.editing]="editing.name">
       <h1 [attr.contentEditable]="editing.name" [(contenteditableModel)]="channel.name">  {{channel.name}} </h1>
-      <ion-icon name="create" *ngIf="!editing.name && channel.guid == this.storage.get('user_guid')" (click)="editing.name = true"></ion-icon>
+      <ion-icon name="create" *ngIf="!editing.name && channel.guid == this.storage.get('user_guid')" (click)="editing.name = true; cd.markForCheck(); cd.detectChanges();"></ion-icon>
       <ion-icon name="checkmark-circle" *ngIf="editing.name" (click)="editing.name = false; save({name: channel.name})"></ion-icon>
     </div>
 
@@ -55,7 +53,7 @@
 
   <channel-feed [channel]="channel" #feed [loadMore]="feed.scroller"></channel-feed>
 
-  <ion-infinite-scroll (ionInfinite)="feed.scroller = $event">
+  <ion-infinite-scroll (ionInfinite)="feed.scroller = $event; $event.complete();">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 

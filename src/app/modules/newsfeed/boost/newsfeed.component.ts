@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef, HostListener } from '@angular/core';
-import { ModalController, NavParams, ViewController } from 'ionic-angular'
+import { ModalController, NavParams, ViewController, LoadingController } from 'ionic-angular'
 import { CacheService } from '../../../common/services/cache/cache.service';
 import { Storage } from '../../../common/services/storage';
 import { Client } from '../../../common/services/api/client';
@@ -34,11 +34,16 @@ export class NewsfeedBoostComponent {
     cap: 5000
   }
 
+  loader;
   inProgress : boolean = false;
 
   constructor(public client : Client, public modalCtrl: ModalController, private params : NavParams,
-    private viewCtrl : ViewController, private cd : ChangeDetectorRef, private storage : Storage){
+    private viewCtrl : ViewController, private loadingCtrl : LoadingController, private cd : ChangeDetectorRef,
+    private storage : Storage){
 
+    this.loader = this.loadingCtrl.create({
+      content: "Please wait...",
+    });
   }
 
   ngOnInit(){
@@ -56,15 +61,17 @@ export class NewsfeedBoostComponent {
 
   boost() {
 
-    if(this.inProgress)
-      return;
+    //if(this.inProgress)
+    //  return;
 
     this.inProgress = true;
+    this.loader.present();
 
     if (this.data.points % 1 !== 0) {
       this.data.points = Math.round(this.data.points);
       this.showError('Sorry, you must enter a whole point.');
       this.inProgress = false;
+      this.loader.dismiss();
       return false;
     }
 
@@ -72,17 +79,20 @@ export class NewsfeedBoostComponent {
       this.data.points = 1;
       this.showError('Sorry, you must enter a whole point.');
       this.inProgress = false;
+      this.loader.dismiss();
       return false;
     }
 
     if (this.data.impressions === 0 || Math.round(this.data.impressions) === 0) {
       this.showError('Sorry, you must have at least 1 impression.');
       this.inProgress = false;
+      this.loader.dismiss();
       return false;
     }
 
     if (!this.checkBalance()){
       this.inProgress = false;
+      this.loader.dismiss();
       return false;
     }
 
@@ -94,11 +104,13 @@ export class NewsfeedBoostComponent {
       })
       .then((success : any) => {
         this.inProgress = false;
+        this.loader.dismiss();
         this.dismiss();
       })
       .catch((e) => {
         this.showError((e && e.message) || 'Sorry, something went wrong.');
         this.inProgress = false;
+        this.loader.dismiss();
       });
 
   }

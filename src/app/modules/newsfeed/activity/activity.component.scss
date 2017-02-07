@@ -11,6 +11,16 @@
     padding:8px;
   }
 
+  .m-ionic-body{
+    flex:1;
+  }
+
+  .m-ionic-actions ion-icon{
+    font-size: 28px;
+    padding: 0 8px;
+    color: #AAA;
+  }
+
   img{
     display:block;
   }
@@ -55,6 +65,14 @@
 .m-ionic-message{
   padding:8px;
   //font-size:11px;
+
+  span {
+    line-height: 18px;
+    font-size: 14px;
+    letter-spacing: 0.3px;
+    word-break: inherit;
+    white-space: pre-wrap;
+  }
 }
 
 .m-ionic-editable-container{
@@ -84,9 +102,9 @@
 }
 
 .m-ionic-boosted-tag{
-  right: 0;
+  right: 32px;
   position: absolute;
-  padding: 22px 8px 0;
+  padding: 26px 0 0;
   text-transform: uppercase;
   line-height: 1;
   font-size:10px;

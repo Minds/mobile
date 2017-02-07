@@ -5,6 +5,10 @@
   width:100%;
   height:175px;
   overflow:hidden;
+  position:absolute;
+  top:0;
+  left:0;
+  z-index:-1;
 }
 
 .m-ionic-channel--header{
@@ -12,8 +16,14 @@
   text-align:center;
 
   .m-ionic-channel--avatar{
-    border-radius:50%;
-    margin-top:-75px;
+    border-radius: 50%;
+    margin-top: 100px;;
+    width: 150px;
+    height: 150px;
+    background-size: cover;
+    background-position: center center;
+    display: inline-block;
+    z-index:1;
   }
 
   .m-ionic-channel--name{

@@ -4,20 +4,52 @@
 
 <ion-content>
 
-  <ion-refresher (ionRefresh)="refresh($event)">
+  <ion-refresher (ionRefresh)="refresh($event)" *ngIf="!q.value">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-list style="line-height:0;">
+  <div class="m-ionic-discovery--search">
+    <ion-icon name="md-search"></ion-icon>
+    <input type="text" placeholder="Search..." #q (keyup)="service.search(q.value)"/>
+    <ion-icon name="md-options" (click)="openOptions()" [hidden]="q.value"></ion-icon>
+  </div>
 
-    <div *ngFor="let entity of feed" class="m-ionic-discovery--tile">
+  <ion-list style="line-height:0;padding-top:56px;" *ngIf="service.type != 'user' && !q.value">
+
+    <div *ngFor="let entity of service.entities" class="m-ionic-discovery--tile">
   	    <img [src]="'https://edge.minds.com/api/v1/archive/thumbnails/' + entity.guid + '/medium'" (click)="openImage(entity)"/>
     </div>
 
 	</ion-list>
 
+  <ion-list style="line-height:0;" *ngIf="service.type == 'user' || q.value">
 
-  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+    <div *ngFor="let entity of service.entities"
+      [navPush]="components.channel"
+      [navParams]="{ guid: entity.guid }"
+      class="m-ionic-discovery--card">
+  	  <div class="m-ionic-discovery--card-avatar">
+        <img [src]="'https://www.minds.com/icon/' + entity.guid + '/medium/' + entity.icontime"/>
+      </div>
+      <div class="m-ionic-discovery--card-body">
+        <h3>{{entity.name}}</h3>
+        <!--<div class="m-ionic-discovery--card-body-stats">
+          <div class="m-ionic-discovery--card-body-stat">
+            <label>Subscribers:</label>
+            <span>{{entity.subscribers_count}}</span>
+          </div>
+          <div class="m-ionic-discovery--card-body-stat">
+            <label>Views:</label>
+            <span>{{entity.impressions}}</span>
+          </div>
+        </div>-->
+      </div>
+    </div>
+
+	</ion-list>
+
+
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)" *ngIf="!q.value">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 

@@ -1,5 +1,9 @@
 $tabbar-md-background: #37474f;
 
+ion-navbar.toolbar.toolbar-ios.statusbar-padding{
+  min-height: 64px;
+  padding-top: 24px;
+}
 
 img{
 

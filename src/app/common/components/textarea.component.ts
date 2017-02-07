@@ -27,6 +27,8 @@ export class TextareaComponent implements OnChanges {
   @Input('mModel') model : string = '';
   @Output('mModelChange') update : EventEmitter<any> = new EventEmitter();
 
+  @Input() disableBlur : boolean = false;
+
   disabled : boolean = false;
 
 
@@ -34,12 +36,21 @@ export class TextareaComponent implements OnChanges {
 
   }
 
+  @Input('autofocus') set autofocus(value : boolean){
+    //alert('autofocusing');
+    //if(value)
+    setTimeout(() => {
+      this.editorControl.nativeElement.focus();
+    }, 300);
+  }
+
   focus() {
     this.editorControl.nativeElement.focus();
   }
 
   blur() {
-    this.editorControl.nativeElement.blur();
+    if(!this.disableBlur)
+      this.editorControl.nativeElement.blur();
   }
 
   change() {

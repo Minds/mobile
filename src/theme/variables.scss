@@ -24,7 +24,7 @@ $font-path: "../assets/fonts";
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #333,
+  primary:    #4690D6,
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
@@ -59,6 +59,14 @@ $colors: (
 // then be future customized. This import comes last
 // so that the above variables are used and Ionic's
 // default are overridden.
+
+$background-ios-color: #fff;
+$background-md-color: #fff;
+$background-wp-color: #fff;
+
+$tabs-ios-tab-color-active: #333;
+$tabs-md-tab-color-active: #333;
+$tabs-wp-tab-color-active: #333;
 
 @import "ionic.theme.default";
 

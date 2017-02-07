@@ -1,4 +1,4 @@
-<ion-menu [content]="content">
+<ion-menu [content]="content" side="right">
   <ion-header>
     <ion-toolbar>
       <ion-title></ion-title>
@@ -6,6 +6,9 @@
   </ion-header>
   <ion-content>
     <ion-list>
+      <button ion-item (click)="openBugGroup()">
+        Support & Bugs Groups
+      </button>
       <button ion-item (click)="logout()">
         Logout
       </button>
@@ -13,4 +16,4 @@
   </ion-content>
 </ion-menu>
 
-<ion-nav [root]="rootPage" #content swipeBackEnabled="true"></ion-nav>
+<ion-nav [root]="rootPage" #content></ion-nav>

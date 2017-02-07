@@ -6,12 +6,8 @@ import { Storage } from '../storage';
 @Injectable()
 export class Client {
 	base : string = "https://edge.minds.com/";
-  oauth2;
 
-  storage = new Storage();
-
-	constructor(public http : Http){
-    this.oauth2 = new OAuth2(http);
+	constructor(public http : Http, private storage : Storage, private oauth2 : OAuth2){
 	}
 
 	private buildParams(object : Object){

@@ -2,18 +2,17 @@ import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 
 import { Storage } from '../storage';
-import { OAUTH2 } from '../../../../../config/config';
+//import { OAUTH2 } from '../../../../../config/config';
 
 @Injectable()
 export class OAuth2{
 
-  client_id = OAUTH2.client_id;
-  client_secret = OAUTH2.client_secret;
+  client_id = "";
+  client_secret = "";
   access_token;
   timestamp = 0;
-  storage = new Storage();
 
-  constructor(public http : Http){
+  constructor(public http : Http, private storage : Storage){
   }
 
   buildParams(params) {

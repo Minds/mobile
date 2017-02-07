@@ -50,9 +50,9 @@
     <img [src]="'https://www.minds.com/icon/' +  storage.get('user_guid') + '/medium'" class="mdl-shadow--2dp"/>
   </div>
   <div class="m-ionic-body">
-    <m-textarea placeholder="Type your message..." [(mModel)]="message"></m-textarea>
+    <m-textarea placeholder="Type your message..." [(mModel)]="message" [disableBlur]="true"></m-textarea>
   </div>
   <div class="m-ionic-messenger--actions" *ngIf="message">
-    <ion-icon name="md-send" (click)="send($event)"></ion-icon>
+    <ion-icon name="md-send" (mousedown)="send($event)"></ion-icon>
   </div>
 </div>

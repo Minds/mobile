@@ -95,7 +95,13 @@ export class MessengerView {
       time_created: Date.now()
     });
 
+    this.cd.markForCheck();
+    this.cd.detectChanges();
+
     this.scrollArea.scrollToBottom();
+    setTimeout(() => {
+      this.scrollArea.scrollToBottom();
+    }, 300);
 
     let encrypted = {};
 

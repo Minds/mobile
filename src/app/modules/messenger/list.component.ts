@@ -22,20 +22,20 @@ export class MessengerList {
   offset : string = "";
   inProgress : boolean = true;
 
-  storage = new Storage();
-
   components = {
     view: MessengerView,
     channel: ChannelComponent
   }
 
-  constructor(private client : Client, private cd : ChangeDetectorRef, private nav : NavController){}
+  constructor(private client : Client, private cd : ChangeDetectorRef, private nav : NavController,
+    private storage : Storage){
+
+  }
 
   ngOnInit(){
     if(!this.storage.get('private-key')){
-      return this.nav.push(MessengerSetup);
+      return this.nav.setRoot(MessengerSetup);
     }
-
     this.loadList();
   }
 

@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { Content, NavParams } from 'ionic-angular';
+import { Keyboard } from 'ionic-native';
 
 import { ChannelComponent } from '../channel/channel.component';
 import { Client } from '../../common/services/api/client';
@@ -31,10 +32,8 @@ export class MessengerView {
     channel: ChannelComponent
   }
 
-  storage = new Storage();
-
   constructor(private client : Client, private cd : ChangeDetectorRef, private params: NavParams,
-    private service : MessengerViewService){}
+    private service : MessengerViewService, private storage : Storage){}
 
   ngOnInit(){
     this.conversation = this.params.get('conversation');
@@ -83,8 +82,21 @@ export class MessengerView {
     this.load();
   }
 
-  send(){
-    console.log('waiting to send');
+  send(e){
+    e.preventDefault();
+
+    this.messages.push({
+      guid: '',
+      message: this.message,
+      decrypted: true,
+      owner: {
+        guid: this.storage.get('user_guid')
+      },
+      time_created: Date.now()
+    });
+
+    this.scrollArea.scrollToBottom();
+
     let encrypted = {};
 
     let encrypt = new Promise((resolve, reject) => {
@@ -98,18 +110,6 @@ export class MessengerView {
           encrypted[guid] = success;
           if(Object.keys(encrypted).length == Object.keys(this.service.publickeys).length){
             resolve(true);
-          }
-
-          if(guid == this.storage.get('user_guid')){
-            this.messages.push({
-              guid: '',
-              message: success,
-              owner: {
-                guid: guid
-              },
-              time_created: Date.now()
-            });
-            this.scrollArea.scrollToBottom();
           }
         });
       }

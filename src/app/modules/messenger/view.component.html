@@ -27,7 +27,10 @@
         *ngIf="message.owner.guid == storage.get('user_guid')">
 
       <div class="m-ionic-messenger--message-bubble">
-        <m-decrypt [message]="message.message" allow-text-select></m-decrypt>
+        <m-decrypt [message]="message.message" allow-text-select *ngIf="!message.decrypted"></m-decrypt>
+        <div allow-text-select *ngIf="message.decrypted">
+          {{message.message}}
+        </div>
       </div>
 
 
@@ -50,6 +53,6 @@
     <m-textarea placeholder="Type your message..." [(mModel)]="message"></m-textarea>
   </div>
   <div class="m-ionic-messenger--actions" *ngIf="message">
-    <ion-icon name="md-send" (click)="send()"></ion-icon>
+    <ion-icon name="md-send" (click)="send($event)"></ion-icon>
   </div>
 </div>

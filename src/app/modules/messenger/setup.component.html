@@ -4,13 +4,28 @@
 
 <ion-content>
 
-  <div class="m-ionic-messenger--setup-fields">
+  <div class="m-ionic-messenger--setup-fields" *ngIf="this.configured">
     <div class="m-ionic-messenger--setup-field">
       <input type="password" placeholder="Password" #password />
     </div>
 
     <div class="m-ionic-messenger--setup-field">
       <button ion-button (click)="unlock(password)">Unlock</button>
+    </div>
+
+  </div>
+
+  <div class="m-ionic-messenger--setup-fields" *ngIf="!this.configured">
+    <div class="m-ionic-messenger--setup-field">
+      <input type="password" placeholder="Password" #password />
+    </div>
+
+    <div class="m-ionic-messenger--setup-field">
+      <input type="password" placeholder="Confirm password" #password2 />
+    </div>
+
+    <div class="m-ionic-messenger--setup-field">
+      <button ion-button (click)="setup(password, password2)">Setup</button>
     </div>
 
   </div>

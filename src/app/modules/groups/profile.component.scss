@@ -24,6 +24,7 @@
       display: inline-block;
       vertical-align: middle;
       margin: 0;
+      margin-bottom: 3px;
       padding: 4px 16px;
     }
 
@@ -34,6 +35,14 @@
     ion-icon{
       vertical-align: middle;
       color: #888;
+    }
+
+    span{
+      text-transform: uppercase;
+      vertical-align: middle;
+      letter-spacing: 1px;
+      color: #888;
+      font-size: 11px;
     }
 
   }

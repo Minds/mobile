@@ -33,6 +33,7 @@ import { routes } from "./app.routes";
           tabsPlacement: 'bottom'
         },
         ios: {
+          swipeBackEnabled: true,
           statusbarPadding: true
         }
       }

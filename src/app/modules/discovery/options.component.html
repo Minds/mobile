@@ -1,12 +1,27 @@
 
 <ion-list>
   <ion-item-group>
-    <button ion-item (click)="setFilter('trending')">Trending</button>
-    <button ion-item (click)="setFilter('featured')">Featured</button>
+    <ion-item>
+      <ion-label>Trending</ion-label>
+      <ion-radio [checked]="service.filter=='trending'" (ionSelect)="setFilter('trending')"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>Featured</ion-label>
+      <ion-radio [checked]="service.filter=='featured'" (ionSelect)="setFilter('featured')"></ion-radio>
+    </ion-item>
   </ion-item-group>
   <ion-item-group>
-    <button ion-item (click)="setType('object/video')">Videos</button>
-    <button ion-item (click)="setType('object/image')">Images</button>
-    <button ion-item (click)="setType('user')">Channels</button>
+    <ion-item>
+      <ion-label>Videos</ion-label>
+      <ion-radio [checked]="service.type=='object/video'" (ionSelect)="setType('object/video')"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>Images</ion-label>
+      <ion-radio [checked]="service.type=='object/image'" (ionSelect)="setType('object/image')"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>Channels</ion-label>
+      <ion-radio [checked]="service.type=='user'" (ionSelect)="setType('user')"></ion-radio>
+    </ion-item>
   </ion-item-group>
 </ion-list>

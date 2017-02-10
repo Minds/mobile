@@ -2,11 +2,11 @@
   <m-header></m-header>
 </ion-header>
 
-<ion-content>
+<ion-content #scrollArea>
 
   <newsfeed-poster (prepend)="feed.unshift($event)"></newsfeed-poster>
 
-  <ion-refresher (ionRefresh)="refresh($event)">
+  <ion-refresher (ionRefresh)="refresh($event)" #refresher>
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 

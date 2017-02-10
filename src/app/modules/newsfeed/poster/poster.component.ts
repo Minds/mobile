@@ -5,6 +5,7 @@ import { Client } from '../../../common/services/api/client';
 import { ChannelComponent } from '../../channel/channel.component';
 import { Storage } from '../../../common/services/storage';
 import { AttachmentService } from '../../attachments/attachment.service';
+import { WalletService } from '../../wallet/wallet.service';
 
 @Component({
   moduleId: 'module.id',
@@ -38,7 +39,7 @@ export class PosterComponent {
   storage = new Storage();
 
   constructor(public client : Client, public actionSheetCtrl: ActionSheetController, public attachment : AttachmentService, private loadingCtrl : LoadingController,
-    private cd : ChangeDetectorRef){
+    private wallet : WalletService, private cd : ChangeDetectorRef){
 
   }
 
@@ -94,6 +95,12 @@ export class PosterComponent {
 
     this.client.post('api/v1/newsfeed', this.meta)
       .then((response : any) => {
+        if(this.meta.attachment_guid){
+          this.wallet.increment(10);
+        } else {
+          this.wallet.increment(1);
+        }
+
         this.meta.attachment_guid = "";
         this.meta.message = "";
         this.progress = 0;

@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef, HostListener } from '@angular/core';
-import { ModalController, NavParams, ViewController, LoadingController } from 'ionic-angular'
+import { ModalController, NavParams, NavController, ViewController, LoadingController } from 'ionic-angular'
 import { Client } from '../../common/services/api/client';
 import { CacheService } from '../../common/services/cache/cache.service';
 import { Storage } from '../../common/services/storage';
 
 import { WalletService } from './wallet.service';
+import { PurchaseComponent } from './purchase.component';
 
 
 @Component({
@@ -22,6 +23,10 @@ export class WalletComponent {
     cdn_url: 'https://edge.minds.com/'
   }
 
+  components : {
+    purchase : PurchaseComponent
+  }
+
   inProgress : boolean = false;
   transactions : Array<any> = [];
   limit : number = 12;
@@ -30,8 +35,8 @@ export class WalletComponent {
   points : number = 0;
 
   constructor(public client : Client, public modalCtrl: ModalController, private params : NavParams,
-    private viewCtrl : ViewController, private loadingCtrl : LoadingController, private cd : ChangeDetectorRef,
-    private storage : Storage, private service : WalletService){
+    private viewCtrl : ViewController, private loadingCtrl : LoadingController, private navCtrl : NavController,
+    private cd : ChangeDetectorRef, private storage : Storage, private service : WalletService){
 
   }
 
@@ -77,6 +82,10 @@ export class WalletComponent {
         this.cd.markForCheck();
         this.cd.detectChanges();
       });
+  }
+
+  purchasePoints(){
+    this.navCtrl.push(PurchaseComponent);
   }
 
   ngOnDestroy(){

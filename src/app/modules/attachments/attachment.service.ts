@@ -8,6 +8,8 @@ export class AttachmentService{
 
   meta :any = {
   }
+  previewUri : string = "";
+  previewDataUri : string = "";
 
   emitter = new EventEmitter();
   progress : number = 0;
@@ -16,7 +18,6 @@ export class AttachmentService{
   }
 
   takePicture(){
-
     MediaCapture.captureImage({
         limit: 1,
         //correctOrientation: true,
@@ -27,6 +28,7 @@ export class AttachmentService{
       })
       .then((data : MediaFile[]) => {
           this.upload(data[0].fullPath, 'image');
+          this.previewUri = data[0].fullPath;
   			},
         (err) => {
   				console.log('capture failed');
@@ -55,6 +57,7 @@ export class AttachmentService{
         mediaType: 2
       })
       .then((data) => {
+        this.previewUri = data;
         this.upload(data, '');
       }, (err) => {
 
@@ -78,6 +81,9 @@ export class AttachmentService{
 
   reset(){
     this.meta = {};
+    this.previewUri = '';
+    this.progress = 0;
+    this.emitter.next({ progress: 0, guid: '' });
   }
 
 

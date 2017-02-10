@@ -35,7 +35,7 @@ export class NotificationsList {
   constructor(private client : Client, private loadingCtrl : LoadingController, private cd : ChangeDetectorRef,
     private service : NotificationService){}
 
-  ngOnInit(){
+  ionViewDidEnter(){
     this.loader.present();
     this.loadList();
   }

@@ -405,3 +405,11 @@
   <span class="ts mdl-color-text--grey">{{ entity.time_created * 1000 | date : 'medium' }}</span>
 
 </div>
+
+<div class="m-ionic-notifications--card-actions">
+  <ion-icon name="person-add"
+    *ngIf="entity.fromObj.guid != storage.get('user_guid') && !entity.fromObj.subscribed"
+    [class.selected]="entity.fromObj.subscribed"
+    (click)="subscribe()"
+    ></ion-icon>
+</div>

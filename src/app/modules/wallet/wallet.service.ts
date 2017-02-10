@@ -1,12 +1,15 @@
 import { Client } from '../../common/services/api/client';
-import { EventEmitter } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
+import { App } from 'ionic-angular'
+
+import { PopController } from './pop/pop';
 
 export class WalletService{
 
   emitter : EventEmitter<any> = new EventEmitter();
   points : number;
 
-  constructor(private client : Client){
+  constructor(private client : Client, private popCtrl : PopController){
     //this.getCount();
   }
 
@@ -37,7 +40,12 @@ export class WalletService{
     });
   }
 
+  playAnimation(points : number){
+    this.popCtrl.create({text: '+' + points}).present();
+  }
+
   increment(points : number){
+    this.playAnimation(points);
     this.points += points;
     this.emitter.next(this.points);
   }
@@ -47,8 +55,8 @@ export class WalletService{
     this.emitter.next(this.points);
   }
 
-  static _(client : Client){
-    return new WalletService(client);
+  static _(client : Client, popCtrl : PopController){
+    return new WalletService(client, popCtrl);
   }
 
 }

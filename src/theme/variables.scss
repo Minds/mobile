@@ -68,6 +68,9 @@ $tabs-ios-tab-color-active: #333;
 $tabs-md-tab-color-active: #333;
 $tabs-wp-tab-color-active: #333;
 
+$toolbar-md-button-color: #FFF;
+$toolbar-ios-button-color: #FFF;
+
 @import "ionic.theme.default";
 
 
@@ -76,7 +79,7 @@ $tabs-wp-tab-color-active: #333;
 // The premium icon font for Ionic. For more info, please see:
 // http://ionicframework.com/docs/v2/ionicons/
 
-@import "ionicons";
+@import "ionic.ionicons";
 
 
 // Fonts

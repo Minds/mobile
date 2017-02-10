@@ -4,6 +4,7 @@ import { ViewController, LoadingController, ToastController, ModalController } f
 import { Client } from '../../common/services/api/client';
 import { Storage } from '../../common/services/storage';
 import { AttachmentService } from '../attachments/attachment.service';
+import { WalletService } from '../wallet/wallet.service';
 import { BoostComponent } from '../newsfeed/boost/boost.component';
 
 @Component({
@@ -28,7 +29,8 @@ export class CaptureComponent {
   }
 
   constructor(private client : Client, private viewCtrl : ViewController, public attachment : AttachmentService, private loadingCtrl : LoadingController,
-    private toastCtrl: ToastController, private modalCtrl : ModalController, private storage : Storage, private cd : ChangeDetectorRef){
+    private toastCtrl: ToastController, private modalCtrl : ModalController, private storage : Storage, private cd : ChangeDetectorRef,
+    private wallet : WalletService){
 
   }
 
@@ -61,6 +63,12 @@ export class CaptureComponent {
 
     this.client.post('api/v1/newsfeed', this.meta)
       .then((response : any) => {
+        if(this.meta.attachment_guid){
+          this.wallet.increment(10);
+        } else {
+          this.wallet.increment(1);
+        }
+
         this.meta.attachment_guid = "";
         this.meta.message = "";
         this.progress = 0;

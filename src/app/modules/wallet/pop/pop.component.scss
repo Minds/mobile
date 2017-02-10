@@ -1,0 +1,82 @@
+wallet-pop{
+  display: block;
+  position: fixed;
+  width: 46px;
+  height: 46px;
+  top: 5px;
+  right: 5px;
+  //animation-name: vanishIn;
+  animation-name: foolishIn;
+  animation-duration: 1s;
+}
+
+.m-ionic-pop{
+  width: 46px;
+  height: 46px;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 6px;
+  color: #FFF;
+  text-align: center;
+  opacity: 1;
+  background: #4690D6;
+  border: 2px solid #4690D6;
+  border-radius: 50%;
+  vertical-align: middle;
+  line-height: 44px;
+}
+
+
+@keyframes vanishIn {
+  0% {
+    opacity: 0;
+    transform-origin: 50% 50%;
+    transform: scale(2, 2);
+    filter: blur(90px);
+  }
+
+  100% {
+    opacity: 1;
+    transform-origin: 50% 50%;
+    transform: scale(1, 1);
+    filter: blur(0px);
+  }
+}
+
+@keyframes foolishIn {
+  0% {
+    opacity: 0;
+    transform-origin: 50% 50%;
+    transform: scale(0, 0) rotate(360deg);
+  }
+
+  20% {
+    opacity: 1;
+    transform-origin: 0% 100%;
+    transform: scale(0.5, 0.5) rotate(0deg);
+  }
+
+  40% {
+    opacity: 1;
+    transform-origin: 100% 100%;
+    transform: scale(0.5, 0.5) rotate(0deg);
+  }
+
+  60% {
+    opacity: 1;
+    transform-origin: 0%;
+    transform: scale(0.5, 0.5) rotate(0deg);
+  }
+
+  80% {
+    opacity: 1;
+    transform-origin: 0% 0%;
+    transform: scale(0.5, 0.5) rotate(0deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform-origin: 50% 50%;
+    transform: scale(1, 1) rotate(0deg);
+  }
+}

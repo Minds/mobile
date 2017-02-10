@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { Content, Refresher } from 'ionic-angular';
 
 import { ChannelComponent } from '../channel/channel.component';
 import { Client } from '../../common/services/api/client';
@@ -14,6 +15,8 @@ import { Storage } from '../../common/services/storage';
 })
 
 export class NewsfeedList {
+
+  @ViewChild('scrollArea') scrollArea : Content;
 
   feed : Array<any> = [];
   offset : string = "";
@@ -66,5 +69,23 @@ export class NewsfeedList {
         e.complete();
       });
   }
+
+  @ViewChild('refresher') refresher : Refresher;
+  ionSelected(){
+    //this.refresher._beginRefresh();
+    //this.cd.markForCheck();
+    //this.cd.detectChanges();
+    this.scrollArea.scrollToTop(0);
+    this.offset = "";
+    this.loadList(true)
+      .then(() => {
+        this.cd.markForCheck();
+        this.cd.detectChanges();
+      });
+  }
+
+   ionViewDidEnter(){
+     console.log('view loaded');
+   }
 
 }

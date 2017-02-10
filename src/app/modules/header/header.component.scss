@@ -4,6 +4,25 @@ m-header{
   overflow: hidden;
 }
 
+.toolbar-background-md {
+  background: #37474f !important;
+}
+
+.toolbar-background-ios {
+  background: #37474f !important;
+}
+
+
+.m-ionic--vanity-avatar{
+  position: fixed;
+  top: 10px;
+  right: calc(50vw - 20px);
+  display: block;
+}
+
+.header-ios .m-ionic--vanity-avatar{
+  top: 20px;
+}
 
 .header-ios m-header{
   height:64px;

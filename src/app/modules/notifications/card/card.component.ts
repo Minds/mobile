@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy } from '@angular/core';
 import { CacheService } from '../../../common/services/cache/cache.service';
+import { Client } from '../../../common/services/api/client';
+import { Storage } from '../../../common/services/storage';
 
 import { ChannelComponent } from '../../channel/channel.component';
 import { NewsfeedSingleComponent } from '../../newsfeed/single.component';
-
 
 
 @Component({
@@ -28,7 +29,7 @@ export class NotificationCard {
     channel: ChannelComponent
   }
 
-  constructor(public cache : CacheService){
+  constructor(public cache : CacheService, private client : Client, public storage : Storage){
 
   }
 
@@ -39,6 +40,17 @@ export class NotificationCard {
 
   onLoaded(){
     console.log('fully loaded');
+  }
+
+  subscribe(){
+    this.entity.fromObj.subscribed = true;
+    this.client.post('api/v1/subscribe/' + this.entity.fromObj.guid, {})
+      .then((response : any) => {
+          this.entity.fromObj.subscribed = true;
+      })
+      .catch((e) => {
+        this.entity.fromObj.subscribed = false;
+      });
   }
 
 }

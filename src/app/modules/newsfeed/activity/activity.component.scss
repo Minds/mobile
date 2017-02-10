@@ -121,7 +121,7 @@
 
   > * {
     flex:1;
-    padding:8px 0;
+    padding:12px 0;
     color:#888;
     text-align:center;
   }
@@ -137,4 +137,15 @@
     height: 30px;
     vertical-align: middle;
   }
+}
+
+.m-ionic-activity--impressions {
+  position: absolute;
+  padding: 1px 4px;
+  font-size: 9px;
+  right: 0;
+  background: #EEE;
+  border-radius: 3px 0 0 3px;
+  margin: -5px 0;
+  letter-spacing: 0.5px;
 }

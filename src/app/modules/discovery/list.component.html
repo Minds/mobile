@@ -22,7 +22,7 @@
 
 	</ion-list>
 
-  <ion-list style="line-height:0;" *ngIf="service.type == 'user' || q.value">
+  <ion-list style="line-height:0;padding-top:56px;" *ngIf="service.type == 'user' || q.value">
 
     <div *ngFor="let entity of service.entities"
       [navPush]="components.channel"
@@ -33,7 +33,7 @@
       </div>
       <div class="m-ionic-discovery--card-body">
         <h3>{{entity.name}}</h3>
-        <!--<div class="m-ionic-discovery--card-body-stats">
+        <div class="m-ionic-discovery--card-body-stats">
           <div class="m-ionic-discovery--card-body-stat">
             <label>Subscribers:</label>
             <span>{{entity.subscribers_count}}</span>
@@ -42,7 +42,7 @@
             <label>Views:</label>
             <span>{{entity.impressions}}</span>
           </div>
-        </div>-->
+        </div>
       </div>
     </div>
 

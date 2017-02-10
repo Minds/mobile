@@ -19,6 +19,10 @@ img{
 
 }
 
+a{
+  text-decoration: none;
+}
+
 
 .m-ionic-avatar{
 
@@ -36,4 +40,16 @@ img{
 .m-ionic-body{
   padding-left:12px;
   a{ display:block }
+}
+
+.m-ionic-menu--footer {
+  bottom: 0;
+  position: absolute;
+  padding: 16px;
+  a {
+    text-decoration: none;
+    letter-spacing: 1px;
+    padding-right: 24px;
+    color: #888;
+  }
 }

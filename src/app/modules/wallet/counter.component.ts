@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from "@angular/core";
-import { ModalController } from 'ionic-angular';
+import { ModalController, NavController } from 'ionic-angular';
 
 import { WalletComponent } from './wallet.component';
 import { WalletService } from './wallet.service';
@@ -20,7 +20,8 @@ export class WalletCounterComponent {
   subscription;
   points : number;
 
-  constructor(public service : WalletService, private cd : ChangeDetectorRef, private modalCtrl : ModalController){
+  constructor(public service : WalletService, private cd : ChangeDetectorRef, private modalCtrl : ModalController,
+    private navCtrl : NavController){
   }
 
   ngOnInit(){
@@ -34,8 +35,9 @@ export class WalletCounterComponent {
   }
 
   open(e){
-    this.modalCtrl.create(WalletComponent)
-      .present();
+    this.navCtrl.push(WalletComponent);
+    //this.modalCtrl.create(WalletComponent)
+    //  .present();
   }
 
 }

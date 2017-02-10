@@ -65,7 +65,7 @@
 <div class="m-ionic-message m-mature-message" [hidden]="!entity.message || editing">
 
 	<span class="m-mature-message-content"
-	  [innerHtml]="entity.message"
+	  [innerHtml]="entity.message | tags"
 	  (click)="entity.mature && !entity.mature_visibility ? entity.mature_visibility = !entity.mature_visibility : null"
 		allow-text-select>
     </span>
@@ -93,7 +93,7 @@
   *ngIf="entity.perma_url && entity.title"
   (click)="openInBrowser(entity.perma_url)"
   >
-	<img [src]="entity.thumbnail_src" (error)="entity.thumbnail_src = null">
+	<img [src]="entity.thumbnail_src" (error)="entity.thumbnail_src = null" *ngIf="entity.thumbnail_src">
   <h3>{{entity.title}}</h3>
   <p>{{entity.perma_url | domain }}</p>
 </div>
@@ -119,7 +119,6 @@
     <video
       width="100%"
       height="300px"
-      autoplay="autoplay"
       loop="true"
       muted="true"
       style="background:#000;"
@@ -175,4 +174,8 @@
 		*ngIf="entity.owner_guid == storage.get('user_guid') || (entity.reminderOwnerObj  && entity.reminderOwnerObj.guid == storage.get('user_guid'))">
 		Boost
 	</button>
+</div>
+
+<div class="m-ionic-activity--impressions">
+	{{entity.impressions}} views
 </div>

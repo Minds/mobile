@@ -40,16 +40,16 @@ export class DiscoveryService {
         //  this.inProgress = false;
         //  return;
         //}
-        this.entities = [];
+        this.entities = response.suggestions;
 
-        for(let suggestion of response.suggestions){
+        /*for(let suggestion of response.suggestions){
           this.entities.push({
             guid: suggestion.payload.guid,
             username: suggestion.payload.username,
             name: '@' + suggestion.payload.name,
             icontime: Date.now()
           });
-        }
+        }*/
         this.emitter.next(this.entities);
         this.offset = response['load-next'];
         this.inProgress = false;

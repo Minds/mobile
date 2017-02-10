@@ -1,5 +1,5 @@
 import { Component, ViewChild } from "@angular/core";
-import { Nav, MenuController, Platform } from 'ionic-angular';
+import { Nav, MenuController, Platform, App } from 'ionic-angular';
 import { StatusBar } from 'ionic-native';
 
 import { TabsComponent } from "./modules/tabs/tabs.component";
@@ -19,17 +19,15 @@ import { OnboardingComponent } from './modules/onboarding/onboarding.component';
 
 export class MindsApp {
 
-  @ViewChild(Nav) nav: Nav;
-
   components = {
     group: GroupProfile
   };
 
   rootPage : any = LoginComponent;
 
-  constructor(private oauth2 : OAuth2, public menuCtrl: MenuController, private platform : Platform){
+  constructor(private oauth2 : OAuth2, public menuCtrl: MenuController, private platform : Platform, private app : App){
     platform.ready().then(() => {
-      StatusBar.backgroundColorByHexString('#333333');
+      StatusBar.backgroundColorByHexString('#37474f');
     });
     if(this.oauth2.hasAccessToken()){
       this.rootPage = TabsComponent;
@@ -42,13 +40,13 @@ export class MindsApp {
   }
 
   openBugGroup(){
-    this.nav.push(GroupProfile, {guid:'100000000000000681'});
+    this.app.getRootNav().push(GroupProfile, {guid:'100000000000000681'});
     this.menuCtrl.close();
   }
 
   logout(){
     (<any>window).localStorage.clear();
-    this.nav.push(LoginComponent);
+    this.app.getRootNav().push(LoginComponent);
     (<any>window).location.reload();
   }
 

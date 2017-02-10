@@ -49,4 +49,24 @@ export class GroupProfile {
       });
   }
 
+  join(){
+    this.group['is:member'] = true;
+    this.cd.markForCheck();
+    this.cd.detectChanges();
+    this.client.put('api/v1/groups/membership/' + this.guid)
+      .catch(() => {
+        this.group['is:member'] = false;
+      });
+  }
+
+  leave(){
+    this.group['is:member'] = false;
+    this.cd.markForCheck();
+    this.cd.detectChanges();
+    this.client.delete('api/v1/groups/membership/' + this.guid)
+      .catch(() => {
+        this.group['is:member'] = true;
+      });
+  }
+
 }

@@ -13,7 +13,15 @@
         Logout
       </button>
     </ion-list>
+
+    <div class="m-ionic-menu--footer">
+      <a href="https://www.minds.com/p/faq">FAQ</a>
+      <a href="https://www.minds.com/p/code">Code</a>
+      <a href="https://www.minds.com/p/terms">Terms</a>
+      <a href="https://www.minds.com/p/privacy">Privacy</a>
+    </div>
   </ion-content>
+
 </ion-menu>
 
-<ion-nav [root]="rootPage" #content></ion-nav>
+<ion-nav [root]="rootPage" #content swipeBackEnabled="true"></ion-nav>

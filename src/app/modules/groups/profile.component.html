@@ -30,6 +30,9 @@
       <h1 [attr.contentEditable]="editing.name" [(contenteditableModel)]="group.name">  {{group.name}} </h1>
       <ion-icon name="create" *ngIf="!editing.name && group.guid == this.storage.get('user_guid')" (click)="editing.name = true"></ion-icon>
       <ion-icon name="checkmark-circle" *ngIf="editing.name" (click)="editing.name = false; save({name: group.name})"></ion-icon>
+
+      <span *ngIf="group['is:member']" (click)="leave()">Leave</span>
+      <span *ngIf="!group['is:member']" (click)="join()">Join</span>
     </div>
 
   </div>

@@ -6,16 +6,7 @@
 
   <div class="m-ionic-channel--header" *ngIf="channel">
 
-    <div class="m-ionic-channel--header-banner">
-      <img
-          #banner
-         [src]="'https://www.minds.com/fs/v1/banners/' + channel.guid + '/fat/' + channel.icontime"
-         (error)="banner.hide = true"
-         width="100%"
-         [hidden]="banner.hide"
-         height="225px"
-         imgFade
-         >
+    <div class="m-ionic-channel--header-banner" [style.background-image]="'url(https://www.minds.com/fs/v1/banners/' + channel.guid + '/fat/' + channel.icontime + ')'">
      </div>
 
      <div class="m-ionic-channel--avatar"
@@ -28,10 +19,16 @@
       <h1 [attr.contentEditable]="editing.name" [(contenteditableModel)]="channel.name">  {{channel.name}} </h1>
       <ion-icon name="create" *ngIf="!editing.name && channel.guid == this.storage.get('user_guid')" (click)="editing.name = true; cd.markForCheck(); cd.detectChanges();"></ion-icon>
       <ion-icon name="checkmark-circle" *ngIf="editing.name" (click)="editing.name = false; save({name: channel.name})"></ion-icon>
+
+      <ion-icon name="person-add"
+        *ngIf="channel.guid != this.storage.get('user_guid')"
+        [class.selected]="channel.subscribed"
+        (click)="subscribe()"
+        ></ion-icon>
     </div>
 
     <div class="m-ionic-channel--stats">
-      <div class="m-ionic-channel--stats-stat" *ngIf="!channel.supporters_count && channel.activity_count">
+      <div class="m-ionic-channel--stats-stat" *ngIf="!channel.supporters_count && (channel.activity_count || channel.activity_count === 0)">
         <label>Feed</label>
         <span>{{channel.activity_count}}</span>
       </div>
@@ -49,9 +46,15 @@
       </div>
     </div>
 
+    <div class="m-ionic-channel--bio">
+      {{channel.briefdescription}}
+    </div>
+
   </div>
 
-  <channel-feed [channel]="channel" #feed [loadMore]="feed.scroller"></channel-feed>
+  <ion-list>
+    <channel-feed [channel]="channel" #feed [loadMore]="feed.scroller"></channel-feed>
+  </ion-list>
 
   <ion-infinite-scroll (ionInfinite)="feed.scroller = $event; $event.complete();">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>

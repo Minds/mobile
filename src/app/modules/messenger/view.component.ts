@@ -26,6 +26,8 @@ export class MessengerView {
   messages : Array<any> = [];
   publickeys : any = {};
 
+  keyboardListener;
+
   message : string = "";
 
   components = {
@@ -41,6 +43,11 @@ export class MessengerView {
     setTimeout(() => {
       this.load();
     }, 300);
+
+    this.keyboardListener = Keyboard.onKeyboardShow();
+    this.keyboardListener.subscribe(() => {
+      this.scrollArea.scrollToBottom();
+    });
   }
 
   load(){
@@ -95,6 +102,9 @@ export class MessengerView {
       time_created: Date.now()
     });
 
+    let message = this.message;
+    this.message = "";
+
     this.cd.markForCheck();
     this.cd.detectChanges();
 
@@ -111,7 +121,7 @@ export class MessengerView {
 
         (<any>window).Crypt.setPublicKey(this.service.publickeys[guid]);
 
-        (<any>window).Crypt.encrypt(this.message, (success) => {
+        (<any>window).Crypt.encrypt(message, (success) => {
 
           encrypted[guid] = success;
           if(Object.keys(encrypted).length == Object.keys(this.service.publickeys).length){
@@ -130,9 +140,6 @@ export class MessengerView {
 
       this.client.post('api/v2/conversations/' + this.conversation.guid, data)
         .then(() => {
-          this.message = "";
-          this.cd.markForCheck();
-          this.cd.detectChanges();
         })
     })
 

@@ -10,7 +10,7 @@ import { CacheService } from '../../common/services/cache/cache.service';
   selector: 'channel-feed',
   templateUrl: 'feed.component.html',
   //styleUrls: [ 'feed.component.css' ],
-  //changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class ChannelFeedComponent {

@@ -7,6 +7,7 @@ notification-card{
 
 .m-ionic-notifications--card-body{
   padding-left:16px;
+  flex:1;
 
   a {
     text-decoration: none;
@@ -14,5 +15,10 @@ notification-card{
 
   span.ts{
     font-size: 11px;
+  }
+}
+.m-ionic-notifications--card-actions{
+  ion-icon{
+    margin-left: 8px;
   }
 }

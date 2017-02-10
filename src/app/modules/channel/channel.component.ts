@@ -109,6 +109,31 @@ export class ChannelComponent {
 
   }
 
+  subscribe(){
+    if(this.channel.subscribed){
+      return this.unsubscribe();
+    }
+    this.channel.subscribed = true;
+    this.client.post('api/v1/subscribe/' + this.channel.guid, {})
+      .then((response : any) => {
+          this.channel.subscribed = true;
+      })
+      .catch((e) => {
+        this.channel.subscribed = false;
+      });
+  }
+
+  unsubscribe(){
+    this.channel.subscribed = false;
+    this.client.delete('api/v1/subscribe/' + this.channel.guid, {})
+      .then((response : any) => {
+          this.channel.subscribed = false;
+      })
+      .catch((e) => {
+        this.channel.subscribed = true;
+      });
+  }
+
   refresh(){
 
   }

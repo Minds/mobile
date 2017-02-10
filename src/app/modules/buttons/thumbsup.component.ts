@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 
 import { Client } from '../../common/services/api/client';
 import { Storage } from '../../common/services/storage';
-
+import { WalletService } from '../wallet/wallet.service';
 
 @Component({
   moduleId: 'module.id',
@@ -28,7 +28,7 @@ export class ThumbsUpComponent {
 
   storage = new Storage();
 
-  constructor(public client : Client) {
+  constructor(public client : Client, private wallet : WalletService) {
   }
 
   @Input('entity') set _entity(value : any){
@@ -48,7 +48,7 @@ export class ThumbsUpComponent {
       this.entity['thumbs:up:user_guids'] = [ this.storage.get('user_guid') ];
       this.entity['thumbs:up:count']++;
       if ( this.storage.get('user_guid') != this.entity.owner_guid) {
-        //self.wallet.increment();
+        //this.wallet.increment(1);
       }
     } else {
       for(let key in this.entity['thumbs:up:user_guids']){
@@ -57,7 +57,7 @@ export class ThumbsUpComponent {
       }
       this.entity['thumbs:up:count']--;
       if ( this.storage.get('user_guid')!= this.entity.owner_guid) {
-        //self.wallet.decrement();
+        //this.wallet.decrement(1);
       }
     }
   }

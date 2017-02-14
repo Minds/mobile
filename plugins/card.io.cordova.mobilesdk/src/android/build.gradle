@@ -1,0 +1,7 @@
+repositories{
+    mavenCentral()
+}
+
+dependencies {
+  compile 'io.card:android-sdk:5.5.0'
+}

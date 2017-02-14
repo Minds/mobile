@@ -49,10 +49,10 @@
       <a *ngIf="entity.entityObj.type == 'activity'"
           [navPush]="components.activity"
           [navParams]="{ guid: entity.entityObj.guid }">
-        <p *ngIf="entity.entityObj.owner_guid == session.getLoggedInUser().guid && !entity.entityObj.title">
+        <p *ngIf="entity.entityObj.owner_guid == storage.get('user_guid') && !entity.entityObj.title">
           <!-- i18n -->{{entity.fromObj.name}} commented on <span class="pseudo-link mdl-color-text--blue-grey-400">your activity</span><!-- /i18n -->
         </p>
-        <p *ngIf="entity.entityObj.owner_guid != session.getLoggedInUser().guid  && !entity.entityObj.title">
+        <p *ngIf="entity.entityObj.owner_guid != storage.get('user_guid')  && !entity.entityObj.title">
           <!-- i18n -->{{entity.fromObj.name}} commented on <span class="pseudo-link mdl-color-text--blue-grey-400">{{entity.entityObj.ownerObj.name}}'s activity</span><!-- /i18n -->
         </p>
         <p *ngIf="entity.entityObj.title">
@@ -74,8 +74,8 @@
             <p>
               <!-- i18n -->{{entity.fromObj.name}} commented on<!-- /i18n -->
               <span class="pseudo-link mdl-color-text--blue-grey-400" *ngIf="entity.entityObj.title" >{{entity.entityObj.title}}</span>
-              <span class="pseudo-link mdl-color-text--blue-grey-400" *ngIf="entity.entityObj.owner_guid != session.getLoggedInUser().guid && !entity.entityObj.title" i18n="object belonging to user">{{entity.entityObj.ownerObj.name}}'s {{entity.entityObj.subtype}}</span>
-              <span class="pseudo-link mdl-color-text--blue-grey-400" *ngIf="entity.entityObj.owner_guid == session.getLoggedInUser().guid && !entity.entityObj.title" i18n="object belonging to current user">your {{entity.entityObj.subtype}}</span>
+              <span class="pseudo-link mdl-color-text--blue-grey-400" *ngIf="entity.entityObj.owner_guid != storage.get('user_guid') && !entity.entityObj.title" i18n="object belonging to user">{{entity.entityObj.ownerObj.name}}'s {{entity.entityObj.subtype}}</span>
+              <span class="pseudo-link mdl-color-text--blue-grey-400" *ngIf="entity.entityObj.owner_guid == storage.get('user_guid') && !entity.entityObj.title" i18n="object belonging to current user">your {{entity.entityObj.subtype}}</span>
             </p>
           </a>
         </div>

@@ -5,5 +5,51 @@
 
 <ion-content>
 
+    <div class="m-ionic-wallet--purchase-points-wrapper">
+
+      <div class="m-ionic-wallet--purchase-points-input">
+        <div>
+          <input
+            name="usd"
+            [(ngModel)]="usd"
+            type="number"
+            min="0"
+            (keyup)="calculatePoints()"
+            (change)="calculatePoints()"
+            placeholder="..."
+            autofocus="autofocus"
+            />
+        </div>
+        <div>
+          <label>USD</label>
+        </div>
+      </div>
+
+      <div class="m-ionic-wallet--purchase-points-input">
+        <div>
+          <input
+            name="points"
+            [(ngModel)]="points"
+            type="number"
+            min="0"
+            (keyup)="calculateUSD()"
+            (change)="calculateUSD()"
+            />
+        </div>
+        <div>
+          <label>Points</label>
+        </div>
+      </div>
+
+      <div class="m-ionic-wallet--purchase-recur">
+        <ion-toggle [(ngModel)]="recurring"></ion-toggle>
+        <span>Repeat this transaction every month and get 10% more points</span>
+      </div>
+
+      <div>
+        <button ion-button clear (click)="buy()" style="width: 100%;font-size: 28px;letter-spacing: 3px;">BUY!</button>
+      </div>
+
+    </div>
 
 </ion-content>

@@ -27,7 +27,7 @@ export class PopComponent {
     params: NavParams,
     renderer: Renderer
   ){
-    this.text = config.get('text') || '+1';
+    this.text = params.get('text') || '+1';
   }
 
   ngOnInit(){

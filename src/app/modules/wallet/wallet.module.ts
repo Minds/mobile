@@ -7,13 +7,14 @@ import { PopComponent } from './pop/pop.component';
 import { PopController } from './pop/pop';
 
 import { CommonModule } from '../../common/common.module';
+import { PaymentsModule } from '../payments/payments.module';
 import { WalletComponent } from './wallet.component';
 import { WalletService } from './wallet.service';
 import { PurchaseComponent } from './purchase.component';
 import { Client } from '../../common/services/api/client';
 
 @NgModule({
-  imports: [ IonicModule, CommonModule ],
+  imports: [ IonicModule, CommonModule, PaymentsModule ],
   declarations: [ WalletCounterComponent, WalletComponent, PopComponent, PurchaseComponent ],
   providers: [
     {

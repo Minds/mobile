@@ -27,7 +27,7 @@ export class DiscoveryService {
 
   search(q : string){
     if(!q){
-      return this.get();
+      return this.get(true);
     }
     this.client.get('api/v1/search/suggest', {
         q: q,

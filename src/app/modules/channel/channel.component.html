@@ -27,6 +27,9 @@
         ></ion-icon>
     </div>
 
+    <div class="m-ionic-channel--bio" [innerHtml]="channel.briefdescription | tags">
+    </div>
+
     <div class="m-ionic-channel--stats">
       <div class="m-ionic-channel--stats-stat" *ngIf="!channel.supporters_count && (channel.activity_count || channel.activity_count === 0)">
         <label>Feed</label>
@@ -44,10 +47,6 @@
         <label>Views</label>
         <span>{{channel.impressions}}</span>
       </div>
-    </div>
-
-    <div class="m-ionic-channel--bio">
-      {{channel.briefdescription}}
     </div>
 
   </div>

@@ -114,23 +114,31 @@ export class ChannelComponent {
       return this.unsubscribe();
     }
     this.channel.subscribed = true;
+    this.cd.markForCheck();
+    this.cd.detectChanges();
     this.client.post('api/v1/subscribe/' + this.channel.guid, {})
       .then((response : any) => {
           this.channel.subscribed = true;
       })
       .catch((e) => {
         this.channel.subscribed = false;
+        this.cd.markForCheck();
+        this.cd.detectChanges();
       });
   }
 
   unsubscribe(){
     this.channel.subscribed = false;
+    this.cd.markForCheck();
+    this.cd.detectChanges();
     this.client.delete('api/v1/subscribe/' + this.channel.guid, {})
       .then((response : any) => {
           this.channel.subscribed = false;
       })
       .catch((e) => {
         this.channel.subscribed = true;
+        this.cd.markForCheck();
+        this.cd.detectChanges();
       });
   }
 

@@ -8,6 +8,70 @@
 
 <ion-content>
 
-  You are about to send a p2p boost
+  <div class="m-ionic-boost--destination-wrapper" >
+    <div class="m-ionic-boost--points-input">
+      <div class="cell">
+        <input
+          type="text"
+          min="0"
+          [placeholder]="!destination ? '@username' : '@' + destination.username"
+          #q
+          (keyup)="findDestinations(q)"
+          autofocus
+          />
+      </div>
+      <div class="cell">
+        <label i18n>Destination</label>
+      </div>
+    </div>
+
+    <div class="m-ionic-boost--destinations-list" *ngIf="destinations.length > 0">
+      <div *ngFor="let entity of destinations" class="m-ionic-boost--destination" (click)="selectDestination(entity, q)">
+    	  <div class="m-ionic-boost--destination-avatar">
+          <img [src]="'https://www.minds.com/icon/' + entity.guid + '/medium/' + entity.icontime"/>
+        </div>
+        <div class="m-ionic-boost--destination-body">
+          <h3>{{entity.name}}</h3>
+          <div class="m-ionic-boost--destination-body-stats">
+            <div class="m-ionic-boost--destination-body-stat">
+              <label>Subscribers:</label>
+              <span>{{entity.subscribers_count}}</span>
+            </div>
+            <div class="m-ionic-boost--destination-body-stat">
+              <label>Views:</label>
+              <span>{{entity.impressions}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="m-ionic-boost--points-wrapper">
+    <div class="m-ionic-boost--points-input">
+      <div class="cell">
+        <input
+          type="number"
+          min="0"
+          #points
+          placeholder="Enter here"
+          name="points"
+          [(ngModel)]= "data.points"
+          (change)="calculateImpressions()"
+          (keyup)="calculateImpressions()"
+          />
+      </div>
+      <div class="cell">
+				<label i18n>Points</label>
+			</div>
+    </div>
+  </div>
+
+  <button class="m-ionic-boost--button" (click)="boost()" *ngIf="destination">Boost</button>
+
+  <p style="color:#888; font-size:11px; padding:16px;" *ngIf="destination">
+     <!-- i18n -->You will be notified if you post is accepted or rejected by {{data.destination}}. Once they accept, this post will not be able to be deleted.<!-- /i18n -->
+  </p>
 
 </ion-content>

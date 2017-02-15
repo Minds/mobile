@@ -15,7 +15,7 @@
   padding-top:16px;
 }
 
-.m-ionic-boost--points-input {
+.m-ionic-boost--points-input{
   text-align: center;
   padding: 16px;
   display: flex;
@@ -38,6 +38,12 @@
   }
 }
 
+.m-ionic-boost--destination-wrapper{
+  display:block;
+  text-align:left;
+  padding-top:16px;
+}
+
 .m-ionic-boost--button{
   border-radius: 3px;
   padding: 16px;
@@ -47,4 +53,47 @@
   background: #4690D6;
   color: #FFF;
   letter-spacing: 2px;
+}
+
+
+
+.m-ionic-boost--destination{
+  display: flex;
+  align-items: center;
+  padding:4px;
+
+  .m-ionic-boost--destination-avatar{
+    padding:8px;
+    img{
+      width:52px;
+      height:52px;
+      border-radius:50%;
+    }
+  }
+  .m-ionic-boost--destination-body{
+    padding:8px;
+
+    h3{
+      padding:0;
+      margin:0;
+      font-size: 18px;
+      letter-spacing: 1px;
+    }
+
+    .m-ionic-boost--destination-body-stats{
+      display:flex;
+      flex-align:column;
+
+      .m-ionic-boost--destination-body-stat{
+        padding: 4px 8px 0 0;
+        font-size: 12px;
+        letter-spacing: 0.5px;
+
+        label{
+          font-weight: 500;
+        }
+      }
+
+    }
+  }
 }

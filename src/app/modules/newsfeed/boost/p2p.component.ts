@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef, HostListener } from '@angular/core';
-import { ModalController, NavParams, ViewController } from 'ionic-angular'
+import { AlertController, LoadingController, NavParams, ViewController } from 'ionic-angular'
 import { CacheService } from '../../../common/services/cache/cache.service';
 import { Storage } from '../../../common/services/storage';
 import { Client } from '../../../common/services/api/client';
@@ -9,12 +9,14 @@ import { Client } from '../../../common/services/api/client';
   moduleId: 'module.id',
   selector: 'p2p-boost',
   templateUrl: 'p2p.component.html',
-  //styleUrls: ['activity.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
-  ////styleUrls: ['activity.component.css']
 })
 
 export class P2PBoostComponent {
+
+  data = {
+    points: 100
+  }
 
   @Input('entity') entity;
 
@@ -22,9 +24,72 @@ export class P2PBoostComponent {
     cdn_url: 'https://edge.minds.com/'
   }
 
-  constructor(public client : Client, public modalCtrl: ModalController, private params : NavParams,
+  constructor(public client : Client, public alertCtrl: AlertController, private loadingCtrl : LoadingController, private params : NavParams,
     private viewCtrl : ViewController, private cd : ChangeDetectorRef, private storage : Storage){
+    this.entity = this.params.get('entity');
+  }
 
+  destinations : Array<any> = [];
+
+  findDestinations(q){
+    if(!q.value){
+      this.destinations = [];
+      this.cd.markForCheck();
+      this.cd.detectChanges();
+      return;
+    }
+    this.client.get('api/v1/search/suggest', {
+        q: q.value,
+        //type: this.type,
+        limit: 12,
+        offset: ""
+      })
+      .then((response : any) => {
+        this.destinations = response.suggestions;
+        this.cd.markForCheck();
+        this.cd.detectChanges();
+      });
+  }
+
+  destination;
+
+  selectDestination(destination, q){
+    q.value = "";
+    this.destinations = [];
+    this.destination = destination;
+    this.cd.markForCheck();
+    this.cd.detectChanges();
+  }
+
+  boost(){
+    let loader = this.loadingCtrl.create();
+    loader.present();
+    this.client.post('api/v1/boost/peer/' + this.entity.guid + '/' + this.entity.owner_guid, {
+        type: 'points',
+        bid: this.data.points,
+        destination: this.destination.guid,
+        //scheduledTs: this.scheduledTs,
+        //postToFacebook: this.postToFacebook,
+      })
+      .then((response) => {
+        loader.dismiss();
+        this.alertCtrl.create({
+          title: 'Success!',
+          subTitle: `Your offer has been sent to @${this.destination.username}. You may revoke your request by visiting the Outbox of your Boost Console`,
+          buttons: ['Ok']
+        })
+        .present();
+        this.dismiss();
+      })
+      .catch((e) => {
+        loader.dismiss();
+        this.alertCtrl.create({
+          title: 'Oooopppsss...',
+          subTitle: e.message || 'There was a problem',
+          buttons: ['Try again']
+        })
+        .present();
+      });
   }
 
   dismiss(){

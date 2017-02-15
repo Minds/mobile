@@ -5,9 +5,7 @@ import { Client } from '../../common/services/api/client';
 
 @Component({
   selector: 'newsfeed-single',
-  template: `
-    <activity [entity]="entity" *ngIf="entity"></activity>
-  `,
+  templateUrl: 'single.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 

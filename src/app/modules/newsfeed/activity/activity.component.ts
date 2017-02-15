@@ -41,6 +41,10 @@ export class Activity {
       this.entity.reminderOwnerObj = entity.ownerObj;
       this.entity.remind_object = false; //stop remind looping, if it even happens
       this.entity.boosted = entity.boosted;
+      this.entity.impressions = entity.impressions;
+      this.entity['thumbs:up:count'] = entity['thumbs:up:count'];
+      this.entity['thumbs:down:count'] = entity['thumbs:down:count'];
+      this.entity.remind_count = entity.remind_count;
     } else {
       this.entity = entity;
     }

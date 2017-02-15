@@ -5,7 +5,7 @@ import { Storage } from '../../common/services/storage';
 @Component({
   selector: 'm-decrypt',
   template: `
-    {{decrypted | tags}}
+    <div [innerHtml]="decrypted | tags"></div>
   `
 })
 

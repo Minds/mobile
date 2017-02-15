@@ -39,7 +39,7 @@
       </div>
 
       <div class="m-ionic-comments--comment">
-        <p allow-text-select>{{comment.description | tags}}</p>
+        <p allow-text-select [innerHtml]="comment.description | tags"></p>
       </div>
     </div>
 

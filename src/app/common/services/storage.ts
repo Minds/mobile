@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 
 export class Storage {
-	get(key : string){
+	get(key : string) : boolean | string{
 		return window.localStorage.getItem(key);
 	}
 	set(key : string, value : any){

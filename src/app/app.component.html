@@ -6,9 +6,21 @@
   </ion-header>
   <ion-content>
     <ion-list>
+
+      <button ion-item (click)="openBugGroup()">
+        Blogs
+      </button>
+
       <button ion-item (click)="openBugGroup()">
         Support & Bugs Groups
       </button>
+
+
+      <ion-item>
+        <ion-label>Turn off video autoplay</ion-label>
+        <ion-toggle [checked]="storage.get('disable-autoplay')" (ionChange)="storage.set('disable-autoplay', $event.checked)"></ion-toggle>
+      </ion-item>
+
       <button ion-item (click)="logout()">
         Logout
       </button>

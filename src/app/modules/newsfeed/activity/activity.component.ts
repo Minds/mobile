@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef, HostListener } from '@angular/core';
-import { ActionSheetController, ModalController } from 'ionic-angular'
+import { ActionSheetController, ModalController, Platform } from 'ionic-angular'
 import { CacheService } from '../../../common/services/cache/cache.service';
 import { Storage } from '../../../common/services/storage';
 import { Client } from '../../../common/services/api/client';
@@ -30,7 +30,7 @@ export class Activity {
   }
 
   constructor(private client : Client, public cache : CacheService, public actionSheetCtrl: ActionSheetController,
-    private cd : ChangeDetectorRef, private storage : Storage, private modalCtrl : ModalController){
+    private cd : ChangeDetectorRef, private storage : Storage, private modalCtrl : ModalController, private platform : Platform){
 
   }
 
@@ -126,6 +126,12 @@ export class Activity {
   boost(){
     this.modalCtrl.create(BoostComponent, { entity: this.entity })
       .present();
+  }
+
+  canAutoplay(){
+    if(this.platform.is('ios'))
+      return false; //ios can't inline play
+    return !this.storage.get('disable-autoplay');
   }
 
 

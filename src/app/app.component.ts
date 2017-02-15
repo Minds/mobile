@@ -7,6 +7,7 @@ import { LoginComponent } from "./modules/auth/login.component";
 import { GroupProfile } from './modules/groups/profile.component';
 import { NewsfeedList } from "./modules/newsfeed/list.component";
 import { OAuth2 } from "./common/services/api/oauth2";
+import { Storage } from "./common/services/storage";
 
 //for testing onboarding
 import { OnboardingComponent } from './modules/onboarding/onboarding.component';
@@ -25,7 +26,8 @@ export class MindsApp {
 
   rootPage : any = LoginComponent;
 
-  constructor(private oauth2 : OAuth2, public menuCtrl: MenuController, private platform : Platform, private app : App){
+  constructor(private oauth2 : OAuth2, public menuCtrl: MenuController, private platform : Platform, private app : App,
+    private storage : Storage){
     platform.ready().then(() => {
       StatusBar.backgroundColorByHexString('#37474f');
     });

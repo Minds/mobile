@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-navbar></ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-refresher (ionRefresh)="refresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list>
+
+    <div *ngFor="let blog of blogs">
+      <div class="m-ionic-blogs--list-blog"
+        [navPush]="components.view"
+        [navParams]="{ guid: blog.guid }">
+
+        <div class="m-ionic-blogs--list-blog-thumbnail"
+          [ngStyle]="{background: '#333 url(' + blog.thumbnail_src + ') center center / cover'}">
+        </div>
+
+        <div class="m-ionic-blogs--list-blog-body">
+      		<h3>{{ blog.title }}</h3>
+
+		      <div class="m-ionic-owner-block m-ionic-blogs--list-blog-owner-block">
+
+            <div class="m-ionic-avatar">
+              <img [src]="'https://www.minds.com/icon/' +  blog.ownerObj.guid+ '/medium'" class="mdl-shadow--2dp" imgFade />
+            </div>
+            <div class="m-ionic-body">
+              <strong>{{blog.ownerObj.name}}</strong>
+              <span>{{ blog.time_created * 1000 | date:'mediumDate' }}</span>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+
+	</ion-list>
+
+
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+
+</ion-content>

@@ -5,6 +5,7 @@ import { StatusBar } from 'ionic-native';
 import { TabsComponent } from "./modules/tabs/tabs.component";
 import { LoginComponent } from "./modules/auth/login.component";
 import { GroupProfile } from './modules/groups/profile.component';
+import { BlogsList } from './modules/blog/list.component';
 import { NewsfeedList } from "./modules/newsfeed/list.component";
 import { OAuth2 } from "./common/services/api/oauth2";
 import { Storage } from "./common/services/storage";
@@ -21,7 +22,8 @@ import { OnboardingComponent } from './modules/onboarding/onboarding.component';
 export class MindsApp {
 
   components = {
-    group: GroupProfile
+    group: GroupProfile,
+    blogs: BlogsList
   };
 
   rootPage : any = LoginComponent;
@@ -39,6 +41,11 @@ export class MindsApp {
 
   ngOnInit(){
 
+  }
+
+  openBlogs(){
+    this.app.getRootNav().push(BlogsList);
+    this.menuCtrl.close();
   }
 
   openBugGroup(){

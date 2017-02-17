@@ -14,7 +14,7 @@ import { CacheService } from '../../common/services/cache/cache.service';
 
 export class GroupFeedComponent {
 
-
+  group;
   guid;
 
   feed : Array<any> = [];
@@ -23,7 +23,7 @@ export class GroupFeedComponent {
 
   constructor(private client : Client, private cache : CacheService, private cd : ChangeDetectorRef){ }
 
-  @Input() set group(group : any){
+  @Input('group') set _group(group : any){
 
     if(!group)
       return;
@@ -38,13 +38,14 @@ export class GroupFeedComponent {
     //  return;
     //}
 
+    this.group = group;
     this.guid = group.guid;
     this.loadList();
   }
 
   loadList(){
     return new Promise((resolve, reject) => {
-      this.client.get('api/v1/newsfeed/container/' + this.guid, { limit: 12, offset: ""})
+      this.client.get('api/v1/newsfeed/container/' + this.guid, { limit: 12, offset: this.offset})
         .then((response : any) => {
           //console.log(response);
           for(let activity of response.activity){
@@ -67,7 +68,6 @@ export class GroupFeedComponent {
     this.loadList()
       .then(() => {
         e.complete();
-        e = null;
       });
   }
 

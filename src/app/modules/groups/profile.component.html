@@ -37,7 +37,12 @@
 
   </div>
 
-  <group-feed [group]="group"></group-feed>
+  <ion-list>
+    <group-feed [group]="group" #feed [loadMore]="feed.scrollEvnt" (done)="feed.scrollEvnt = null; cd.markForCheck(); cd.detectChanges()"></group-feed>
+  </ion-list>
 
+  <ion-infinite-scroll (ionInfinite)="feed.scrollEvnt = $event">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
 </ion-content>

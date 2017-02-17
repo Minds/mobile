@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar></ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-refresher (ionRefresh)="refresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list>
+
+    <div *ngFor="let group of groups">
+      <div class="m-ionic-groups--card m-ionic-owner-block"
+        [navPush]="components.profile"
+        [navParams]="{ guid: group.guid }">
+          <div class="m-ionic-avatar">
+            <img [src]="'https://www.minds.com/fs/v1/avatars/' + group.guid +'/small'" imgFade />
+          </div>
+          <div class="m-ionic-body">
+            <strong>{{group.name}}</strong>
+            <span><b>Members</b> {{group['members:count']}}</span>
+          </div>
+      </div>
+    </div>
+
+	</ion-list>
+
+
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+
+</ion-content>

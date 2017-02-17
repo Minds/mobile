@@ -5,6 +5,7 @@ import { StatusBar } from 'ionic-native';
 import { TabsComponent } from "./modules/tabs/tabs.component";
 import { LoginComponent } from "./modules/auth/login.component";
 import { GroupProfile } from './modules/groups/profile.component';
+import { GroupsList } from './modules/groups/list.component';
 import { BlogsList } from './modules/blog/list.component';
 import { NewsfeedList } from "./modules/newsfeed/list.component";
 import { OAuth2 } from "./common/services/api/oauth2";
@@ -45,6 +46,11 @@ export class MindsApp {
 
   openBlogs(){
     this.app.getRootNav().push(BlogsList);
+    this.menuCtrl.close();
+  }
+
+  openGroups(){
+    this.app.getRootNav().push(GroupsList);
     this.menuCtrl.close();
   }
 

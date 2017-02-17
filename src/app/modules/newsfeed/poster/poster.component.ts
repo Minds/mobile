@@ -31,8 +31,20 @@ export class PosterComponent {
 
   meta = {
     message: '',
-    attachment_guid: null
+    attachment_guid: null,
+    container_guid: null
   };
+
+  @Input() placeholder : string = "Enter your status here";
+
+  @Input() set containerGuid(guid: any){
+    this.attachment.setContainerGuid(guid);
+    this.meta.container_guid = guid;
+  }
+
+  @Input() set accessId(access_id: any){
+   this.attachment.setAccessId(access_id);
+  }
 
   @Output('prepend') prepend : EventEmitter<any> = new EventEmitter();
 

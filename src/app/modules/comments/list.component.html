@@ -40,6 +40,27 @@
 
       <div class="m-ionic-comments--comment">
         <p allow-text-select [innerHtml]="comment.description | tags"></p>
+
+        <!-- Images -->
+        <div class="m-ionic-image allow-select"
+         *ngIf="comment.thumbnail_src && !comment.perma_url">
+        	<a>
+        		<img [src]="comment.thumbnail_src" (error)="comment.thumbnail_src = null">
+        	</a>
+        </div>
+
+        <!-- Custom type:: batch -->
+        <div class="m-ionic-image allow-select"
+         *ngIf="comment.custom_type == 'batch'">
+
+        	<a>
+        		<img [src]="comment.custom_data[0].src" style="width:100%"
+              (error)="comment.custom_data[0].src = 'https://www.minds.com/assets/logos/medium.png'"
+              imgFade
+              *ngIf="comment.custom_data"
+            >
+        	</a>
+        </div>
       </div>
     </div>
 

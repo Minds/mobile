@@ -53,3 +53,13 @@ a{
     color: #888;
   }
 }
+
+.m-ionic-back-button {
+  position: fixed;
+  top: 0;
+  left: 0;
+  /* z-index: 99999; */
+  color: #FFF;
+  padding: 16px;
+  font-size: 26px;
+}

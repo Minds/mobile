@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef, Host } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Page } from "ui/page";
 import { Client } from '../../common/services/api/client';
@@ -22,6 +22,8 @@ export class ChannelFeedComponent {
   offset : string = "";
   inProgress : boolean = true;
 
+  @Output() done : EventEmitter<any> = new EventEmitter();
+
   constructor(private client : Client, private cache : CacheService, private cd : ChangeDetectorRef){ }
 
   @Input() set channel(channel : any){
@@ -41,7 +43,7 @@ export class ChannelFeedComponent {
 
   loadList(){
     return new Promise((resolve, reject) => {
-      this.client.get('api/v1/newsfeed/personal/' + this.guid, { limit: 12, offset: ""})
+      this.client.get('api/v1/newsfeed/personal/' + this.guid, { limit: 12, offset: this.offset })
         .then((response : any) => {
           //console.log(response);
           for(let activity of response.activity){
@@ -59,12 +61,10 @@ export class ChannelFeedComponent {
   }
 
   @Input() set loadMore(e){
-    if(!e)
-      return;
     this.loadList()
       .then(() => {
         e.complete();
-        e = null;
+        this.done.next(true);
       });
   }
 

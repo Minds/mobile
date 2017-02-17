@@ -52,10 +52,10 @@
   </div>
 
   <ion-list>
-    <channel-feed [channel]="channel" #feed [loadMore]="feed.scroller"></channel-feed>
+    <channel-feed [channel]="channel" #feed [loadMore]="feed.scrollEvnt" (done)="feed.scrollEvnt = null; cd.markForCheck(); cd.detectChanges()"></channel-feed>
   </ion-list>
 
-  <ion-infinite-scroll (ionInfinite)="feed.scroller = $event; $event.complete();">
+  <ion-infinite-scroll (ionInfinite)="feed.scrollEvnt = $event">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 

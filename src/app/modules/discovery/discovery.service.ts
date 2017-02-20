@@ -12,7 +12,7 @@ export class DiscoveryService {
   limit : number = 15;
   inProgress : boolean = false;
 
-  filter : string = "trending";
+  filter : string = "featured";
   type : string = "object/image";
 
   constructor(private client : Client){}

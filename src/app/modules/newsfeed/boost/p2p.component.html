@@ -6,7 +6,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content #scrollArea>
 
   <div class="m-ionic-boost--destination-wrapper" >
     <div class="m-ionic-boost--points-input">
@@ -26,7 +26,7 @@
     </div>
 
     <div class="m-ionic-boost--destinations-list" *ngIf="destinations.length > 0">
-      <div *ngFor="let entity of destinations" class="m-ionic-boost--destination" (click)="selectDestination(entity, q)">
+      <div *ngFor="let entity of destinations" class="m-ionic-boost--destination" (mousedown)="$event.preventDefault(); selectDestination(entity, q); points.focus()">
     	  <div class="m-ionic-boost--destination-avatar">
           <img [src]="'https://www.minds.com/icon/' + entity.guid + '/medium/' + entity.icontime"/>
         </div>

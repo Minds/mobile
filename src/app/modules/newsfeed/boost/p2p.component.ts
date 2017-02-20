@@ -1,5 +1,6 @@
-import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef, HostListener } from '@angular/core';
-import { AlertController, LoadingController, NavParams, ViewController } from 'ionic-angular'
+import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef, HostListener, ViewChild } from '@angular/core';
+import { Content, AlertController, LoadingController, NavParams, ViewController } from 'ionic-angular';
+import { Keyboard } from 'ionic-native';
 import { CacheService } from '../../../common/services/cache/cache.service';
 import { Storage } from '../../../common/services/storage';
 import { Client } from '../../../common/services/api/client';
@@ -23,6 +24,8 @@ export class P2PBoostComponent {
   minds = {
     cdn_url: 'https://edge.minds.com/'
   }
+
+  @ViewChild('scrollArea') scrollArea : Content;
 
   constructor(public client : Client, public alertCtrl: AlertController, private loadingCtrl : LoadingController, private params : NavParams,
     private viewCtrl : ViewController, private cd : ChangeDetectorRef, private storage : Storage){
@@ -59,6 +62,9 @@ export class P2PBoostComponent {
     this.destination = destination;
     this.cd.markForCheck();
     this.cd.detectChanges();
+
+    //this.scrollArea.scrollToTop();
+    //Keyboard.close();
   }
 
   boost(){

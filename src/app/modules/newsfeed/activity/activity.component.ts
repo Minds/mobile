@@ -1,11 +1,14 @@
 import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef, HostListener } from '@angular/core';
-import { ActionSheetController, ModalController, Platform } from 'ionic-angular'
+import { ActionSheetController, ModalController, Platform, Nav } from 'ionic-angular'
+import { PhotoViewer } from 'ionic-native';
+
 import { CacheService } from '../../../common/services/cache/cache.service';
 import { Storage } from '../../../common/services/storage';
 import { Client } from '../../../common/services/api/client';
 import { ChannelComponent } from '../../channel/channel.component';
 import { BoostComponent } from '../boost/boost.component';
 import { BlogView } from '../../blog/view.component';
+import { NewsfeedSingleComponent } from '../single.component';
 
 @Component({
   moduleId: 'module.id',
@@ -30,7 +33,8 @@ export class Activity {
   }
 
   constructor(private client : Client, public cache : CacheService, public actionSheetCtrl: ActionSheetController,
-    private cd : ChangeDetectorRef, private storage : Storage, private modalCtrl : ModalController, private platform : Platform){
+    private cd : ChangeDetectorRef, private storage : Storage, private modalCtrl : ModalController, private platform : Platform,
+    private navCtrl : Nav){
 
   }
 
@@ -56,6 +60,11 @@ export class Activity {
       let parts = url.split('/');
       this.modalCtrl.create(BlogView, { guid: parts[parts.length-1]})
         .present();
+      return;
+    }
+    if(url.indexOf('minds.com/newsfeed/')){
+      let parts = url.split('/');
+      this.navCtrl.push(NewsfeedSingleComponent, { guid: parts[parts.length-1]});
       return;
     }
     (<any>window).open(url, "_system");
@@ -135,8 +144,12 @@ export class Activity {
   canAutoplay(){
     if(this.platform.is('ios'))
       return false; //ios can't inline play
-    return !this.storage.get('disable-autoplay');
+    console.log(this.storage.get('disable-autoplay') == 'false');
+    return this.storage.get('disable-autoplay') == 'false' ? true : false;
   }
 
+  openImage(){
+    PhotoViewer.show('https://edge.minds.com/api/v1/archive/thumbnails/' + this.entity.entity_guid + '/xlarge');
+  }
 
 }

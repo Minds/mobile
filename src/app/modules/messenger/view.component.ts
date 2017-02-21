@@ -99,7 +99,7 @@ export class MessengerView {
       owner: {
         guid: this.storage.get('user_guid')
       },
-      time_created: Date.now()
+      time_created: Date.now() / 1000
     });
 
     let message = this.message;

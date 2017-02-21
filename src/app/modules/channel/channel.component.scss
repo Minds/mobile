@@ -49,9 +49,20 @@
 
   .m-ionic-channel--bio{
     text-align: left;
-    padding: 16px;
+    padding: 8px;
+    margin: 8px;
     letter-spacing: 0.3px;
     line-height: 19px;
+
+    &.editing{
+      border:1px solid #EEE;
+    }
+  }
+
+  .m-ionic-channel--bio-icon{
+    float: right;
+    margin: -32px 16px;
+    color: #888;
   }
 
   .m-ionic-channel--stats {

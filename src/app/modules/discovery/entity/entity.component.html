@@ -1,0 +1,84 @@
+
+<!-- Owner block -->
+<div class="m-ionic-owner-block" *ngIf="entity.ownerObj && entity.ownerObj.username">
+
+	<div class="m-ionic-avatar">
+		<a>
+			<img [src]="minds.cdn_url + '/icon/' + entity.ownerObj.guid + '/medium/' + entity.ownerObj.icontime"
+        class="mdl-shadow--2dp"
+        [navPush]="components.channel"
+        [navParams]="{ channel: entity.ownerObj }"
+        imgFade
+        />
+		</a>
+	</div>
+
+	<div class="m-ionic-body">
+		<a [navPush]="components.channel" [navParams]="{ guid: entity.ownerObj.guid}">
+			<strong>{{entity.ownerObj.name}}</strong>
+		</a>
+    <a *ngIf="entity.containerObj && entity.containerObj.type == 'group'"
+      class="mdl-color-text--blue-grey-300">
+      <strong>({{entity.containerObj.name}})</strong>
+    </a>
+		<a>
+			<span>{{entity.time_created * 1000 | date:'medium'}}</span>
+		</a>
+	</div>
+
+	<div class="m-ionic-actions">
+		<ion-icon name="md-more" (click)="openSettings()"></ion-icon>
+	</div>
+
+</div>
+
+<!-- Messages -->
+<div class="m-ionic-message m-mature-message" [hidden]="!entity.title || editing">
+
+	<span class="m-mature-message-content"
+	  [innerHtml]="entity.title | tags"
+	  (click)="entity.mature && !entity.mature_visibility ? entity.mature_visibility = !entity.mature_visibility : null"
+		allow-text-select>
+    </span>
+</div>
+
+<div class="minds-editable-container" *ngIf="editing && entity.custom_type && entity.title">
+	<!-- Please not the intentional single way binding for ngModel, we want to be able to cancel our changes -->
+	<textarea class="mdl-card__supporting-text message" name="title" [ngModel]="entity.title" #titleEdit></textarea>
+	<button class="mdl-button mdl-button--raised mdl-color--blue-grey-100" (click)="titleEdit.value = entity.title; editing=false;" i18n>Cancel</button>
+	<button class="mdl-button mdl-button--colored mdl-button--raised" (click)="entity.title = titleEdit.value; save();" i18n>Save</button>
+</div>
+
+<div class="item item-image item-image-video"
+  *ngIf="entity.subtype == 'video'">
+    <video
+      width="100%"
+      height="300px"
+      loop="true"
+      muted="true"
+      style="background:#000;"
+      [poster]="entity.thumbnail_src"
+			[attr.autoplay]="canAutoplay() ? true : null"
+      controls="true"
+			playsinline webkit-playsinline
+      >
+      <source [src]="'https://edge.minds.com/api/v1/archive/' + entity.guid + '/play'" type="video/mp4" />
+    </video>
+ </div>
+
+<!-- Images -->
+<div class="m-ionic-image allow-select"
+ *ngIf="entity.subtype == 'image'">
+	<a (click)="openImage()">
+		<img [src]="entity.thumbnail_src" (error)="entity.thumbnail_src = null">
+	</a>
+</div>
+
+<div class="m-ionic-tabs">
+  <minds-button-thumbs-up [entity]="entity" ></minds-button-thumbs-up>
+  <minds-button-thumbs-down [entity]="entity" ></minds-button-thumbs-down>
+	<minds-button-bolt [entity]="entity"></minds-button-bolt>
+  <minds-button-comment [entity]="entity" ></minds-button-comment>
+  <minds-button-remind [entity]="entity" ></minds-button-remind>
+
+</div>

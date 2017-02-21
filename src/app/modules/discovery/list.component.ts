@@ -7,6 +7,7 @@ import { Client } from '../../common/services/api/client';
 import { Storage } from '../../common/services/storage';
 
 import { DiscoveryOptionsComponent } from './options.component';
+import { DiscoveryView } from './view.component';
 import { DiscoveryService } from './discovery.service';
 
 @Component({
@@ -30,7 +31,8 @@ export class DiscoveryList {
   storage = new Storage();
 
   components = {
-    channel: ChannelComponent
+    channel: ChannelComponent,
+    view: DiscoveryView
   }
 
   constructor(private client : Client, private popoverCtrl : PopoverController, private cd : ChangeDetectorRef,

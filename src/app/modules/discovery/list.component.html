@@ -16,8 +16,11 @@
 
   <ion-list style="line-height:0;padding-top:56px;" *ngIf="service.type != 'user' && !q.value">
 
-    <div *ngFor="let entity of service.entities" class="m-ionic-discovery--tile">
-  	    <img [src]="'https://edge.minds.com/api/v1/archive/thumbnails/' + entity.guid + '/medium'" (click)="openImage(entity)"/>
+    <div *ngFor="let entity of service.entities"
+      class="m-ionic-discovery--tile"
+      [navPush]="components.view"
+      [navParams]="{entity: entity}">
+  	    <img [src]="'https://edge.minds.com/api/v1/archive/thumbnails/' + entity.guid + '/medium'"/>
     </div>
 
 	</ion-list>

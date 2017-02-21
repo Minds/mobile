@@ -169,7 +169,7 @@
 <div class="m-ionic-tabs">
   <minds-button-thumbs-up [entity]="entity" ></minds-button-thumbs-up>
   <minds-button-thumbs-down [entity]="entity" ></minds-button-thumbs-down>
-	<minds-button-bolt [entity]="entity"></minds-button-bolt>
+	<minds-button-bolt [entity]="entity" *ngIf="!(entity.owner_guid == storage.get('user_guid') || (entity.reminderOwnerObj  && entity.reminderOwnerObj.guid == storage.get('user_guid')))"></minds-button-bolt>
   <minds-button-comment [entity]="entity" ></minds-button-comment>
   <minds-button-remind [entity]="entity" ></minds-button-remind>
 	<button class="m-ionic-boost-button" (click)="boost()"

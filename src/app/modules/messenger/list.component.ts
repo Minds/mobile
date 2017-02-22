@@ -39,11 +39,17 @@ export class MessengerList {
     this.loadList();
   }
 
-  loadList(){
+  loadList(refresh : boolean = true){
+    if(refresh){
+      this.offset = "";
+    }
     return new Promise((res, err) => {
       this.inProgress = true;
       this.client.get('api/v2/conversations', { limit: 12, offset: this.offset})
         .then((response : any) => {
+          if(refresh){
+            this.conversations = [];
+          }
           //console.log(response);
           for(let convo of response.conversations){
             this.conversations.push(convo);
@@ -59,9 +65,8 @@ export class MessengerList {
 
   refresh(puller){
     puller.complete();
-    this.offset = "";
-    this.conversations = [];
-    this.loadList()
+
+    this.loadList(true)
       .then(() => {
         puller.complete();
       });
@@ -71,6 +76,23 @@ export class MessengerList {
     this.loadList()
       .then(() => {
         e.complete();
+      });
+  }
+
+  search(q : string){
+    if(!q){
+      return this.loadList(true);
+    }
+    this.client.get('api/v2/conversations/search', {
+        q: q,
+        //type: this.type,
+        limit: 12,
+        offset: ""
+      })
+      .then((response : any) => {
+        this.conversations = response.conversations;
+        this.offset = response['load-next'];
+        this.inProgress = false;
       });
   }
 

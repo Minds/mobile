@@ -8,7 +8,13 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-list>
+  <div class="m-ionic-messenger--search">
+    <ion-icon name="md-search"></ion-icon>
+    <input type="text" placeholder="Search..." #q (keyup)="search(q.value)"/>
+  </div>
+
+
+  <ion-list style="padding-top:56px;">
 
     <div *ngFor="let convo of conversations; let i = index">
       <div class="m-ionic-messenger--conversation" (press)="openOptions(i, $event)">

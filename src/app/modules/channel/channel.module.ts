@@ -4,6 +4,7 @@ import { IonicModule } from 'ionic-angular';
 import { Client } from '../../common/services/api/client';
 import { ChannelComponent } from './channel.component';
 import { ChannelFeedComponent } from './feed.component';
+import { SubscribersComponent } from './subscribers.component';
 import { NewsfeedModule } from '../newsfeed/newsfeed.module';
 import { CommonModule } from '../../common/common.module';
 
@@ -25,8 +26,8 @@ import { CommonModule } from '../../common/common.module';
   ]*/
   imports: [ IonicModule, NewsfeedModule, CommonModule ],
   providers: [ Client ],
-  declarations: [ ChannelComponent, ChannelFeedComponent ],
+  declarations: [ ChannelComponent, ChannelFeedComponent, SubscribersComponent ],
   exports: [ ChannelComponent ],
-  entryComponents: [ ChannelComponent ]
+  entryComponents: [ ChannelComponent, SubscribersComponent ]
 })
 export class ChannelModule { }

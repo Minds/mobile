@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar></ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-segment [(ngModel)]="filter">
+    <ion-segment-button value="subscribers" (click)="load(true)">
+      Subscribers
+    </ion-segment-button>
+    <ion-segment-button value="subscriptions" (click)="load(true)">
+      Subscriptions
+    </ion-segment-button>
+  </ion-segment>
+
+  <ion-list>
+    <div *ngFor="let entity of users"
+      [navPush]="components.channel"
+      [navParams]="{ guid: entity.guid }"
+      class="m-ionic-discovery--card">
+  	  <div class="m-ionic-discovery--card-avatar">
+        <img [src]="'https://www.minds.com/icon/' + entity.guid + '/medium/' + entity.icontime"/>
+      </div>
+      <div class="m-ionic-discovery--card-body">
+        <h3>{{entity.name}}</h3>
+        <div class="m-ionic-discovery--card-body-stats">
+          <div class="m-ionic-discovery--card-body-stat">
+            <label>Subscribers:</label>
+            <span>{{entity.subscribers_count}}</span>
+          </div>
+          <div class="m-ionic-discovery--card-body-stat">
+            <label>Views:</label>
+            <span>{{entity.impressions}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-list>
+
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>

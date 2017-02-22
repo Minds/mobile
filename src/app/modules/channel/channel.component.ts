@@ -6,6 +6,7 @@ import { Client } from '../../common/services/api/client';
 import { Upload } from '../../common/services/api/upload';
 import { CacheService } from '../../common/services/cache/cache.service';
 import { Storage } from '../../common/services/storage';
+import { SubscribersComponent } from './subscribers.component';
 
 @Component({
   moduleId: 'module.id',
@@ -25,6 +26,10 @@ export class ChannelComponent {
     name: false,
     avatar: false
   };
+
+  components = {
+    subscribers: SubscribersComponent
+  }
 
   constructor(private client : Client, private upload : Upload, private params: NavParams, private cache : CacheService,
     private cd: ChangeDetectorRef, private loadingCtrl : LoadingController, private storage : Storage){

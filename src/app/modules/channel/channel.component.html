@@ -46,7 +46,7 @@
         <label>Supporters</label>
         <span>{{channel.supporters_count}}</span>
       </div>
-      <div class="m-ionic-channel--stats-stat">
+      <div class="m-ionic-channel--stats-stat" [navPush]="components.subscribers" [navParams]="{guid: channel.guid, filter: 'subscribers'}">
         <label>Subscribers</label>
         <span>{{channel.subscribers_count}}</span>
       </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ActionSheetController } from 'ionic-angular';
 
 import { ChannelComponent } from '../channel/channel.component';
 import { Client } from '../../common/services/api/client';
@@ -28,7 +28,7 @@ export class MessengerList {
   }
 
   constructor(private client : Client, private cd : ChangeDetectorRef, private nav : NavController,
-    private storage : Storage){
+    private storage : Storage, private actionSheetCtrl : ActionSheetController){
 
   }
 
@@ -72,6 +72,32 @@ export class MessengerList {
       .then(() => {
         e.complete();
       });
+  }
+
+  openOptions(i, e){
+    e.preventDefault();
+
+    let buttons = [{
+        text: 'Delete',
+        icon: 'md-trash',
+        role: 'destructive',
+        handler: () => {
+          this.client.delete('api/v2/conversations/' + this.conversations[i].guid);
+          this.conversations.splice(i,1);
+          this.cd.markForCheck();
+          this.cd.detectChanges();
+        }
+      },
+      {
+        text: 'Cancel',
+        icons: 'md-cancel',
+        role: 'cancel'
+      }];
+
+    let actionSheet = this.actionSheetCtrl.create({
+      buttons: buttons
+    });
+    actionSheet.present();
   }
 
 }

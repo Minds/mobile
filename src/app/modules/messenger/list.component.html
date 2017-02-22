@@ -10,14 +10,16 @@
 
   <ion-list>
 
-    <div *ngFor="let convo of conversations">
-      <div class="m-ionic-messenger--conversation"
-        [navPush]="components.view"
-        [navParams]="{ conversation: convo }">
-        <div class="m-ionic-avatar">
-          <img [src]="'https://www.minds.com/icon/' +  convo.participants[0].guid+ '/medium'" class="mdl-shadow--2dp" imgFade />
+    <div *ngFor="let convo of conversations; let i = index">
+      <div class="m-ionic-messenger--conversation" (press)="openOptions(i, $event)">
+        <div class="m-ionic-avatar"
+          [navPush]="components.channel"
+          [navParams]="{ guid: convo.participants[0].guid }">
+          <img [src]="'https://www.minds.com/icon/' +  convo.participants[0].guid + '/medium'" class="mdl-shadow--2dp" imgFade />
         </div>
-        <div class="m-ionic-body">
+        <div class="m-ionic-body"
+          [navPush]="components.view"
+          [navParams]="{ conversation: convo }">
           <h3>{{convo.username}}</h3>
         </div>
       </div>

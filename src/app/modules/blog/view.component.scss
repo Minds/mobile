@@ -24,6 +24,19 @@
     .m-ionic-body{
       font-size:12px;
       padding:0;
+      flex:0;
+    }
+    .m-ionic-blog--buttons {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      padding-left:16px;
+
+      .m-ionic-blog--buttons > * {
+        flex: 1;
+        text-align: center;
+        color: #666;
+      }
     }
   }
 

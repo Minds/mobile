@@ -18,6 +18,7 @@ import { NotificationSettingsComponent } from './settings.component';
 export class NotificationsList {
 
   notifications : Array<any> = [];
+  filter : string = "all";
   offset : string = "";
   inProgress : boolean = true;
 
@@ -40,12 +41,16 @@ export class NotificationsList {
     this.loadList();
   }
 
-  loadList(){
+  loadList(refresh : boolean = false){
+    if(this.refresh)
+      this.offset = '';
     this.service.clear();
     return new Promise((res, err) => {
       this.inProgress = true;
-      this.client.get('api/v1/notifications', { limit: 12, offset: this.offset})
+      this.client.get('api/v1/notifications/' + this.filter, { limit: 12, offset: this.offset })
         .then((response : any) => {
+          if(refresh)
+            this.notifications = [];
           this.loader.dismiss();
           for(let notification of response.notifications){
             this.notifications.push(notification);
@@ -63,9 +68,7 @@ export class NotificationsList {
   }
 
   refresh(puller){
-    this.offset = "";
-    this.notifications = [];
-    this.loadList()
+    this.loadList(true)
       .then(() => {
         puller.complete();
       });
@@ -77,6 +80,11 @@ export class NotificationsList {
       .then(() => {
         e.complete();
       })
+  }
+
+  setFilter(filter : string){
+    this.filter = filter;
+    this.loadList(true);
   }
 
   ngOnDestroy(){

@@ -7,9 +7,28 @@
     </ion-buttons>
 
   </ion-navbar>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="filter" class="m-ionic-notifications--filter">
+      <ion-segment-button value="all" (ionSelect)="setFilter('all')">
+        <ion-icon name="md-notifications"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="tags" (ionSelect)="setFilter('tags')">
+        <ion-icon name="md-pricetag"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="comments" (ionSelect)="setFilter('comments')">
+        <ion-icon name="md-chatbubbles"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="boosts" (ionSelect)="setFilter('boosts')">
+        <ion-icon name="md-trending-up"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="votes" (ionSelect)="setFilter('votes')">
+        <ion-icon name="md-thumbs-up"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content #scrollArea>
 
   <ion-refresher (ionRefresh)="refresh($event)">
     <ion-refresher-content></ion-refresher-content>

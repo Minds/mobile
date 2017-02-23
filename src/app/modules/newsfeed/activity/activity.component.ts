@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef, HostListener } from '@angular/core';
-import { ActionSheetController, ModalController, Platform, Nav } from 'ionic-angular'
+import { ActionSheetController, ModalController, PopoverController, Platform, Nav } from 'ionic-angular'
 import { PhotoViewer } from 'ionic-native';
 
 import { CacheService } from '../../../common/services/cache/cache.service';
@@ -9,6 +9,7 @@ import { ChannelComponent } from '../../channel/channel.component';
 import { BoostComponent } from '../boost/boost.component';
 import { BlogView } from '../../blog/view.component';
 import { NewsfeedSingleComponent } from '../single.component';
+import { LanguagesComponent } from '../../translations/languages.component';
 
 @Component({
   moduleId: 'module.id',
@@ -32,9 +33,11 @@ export class Activity {
     channel: ChannelComponent
   }
 
+  language : string = '';
+
   constructor(private client : Client, public cache : CacheService, public actionSheetCtrl: ActionSheetController,
     private cd : ChangeDetectorRef, private storage : Storage, private modalCtrl : ModalController, private platform : Platform,
-    private navCtrl : Nav){
+    private navCtrl : Nav, private popoverCtrl : PopoverController){
 
   }
 
@@ -96,7 +99,14 @@ export class Activity {
     buttons.push({
       text: 'Translate',
       handler: () => {
-       console.log('Translate clicked');
+        this.popoverCtrl.create(LanguagesComponent, {
+          callback: (language) => {
+            this.language = language;
+            this.cd.markForCheck();
+            this.cd.detectChanges();
+          }
+        })
+        .present();
       }
     });
 

@@ -62,24 +62,15 @@
 <!-- END: PayWall -->
 
 <!-- Messages -->
-<div class="m-ionic-message m-mature-message" [hidden]="!entity.message || editing">
-
-	<span class="m-mature-message-content"
-	  [innerHtml]="entity.message | tags"
+<div class="m-ionic-message" [hidden]="!entity.message || editing">
+	<span
+	  [innerHtml]="entity.message | tags "
 	  (click)="entity.mature && !entity.mature_visibility ? entity.mature_visibility = !entity.mature_visibility : null"
 		allow-text-select>
     </span>
 </div>
 
-<!--<m-translate
-  [open]="translateToggle"
-  [entity]="activity"
-  [translateEvent]="translateEvent"
-  (onTranslateInit)="propagateTranslation($event)"
-  (onTranslate)="translateToggle = false"
-  (onTranslateError)="translateToggle = false"
-  #translate
-></m-translate>-->
+<translation-view [guid]="entity.guid" [language]="language"></translation-view>
 
 <div class="m-ionic-editable-container" *ngIf="editing && (!entity.custom_type || (entity.custom_type && !entity.title))">
 	<!-- NOTE the intentional single way binding for ngModel, we want to be able to cancel our changes -->
@@ -99,13 +90,6 @@
 </div>
 
 <div class="mdl-card__supporting-text m-ionic-message" [hidden]="!entity.title || entity.perma_url || editing" [innerHtml]="entity.title" allow-text-select></div>
-<!-- Translation -->
-<div *ngIf="translate && translate.translation && translate.translation.translated && translate.translation.title" class="m-translation-wrapper">
-  <div class="mdl-card__supporting-text message" [hidden]="!translate.translation.title">
-    <span [innerHtml]="translate.translation.title"></span>
-  </div>
-</div>
-<!-- End translation -->
 
 <div class="minds-editable-container" *ngIf="editing && entity.custom_type && entity.title">
 	<!-- Please not the intentional single way binding for ngModel, we want to be able to cancel our changes -->
@@ -169,7 +153,7 @@
 <div class="m-ionic-tabs">
   <minds-button-thumbs-up [entity]="entity" ></minds-button-thumbs-up>
   <minds-button-thumbs-down [entity]="entity" ></minds-button-thumbs-down>
-	<minds-button-bolt [entity]="entity" *ngIf="!(entity.owner_guid == storage.get('user_guid') || (entity.reminderOwnerObj  && entity.reminderOwnerObj.guid == storage.get('user_guid')))"></minds-button-bolt>
+	<minds-button-wire [entity]="entity" *ngIf="!(entity.owner_guid == storage.get('user_guid') || (entity.reminderOwnerObj  && entity.reminderOwnerObj.guid == storage.get('user_guid')))"></minds-button-wire>
   <minds-button-comment [entity]="entity" ></minds-button-comment>
   <minds-button-remind [entity]="entity" ></minds-button-remind>
 	<button class="m-ionic-boost-button" (click)="boost()"

@@ -1,0 +1,5 @@
+<div class="m-ionic-translation--view" *ngIf="translation">
+
+  <p [innerHtml]="translation.message.content | tags"></p>
+  <span><ion-icon name="globe"></ion-icon> Translated from <b>{{translation.message.source}}</b></span>
+</div>

@@ -65,8 +65,10 @@
 <div class="m-ionic-message" [hidden]="!entity.message || editing">
 	<span
 	  [innerHtml]="entity.message | tags "
-	  (click)="entity.mature && !entity.mature_visibility ? entity.mature_visibility = !entity.mature_visibility : null"
-		allow-text-select>
+		allow-text-select
+		[explicit]="entity.mature"
+		(showExplicit)="entity.mature = !$event; cd.markForCheck(); cd.detectChanges()"
+		>
     </span>
 </div>
 
@@ -83,6 +85,8 @@
 <div class="m-ionic-rich-embed"
   *ngIf="entity.perma_url && entity.title"
   (click)="openInBrowser(entity.perma_url)"
+	[explicit]="entity.mature"
+	(showExplicit)="entity.mature = !$event; cd.markForCheck(); cd.detectChanges()"
   >
 	<img [src]="entity.thumbnail_src" (error)="entity.thumbnail_src = null" *ngIf="entity.thumbnail_src">
   <h3>{{entity.title}}</h3>
@@ -131,7 +135,10 @@
 
 <!-- Images -->
 <div class="m-ionic-image allow-select"
- *ngIf="entity.thumbnail_src && !entity.perma_url">
+ *ngIf="entity.thumbnail_src && !entity.perma_url"
+ [explicit]="entity.mature"
+ (showExplicit)="entity.mature = !$event; cd.markForCheck(); cd.detectChanges()"
+ >
 	<a (click)="openImage()">
 		<img [src]="entity.thumbnail_src" (error)="entity.thumbnail_src = null">
 	</a>

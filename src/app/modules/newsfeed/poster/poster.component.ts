@@ -35,7 +35,7 @@ export class PosterComponent {
     container_guid: null
   };
 
-  @Input() placeholder : string = "Enter your status here";
+  @Input() placeholder : string = "Speak your mind...";
 
   @Input() set containerGuid(guid: any){
     this.attachment.setContainerGuid(guid);
@@ -115,6 +115,7 @@ export class PosterComponent {
 
         this.meta.attachment_guid = "";
         this.meta.message = "";
+        this.attachment.reset();
         this.progress = 0;
         this.prepend.next(response.activity);
         this.cd.markForCheck();

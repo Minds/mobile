@@ -20,6 +20,7 @@ import { ImageCachePipe } from '../../common/pipes/image-cache.pipe';
 import { CommonModule } from '../../common/common.module';
 import { HeaderModule } from '../header/header.module';
 import { AttachmentModule } from '../attachments/attachment.module';
+import { TranslationsModule } from '../translations/translations.module';
 
 @NgModule({
   /*imports: [
@@ -37,7 +38,7 @@ import { AttachmentModule } from '../attachments/attachment.module';
   exports: [
     RouterModule
   ]*/
-  imports: [ IonicModule, CommonModule, ButtonsModule, AttachmentModule, HeaderModule ],
+  imports: [ IonicModule, CommonModule, ButtonsModule, AttachmentModule, HeaderModule, TranslationsModule ],
   providers: [ Client ],
   declarations: [
     NewsfeedList,

@@ -6,6 +6,7 @@ import { ThumbsUpComponent } from './thumbsup.component';
 import { ThumbsDownComponent } from './thumbsdown.component';
 import { CommentButtonComponent } from './comment.component';
 import { RemindButtonComponent } from './remind.component';
+import { WireButtonComponent } from './wire.component';
 
 @NgModule({
   /*imports: [
@@ -25,7 +26,7 @@ import { RemindButtonComponent } from './remind.component';
   ]*/
   imports: [ IonicModule ],
   providers: [ Client ],
-  declarations: [ ThumbsUpComponent, ThumbsDownComponent, CommentButtonComponent, RemindButtonComponent ],
-  exports: [ ThumbsUpComponent, ThumbsDownComponent, CommentButtonComponent, RemindButtonComponent ]
+  declarations: [ ThumbsUpComponent, ThumbsDownComponent, CommentButtonComponent, RemindButtonComponent, WireButtonComponent ],
+  exports: [ ThumbsUpComponent, ThumbsDownComponent, CommentButtonComponent, RemindButtonComponent, WireButtonComponent ]
 })
 export class ButtonsModule { }

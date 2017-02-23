@@ -99,6 +99,7 @@ export class CaptureComponent {
   }
 
   dismiss(){
+    this.attachment.reset();
     this.viewCtrl.dismiss();
   }
 

@@ -79,8 +79,18 @@ export class AttachmentService{
       });
   }
 
+  setContainerGuid(guid){
+    this.meta.container_guid = guid;
+    return this;
+  }
+
+  setAccessId(access_id) {
+    this.meta.access_id = access_id;
+    return this;
+  }
+
   reset(){
-    this.meta = {};
+    this.meta.attachment_guid = '';
     this.previewUri = '';
     this.progress = 0;
     this.emitter.next({ progress: 0, guid: '' });

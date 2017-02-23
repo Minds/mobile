@@ -18,16 +18,16 @@ export class NotificationSettingsComponent {
   storage = new Storage();
 
   toggles = [
-    { id: 'daily', name: 'Daily Reward', icon: 'md-trophy', toggle: true },
-    { id: 'comment', name: 'Comments', icon: 'md-chatbubble', toggle: true },
-    { id: 'like', name: 'Votes', icon: 'md-thumbs-up', toggle: true },
-    { id: 'tag', name: 'Tags', icon: 'md-at', toggle: true },
-    { id: 'friends', name: 'Subscriptions', icon: 'md-person-add', toggle: true },
-    { id: 'reminds', name: 'Reminds', icon: 'md-repeat', toggle: true },
-    { id: 'boost_request', name: 'Peer2Peer boosts', icon: 'md-trending-up', toggle: true },
-    { id: 'boost_accepted', name: 'Approved boosts', icon: 'md-trending-up', toggle: true },
-    { id: 'boost_rejected', name: 'Rejected boosts', icon: 'md-trending-up', toggle: true },
-    { id: 'boost_completed', name: 'Fulfilled boosts', icon: 'md-trending-up', toggle: true }
+    { id: 'daily', name: 'Daily Reward', icon: 'md-trophy', toggle: true, ready: false },
+    { id: 'comment', name: 'Comments', icon: 'md-chatbubble', toggle: true, ready: false },
+    { id: 'like', name: 'Votes', icon: 'md-thumbs-up', toggle: true, ready: false },
+    { id: 'tag', name: 'Tags', icon: 'md-at', toggle: true, ready: false },
+    { id: 'friends', name: 'Subscriptions', icon: 'md-person-add', toggle: true, ready: false },
+    { id: 'reminds', name: 'Reminds', icon: 'md-repeat', toggle: true, ready: false },
+    { id: 'boost_request', name: 'Peer2Peer boosts', icon: 'md-trending-up', toggle: true, ready: false },
+    { id: 'boost_accepted', name: 'Approved boosts', icon: 'md-trending-up', toggle: true, ready: false },
+    { id: 'boost_rejected', name: 'Rejected boosts', icon: 'md-trending-up', toggle: true, ready: false },
+    { id: 'boost_completed', name: 'Fulfilled boosts', icon: 'md-trending-up', toggle: true, ready: false }
   ]
 
   inProgress : boolean = false;
@@ -52,6 +52,10 @@ export class NotificationSettingsComponent {
   }
 
   setToggle(toggle) {
+    if(!toggle.ready){
+      toggle.ready = true;
+      return;
+    }
     this.client.post('api/v1/notifications/settings', {
       id: toggle.id,
       toggle: toggle.toggle

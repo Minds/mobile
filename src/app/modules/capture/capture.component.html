@@ -43,7 +43,7 @@
   </div>
 
   <div class="m-ionic-poster--preview" *ngIf="attachment.previewUri" (click)="attachment.reset()">
-  	<img [src]="attachment.previewUri" style="display: block;width: 100%;"/>
+  	<img [src]="attachment.previewUri" style="display: block;width: 100%;" (error)="attachment.previewUri = false"/>
   </div>
 
   <div class="m-ionic--progress-bar" *ngIf="progress > 0">

@@ -23,3 +23,16 @@ minds-button-comment{
     position: absolute;
   }*/
 }
+
+minds-button-wire{
+  height: 40px;
+  overflow: hidden;
+
+  ion-icon.m-ionic-icon{
+    font-size: 42px;
+    margin-top: -12px;
+    width: 100%;
+    text-align: center;
+    color: #4690D6 !important;
+  }
+}

@@ -19,7 +19,10 @@
     <div *ngFor="let entity of service.entities"
       class="m-ionic-discovery--tile"
       [navPush]="components.view"
-      [navParams]="{entity: entity}">
+      [navParams]="{entity: entity}"
+      [explicit]="entity.mature"
+      (showExplicit)="entity.mature = false; cd.markForCheck(); cd.detectChanges()"
+      >
   	    <img [src]="'https://edge.minds.com/api/v1/archive/thumbnails/' + entity.guid + '/medium'"/>
     </div>
 

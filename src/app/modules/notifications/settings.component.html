@@ -8,7 +8,7 @@
     <ion-item *ngFor="let toggle of toggles">
       <ion-icon [name]="toggle.icon"></ion-icon>
       <ion-label>{{toggle.name}}</ion-label>
-      <ion-toggle [checked]="toggle.toggle" (ionChange)="toggle.toggle = $event.value; setToggle(toggle);" [disabled]="inProgress"></ion-toggle>
+      <ion-toggle [checked]="toggle.toggle" (ionChange)="toggle.toggle = $event.checked; setToggle(toggle);" [disabled]="inProgress"></ion-toggle>
     </ion-item>
   </ion-list>
 

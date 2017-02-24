@@ -24,6 +24,16 @@ export class DiscoveryList {
   type : string = 'images';
   layout : string = 'tiles';
 
+  categories : Array<{id, label}> = [
+    { id: "awesome", label: "Awesome" },
+    { id: "art", label: "Art" },
+    { id: "music", label: "Music" },
+    { id: "technology", label: "Science & Technology" },
+    { id: "gaming", label: "Gaming" },
+    { id: "nature", label: "Nature" },
+    { id: "news", label: "News" }
+  ];
+
   feed : Array<any> = [];
   offset : string = "";
   inProgress : boolean = true;

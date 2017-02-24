@@ -14,6 +14,7 @@ export class DiscoveryService {
 
   filter : string = "featured";
   type : string = "object/image";
+  category : string = "all";
 
   constructor(private client : Client, private storage : Storage){
     if(this.storage.get('saved.discovery.filter'))
@@ -30,6 +31,32 @@ export class DiscoveryService {
   setType(type : string){
     this.type = type;
     this.storage.set('saved.discovery.type', type);
+  }
+
+  setCategory(category : string){
+    this.category = category;
+    if(this.category == 'all'){
+      this.get(true);
+      return;
+    }
+
+    this.client.get('api/v1/categories/featured/' + this.type, {
+        categories: this.category,
+        limit: this.limit,
+        offset: this.offset
+      })
+      .then((response : any) => {
+
+        this.entities = [];
+
+        for(let entity of response.entities){
+          this.entities.push(entity);
+        }
+
+        this.emitter.next(this.entities);
+        this.inProgress = false;
+        this.offset = response['load-next'];
+      });
   }
 
   search(q : string){

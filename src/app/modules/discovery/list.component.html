@@ -13,8 +13,19 @@
     <input type="text" placeholder="Search..." #q (keyup)="service.search(q.value)"/>
     <ion-icon name="md-options" (click)="openOptions()" [hidden]="q.value"></ion-icon>
   </div>
+  <div class="m-ionic-discovery--categories" style="margin-top: 50px; margin-bottom: -50px;" *ngIf="service.filter == 'featured'">
+    <ion-segment [(ngModel)]="service.category" color="primary">
+      <ion-segment-button value="all" (ionSelect)="service.setCategory('all')">
+        All
+      </ion-segment-button>
+      <ion-segment-button *ngFor="let category of categories" [value]="category.id" (ionSelect)="service.setCategory(category.id)">
+        {{category.label}}
+      </ion-segment-button>
+    </ion-segment>
+  </div>
 
-  <ion-list style="line-height:0;padding-top:56px;" *ngIf="service.type != 'user' && !q.value">
+
+  <ion-list style="line-height:0;margin-top:50px;" *ngIf="service.type != 'user' && !q.value">
 
     <div *ngFor="let entity of service.entities"
       class="m-ionic-discovery--tile"

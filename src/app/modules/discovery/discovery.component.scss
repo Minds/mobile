@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   position: fixed;
+  z-index:1;
   background: #FFF;
   width: 100%;
 
@@ -20,6 +21,16 @@
     -webkit-appearance: none;
     padding: 16px;
     width: 100%;
+  }
+}
+
+.m-ionic-discovery--categories{
+  margin-top: 50px;
+  margin-bottom: -50px;
+  overflow: scroll;
+
+  ion-segment{
+    min-width: 200%;
   }
 }
 

@@ -15,14 +15,21 @@ export class DiscoveryService {
   filter : string = "featured";
   type : string = "object/image";
 
-  constructor(private client : Client){}
+  constructor(private client : Client, private storage : Storage){
+    if(this.storage.get('saved.discovery.filter'))
+      this.filter = <string>this.storage.get('saved.discovery.filter');
+    if(this.storage.get('saved.discovery.type'))
+      this.type = <string>this.storage.get('saved.discovery.type');
+  }
 
   setFilter(filter : string){
     this.filter = filter;
+    this.storage.set('saved.discovery.filter', filter);
   }
 
   setType(type : string){
     this.type = type;
+    this.storage.set('saved.discovery.type', type);
   }
 
   search(q : string){
@@ -79,8 +86,8 @@ export class DiscoveryService {
     });
   }
 
-  static _(client : Client){
-    return new DiscoveryService(client);
+  static _(client : Client, storage : Storage){
+    return new DiscoveryService(client, storage);
   }
 
 }

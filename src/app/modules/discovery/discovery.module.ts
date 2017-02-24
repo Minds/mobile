@@ -7,6 +7,7 @@ import { DiscoveryService } from './discovery.service';
 import { DiscoveryEntity } from './entity/entity.component';
 import { DiscoveryView } from './view.component';
 import { Client } from '../../common/services/api/client';
+import { Storage } from '../../common/services/storage';
 import { ButtonsModule } from '../buttons/buttons.module';
 import { CommonModule } from '../../common/common.module';
 import { HeaderModule } from '../header/header.module';
@@ -17,7 +18,7 @@ import { HeaderModule } from '../header/header.module';
     {
       provide: DiscoveryService,
       useFactory: DiscoveryService._,
-      deps: [ Client ]
+      deps: [ Client, Storage ]
     }
   ],
   declarations: [ DiscoveryList, DiscoveryOptionsComponent, DiscoveryView, DiscoveryEntity ],

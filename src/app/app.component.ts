@@ -44,8 +44,8 @@ export class MindsApp {
 
   }
 
-  openBlogs(){
-    this.app.getRootNav().push(BlogsList);
+  openBlogs(filter : string){
+    this.app.getRootNav().push(BlogsList, { filter: filter });
     this.menuCtrl.close();
   }
 

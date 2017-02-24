@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 
 import { ChannelComponent } from '../channel/channel.component';
 import { Client } from '../../common/services/api/client';
@@ -27,9 +27,9 @@ export class BlogsList {
     channel: ChannelComponent
   }
 
-  constructor(private client : Client, private cd : ChangeDetectorRef, private nav : NavController,
+  constructor(private client : Client, private cd : ChangeDetectorRef, private nav : NavController, private params : NavParams,
     private storage : Storage){
-
+    this.filter = this.params.get('filter');
   }
 
   ngOnInit(){

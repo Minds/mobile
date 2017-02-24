@@ -5,10 +5,19 @@
     </ion-toolbar>
   </ion-header>
   <ion-content>
-    <ion-list>
+    <ion-list #dropdowns>
 
-      <button ion-item (click)="openBlogs()">
+      <button ion-item (click)="dropdowns.blog = true">
         Blogs
+      </button>
+      <button ion-item class="m-ionic-nav--subitem" (click)="openBlogs('featured'); dropdowns.blog = false;" *ngIf="dropdowns.blog">
+        Featured
+      </button>
+      <button ion-item class="m-ionic-nav--subitem" (click)="openBlogs('trending'); dropdowns.blog = false;" *ngIf="dropdowns.blog">
+        Trending
+      </button>
+      <button ion-item class="m-ionic-nav--subitem" (click)="openBlogs('my'); dropdowns.blog = false;" *ngIf="dropdowns.blog">
+        Mine
       </button>
 
       <button ion-item (click)="openGroups()">

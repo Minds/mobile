@@ -3,25 +3,39 @@
   height: 200px;
 }
 .m-ionic-blogs--list-blog-body{
-  padding: 16px;
+  padding: 8px 8px 24px 8px;
 
   h3{
     margin: 0;
+    padding:8px;
     font-size: 16px;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
   }
 }
 
 
 .m-ionic-blogs--list-blog-owner-block{
+
+  > div{
+    padding: 0 8px !important;
+  }
+
+  color:#666;
   .m-ionic-avatar img {
-    min-width: 24px;
-    min-height: 24px;
-    max-width: 24px;
-    max-height: 24px;
+    min-width: 32px;
+    min-height: 32px;
+    max-width: 32px;
+    max-height: 32px;
     border-radius: 50%;
   }
+  .m-ionic-body{
+    display:flex;
+    align-items: center;
+  }
   strong{
+    flex:1;
     letter-spacing:1px;
+    font-weight:500;
+    font-size:11px;
   }
 }

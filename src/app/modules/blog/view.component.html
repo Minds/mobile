@@ -21,14 +21,13 @@
     		<a>
     			<strong>{{blog.ownerObj.name}}</strong>
     		</a>
-
-        <div class="m-ionic-blog--buttons">
-          <minds-button-thumbs-up [entity]="blog" ></minds-button-thumbs-up>
-          <minds-button-thumbs-down [entity]="blog" ></minds-button-thumbs-down>
-          <minds-button-comment [entity]="blog" ></minds-button-comment>
-          <minds-button-remind [entity]="blog" ></minds-button-remind>
-        </div>
     	</div>
+      <div class="m-ionic-blog--buttons">
+        <minds-button-thumbs-up [entity]="blog" ></minds-button-thumbs-up>
+        <minds-button-thumbs-down [entity]="blog" ></minds-button-thumbs-down>
+        <minds-button-comment [entity]="blog" ></minds-button-comment>
+        <minds-button-remind [entity]="blog" ></minds-button-remind>
+      </div>
     </div>
 
     <div class="m-ionic-blog--body" [innerHtml]="blog.description"></div>

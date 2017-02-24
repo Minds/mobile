@@ -19,8 +19,20 @@ export class BlogsList {
 
   filter : string = 'featured';
   blogs : Array<any> = [];
+  limit : number = 12;
   offset : string = "";
   inProgress : boolean = true;
+
+  category : string = 'all';
+  categories : Array<{id, label}> = [
+    { id: "awesome", label: "Awesome" },
+    { id: "art", label: "Art" },
+    { id: "music", label: "Music" },
+    { id: "technology", label: "Science & Technology" },
+    { id: "gaming", label: "Gaming" },
+    { id: "nature", label: "Nature" },
+    { id: "news", label: "News" }
+  ];
 
   components = {
     view: BlogView,
@@ -36,12 +48,16 @@ export class BlogsList {
     this.loadList();
   }
 
-  loadList(){
+  loadList(refresh : boolean = false){
+    if(refresh)
+      this.offset = "";
     return new Promise((res, err) => {
       this.inProgress = true;
       this.client.get('api/v1/blog/' + this.filter, { limit: 12, offset: this.offset})
         .then((response : any) => {
-          //console.log(response);
+          if(refresh){
+            this.blogs = [];
+          }
           for(let blog of response.blogs){
             this.blogs.push(blog);
           }
@@ -52,6 +68,33 @@ export class BlogsList {
           this.cd.detectChanges();
         });
     });
+  }
+
+  setCategory(category : string){
+    this.category = category;
+    if(this.category == 'all'){
+      this.loadList(true);
+      return;
+    }
+
+    this.client.get('api/v1/categories/featured/object/blog', {
+        categories: this.category,
+        limit: this.limit,
+        offset: ''
+      })
+      .then((response : any) => {
+
+        this.blogs = [];
+
+        for(let entity of response.entities){
+          this.blogs.push(entity);
+        }
+
+        this.inProgress = false;
+        this.offset = response['load-next'];
+        this.cd.markForCheck();
+        this.cd.detectChanges();
+      });
   }
 
   refresh(puller){

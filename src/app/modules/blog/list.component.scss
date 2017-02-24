@@ -39,3 +39,11 @@
     font-size:11px;
   }
 }
+
+.m-ionic-blog--categories{
+  overflow: scroll;
+
+  ion-segment{
+    min-width: 200%;
+  }
+}

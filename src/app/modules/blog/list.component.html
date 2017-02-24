@@ -10,6 +10,17 @@
 
   <ion-list>
 
+    <div class="m-ionic-blog--categories" *ngIf="filter == 'featured'">
+      <ion-segment [(ngModel)]="category" color="primary">
+        <ion-segment-button value="all" (ionSelect)="setCategory('all')">
+          All
+        </ion-segment-button>
+        <ion-segment-button *ngFor="let category of categories" [value]="category.id" (ionSelect)="setCategory(category.id)">
+          {{category.label}}
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+
     <div *ngFor="let blog of blogs">
       <div class="m-ionic-blogs--list-blog"
         [navPush]="components.view"

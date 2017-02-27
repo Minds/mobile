@@ -1,6 +1,6 @@
 import { Component, ViewChild } from "@angular/core";
 import { Nav, MenuController, Platform, App } from 'ionic-angular';
-import { StatusBar } from 'ionic-native';
+import { StatusBar, AppVersion } from 'ionic-native';
 
 import { TabsComponent } from "./modules/tabs/tabs.component";
 import { LoginComponent } from "./modules/auth/login.component";
@@ -27,6 +27,9 @@ export class MindsApp {
     blogs: BlogsList
   };
 
+  versionNumber : string = "...";
+  versionCode : string = "...";
+
   rootPage : any = LoginComponent;
 
   constructor(private oauth2 : OAuth2, public menuCtrl: MenuController, private platform : Platform, private app : App,
@@ -41,7 +44,16 @@ export class MindsApp {
   }
 
   ngOnInit(){
-
+    this.platform.ready().then(() => {
+      AppVersion.getVersionNumber()
+        .then((version) => {
+          this.versionNumber = version;
+        });
+      AppVersion.getVersionCode()
+        .then((code) => {
+          this.versionCode = code;
+      });
+    });
   }
 
   openBlogs(filter : string){

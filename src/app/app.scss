@@ -46,11 +46,26 @@ a{
   bottom: 0;
   position: absolute;
   padding: 16px;
+  text-align: center;
+
   a {
     text-decoration: none;
     letter-spacing: 1px;
     padding-right: 24px;
     color: #888;
+  }
+
+  img{
+    width: 140px;
+    margin: 12px;
+  }
+  .m-ionic-menu--version{
+    text-decoration: none;
+    letter-spacing: 1px;
+    padding: 0 24px 12px 12px;
+    font-weight: bold;
+    color: #888;
+    box-sizing: border-box;
   }
 }
 

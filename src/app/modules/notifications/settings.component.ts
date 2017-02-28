@@ -42,8 +42,10 @@ export class NotificationSettingsComponent {
     this.inProgress = true;
     this.client.get('api/v1/notifications/settings')
       .then((response : any) => {
+
         for (var toggle in this.toggles) {
-          this.toggles[toggle].toggle = response.toggles[toggle];
+          let id = this.toggles[toggle].id;
+          this.toggles[toggle].toggle = response.toggles[id];
         }
         this.inProgress = false;
         this.cd.markForCheck();

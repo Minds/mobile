@@ -65,7 +65,7 @@ export class Activity {
         .present();
       return;
     }
-    if(url.indexOf('minds.com/newsfeed/')){
+    if(url.indexOf('minds.com/newsfeed/') > -1){
       let parts = url.split('/');
       this.navCtrl.push(NewsfeedSingleComponent, { guid: parts[parts.length-1]});
       return;

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef, HostListener } from '@angular/core';
 import { ActionSheetController, ModalController, PopoverController, Platform, Nav } from 'ionic-angular'
 import { PhotoViewer } from 'ionic-native';
 
@@ -24,6 +24,7 @@ export class Activity {
 
   entity;
   editing : boolean = false;
+  @Output() deleted : EventEmitter<any> = new EventEmitter();
 
   minds = {
     cdn_url: 'https://edge.minds.com/'
@@ -45,6 +46,7 @@ export class Activity {
 
     if(entity.remind_object){
       this.entity = entity.remind_object;
+      this.entity.guid = entity.guid;
       this.entity.reminderOwnerObj = entity.ownerObj;
       this.entity.remind_object = false; //stop remind looping, if it even happens
       this.entity.boosted = entity.boosted;
@@ -83,6 +85,8 @@ export class Activity {
         role: 'destructive',
         handler: () => {
           //console.log('Destructive clicked');
+          this.client.delete('api/v1/newsfeed/' + this.entity.guid);
+          this.deleted.next(true);
         }
       });
       buttons.push({

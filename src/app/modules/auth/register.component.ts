@@ -1,22 +1,22 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NavController, LoadingController, AlertController } from 'ionic-angular';
 
-
 import { TabsComponent } from '../tabs/tabs.component';
+import { OnboardingComponent } from '../onboarding/onboarding.component';
 import { Client } from '../../common/services/api/client';
 import { OAuth2 } from '../../common/services/api/oauth2';
+import { PushService } from '../push/push.service';
 
 @Component({
   moduleId: 'module.id',
   selector: 'register',
-  templateUrl: 'register.component.html',
-  //styleUrls: ['login.component.css']
+  templateUrl: 'register.component.html'
 })
 
 export class RegisterComponent {
 
   constructor(private client : Client, private oauth2 : OAuth2, private nav : NavController,
-    public loadingCtrl: LoadingController, private alertCtrl: AlertController){
+    public loadingCtrl: LoadingController, private alertCtrl: AlertController, private push : PushService){
   }
 
   ngOnInit(){
@@ -42,7 +42,8 @@ export class RegisterComponent {
         loader.dismiss();
         if(response.status == 'success'){
           //take to onboarding flow
-          this.nav.setRoot(TabsComponent);
+          this.push.registerToken();
+          this.nav.setRoot(OnboardingComponent);
         } else {
           let alert = this.alertCtrl.create({
             title: 'Sorry!',

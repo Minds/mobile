@@ -10,6 +10,7 @@ import { BlogsList } from './modules/blog/list.component';
 import { NewsfeedList } from "./modules/newsfeed/list.component";
 import { OAuth2 } from "./common/services/api/oauth2";
 import { Storage } from "./common/services/storage";
+import { PushService } from './modules/push/push.service';
 
 //for testing onboarding
 import { OnboardingComponent } from './modules/onboarding/onboarding.component';
@@ -33,7 +34,7 @@ export class MindsApp {
   rootPage : any = LoginComponent;
 
   constructor(private oauth2 : OAuth2, public menuCtrl: MenuController, private platform : Platform, private app : App,
-    private storage : Storage){
+    private storage : Storage, private push : PushService){
     platform.ready().then(() => {
       StatusBar.backgroundColorByHexString('#37474f');
     });

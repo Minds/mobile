@@ -4,6 +4,7 @@ import { NavController, LoadingController, AlertController } from 'ionic-angular
 import { RegisterComponent } from './register.component';
 import { TabsComponent } from '../tabs/tabs.component';
 import { OAuth2 } from '../../common/services/api/oauth2';
+import { PushService } from '../push/push.service';
 
 @Component({
   moduleId: 'module.id',
@@ -14,7 +15,8 @@ import { OAuth2 } from '../../common/services/api/oauth2';
 
 export class LoginComponent {
 
-  constructor(private oauth2 : OAuth2, private nav : NavController, public loadingCtrl: LoadingController, private alertCtrl: AlertController){
+  constructor(private oauth2 : OAuth2, private nav : NavController, public loadingCtrl: LoadingController, private alertCtrl: AlertController,
+    private push : PushService){
   }
 
   ngOnInit(){
@@ -34,7 +36,8 @@ export class LoginComponent {
     this.oauth2.login(username.value, password.value, (success) => {
       loader.dismiss();
       if(success){
-        this.nav.push(TabsComponent);
+        this.push.registerToken();
+        this.nav.setRoot(TabsComponent);
       } else {
         let alert = this.alertCtrl.create({
           title: 'Sorry!',

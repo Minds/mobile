@@ -30,8 +30,8 @@
 
 
       <ion-item>
-        <ion-label>Turn off video autoplay</ion-label>
-        <ion-toggle [checked]="storage.get('disable-autoplay')" (ionChange)="storage.set('disable-autoplay', $event.checked)"></ion-toggle>
+        <ion-label>Autoplay videos</ion-label>
+        <ion-toggle [checked]="storage.get('autoplay')" (ionChange)="storage.set('autoplay', $event.checked)"></ion-toggle>
       </ion-item>
 
       <button ion-item (click)="logout()">
@@ -39,11 +39,10 @@
       </button>
     </ion-list>
 
-    <div class="m-ionic-menu--version">
-      {{versionNumber}} ({{versionCode}})
-    </div>
-
     <div class="m-ionic-menu--footer">
+      <div class="m-ionic-menu--version">
+        v{{versionNumber}} ({{versionCode}})
+      </div>
       <a href="https://www.minds.com/p/faq">FAQ</a>
       <a href="https://www.minds.com/p/code">Code</a>
       <a href="https://www.minds.com/p/terms">Terms</a>

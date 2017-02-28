@@ -154,8 +154,7 @@ export class Activity {
   canAutoplay(){
     if(this.platform.is('ios'))
       return false; //ios can't inline play
-    console.log(this.storage.get('disable-autoplay') == 'false');
-    return this.storage.get('disable-autoplay') == 'false' ? true : false;
+    return this.storage.get('autoplay');
   }
 
   openImage(){

@@ -34,6 +34,10 @@
         <ion-toggle [checked]="storage.get('autoplay')" (ionChange)="storage.set('autoplay', $event.checked)"></ion-toggle>
       </ion-item>
 
+      <button ion-item (click)="invite()">
+        Invite
+      </button>
+
       <button ion-item (click)="logout()">
         Logout
       </button>

@@ -11,6 +11,7 @@ import { NewsfeedList } from "./modules/newsfeed/list.component";
 import { OAuth2 } from "./common/services/api/oauth2";
 import { Storage } from "./common/services/storage";
 import { PushService } from './modules/push/push.service';
+import { ShareService } from './modules/share/share.service';
 
 //for testing onboarding
 import { OnboardingComponent } from './modules/onboarding/onboarding.component';
@@ -34,7 +35,7 @@ export class MindsApp {
   rootPage : any = LoginComponent;
 
   constructor(private oauth2 : OAuth2, public menuCtrl: MenuController, private platform : Platform, private app : App,
-    private storage : Storage, private push : PushService){
+    private storage : Storage, private push : PushService, private share : ShareService){
     platform.ready().then(() => {
       StatusBar.backgroundColorByHexString('#37474f');
     });
@@ -70,6 +71,10 @@ export class MindsApp {
   openBugGroup(){
     this.app.getRootNav().push(GroupProfile, {guid:'100000000000000681'});
     this.menuCtrl.close();
+  }
+
+  invite(){
+    this.share.share('Join me on Minds.com', 'Join me on Minds.com', null, 'https://www.minds.com/register?referrer=' + this.storage.get('user_guid'));
   }
 
   logout(){

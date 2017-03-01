@@ -69,8 +69,10 @@ export class CaptureComponent {
           this.wallet.increment(1);
         }
 
-        this.meta.attachment_guid = "";
-        this.meta.message = "";
+        this.meta = {
+          message: '',
+          attachment_guid: ''
+        };
         this.progress = 0;
 
         this.modalCtrl.create(BoostComponent, { entity: response.activity })
@@ -96,6 +98,10 @@ export class CaptureComponent {
           })
           .present();
       })
+  }
+
+  setRichMeta(meta){
+    this.meta = Object.assign(this.meta, meta);
   }
 
   dismiss(){

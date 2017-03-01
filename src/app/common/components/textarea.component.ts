@@ -10,7 +10,7 @@ import { Component, ElementRef, Input, Output, EventEmitter, ViewChild, OnChange
       [attr.contenteditable]="!disabled ? 'true' : null"
       (keyup)="change()"
       (blur)="change()"
-      (paste)="change()"
+      (paste)="paste($event); change()"
     ></div>
     <span
       *ngIf="placeholder && editor.innerText.length === 0"
@@ -58,6 +58,18 @@ export class TextareaComponent implements OnChanges {
     this.update.emit(this.editorControl.nativeElement.innerText);
   }
 
+  paste(e: any) {
+    e.preventDefault();
+
+    if (e.clipboardData && e.clipboardData.getData) {
+      var text = e.clipboardData.getData("text/plain");
+      document.execCommand("insertHTML", false, text);
+    } else if ((<any> window).clipboardData && (<any> window).clipboardData.getData) {
+      var text = (<any> window).clipboardData.getData("Text");
+      this.insertTextAtCursor(text);
+    }
+  }
+
   @Input() set clear(value : any){
     this.blur();
     this.model = this.editorControl.nativeElement.innerText = '';
@@ -80,6 +92,21 @@ export class TextareaComponent implements OnChanges {
 
     this.cd.markForCheck();
     this.cd.detectChanges();
+  }
+
+  private insertTextAtCursor(text: string) {
+    let sel, range, html;
+
+    if (window.getSelection) {
+      sel = window.getSelection();
+      if (sel.getRangeAt && sel.rangeCount) {
+        range = sel.getRangeAt(0);
+        range.deleteContents();
+        range.insertNode(document.createTextNode(text));
+      }
+    } else if ((<any>document).selection && (<any>document).selection.createRange) {
+      (<any>document).selection.createRange().text = text;
+    }
   }
 
 }

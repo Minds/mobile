@@ -113,8 +113,11 @@ export class PosterComponent {
           this.wallet.increment(1);
         }
 
-        this.meta.attachment_guid = "";
-        this.meta.message = "";
+        this.meta = {
+          message: '',
+          attachment_guid: null,
+          container_guid: null
+        };
         this.attachment.reset();
         this.progress = 0;
         this.prepend.next(response.activity);
@@ -125,6 +128,10 @@ export class PosterComponent {
       .catch((err) => {
         loader.dismiss();
       })
+  }
+
+  setRichMeta(meta){
+    this.meta = Object.assign(this.meta, meta);
   }
 
 }

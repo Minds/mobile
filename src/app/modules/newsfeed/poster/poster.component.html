@@ -21,6 +21,8 @@
 
 </div>
 
+<m-rich-input [richInput]="meta.message" (richInputMeta)="setRichMeta($event)"></m-rich-input>
+
 <div class="m-ionic-poster--preview" *ngIf="attachment.previewUri" (click)="attachment.reset()">
 	<img [src]="attachment.previewUri" style="display: block;width: 100%;"/>
 </div>

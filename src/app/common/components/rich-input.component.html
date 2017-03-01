@@ -1,0 +1,6 @@
+<!-- Rich content -->
+<div class="m-ionic-rich-embed" *ngIf="meta.url">
+	<img [src]="meta.thumbnail" *ngIf="meta.thumbnail">
+  <h3>{{meta.title}}</h3>
+  <p>{{meta.perma_url | domain }}</p>
+</div>

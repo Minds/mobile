@@ -11,6 +11,7 @@ import { BlogView } from '../../blog/view.component';
 import { NewsfeedSingleComponent } from '../single.component';
 import { LanguagesComponent } from '../../translations/languages.component';
 import { ReportService } from '../../report/report.service';
+import { ShareService } from '../../share/share.service';
 
 @Component({
   moduleId: 'module.id',
@@ -39,7 +40,7 @@ export class Activity {
 
   constructor(private client : Client, public cache : CacheService, public actionSheetCtrl: ActionSheetController,
     private cd : ChangeDetectorRef, private storage : Storage, private modalCtrl : ModalController, private platform : Platform,
-    private navCtrl : Nav, private popoverCtrl : PopoverController, private report : ReportService){
+    private navCtrl : Nav, private popoverCtrl : PopoverController, private report : ReportService, private share : ShareService){
 
   }
 
@@ -118,7 +119,7 @@ export class Activity {
     buttons.push({
       text: 'Share',
       handler: () => {
-       console.log('Share clicked');
+       this.share.share('', '', null, 'https://www.minds.com/newsfeed/' + this.entity.guid);
       }
     });
 

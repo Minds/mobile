@@ -46,43 +46,48 @@ public class Crypt extends CordovaPlugin {
      * @return                  True if the action was valid, false if not.
      */
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        if (action.equals("encrypt")) {
-            try{
-                String data = args.getString(0);
-                String publickey = args.getString(1);
-                callbackContext.success(this.encrypt(data, publickey));
-            } catch(Exception e){
+        Crypt self = this;
+        this.cordova.getThreadPool().execute(new Runnable() {
+            public void run() {
+              if (action.equals("encrypt")) {
+                  try{
+                      String data = args.getString(0);
+                      String publickey = args.getString(1);
+                      callbackContext.success(self.encrypt(data, publickey));
+                  } catch(Exception e){
+                  }
+              }
+              else if(action.equals("decrypt")) {
+                  try{
+                      String data = args.getString(0);
+                      String privatekey = args.getString(1);
+                      callbackContext.success(self.decrypt(data, privatekey));
+                   } catch(Exception e){
+                   }
+              } else {
+                  return false;
+              }
             }
-        }
-        else if(action.equals("decrypt")) {
-            try{
-                String data = args.getString(0);
-                String privatekey = args.getString(1);
-                callbackContext.success(this.decrypt(data, privatekey));
-             } catch(Exception e){
-             }
-        } else {
-            return false;
-        }
+        });
         return true;
     }
 
     public String encrypt(String data, String publickey) throws Exception{
             publickey= publickey.replaceAll("(-+BEGIN PUBLIC KEY-+\\r?\\n|-+END PUBLIC KEY-+\\r?\\n?)", "");
-    
+
             try{
                 byte[] publickeyRaw = Base64.decode(publickey, Base64.DEFAULT);
-                X509EncodedKeySpec keySpec = new X509EncodedKeySpec(publickeyRaw); 
+                X509EncodedKeySpec keySpec = new X509EncodedKeySpec(publickeyRaw);
                 KeyFactory fact = KeyFactory.getInstance("RSA");
                 PublicKey pub = fact.generatePublic(keySpec);
 
                 byte[] text = data.getBytes(Charset.forName("UTF-8"));
-            
+
                 Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
                 cipher.init(Cipher.ENCRYPT_MODE, pub);
                 byte[] cipherString = cipher.doFinal(text);
-               
-                
+
+
                 return new String(Base64.encode(cipherString, Base64.DEFAULT));
 
             } catch(Exception e){
@@ -92,10 +97,10 @@ public class Crypt extends CordovaPlugin {
     }
 
     public String decrypt(String data, String privatekey) throws IllegalBlockSizeException, BadPaddingException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException {
-        privatekey= privatekey.replaceAll("(-+BEGIN PRIVATE KEY-+\\r?\\n|-+END PRIVATE KEY-+\\r?\\n?)", "");  
+        privatekey= privatekey.replaceAll("(-+BEGIN PRIVATE KEY-+\\r?\\n|-+END PRIVATE KEY-+\\r?\\n?)", "");
         byte[] dataCipher = Base64.decode(data, Base64.DEFAULT);
-       
-        try{ 
+
+        try{
             byte[] privatekeyRaw = Base64.decode(privatekey, Base64.DEFAULT);
             PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(privatekeyRaw);
             KeyFactory fact = KeyFactory.getInstance("RSA");
@@ -112,8 +117,8 @@ public class Crypt extends CordovaPlugin {
             Log.w("CRYPT", e);
             return null;
         }
-        
-        
+
+
     }
 
 }

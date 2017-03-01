@@ -10,6 +10,7 @@ import { BoostComponent } from '../boost/boost.component';
 import { BlogView } from '../../blog/view.component';
 import { NewsfeedSingleComponent } from '../single.component';
 import { LanguagesComponent } from '../../translations/languages.component';
+import { ReportService } from '../../report/report.service';
 
 @Component({
   moduleId: 'module.id',
@@ -38,7 +39,7 @@ export class Activity {
 
   constructor(private client : Client, public cache : CacheService, public actionSheetCtrl: ActionSheetController,
     private cd : ChangeDetectorRef, private storage : Storage, private modalCtrl : ModalController, private platform : Platform,
-    private navCtrl : Nav, private popoverCtrl : PopoverController){
+    private navCtrl : Nav, private popoverCtrl : PopoverController, private report : ReportService){
 
   }
 
@@ -124,7 +125,7 @@ export class Activity {
     buttons.push({
       text: 'Report',
       handler: () => {
-       console.log('Report clicked');
+        this.report.report(this.entity.guid);
       }
     });
 

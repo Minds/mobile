@@ -21,6 +21,7 @@ import { CommonModule } from '../../common/common.module';
 import { HeaderModule } from '../header/header.module';
 import { AttachmentModule } from '../attachments/attachment.module';
 import { TranslationsModule } from '../translations/translations.module';
+import { ReportModule } from '../report/report.module';
 
 @NgModule({
   /*imports: [
@@ -38,7 +39,7 @@ import { TranslationsModule } from '../translations/translations.module';
   exports: [
     RouterModule
   ]*/
-  imports: [ IonicModule, CommonModule, ButtonsModule, AttachmentModule, HeaderModule, TranslationsModule ],
+  imports: [ IonicModule, CommonModule, ButtonsModule, AttachmentModule, HeaderModule, TranslationsModule, ReportModule ],
   providers: [ Client ],
   declarations: [
     NewsfeedList,

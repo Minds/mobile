@@ -36,7 +36,7 @@ export class RemindButtonComponent {
 
   remind(){
     let loader = this.loadingCtrl.create({
-      content: "Please wait...",
+      //content: "Please wait...",
     });
     loader.present();
     this.selected = true;

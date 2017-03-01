@@ -42,7 +42,7 @@ export class NewsfeedBoostComponent {
     private storage : Storage){
 
     this.loader = this.loadingCtrl.create({
-      content: "Please wait...",
+      //content: "Please wait...",
     });
   }
 

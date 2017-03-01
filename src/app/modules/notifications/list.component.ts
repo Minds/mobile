@@ -30,7 +30,7 @@ export class NotificationsList {
   storage = new Storage();
 
   loader = this.loadingCtrl.create({
-    content: "Please wait...",
+    //content: "Please wait...",
   });
 
   constructor(private client : Client, private loadingCtrl : LoadingController, private cd : ChangeDetectorRef,

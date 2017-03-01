@@ -96,7 +96,7 @@ export class ChannelComponent {
       })
       .then((data) => {
         let loader = this.loadingCtrl.create({
-          content: "Please wait...",
+          content: "Uploading...",
         });
         loader.present();
 

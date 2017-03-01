@@ -31,7 +31,7 @@ export class BlogView {
   ngOnInit(){
     this.guid = this.params.get('guid');
     this.loader = this.loadingCtrl.create({
-      content: "Please wait...",
+      //content: "Please wait...",
     });
     this.load();
   }

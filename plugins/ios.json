@@ -7,40 +7,53 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-console": {
-            "PACKAGE_NAME": "io.ionic.starter"
-        },
-        "cordova-plugin-crosswalk-webview": {
-            "PACKAGE_NAME": "io.ionic.starter"
-        },
-        "cordova-plugin-device": {
-            "PACKAGE_NAME": "io.ionic.starter"
-        },
-        "cordova-plugin-splashscreen": {
-            "PACKAGE_NAME": "io.ionic.starter"
-        },
-        "cordova-plugin-statusbar": {
-            "PACKAGE_NAME": "io.ionic.starter"
-        },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "io.ionic.starter"
-        },
-        "ionic-plugin-keyboard": {
-            "PACKAGE_NAME": "io.ionic.starter"
+        "com-sarriaroman-photoviewer": {
+            "PACKAGE_NAME": "com.minds.mobile.dev"
         },
         "cordova-plugin-camera": {
             "PACKAGE_NAME": "com.minds.mobile.dev"
         },
-        "cordova-plugin-media-capture": {
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.minds.mobile.dev"
+        },
+        "cordova-plugin-crosswalk-webview": {
+            "PACKAGE_NAME": "com.minds.mobile.dev"
+        },
+        "cordova-plugin-device": {
             "PACKAGE_NAME": "com.minds.mobile.dev"
         },
         "cordova-plugin-file-transfer": {
             "PACKAGE_NAME": "com.minds.mobile.dev"
         },
-        "com-sarriaroman-photoviewer": {
+        "cordova-plugin-media-capture": {
             "PACKAGE_NAME": "com.minds.mobile.dev"
         },
-        "org.apache.cordova.crypt": {
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.minds.mobile.dev"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "com.minds.mobile.dev"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.minds.mobile.dev"
+        },
+        "cordova-sqlite-storage": {
+            "PACKAGE_NAME": "com.minds.mobile.dev"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "com.minds.mobile.dev"
+        },
+        "card.io.cordova.mobilesdk": {
+            "PACKAGE_NAME": "com.minds.mobile.dev"
+        },
+        "cordova-plugin-app-version": {
+            "PACKAGE_NAME": "com.minds.mobile.dev"
+        },
+        "phonegap-plugin-push": {
+            "SENDER_ID": "85075801930",
+            "PACKAGE_NAME": "com.minds.mobile.dev"
+        },
+        "cordova-plugin-x-socialsharing": {
             "PACKAGE_NAME": "com.minds.mobile.dev"
         }
     },
@@ -49,6 +62,9 @@
             "PACKAGE_NAME": "com.minds.mobile.dev"
         },
         "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.minds.mobile.dev"
+        },
+        "minds-plugin-crypt": {
             "PACKAGE_NAME": "com.minds.mobile.dev"
         }
     }

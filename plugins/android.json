@@ -7,6 +7,12 @@
         "files": {}
     },
     "installed_plugins": {
+        "com-sarriaroman-photoviewer": {
+            "PACKAGE_NAME": "com.minds.mobile.dev"
+        },
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "com.minds.mobile.dev"
+        },
         "cordova-plugin-console": {
             "PACKAGE_NAME": "com.minds.mobile.dev"
         },
@@ -21,6 +27,12 @@
         "cordova-plugin-device": {
             "PACKAGE_NAME": "com.minds.mobile.dev"
         },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "com.minds.mobile.dev"
+        },
+        "cordova-plugin-media-capture": {
+            "PACKAGE_NAME": "com.minds.mobile.dev"
+        },
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "com.minds.mobile.dev"
         },
@@ -30,22 +42,23 @@
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.minds.mobile.dev"
         },
+        "cordova-sqlite-storage": {
+            "PACKAGE_NAME": "com.minds.mobile.dev"
+        },
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "com.minds.mobile.dev"
         },
-        "cordova-plugin-camera": {
+        "card.io.cordova.mobilesdk": {
             "PACKAGE_NAME": "com.minds.mobile.dev"
         },
-        "cordova-plugin-media-capture": {
+        "cordova-plugin-app-version": {
+            "PACKAGE_NAME": "com.minds.mobile"
+        },
+        "phonegap-plugin-push": {
+            "SENDER_ID": "85075801930",
             "PACKAGE_NAME": "com.minds.mobile.dev"
         },
-        "cordova-plugin-file-transfer": {
-            "PACKAGE_NAME": "com.minds.mobile.dev"
-        },
-        "com-sarriaroman-photoviewer": {
-            "PACKAGE_NAME": "com.minds.mobile.dev"
-        },
-        "minds-plugin-crypt": {
+        "cordova-plugin-x-socialsharing": {
             "PACKAGE_NAME": "com.minds.mobile.dev"
         }
     },
@@ -54,6 +67,9 @@
             "PACKAGE_NAME": "com.minds.mobile.dev"
         },
         "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.minds.mobile.dev"
+        },
+        "minds-plugin-crypt": {
             "PACKAGE_NAME": "com.minds.mobile.dev"
         }
     }

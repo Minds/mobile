@@ -42,7 +42,9 @@
 			<strong>{{entity.ownerObj.name}}</strong>
 		</a>
     <a *ngIf="entity.containerObj && entity.containerObj.type == 'group'"
-      class="mdl-color-text--blue-grey-300">
+      class="mdl-color-text--blue-grey-300"
+			[navPush]="components.group" [navParams]="{ guid: entity.containerObj.guid}"
+			>
       <strong>({{entity.containerObj.name}})</strong>
     </a>
 		<a>

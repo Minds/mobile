@@ -12,6 +12,7 @@ import { NewsfeedSingleComponent } from '../single.component';
 import { LanguagesComponent } from '../../translations/languages.component';
 import { ReportService } from '../../report/report.service';
 import { ShareService } from '../../share/share.service';
+import { GroupProfile } from '../../groups/profile.component';
 
 @Component({
   moduleId: 'module.id',
@@ -33,7 +34,8 @@ export class Activity {
   }
 
   components = {
-    channel: ChannelComponent
+    channel: ChannelComponent,
+    group: GroupProfile
   }
 
   language : string = '';

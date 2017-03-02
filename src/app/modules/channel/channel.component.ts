@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { NavParams, LoadingController } from 'ionic-angular';
+import { NavParams, LoadingController, ActionSheetController } from 'ionic-angular';
 import { Camera } from 'ionic-native';
 
 import { Client } from '../../common/services/api/client';
@@ -32,7 +32,7 @@ export class ChannelComponent {
   }
 
   constructor(private client : Client, private upload : Upload, private params: NavParams, private cache : CacheService,
-    private cd: ChangeDetectorRef, private loadingCtrl : LoadingController, private storage : Storage){
+    private cd: ChangeDetectorRef, private loadingCtrl : LoadingController, private storage : Storage, private actionSheetCtrl : ActionSheetController){
     //if(applicationModule.android)
     //  page.actionBarHidden = true;
   }
@@ -149,6 +149,50 @@ export class ChannelComponent {
 
   refresh(){
 
+  }
+
+  openActions(){
+
+    let buttons = [];
+
+    if(!this.channel.blocked){
+      buttons.push({
+        text: 'Block',
+        handler: () => {
+          this.client.put('api/v1/block/' + this.channel.guid, {})
+            .then((response : any) => {
+              this.channel.blocked = true;
+            })
+            .catch((e) => {
+              this.channel.blocked = false;
+            });
+        }
+      });
+    } else {
+      buttons.push({
+        text: 'Unblock',
+        handler: () => {
+          this.client.delete('api/v1/block/' + this.channel.guid, {})
+            .then((response : any) => {
+              this.channel.blocked = false;
+            })
+            .catch((e) => {
+              this.channel.blocked = true;
+            });
+        }
+      });
+    }
+
+    buttons.push({
+      text: 'Cancel',
+      role: 'cancel'
+    });
+
+    let actionSheet = this.actionSheetCtrl.create({
+      //title: '',
+      buttons: buttons
+    });
+    actionSheet.present();
   }
 
 }

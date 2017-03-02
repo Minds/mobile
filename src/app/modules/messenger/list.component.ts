@@ -39,7 +39,7 @@ export class MessengerList {
     this.loadList();
   }
 
-  loadList(refresh : boolean = true){
+  loadList(refresh : boolean = false){
     if(refresh){
       this.offset = "";
     }

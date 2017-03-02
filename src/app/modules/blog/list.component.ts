@@ -58,6 +58,8 @@ export class BlogsList {
           if(refresh){
             this.blogs = [];
           }
+          if(this.offset)
+            this.blogs.shift();
           for(let blog of response.blogs){
             this.blogs.push(blog);
           }

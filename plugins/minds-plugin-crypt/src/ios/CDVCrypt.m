@@ -26,37 +26,37 @@
 
 - (void)encrypt:(CDVInvokedUrlCommand*)command
 {
-    
+
     //arguments passed from cordova
     NSString* dataString = [command.arguments objectAtIndex:0];
     NSString* publickeyString = [command.arguments objectAtIndex:1];
-    
+
     //NSLog(@"Attempting to encrypt: %@", dataString);
-    
+
     //load the public key
     const char *publickey = [publickeyString UTF8String];
     BIO *bio = BIO_new_mem_buf((void*)publickey, (int)strlen(publickey)+1000);
     RSA *rsa_publickey = PEM_read_bio_RSA_PUBKEY(bio, NULL, 0, NULL);
     BIO_free(bio);
-    
-    
+
+
     NSData *data = [dataString dataUsingEncoding:NSUTF8StringEncoding];
-    
+
     // Allocate a buffer
     int maxSize = RSA_size(rsa_publickey);
     unsigned char *output = (unsigned char *) malloc(maxSize * [data length]);
-    
+
     // Fill buffer with encrypted data
     int bytes = RSA_public_encrypt((int)[data length], [data bytes], output, rsa_publickey, RSA_PKCS1_PADDING);
-    
+
     // If you want a NSData object back
     NSData *raw_cipher = [NSData dataWithBytes:output length:bytes];
-    NSString* encrypted_string = [raw_cipher base64EncodedString];
-    
+    NSString* encrypted_string =  [raw_cipher base64EncodedStringWithOptions:0];
+
     //NSLog(@"with cipher: %@", encrypted_string);
 
     CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:encrypted_string];
-    [pluginResult setKeepCallbackAsBool:YES]; 
+    [pluginResult setKeepCallbackAsBool:YES];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
@@ -65,7 +65,7 @@
     //arguments passed from cordova
     NSString* dataString = [command.arguments objectAtIndex:0];
     NSString* privatekeyString = [command.arguments objectAtIndex:1];
-    
+
     //NSLog(@"Attempting to decrypt: %@", dataString);
  //   NSLog(@"with the following private key: %@", privatekeyString);
 
@@ -74,19 +74,19 @@
     BIO *bio = BIO_new_mem_buf((void *)private_key, -1);
     RSA *rsa_privatekey = PEM_read_bio_RSAPrivateKey(bio, NULL, NULL, NULL);
     BIO_free(bio);
-    
+
     if(rsa_privatekey == NULL){
         NSLog(@"Error with the private key");
         return nil;
     }
- 
+
     NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:dataString options:0];
 
     int maxSize = RSA_size(rsa_privatekey);
     char *decrypted = (unsigned char *)malloc(maxSize * [decodedData length]);
     char *err = NULL;
     if (RSA_private_decrypt([decodedData length], [decodedData bytes], decrypted, rsa_privatekey, RSA_PKCS1_PADDING) == -1) {
-        ERR_load_CRYPTO_strings();
+        /*ERR_load_CRYPTO_strings();
         NSLog(@"Decrypt error: %s (%s)",
                           ERR_error_string(ERR_get_error(), malloc(130)),
                                             ERR_reason_error_string(ERR_get_error()));
@@ -96,18 +96,18 @@
 
         NSLog(@"the cipher length was %@", [decodedData length]);
         NSLog(@"base64 was...", [decodedData base64EncodedString]);
-        NSLog(@"an raw was...", decodedData);
+        NSLog(@"an raw was...", decodedData);*/
         return nil;
-        
+
     }
     RSA_free(rsa_privatekey);
 
     //NSLog(@"with output: %@", [NSString stringWithUTF8String:(char *)decrypted]);
-    
+
     CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[NSString stringWithUTF8String:(char *)decrypted]];
-    [pluginResult setKeepCallbackAsBool:YES]; 
+    [pluginResult setKeepCallbackAsBool:YES];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-    
+
     return true;
 }
 

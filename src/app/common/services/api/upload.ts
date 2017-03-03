@@ -4,12 +4,14 @@ import { Http, Headers } from '@angular/http';
 import { OAuth2 } from './oauth2';
 import { Storage } from '../storage';
 
+import { CONFIG } from '../../../config';
+
 /**
  * API Class
  */
 export class Upload  {
 
-  base : string = "https://edge.minds.com/";
+  base : string = CONFIG.baseUrl;
   oauth2;
 
   storage = new Storage();

@@ -15,7 +15,7 @@
         [navPush]="components.profile"
         [navParams]="{ guid: group.guid }">
           <div class="m-ionic-avatar">
-            <img [src]="'https://www.minds.com/fs/v1/avatars/' + group.guid +'/small'" imgFade />
+            <img [src]="minds.cdn_url + 'fs/v1/avatars/' + group.guid +'/small'" imgFade />
           </div>
           <div class="m-ionic-body">
             <strong>{{group.name}}</strong>

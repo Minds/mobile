@@ -89,7 +89,7 @@ export class MessengerViewService {
   getFromRemote(limit : number, offset : string = ""){
     return new Promise((resolve, reject) => {
       this.client.get('api/v2/conversations/' + this.guid, {
-          limit: 8,
+          limit: limit,
           offset: offset
         })
         .then((response : any) => {

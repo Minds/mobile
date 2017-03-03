@@ -9,7 +9,7 @@
       [navParams]="{ guid: 'me' }"
       class="m-ionic--vanity-avatar"
       >
-      <img [src]="'https://www.minds.com/icon/' + storage.get('user_guid') +'/medium'"
+      <img [src]="minds.cdn_url + 'icon/' + storage.get('user_guid') +'/medium'"
         width="40"
         height="40"
         imgFade

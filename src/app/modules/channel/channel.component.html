@@ -8,11 +8,11 @@
 
   <div class="m-ionic-channel--header" *ngIf="channel">
 
-    <div class="m-ionic-channel--header-banner" [style.background-image]="'url(https://www.minds.com/fs/v1/banners/' + channel.guid + '/fat/' + channel.icontime + ')'">
+    <div class="m-ionic-channel--header-banner" [style.background-image]="'url(' + minds.cdn_url + 'fs/v1/banners/' + channel.guid + '/fat/' + channel.icontime + ')'">
      </div>
 
      <div class="m-ionic-channel--avatar"
-      [style.background-image]="'url(https://www.minds.com/icon/' + channel.guid + '/large/' + channel.icontime + ')'"
+      [style.background-image]="'url(' + minds.cdn_url + 'icon/' + channel.guid + '/large/' + channel.icontime + ')'"
       (click)="changeAvatar()"
       >
      </div>

@@ -8,6 +8,8 @@ import { Client } from '../../../common/services/api/client';
 import { ChannelComponent } from '../../channel/channel.component';
 import { BoostComponent } from '../boost/boost.component';
 
+import { CONFIG } from '../../../config';
+
 @Component({
   moduleId: 'module.id',
   selector: 'minds-entity',
@@ -21,7 +23,7 @@ export class DiscoveryEntity {
   editing : boolean = false;
 
   minds = {
-    cdn_url: 'https://edge.minds.com/'
+    cdn_url: CONFIG.cdnUrl
   }
 
   components = {
@@ -107,8 +109,6 @@ export class DiscoveryEntity {
   }
 
   openImage(){
-    PhotoViewer.show('https://edge.minds.com/api/v1/archive/thumbnails/' + this.entity.guid + '/xlarge');
+    PhotoViewer.show(`${this.minds.cdn_url}api/v1/archive/thumbnails/${this.entity.guid}/xlarge`);
   }
-
-
 }

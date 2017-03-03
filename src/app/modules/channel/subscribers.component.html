@@ -19,7 +19,7 @@
       [navParams]="{ guid: entity.guid }"
       class="m-ionic-discovery--card">
   	  <div class="m-ionic-discovery--card-avatar">
-        <img [src]="'https://www.minds.com/icon/' + entity.guid + '/medium/' + entity.icontime"/>
+        <img [src]="minds.cdn_url + 'icon/' + entity.guid + '/medium/' + entity.icontime"/>
       </div>
       <div class="m-ionic-discovery--card-body">
         <h3>{{entity.name}}</h3>

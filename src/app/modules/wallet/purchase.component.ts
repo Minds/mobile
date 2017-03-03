@@ -7,6 +7,8 @@ import { Storage } from '../../common/services/storage';
 import { WalletService } from './wallet.service';
 import { BraintreeCheckout } from '../payments/braintree/checkout.component';
 
+import { CONFIG } from '../../config';
+
 @Component({
   moduleId: 'module.id',
   selector: 'purchase-points',
@@ -17,7 +19,7 @@ import { BraintreeCheckout } from '../payments/braintree/checkout.component';
 export class PurchaseComponent {
 
   minds = {
-    cdn_url: 'https://edge.minds.com/'
+    cdn_url: CONFIG.cdnUrl
   }
 
   ex : number = 0.01;

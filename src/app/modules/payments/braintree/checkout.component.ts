@@ -6,6 +6,8 @@ import { Storage } from '../../../common/services/storage';
 
 import { loadScript } from '../scriptloader.service.ts';
 
+import { CONFIG } from '../../../config';
+
 @Component({
   moduleId: 'module.id',
   selector: 'braintree-checkout',
@@ -16,7 +18,7 @@ import { loadScript } from '../scriptloader.service.ts';
 export class BraintreeCheckout {
 
   minds = {
-    cdn_url: 'https://edge.minds.com/'
+    cdn_url: CONFIG.cdnUrl
   }
 
   braintree;

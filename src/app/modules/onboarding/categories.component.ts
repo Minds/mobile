@@ -4,6 +4,8 @@ import { NavController, LoadingController, AlertController } from 'ionic-angular
 import { TabsComponent } from '../tabs/tabs.component';
 import { Client } from '../../common/services/api/client';
 
+import { CONFIG } from '../../config';
+
 @Component({
   moduleId: 'module.id',
   selector: 'categories',
@@ -14,7 +16,7 @@ import { Client } from '../../common/services/api/client';
 export class CategoriesComponent {
 
   minds = {
-    cdn_url: 'https://edge.minds.com/'
+    cdn_url: CONFIG.cdnUrl
   }
 
   categories : Array<{id, label, selected}> = [

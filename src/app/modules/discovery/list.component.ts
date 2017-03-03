@@ -10,6 +10,8 @@ import { DiscoveryOptionsComponent } from './options.component';
 import { DiscoveryView } from './view.component';
 import { DiscoveryService } from './discovery.service';
 
+import { CONFIG } from '../../config';
+
 @Component({
   moduleId: 'module.id',
   selector: 'discovery-list',
@@ -43,6 +45,10 @@ export class DiscoveryList {
   components = {
     channel: ChannelComponent,
     view: DiscoveryView
+  }
+
+  minds = {
+    cdn_url: CONFIG.cdnUrl
   }
 
   constructor(private client : Client, private popoverCtrl : PopoverController, private cd : ChangeDetectorRef,
@@ -88,7 +94,7 @@ export class DiscoveryList {
   }
 
   openImage(entity : any){
-    PhotoViewer.show('https://edge.minds.com/api/v1/archive/thumbnails/' + entity.guid + '/xlarge');
+    PhotoViewer.show(`${this.minds.cdn_url}api/v1/archive/thumbnails/${entity.guid}/xlarge`);
   }
 
 }

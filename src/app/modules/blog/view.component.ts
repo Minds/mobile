@@ -4,6 +4,8 @@ import { NavParams, ViewController, LoadingController } from 'ionic-angular';
 import { Client } from '../../common/services/api/client';
 import { Storage } from '../../common/services/storage';
 
+import { CONFIG } from '../../config';
+
 @Component({
   moduleId: 'module.id',
   selector: 'capture',
@@ -15,7 +17,7 @@ import { Storage } from '../../common/services/storage';
 export class BlogView {
 
   minds = {
-    cdn_url: 'https://edge.minds.com/'
+    cdn_url: CONFIG.cdnUrl
   }
 
   @Input() guid : string;

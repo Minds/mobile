@@ -28,7 +28,7 @@
     <div class="m-ionic-boost--destinations-list" *ngIf="destinations.length > 0">
       <div *ngFor="let entity of destinations" class="m-ionic-boost--destination" (mousedown)="$event.preventDefault(); selectDestination(entity, q); points.focus()">
     	  <div class="m-ionic-boost--destination-avatar">
-          <img [src]="'https://www.minds.com/icon/' + entity.guid + '/medium/' + entity.icontime"/>
+          <img [src]="minds.cdn_url + 'icon/' + entity.guid + '/medium/' + entity.icontime"/>
         </div>
         <div class="m-ionic-boost--destination-body">
           <h3>{{entity.name}}</h3>

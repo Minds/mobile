@@ -6,6 +6,7 @@ import { Storage } from '../../../common/services/storage';
 import { ChannelComponent } from '../../channel/channel.component';
 import { NewsfeedSingleComponent } from '../../newsfeed/single.component';
 
+import { CONFIG } from '../../../config';
 
 @Component({
   moduleId: 'module.id',
@@ -21,7 +22,7 @@ export class NotificationCard {
   entity;
 
   minds = {
-    cdn_url: 'https://edge.minds.com/'
+    cdn_url: CONFIG.cdnUrl
   }
 
   components = {

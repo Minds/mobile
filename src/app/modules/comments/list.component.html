@@ -22,7 +22,7 @@
 
       <div class="m-ionic-comments--owner-block m-ionic-owner-block">
         <div class="m-ionic-avatar" [navPush]="components.channel" [navParams]="{ channel: comment.ownerObj }">
-          <img [src]="'https://www.minds.com/icon/' +  comment.ownerObj.guid + '/medium'" class="mdl-shadow--2dp" imgFade/>
+          <img [src]="minds.cdn_url + 'icon/' +  comment.ownerObj.guid + '/medium'" class="mdl-shadow--2dp" imgFade/>
         </div>
         <div class="m-ionic-body">
           <a [navPush]="components.channel" [navParams]="{ guid: comment.ownerObj.guid}">
@@ -55,7 +55,7 @@
 
         	<a>
         		<img [src]="comment.custom_data[0].src" style="width:100%"
-              (error)="comment.custom_data[0].src = 'https://www.minds.com/assets/logos/medium.png'"
+              (error)="comment.custom_data[0].src = minds.cdn_url + 'assets/logos/medium.png'"
               imgFade
               *ngIf="comment.custom_data"
             >
@@ -74,7 +74,7 @@
 
 <div class="m-ionic-comments--composer">
   <div class="m-ionic-avatar">
-    <img [src]="'https://www.minds.com/icon/' +  storage.get('user_guid') + '/medium'" class="mdl-shadow--2dp"/>
+    <img [src]="minds.cdn_url + 'icon/' +  storage.get('user_guid') + '/medium'" class="mdl-shadow--2dp"/>
   </div>
   <div class="m-ionic-body">
     <m-textarea placeholder="Write your comment..." [(mModel)]="message"></m-textarea>

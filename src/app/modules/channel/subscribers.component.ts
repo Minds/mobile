@@ -8,6 +8,8 @@ import { CacheService } from '../../common/services/cache/cache.service';
 import { Storage } from '../../common/services/storage';
 import { ChannelComponent } from './channel.component';
 
+import { CONFIG } from '../../config';
+
 @Component({
   moduleId: 'module.id',
   selector: 'channel',
@@ -26,6 +28,10 @@ export class SubscribersComponent {
 
   components = {
     channel : ChannelComponent
+  }
+
+  minds = {
+    cdn_url: CONFIG.cdnUrl
   }
 
   constructor(private client : Client, private upload : Upload, private params: NavParams, private cache : CacheService,

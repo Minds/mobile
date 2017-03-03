@@ -5,6 +5,9 @@ import { ChannelComponent } from '../channel/channel.component';
 import { Client } from '../../common/services/api/client';
 import { Storage } from '../../common/services/storage';
 
+import { CONFIG } from '../../config';
+import { SocketsService } from "../../common/services/api/sockets.service";
+
 @Component({
   moduleId: 'module.id',
   selector: 'comments-list',
@@ -13,7 +16,7 @@ import { Storage } from '../../common/services/storage';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class CommentsList {
+export class CommentsList implements OnInit, OnDestroy {
 
   guid : string;
   comments : Array<any> = [];
@@ -29,13 +32,26 @@ export class CommentsList {
     channel: ChannelComponent
   }
 
-  constructor(private client : Client, private cd : ChangeDetectorRef,  private params: NavParams){}
+  minds = {
+    cdn_url: CONFIG.cdnUrl
+  }
+
+  socketRoomName: string;
+  socketSubscriptions: any = {
+    comment: null
+  };
+
+  constructor(private client : Client, private cd : ChangeDetectorRef,  private params: NavParams, private sockets: SocketsService){}
 
   ngOnInit(){
     this.loadList()
       .then(() => {
-
+        this.listen();
       });
+  }
+
+  ngOnDestroy() {
+    this.unListen();
   }
 
   loadList(){
@@ -52,9 +68,13 @@ export class CommentsList {
           if (response.comments && response.comments.length >= 1) {
   					this.comments = response.comments.concat(this.comments);
             this.offset = response['load-previous'];
-				  }
+          }
 
-
+          if (!this.socketRoomName && response.socketRoomName) {
+            this.leaveSocketRoom();
+            this.socketRoomName = response.socketRoomName;
+            this.joinSocketRoom();
+          }
 
           this.inProgress = false;
           res();
@@ -96,5 +116,49 @@ export class CommentsList {
       });
   }
 
+  joinSocketRoom() {
+    if (this.socketRoomName) {
+      this.sockets.join(this.socketRoomName);
+    }
+  }
+
+  leaveSocketRoom() {
+    if (this.socketRoomName) {
+      this.sockets.leave(this.socketRoomName);
+    }
+  }
+
+  listen() {
+    this.socketSubscriptions.comment = this.sockets.subscribe('comment', (parent_guid, owner_guid, guid) => {
+      if (parent_guid !== this.params.get('guid')) {
+        return;
+      }
+
+      if (owner_guid === this.storage.get('user_guid')) {
+        return;
+      }
+      this.client.get('api/v1/comments/' + this.params.get('guid'), { limit: 1, offset: guid, reversed: false })
+        .then((response: any) => {
+          console.log(response);
+          if (!response.comments || response.comments.length === 0) {
+            return;
+          }
+
+          this.comments.push(response.comments[0]);
+          this.cd.markForCheck();
+          this.cd.detectChanges();
+          this.scrollArea.scrollToBottom(300);
+        })
+        .catch(e => {});
+    });
+  }
+
+  unListen() {
+    if (this.socketSubscriptions.comment) {
+      this.socketSubscriptions.comment.unsubscribe();
+    }
+
+    this.leaveSocketRoom();
+  }
 
 }

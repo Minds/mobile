@@ -9,7 +9,7 @@
     <div class="m-ionic-group--header-banner">
       <img
           #banner
-         [src]="'https://www.minds.com/fs/v1/banners/' + group.guid + '/fat/' + group.icontime"
+         [src]="minds.cdn_url + 'fs/v1/banners/' + group.guid + '/fat/' + group.icontime"
          (error)="banner.hide = true"
          width="100%"
          [hidden]="banner.hide"
@@ -20,7 +20,7 @@
 
     <img
       class="m-ionic-group--avatar"
-      [src]="'https://www.minds.com/fs/v1/avatars/' + group.guid + '/large'"
+      [src]="minds.cdn_url + 'fs/v1/avatars/' + group.guid + '/large'"
       width="150px"
       height="150px"
       imgFade

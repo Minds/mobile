@@ -7,6 +7,8 @@ import { Storage } from '../../../common/services/storage';
 import { AttachmentService } from '../../attachments/attachment.service';
 import { WalletService } from '../../wallet/wallet.service';
 
+import { CONFIG } from '../../../config';
+
 @Component({
   moduleId: 'module.id',
   selector: 'newsfeed-poster',
@@ -19,7 +21,7 @@ export class PosterComponent {
   entity;
 
   minds = {
-    cdn_url: 'https://edge.minds.com/'
+    cdn_url: CONFIG.cdnUrl
   }
 
   components = {

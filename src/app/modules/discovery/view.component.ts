@@ -9,6 +9,8 @@ import { Storage } from '../../common/services/storage';
 import { DiscoveryOptionsComponent } from './options.component';
 import { DiscoveryService } from './discovery.service';
 
+import { CONFIG } from '../../config';
+
 @Component({
   moduleId: 'module.id',
   selector: 'discovery-view',
@@ -25,6 +27,10 @@ export class DiscoveryView {
 
   components = {
     channel: ChannelComponent
+  }
+
+  minds = {
+    cdn_url: CONFIG.cdnUrl
   }
 
   constructor(private client : Client, private params : NavParams, private cd : ChangeDetectorRef, private storage : Storage){}
@@ -47,7 +53,7 @@ export class DiscoveryView {
   }
 
   openImage(entity : any){
-    PhotoViewer.show('https://edge.minds.com/api/v1/archive/thumbnails/' + entity.guid + '/xlarge');
+    PhotoViewer.show(`${this.minds.cdn_url}api/v1/archive/thumbnails/${entity.guid}/xlarge`);
   }
 
 }

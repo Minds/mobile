@@ -8,6 +8,9 @@ import { Storage } from '../../common/services/storage';
 import { MessengerSetup } from './setup.component';
 import { MessengerView } from './view.component';
 
+import { CONFIG } from '../../config';
+import { SocketsService } from "../../common/services/api/sockets.service";
+
 @Component({
   moduleId: 'module.id',
   selector: 'messenger-list',
@@ -16,7 +19,7 @@ import { MessengerView } from './view.component';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class MessengerList {
+export class MessengerList implements OnInit, OnDestroy {
 
   conversations : Array<any> = [];
   offset : string = "";
@@ -27,8 +30,12 @@ export class MessengerList {
     channel: ChannelComponent
   }
 
+  minds = {
+    cdn_url: CONFIG.cdnUrl
+  }
+
   constructor(private client : Client, private cd : ChangeDetectorRef, private nav : NavController,
-    private storage : Storage, private actionSheetCtrl : ActionSheetController){
+    private storage : Storage, private actionSheetCtrl : ActionSheetController, private sockets: SocketsService){
 
   }
 
@@ -36,7 +43,14 @@ export class MessengerList {
     if(!this.storage.get('private-key')){
       return this.nav.setRoot(MessengerSetup);
     }
-    this.loadList();
+    this.loadList()
+      .then(() => {
+        this.listen();
+      });
+  }
+
+  ngOnDestroy() {
+    this.unListen();
   }
 
   loadList(refresh : boolean = false){
@@ -120,6 +134,31 @@ export class MessengerList {
       buttons: buttons
     });
     actionSheet.present();
+  }
+
+  socketSubscriptions = {
+    touchConversation: null
+  };
+
+  listen() {
+    this.socketSubscriptions.touchConversation = this.sockets.subscribe('touchConversation', (guid) => {
+      for (var i in this.conversations) {
+        if (this.conversations[i].guid == guid) {
+          this.conversations[i].unread = true;
+          this.cd.markForCheck();
+          this.cd.detectChanges();
+          return;
+        }
+      }
+    });
+  }
+
+  unListen() {
+    for (let sub in this.socketSubscriptions) {
+      if (this.socketSubscriptions[sub]) {
+        this.socketSubscriptions[sub].unsubscribe();
+      }
+    }
   }
 
 }

@@ -6,6 +6,8 @@ import { Client } from '../../common/services/api/client';
 import { CacheService } from '../../common/services/cache/cache.service';
 import { Storage } from '../../common/services/storage';
 
+import { CONFIG } from '../../config';
+
 @Component({
   moduleId: 'module.id',
   selector: 'group-profile',
@@ -20,6 +22,10 @@ export class GroupProfile {
 
   editing = {
     name: false
+  }
+
+  minds = {
+    cdn_url: CONFIG.cdnUrl
   }
 
   constructor(private client : Client, private params: NavParams, private cd : ChangeDetectorRef,

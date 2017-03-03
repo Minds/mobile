@@ -7,6 +7,8 @@ import { Storage } from '../../common/services/storage';
 
 import { BlogView } from './view.component';
 
+import { CONFIG } from '../../config';
+
 @Component({
   moduleId: 'module.id',
   selector: 'blog-list',
@@ -37,6 +39,10 @@ export class BlogsList {
   components = {
     view: BlogView,
     channel: ChannelComponent
+  }
+
+  minds = {
+    cdn_url: CONFIG.cdnUrl
   }
 
   constructor(private client : Client, private cd : ChangeDetectorRef, private nav : NavController, private params : NavParams,

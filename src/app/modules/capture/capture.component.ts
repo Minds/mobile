@@ -7,6 +7,8 @@ import { AttachmentService } from '../attachments/attachment.service';
 import { WalletService } from '../wallet/wallet.service';
 import { BoostComponent } from '../newsfeed/boost/boost.component';
 
+import { CONFIG } from '../../config';
+
 @Component({
   moduleId: 'module.id',
   selector: 'capture',
@@ -18,7 +20,7 @@ import { BoostComponent } from '../newsfeed/boost/boost.component';
 export class CaptureComponent {
 
   minds = {
-    cdn_url: 'https://edge.minds.com/'
+    cdn_url: CONFIG.cdnUrl
   }
 
   progress : number = 0;

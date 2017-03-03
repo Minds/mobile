@@ -7,6 +7,8 @@ import { Storage } from '../../common/services/storage';
 
 import { GroupProfile } from './profile.component';
 
+import { CONFIG } from '../../config';
+
 @Component({
   moduleId: 'module.id',
   selector: 'groups-list',
@@ -25,6 +27,10 @@ export class GroupsList {
   components = {
     profile: GroupProfile,
     channel: ChannelComponent
+  }
+
+  minds = {
+    cdn_url: CONFIG.cdnUrl
   }
 
   constructor(private client : Client, private cd : ChangeDetectorRef, private nav : NavController,

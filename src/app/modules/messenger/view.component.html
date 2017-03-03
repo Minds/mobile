@@ -23,7 +23,7 @@
       *ngFor="let message of messages"
       [class.odd]="message.owner.guid == storage.get('user_guid')"
       >
-      <img [src]="'https://edge.minds.com/icon/' + message.owner.guid + '/small'"
+      <img [src]="minds.cdn_url + 'icon/' + message.owner.guid + '/small'"
         *ngIf="message.owner.guid == storage.get('user_guid')">
 
       <div class="m-ionic-messenger--message-bubble">
@@ -34,7 +34,7 @@
       </div>
 
 
-      <img [src]="'https://edge.minds.com/icon/' + message.owner.guid + '/small'"
+      <img [src]="minds.cdn_url + 'icon/' + message.owner.guid + '/small'"
         *ngIf="message.owner.guid != storage.get('user_guid')">
 
       <div class="m-ionic-messenger--message-ts">
@@ -47,7 +47,7 @@
 
 <div class="m-ionic-messenger--composer">
   <div class="m-ionic-avatar">
-    <img [src]="'https://www.minds.com/icon/' +  storage.get('user_guid') + '/medium'" class="mdl-shadow--2dp"/>
+    <img [src]="minds.cdn_url + 'icon/' +  storage.get('user_guid') + '/medium'" class="mdl-shadow--2dp"/>
   </div>
   <div class="m-ionic-body">
     <m-textarea placeholder="Type your message..." [(mModel)]="message" [disableBlur]="true"></m-textarea>

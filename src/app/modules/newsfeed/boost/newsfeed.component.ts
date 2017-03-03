@@ -4,6 +4,7 @@ import { CacheService } from '../../../common/services/cache/cache.service';
 import { Storage } from '../../../common/services/storage';
 import { Client } from '../../../common/services/api/client';
 
+import { CONFIG } from '../../../config';
 
 @Component({
   moduleId: 'module.id',
@@ -19,7 +20,7 @@ export class NewsfeedBoostComponent {
   @Input('entity') entity;
 
   minds = {
-    cdn_url: 'https://edge.minds.com/'
+    cdn_url: CONFIG.cdnUrl
   }
 
   data = {

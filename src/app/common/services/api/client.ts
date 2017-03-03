@@ -3,9 +3,11 @@ import {Http, Headers} from '@angular/http';
 import { OAuth2 } from './oauth2';
 import { Storage } from '../storage';
 
+import { CONFIG } from '../../../config';
+
 @Injectable()
 export class Client {
-	base : string = "https://edge.minds.com/";
+	base : string = CONFIG.baseUrl;
 
 	constructor(public http : Http, private storage : Storage, private oauth2 : OAuth2){
 	}

@@ -7,6 +7,7 @@ import { Storage } from '../../common/services/storage';
 import { WalletService } from './wallet.service';
 import { PurchaseComponent } from './purchase.component';
 
+import { CONFIG } from '../../config';
 
 @Component({
   moduleId: 'module.id',
@@ -20,7 +21,7 @@ import { PurchaseComponent } from './purchase.component';
 export class WalletComponent {
 
   minds = {
-    cdn_url: 'https://edge.minds.com/'
+    cdn_url: CONFIG.cdnUrl
   }
 
   components : {

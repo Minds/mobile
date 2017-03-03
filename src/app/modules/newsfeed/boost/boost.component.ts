@@ -7,6 +7,8 @@ import { Client } from '../../../common/services/api/client';
 import { NewsfeedBoostComponent } from './newsfeed.component';
 import { P2PBoostComponent } from './p2p.component';
 
+import { CONFIG } from '../../../config';
+
 @Component({
   moduleId: 'module.id',
   selector: 'boost',
@@ -21,7 +23,7 @@ export class BoostComponent {
   @Input('entity') entity;
 
   minds = {
-    cdn_url: 'https://edge.minds.com/'
+    cdn_url: CONFIG.cdnUrl
   }
 
   constructor(public cache : CacheService, public modalCtrl: ModalController, private params : NavParams,

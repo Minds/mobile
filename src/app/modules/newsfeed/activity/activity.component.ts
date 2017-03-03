@@ -14,6 +14,8 @@ import { ReportService } from '../../report/report.service';
 import { ShareService } from '../../share/share.service';
 import { GroupProfile } from '../../groups/profile.component';
 
+import { CONFIG } from '../../../config';
+
 @Component({
   moduleId: 'module.id',
   selector: 'activity',
@@ -30,7 +32,8 @@ export class Activity {
   @Output() deleted : EventEmitter<any> = new EventEmitter();
 
   minds = {
-    cdn_url: 'https://edge.minds.com/'
+    cdn_url: CONFIG.cdnUrl,
+    base: CONFIG.baseUrl,
   }
 
   components = {
@@ -121,7 +124,7 @@ export class Activity {
     buttons.push({
       text: 'Share',
       handler: () => {
-       this.share.share('', '', null, 'https://www.minds.com/newsfeed/' + this.entity.guid);
+       this.share.share('', '', null, this.minds.base + 'newsfeed/' + this.entity.guid);
       }
     });
 
@@ -166,7 +169,7 @@ export class Activity {
   }
 
   openImage(){
-    PhotoViewer.show('https://edge.minds.com/api/v1/archive/thumbnails/' + this.entity.entity_guid + '/xlarge');
+    PhotoViewer.show(`${this.minds.cdn_url}api/v1/archive/thumbnails/${this.entity.entity_guid}/xlarge`);
   }
 
 }

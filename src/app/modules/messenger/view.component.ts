@@ -8,6 +8,9 @@ import { Storage } from '../../common/services/storage';
 
 import { MessengerViewService } from './view.service';
 
+import { CONFIG } from '../../config';
+import { SocketsService } from "../../common/services/api/sockets.service";
+
 @Component({
   moduleId: 'module.id',
   selector: 'messenger-view',
@@ -16,32 +19,46 @@ import { MessengerViewService } from './view.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class MessengerView {
+export class MessengerView implements OnInit, OnDestroy {
 
-  @ViewChild('scrollArea') scrollArea : Content;
-  @Input() conversation : any;
 
-  inProgress : boolean = false;
-  offset : string = "";
-  messages : Array<any> = [];
-  publickeys : any = {};
+  @ViewChild('scrollArea') scrollArea: Content;
+  @Input() conversation: any;
+
+  inProgress: boolean = false;
+  offset: string = "";
+  messages: Array<any> = [];
+  publickeys: any = {};
 
   keyboardListener;
 
-  message : string = "";
+  message: string = "";
+
+  minds = {
+    cdn_url: CONFIG.cdnUrl
+  }
 
   components = {
     channel: ChannelComponent
   }
 
-  constructor(private client : Client, private cd : ChangeDetectorRef, private params: NavParams,
-    private service : MessengerViewService, private storage : Storage){}
+  live: boolean = true;
+  blocked: boolean = false;
+  invalid: boolean = false;
 
-  ngOnInit(){
+
+  constructor(private client: Client, private cd: ChangeDetectorRef, private params: NavParams,
+    private service: MessengerViewService, private storage: Storage, private sockets: SocketsService) { }
+
+  ngOnInit() {
     this.conversation = this.params.get('conversation');
+
     this.service.setGuid(this.conversation.guid);
     setTimeout(() => {
-      this.load();
+      this.load()
+        .then(() => {
+          this.listen();
+        });
     }, 300);
 
     this.keyboardListener = Keyboard.onKeyboardShow();
@@ -50,28 +67,44 @@ export class MessengerView {
     });
   }
 
-  load(){
+  ngOnDestroy() {
+    this.unListen();
+  }
+
+  load(opts = { finish: '' }) {
 
     this.inProgress = true;
+    this.conversation.unread = false;
 
     let offset = "";
-    if(this.messages.length > 0)
-      offset = this.messages[0].guid;
+    let limit = 12;
 
-    this.service.getFromRemote(12, offset)
-      .then((messages : Array<any>) => {
+    if (opts.finish) {
+      offset = opts.finish;
+      limit = 1;
+    }
+    else if (this.messages.length > 0) {
+      offset = this.messages[0].guid;
+    }
+
+    return this.service.getFromRemote(limit, offset)
+      .then((messages: Array<any>) => {
         this.inProgress = false;
 
-        if(offset){
+        if (offset && limit > 1) {
           messages.shift();
         }
 
-        this.messages = messages.concat(this.messages);
+        if (opts.finish) {
+          this.messages.push(...messages);
+        } else {
+          this.messages = messages.concat(this.messages);
+        }
 
         this.cd.markForCheck();
         this.cd.detectChanges();
 
-        if(!offset){
+        if (!offset || opts.finish) {
           this.scrollArea.scrollToBottom();
           setTimeout(() => {
             this.scrollArea.scrollToBottom();
@@ -84,12 +117,12 @@ export class MessengerView {
 
   }
 
-  loadEarlier(puller){
+  loadEarlier(puller) {
     puller.complete();
     this.load();
   }
 
-  send(e){
+  send(e) {
     e.preventDefault();
 
     this.messages.push({
@@ -117,14 +150,14 @@ export class MessengerView {
 
     let encrypt = new Promise((resolve, reject) => {
 
-      for(let guid in this.service.publickeys){
+      for (let guid in this.service.publickeys) {
 
         (<any>window).Crypt.setPublicKey(this.service.publickeys[guid]);
 
         (<any>window).Crypt.encrypt(message, (success) => {
 
           encrypted[guid] = success;
-          if(Object.keys(encrypted).length == Object.keys(this.service.publickeys).length){
+          if (Object.keys(encrypted).length == Object.keys(this.service.publickeys).length) {
             resolve(true);
           }
         });
@@ -135,8 +168,8 @@ export class MessengerView {
 
       let data = {};
       for (var index in encrypted) {
-				data["message:" + index] = encrypted[index];
-			}
+        data["message:" + index] = encrypted[index];
+      }
 
       this.client.post('api/v2/conversations/' + this.conversation.guid, data)
         .then(() => {
@@ -145,5 +178,103 @@ export class MessengerView {
 
   }
 
+  socketSubscriptions = {
+    pushConversationMessage: null,
+    clearConversation: null,
+    connect: null,
+    disconnect: null,
+    block: null,
+    unblock: null
+  }
 
+  listen() {
+    if (this.conversation.socketRoomName) {
+
+      this.sockets.join(this.conversation.socketRoomName);
+
+      this.socketSubscriptions.pushConversationMessage = this.sockets.subscribe('pushConversationMessage', (guid, message) => {
+        if (guid != this.conversation.guid) {
+          return;
+        }
+
+        let fromSelf = false;
+
+        if (this.storage.get('user_guid') == message.ownerObj.guid) {
+          fromSelf = true;
+        }
+
+        if (!fromSelf) {
+          this.load({ finish: message.guid });
+          this.invalid = false;
+          // @todo: play sound and notify user
+        }
+      });
+
+      this.socketSubscriptions.clearConversation = this.sockets.subscribe('clearConversation', (guid, actor) => {
+        if (guid != this.conversation.guid) {
+          return;
+        }
+
+        this.messages = [];
+        // @todo: notify user that the history was cleared
+        this.invalid = false;
+      });
+
+      this.socketSubscriptions.block = this.sockets.subscribe('block', (guid) => {
+        if (!this.hasParticipant(guid)) {
+          return;
+        }
+
+        this.blocked = true;
+        // @todo: handle blocking
+      });
+
+      this.socketSubscriptions.unblock = this.sockets.subscribe('unblock', (guid) => {
+        if (!this.hasParticipant(guid)) {
+          return;
+        }
+
+        this.blocked = false;
+        // @todo: handle unblocking
+      });
+
+      this.socketSubscriptions.connect = this.sockets.subscribe('connect', () => {
+        this.live = true;
+        // @todo: handle connecting to server (or delete this and its object key from socketSubscriptions)
+      });
+
+      this.socketSubscriptions.disconnect = this.sockets.subscribe('disconnect', () => {
+        this.live = false;
+        // @todo: handle disconnecting from server (or delete this and its object key from socketSubscriptions)
+      });
+    }
+  }
+
+  unListen() {
+    if (this.conversation.socketRoomName) {
+      this.sockets.leave(this.conversation.socketRoomName);
+    }
+
+    for (let sub in this.socketSubscriptions) {
+      if (this.socketSubscriptions[sub]) {
+        this.socketSubscriptions[sub].unsubscribe();
+      }
+    }
+  }
+
+  private hasParticipant(guid: string) {
+    if (!this.conversation || !this.conversation.participants) {
+      return false;
+    }
+
+    let has = false;
+
+    this.conversation.participants.forEach((participant: any) => {
+      if (participant.guid == guid) {
+        has = true;
+      }
+    });
+
+    return has;
+  }
 }

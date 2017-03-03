@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 
 import { Storage } from '../storage';
+import { SocketsService } from './sockets.service';
+import { CONFIG } from '../../../config';
 //import { OAUTH2 } from '../../../../../config/config';
 
 @Injectable()
@@ -12,7 +14,7 @@ export class OAuth2{
   access_token;
   timestamp = 0;
 
-  constructor(public http : Http, private storage : Storage){
+  constructor(public http: Http, private storage: Storage, private sockets: SocketsService) {
   }
 
   buildParams(params) {
@@ -30,7 +32,7 @@ export class OAuth2{
 
   login(username, password, callback){
 
-		this.http.post('https://edge.minds.com/oauth2/token',
+		this.http.post(`${CONFIG.baseUrl}oauth2/token`,
         {
   			  'grant_type': 'password',
   				'client_id': this.client_id,
@@ -53,6 +55,7 @@ export class OAuth2{
 
           //reconnect
           //socket.emit('register', data.user_id, data.access_token);
+          this.sockets.reconnect();
 
           callback(true);
   		},

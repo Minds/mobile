@@ -6,6 +6,7 @@ import { OnboardingComponent } from '../onboarding/onboarding.component';
 import { Client } from '../../common/services/api/client';
 import { OAuth2 } from '../../common/services/api/oauth2';
 import { PushService } from '../push/push.service';
+import { SocketsService } from "../../common/services/api/sockets.service";
 
 @Component({
   moduleId: 'module.id',
@@ -16,12 +17,13 @@ import { PushService } from '../push/push.service';
 export class RegisterComponent {
 
   constructor(private client : Client, private oauth2 : OAuth2, private nav : NavController,
-    public loadingCtrl: LoadingController, private alertCtrl: AlertController, private push : PushService){
+    public loadingCtrl: LoadingController, private alertCtrl: AlertController, private push : PushService, private sockets: SocketsService){
   }
 
   ngOnInit(){
     if(this.oauth2.hasAccessToken()){
       this.nav.setRoot(TabsComponent);
+      this.sockets.reconnect();
     }
   }
 

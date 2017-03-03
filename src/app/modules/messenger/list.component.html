@@ -21,12 +21,20 @@
         <div class="m-ionic-avatar"
           [navPush]="components.channel"
           [navParams]="{ guid: convo.participants[0].guid }">
-          <img [src]="'https://www.minds.com/icon/' +  convo.participants[0].guid + '/medium'" class="mdl-shadow--2dp" imgFade />
+          <img [src]="minds.cdn_url + 'icon/' +  convo.participants[0].guid + '/medium'" class="mdl-shadow--2dp" imgFade />
         </div>
         <div class="m-ionic-body"
           [navPush]="components.view"
           [navParams]="{ conversation: convo }">
-          <h3>{{convo.username}}</h3>
+          <h3>
+            <!--TODO: unread conversation-->
+            <span *ngIf="convo.unread">&#9658;</span>
+
+            <!--TODO: online conversation-->
+            <span *ngIf="convo.online">&#9673;</span>
+
+            {{convo.username}}
+          </h3>
         </div>
       </div>
 

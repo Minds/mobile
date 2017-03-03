@@ -25,8 +25,8 @@ export class NotificationSettingsComponent {
     { id: 'friends', name: 'Subscriptions', icon: 'md-person-add', toggle: true, ready: false },
     { id: 'reminds', name: 'Reminds', icon: 'md-repeat', toggle: true, ready: false },
     { id: 'boost_request', name: 'Peer2Peer boosts', icon: 'md-trending-up', toggle: true, ready: false },
-    { id: 'boost_accepted', name: 'Approved boosts', icon: 'md-trending-up', toggle: true, ready: false },
-    { id: 'boost_rejected', name: 'Rejected boosts', icon: 'md-trending-up', toggle: true, ready: false },
+    { id: 'boost_accepted', name: 'Boost approvals', icon: 'md-trending-up', toggle: true, ready: false },
+    //{ id: 'boost_rejected', name: 'Rejected boosts', icon: 'md-trending-up', toggle: true, ready: false },
     { id: 'boost_completed', name: 'Fulfilled boosts', icon: 'md-trending-up', toggle: true, ready: false }
   ]
 

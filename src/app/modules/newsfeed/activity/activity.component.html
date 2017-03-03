@@ -11,7 +11,7 @@
 			<img [src]="minds.cdn_url + '/icon/' + entity.reminderOwnerObj.guid + '/medium/' + entity.reminderOwnerObj.icontime"
         class="mdl-shadow--2dp"
         [navPush]="components.channel"
-        [navParams]="{ channel: entity.ownerObj }"
+        [navParams]="{ channel: entity.reminderOwnerObj }"
         imgFade
         />
 		</a>

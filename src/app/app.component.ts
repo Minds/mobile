@@ -40,6 +40,9 @@ export class MindsApp {
     platform.ready().then(() => {
       StatusBar.backgroundColorByHexString('#37474f');
     });
+
+    this.setDefaultSettings();
+
     if(this.oauth2.hasAccessToken()){
       this.rootPage = TabsComponent;
       this.sockets.reconnect();
@@ -86,4 +89,18 @@ export class MindsApp {
     (<any>window).location.reload();
   }
 
+  setDefaultSettings() {
+    const defaults = {
+      autoplay: false,
+      pointsAnimation: true,
+    }
+
+    for (var key in defaults) {
+      if (this.storage.get(key) !== null) {
+        continue;
+      }
+
+      this.storage.set(key, defaults[key]);
+    }
+  }
 }

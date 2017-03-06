@@ -132,7 +132,7 @@ export class PurchaseComponent {
             return false;
           }
           this.navCtrl.pop();
-          this.service.increment(this.points*1.1);
+          // this.service.increment(this.points*1.1);
         })
         .catch((e) => {
           loader.dismiss();
@@ -162,7 +162,7 @@ export class PurchaseComponent {
            return false;
          }
          this.navCtrl.pop();
-         this.service.increment(this.points);
+        //  this.service.increment(this.points);
        })
        .catch((e) => {
          loader.dismiss();

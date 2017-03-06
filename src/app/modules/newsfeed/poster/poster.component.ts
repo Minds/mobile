@@ -109,11 +109,11 @@ export class PosterComponent {
 
     this.client.post('api/v1/newsfeed', this.meta)
       .then((response : any) => {
-        if(this.meta.attachment_guid){
-          this.wallet.increment(10);
-        } else {
-          this.wallet.increment(1);
-        }
+        // if(this.meta.attachment_guid){
+        //   this.wallet.increment(10);
+        // } else {
+        //   this.wallet.increment(1);
+        // }
 
         this.meta = {
           message: '',

@@ -15,7 +15,7 @@ wallet-pop{
   height: 46px;
   font-size: 13px;
   font-weight: 900;
-  letter-spacing: 6px;
+  // letter-spacing: 6px;
   color: #FFF;
   text-align: center;
   opacity: 1;
@@ -24,6 +24,8 @@ wallet-pop{
   border-radius: 50%;
   vertical-align: middle;
   line-height: 44px;
+  white-space: nowrap;
+  word-break: keep-all;
 }
 
 

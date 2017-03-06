@@ -12,6 +12,8 @@ import { WalletComponent } from './wallet.component';
 import { WalletService } from './wallet.service';
 import { PurchaseComponent } from './purchase.component';
 import { Client } from '../../common/services/api/client';
+import { SocketsService } from "../../common/services/api/sockets.service";
+import { Storage } from "../../common/services/storage";
 
 @NgModule({
   imports: [ IonicModule, CommonModule, PaymentsModule ],
@@ -20,7 +22,7 @@ import { Client } from '../../common/services/api/client';
     {
       provide: WalletService,
       useFactory: WalletService._,
-      deps: [ Client, PopController ]
+      deps: [ Client, PopController, SocketsService, Storage ]
     },
     PopController
   ],

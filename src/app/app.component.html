@@ -39,6 +39,11 @@
         <ion-toggle [checked]="storage.get('autoplay')" (ionChange)="storage.set('autoplay', $event.checked)"></ion-toggle>
       </ion-item>
 
+      <ion-item>
+        <ion-label>Points animation</ion-label>
+        <ion-toggle [checked]="storage.get('pointsAnimation')" (ionChange)="storage.set('disablePointsAnimation', $event.checked)"></ion-toggle>
+      </ion-item>
+
       <button ion-item (click)="invite()">
         Invite
       </button>

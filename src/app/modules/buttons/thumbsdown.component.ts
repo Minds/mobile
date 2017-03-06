@@ -13,7 +13,7 @@ import { Storage } from '../../common/services/storage';
   },
   template: `
     <ion-icon name="md-thumbs-down" class="m-ionic-icon" [class.selected]="has()"></ion-icon>
-    <span class="m-ionic-icon--counter" *ngIf="entity['thumbs:down:count'] > 0">({{entity['thumbs:down:count']}})</span>
+    <span class="m-ionic-icon--counter" [class.m-ionic-icon--counter-hide]="!entity['thumbs:down:count']">({{entity['thumbs:down:count']}})</span>
   `,
   //styleUrls: ['buttons.css']
 })

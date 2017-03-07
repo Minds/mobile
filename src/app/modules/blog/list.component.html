@@ -21,6 +21,10 @@
       </ion-segment>
     </div>
 
+    <div class="m-ionic-blog--empty-list" *ngIf="!inProgress && !blogs.length">
+      No blogs.
+    </div>
+
     <div *ngFor="let blog of blogs">
       <div class="m-ionic-blogs--list-blog"
         [navPush]="components.view"

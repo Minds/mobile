@@ -65,8 +65,8 @@ export class MindsApp {
     this.menuCtrl.close();
   }
 
-  openGroups(){
-    this.app.getRootNav().push(GroupsList);
+  openGroups(filter: string) {
+    this.app.getRootNav().push(GroupsList, { filter: filter });
     this.menuCtrl.close();
   }
 

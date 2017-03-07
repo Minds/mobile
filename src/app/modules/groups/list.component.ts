@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 
 import { ChannelComponent } from '../channel/channel.component';
 import { Client } from '../../common/services/api/client';
@@ -22,42 +22,62 @@ export class GroupsList {
   filter : string = 'member';
   groups : Array<any> = [];
   offset : string = "";
-  inProgress : boolean = true;
+  inProgress : boolean = false;
+
+  limit: number = 12;
 
   components = {
     profile: GroupProfile,
     channel: ChannelComponent
   }
 
+  category : string = 'all';
+  categories : Array<{id, label}> = [
+    { id: "awesome", label: "Awesome" },
+    { id: "art", label: "Art" },
+    { id: "music", label: "Music" },
+    { id: "technology", label: "Science & Technology" },
+    { id: "gaming", label: "Gaming" },
+    { id: "nature", label: "Nature" },
+    { id: "news", label: "News" }
+  ];
+
   minds = {
     cdn_url: CONFIG.cdnUrl
   }
 
   constructor(private client : Client, private cd : ChangeDetectorRef, private nav : NavController,
-    private storage : Storage){
-
+    private storage : Storage, private params: NavParams){
+      this.filter = this.params.get('filter');
   }
 
   ngOnInit(){
-    this.loadList();
+    this.loadList(true);
   }
 
-  loadList(){
-    return new Promise((res, err) => {
-      this.inProgress = true;
-      this.client.get('api/v1/groups/' + this.filter, { limit: 12, offset: this.offset})
-        .then((response : any) => {
-          //console.log(response);
-          for(let group of response.groups){
-            this.groups.push(group);
-          }
-          this.inProgress = false;
-          this.offset = response['load-next'];
-          res();
-          this.cd.markForCheck();
-          this.cd.detectChanges();
-        });
-    });
+  loadList(refresh: boolean = false) {
+    if (this.inProgress) {
+      return;
+    }
+
+    if (refresh) {
+      this.groups = [];
+    }
+
+    this.inProgress = true;
+    return this.client.get('api/v1/groups/' + this.filter, { limit: 12, offset: this.offset})
+      .then(({ groups = [], 'load-next': loadNext = '' }) => {
+        this.groups.push(...groups);
+        this.inProgress = false;
+        this.offset = loadNext;
+
+        this.triggerChanges();
+      })
+      .catch(e => {
+        this.inProgress = false;
+        this.triggerChanges();
+        throw e;
+      });
   }
 
   refresh(puller){
@@ -66,6 +86,7 @@ export class GroupsList {
     this.loadList()
       .then(() => {
         puller.complete();
+        this.triggerChanges();
       });
   }
 
@@ -73,7 +94,39 @@ export class GroupsList {
     this.loadList()
       .then(() => {
         e.complete();
+        this.triggerChanges();
       });
   }
 
+  setCategory(category : string){
+    this.category = category;
+    if(this.category == 'all'){
+      this.loadList(true);
+      return;
+    }
+
+    this.client.get('api/v1/categories/featured/object/group', {
+      categories: this.category,
+      limit: this.limit,
+      offset: ''
+    })
+      .then(({ entities = [], 'load-next': loadNext = '' }) => {
+        this.inProgress = false;
+
+        this.groups = entities;
+        this.offset = loadNext;
+
+        this.triggerChanges();
+      })
+      .catch(e => {
+        this.inProgress = false;
+        this.groups = [];
+        this.triggerChanges();
+      });
+  }
+
+  triggerChanges() {
+    this.cd.markForCheck();
+    this.cd.detectChanges();
+  }
 }

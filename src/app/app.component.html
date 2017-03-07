@@ -20,14 +20,19 @@
         Mine
       </button>
 
-      <button ion-item (click)="openGroups()">
+      <button ion-item (click)="dropdowns.group = true">
         Groups
+      </button>
+      <button ion-item class="m-ionic-nav--subitem" (click)="openGroups('featured'); dropdowns.group = false;" *ngIf="dropdowns.group">
+        Featured
+      </button>
+      <button ion-item class="m-ionic-nav--subitem" (click)="openGroups('member'); dropdowns.group = false;" *ngIf="dropdowns.group">
+        Member
       </button>
 
       <button ion-item (click)="openBugGroup()">
         Support & Bugs Groups
       </button>
-
 
       <ion-item>
         <ion-label>Autoplay videos</ion-label>

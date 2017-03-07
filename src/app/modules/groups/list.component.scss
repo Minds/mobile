@@ -12,3 +12,18 @@
     color: #888;
   }
 }
+
+.m-ionic-group--categories{
+  overflow: scroll;
+
+  ion-segment{
+    min-width: 200%;
+  }
+}
+
+.m-ionic-group--empty-list {
+  padding: 12px 0;
+  text-align: center;
+  font-weight: 300;
+  color: #666;
+}

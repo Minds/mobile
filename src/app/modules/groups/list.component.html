@@ -10,6 +10,21 @@
 
   <ion-list>
 
+    <div class="m-ionic-group--categories" *ngIf="filter == 'featured'">
+      <ion-segment [(ngModel)]="category" color="primary">
+        <ion-segment-button value="all" (ionSelect)="setCategory('all')">
+          All
+        </ion-segment-button>
+        <ion-segment-button *ngFor="let category of categories" [value]="category.id" (ionSelect)="setCategory(category.id)">
+          {{category.label}}
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+
+    <div class="m-ionic-group--empty-list" *ngIf="!inProgress && !groups.length">
+      No groups.
+    </div>
+
     <div *ngFor="let group of groups">
       <div class="m-ionic-groups--card m-ionic-owner-block"
         [navPush]="components.profile"

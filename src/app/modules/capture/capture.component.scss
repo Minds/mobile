@@ -31,3 +31,26 @@
     }
   }
 }
+.m-ionic-poster--preview{
+  position:relative;
+  width:100%;
+  min-height:200px;
+
+  .m-ionic-poster--preview-delete{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.3);
+    display: flex;
+    text-align: center;
+    align-items: center;
+
+    ion-icon{
+      font-size: 80px;
+      color: #FFF;
+      width: 100%;
+    }
+  }
+}

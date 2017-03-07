@@ -189,6 +189,20 @@ export class ChannelComponent {
     }
 
     buttons.push({
+      text: 'Blogs',
+      handler: () => {
+        this.nav.push(BlogList, { filter: 'owner/' + this.channel.guid });
+      }
+    });
+
+    buttons.push({
+      text: 'Videos',
+      handler: () => {
+        this.nav.push(BlogList, { filter: 'owner/' + this.channel.guid });
+      }
+    });
+
+    buttons.push({
       text: 'Cancel',
       role: 'cancel'
     });

@@ -24,7 +24,11 @@
 <m-rich-input [richInput]="meta.message" (richInputMeta)="setRichMeta($event)"></m-rich-input>
 
 <div class="m-ionic-poster--preview" *ngIf="attachment.previewUri" (click)="attachment.reset()">
-	<img [src]="attachment.previewUri" style="display: block;width: 100%;"/>
+	<img [src]="attachment.previewUri" style="display: block;width: 100%;" #preview (error)="preview.style.display = 'none'"/>
+
+	<div class="m-ionic-poster--preview-delete">
+		<ion-icon name="md-trash"></ion-icon>
+	</div>
 </div>
 
 <div class="m-ionic--progress-bar" *ngIf="progress > 0">

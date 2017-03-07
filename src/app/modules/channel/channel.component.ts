@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { NavParams, LoadingController, ActionSheetController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, ActionSheetController } from 'ionic-angular';
 import { Camera } from 'ionic-native';
 
 import { Client } from '../../common/services/api/client';
@@ -7,6 +7,7 @@ import { Upload } from '../../common/services/api/upload';
 import { CacheService } from '../../common/services/cache/cache.service';
 import { Storage } from '../../common/services/storage';
 import { SubscribersComponent } from './subscribers.component';
+import { BlogsList } from '../blog/list.component';
 
 import { CONFIG } from '../../config';
 
@@ -32,11 +33,13 @@ export class ChannelComponent {
     avatar: false
   };
 
+  feedType : string = "activity";
+
   components = {
     subscribers: SubscribersComponent
   }
 
-  constructor(private client : Client, private upload : Upload, private params: NavParams, private cache : CacheService,
+  constructor(private client : Client, private upload : Upload, private nav : NavController, private params: NavParams, private cache : CacheService,
     private cd: ChangeDetectorRef, private loadingCtrl : LoadingController, private storage : Storage, private actionSheetCtrl : ActionSheetController){
     //if(applicationModule.android)
     //  page.actionBarHidden = true;
@@ -189,16 +192,36 @@ export class ChannelComponent {
     }
 
     buttons.push({
-      text: 'Blogs',
+      text: 'View blogs',
       handler: () => {
-        this.nav.push(BlogList, { filter: 'owner/' + this.channel.guid });
+        this.nav.push(BlogsList, { filter: 'owner/' + this.channel.guid });
       }
     });
 
     buttons.push({
-      text: 'Videos',
+      text: 'View feed',
       handler: () => {
-        this.nav.push(BlogList, { filter: 'owner/' + this.channel.guid });
+        this.feedType = 'activity';
+        this.cd.markForCheck();
+        this.cd.detectChanges();
+      }
+    });
+
+    buttons.push({
+      text: 'View images',
+      handler: () => {
+        this.feedType = 'image';
+        this.cd.markForCheck();
+        this.cd.detectChanges();
+      }
+    });
+
+    buttons.push({
+      text: 'View videos',
+      handler: () => {
+        this.feedType = 'video';
+        this.cd.markForCheck();
+        this.cd.detectChanges();
       }
     });
 

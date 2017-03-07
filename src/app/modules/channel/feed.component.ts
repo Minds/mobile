@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Page } from "ui/page";
 import { Client } from '../../common/services/api/client';
 import { CacheService } from '../../common/services/cache/cache.service';
-
+import { CONFIG } from '../../config';
 
 @Component({
   moduleId: 'module.id',
@@ -18,9 +18,14 @@ export class ChannelFeedComponent {
 
   guid;
 
+  type : string = "activity";
   feed : Array<any> = [];
   offset : string = "";
   inProgress : boolean = true;
+
+  minds = {
+    cdn_url: CONFIG.cdnUrl
+  }
 
   @Output() done : EventEmitter<any> = new EventEmitter();
 
@@ -41,23 +46,53 @@ export class ChannelFeedComponent {
     this.loadList();
   }
 
-  loadList(){
-    return new Promise((resolve, reject) => {
-      this.client.get('api/v1/newsfeed/personal/' + this.guid, { limit: 12, offset: this.offset })
-        .then((response : any) => {
-          //console.log(response);
-          for(let activity of response.activity){
-            this.feed.push(activity);
-          }
+  @Input('type') set _type(type : string){
+    this.type = type;
+    this.loadList(true);
+  }
 
-          //this.cache.set('feed:' + channel.guid, this.feed, true);
-          this.inProgress = false;
-          this.offset = response['load-next'];
-          resolve();
-          this.cd.markForCheck();
-          this.cd.detectChanges();
-        });
-    });
+  loadList(refresh : boolean = false){
+    if(refresh)
+      this.offset = "";
+    switch(this.type){
+      case "activity":
+        return this.client.get('api/v1/newsfeed/personal/' + this.guid, { limit: 12, offset: this.offset })
+          .then((response : any) => {
+
+            if(refresh)
+              this.feed = [];
+
+            for(let activity of response.activity){
+              this.feed.push(activity);
+            }
+            this.inProgress = false;
+            this.offset = response['load-next'];
+            return true;
+          })
+          .then(() => {
+            this.cd.markForCheck();
+            this.cd.detectChanges();
+          });
+      case "video":
+      case "image":
+        return this.client.get(`api/v1/entities/owner/${this.type}/${this.guid}`, { limit: 12, offset: this.offset })
+          .then((response : any) => {
+
+            if(refresh)
+              this.feed = [];
+
+            for(let entity of response.entities){
+              this.feed.push(entity);
+            }
+            this.inProgress = false;
+            this.offset = response['load-next'];
+            return true;
+          })
+          .then(() => {
+            this.cd.markForCheck();
+            this.cd.detectChanges();
+          });
+    }
   }
 
   @Input() set loadMore(e){

@@ -1,0 +1,13 @@
+.m-ionic-boost-review--tabs{
+  display: flex;
+  align-items: center;
+
+  > * {
+    flex: 1;
+    padding: 16px;
+
+    ion-icon{
+      padding-right:8px;
+    }
+  }
+}

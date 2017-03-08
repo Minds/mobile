@@ -9,6 +9,7 @@ import { CommonModule } from './common/common.module';
 
 import { AuthModule } from './modules/auth/auth.module';
 import { BlogModule } from './modules/blog/blog.module';
+import { BoostModule } from './modules/boost/boost.module';
 import { TabsModule } from './modules/tabs/tabs.module';
 import { ChannelModule } from './modules/channel/channel.module';
 import { CommentsModule } from './modules/comments/comments.module';
@@ -43,6 +44,7 @@ import { routes } from "./app.routes";
     CommonModule,
     ApiModule,
     BlogModule,
+    BoostModule,
     CacheModule,
     AuthModule,
     TabsModule,

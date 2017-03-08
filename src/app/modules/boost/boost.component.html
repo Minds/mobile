@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-navbar>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-refresher (ionRefresh)="refresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list>
+
+    <div *ngFor="let boost of boosts; let i = index" class="m-ionic-boost-review--boost">
+
+      <activity [entity]="boost.entity"></activity>
+
+      <div class="m-ionic-boost-review--tabs">
+        <div class="m-boost-admin-bid" style="color:green"><ion-icon name="md-trophy"></ion-icon>{{boost.bid}} points</div>
+        <div class="m-boost-admin-state"><ion-icon name="md-time"></ion-icon> {{boost.state}}</div>
+        <div class="m-ionic-boost-review--admin-buttons" *ngIf="boost.state == 'created'">
+          <button ion-button (click)="accept(boost, i)">Accept</button>
+          <button ion-button color="danger" (click)="reject(boost, i)">Reject</button>
+        </div>
+      </div>
+
+    </div>
+
+	</ion-list>
+
+
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>

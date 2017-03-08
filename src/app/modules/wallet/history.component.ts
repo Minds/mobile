@@ -5,29 +5,25 @@ import { CacheService } from '../../common/services/cache/cache.service';
 import { Storage } from '../../common/services/storage';
 
 import { WalletService } from './wallet.service';
-import { WalletHistoryComponent } from './history.component';
 import { PurchaseComponent } from './purchase.component';
-import { BoostReviewComponent } from '../boost/boost.component';
 
 import { CONFIG } from '../../config';
 
 @Component({
   moduleId: 'module.id',
-  selector: 'wallet',
-  templateUrl: 'wallet.component.html',
+  selector: 'wallet-history',
+  templateUrl: 'history.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class WalletComponent {
+export class WalletHistoryComponent {
 
   minds = {
     cdn_url: CONFIG.cdnUrl
   }
 
-  components = {
-    history: WalletHistoryComponent,
-    purchase : PurchaseComponent,
-    boost: BoostReviewComponent
+  components : {
+    purchase : PurchaseComponent
   }
 
   inProgress : boolean = false;
@@ -45,26 +41,19 @@ export class WalletComponent {
 
   ngOnInit(){
     this.load();
-    this.subscription = this.service.getCount()
-      .subscribe((count : number) => {
-          this.points = count;
-          this.cd.markForCheck();
-          this.cd.detectChanges();
-        });
   }
 
   load(){
-    return new Promise((resolve, reject) => {
-      this.client.get('api/v1/wallet/transactions', { limit: 12, offset: this.offset})
-        .then((response : any) => {
-          this.transactions = this.transactions.concat(response.transactions);
-          this.offset = response['load-next'];
-          resolve(true);
-          this.cd.markForCheck();
-          this.cd.detectChanges();
-
-        });
-    });
+    return this.client.get('api/v1/wallet/transactions', { limit: 12, offset: this.offset})
+      .then((response : any) => {
+        this.transactions = this.transactions.concat(response.transactions);
+        this.offset = response['load-next'];
+        return true;
+      })
+      .then(() => {
+        this.cd.markForCheck();
+        this.cd.detectChanges();
+      });
   }
 
   loadMore(loader){
@@ -87,11 +76,4 @@ export class WalletComponent {
       });
   }
 
-  purchasePoints(){
-    this.navCtrl.push(PurchaseComponent);
-  }
-
-  ngOnDestroy(){
-    this.subscription.unsubscribe();
-  }
 }

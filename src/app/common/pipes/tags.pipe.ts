@@ -20,9 +20,17 @@ export class TagsPipe {
     if(!value || typeof value !== "string")
       return value;
 
-    //<a>tag
+    //<a>tag w/ protocol
     var url = /(\b(https?|http|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
     value = value.replace(url, '<a href="$1" target="_blank">$1</a>');
+
+    // <a>tag w/o protocol, but common TLD
+    var url = /(^|\s+)([-A-Z0-9+&@#\/%?=~_|!:,.;]+\.(com|org|net)\/[-A-Z0-9+&@#\/%=~_|]*)/gim;
+    value = value.replace(url, ' <a href="http://$2" target="_blank">$2</a>');
+
+    // <a>tag w/o protocol, but www prefix
+    var url = /(^|\s+)(www\.[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|]*)/gim;
+    value = value.replace(url, ' <a href="http://$2" target="_blank">$2</a>');
 
     //#hashtag
     var hash = /(^|\s)#(\w*[a-zA-Z_]+\w*)/gim;

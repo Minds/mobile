@@ -8,6 +8,8 @@ import { CommentButtonComponent } from './comment.component';
 import { RemindButtonComponent } from './remind.component';
 import { WireButtonComponent } from './wire.component';
 
+import { WireModule } from '../wire/wire.module';
+
 @NgModule({
   /*imports: [
     RouterModule.forChild([
@@ -24,7 +26,7 @@ import { WireButtonComponent } from './wire.component';
   exports: [
     RouterModule
   ]*/
-  imports: [ IonicModule ],
+  imports: [ IonicModule, WireModule ],
   providers: [ Client ],
   declarations: [ ThumbsUpComponent, ThumbsDownComponent, CommentButtonComponent, RemindButtonComponent, WireButtonComponent ],
   exports: [ ThumbsUpComponent, ThumbsDownComponent, CommentButtonComponent, RemindButtonComponent, WireButtonComponent ]

@@ -1,0 +1,65 @@
+wire-fab{
+  width: 100%;
+  height: 100%;
+  display: block;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,0.8);
+  position: fixed;
+}
+
+.m-ionic-wire--fab-bolt{
+  text-align: center;
+
+  ion-icon{
+    color: #FFF;
+    font-size: 64px;
+  }
+}
+
+.m-ionic-wire--fab{
+  position: fixed;
+  top: calc(50% - 100px);
+  left: 5%;
+  width: 90%;
+  height: auto;
+}
+
+.m-ionic-wire--fab-input{
+  input{
+    width: 100%;
+    -webkit-appearance: none;
+    padding: 16px;
+    border: 0;
+    background: transparent;
+    color: #FFF;
+    text-align: center;
+    font-size: 50px;
+    letter-spacing: 8px;
+  }
+}
+
+.m-ionic-wire--fab-options{
+  color: #FFF;
+  display: flex;
+  align-items: center;
+
+  .m-ionic-wire--fab-options-option {
+    flex: 1;
+    text-align: center;
+    letter-spacing: 2px;
+
+    ion-icon{
+      display: block;
+      padding-bottom: 8px;
+    }
+  }
+}
+
+.m-ionic-wire--close{
+  position: fixed;
+  padding: 16px;
+  right: 0;
+  color: #FFF;
+  font-size: 25px;
+}

@@ -5,6 +5,7 @@ import { Storage } from '../../../common/services/storage';
 
 import { ChannelComponent } from '../../channel/channel.component';
 import { NewsfeedSingleComponent } from '../../newsfeed/single.component';
+import { GroupProfile } from '../../groups/profile.component';
 
 import { CONFIG } from '../../../config';
 
@@ -27,7 +28,8 @@ export class NotificationCard {
 
   components = {
     activity: NewsfeedSingleComponent,
-    channel: ChannelComponent
+    channel: ChannelComponent,
+    group: GroupProfile
   }
 
   constructor(public cache : CacheService, private client : Client, public storage : Storage){

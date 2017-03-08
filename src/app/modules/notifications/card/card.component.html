@@ -19,14 +19,14 @@
 
   <!-- group inivite -->
   <template ngSwitchCase="group_invite">
-    <a>
+    <a [navPush]="components.group" [navParams]="{guid: entity.params.group.guid}">
         <p i18n>{{entity.params.user}} invited you to join <span class="pseudo-link mdl-color-text--blue-grey-400">{{entity.params.group.name}}</span></p>
     </a>
   </template>
 
   <!-- group kick -->
   <template ngSwitchCase="group_kick">
-    <a>
+    <a [navPush]="components.group" [navParams]="{guid: entity.params.group.guid}">
         <p i18n>You were kicked off from <span class="pseudo-link mdl-color-text--blue-grey-400">{{entity.params.group.name}}</span></p>
     </a>
   </template>

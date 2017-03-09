@@ -15,6 +15,7 @@ import { BoostComponent } from './boost/boost.component';
 import { NewsfeedBoostComponent } from './boost/newsfeed.component';
 import { P2PBoostComponent } from './boost/p2p.component';
 import { ButtonsModule } from '../buttons/buttons.module';
+import { BoostSliderComponent } from "./boost/slider.component";
 
 import { ImageCachePipe } from '../../common/pipes/image-cache.pipe';
 import { CommonModule } from '../../common/common.module';
@@ -53,7 +54,8 @@ import { ReportModule } from '../report/report.module';
     RichActivity,
     Remind,
     PosterComponent,
-    ImageCachePipe
+    ImageCachePipe,
+    BoostSliderComponent,
   ],
   exports: [
     NewsfeedList,

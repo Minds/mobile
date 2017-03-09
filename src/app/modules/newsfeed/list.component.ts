@@ -4,6 +4,7 @@ import { Content, Refresher } from 'ionic-angular';
 import { ChannelComponent } from '../channel/channel.component';
 import { Client } from '../../common/services/api/client';
 import { Storage } from '../../common/services/storage';
+import { BoostSliderComponent } from "./boost/slider.component";
 
 
 @Component({
@@ -17,6 +18,7 @@ import { Storage } from '../../common/services/storage';
 export class NewsfeedList {
 
   @ViewChild('scrollArea') scrollArea : Content;
+  @ViewChild('boostsSlider') boostSlider: BoostSliderComponent;
 
   feed : Array<any> = [];
   offset : string = "";
@@ -61,6 +63,8 @@ export class NewsfeedList {
         this.cd.markForCheck();
         this.cd.detectChanges();
       });
+
+    this.boostSlider.refresh();
   }
 
   loadMore(e){

@@ -1,0 +1,25 @@
+.m-ionic-boost--slide-activity {
+  font-size: 1.4rem;
+  text-align: left;
+}
+
+.m-ionic-boost--slider {
+  height: auto;
+  border-bottom: 1px solid #eee;
+
+  .swiper-wrapper {
+    padding-top: 20px;
+    height: 100%;
+  }
+
+  .swiper-pagination {
+    top: 0;
+    bottom: auto;
+  }
+}
+
+.m-ionic-boost--slide {
+  align-items: flex-start;
+  padding: 4px;
+  padding-bottom: 12px;
+}

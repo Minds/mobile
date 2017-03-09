@@ -51,8 +51,10 @@ export class BoostSliderComponent implements OnInit, AfterViewInit, OnDestroy {
     const limit: number = this.FETCH_LIMIT;
 
     if (refresh) {
-      this.unListen();
       this.boosts = [];
+
+      this.unListen();
+      this.refreshPagination();
     }
 
     this.inProgress = true;
@@ -130,14 +132,17 @@ export class BoostSliderComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  // @todo: implement when able to re-render pager
   refreshPagination() {
-    //const last = this.slider.paginationType;
-    // this.slider.paginationType = this.boosts.length > this.MAX_BULLETS ? 'progress' : 'bullets';
+    const last = this.slider.paginationType;
+    this.slider.paginationType = this.boosts.length > this.MAX_BULLETS ? 'progress' : 'bullets';
 
-    // if (this.slider.paginationType != last) {
-    //   // re-render
-    // }
+    if (this.slider.paginationType != last) {
+      // @todo: ugly workaround. post issue on ionic repo
+      const el = (<HTMLElement>this.slider.getNativeElement()).querySelector('.swiper-pagination');
+
+      el.classList.remove(`swiper-pagination-${last}`);
+      el.classList.add(`swiper-pagination-${this.slider.paginationType}`);
+    }
   }
 
   detectChanges() {

@@ -2,6 +2,25 @@
   color: #4690D6 !important;
 }
 
+.m-animate-button{
+  animation-name: buttonAnimation;
+  animation-duration: 0.5s;
+  /* display: none; */
+  animation-iteration-count: 2;
+}
+
+@keyframes buttonAnimation {
+  0% {
+    opacity: 1;
+    transform: scale(1, 1);
+  }
+
+  60% {
+    opacity: 1;
+    transform: scale(1.4, 1.4);
+  }
+}
+
 .m-ionic-icon{
   font-size:22px;
   vertical-align:middle;

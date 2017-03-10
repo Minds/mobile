@@ -12,7 +12,7 @@ import { Storage } from '../../common/services/storage';
     '(click)': 'thumb()'
   },
   template: `
-    <ion-icon name="md-thumbs-down" class="m-ionic-icon" [class.selected]="has()"></ion-icon>
+    <ion-icon name="md-thumbs-down" class="m-ionic-icon" [class.selected]="has()" [class.m-animate-button]="animate"></ion-icon>
     <span class="m-ionic-icon--counter" [class.m-ionic-icon--counter-hide]="!entity['thumbs:down:count']">({{entity['thumbs:down:count']}})</span>
   `,
   //styleUrls: ['buttons.css']
@@ -27,6 +27,7 @@ export class ThumbsDownComponent {
   };
 
   storage = new Storage();
+  animate : boolean = false;
 
   constructor(public client : Client) {
   }
@@ -47,6 +48,7 @@ export class ThumbsDownComponent {
       //this.entity['thumbs:up:user_guids'].push(this.session.getLoggedInUser().guid);
       this.entity['thumbs:down:user_guids'] = [ this.storage.get('user_guid') ];
       this.entity['thumbs:down:count']++;
+      this.animate = true;
       if ( this.storage.get('user_guid') != this.entity.owner_guid) {
         //self.wallet.increment();
       }
@@ -56,6 +58,7 @@ export class ThumbsDownComponent {
           delete this.entity['thumbs:down:user_guids'][key];
       }
       this.entity['thumbs:down:count']--;
+      this.animate = false;
       if ( this.storage.get('user_guid')!= this.entity.owner_guid) {
         //self.wallet.decrement();
       }

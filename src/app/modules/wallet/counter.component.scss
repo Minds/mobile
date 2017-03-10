@@ -5,14 +5,14 @@ wallet-counter{
   line-height: 1;
   vertical-align: -webkit-baseline-middle;
 
-  ion-icon{
-    font-size:18px;
+  img{
+    height:18px;
     color:#FFF;
   }
   span{
     padding-left:4px;
   }
-  ion-icon, span{
+  img, span{
     vertical-align:middle;
     line-height:1;
   }

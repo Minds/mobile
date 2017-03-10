@@ -100,7 +100,7 @@ export class BoostSliderComponent implements OnInit, AfterViewInit, OnDestroy {
     this.recordImpressionTimer = setTimeout(() => {
       this.recordImpressionTimer = null;
 
-      if (slide.boosted_guid) {
+      if (!slide.boosted_guid) {
         return;
       }
 

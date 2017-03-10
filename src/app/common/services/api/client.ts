@@ -75,6 +75,8 @@ export class Client {
 				)
 				.subscribe(
           res => {
+						if(!res.text())
+							return reject();
 						var data = res.json();
 						if(!data || data.status != 'success')
 							return reject(data);

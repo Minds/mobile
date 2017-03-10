@@ -25,7 +25,7 @@ export class WireButtonComponent {
   }
 
   open(e){
-    let fab = this.fab.create({});
+    let fab = this.fab.create({ guid: this.entity.guid });
     fab.present();
   }
 

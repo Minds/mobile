@@ -17,9 +17,16 @@ wire-fab{
   }
 }
 
+.m-ionic-wire--fab-bolt-animate{
+  animation-name: throbAnimation;
+  animation-duration: 1s;
+  /* display: none; */
+  animation-iteration-count: infinite;
+}
+
 .m-ionic-wire--fab{
   position: fixed;
-  top: calc(50% - 100px);
+  top: calc(50% - 150px);
   left: 5%;
   width: 90%;
   height: auto;
@@ -54,6 +61,18 @@ wire-fab{
       padding-bottom: 8px;
     }
   }
+  .m-ionic-wire--fab-options-option-selected{
+    color: #ffca28 !important;
+  }
+}
+
+.m-ionic-wire--fab-send{
+  text-align: center;
+  width: 100%;
+  font-size: 24px;
+  letter-spacing: 5px;
+  margin: 42px 0px 0;
+  color: #FFF;
 }
 
 .m-ionic-wire--close{
@@ -62,4 +81,22 @@ wire-fab{
   right: 0;
   color: #FFF;
   font-size: 25px;
+}
+
+
+@keyframes throbAnimation{
+  0%, 40%, 80%, 50% {
+    opacity: 1;
+    transform: scale(1, 1) translateY(0);
+  }
+
+  20%, 60% {
+    opacity: 1;
+    transform: scale(1.2, 1.2) translateY(0);
+  }
+
+  100%{
+    opacity: 1;
+    transform: scale(1, 1) translateY(0);
+  }
 }

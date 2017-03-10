@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef, ElementRef, Renderer } from "@angular/core";
 import { ViewController, Config, Platform, GestureController, NavParams } from 'ionic-angular';
 
-//import { WalletService } from './wallet.service';
+import { WireService } from './wire.service';
 
 @Component({
   moduleId: 'module.id',
@@ -10,7 +10,8 @@ import { ViewController, Config, Platform, GestureController, NavParams } from '
     <ion-icon name="md-close" class="m-ionic-wire--close" (click)="dismiss()"></ion-icon>
     <div class="m-ionic-wire--fab">
 
-      <div class="m-ionic-wire--fab-bolt m-ionic-wire--fab-button">
+      <div class="m-ionic-wire--fab-bolt m-ionic-wire--fab-button"
+       [class.m-ionic-wire--fab-bolt-animate]="animate">
         <ion-icon name="ios-flash" class="m-ionic-icon"></ion-icon>
       </div>
 
@@ -19,19 +20,27 @@ import { ViewController, Config, Platform, GestureController, NavParams } from '
       </div>
 
       <div class="m-ionic-wire--fab-options">
-        <div class="m-ionic-wire--fab-options-option" (click)="selectMethod('points')">
+        <div class="m-ionic-wire--fab-options-option"
+          [class.m-ionic-wire--fab-options-option-selected]="method == 'points'"
+          (click)="selectMethod('points')">
           <ion-icon name="md-trophy" class="m-ionic-icon"></ion-icon>
           Points
         </div>
-        <div class="m-ionic-wire--fab-options-option" (click)="selectMethod('money')">
+        <div class="m-ionic-wire--fab-options-option"
+          [class.m-ionic-wire--fab-options-option-selected]="method == 'money'"
+          (click)="selectMethod('money')">
           <ion-icon name="logo-usd" class="m-ionic-icon"></ion-icon>
           Money
         </div>
-        <div class="m-ionic-wire--fab-options-option" (click)="selectMethod('bitcoin')">
+        <div class="m-ionic-wire--fab-options-option"
+          [class.m-ionic-wire--fab-options-option-selected]="method == 'bitcoin'"
+          (click)="selectMethod('bitcoin')">
           <ion-icon name="logo-bitcoin" class="m-ionic-icon"></ion-icon>
           Bitcoin
         </div>
       </div>
+
+      <button ion-button clear class="m-ionic-wire--fab-send" (click)="send()">Send</button>
 
     </div>
   `,
@@ -39,9 +48,12 @@ import { ViewController, Config, Platform, GestureController, NavParams } from '
 
 export class WireFabComponent {
 
-  text : string = "this is a wire fab"
+  guid : string;
   amount : number = 1000;
   method : string = "points";
+
+  animate : boolean = false;
+  inProgress : boolean = false;
 
   constructor(
     private _viewCtrl: ViewController,
@@ -50,9 +62,11 @@ export class WireFabComponent {
     private _elementRef: ElementRef,
     gestureCtrl: GestureController,
     params: NavParams,
-    renderer: Renderer
+    renderer: Renderer,
+    private service : WireService,
+    private cd : ChangeDetectorRef
   ){
-    this.text = params.get('text') || '+1';
+    this.guid = params.get('guid');
   }
 
   ngOnInit(){
@@ -82,6 +96,9 @@ export class WireFabComponent {
       this.amount = (this.amount * 1024) * 500;
 
     this.method = method;
+    this.cd.markForCheck();
+    this.cd.detectChanges();
+
   }
 
   round(number, precision) {
@@ -89,6 +106,32 @@ export class WireFabComponent {
     var tempNumber = number * factor;
     var roundedTempNumber = Math.round(tempNumber);
     return roundedTempNumber / factor;
+  }
+
+  send(){
+    if(this.inProgress)
+      return;
+    this.inProgress = true;
+
+    this.service.setEntityGuid(this.guid);
+    this.service.setMethod(this.method);
+    this.service.setAmount(this.amount);
+
+    this.animate = true;
+    this.cd.markForCheck();
+    this.cd.detectChanges();
+
+    this.service.send()
+      .then(() => {
+        console.log('[wire]: success');
+        setTimeout(() => {
+          this.dismiss();
+        }, 1000);
+      })
+      .catch(() => {
+        console.log('[wire]: exception thrown');
+        this.inProgress = false;
+      });
   }
 
 

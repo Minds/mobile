@@ -22,6 +22,11 @@ export class DiscoveryEntity {
   @Input('entity') entity;
   editing : boolean = false;
 
+  preview: boolean = false;
+  @Input('isPreview') set _isPreview(value) {
+    this.preview = !!value;
+  };
+
   minds = {
     cdn_url: CONFIG.cdnUrl
   }
@@ -101,7 +106,11 @@ export class DiscoveryEntity {
     this.cd.detectChanges();
   }
 
-  canAutoplay(){
+  canAutoplay() {
+    if (this.preview) {
+      return false;
+    }
+
     if(this.platform.is('ios'))
       return false; //ios can't inline play
     console.log(this.storage.get('disable-autoplay') == 'false');

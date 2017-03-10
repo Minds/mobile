@@ -54,6 +54,12 @@
     font-size:12px;
     padding:0;
   }
+
+  &.m-ionic-remind-message {
+    margin-left: 12px;
+    padding: 12px 0 8px 12px;
+    border-left: 3px solid #eee;
+  }
 }
 
 .m-ionic-image{

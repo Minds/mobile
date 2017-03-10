@@ -1,4 +1,4 @@
-<div class="m-ionic-boosted-tag" *ngIf="entity.boosted">
+<div class="m-ionic-boosted-tag" *ngIf="!preview && entity.boosted">
 	<ion-icon name="trending-up"></ion-icon>
 	<a style="color:#999" i18n>Boosted</a>
 </div>
@@ -23,6 +23,12 @@
 	</div>
 </div>
 
+<div class="m-ionic-owner-block m-ionic-remind-owner-block m-ionic-remind-message" *ngIf="entity.reminderMessage">
+	<div class="m-ionic-body">
+		<span [innerHtml]="entity.reminderMessage | tags"></span>
+	</div>
+</div>
+
 <!-- Owner block -->
 <div class="m-ionic-owner-block" *ngIf="entity.ownerObj && entity.ownerObj.username">
 
@@ -38,28 +44,28 @@
 	</div>
 
 	<div class="m-ionic-body">
-		<a [navPush]="components.channel" [navParams]="{ guid: entity.ownerObj.guid}">
+		<a class="m-name" [navPush]="components.channel" [navParams]="{ guid: entity.ownerObj.guid}">
 			<strong>{{entity.ownerObj.name}}</strong>
 		</a>
     <a *ngIf="entity.containerObj && entity.containerObj.type == 'group'"
-      class="mdl-color-text--blue-grey-300"
+      class="m-name mdl-color-text--blue-grey-300"
 			[navPush]="components.group" [navParams]="{ guid: entity.containerObj.guid}"
 			>
       <strong>({{entity.containerObj.name}})</strong>
     </a>
-		<a>
+		<a class="m-date">
 			<span>{{entity.time_created * 1000 | date:'medium'}}</span>
 		</a>
 	</div>
 
-	<div class="m-ionic-actions">
+	<div class="m-ionic-actions" *ngIf="!preview">
 		<ion-icon name="md-more" (click)="openSettings()"></ion-icon>
 	</div>
 
 </div>
 
 <!-- PayWall -->
-<!--<minds-paywall class="m-paywall" [(entity)]="activity" *ngIf="entity.paywall">
+<!--<minds-paywall class="m-paywall" [(entity)]="activity" *ngIf="!preview && entity.paywall">
 </minds-paywall>-->
 <!-- END: PayWall -->
 
@@ -160,18 +166,18 @@
 	</a>
 </div>
 
-<div class="m-ionic-tabs">
+<div class="m-ionic-tabs" *ngIf="!preview">
   <minds-button-thumbs-up [entity]="entity" ></minds-button-thumbs-up>
   <minds-button-thumbs-down [entity]="entity" ></minds-button-thumbs-down>
 	<minds-button-wire [entity]="entity" *ngIf="!(entity.owner_guid == storage.get('user_guid') || (entity.reminderOwnerObj  && entity.reminderOwnerObj.guid == storage.get('user_guid')))"></minds-button-wire>
   <minds-button-comment [entity]="entity" ></minds-button-comment>
-  <minds-button-remind [entity]="entity" ></minds-button-remind>
+  <minds-button-remind [entity]="rawEntity" ></minds-button-remind>
 	<button class="m-ionic-boost-button" (click)="boost()"
 		*ngIf="entity.owner_guid == storage.get('user_guid') || (entity.reminderOwnerObj  && entity.reminderOwnerObj.guid == storage.get('user_guid'))">
 		Boost
 	</button>
 </div>
 
-<div class="m-ionic-activity--impressions">
+<div class="m-ionic-activity--impressions" *ngIf="!preview">
 	{{entity.impressions}} views
 </div>

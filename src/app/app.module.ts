@@ -19,6 +19,7 @@ import { NotificationsModule } from './modules/notifications/notifications.modul
 import { OnboardingModule } from './modules/onboarding/onboarding.module';
 import { PushModule } from './modules/push/push.module';
 import { ShareModule } from './modules/share/share.module';
+import { RemindModule } from "./modules/remind/remind.module";
 
 import { routes } from "./app.routes";
 
@@ -55,7 +56,8 @@ import { routes } from "./app.routes";
     NotificationsModule,
     OnboardingModule,
     PushModule,
-    ShareModule
+    ShareModule,
+    RemindModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [IonicApp],

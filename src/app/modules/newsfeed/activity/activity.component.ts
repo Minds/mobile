@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef, HostListener } from '@angular/core';
-import { ActionSheetController, ModalController, PopoverController, Platform, Nav } from 'ionic-angular'
+import { ActionSheetController, ModalController, PopoverController, Platform, NavController } from 'ionic-angular'
 import { PhotoViewer } from 'ionic-native';
 
 import { CacheService } from '../../../common/services/cache/cache.service';
@@ -28,6 +28,7 @@ import { CONFIG } from '../../../config';
 export class Activity {
 
   entity;
+  rawEntity;
   editing : boolean = false;
   @Output() deleted : EventEmitter<any> = new EventEmitter();
 
@@ -45,16 +46,23 @@ export class Activity {
 
   constructor(private client : Client, public cache : CacheService, public actionSheetCtrl: ActionSheetController,
     private cd : ChangeDetectorRef, private storage : Storage, private modalCtrl : ModalController, private platform : Platform,
-    private navCtrl : Nav, private popoverCtrl : PopoverController, private report : ReportService, private share : ShareService){
+    private navCtrl : NavController, private popoverCtrl : PopoverController, private report : ReportService, private share : ShareService){
 
   }
 
-  @Input('entity') set _entity(entity){
+  preview: boolean = false;
+  @Input('isPreview') set _isPreview(value) {
+    this.preview = !!value;
+  };
 
+  @Input('entity') set _entity(entity) {
     if(entity.remind_object){
+      this.rawEntity = JSON.parse(JSON.stringify(entity.remind_object));
+
       this.entity = entity.remind_object;
       this.entity.guid = entity.guid;
       this.entity.reminderOwnerObj = entity.ownerObj;
+      this.entity.reminderMessage = entity.message;
       this.entity.remind_object = false; //stop remind looping, if it even happens
       this.entity.boosted = entity.boosted;
       this.entity.impressions = entity.impressions;
@@ -62,6 +70,7 @@ export class Activity {
       this.entity['thumbs:down:count'] = entity['thumbs:down:count'];
       this.entity.remind_count = entity.remind_count;
     } else {
+      this.rawEntity = JSON.parse(JSON.stringify(entity));
       this.entity = entity;
     }
     //this.cache.set('channel:' + entity.ownerObj.guid, entity.ownerObj, false);
@@ -162,7 +171,11 @@ export class Activity {
       .present();
   }
 
-  canAutoplay(){
+  canAutoplay() {
+    if (this.preview) {
+      return false;
+    }
+
     if(this.platform.is('ios'))
       return false; //ios can't inline play
     return this.storage.get('autoplay');

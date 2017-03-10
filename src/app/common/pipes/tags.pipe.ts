@@ -1,6 +1,6 @@
 import { Pipe, Inject, Renderer }  from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Nav } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 
 import { ChannelComponent } from '../../modules/channel/channel.component';
 
@@ -11,7 +11,7 @@ import { ChannelComponent } from '../../modules/channel/channel.component';
 
 export class TagsPipe {
 
-  constructor(private domSanitizer: DomSanitizer, private nav : Nav) {
+  constructor(private domSanitizer: DomSanitizer, private navCtrl : NavController) {
   }
 
 
@@ -45,7 +45,7 @@ export class TagsPipe {
 
     //TODO: move this to a proper service
     (<any>window).tagPress = (username) => {
-      this.nav.push(ChannelComponent, {guid: username});
+      this.navCtrl.push(ChannelComponent, {guid: username});
     };
 
     return value;

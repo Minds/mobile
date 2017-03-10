@@ -23,6 +23,7 @@ export class BlogView {
   @Input() guid : string;
   blog = {};
 
+  loaded: boolean = true;
   loader;
 
   constructor(private client : Client, private params : NavParams, private viewCtrl : ViewController,
@@ -38,18 +39,25 @@ export class BlogView {
     this.load();
   }
 
-  load(){
+  load() {
+    this.loaded = false;
+
     setTimeout(() => {
-      this.loader.present();
+      if (!this.loaded) {
+        this.loader.present();
+      }
     }, 100);
+
     this.client.get('api/v1/blog/' + this.guid)
-      .then((response : any) => {
+      .then((response: any) => {
+        this.loaded = true;
         this.blog = response.blog;
         this.loader.dismiss();
         this.cd.detectChanges();
         this.cd.markForCheck();
       })
       .catch(() => {
+        this.loaded = true;
         this.dismiss();
       })
   }

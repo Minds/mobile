@@ -1,7 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
-import { LoadingController } from 'ionic-angular';
-import { Client } from '../../common/services/api/client';
-
+import { ModalController } from 'ionic-angular';
+import { RemindComponent } from "../remind/remind.component";
 
 @Component({
   moduleId: 'module.id',
@@ -11,7 +10,7 @@ import { Client } from '../../common/services/api/client';
     '(click)': 'remind()'
   },
   template: `
-    <ion-icon name="md-repeat" class="m-ionic-icon" [class.selected]="selected"></ion-icon>
+    <ion-icon name="md-repeat" class="m-ionic-icon" [class.selected]="reminded"></ion-icon>
   `,
   //styleUrls: [ 'buttons.css' ]
 })
@@ -25,7 +24,7 @@ export class RemindButtonComponent {
 
   selected : boolean = false;
 
-  constructor(public client : Client, private loadingCtrl : LoadingController) {
+  constructor(private modalCtrl: ModalController) {
   }
 
   @Input('entity') set _entity(value : any){
@@ -34,24 +33,18 @@ export class RemindButtonComponent {
     this.entity = value;
   }
 
-  remind(){
-    let loader = this.loadingCtrl.create({
-      //content: "Please wait...",
+  remind() {
+    const modal = this.modalCtrl
+      .create(RemindComponent, { entity: this.entity });
+
+    modal.onDidDismiss((data = { success: false }) => {
+      if (!data.success) {
+        return;
+      }
+
+      this.selected = true;
     });
-    loader.present();
-    this.selected = true;
 
-    this.client.post('api/v1/newsfeed/remind/' + this.entity.guid, {
-      })
-      .then(() => {
-        loader.dismiss();
-
-      })
-      .catch(e => {
-        loader.dismiss();
-        this.selected = false;
-      });
-
+    modal.present();
   }
-
 }

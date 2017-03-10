@@ -22,7 +22,7 @@ import { HeaderModule } from '../header/header.module';
     }
   ],
   declarations: [ DiscoveryList, DiscoveryOptionsComponent, DiscoveryView, DiscoveryEntity ],
-  exports: [ DiscoveryList, DiscoveryOptionsComponent, DiscoveryView ],
+  exports: [ DiscoveryList, DiscoveryOptionsComponent, DiscoveryView, DiscoveryEntity ],
   entryComponents: [ DiscoveryList, DiscoveryOptionsComponent, DiscoveryView ]
 })
 export class DiscoveryModule { }

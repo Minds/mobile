@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+import { ModalController } from 'ionic-angular';
 
+import { StripeCheckout } from '../payments/stripe/checkout.component';
 import { Client } from '../../common/services/api/client';
 
 @Injectable()
@@ -9,7 +11,7 @@ export class WireService {
   method : string;
   amount : number;
 
-  constructor(private client : Client){
+  constructor(private client : Client, private modalCtrl : ModalController){
 
   }
 
@@ -25,7 +27,7 @@ export class WireService {
             return true;
           })
           .catch((e) => {
-            throw e;
+            return e;
           })
       });
   }
@@ -34,6 +36,15 @@ export class WireService {
     return new Promise((resolve, reject) => {
       switch(this.method){
         case "money":
+          let checkout = this.modalCtrl.create(StripeCheckout, {
+              success: (nonce : string) => {
+                resolve({nonce: nonce});
+              },
+              error: (msg) => {
+                reject(msg);
+              }
+            });
+          checkout.present();
           break;
         case "bitcoin":
           break;

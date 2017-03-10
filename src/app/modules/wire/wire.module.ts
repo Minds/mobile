@@ -3,13 +3,13 @@ import { RouterModule } from '@angular/router';
 import { IonicModule, App } from 'ionic-angular';
 
 import { CommonModule } from '../../common/common.module';
-import { NewsfeedModule } from '../newsfeed/newsfeed.module';
+import { PaymentsModule } from '../payments/payments.module';
 import { WireFabController } from './fab';
 import { WireFabComponent } from './fab.component';
 import { WireService } from './wire.service';
 
 @NgModule({
-  imports: [ IonicModule, CommonModule ],
+  imports: [ IonicModule, CommonModule, PaymentsModule ],
   declarations: [ WireFabComponent ],
   providers: [
     WireFabController,

@@ -40,7 +40,7 @@ import { WireService } from './wire.service';
         </div>
       </div>
 
-      <button ion-button clear class="m-ionic-wire--fab-send" (click)="send()">Send</button>
+      <button ion-button clear class="m-ionic-wire--fab-send" (click)="send()" *ngIf="!inProgress">Send</button>
 
     </div>
   `,

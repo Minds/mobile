@@ -1,5 +1,5 @@
 
-<div *ngFor="let entity of feed" [class.m-ionic-discovery--tile]="type == 'video' || type == 'image'">
+<div *ngFor="let entity of feed" [class.m-ionic-discovery--tile]="type == 'video' || type == 'image'" [class.m-ionic-activity]="type=='activity'">
   <activity [entity]="entity" class="activity-item list card" (deleted)="delete(entity)" *ngIf="type=='activity'">
   </activity>
 

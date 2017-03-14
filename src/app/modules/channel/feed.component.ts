@@ -4,6 +4,7 @@ import { Page } from "ui/page";
 import { Client } from '../../common/services/api/client';
 import { CacheService } from '../../common/services/cache/cache.service';
 import { CONFIG } from '../../config';
+import { DiscoveryView } from '../discovery/view.component';
 
 @Component({
   moduleId: 'module.id',
@@ -22,6 +23,10 @@ export class ChannelFeedComponent {
   feed : Array<any> = [];
   offset : string = "";
   inProgress : boolean = true;
+
+  components = {
+    view: DiscoveryView
+  }
 
   minds = {
     cdn_url: CONFIG.cdnUrl

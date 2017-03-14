@@ -6,5 +6,8 @@
   <img [src]="minds.cdn_url + 'api/v1/archive/thumbnails/' + entity.guid + '/medium'"
     #tile
     (error)="tile.style.display='none'"
-    *ngIf="type == 'video' || type == 'image'"/>
+    *ngIf="type == 'video' || type == 'image'"
+    [navPush]="components.view"
+    [navParams]="{entity: entity}"
+    />
 </div>

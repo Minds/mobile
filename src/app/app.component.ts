@@ -1,6 +1,6 @@
 import { Component, ViewChild } from "@angular/core";
 import { Nav, MenuController, Platform, App } from 'ionic-angular';
-import { StatusBar, AppVersion } from 'ionic-native';
+import { StatusBar, Keyboard, AppVersion } from 'ionic-native';
 
 import { TabsComponent } from "./modules/tabs/tabs.component";
 import { LoginComponent } from "./modules/auth/login.component";
@@ -39,6 +39,7 @@ export class MindsApp {
     private storage : Storage, private push : PushService, private share : ShareService, private sockets: SocketsService){
     platform.ready().then(() => {
       StatusBar.backgroundColorByHexString('#37474f');
+      Keyboard.disableScroll(true);
     });
 
     this.setDefaultSettings();

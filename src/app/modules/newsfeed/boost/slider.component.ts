@@ -12,7 +12,7 @@ import { Client } from "../../../common/services/api/client";
 export class BoostSliderComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('slider') private slider: Slides;
 
-  FETCH_LIMIT: number = 10;
+  FETCH_LIMIT: number = 15;
   MAX_BULLETS: number = 15; // max number of bullets allowed
 
   boosts: any[] = [];
@@ -54,7 +54,6 @@ export class BoostSliderComponent implements OnInit, AfterViewInit, OnDestroy {
       this.boosts = [];
 
       this.unListen();
-      this.refreshPagination();
     }
 
     this.inProgress = true;
@@ -68,8 +67,6 @@ export class BoostSliderComponent implements OnInit, AfterViewInit, OnDestroy {
 
         this.detectChanges();
         this.listen();
-
-        this.refreshPagination();
 
         if (refresh) {
           this.recordImpression();
@@ -128,21 +125,36 @@ export class BoostSliderComponent implements OnInit, AfterViewInit, OnDestroy {
     this.recordImpression();
 
     if (this.boosts && this.boosts.length > 0 && this.slider.isEnd()) {
-      this.load();
+      this.slider.lockSwipes(true);
+      this.load()
+        .then(() => {
+          this.trimSlider();
+          this.slider.lockSwipes(false);
+        })
+        .catch(() => {
+          this.slider.lockSwipes(false);
+        });
     }
   }
 
-  refreshPagination() {
-    const last = this.slider.paginationType;
-    this.slider.paginationType = this.boosts.length > this.MAX_BULLETS ? 'progress' : 'bullets';
-
-    if (this.slider.paginationType != last) {
-      // @todo: ugly workaround. post issue on ionic repo
-      const el = (<HTMLElement>this.slider.getNativeElement()).querySelector('.swiper-pagination');
-
-      el.classList.remove(`swiper-pagination-${last}`);
-      el.classList.add(`swiper-pagination-${this.slider.paginationType}`);
+  trimSlider() {
+    if (this.boosts.length < this.MAX_BULLETS) {
+      return;
     }
+
+    const end = this.slider.getActiveIndex(); // zero-based
+
+    if (end === 0) {
+      return;
+    }
+
+    this.boosts.splice(0, end);
+    this.detectChanges();
+
+    setTimeout(() => {
+      this.slider.update();
+      this.slider.slideTo(0, 0, false);
+    }, 0);
   }
 
   detectChanges() {

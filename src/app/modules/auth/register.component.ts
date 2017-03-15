@@ -61,7 +61,17 @@ export class RegisterComponent {
         if(response.status == 'success'){
           //take to onboarding flow
           this.push.registerToken();
-          this.nav.setRoot(OnboardingComponent);
+          this.login(username.value, password.value)
+            .then(() => {
+              this.nav.setRoot(OnboardingComponent);
+            })
+            .catch(() => {
+              let alert = this.alertCtrl.create({
+                title: 'Sorry there was a problem!',
+                buttons: ['Try again']
+              });
+              alert.present();
+            });
         } else {
           let alert = this.alertCtrl.create({
             title: 'Sorry!',
@@ -75,6 +85,24 @@ export class RegisterComponent {
         loader.dismiss();
       });
       //this.routerExtensions.navigate(['/tab/newsfeed'], { clearHistory: true });
+  }
+
+  login(username, password){
+    let loader = this.loadingCtrl.create({
+      //content: "Please wait...",
+    });
+    loader.present();
+
+    return new Promise((resolve, reject) => {
+      this.oauth2.login(username, password, (success) => {
+        loader.dismiss();
+        if(success){
+          return resolve(success);
+        }
+        reject();
+      });
+    });
+
   }
 
   ngOnDestroy(){

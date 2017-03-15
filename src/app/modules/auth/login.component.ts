@@ -1,5 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { NavController, LoadingController, AlertController } from 'ionic-angular';
+import { Keyboard } from 'ionic-native';
 
 import { RegisterComponent } from './register.component';
 import { TabsComponent } from '../tabs/tabs.component';
@@ -16,8 +17,12 @@ import { SocketsService } from "../../common/services/api/sockets.service";
 
 export class LoginComponent {
 
+  keyboardVisible : boolean = false;
+  keyboardShowSubscription;
+  keyboardHideSubscription;
+
   constructor(private oauth2 : OAuth2, private nav : NavController, public loadingCtrl: LoadingController, private alertCtrl: AlertController,
-    private push : PushService, private sockets: SocketsService){
+    private push : PushService, private sockets: SocketsService, private cd: ChangeDetectorRef){
   }
 
   ngOnInit(){
@@ -25,6 +30,17 @@ export class LoginComponent {
       this.nav.setRoot(TabsComponent);
       this.sockets.reconnect();
     }
+
+    this.keyboardShowSubscription = Keyboard.onKeyboardShow().subscribe(() => {
+      this.keyboardVisible = true;
+      this.cd.markForCheck();
+      this.cd.detectChanges();
+    });
+    this.keyboardHideSubscription = Keyboard.onKeyboardHide().subscribe(() => {
+      this.keyboardVisible = false;
+      this.cd.markForCheck();
+      this.cd.detectChanges();
+    });
   }
 
   login(username, password, e){
@@ -54,6 +70,11 @@ export class LoginComponent {
 
   register(){
     this.nav.push(RegisterComponent);
+  }
+
+  ngOnDestroy(){
+    this.keyboardShowSubscription.unsubscribe();
+    this.keyboardHideSubscription.unsubscribe();
   }
 
 }

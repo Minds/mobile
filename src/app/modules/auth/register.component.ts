@@ -1,5 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { NavController, LoadingController, AlertController } from 'ionic-angular';
+import { Keyboard } from 'ionic-native';
 
 import { TabsComponent } from '../tabs/tabs.component';
 import { OnboardingComponent } from '../onboarding/onboarding.component';
@@ -16,8 +17,12 @@ import { SocketsService } from "../../common/services/api/sockets.service";
 
 export class RegisterComponent {
 
-  constructor(private client : Client, private oauth2 : OAuth2, private nav : NavController,
-    public loadingCtrl: LoadingController, private alertCtrl: AlertController, private push : PushService, private sockets: SocketsService){
+  keyboardVisible : boolean = false;
+  keyboardShowSubscription;
+  keyboardHideSubscription;
+
+  constructor(private client : Client, private oauth2 : OAuth2, private nav : NavController, public loadingCtrl: LoadingController,
+    private alertCtrl: AlertController, private push : PushService, private sockets: SocketsService, private cd : ChangeDetectorRef){
   }
 
   ngOnInit(){
@@ -25,6 +30,17 @@ export class RegisterComponent {
       this.nav.setRoot(TabsComponent);
       this.sockets.reconnect();
     }
+
+    this.keyboardShowSubscription = Keyboard.onKeyboardShow().subscribe(() => {
+      this.keyboardVisible = true;
+      this.cd.markForCheck();
+      this.cd.detectChanges();
+    });
+    this.keyboardHideSubscription = Keyboard.onKeyboardHide().subscribe(() => {
+      this.keyboardVisible = false;
+      this.cd.markForCheck();
+      this.cd.detectChanges();
+    });
   }
 
   register(username, email, password, e){
@@ -54,8 +70,16 @@ export class RegisterComponent {
           });
           alert.present();
         }
+      })
+      .catch(() => {
+        loader.dismiss();
       });
       //this.routerExtensions.navigate(['/tab/newsfeed'], { clearHistory: true });
+  }
+
+  ngOnDestroy(){
+    this.keyboardShowSubscription.unsubscribe();
+    this.keyboardHideSubscription.unsubscribe();
   }
 
 }

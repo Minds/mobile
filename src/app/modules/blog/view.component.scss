@@ -50,5 +50,9 @@
     font-size: 16px;
     letter-spacing: 0.3px;
     line-height: 22px;
+
+    iframe, img {
+      max-width: 100% !important;
+    }
   }
 }

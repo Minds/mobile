@@ -30,7 +30,7 @@
       </div>
     </div>
 
-    <div class="m-ionic-blog--body" [innerHtml]="blog.description" allow-text-select></div>
+    <div class="m-ionic-blog--body" [innerHtml]="blog.description | safe" allow-text-select></div>
 
   </div>
 

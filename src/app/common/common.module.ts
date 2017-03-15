@@ -10,12 +10,13 @@ import { DomainPipe } from './pipes/domain.pipe';
 import { TagsPipe } from './pipes/tags.pipe';
 import { TextareaComponent } from './components/textarea.component';
 import { RichInputComponent } from './components/rich-input.component.ts';
+import { SafePipe } from "./pipes/safe.pipe";
 
 
 @NgModule({
   imports: [ IonicModule ],
   providers: [ Storage ],
-  declarations: [ ImgFadeDirective, ExplicitDirective, ContenteditableModel, DomainPipe, AbbrPipe, TagsPipe, TextareaComponent, RichInputComponent ],
-  exports: [ ImgFadeDirective, ExplicitDirective, ContenteditableModel, DomainPipe, AbbrPipe, TagsPipe, TextareaComponent, RichInputComponent ]
+  declarations: [ ImgFadeDirective, ExplicitDirective, ContenteditableModel, DomainPipe, AbbrPipe, TagsPipe, TextareaComponent, RichInputComponent, SafePipe ],
+  exports: [ ImgFadeDirective, ExplicitDirective, ContenteditableModel, DomainPipe, AbbrPipe, TagsPipe, TextareaComponent, RichInputComponent, SafePipe ]
 })
 export class CommonModule { }

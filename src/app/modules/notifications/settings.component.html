@@ -4,7 +4,7 @@
 
 <ion-content>
 
-  <ion-list>
+  <ion-list *ngIf="!inProgress">
     <ion-item *ngFor="let toggle of toggles">
       <ion-icon [name]="toggle.icon"></ion-icon>
       <ion-label>{{toggle.name}}</ion-label>

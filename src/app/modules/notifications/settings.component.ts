@@ -54,10 +54,10 @@ export class NotificationSettingsComponent {
   }
 
   setToggle(toggle) {
-    if(!toggle.ready){
-      toggle.ready = true;
-      return;
-    }
+    //if(!toggle.ready){
+    //  toggle.ready = true;
+    //  return;
+    //}
     this.client.post('api/v1/notifications/settings', {
       id: toggle.id,
       toggle: toggle.toggle

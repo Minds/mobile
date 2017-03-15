@@ -39,7 +39,9 @@ export class PosterComponent {
 
   @Input() placeholder : string = "Speak your mind...";
 
-  @Input() set containerGuid(guid: any){
+  containerGuid: any = null;
+  @Input('containerGuid') set _containerGuid(guid: any) {
+    this.containerGuid = guid;
     this.attachment.setContainerGuid(guid);
     this.meta.container_guid = guid;
   }
@@ -118,7 +120,7 @@ export class PosterComponent {
         this.meta = {
           message: '',
           attachment_guid: null,
-          container_guid: null
+          container_guid: this.containerGuid,
         };
         this.attachment.reset();
         this.progress = 0;

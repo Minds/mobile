@@ -1,6 +1,6 @@
 import { Component, ViewChild } from "@angular/core";
 import { Nav, MenuController, Platform, App } from 'ionic-angular';
-import { StatusBar, Keyboard, AppVersion } from 'ionic-native';
+import { StatusBar, Splashscreen, Keyboard, AppVersion } from 'ionic-native';
 
 import { TabsComponent } from "./modules/tabs/tabs.component";
 import { LoginComponent } from "./modules/auth/login.component";
@@ -37,22 +37,20 @@ export class MindsApp {
 
   constructor(private oauth2 : OAuth2, public menuCtrl: MenuController, private platform : Platform, private app : App,
     private storage : Storage, private push : PushService, private share : ShareService, private sockets: SocketsService){
-    platform.ready().then(() => {
-      StatusBar.backgroundColorByHexString('#37474f');
-      Keyboard.disableScroll(true);
-    });
-
-    this.setDefaultSettings();
 
     if(this.oauth2.hasAccessToken()){
       this.rootPage = TabsComponent;
-      this.sockets.reconnect();
       //this.rootPage = OnboardingComponent;
     }
   }
 
   ngOnInit(){
     this.platform.ready().then(() => {
+      StatusBar.backgroundColorByHexString('#37474f');
+      Keyboard.disableScroll(true);
+      Splashscreen.hide();
+      this.setDefaultSettings();
+      this.sockets.reconnect();
       AppVersion.getVersionNumber()
         .then((version) => {
           this.versionNumber = version;
@@ -86,8 +84,9 @@ export class MindsApp {
   logout() {
     this.sockets.deregister();
     (<any>window).localStorage.clear();
-    this.app.getRootNav().push(LoginComponent);
-    (<any>window).location.reload();
+    this.menuCtrl.close();
+    this.app.getRootNav().setRoot(LoginComponent);
+    //(<any>window).location.reload();
   }
 
   setDefaultSettings() {

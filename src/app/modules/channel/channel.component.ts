@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { NavController, NavParams, LoadingController, ActionSheetController } from 'ionic-angular';
+import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild, AfterContentInit } from '@angular/core';
+import { NavController, NavParams, LoadingController, ActionSheetController, Content } from 'ionic-angular';
 import { Camera } from 'ionic-native';
 
 import { Client } from '../../common/services/api/client';
@@ -8,6 +8,7 @@ import { CacheService } from '../../common/services/cache/cache.service';
 import { Storage } from '../../common/services/storage';
 import { SubscribersComponent } from './subscribers.component';
 import { BlogsList } from '../blog/list.component';
+import { OnScreenService } from "../../common/services/visibility/on-screen.service";
 
 import { CONFIG } from '../../config';
 
@@ -19,7 +20,7 @@ import { CONFIG } from '../../config';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class ChannelComponent {
+export class ChannelComponent implements OnInit, OnDestroy, AfterContentInit {
 
   minds = {
     cdn_url: CONFIG.cdnUrl
@@ -39,6 +40,9 @@ export class ChannelComponent {
     subscribers: SubscribersComponent
   }
 
+  @ViewChild('scrollArea') scrollArea: Content;
+  onScreen = new OnScreenService();
+
   constructor(private client : Client, private upload : Upload, private nav : NavController, private params: NavParams, private cache : CacheService,
     private cd: ChangeDetectorRef, private loadingCtrl : LoadingController, private storage : Storage, private actionSheetCtrl : ActionSheetController){
     //if(applicationModule.android)
@@ -56,6 +60,14 @@ export class ChannelComponent {
     }
 
     this.load();
+  }
+
+  ngAfterContentInit() {
+    this.onScreen.init(this.scrollArea);
+  }
+
+  ngOnDestroy() {
+    this.onScreen.destroy();
   }
 
   @Input() set username(value : string){

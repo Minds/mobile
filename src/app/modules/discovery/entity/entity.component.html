@@ -51,19 +51,13 @@
 
 <div class="item item-image item-image-video"
   *ngIf="entity.subtype == 'video'">
-    <video
-      width="100%"
-      height="300px"
-      loop="true"
-      muted="true"
-      style="background:#000;"
-      [poster]="entity.thumbnail_src"
-			[attr.autoplay]="canAutoplay() ? true : null"
-      controls="true"
-			playsinline webkit-playsinline
-      >
-      <source [src]="minds.cdn_url + 'api/v1/archive/' + entity.guid + '/play'" type="video/mp4" />
-    </video>
+    <minds-video
+      [thumbnail]="entity.thumbnail_src"
+      [src]="minds.cdn_url + 'api/v1/archive/' + entity.guid + '/play'"
+      [autoplay]="true"
+      [analyticsGuid]="entity.guid"
+      #player='video'
+    ></minds-video>
  </div>
 
 <!-- Images -->

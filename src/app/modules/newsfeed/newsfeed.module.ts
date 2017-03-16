@@ -23,6 +23,7 @@ import { HeaderModule } from '../header/header.module';
 import { AttachmentModule } from '../attachments/attachment.module';
 import { TranslationsModule } from '../translations/translations.module';
 import { ReportModule } from '../report/report.module';
+import { VideoModule } from "../video/video.module";
 
 @NgModule({
   /*imports: [
@@ -40,7 +41,7 @@ import { ReportModule } from '../report/report.module';
   exports: [
     RouterModule
   ]*/
-  imports: [ IonicModule, CommonModule, ButtonsModule, AttachmentModule, HeaderModule, TranslationsModule, ReportModule ],
+  imports: [ IonicModule, CommonModule, ButtonsModule, AttachmentModule, HeaderModule, TranslationsModule, ReportModule, VideoModule ],
   providers: [ Client ],
   declarations: [
     NewsfeedList,

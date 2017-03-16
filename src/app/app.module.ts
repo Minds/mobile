@@ -21,6 +21,7 @@ import { PushModule } from './modules/push/push.module';
 import { ShareModule } from './modules/share/share.module';
 import { SettingsModule } from './modules/settings/settings.module';
 import { RemindModule } from "./modules/remind/remind.module";
+import { VideoModule } from "./modules/video/video.module";
 
 import { routes } from "./app.routes";
 

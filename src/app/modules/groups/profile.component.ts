@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { NavParams } from 'ionic-angular';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, ViewChild, AfterContentInit } from '@angular/core';
+import { NavParams, Content } from 'ionic-angular';
 
 import { TabsComponent } from '../tabs/tabs.component';
 import { Client } from '../../common/services/api/client';
@@ -7,6 +7,7 @@ import { CacheService } from '../../common/services/cache/cache.service';
 import { Storage } from '../../common/services/storage';
 
 import { CONFIG } from '../../config';
+import { OnScreenService } from "../../common/services/visibility/on-screen.service";
 
 @Component({
   moduleId: 'module.id',
@@ -15,7 +16,7 @@ import { CONFIG } from '../../config';
   //styleUrls: ['login.component.css']
 })
 
-export class GroupProfile {
+export class GroupProfile implements OnInit, OnDestroy, AfterContentInit {
 
   guid : string = "";
   group;
@@ -28,6 +29,9 @@ export class GroupProfile {
     cdn_url: CONFIG.cdnUrl
   }
 
+  @ViewChild('scrollArea') scrollArea: Content;
+  onScreen = new OnScreenService();
+
   constructor(private client : Client, private params: NavParams, private cd : ChangeDetectorRef,
     private storage : Storage, private cache : CacheService){
   }
@@ -35,6 +39,14 @@ export class GroupProfile {
   ngOnInit(){
     this.guid = this.params.get('guid');
     this.load();
+  }
+
+  ngAfterContentInit() {
+    this.onScreen.init(this.scrollArea);
+  }
+
+  ngOnDestroy() {
+    this.onScreen.destroy();
   }
 
   load(){

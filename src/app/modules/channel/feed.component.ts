@@ -5,6 +5,7 @@ import { Client } from '../../common/services/api/client';
 import { CacheService } from '../../common/services/cache/cache.service';
 import { CONFIG } from '../../config';
 import { DiscoveryView } from '../discovery/view.component';
+import { VisibilityServiceInterface } from "../../common/services/visibility/visibility-service.interface";
 
 @Component({
   moduleId: 'module.id',
@@ -56,6 +57,8 @@ export class ChannelFeedComponent {
     this.loadList(true);
   }
 
+  @Input() visibilityService: VisibilityServiceInterface;
+
   loadList(refresh : boolean = false){
     if(refresh)
       this.offset = "";
@@ -67,8 +70,8 @@ export class ChannelFeedComponent {
             if(refresh)
               this.feed = [];
 
-            for(let activity of response.activity){
-              this.feed.push(activity);
+            if (response.activity) {
+              this.feed.push(...response.activity);
             }
             this.inProgress = false;
             this.offset = response['load-next'];
@@ -77,6 +80,7 @@ export class ChannelFeedComponent {
           .then(() => {
             this.cd.markForCheck();
             this.cd.detectChanges();
+            this.visibilityService.refresh();
           });
       case "video":
       case "image":

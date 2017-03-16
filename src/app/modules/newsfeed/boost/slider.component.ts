@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRe
 import { Slides } from "ionic-angular";
 
 import { Client } from "../../../common/services/api/client";
+import { OnSlideService } from "../../../common/services/visibility/on-slide.service";
 
 @Component({
   moduleId: 'module.id',
@@ -25,6 +26,8 @@ export class BoostSliderComponent implements OnInit, AfterViewInit, OnDestroy {
   private recordImpressionTimer;
   private updateTimer;
 
+  private onSlide = new OnSlideService();
+
   constructor(private client: Client, private changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -33,6 +36,7 @@ export class BoostSliderComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     this.slider.autoHeight = true;
+    this.onSlide.init(this.slider);
   }
 
   ngOnDestroy() {
@@ -70,6 +74,7 @@ export class BoostSliderComponent implements OnInit, AfterViewInit, OnDestroy {
 
         if (refresh) {
           this.recordImpression();
+          this.onSlide.refresh();
         }
 
         return boosts;

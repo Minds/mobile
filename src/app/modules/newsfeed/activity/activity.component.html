@@ -109,35 +109,16 @@
 </div>
 
 <div class="item item-image item-image-video"
-  *ngIf="entity.custom_type == 'video'">
-    <video
-      width="100%"
-      height="300px"
-      loop="true"
-      [muted]="canAutoplay()"
-      style="background:#000;"
-			preload="none"
-      [poster]="entity.custom_data.thumbnail_src"
-			[attr.autoplay]="canAutoplay() ? true : null"
-      controls="true"
-			playsinline webkit-playsinline
-      >
-      <source [src]="minds.cdn_url + 'api/v1/archive/' + entity.custom_data.guid + '/play'" type="video/mp4" />
-    </video>
-		 <!--<minds-video
-				width="100%"
-				height="300px"
-				style="background:#000;"
-				loop="true"
-				controls="true"
-				muted="true"
-				[poster]="entity.custom_data.thumbnail_src"
-				[src]="[{ 'res': '720', 'uri': 'api/v1/archive/' + entity.custom_data.guid + '/play', 'type': 'video/mp4' }]"
-        [guid]="entity.custom_data.guid"
-				[playCount]="activity['play:count']"
-				#player>
-				<video-ads [player]="player" *ngIf="entity.monetized"></video-ads>
-		</minds-video>-->
+  *ngIf="entity.custom_type == 'video'"
+>
+  <minds-video
+    [src]="minds.cdn_url + 'api/v1/archive/' + entity.custom_data.guid + '/play'"
+    [thumbnail]="entity.custom_data.thumbnail_src"
+    [preview]="true"
+    [previewPlayback]="active"
+    [analyticsGuid]="entity.entity_guid"
+    #player='video'
+  ></minds-video>
  </div>
 
 <!-- Images -->

@@ -11,9 +11,10 @@ import { Storage } from '../../common/services/storage';
 import { ButtonsModule } from '../buttons/buttons.module';
 import { CommonModule } from '../../common/common.module';
 import { HeaderModule } from '../header/header.module';
+import { VideoModule } from "../video/video.module";
 
 @NgModule({
-  imports: [ IonicModule, CommonModule, ButtonsModule, HeaderModule ],
+  imports: [ IonicModule, CommonModule, ButtonsModule, HeaderModule, VideoModule ],
   providers: [
     {
       provide: DiscoveryService,

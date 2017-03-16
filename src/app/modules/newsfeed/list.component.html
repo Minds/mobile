@@ -15,8 +15,7 @@
   <ion-list>
 
     <div *ngFor="let activity of feed" class="m-ionic-activity">
-  		<activity [entity]="activity" class="activity-item list card" (deleted)="delete(activity)">
-  		</activity>
+      <activity [entity]="activity" class="activity-item list card" (deleted)="delete(activity)" [visibilityService]="onScreen"></activity>
     </div>
 
 	</ion-list>

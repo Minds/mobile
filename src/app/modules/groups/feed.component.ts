@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Page } from "ui/page";
 import { Client } from '../../common/services/api/client';
 import { CacheService } from '../../common/services/cache/cache.service';
+import { VisibilityServiceInterface } from "../../common/services/visibility/visibility-service.interface";
 
 
 @Component({
@@ -21,6 +22,8 @@ export class GroupFeedComponent {
   offset : string = "";
   inProgress : boolean = true;
   @Output() done : EventEmitter<any> = new EventEmitter();
+
+  @Input() visibilityService: VisibilityServiceInterface;
 
   constructor(private client : Client, private cache : CacheService, private cd : ChangeDetectorRef){ }
 
@@ -59,6 +62,7 @@ export class GroupFeedComponent {
           resolve();
           this.cd.markForCheck();
           this.cd.detectChanges();
+          this.visibilityService.refresh();
         });
     });
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef, HostListener, AfterViewInit, ElementRef } from '@angular/core';
 import { ActionSheetController, ModalController, PopoverController, Platform, NavController } from 'ionic-angular'
 import { PhotoViewer } from 'ionic-native';
 
@@ -13,6 +13,7 @@ import { LanguagesComponent } from '../../translations/languages.component';
 import { ReportService } from '../../report/report.service';
 import { ShareService } from '../../share/share.service';
 import { GroupProfile } from '../../groups/profile.component';
+import { VisibilityServiceInterface } from "../../../common/services/visibility/visibility-service.interface";
 
 import { CONFIG } from '../../../config';
 
@@ -25,12 +26,17 @@ import { CONFIG } from '../../../config';
   ////styleUrls: ['activity.component.css']
 })
 
-export class Activity {
+export class Activity implements AfterViewInit, OnDestroy {
 
   entity;
   rawEntity;
   editing : boolean = false;
   @Output() deleted : EventEmitter<any> = new EventEmitter();
+
+  @Input() visibilityService: VisibilityServiceInterface;
+  @Input() visible: boolean = false;
+
+  active: boolean = false;
 
   minds = {
     cdn_url: CONFIG.cdnUrl,
@@ -43,11 +49,32 @@ export class Activity {
   }
 
   language : string = '';
+  impressionRegistered: boolean = false;
 
   constructor(private client : Client, public cache : CacheService, public actionSheetCtrl: ActionSheetController,
     private cd : ChangeDetectorRef, private storage : Storage, private modalCtrl : ModalController, private platform : Platform,
-    private navCtrl : NavController, private popoverCtrl : PopoverController, private report : ReportService, private share : ShareService){
+    private navCtrl : NavController, private popoverCtrl : PopoverController, private report : ReportService, private share : ShareService, private elementRef: ElementRef){
 
+  }
+
+  ngAfterViewInit() {
+    if (this.visibilityService) {
+      this.visibilityService.register(this.elementRef, (inViewport) => {
+        if (inViewport === this.visibilityService.VISIBLE) {
+          this.onShow();
+        } else if (inViewport === this.visibilityService.HIDDEN) {
+          this.onHide();
+        }
+      });
+    } else if (this.visible) {
+      this.onShow();
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.visibilityService) {
+      this.visibilityService.unregister(this.elementRef);
+    }
   }
 
   preview: boolean = false;
@@ -171,18 +198,32 @@ export class Activity {
       .present();
   }
 
-  canAutoplay() {
-    if (this.preview) {
-      return false;
-    }
-
-    if(this.platform.is('ios'))
-      return false; //ios can't inline play
-    return this.storage.get('autoplay');
-  }
-
   openImage(){
     PhotoViewer.show(`${this.minds.cdn_url}api/v1/archive/thumbnails/${this.entity.entity_guid}/xlarge`);
   }
 
+  onShow() {
+    this.registerImpression();
+
+    this.active = true;
+
+    this.cd.markForCheck();
+    this.cd.detectChanges();
+  }
+
+  onHide() {
+    this.active = false;
+
+    this.cd.markForCheck();
+    this.cd.detectChanges();
+  }
+
+  registerImpression() {
+    if (this.impressionRegistered) {
+      return;
+    }
+
+    this.impressionRegistered = true;
+    this.client.put('api/v1/newsfeed/' + this.entity.guid + '/view');
+  }
 }

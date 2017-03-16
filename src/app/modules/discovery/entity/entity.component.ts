@@ -106,17 +106,6 @@ export class DiscoveryEntity {
     this.cd.detectChanges();
   }
 
-  canAutoplay() {
-    if (this.preview) {
-      return false;
-    }
-
-    if(this.platform.is('ios'))
-      return false; //ios can't inline play
-    console.log(this.storage.get('disable-autoplay') == 'false');
-    return this.storage.get('disable-autoplay') == 'false' ? true : false;
-  }
-
   openImage(){
     PhotoViewer.show(`${this.minds.cdn_url}api/v1/archive/thumbnails/${this.entity.guid}/xlarge`);
   }

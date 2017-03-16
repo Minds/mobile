@@ -1,0 +1,12 @@
+<video
+  class="m-video-component"
+  [poster]="thumbnail"
+  [attr.autoplay]="!preview && autoplay ? true : null"
+  [attr.muted]="isPlayingPreview || muted ? true : null"
+  [attr.loop]="isPlayingPreview || loop ? true : null"
+  controls playsinline webkit-playsinline
+  #nativeVideo
+>
+  <source *ngFor="let src of sources" [src]="src" type="video/mp4">
+</video>
+<ng-content></ng-content>

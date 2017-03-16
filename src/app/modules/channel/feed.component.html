@@ -1,6 +1,6 @@
 
 <div *ngFor="let entity of feed" [class.m-ionic-discovery--tile]="type == 'video' || type == 'image'" [class.m-ionic-activity]="type=='activity'">
-  <activity [entity]="entity" class="activity-item list card" (deleted)="delete(entity)" *ngIf="type=='activity'">
+  <activity [entity]="entity" class="activity-item list card" (deleted)="delete(entity)" [visibilityService]="visibilityService" *ngIf="type=='activity'">
   </activity>
 
   <img [src]="minds.cdn_url + 'api/v1/archive/thumbnails/' + entity.guid + '/medium'"

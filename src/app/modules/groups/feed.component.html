@@ -8,6 +8,6 @@
     ></newsfeed-poster>
 
   <div *ngFor="let activity of feed">
-    <activity [entity]="activity" class="activity-item list card" (deleted)="delete(activity)">
+    <activity [entity]="activity" class="activity-item list card" (deleted)="delete(activity)" [visibilityService]="visibilityService">
     </activity>
   </div>

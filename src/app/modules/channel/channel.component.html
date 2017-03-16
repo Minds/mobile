@@ -1,6 +1,6 @@
 
 
-<ion-content>
+<ion-content #scrollArea>
 
   <ion-icon name="md-arrow-round-back" class="m-ionic-back-button" navPop></ion-icon>
 
@@ -61,7 +61,7 @@
   </div>
 
   <ion-list>
-    <channel-feed [channel]="channel" [type]="feedType" #feed [loadMore]="feed.scrollEvnt" (done)="feed.scrollEvnt = null; cd.markForCheck(); cd.detectChanges()"></channel-feed>
+    <channel-feed [channel]="channel" [type]="feedType" #feed [loadMore]="feed.scrollEvnt" (done)="feed.scrollEvnt = null; cd.markForCheck(); cd.detectChanges()" [visibilityService]="onScreen"></channel-feed>
   </ion-list>
 
   <ion-infinite-scroll (ionInfinite)="feed.scrollEvnt = $event">

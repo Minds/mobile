@@ -1,10 +1,11 @@
-import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild, AfterContentInit } from '@angular/core';
 import { Content, Refresher } from 'ionic-angular';
 
 import { ChannelComponent } from '../channel/channel.component';
 import { Client } from '../../common/services/api/client';
 import { Storage } from '../../common/services/storage';
 import { BoostSliderComponent } from "./boost/slider.component";
+import { OnScreenService } from "../../common/services/visibility/on-screen.service";
 
 
 @Component({
@@ -15,7 +16,7 @@ import { BoostSliderComponent } from "./boost/slider.component";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class NewsfeedList {
+export class NewsfeedList implements OnInit, OnDestroy, AfterContentInit {
 
   @ViewChild('scrollArea') scrollArea : Content;
   @ViewChild('boostsSlider') boostSlider: BoostSliderComponent;
@@ -28,10 +29,20 @@ export class NewsfeedList {
     channel: ChannelComponent
   }
 
-  constructor(private client : Client, private cd : ChangeDetectorRef, private storage : Storage){}
+  onScreen = new OnScreenService();
+
+  constructor(private client: Client, private cd: ChangeDetectorRef, private storage: Storage) { }
 
   ngOnInit(){
-    this.loadList();
+    this.loadList(true);
+  }
+
+  ngAfterContentInit() {
+    this.onScreen.init(this.scrollArea);
+  }
+
+  ngOnDestroy() {
+    this.onScreen.destroy();
   }
 
   loadList(refresh : boolean = false){
@@ -51,6 +62,8 @@ export class NewsfeedList {
           res();
           this.cd.markForCheck();
           this.cd.detectChanges();
+
+          this.onScreen.refresh();
         });
     });
   }
@@ -98,5 +111,4 @@ export class NewsfeedList {
       }
     }
   }
-
 }

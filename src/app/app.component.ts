@@ -9,6 +9,7 @@ import { GroupsList } from './modules/groups/list.component';
 import { BlogsList } from './modules/blog/list.component';
 import { NewsfeedList } from "./modules/newsfeed/list.component";
 import { OAuth2 } from "./common/services/api/oauth2";
+import { Client } from './common/services/api/client';
 import { Storage } from "./common/services/storage";
 import { PushService } from './modules/push/push.service';
 import { ShareService } from './modules/share/share.service';
@@ -36,7 +37,8 @@ export class MindsApp {
   rootPage : any = LoginComponent;
 
   constructor(private oauth2 : OAuth2, public menuCtrl: MenuController, private platform : Platform, private app : App,
-    private storage : Storage, private push : PushService, private share : ShareService, private sockets: SocketsService){
+    private storage : Storage, private push : PushService, private share : ShareService, private sockets: SocketsService,
+    private client : Client){
 
     if(this.oauth2.hasAccessToken()){
       this.rootPage = TabsComponent;
@@ -83,6 +85,7 @@ export class MindsApp {
 
   logout() {
     this.sockets.deregister();
+    this.client.post('api/v1/logout');
     (<any>window).localStorage.clear();
     this.menuCtrl.close();
     this.app.getRootNav().setRoot(LoginComponent);

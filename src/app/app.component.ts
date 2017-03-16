@@ -14,6 +14,7 @@ import { Storage } from "./common/services/storage";
 import { PushService } from './modules/push/push.service';
 import { ShareService } from './modules/share/share.service';
 import { SocketsService } from './common/services/api/sockets.service'
+import { SettingsComponent } from './modules/settings/settings.component';
 
 //for testing onboarding
 import { OnboardingComponent } from './modules/onboarding/onboarding.component';
@@ -81,6 +82,11 @@ export class MindsApp {
 
   invite(){
     this.share.share('Join me on Minds.com', 'Join me on Minds.com', null, 'https://www.minds.com/register?referrer=' + this.storage.get('user_guid'));
+  }
+
+  openSettings(){
+    this.app.getRootNav().push(SettingsComponent);
+    this.menuCtrl.close();
   }
 
   logout() {

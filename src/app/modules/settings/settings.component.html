@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons right>
+      <button ion-button (click)="save()" style="color:#FFF" *ngIf="password || password2">
+        Save
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+
+    <ion-item>
+      <ion-label stacked>Current Password</ion-label>
+      <ion-input type="password" [(ngModel)]="currentPassword"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>New Password</ion-label>
+      <ion-input type="password" [(ngModel)]="password"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Confirm New Password</ion-label>
+      <ion-input type="password" [(ngModel)]="password2"></ion-input>
+    </ion-item>
+
+	</ion-list>
+
+</ion-content>

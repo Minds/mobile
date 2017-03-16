@@ -43,6 +43,7 @@ export class AttachmentService{
     })
     .then((data : MediaFile[]) => {
         this.upload(data[0].fullPath, 'video');
+        this.previewUri = 'video.png';
 			},
       (err) => {
 				console.log('capture failed');
@@ -57,8 +58,19 @@ export class AttachmentService{
         mediaType: 2
       })
       .then((data) => {
+
+        let type = 'video';
+
+        var image = ["images", "document/image", '.jpg', '.JPG', '.jpeg', '.JPEG', '.png', '.PNG', '.bmp', '.BMP', '.gif', '.GIF'];
+				for (var i = 0; i < image.length; i++) {
+					if (data.indexOf(image[i]) > -1) {
+						type = 'image';
+						break;
+					}
+				}
+
         this.previewUri = data;
-        this.upload(data, '');
+        this.upload(data, type);
       }, (err) => {
 
       });

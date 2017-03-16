@@ -23,10 +23,8 @@
 	</div>
 </div>
 
-<div class="m-ionic-owner-block m-ionic-remind-owner-block m-ionic-remind-message" *ngIf="entity.reminderMessage">
-	<div class="m-ionic-body">
-		<span [innerHtml]="entity.reminderMessage | tags"></span>
-	</div>
+<div class="m-ionic-remind-message" *ngIf="entity.reminderMessage">
+	<span [innerHtml]="entity.reminderMessage | tags" allow-text-select></span>
 </div>
 
 <!-- Owner block -->

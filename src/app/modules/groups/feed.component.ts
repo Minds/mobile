@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, ChangeDetectionStrategy, ChangeDetectorRef, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Page } from "ui/page";
 import { Client } from '../../common/services/api/client';
@@ -20,6 +20,7 @@ export class GroupFeedComponent {
   feed : Array<any> = [];
   offset : string = "";
   inProgress : boolean = true;
+  @Output() done : EventEmitter<any> = new EventEmitter();
 
   constructor(private client : Client, private cache : CacheService, private cd : ChangeDetectorRef){ }
 
@@ -68,6 +69,7 @@ export class GroupFeedComponent {
     this.loadList()
       .then(() => {
         e.complete();
+        this.done.next(true);
       });
   }
 

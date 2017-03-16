@@ -1,17 +1,13 @@
 
-  <ion-list>
+  <newsfeed-poster
+    (prepend)="feed.unshift($event)"
+    placeholder="Enter a message here"
+    [containerGuid]="group.guid"
+    [accessId]="group.guid"
+    *ngIf="group && group['is:member']"
+    ></newsfeed-poster>
 
-    <newsfeed-poster
-      (prepend)="feed.unshift($event)"
-      placeholder="Enter a message here"
-      [containerGuid]="group.guid"
-      [accessId]="group.guid"
-      *ngIf="group && group['is:member']"
-      ></newsfeed-poster>
-
-    <div *ngFor="let activity of feed">
-      <activity [entity]="activity" class="activity-item list card" (deleted)="delete(activity)">
-      </activity>
-    </div>
-
-  </ion-list>
+  <div *ngFor="let activity of feed">
+    <activity [entity]="activity" class="activity-item list card" (deleted)="delete(activity)">
+    </activity>
+  </div>

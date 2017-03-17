@@ -175,7 +175,7 @@ export class ChannelComponent implements OnInit, OnDestroy, AfterContentInit {
 
     let buttons = [];
 
-    if(!this.channel.blocked){
+    if(!this.channel.blocked && this.channel.guid != this.storage.get('user_guid')){
       buttons.push({
         text: 'Block',
         handler: () => {
@@ -188,7 +188,7 @@ export class ChannelComponent implements OnInit, OnDestroy, AfterContentInit {
             });
         }
       });
-    } else {
+    } else if(this.channel.guid != this.storage.get('user_guid')) {
       buttons.push({
         text: 'Unblock',
         handler: () => {

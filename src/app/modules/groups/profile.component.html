@@ -38,7 +38,7 @@
   </div>
 
   <ion-list>
-    <group-feed [group]="group" #feed [loadMore]="feed.scrollEvnt" (done)="feed.scrollEvnt = null; cd.markForCheck(); cd.detectChanges()" [visibilityService]="onScreen"></group-feed>
+    <group-feed *ngIf="group && group['is:member']" [group]="group" #feed [loadMore]="feed.scrollEvnt" (done)="feed.scrollEvnt = null; cd.markForCheck(); cd.detectChanges()" [visibilityService]="onScreen"></group-feed>
   </ion-list>
 
   <ion-infinite-scroll (ionInfinite)="feed.scrollEvnt = $event">

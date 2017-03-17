@@ -42,35 +42,40 @@ export class NotificationsList {
   }
 
   loadList(refresh : boolean = false){
-    if(this.refresh)
+    if(refresh)
       this.offset = '';
     this.service.clear();
-    return new Promise((res, err) => {
-      this.inProgress = true;
-      this.client.get('api/v1/notifications/' + this.filter, { limit: 12, offset: this.offset })
+
+    return this.client.get('api/v1/notifications/' + this.filter, { limit: 12, offset: this.offset })
         .then((response : any) => {
           if(refresh)
             this.notifications = [];
-          this.loader.dismiss();
-          for(let notification of response.notifications){
-            this.notifications.push(notification);
-          }
           this.inProgress = false;
-          this.offset = response['load-next'];
-          res();
-          this.cd.markForCheck();
-          this.cd.detectChanges();
+          this.loader.dismiss();
+          if(response.notifications){
+            this.notifications.push(...response.notifications);
+            this.offset = response['load-next'];
+          }
+          return true;
         })
         .catch(() => {
+          if(refresh)
+            this.notifications = [];
           this.loader.dismiss();
+          return true;
         })
-    });
+        .then(() => {
+          this.cd.markForCheck();
+          this.cd.detectChanges();
+        });
   }
 
   refresh(puller){
     this.loadList(true)
       .then(() => {
         puller.complete();
+        this.cd.markForCheck();
+        this.cd.detectChanges();
       });
   }
 

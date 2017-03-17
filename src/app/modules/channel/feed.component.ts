@@ -72,9 +72,10 @@ export class ChannelFeedComponent {
 
             if (response.activity) {
               this.feed.push(...response.activity);
+              this.offset = response['load-next'];
             }
+
             this.inProgress = false;
-            this.offset = response['load-next'];
             return true;
           })
           .then(() => {

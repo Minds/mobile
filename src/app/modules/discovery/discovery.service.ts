@@ -101,6 +101,9 @@ export class DiscoveryService {
           if(refresh)
             this.entities = [];
 
+          if(this.offset)
+            response.entities.shift();
+
           for(let entity of response.entities){
             this.entities.push(entity);
           }

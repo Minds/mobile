@@ -25,6 +25,14 @@ export class LoginComponent {
     private push : PushService, private sockets: SocketsService, private cd: ChangeDetectorRef){
   }
 
+  ionViewDidEnter(){
+    Keyboard.disableScroll(true);
+  }
+
+  ionViewDidLeave(){
+    Keyboard.disableScroll(false);
+  }
+
   ngOnInit(){
     if(this.oauth2.hasAccessToken()){
       this.nav.setRoot(TabsComponent);

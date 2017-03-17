@@ -50,7 +50,7 @@ export class MindsApp {
   ngOnInit(){
     this.platform.ready().then(() => {
       StatusBar.backgroundColorByHexString('#37474f');
-      Keyboard.disableScroll(true);
+      //Keyboard.disableScroll(true);
       Splashscreen.hide();
       this.setDefaultSettings();
       this.sockets.reconnect();

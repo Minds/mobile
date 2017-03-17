@@ -90,7 +90,7 @@ export class MessengerSetup {
   }
 
   setup(password, password2){
-    if(password.value != password2.value){
+    if(!password.value || password.value != password2.value){
       this.alertCtrl.create({
           title: 'Sorry!',
           subTitle: "The passwords your entered do not match.",
@@ -116,6 +116,15 @@ export class MessengerSetup {
             })
             .present();
         }
+      })
+      .catch((error) => {
+        loader.dismiss();
+        this.alertCtrl.create({
+            title: 'Ooops...',
+            subTitle: error.message,
+            buttons: ['Try again']
+          })
+          .present();
       });
   }
 

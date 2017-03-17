@@ -7,8 +7,8 @@
     </ion-buttons>
 
   </ion-navbar>
-  <ion-toolbar>
-    <ion-segment [(ngModel)]="filter" class="m-ionic-notifications--filter">
+  <ion-toolbar mode='md'>
+    <ion-segment [(ngModel)]="filter" class="m-ionic-notifications--filter" mode='md'>
       <ion-segment-button value="all" (ionSelect)="setFilter('all')">
         <ion-icon name="md-notifications"></ion-icon>
       </ion-segment-button>

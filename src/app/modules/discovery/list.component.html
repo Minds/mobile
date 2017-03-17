@@ -14,7 +14,7 @@
     <ion-icon name="md-options" (click)="openOptions()" [hidden]="q.value"></ion-icon>
   </div>
   <div class="m-ionic-discovery--categories" style="margin-top: 50px; margin-bottom: -50px;" *ngIf="service.filter == 'featured'">
-    <ion-segment [(ngModel)]="service.category" color="primary">
+    <ion-segment [(ngModel)]="service.category" color="primary" mode='md'>
       <ion-segment-button value="all" (ionSelect)="service.setCategory('all')">
         All
       </ion-segment-button>

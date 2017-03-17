@@ -13,6 +13,7 @@ export class Upload  {
 
   base : string = CONFIG.baseUrl;
   oauth2;
+  ft;
 
   storage = new Storage();
 
@@ -23,7 +24,7 @@ export class Upload  {
 	post(endpoint : string, files : Array<any> = [], data : any = {}, progress : Function = ()=>{}){
 
     const fileTransfer = new Transfer();
-
+    this.ft = fileTransfer;
     var options: any;
 
     options = {

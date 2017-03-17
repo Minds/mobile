@@ -104,8 +104,13 @@ export class AttachmentService{
   reset(){
     this.meta.attachment_guid = '';
     this.previewUri = '';
-    this.progress = 0;
-    this.emitter.next({ progress: 0, guid: '' });
+    if(this.client.ft)
+      this.client.ft.abort();
+
+    setTimeout(() => {
+      this.progress = 0;
+      this.emitter.next({ progress: 0, guid: '' });
+    }, 300);
   }
 
 

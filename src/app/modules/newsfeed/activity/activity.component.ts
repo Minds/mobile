@@ -88,6 +88,8 @@ export class Activity implements AfterViewInit, OnDestroy {
 
       this.entity = entity.remind_object;
       this.entity.guid = entity.guid;
+      if(entity.entity_guid)
+        this.entity.entity_guid = entity.entity_guid;
       this.entity.reminderOwnerObj = entity.ownerObj;
       this.entity.reminderMessage = entity.message;
       this.entity.remind_object = false; //stop remind looping, if it even happens
@@ -95,6 +97,7 @@ export class Activity implements AfterViewInit, OnDestroy {
       this.entity.impressions = entity.impressions;
       this.entity['thumbs:up:count'] = entity['thumbs:up:count'];
       this.entity['thumbs:down:count'] = entity['thumbs:down:count'];
+      this.entity['comments:count'] = entity['comments:count'];
       this.entity.remind_count = entity.remind_count;
     } else {
       this.rawEntity = JSON.parse(JSON.stringify(entity));

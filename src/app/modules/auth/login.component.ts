@@ -26,10 +26,12 @@ export class LoginComponent {
   }
 
   ionViewDidEnter(){
-    Keyboard.disableScroll(true);
+    setTimeout(() => {
+      Keyboard.disableScroll(true);
+    }, 100);
   }
 
-  ionViewDidLeave(){
+  ionViewWillLeave(){
     Keyboard.disableScroll(false);
   }
 

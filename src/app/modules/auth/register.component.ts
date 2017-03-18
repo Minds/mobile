@@ -29,7 +29,7 @@ export class RegisterComponent {
     Keyboard.disableScroll(true);
   }
 
-  ionViewDidLeave(){
+  ionViewWillLeave(){
     Keyboard.disableScroll(false);
   }
 

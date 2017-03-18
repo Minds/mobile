@@ -108,6 +108,7 @@ export class MessengerSetup {
         loader.dismiss();
         if(response.key){
           this.storage.set('private-key', response.key);
+          this.nav.setRoot(MessengerList);
         } else {
           this.alertCtrl.create({
               title: 'Ooops...',

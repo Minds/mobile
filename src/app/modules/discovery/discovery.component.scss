@@ -92,6 +92,11 @@
         font-size: 12px;
         letter-spacing: 0.5px;
 
+        @media only screen and (max-device-width: 320px) {
+          font-size: 11px;
+          letter-spacing: 0.2px;
+        }
+
         label{
           font-weight: 500;
         }

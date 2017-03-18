@@ -41,6 +41,18 @@
       <div class="m-ionic-comments--comment">
         <p allow-text-select [innerHtml]="comment.description | tags"></p>
 
+        <!-- Rich content -->
+        <div class="m-ionic-comments--rich-embed"
+          *ngIf="comment.perma_url && comment.title"
+          (click)="openInBrowser(comment.perma_url)"
+        >
+          <img [src]="comment.thumbnail_src" (error)="comment.thumbnail_src = null" *ngIf="comment.thumbnail_src">
+          <div class="m-ionic-comments--rich-embed-meta">
+            <h3>{{comment.title}}</h3>
+            <p>{{comment.perma_url | domain }}</p>
+          </div>
+        </div>
+
         <!-- Images -->
         <div class="m-ionic-image allow-select"
          *ngIf="comment.thumbnail_src && !comment.perma_url">

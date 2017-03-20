@@ -89,6 +89,9 @@ export class ChannelFeedComponent {
             this.cd.detectChanges();
             this.inProgress = false;
             this.visibilityService.refresh();
+          })
+          .catch(() => {
+            this.inProgress = false;
           });
       case "video":
       case "image":
@@ -98,16 +101,21 @@ export class ChannelFeedComponent {
             if(refresh)
               this.feed = [];
 
-            for(let entity of response.entities){
-              this.feed.push(entity);
-            }
             this.inProgress = false;
-            this.offset = response['load-next'];
+
+            if(response.entities){
+              this.feed.push(...response.entities);
+              this.offset = response['load-next'];
+            }
+
             return true;
           })
           .then(() => {
             this.cd.markForCheck();
             this.cd.detectChanges();
+            this.inProgress = false;
+          })
+          .catch(() => {
             this.inProgress = false;
           });
     }

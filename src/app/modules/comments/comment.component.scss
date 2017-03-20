@@ -1,0 +1,54 @@
+
+
+.m-ionic-comments--comment-body{
+  display:block;
+  padding-bottom: 16px;
+
+  p{
+    margin:0;
+    padding: 0 16px 8px;
+    letter-spacing:0.3px;
+    line-height: 18px;
+  }
+}
+
+.m-ionic-comments--rich-embed{
+  margin: 0 16px;
+  border: 1px solid #eeeeee;
+  padding: 8px;
+
+  img{
+    width: 25%;
+    height: 100%;
+    min-width: 25%;
+    max-width: 100%;
+    max-height: 120px;
+    float: left;
+  }
+
+  .m-ionic-comments--rich-embed-meta {
+    margin-left: 25%;
+    padding: 0 8px;
+  }
+
+  h3{
+    font-size:16px;
+    margin: 0 0 8px;
+    padding: 0;
+  }
+
+  p{
+    margin: 0;
+    padding: 0;
+    color:#888;
+  }
+
+  &:before,
+  &:after {
+      content: " ";
+      display: table;
+  }
+  &:after {
+      clear: both;
+  }
+}

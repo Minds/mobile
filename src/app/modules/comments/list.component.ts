@@ -25,6 +25,8 @@ export class CommentsList implements OnInit, OnDestroy {
   @ViewChild('scrollArea') scrollArea : Content;
   autofocus : boolean = false;
 
+  editing : boolean = false;
+
   storage = new Storage();
   message : string = "";
 
@@ -114,6 +116,11 @@ export class CommentsList implements OnInit, OnDestroy {
         this.cd.detectChanges();
         this.scrollArea.scrollToBottom(300);
       });
+  }
+
+
+  delete(i){
+    this.comments.splice(i, 1);
   }
 
   joinSocketRoom() {

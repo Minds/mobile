@@ -23,7 +23,7 @@ export class ChannelFeedComponent {
   type : string = "activity";
   feed : Array<any> = [];
   offset : string = "";
-  inProgress : boolean = true;
+  inProgress : boolean = false;
 
   components = {
     view: DiscoveryView
@@ -38,28 +38,34 @@ export class ChannelFeedComponent {
   constructor(private client : Client, private cache : CacheService, private cd : ChangeDetectorRef){ }
 
   @Input() set channel(channel : any){
-    this.inProgress = true;
-    this.feed = [];
-
-    //let _feed = this.cache.get('feed:' + channel.guid);
-    //if(_feed){
-    //  this.feed = _feed;
-    //  this.inProgress = false;
-    //  return;
-    //}
-
     this.guid = channel.guid;
-    this.loadList();
+    this.loadList(true)
+      .then(() => {
+        this.cd.markForCheck();
+        this.cd.detectChanges();
+      });
   }
 
   @Input('type') set _type(type : string){
     this.type = type;
-    this.loadList(true);
+    this.feed = [];
+    this.cd.markForCheck();
+    this.cd.detectChanges();
+    this.loadList(true)
+      .then(() => {
+        this.cd.markForCheck();
+        this.cd.detectChanges();
+      });
   }
 
   @Input() visibilityService: VisibilityServiceInterface;
 
   loadList(refresh : boolean = false){
+    if(!this.guid || this.inProgress)
+      return new Promise((resolve, reject) => { reject(true) }); //has to be a promise!
+
+    this.inProgress = true;
+
     if(refresh)
       this.offset = "";
     switch(this.type){
@@ -81,6 +87,7 @@ export class ChannelFeedComponent {
           .then(() => {
             this.cd.markForCheck();
             this.cd.detectChanges();
+            this.inProgress = false;
             this.visibilityService.refresh();
           });
       case "video":
@@ -101,6 +108,7 @@ export class ChannelFeedComponent {
           .then(() => {
             this.cd.markForCheck();
             this.cd.detectChanges();
+            this.inProgress = false;
           });
     }
   }
@@ -110,7 +118,11 @@ export class ChannelFeedComponent {
       .then(() => {
         e.complete();
         this.done.next(true);
-      });
+      })
+      .catch(() => {
+        e.complete();
+        this.done.next(true);
+      })
   }
 
   refresh(e){

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { NavParams } from 'ionic-angular';
+import { NavParams, NavController } from 'ionic-angular';
 import { Client } from '../../common/services/api/client';
 
 
@@ -15,7 +15,7 @@ export class NewsfeedSingleComponent {
   entity;
   inProgress : boolean = false;
 
-  constructor(private client : Client, private params: NavParams, private cd : ChangeDetectorRef){}
+  constructor(private navCtrl : NavController, private client : Client, private params: NavParams, private cd : ChangeDetectorRef){}
 
   ngOnInit(){
     this.guid = this.params.get('guid');
@@ -32,5 +32,15 @@ export class NewsfeedSingleComponent {
       });
   }
 
+  ionViewCanEnter(): boolean {
+    let active = this.navCtrl.getActive();
+    let previousGuid = this.params.get('guid');
+
+    if(active.component.name === "NewsfeedSingleComponent" && previousGuid === active.data.guid){
+      return false;
+    }
+
+    return true;
+  }
 
 }

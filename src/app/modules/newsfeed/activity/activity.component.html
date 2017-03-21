@@ -51,7 +51,8 @@
 			>
       <strong>({{entity.containerObj.name}})</strong>
     </a>
-		<a class="m-date">
+		<a  [navPush]="components.activity"
+	      [navParams]="{ guid: entity.guid }" class="m-date">
 			<span>{{entity.time_created * 1000 | date:'medium'}}</span>
 		</a>
 	</div>

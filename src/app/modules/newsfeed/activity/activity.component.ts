@@ -44,6 +44,7 @@ export class Activity implements AfterViewInit, OnDestroy {
   }
 
   components = {
+    activity: NewsfeedSingleComponent,
     channel: ChannelComponent,
     group: GroupProfile
   }

@@ -7,6 +7,7 @@ import { ChannelFeedComponent } from './feed.component';
 import { SubscribersComponent } from './subscribers.component';
 import { NewsfeedModule } from '../newsfeed/newsfeed.module';
 import { CommonModule } from '../../common/common.module';
+import { BannerModule } from '../banner/banner.module';
 
 @NgModule({
   /*imports: [
@@ -24,7 +25,7 @@ import { CommonModule } from '../../common/common.module';
   exports: [
     RouterModule
   ]*/
-  imports: [ IonicModule, NewsfeedModule, CommonModule ],
+  imports: [ IonicModule, NewsfeedModule, CommonModule, BannerModule ],
   providers: [ Client ],
   declarations: [ ChannelComponent, ChannelFeedComponent, SubscribersComponent ],
   exports: [ ChannelComponent ],

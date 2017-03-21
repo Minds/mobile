@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild, AfterContentInit } from '@angular/core';
-import { NavController, NavParams, LoadingController, ActionSheetController, Content } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, ToastController, ActionSheetController, AlertController, Content } from 'ionic-angular';
 import { Camera } from 'ionic-native';
 
 import { Client } from '../../common/services/api/client';
@@ -11,6 +11,7 @@ import { BlogsList } from '../blog/list.component';
 import { OnScreenService } from "../../common/services/visibility/on-screen.service";
 
 import { CONFIG } from '../../config';
+import { BannerComponent } from "../banner/banner.component";
 
 @Component({
   moduleId: 'module.id',
@@ -21,6 +22,7 @@ import { CONFIG } from '../../config';
 })
 
 export class ChannelComponent implements OnInit, OnDestroy, AfterContentInit {
+  @ViewChild('bannerComponent') bannerComponent: BannerComponent;
 
   minds = {
     cdn_url: CONFIG.cdnUrl
@@ -29,7 +31,10 @@ export class ChannelComponent implements OnInit, OnDestroy, AfterContentInit {
   guid : string = "me";
   channel : any = {};
 
+  fileToUpload;
+
   editing = {
+    banner : false,
     name: false,
     avatar: false
   };
@@ -44,7 +49,8 @@ export class ChannelComponent implements OnInit, OnDestroy, AfterContentInit {
   onScreen = new OnScreenService();
 
   constructor(private client : Client, private upload : Upload, private nav : NavController, private params: NavParams, private cache : CacheService,
-    private cd: ChangeDetectorRef, private loadingCtrl : LoadingController, private storage : Storage, private actionSheetCtrl : ActionSheetController){
+    private cd: ChangeDetectorRef, private loadingCtrl : LoadingController, private storage : Storage, private actionSheetCtrl : ActionSheetController,
+    private toastCtrl : ToastController, private alertCtrl : AlertController){
     //if(applicationModule.android)
     //  page.actionBarHidden = true;
   }
@@ -247,6 +253,68 @@ export class ChannelComponent implements OnInit, OnDestroy, AfterContentInit {
       buttons: buttons
     });
     actionSheet.present();
+  }
+
+  showWarningReplaceBannerImage(){
+    if(this.channel.carousels){
+      let alert = this.alertCtrl.create({
+        title: 'Confirm upload banner image',
+        message: 'Adding a new banner will replace all existing banners on your channel.',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              this.showToast("Image upload cancelled by user.");
+            }
+          },
+          {
+            text: 'Upload',
+            handler: () => {
+              this.uploadBannerImage();
+            }
+          }
+        ]
+      });
+      alert.present();
+    } else {
+      this.uploadBannerImage();
+    }
+  }
+
+  setUploadFile(fileSrc){
+    this.fileToUpload = fileSrc;
+  }
+
+  private showToast(message : string){
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 3000
+    });
+    toast.present();
+  }
+
+  private uploadBannerImage() {
+    if(this.fileToUpload){
+      let loader = this.loadingCtrl.create({
+        content: "Uploading...",
+      });
+      loader.present();
+
+      this.upload.post('api/v1/channel/banner', [this.fileToUpload], {top : 0})
+        .then((response : any) => {
+          loader.dismiss();
+          this.showToast("Image uploaded!");
+          console.log(response);
+        });
+    } else {
+      this.showToast("No image selected!");
+    }
+  }
+
+  cancelUpload(){
+    this.fileToUpload = "";
+    this.bannerComponent.resetPicture();
   }
 
 }

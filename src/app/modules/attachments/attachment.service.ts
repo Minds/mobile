@@ -1,4 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
+
 import { Camera, MediaCapture, MediaFile, CaptureError, CaptureImageOptions } from 'ionic-native';
 
 import { Upload } from '../../common/services/api/upload';

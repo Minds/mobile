@@ -1,0 +1,11 @@
+<div (click)="onPressAddPicture()" class="m-ionic-banner--add-image-button">
+  <ion-icon *ngIf="editing" name="camera"></ion-icon>
+  <p *ngIf="editing">Tap here to add a new banner</p>
+</div>
+<div class="m-banner--header"
+  [style.position]="editing ? 'absolute' : 'inherit'"
+  [style.z-index]="editing ? '100' : '0'"
+  [style.background-image]="picture ? 'url(' + picture + ')' : 'none'"
+></div>
+<div *ngIf="editing" class="m-ionic-banner--edit-cover-dark"></div>
+<ng-content></ng-content>

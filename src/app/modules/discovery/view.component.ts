@@ -37,23 +37,34 @@ export class DiscoveryView {
 
   ngOnInit(){
     this.guid = this.params.get('guid');
-    if(this.params.get('entity'))
-      this.entity = this.params.get('entity');
-    //this.load();
+    if(this.params.get('entity')) {
+      this.entity = this.params.get('entity')
+      this.guid = this.entity.guid;
+    };
+
+    this.load();
   }
 
-  load(){
+  load() {
     this.inProgress = true;
-    this.client.get('api/v1/entities/entity/' + this.guid, {})
-      .then((response : any) => {
-        this.entity = response.activity;
+    this.client.get(`api/v1/entities/entity/${this.guid}`, {})
+      .then(({ entity }) => {
+        this.inProgress = false;
+
+        if (!entity) {
+          return; // or throw?
+        }
+
+        this.entity = entity;
         this.cd.markForCheck();
         this.cd.detectChanges();
+      })
+      .catch(e => {
+        this.inProgress = false;
       });
   }
 
   openImage(entity : any){
     PhotoViewer.show(`${this.minds.cdn_url}api/v1/archive/thumbnails/${entity.guid}/xlarge`);
   }
-
 }

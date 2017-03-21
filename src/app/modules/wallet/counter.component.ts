@@ -1,5 +1,6 @@
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from "@angular/core";
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnInit, OnDestroy } from "@angular/core";
 import { ModalController, NavController } from 'ionic-angular';
+import { Subscription } from "rxjs/Subscription";
 
 import { WalletComponent } from './wallet.component';
 import { WalletService } from './wallet.service';
@@ -15,23 +16,28 @@ import { WalletService } from './wallet.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class WalletCounterComponent {
+export class WalletCounterComponent implements OnInit, OnDestroy {
+  points: number;
 
-  subscription;
-  points : number;
+  private subscription: Subscription;
 
   constructor(public service : WalletService, private cd : ChangeDetectorRef, private modalCtrl : ModalController,
     private navCtrl : NavController){
   }
 
-  ngOnInit(){
-    let subscription = this.service.getCount()
-      .subscribe(
-        (count : number) => {
+  ngOnInit() {
+    this.subscription = this.service.getCount(true)
+      .subscribe((count: number) => {
           this.points = count;
           this.cd.markForCheck();
           this.cd.detectChanges();
-        });
+      });
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   open(e){

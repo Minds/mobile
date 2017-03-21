@@ -85,6 +85,7 @@ export class WalletComponent {
         this.cd.markForCheck();
         this.cd.detectChanges();
       });
+    this.service.getCount(true);
   }
 
   purchasePoints(){

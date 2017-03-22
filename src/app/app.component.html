@@ -41,7 +41,7 @@
 
       <ion-item>
         <ion-label>Points animation</ion-label>
-        <ion-toggle [checked]="storage.get('pointsAnimation')" (ionChange)="storage.set('disablePointsAnimation', $event.checked)"></ion-toggle>
+        <ion-toggle [checked]="storage.get('pointsAnimation')" (ionChange)="storage.set('pointsAnimation', $event.checked)"></ion-toggle>
       </ion-item>
 
       <button ion-item (click)="invite()">

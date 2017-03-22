@@ -6,6 +6,8 @@ import { Storage } from '../../../common/services/storage';
 import { ChannelComponent } from '../../channel/channel.component';
 import { NewsfeedSingleComponent } from '../../newsfeed/single.component';
 import { GroupProfile } from '../../groups/profile.component';
+import { DiscoveryView } from "../../discovery/view.component";
+import { BlogView } from "../../blog/view.component";
 
 import { CONFIG } from '../../../config';
 
@@ -29,7 +31,9 @@ export class NotificationCard {
   components = {
     activity: NewsfeedSingleComponent,
     channel: ChannelComponent,
-    group: GroupProfile
+    group: GroupProfile,
+    entityView: DiscoveryView,
+    blogView: BlogView,
   }
 
   constructor(public cache : CacheService, private client : Client, public storage : Storage){

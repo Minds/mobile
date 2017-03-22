@@ -64,13 +64,13 @@
       <div *ngIf="entity.entityObj.type == 'object'">
 
         <div *ngIf="entity.entityObj.subtype == 'blog'">
-          <a>
+          <a [navPush]="components.blogView" [navParams]="{ guid: entity.entityObj.guid }">
             <p i18n>{{entity.fromObj.name}} commented on <span class="pseudo-link mdl-color-text--blue-grey-400">{{entity.entityObj.title}}</span></p>
           </a>
         </div>
 
         <div *ngIf="entity.entityObj.subtype != 'blog'">
-          <a>
+          <a [navPush]="components.entityView" [navParams]="{ entity: entity.entityObj }">
             <p>
               <!-- i18n -->{{entity.fromObj.name}} commented on<!-- /i18n -->
               <span class="pseudo-link mdl-color-text--blue-grey-400" *ngIf="entity.entityObj.title" >{{entity.entityObj.title}}</span>

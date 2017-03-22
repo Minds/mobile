@@ -52,7 +52,7 @@
       <strong>({{entity.containerObj.name}})</strong>
     </a>
 		<a  [navPush]="components.activity"
-	      [navParams]="{ guid: entity.guid }" class="m-date">
+	      [navParams]="{ guid: entity.remindGuid ? entity.remindGuid : entity.guid }" class="m-date">
 			<span>{{entity.time_created * 1000 | date:'medium'}}</span>
 		</a>
 	</div>

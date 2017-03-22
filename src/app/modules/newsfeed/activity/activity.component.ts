@@ -88,6 +88,7 @@ export class Activity implements AfterViewInit, OnDestroy {
       this.rawEntity = JSON.parse(JSON.stringify(entity.remind_object));
 
       this.entity = entity.remind_object;
+      this.entity.remindGuid = entity.remind_object.guid;
       this.entity.guid = entity.guid;
       if(entity.entity_guid)
         this.entity.entity_guid = entity.entity_guid;

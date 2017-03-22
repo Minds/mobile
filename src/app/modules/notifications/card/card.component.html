@@ -260,7 +260,7 @@
   <!-- Boost reject -->
   <template ngSwitchCase="boost_rejected">
     <a>
-      <p><!-- i18n -->You boost <span *ngIf="entity.entityObj">for</span><!-- /i18n -->
+      <p><!-- i18n -->Your boost <span *ngIf="entity.entityObj">for</span><!-- /i18n -->
         <span class="pseudo-link mdl-color-text--blue-grey-400" *ngIf="entity.entityObj && entity.entityObj.title">{{entity.entityObj.title}}</span>
         <span class="pseudo-link mdl-color-text--blue-grey-400" *ngIf="entity.entityObj && !entity.entityObj.title && entity.entityObj.name">{{entity.entityObj.name}}</span>
         <span class="pseudo-link mdl-color-text--blue-grey-400" *ngIf="entity.entityObj && !entity.entityObj.title && !entity.entityObj.name && entity.entityObj.type !== 'user'" i18n>your post</span>

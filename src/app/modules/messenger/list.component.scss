@@ -16,6 +16,15 @@
     }
   }
 
+  .m-ionic-messenger--conversation-icons{
+    .m-ionic-messenger--conversation-icons-unread{
+      color: #4caf50 !important
+    }
+    .m-ionic-messenger--conversation-icons-online{
+      color: #2196f3 !important;
+    }
+  }
+
 }
 
 .m-ionic-messenger--search{

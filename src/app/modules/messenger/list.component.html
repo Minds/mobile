@@ -27,14 +27,19 @@
           [navPush]="components.view"
           [navParams]="{ conversation: convo }">
           <h3>
-            <!--TODO: unread conversation-->
-            <span *ngIf="convo.unread">&#9658;</span>
-
-            <!--TODO: online conversation-->
-            <span *ngIf="convo.online">&#9673;</span>
-
             {{convo.username}}
           </h3>
+        </div>
+        <div class="m-ionic-messenger--conversation-icons">
+          <!--TODO: unread conversation-->
+          <ion-icon name="md-notifications" class="m-ionic-messenger--conversation-icons-unread"
+            *ngIf="convo.unread">
+          </ion-icon>
+
+          <!--TODO: online conversation-->
+          <ion-icon name="md-radio-button-on" class="m-ionic-messenger--conversation-icons-online"
+            *ngIf="convo.online">
+          </ion-icon>
         </div>
       </div>
 

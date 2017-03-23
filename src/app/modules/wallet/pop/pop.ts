@@ -12,7 +12,7 @@ export class Pop extends ViewController {
 
     super(PopComponent, opts, null);
     this._app = app;
-    this.isOverlay = true;
+    this.isOverlay = false;
   }
 
   /**

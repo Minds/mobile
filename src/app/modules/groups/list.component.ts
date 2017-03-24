@@ -67,6 +67,10 @@ export class GroupsList {
     this.inProgress = true;
     return this.client.get('api/v1/groups/' + this.filter, { limit: 12, offset: this.offset})
       .then(({ groups = [], 'load-next': loadNext = '' }) => {
+        if (this.offset && groups) {
+          groups.shift();
+        }
+
         this.groups.push(...groups);
         this.inProgress = false;
         this.offset = loadNext;

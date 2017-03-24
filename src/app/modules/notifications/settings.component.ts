@@ -27,7 +27,8 @@ export class NotificationSettingsComponent {
     { id: 'boost_request', name: 'Peer2Peer boosts', icon: 'md-trending-up', toggle: true, ready: false },
     { id: 'boost_accepted', name: 'Boost approvals', icon: 'md-trending-up', toggle: true, ready: false },
     //{ id: 'boost_rejected', name: 'Rejected boosts', icon: 'md-trending-up', toggle: true, ready: false },
-    { id: 'boost_completed', name: 'Fulfilled boosts', icon: 'md-trending-up', toggle: true, ready: false }
+    { id: 'boost_completed', name: 'Fulfilled boosts', icon: 'md-trending-up', toggle: true, ready: false },
+    { id: 'chat', name: 'Messenger', icon: 'md-chatbubble', toggle: true, ready: false },
   ]
 
   inProgress : boolean = false;

@@ -5,6 +5,7 @@ import { App } from 'ionic-angular'
 import { PopController } from './pop/pop';
 import { SocketsService } from "../../common/services/api/sockets.service";
 import { Storage } from '../../common/services/storage';
+import { AppStatusService } from "../../common/services/app-status.service";
 
 export class WalletService{
 
@@ -14,7 +15,7 @@ export class WalletService{
   apiInProgress: boolean = false;
   pointsTxSubscription;
 
-  constructor(private client : Client, private popCtrl : PopController, private sockets: SocketsService, private storage: Storage){
+  constructor(private client : Client, private popCtrl : PopController, private sockets: SocketsService, private storage: Storage, private appStatus: AppStatusService){
     //this.getCount();
     this.listen();
   }
@@ -85,7 +86,7 @@ export class WalletService{
       return;
     }
 
-    if (this.storage.get('pointsAnimation')) {
+    if (this.storage.get('pointsAnimation') && this.appStatus.isActive()) {
       this.queueAnimation(points);
     }
 
@@ -112,8 +113,8 @@ export class WalletService{
   }
 
   // factory
-  static _(client : Client, popCtrl : PopController, sockets: SocketsService, storage: Storage){
-    return new WalletService(client, popCtrl, sockets, storage);
+  static _(client : Client, popCtrl : PopController, sockets: SocketsService, storage: Storage, appStatus: AppStatusService){
+    return new WalletService(client, popCtrl, sockets, storage, appStatus);
   }
 
 }

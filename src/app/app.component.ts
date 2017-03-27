@@ -18,6 +18,7 @@ import { SettingsComponent } from './modules/settings/settings.component';
 
 //for testing onboarding
 import { OnboardingComponent } from './modules/onboarding/onboarding.component';
+import { AppStatusService } from "./common/services/app-status.service";
 
 @Component({
   selector: "ion-app",
@@ -39,7 +40,7 @@ export class MindsApp {
 
   constructor(private oauth2 : OAuth2, public menuCtrl: MenuController, private platform : Platform, private app : App,
     private storage : Storage, private push : PushService, private share : ShareService, private sockets: SocketsService,
-    private client : Client){
+    private client : Client, private appStatus: AppStatusService){
 
     if(this.oauth2.hasAccessToken()){
       this.rootPage = TabsComponent;
@@ -62,6 +63,8 @@ export class MindsApp {
         .then((code) => {
           this.versionCode = code;
       });
+
+      this.appStatus.setUp();
     });
   }
 

@@ -12,11 +12,11 @@ import { TextareaComponent } from './components/textarea.component';
 import { RichInputComponent } from './components/rich-input.component.ts';
 import { SafePipe } from "./pipes/safe.pipe";
 import { PlatformFeaturesService } from "./services/platform-features.service";
-
+import { AppStatusService } from "./services/app-status.service";
 
 @NgModule({
   imports: [ IonicModule ],
-  providers: [ Storage, PlatformFeaturesService ],
+  providers: [ Storage, PlatformFeaturesService, AppStatusService ],
   declarations: [ ImgFadeDirective, ExplicitDirective, ContenteditableModel, DomainPipe, AbbrPipe, TagsPipe, TextareaComponent, RichInputComponent, SafePipe ],
   exports: [ ImgFadeDirective, ExplicitDirective, ContenteditableModel, DomainPipe, AbbrPipe, TagsPipe, TextareaComponent, RichInputComponent, SafePipe ]
 })

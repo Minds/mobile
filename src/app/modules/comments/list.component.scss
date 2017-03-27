@@ -30,47 +30,105 @@
 }
 
 
-.m-ionic-comments--composer{
+.m-ionic-comments--composer-wrapper{
   position: fixed;
   bottom: 0;
   left: 0;
-  display: flex;
-  align-items: column;
-  padding: 8px;
   width: 100%;
-  border-top: 1px solid #EEE;
-  background:#FFF;
   z-index:9999;
 
-  .m-ionic-body{
-    width: 100%;
+  .m-ionic-comments--composer {
     display: flex;
     align-items: center;
-    flex-flow: row;
-  }
-
-  textarea{
-    width: 100%;
-    border: 0;
-    min-height: 0;
-    height: auto;
     padding: 8px;
-    resize: none;
+    width: 100%;
+    border-top: 1px solid #EEE;
+    background:#FFF;
+
+    .m-ionic-avatar {
+      line-height: 0;
+
+      img {
+        max-width: 25px;
+        min-width: 25px;
+        max-height: 25px;
+        min-height: 25px;
+      }
+    }
+
+    .m-ionic-comments--capture {
+      font-size: 22px;
+      line-height: 0;
+      padding-left: 8px;
+
+      ion-icon {
+        color: #cccccc;
+      }
+    }
+
+    .m-ionic-comments--more-actions {
+      font-size: 22px;
+      line-height: 0;
+      padding-left: 8px;
+
+      ion-icon {
+        color: #cccccc;
+      }
+    }
+
+    .m-ionic-body{
+      width: 100%;
+      display: flex;
+      align-items: center;
+      flex-flow: row;
+    }
+
+    textarea{
+      width: 100%;
+      border: 0;
+      min-height: 0;
+      height: auto;
+      padding: 8px;
+      resize: none;
+    }
+
+    .m-ionic-comments--actions{
+      display: flex;
+      align-items: center;
+      ion-icon{
+        font-size:24px;
+      }
+    }
   }
 
-  .m-ionic-comments--actions{
-    display: flex;
-    align-items: center;
-    ion-icon{
-      font-size:24px;
+  .m-ionic-comments--attachments {
+    position: relative;
+
+    &.m-has-preview {
+      min-height: 48px;
+    }
+
+    .m-ionic-comments--preview-delete {
+      display: inline-block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 36px;
+      color: #cccccc;
+      text-shadow: 0 0 2px rgba(0, 0, 0, 0.65);
     }
   }
 }
 
-.m-ionic-comments--rich-embed{
+.m-ionic-comments--rich-embed {
   margin: 0 16px;
   border: 1px solid #eeeeee;
+}
+
+.m-ionic-comments--rich-embed, .m-ionic-comments--attachments .m-ionic-rich-embed{
   padding: 8px;
+  background: #ffffff;
 
   img{
     width: 25%;
@@ -105,5 +163,11 @@
   }
   &:after {
       clear: both;
+  }
+}
+
+.m-ionic-comments--attachments .m-ionic-rich-embed {
+  h3, p {
+    margin-left: calc(25% + 8px);
   }
 }

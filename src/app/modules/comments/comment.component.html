@@ -23,7 +23,9 @@
   </div>
 
   <div class="m-ionic-comments--comment-body">
-    <p allow-text-select [innerHtml]="entity.description | tags" *ngIf="!editing"></p>
+    <p allow-text-select [innerHtml]="entity.description | tags" *ngIf="!editing"
+      [explicit]="entity.mature" (showExplicit)="entity.mature = !$event; cd.markForCheck(); cd.detectChanges()"
+    ></p>
 
     <div class="m-ionic-editable-container" *ngIf="editing">
     	<!-- NOTE the intentional single way binding for ngModel, we want to be able to cancel our changes -->
@@ -36,6 +38,7 @@
     <div class="m-ionic-comments--rich-embed"
       *ngIf="entity.perma_url && entity.title"
       (click)="openInBrowser(entity.perma_url)"
+      [explicit]="entity.mature" (showExplicit)="entity.mature = !$event; cd.markForCheck(); cd.detectChanges()"
     >
       <img [src]="entity.thumbnail_src" (error)="entity.thumbnail_src = null" *ngIf="entity.thumbnail_src">
       <div class="m-ionic-comments--rich-embed-meta">
@@ -46,6 +49,7 @@
 
     <!-- Images -->
     <div class="m-ionic-image allow-select"
+      [explicit]="entity.mature" (showExplicit)="entity.mature = !$event; cd.markForCheck(); cd.detectChanges()"
      *ngIf="entity.thumbnail_src && !entity.perma_url">
     	<a>
     		<img [src]="entity.thumbnail_src" (error)="entity.thumbnail_src = null">
@@ -54,6 +58,7 @@
 
     <!-- Custom type:: batch -->
     <div class="m-ionic-image allow-select"
+      [explicit]="entity.mature" (showExplicit)="entity.mature = !$event; cd.markForCheck(); cd.detectChanges()"
      *ngIf="entity.custom_type == 'batch'">
 
     	<a>

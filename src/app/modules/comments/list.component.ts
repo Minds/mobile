@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild } from '@angular/core';
-import { NavParams, Content } from 'ionic-angular';
+import { NavParams, Content, ActionSheetController } from 'ionic-angular';
 
 import { ChannelComponent } from '../channel/channel.component';
 import { Client } from '../../common/services/api/client';
@@ -7,13 +7,17 @@ import { Storage } from '../../common/services/storage';
 
 import { CONFIG } from '../../config';
 import { SocketsService } from "../../common/services/api/sockets.service";
+import { AttachmentService } from "../attachments/attachment.service";
 
 @Component({
   moduleId: 'module.id',
   selector: 'comments-list',
   templateUrl: 'list.component.html',
   //styleUrls: ['list.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    AttachmentService // needs own instance
+  ],
 })
 
 export class CommentsList implements OnInit, OnDestroy {
@@ -28,7 +32,12 @@ export class CommentsList implements OnInit, OnDestroy {
   editing : boolean = false;
 
   storage = new Storage();
-  message : string = "";
+
+  meta = {
+    comment: '',
+    attachment_guid: null,
+    mature: 0,
+  }
 
   components = {
     channel: ChannelComponent
@@ -43,9 +52,18 @@ export class CommentsList implements OnInit, OnDestroy {
     comment: null
   };
 
-  constructor(private client : Client, private cd : ChangeDetectorRef,  private params: NavParams, private sockets: SocketsService){}
+  progress: number = 0;
 
-  ngOnInit(){
+  constructor(private client : Client, private cd : ChangeDetectorRef,  private params: NavParams, private sockets: SocketsService, public actionSheetCtrl: ActionSheetController, public attachment : AttachmentService){}
+
+  ngOnInit() {
+    this.attachment.emitter.subscribe((response : any) => {
+      this.progress = response.progress;
+      this.meta.attachment_guid = response.guid;
+      this.cd.markForCheck();
+      this.cd.detectChanges();
+    });
+
     this.loadList()
       .then(() => {
         this.listen();
@@ -105,12 +123,22 @@ export class CommentsList implements OnInit, OnDestroy {
       });
   }
 
-  post(){
-    this.client.post('api/v1/comments/' +  this.params.get('guid'), {
-        comment: this.message
-      })
+  post() {
+    if (this.progress > 0 && this.progress < 100) {
+      return;
+    }
+
+    this.client.post('api/v1/comments/' +  this.params.get('guid'), this.meta)
       .then((response : any) => {
-        this.message = "";
+        this.meta = {
+          comment: '',
+          attachment_guid: null,
+          mature: 0,
+        };
+
+        this.attachment.reset();
+        this.progress = 0;
+
         this.comments.push(response.comment);
         this.cd.markForCheck();
         this.cd.detectChanges();
@@ -168,4 +196,61 @@ export class CommentsList implements OnInit, OnDestroy {
     this.leaveSocketRoom();
   }
 
+  openCamera(){
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Upload',
+      buttons: [
+        {
+          text: 'Take a photo',
+          icon: 'md-camera',
+          handler: () => {
+            this.attachment.takePicture()
+          }
+        },
+        {
+          text: 'Record a video',
+          icon: 'md-videocam',
+          handler: () => {
+            this.attachment.takeVideo()
+          }
+        },
+        {
+          text: 'Pick from library',
+          icon: 'md-image',
+          handler: () => {
+            this.attachment.selectFromLibrary();
+          }
+        },
+        {
+          text: 'Close',
+          icon: 'md-close',
+          role: 'cancel'
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  setRichMeta(meta){
+    this.meta = Object.assign(this.meta, meta);
+  }
+
+  moreActions(){
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Comment Options',
+      buttons: [
+        {
+          text: !this.meta.mature ? 'Mark as Explicit' : 'Remove Explicit flag',
+          handler: () => {
+            this.toggleMature();
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  toggleMature() {
+    this.meta.mature = !this.meta.mature ? 1 : 0;
+  }
 }

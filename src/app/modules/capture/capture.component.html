@@ -56,6 +56,14 @@
     <div class="m-ionic--progress-bar-progress" [style.width]="progress + '%'"></div>
   </div>
 
+  <div class="m-ionic-capture--actions" [class.m-ionic-capture--actions-show]="meta.message || meta.attachment_guid">
+    <button class="m-mature" (mousedown)="toggleMature(); $event.preventDefault()" [class.m-mature--active]="meta.mature">
+      <img [src]="'assets/explicit_icon_' + (meta.mature ? 'active' : 'idle') + '.svg'"/>
+    </button>
+
+    <span class="m-mature-label" [class.m-mature-label--active]="meta.mature">Explicit</span>
+  </div>
+
   <div class="m-ionic-capture--options">
     <div class="m-ionic-capture--options-option" (click)="openPhoto()">
       <ion-icon name="md-camera"></ion-icon>

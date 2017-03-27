@@ -35,8 +35,13 @@
 }
 
 .m-ionic-poster--actions{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
 
-  display: block;
+  width: 100%;
   opacity:0;
   height:auto;
   max-height:0;
@@ -45,15 +50,46 @@
   -webkit-transition: opacity 1s ease-out, max-height 1s ease-out;
           transition: opacity 1s ease-out, max-height 1s ease-out;
 
-
-
   text-align:right;
   padding:8px;
 
+  .m-ionic-poster--action {
+    vertical-align: middle;
+
+    > * {
+      vertical-align: middle;
+    }
+  }
+
+  .m-mature {
+    appearance: none;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    color: #cccccc;
+    line-height: 0;
+
+    > img {
+      height: 23px;
+    }
+
+    &.m-mature-active {
+      color: #c00000;
+    }
+  }
+
+  .m-mature-label {
+    display: inline-block;
+    font-size: 8px;
+    padding: 3px;
+    border: 1px solid #c00000;
+    border-radius: 4px;
+    color: #c00000;
+    text-transform: uppercase;
+  }
 }
 .m-ionic-poster--actions-show{
 
-  display: block;
   opacity:1;
 
   height:auto;

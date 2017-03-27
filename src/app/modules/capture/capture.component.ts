@@ -27,7 +27,8 @@ export class CaptureComponent {
 
   meta = {
     message: '',
-    attachment_guid: ''
+    attachment_guid: '',
+    mature: 0,
   }
 
   constructor(private client : Client, private viewCtrl : ViewController, public attachment : AttachmentService, private loadingCtrl : LoadingController,
@@ -73,7 +74,8 @@ export class CaptureComponent {
 
         this.meta = {
           message: '',
-          attachment_guid: ''
+          attachment_guid: '',
+          mature: 0,
         };
         this.progress = 0;
 
@@ -104,6 +106,12 @@ export class CaptureComponent {
 
   setRichMeta(meta){
     this.meta = Object.assign(this.meta, meta);
+  }
+
+  toggleMature() {
+    this.meta.mature = !this.meta.mature ? 1 : 0;
+    this.cd.markForCheck();
+    this.cd.detectChanges();
   }
 
   dismiss(){

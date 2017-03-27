@@ -30,9 +30,11 @@ export class PosterComponent {
 
   message : string = "";
   progress : number = 0;
+  mature: boolean = false;
 
   meta = {
     message: '',
+    mature: 0,
     attachment_guid: null,
     container_guid: null
   };
@@ -119,6 +121,7 @@ export class PosterComponent {
 
         this.meta = {
           message: '',
+          mature: 0,
           attachment_guid: null,
           container_guid: this.containerGuid,
         };
@@ -136,6 +139,12 @@ export class PosterComponent {
 
   setRichMeta(meta){
     this.meta = Object.assign(this.meta, meta);
+  }
+
+  toggleMature() {
+    this.meta.mature = !this.meta.mature ? 1 : 0;
+    this.cd.markForCheck();
+    this.cd.detectChanges();
   }
 
 }

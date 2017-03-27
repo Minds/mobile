@@ -126,8 +126,13 @@ export class Activity implements AfterViewInit, OnDestroy {
   //@HostListener('press', ['$event'])
   openSettings(e){
     let buttons = [];
+    let reminderOwnerObjGuid = "";
 
-    if(this.storage.get('user_guid') == this.entity.owner_guid){
+    if(this.entity.reminderOwnerObj) {
+      reminderOwnerObjGuid = this.entity.reminderOwnerObj.guid
+    }
+
+    if(this.storage.get('user_guid') == this.entity.owner_guid || this.storage.get('user_guid') == reminderOwnerObjGuid){
       buttons.push({
         text: 'Delete',
         role: 'destructive',
@@ -189,10 +194,17 @@ export class Activity implements AfterViewInit, OnDestroy {
   }
 
   save(){
-    this.client.post('api/v1/newsfeed/' + this.entity.guid, {
-      message: this.entity.message,
-      title: this.entity.title
-    });
+    if(this.entity.reminderOwnerObj){
+      this.client.post('api/v1/newsfeed/' + this.entity.guid, {
+        message: this.entity.reminderMessage
+      });
+    } else {
+      this.client.post('api/v1/newsfeed/' + this.entity.guid, {
+        message: this.entity.message,
+        title: this.entity.title
+      });
+    }
+
     this.editing = false;
     this.cd.markForCheck();
     this.cd.detectChanges();

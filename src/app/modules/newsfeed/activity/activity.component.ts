@@ -28,8 +28,9 @@ import { CONFIG } from '../../../config';
 
 export class Activity implements AfterViewInit, OnDestroy {
 
-  entity;
-  rawEntity;
+  entity; //manipulated entity
+  originalEntity; //original, none manipulated entity
+  rawEntity; //none manipulated 'base' entity
   editing : boolean = false;
   @Output() deleted : EventEmitter<any> = new EventEmitter();
 
@@ -84,16 +85,20 @@ export class Activity implements AfterViewInit, OnDestroy {
   };
 
   @Input('entity') set _entity(entity) {
+    this.originalEntity = entity;
     if(entity.remind_object){
       this.rawEntity = JSON.parse(JSON.stringify(entity.remind_object));
 
       this.entity = entity.remind_object;
-      this.entity.remindGuid = entity.remind_object.guid;
+      if(entity.remind_object){
+        this.entity.remindGuid = entity.remind_object.guid;
+        this.entity.isRemind = true;
+      }
       this.entity.guid = entity.guid;
       if(entity.entity_guid)
         this.entity.entity_guid = entity.entity_guid;
       this.entity.reminderOwnerObj = entity.ownerObj;
-      this.entity.reminderMessage = entity.message;
+      this.entity.reminderMessage = entity.message || '';
       this.entity.remind_object = false; //stop remind looping, if it even happens
       this.entity.boosted = entity.boosted;
       this.entity.impressions = entity.impressions;
@@ -128,17 +133,13 @@ export class Activity implements AfterViewInit, OnDestroy {
     let buttons = [];
     let reminderOwnerObjGuid = "";
 
-    if(this.entity.reminderOwnerObj) {
-      reminderOwnerObjGuid = this.entity.reminderOwnerObj.guid
-    }
-
-    if(this.storage.get('user_guid') == this.entity.owner_guid || this.storage.get('user_guid') == reminderOwnerObjGuid){
+    if(this.storage.get('user_guid') == this.originalEntity.owner_guid){
       buttons.push({
         text: 'Delete',
         role: 'destructive',
         handler: () => {
           //console.log('Destructive clicked');
-          this.client.delete('api/v1/newsfeed/' + this.entity.guid);
+          this.client.delete('api/v1/newsfeed/' + this.originalEntity.guid);
           this.deleted.next(true);
         }
       });
@@ -170,14 +171,14 @@ export class Activity implements AfterViewInit, OnDestroy {
     buttons.push({
       text: 'Share',
       handler: () => {
-       this.share.share('', '', null, this.minds.base + 'newsfeed/' + this.entity.guid);
+       this.share.share('', '', null, this.minds.base + 'newsfeed/' + this.originalEntity.guid);
       }
     });
 
     buttons.push({
       text: 'Report',
       handler: () => {
-        this.report.report(this.entity.guid);
+        this.report.report(this.originalEntity.guid);
       }
     });
 
@@ -194,12 +195,12 @@ export class Activity implements AfterViewInit, OnDestroy {
   }
 
   save(){
-    if(this.entity.reminderOwnerObj){
-      this.client.post('api/v1/newsfeed/' + this.entity.guid, {
+    if(this.entity.isRemind){
+      this.client.post('api/v1/newsfeed/' + this.originalEntity.guid, {
         message: this.entity.reminderMessage
       });
     } else {
-      this.client.post('api/v1/newsfeed/' + this.entity.guid, {
+      this.client.post('api/v1/newsfeed/' + this.originalEntity.guid, {
         message: this.entity.message,
         title: this.entity.title
       });
@@ -211,7 +212,7 @@ export class Activity implements AfterViewInit, OnDestroy {
   }
 
   boost(){
-    this.modalCtrl.create(BoostComponent, { entity: this.entity })
+    this.modalCtrl.create(BoostComponent, { entity: this.originalEntity })
       .present();
   }
 
@@ -241,6 +242,6 @@ export class Activity implements AfterViewInit, OnDestroy {
     }
 
     this.impressionRegistered = true;
-    this.client.put('api/v1/newsfeed/' + this.entity.guid + '/view');
+    this.client.put('api/v1/newsfeed/' + this.originalEntity.guid + '/view');
   }
 }

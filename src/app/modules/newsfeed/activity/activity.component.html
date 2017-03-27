@@ -28,7 +28,7 @@
 </div>
 
 <!-- remind message edit -->
-<div class="m-ionic-editable-container" *ngIf="editing && entity.reminderOwnerObj">
+<div class="m-ionic-editable-container" *ngIf="editing && entity.isRemind">
 	<!-- NOTE the intentional single way binding for ngModel, we want to be able to cancel our changes -->
 	<m-textarea class="mdl-card__supporting-text message" name="message" #reminderMessageEdit [mModel]="entity.reminderMessage" (mModelChange)="reminderMessageEdit.value = $event"></m-textarea>
 	<button ion-button (click)="reminderMessageEdit.value = entity.reminderMessage; editing=false;" i18n>Cancel</button>
@@ -77,7 +77,7 @@
 <!-- END: PayWall -->
 
 <!-- Messages -->
-<div class="m-ionic-message" [hidden]="!entity.message || (editing && !entity.reminderOwnerObj)">
+<div class="m-ionic-message" [hidden]="!entity.message || (editing && !entity.isRemind)">
 	<span
 	  [innerHtml]="entity.message | tags "
 		allow-text-select
@@ -89,7 +89,7 @@
 
 <translation-view [guid]="entity.guid" [language]="language"></translation-view>
 
-<div class="m-ionic-editable-container" *ngIf="editing && (!entity.custom_type || (entity.custom_type && !entity.title)) && !entity.reminderOwnerObj">
+<div class="m-ionic-editable-container" *ngIf="editing && (!entity.custom_type || (entity.custom_type && !entity.title)) && !entity.isRemind">
 	<!-- NOTE the intentional single way binding for ngModel, we want to be able to cancel our changes -->
 	<m-textarea class="mdl-card__supporting-text message" name="message" #messageEdit [mModel]="entity.message" (mModelChange)="messageEdit.value = $event"></m-textarea>
 	<button ion-button (click)="messageEdit.value = entity.message; editing=false;" i18n>Cancel</button>

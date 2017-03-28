@@ -1,6 +1,8 @@
 
 <ion-content>
 
+  <ion-icon name="md-arrow-round-back" class="m-ionic-back-button" navPop></ion-icon>
+
   <div class="m-ionic-blog" *ngIf="blog.guid">
     <div class="m-ionic-blog--banner">
       <img class="minds-banner-img" [src]="minds.cdn_url + 'fs/v1/banners/' + blog.guid">

@@ -11,6 +11,10 @@ minds-banner {
 	color: whitesmoke;
 	z-index: 150;
   text-shadow: 0 0 3px #000;
+
+  &.editing{
+    color: #4690D6;
+  }
 }
 
 .m-ionic-banner--cancel-button {

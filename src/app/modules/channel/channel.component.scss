@@ -33,6 +33,10 @@
     ion-icon{
       vertical-align: middle;
       color: #888;
+
+      &.editing{
+        color: #4690D6;
+      }
     }
 
   }
@@ -54,6 +58,10 @@
     float: right;
     margin: -32px 16px;
     color: #888;
+
+    &.editing{
+      color: #4690D6;
+    }
   }
 
   .m-ionic-channel--stats {

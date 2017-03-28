@@ -17,7 +17,8 @@
       <!-- edit-changes-icon -->
       <ion-icon *ngIf="editing.banner"
         class="icon icon-ios ion-ios-checkmark-circle m-ionic-banner--edit-button"
-        (click)="showWarningReplaceBannerImage(); editing.banner=false; cd.markForCheck(); cd.detectChanges();">
+        (click)="showWarningReplaceBannerImage(); editing.banner=false; cd.markForCheck(); cd.detectChanges();"
+        [class.editing]="editing.banner">
       </ion-icon>
       <!-- cancel-changes-icon -->
       <ion-icon *ngIf="editing.banner"
@@ -39,7 +40,7 @@
     <div class="m-ionic-channel--name" [class.editing]="editing.name">
       <h1 [attr.contentEditable]="editing.name" [(contenteditableModel)]="channel.name">  {{channel.name}} </h1>
       <ion-icon name="create" *ngIf="!editing.name && channel.guid == this.storage.get('user_guid')" (click)="editing.name = true; cd.markForCheck(); cd.detectChanges();"></ion-icon>
-      <ion-icon name="checkmark-circle" *ngIf="editing.name" (click)="editing.name = false; save({name: channel.name})"></ion-icon>
+      <ion-icon name="checkmark-circle" *ngIf="editing.name" [class.editing]="editing.name" (click)="editing.name = false; save({name: channel.name})"></ion-icon>
 
       <ion-icon name="person-add"
         *ngIf="channel.guid != this.storage.get('user_guid')"
@@ -56,7 +57,7 @@
       >
     </div>
     <ion-icon name="create" class="m-ionic-channel--bio-icon" *ngIf="!editing.bio && channel.guid == this.storage.get('user_guid')" (click)="editing.bio = true; cd.markForCheck(); cd.detectChanges();"></ion-icon>
-    <ion-icon name="checkmark-circle" class="m-ionic-channel--bio-icon" *ngIf="editing.bio" (click)="editing.bio = false; save({briefdescription: channel.briefdescription})"></ion-icon>
+    <ion-icon name="checkmark-circle" class="m-ionic-channel--bio-icon" [class.editing]="editing.bio" *ngIf="editing.bio" (click)="editing.bio = false; save({briefdescription: channel.briefdescription})"></ion-icon>
 
     <div class="m-ionic-channel--stats">
       <div class="m-ionic-channel--stats-stat" *ngIf="!channel.supporters_count && (channel.activity_count || channel.activity_count === 0)">

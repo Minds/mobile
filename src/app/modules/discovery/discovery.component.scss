@@ -73,8 +73,13 @@
       border-radius:50%;
     }
   }
+  .m-ionic-discovery--card-icon{
+    padding:10px;
+    font-size: 25px;
+  }
   .m-ionic-discovery--card-body{
     padding:8px;
+    flex: 1;
 
     h3{
       padding:0;

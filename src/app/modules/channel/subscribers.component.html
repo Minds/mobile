@@ -14,14 +14,14 @@
   </ion-segment>
 
   <ion-list>
-    <div *ngFor="let entity of users"
-      [navPush]="components.channel"
-      [navParams]="{ guid: entity.guid }"
+    <div *ngFor="let entity of users; let i = index" data-index="i"
       class="m-ionic-discovery--card">
-  	  <div class="m-ionic-discovery--card-avatar">
+  	  <div [navPush]="components.channel"
+      [navParams]="{ guid: entity.guid }" class="m-ionic-discovery--card-avatar">
         <img [src]="minds.cdn_url + 'icon/' + entity.guid + '/medium/' + entity.icontime"/>
       </div>
-      <div class="m-ionic-discovery--card-body">
+      <div [navPush]="components.channel"
+      [navParams]="{ guid: entity.guid }" class="m-ionic-discovery--card-body">
         <h3>{{entity.name}}</h3>
         <div class="m-ionic-discovery--card-body-stats">
           <div class="m-ionic-discovery--card-body-stat">
@@ -34,6 +34,10 @@
           </div>
         </div>
       </div>
+      <ion-icon class="m-ionic-discovery--card-icon" name="person-add"
+        *ngIf="entity.guid != storage.get('user_guid') && !entity.subscribed"
+        (click)="subscribe(i)"
+        ></ion-icon>
     </div>
   </ion-list>
 

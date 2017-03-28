@@ -57,8 +57,7 @@ export class SubscribersComponent {
             this.users = [];
           this.users = this.users.concat(response.users);
           this.offset = response['load-next'];
-          this.cd.markForCheck();
-          this.cd.detectChanges();
+          this.detectChanges();
           resolve();
         });
     });
@@ -68,9 +67,29 @@ export class SubscribersComponent {
     this.load()
       .then(() => {
         e.complete();
-        this.cd.markForCheck();
-        this.cd.detectChanges();
+        this.detectChanges();
       })
+  }
+
+  subscribe(index){
+    this.users[index].subscribed = true;
+    this.users[index].subscribers_count++;
+    this.detectChanges();
+
+    this.client.post('api/v1/subscribe/' + this.users[index].guid, {})
+      .then((response : any) => {
+        this.users[index].subscribed = true;
+      })
+      .catch((e) => {
+        this.users[index].subscribed = false;
+        this.users[index].subscribers_count--;
+        this.detectChanges();
+      });
+  }
+
+  detectChanges(){
+    this.cd.markForCheck();
+    this.cd.detectChanges();
   }
 
 }

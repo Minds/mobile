@@ -10,6 +10,8 @@ import { SubscribersComponent } from './subscribers.component';
 import { BlogsList } from '../blog/list.component';
 import { OnScreenService } from "../../common/services/visibility/on-screen.service";
 
+import { MessengerView } from '../messenger/view.component';
+
 import { CONFIG } from '../../config';
 import { BannerComponent } from "../banner/banner.component";
 
@@ -209,6 +211,15 @@ export class ChannelComponent implements OnInit, OnDestroy, AfterContentInit {
       });
     }
 
+    if(this.channel.guid != this.storage.get('user_guid')){
+      buttons.push({
+        text: 'Send message',
+        handler: () => {
+          this.nav.push(MessengerView, { guid : this.getMessengerGuid() });
+        }
+      });
+    }
+
     buttons.push({
       text: 'View blogs',
       handler: () => {
@@ -315,6 +326,12 @@ export class ChannelComponent implements OnInit, OnDestroy, AfterContentInit {
   cancelUpload(){
     this.fileToUpload = "";
     this.bannerComponent.resetPicture();
+  }
+
+  private getMessengerGuid(){
+    let participants = [ this.channel.guid, this.storage.get('user_guid') ];
+    participants.sort((a, b) => a < b ? -1 : 1);
+    return participants.join(':');
   }
 
 }

@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef, ElementRef, Renderer } from "@angular/core";
-import { ViewController, Config, Platform, GestureController, NavParams } from 'ionic-angular';
+import { ViewController, Config, Platform, GestureController, NavParams, AlertController } from 'ionic-angular';
 
 import { WireService } from './wire.service';
 
@@ -64,7 +64,8 @@ export class WireFabComponent {
     params: NavParams,
     renderer: Renderer,
     private service : WireService,
-    private cd : ChangeDetectorRef
+    private cd : ChangeDetectorRef,
+    private alertCtrl : AlertController
   ){
     this.guid = params.get('guid');
   }
@@ -113,27 +114,58 @@ export class WireFabComponent {
       return;
     this.inProgress = true;
 
-    this.service.setEntityGuid(this.guid);
-    this.service.setMethod(this.method);
-    this.service.setAmount(this.amount);
 
-    this.animate = true;
-    this.cd.markForCheck();
-    this.cd.detectChanges();
 
-    this.service.send()
-      .then(() => {
-        console.log('[wire]: success');
-        setTimeout(() => {
-          this.dismiss();
-        }, 1000);
-      })
-      .catch(() => {
-        console.log('[wire]: exception thrown');
-        this.inProgress = false;
+    if(this.method == 'bitcoin'){
+      let alert = this.alertCtrl.create({
+        title: `We're working on it!`,
+        subTitle: "Bitcoin is coming soon.",
+        buttons: ['Ok']
       });
-  }
+      alert.present();
+      this.inProgress = false;
+      return false;
+    }
 
+    let confirm = this.alertCtrl.create({
+      title: 'Are you sure?',
+      //subTitle: "",
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: () => {
+            this.inProgress = false;
+            this.cd.markForCheck();
+            this.cd.detectChanges();
+          }
+        },
+        {
+          text: 'Send',
+          handler: () => {
+            this.service.setEntityGuid(this.guid);
+            this.service.setMethod(this.method);
+            this.service.setAmount(this.amount);
+
+            this.animate = true;
+            this.cd.markForCheck();
+            this.cd.detectChanges();
+
+            this.service.send()
+              .then(() => {
+                //console.log('[wire]: success');
+                setTimeout(() => {
+                  this.dismiss();
+                }, 1000);
+              })
+              .catch(() => {
+                //console.log('[wire]: exception thrown');
+                this.inProgress = false;
+              });
+          }
+        }]
+    });
+    confirm.present();
+  }
 
   dismiss(){
     this._viewCtrl.dismiss();

@@ -52,25 +52,34 @@
   background:#FFF;
   z-index:9999;
 
-  .m-ionic-body{
-    width: 100%;
+  .m-ionic-avatar{
+    flex: 1;
     display: flex;
     align-items: center;
-    flex-flow: row;
+    img {
+      width: 100%;
+    }
+  }
+
+  .m-ionic-body{
+    flex: 100%;
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    overflow: hidden;
   }
 
   textarea{
-    width: 100%;
-    border: 0;
+    border:0;
     min-height: 0;
     height: auto;
-    padding: 8px;
-    resize: none;
   }
 
   .m-ionic-messenger--actions{
     display: flex;
+    flex: 1;
     align-items: center;
+    padding: 5px;
     ion-icon{
       font-size:24px;
     }

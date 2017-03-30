@@ -1,8 +1,7 @@
 .m-ionic-poster{
-
   padding:8px;
   border-bottom:1px solid #EEE;
-
+  width: 100%;
   .m-ionic-avatar{
     img{
       min-width:32px;
@@ -13,25 +12,24 @@
   }
 
   .m-ionic-body{
-
+    display: flex;
+    flex: 100%;
     position:relative;
-
-    flex:1;
+    padding: 8px;
+    overflow: hidden;
 
     textarea{
       border:0;
     }
-
-
-
   }
 
   .m-ionic-poster--icons{
+    display: flex;
+    flex: 1;
     ion-icon{
       font-size:24px;
     }
   }
-
 }
 
 .m-ionic-poster--actions{

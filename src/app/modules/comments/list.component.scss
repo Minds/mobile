@@ -46,6 +46,7 @@
     background:#FFF;
 
     .m-ionic-avatar {
+      flex: 1;
       line-height: 0;
 
       img {
@@ -57,6 +58,7 @@
     }
 
     .m-ionic-comments--capture {
+      flex: 1;
       font-size: 22px;
       line-height: 0;
       padding-left: 8px;
@@ -67,33 +69,32 @@
     }
 
     .m-ionic-comments--more-actions {
-      font-size: 22px;
+      flex: 1;
       line-height: 0;
       padding-left: 8px;
+      display: flex;
 
       ion-icon {
+        font-size: 22px;
         color: #cccccc;
       }
     }
 
-    .m-ionic-body{
-      width: 100%;
-      display: flex;
-      align-items: center;
-      flex-flow: row;
+    .m-ionic-body {
+      flex: 100%;
+      overflow: hidden;
+      padding: 8px;
     }
 
-    textarea{
-      width: 100%;
+    textarea {
+      resize: none;
       border: 0;
       min-height: 0;
       height: auto;
-      padding: 8px;
-      resize: none;
     }
 
     .m-ionic-comments--actions{
-      display: flex;
+      flex: 1;
       align-items: center;
       ion-icon{
         font-size:24px;

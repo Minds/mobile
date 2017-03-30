@@ -1,3 +1,13 @@
+.m-ionic-messenger--options-icon {
+  position: absolute;
+  z-index: 5;
+  right: 0px;
+  font-size: 26px;
+  top:4px;
+  color: rgba(0,0,0,.8);
+  padding: 10px 15px;
+}
+
 .m-ionic-messenger--conversation{
   display:flex;
   align-items: center;

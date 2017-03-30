@@ -71,8 +71,7 @@ export class MessengerList implements OnInit, OnDestroy {
           this.inProgress = false;
           this.offset = response['load-next'];
           res();
-          this.cd.markForCheck();
-          this.cd.detectChanges();
+          this.detectChanges();
         });
     });
   }
@@ -120,8 +119,7 @@ export class MessengerList implements OnInit, OnDestroy {
         handler: () => {
           this.client.delete('api/v2/conversations/' + this.conversations[i].guid);
           this.conversations.splice(i,1);
-          this.cd.markForCheck();
-          this.cd.detectChanges();
+          this.detectChanges();
         }
       },
       {
@@ -145,8 +143,7 @@ export class MessengerList implements OnInit, OnDestroy {
       for (var i in this.conversations) {
         if (this.conversations[i].guid == guid) {
           this.conversations[i].unread = true;
-          this.cd.markForCheck();
-          this.cd.detectChanges();
+          this.detectChanges();
           return;
         }
       }
@@ -159,6 +156,37 @@ export class MessengerList implements OnInit, OnDestroy {
         this.socketSubscriptions[sub].unsubscribe();
       }
     }
+  }
+
+  openMessengerOptions() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: '',
+      buttons: [
+        {
+          text: 'Change password',
+          handler: () => {
+            this.changePassword();
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+          }
+        }
+      ]
+    });
+
+    actionSheet.present();
+  }
+
+  private changePassword(){
+    this.nav.push(MessengerSetup, { changePassword : true });
+  }
+
+  private detectChanges() {
+    this.cd.markForCheck();
+    this.cd.detectChanges();
   }
 
 }

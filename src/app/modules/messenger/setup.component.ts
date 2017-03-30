@@ -24,12 +24,12 @@ export class MessengerSetup {
     private loadingCtrl : LoadingController, private alertCtrl : AlertController, private storage : Storage ){}
 
   ngOnInit(){
-
+    let changePassword : boolean = this.params.get('changePassword') || false;
     let loader = this.showLoader();
 
     this.client.get('api/v1/channel/me')
       .then((response : any) => {
-				if(response.channel.chat) {
+				if(response.channel.chat && !changePassword) {
 					this.configured = true;
 				}
         loader.dismiss();

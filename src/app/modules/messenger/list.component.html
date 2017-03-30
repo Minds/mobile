@@ -8,6 +8,8 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
+  <ion-icon class="m-ionic-messenger--options-icon" name="md-more" (click)="openMessengerOptions()"></ion-icon>
+
   <div class="m-ionic-messenger--search">
     <ion-icon name="md-search"></ion-icon>
     <input type="text" placeholder="Search..." #q (keyup)="search(q.value)"/>

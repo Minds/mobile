@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild } from '@angular/core';
-import { Content, NavParams } from 'ionic-angular';
+import { Content, NavParams, NavController, ActionSheetController, AlertController, LoadingController } from 'ionic-angular';
 import { Keyboard } from 'ionic-native';
 
 import { ChannelComponent } from '../channel/channel.component';
@@ -48,7 +48,9 @@ export class MessengerView implements OnInit, OnDestroy {
 
 
   constructor(private client: Client, private cd: ChangeDetectorRef, private params: NavParams,
-    private service: MessengerViewService, private storage: Storage, private sockets: SocketsService) { }
+    private service: MessengerViewService, private storage: Storage, private sockets: SocketsService,
+    private actionSheetCtrl : ActionSheetController, private navCtrl : NavController, private alertCtrl : AlertController,
+    private loadingCtrl: LoadingController){}
 
   ngOnInit() {
     this.conversation = this.params.get('conversation');
@@ -276,5 +278,63 @@ export class MessengerView implements OnInit, OnDestroy {
     });
 
     return has;
+  }
+
+  openChatOptions() {
+    let menuOptions = this.actionSheetCtrl.create({
+      title: '',
+      buttons: [
+        {
+          text: 'Delete',
+          icon: 'trash',
+          role: 'destructive',
+          handler: () => {
+            this.showChatDeleteAlert();
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {}
+        }
+      ]
+    });
+
+    menuOptions.present();
+  }
+
+  private deleteChat() {
+    let loading = this.loadingCtrl.create({
+      content: 'Deleting...'
+    });
+
+    loading.present();
+
+    this.client.delete('api/v2/conversations/' + this.conversation.guid, {})
+      .then(() => {
+        loading.dismiss();
+        this.navCtrl.pop();
+      })
+  }
+
+  showChatDeleteAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'Are you sure?',
+      message: 'All messages will be deleted for all parties. You cannot UNDO this action.',
+      buttons: [
+        {
+          text: 'No',
+          role: 'destructive',
+          handler: () => {}
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            this.deleteChat();
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 }

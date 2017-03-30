@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 import { NavController, LoadingController, AlertController, NavParams } from 'ionic-angular';
 
 import { Client } from '../../common/services/api/client';
@@ -23,16 +24,28 @@ export class SettingsComponent {
   currentPassword : string;
   password : string;
   password2 : string;
+  currentEmail : string = "";
+  mailChanged: boolean = false;
+  myForm : FormGroup;
 
   constructor(private client : Client, private cd : ChangeDetectorRef, private nav : NavController, private loadingCtrl : LoadingController,
     private storage : Storage, private params: NavParams, private alertCtrl : AlertController){
   }
 
   ngOnInit(){
+
+    this.myForm = new FormGroup({
+      email : new FormControl(this.currentEmail)
+    });
+
+    this.client.get('api/v1/settings/' + this.storage.get('user_guid'))
+      .then((response : any) => {
+        this.currentEmail = response.channel.email;
+        this.detectChanges();
+      });
   }
 
   save(){
-
     if(this.password != this.password2){
       this.alertCtrl.create({
           title: 'Sorry!',
@@ -50,7 +63,8 @@ export class SettingsComponent {
 
     this.client.post('api/v1/settings/' + this.storage.get('user_guid'), {
         password: this.currentPassword,
-        new_password: this.password
+        new_password: this.password,
+        email: this.currentEmail
       })
       .then((response) => {
         this.password = "";
@@ -68,4 +82,10 @@ export class SettingsComponent {
           .present();
       });
   }
+
+  detectChanges() {
+    this.cd.markForCheck();
+    this.cd.detectChanges();
+  }
+
 }

@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-buttons right>
-      <button ion-button (click)="save()" style="color:#FFF" *ngIf="password || password2">
+      <button ion-button (click)="save()" style="color:#FFF" *ngIf="password || password2 || mailChanged">
         Save
       </button>
     </ion-buttons>
@@ -11,6 +11,9 @@
 <ion-content>
 
   <ion-list>
+    <ion-list-header color="light">
+      Password
+    </ion-list-header>
 
     <ion-item>
       <ion-label stacked>Current Password</ion-label>
@@ -26,6 +29,20 @@
       <ion-label stacked>Confirm New Password</ion-label>
       <ion-input type="password" [(ngModel)]="password2"></ion-input>
     </ion-item>
+
+	</ion-list>
+
+  <ion-list>
+    <ion-list-header color="light">
+      Email
+    </ion-list-header>
+
+    <form [formGroup]="myForm">
+      <ion-item>
+        <ion-label stacked>Current Email</ion-label>
+        <ion-input formControlName="email" type="email" (keypress)="mailChanged = true; detectChanges();" name="currentEmail" [(ngModel)]="currentEmail"></ion-input>
+      </ion-item>
+    </form>
 
 	</ion-list>
 

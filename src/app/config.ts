@@ -8,3 +8,5 @@ export const CONFIG = {
 //   cdnUrl: 'http://dev.minds.io/',
 //   socketUri: 'dev.minds.io:8010',
 // };
+
+export const ANDROID_SENDER_ID = '81109256529';

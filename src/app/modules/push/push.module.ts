@@ -4,6 +4,8 @@ import { IonicModule, App, Platform } from 'ionic-angular';
 
 import { Client } from '../../common/services/api/client';
 import { PushService } from './push.service';
+import { NotificationRouterService } from "../notifications/notification-router.service";
+import { AppStatusService } from "../../common/services/app-status.service";
 
 @NgModule({
   imports: [ IonicModule ],
@@ -11,7 +13,7 @@ import { PushService } from './push.service';
     {
       provide: PushService,
       useFactory: PushService._,
-      deps: [ Client, Platform ]
+      deps: [ Client, Platform, NotificationRouterService, AppStatusService ]
     },
   ]
 })

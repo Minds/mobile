@@ -29,6 +29,7 @@ export class NotificationSettingsComponent {
     //{ id: 'boost_rejected', name: 'Rejected boosts', icon: 'md-trending-up', toggle: true, ready: false },
     { id: 'boost_completed', name: 'Fulfilled boosts', icon: 'md-trending-up', toggle: true, ready: false },
     { id: 'chat', name: 'Messenger', icon: 'md-chatbubble', toggle: true, ready: false },
+    { id: 'group_invite', name: 'Group Invites', toggle: true, ready: false },
   ]
 
   inProgress : boolean = false;

@@ -43,8 +43,12 @@ export class NotificationsCounterComponent {
       .subscribe(
         (count : number) => {
           this.unread = count;
-          this.cd.markForCheck();
-          this.cd.detectChanges();
+          try {
+            this.cd.markForCheck();
+            this.cd.detectChanges();
+          } catch (e) {
+            this.subscription.unsubscribe();
+          }
         });
   }
 

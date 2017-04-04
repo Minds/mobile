@@ -19,7 +19,11 @@
   <ion-list class="m-ionic-comments--list">
 
     <div *ngFor="let comment of comments; let i = index">
-      <comment [entity]="comment" (deleted)="delete(i)"></comment>
+      <comment
+        [entity]="comment"
+        (deleted)="delete(i)"
+        (onReply)="reply($event.comment)"
+      ></comment>
     </div>
 
 	</ion-list>
@@ -38,7 +42,7 @@
       <ion-icon name="md-more" (click)="moreActions()"></ion-icon>
     </div>
     <div class="m-ionic-body">
-      <m-textarea placeholder="Write your comment..." [(mModel)]="meta.comment"></m-textarea>
+      <m-textarea placeholder="Write your comment..." [(mModel)]="meta.comment" #textarea="Textarea"></m-textarea>
     </div>
     <div class="m-ionic-comments--actions" *ngIf="meta.comment || meta.attachment_guid">
       <ion-icon name="md-send" (click)="post()"></ion-icon>

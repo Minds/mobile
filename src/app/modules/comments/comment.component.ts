@@ -21,6 +21,7 @@ export class CommentComponent{
   @Input() entity;
   editing : boolean = false;
   @Output() deleted : EventEmitter<any> = new EventEmitter();
+  @Output() onReply: EventEmitter<any> = new EventEmitter();
 
   storage = new Storage();
 
@@ -69,6 +70,14 @@ export class CommentComponent{
           this.editing = true;
           this.cd.markForCheck();
           this.cd.detectChanges();
+        }
+      });
+    } else {
+      buttons.push({
+        text: 'Reply',
+        icon: 'ios-undo',
+        handler: () => {
+          this.onReply.emit({ comment: this.entity });
         }
       });
     }

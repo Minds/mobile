@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDet
 import { NavParams, Content, ActionSheetController } from 'ionic-angular';
 
 import { ChannelComponent } from '../channel/channel.component';
+import { TextareaComponent } from "../../common/components/textarea.component";
 import { Client } from '../../common/services/api/client';
 import { Storage } from '../../common/services/storage';
 
@@ -28,6 +29,7 @@ export class CommentsList implements OnInit, OnDestroy {
   inProgress : boolean = true;
   @ViewChild('scrollArea') scrollArea : Content;
   autofocus : boolean = false;
+  @ViewChild('textarea') textareaComponent: TextareaComponent;
 
   editing : boolean = false;
 
@@ -252,5 +254,16 @@ export class CommentsList implements OnInit, OnDestroy {
 
   toggleMature() {
     this.meta.mature = !this.meta.mature ? 1 : 0;
+  }
+
+  reply(comment) {
+    if (!comment || !comment.ownerObj) {
+      return;
+    }
+
+    this.meta.comment = `@${comment.ownerObj.username}: ${this.meta.comment}`;
+    setTimeout(() => {
+      this.textareaComponent.focus();
+    }, 50);
   }
 }

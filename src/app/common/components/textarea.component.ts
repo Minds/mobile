@@ -16,7 +16,8 @@ import { Component, ElementRef, Input, Output, EventEmitter, ViewChild, OnChange
       *ngIf="placeholder && editor.innerText.length === 0"
       class="m-placeholder"
     >{{ placeholder }}</span>
-  `
+  `,
+  exportAs: 'Textarea'
 })
 
 export class TextareaComponent implements OnChanges {
@@ -46,6 +47,7 @@ export class TextareaComponent implements OnChanges {
 
   focus() {
     this.editorControl.nativeElement.focus();
+    this._placeCaretAtEnd(this.editorControl.nativeElement);
   }
 
   blur() {
@@ -109,4 +111,19 @@ export class TextareaComponent implements OnChanges {
     }
   }
 
+  private _placeCaretAtEnd(el: HTMLElement) {
+    if (typeof window.getSelection != "undefined" && typeof document.createRange != "undefined") {
+      var range = document.createRange();
+      range.selectNodeContents(el);
+      range.collapse(false);
+      var sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+    } else if (typeof (<any>document.body).createTextRange != "undefined") {
+      var textRange = (<any>document.body).createTextRange();
+      textRange.moveToElementText(el);
+      textRange.collapse(false);
+      textRange.select();
+    }
+  }
 }

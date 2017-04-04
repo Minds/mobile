@@ -7,6 +7,8 @@ import { BlogView } from '../../modules/blog/view.component';
 import { NewsfeedSingleComponent } from '../../modules/newsfeed/single.component';
 import { GroupProfile } from '../../modules/groups/profile.component';
 
+import { DiscoveryList } from "../../modules/discovery/list.component";
+
 @Pipe({
   name: 'tags',
   pure: false
@@ -37,7 +39,7 @@ export class TagsPipe {
 
     //#hashtag
     var hash = /(^|\s)#(\w*[a-zA-Z_]+\w*)/gim;
-    value = value.replace(hash, '$1<a>#$2</a>');
+    value = value.replace(hash, '$1<a href="javascript:window.hashtagPress(\'#$2\');">#$2</a>');
 
     //@tag
     var at = /(^|\s)\@(\w*[a-zA-Z_]+\w*)/gim;
@@ -49,6 +51,10 @@ export class TagsPipe {
     //TODO: move this to a proper service
     (<any>window).tagPress = (username) => {
       this.navCtrl.push(ChannelComponent, {guid: username});
+    };
+    //TODO: move this to a proper service
+    (<any>window).hashtagPress = (hashtag) => {
+      this.navCtrl.push(DiscoveryList, {q: hashtag});
     };
     (<any>window).urlPress = (url) => {
 

@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy } from "@angular/core";
+import { NavController } from 'ionic-angular';
 import { Storage } from '../../common/services/storage';
 import { ChannelComponent } from '../channel/channel.component';
 
@@ -22,7 +23,7 @@ export class HeaderComponent {
     cdn_url: CONFIG.cdnUrl
   }
 
-  constructor(private storage : Storage){
+  constructor(private storage : Storage, private navCtrl : NavController){
   }
 
 }

@@ -1,5 +1,8 @@
+  <ion-navbar *ngIf="navCtrl.canGoBack()">
 
-  <ion-navbar>
+  </ion-navbar>
+
+  <ion-navbar *ngIf="!navCtrl.canGoBack()">
     <ion-buttons left>
       <notifications-counter style="padding-left: 12px;"></notifications-counter>
     </ion-buttons>

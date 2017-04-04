@@ -11,6 +11,7 @@ export class DiscoveryService {
   offset : string = "";
   limit : number = 15;
   inProgress : boolean = false;
+  q;
 
   filter : string = "featured";
   type : string = "object/image";
@@ -60,30 +61,42 @@ export class DiscoveryService {
   }
 
   search(q : string){
+    this.q = q;
+
+    //hastags need to reset filters and types
+    this.type = <string>this.storage.get('saved.discovery.type');
+    this.filter = <string>this.storage.get('saved.discovery.type');
+
     if(!q){
-      return this.get(true);
+      return this.reset();
     }
-    this.client.get('api/v1/search/suggest', {
+
+    let endpoint = 'api/v1/search/suggest';
+    this.filter = 'search';
+
+    if(q.indexOf("#") > -1){
+      endpoint = 'api/v1/search';
+      this.type = "activity";
+    } else {
+      //this.setType('user'); //don't use setType as this overwrites the default
+      this.type = 'user';
+    }
+
+    this.emitter.next([]);
+
+    this.client.get(endpoint, {
         q: q,
-        //type: this.type,
+        type: this.type == 'activity' ? 'activities' : this.type,
         limit: 12,
         offset: ""
       })
       .then((response : any) => {
-        //if(!response.entities || response.entities.length == 0){
-        //  this.inProgress = false;
-        //  return;
-        //}
-        this.entities = response.suggestions;
+        if(this.type == 'activity'){
+          this.entities = response.entities;
+        } else {
+          this.entities = response.suggestions;
+        }
 
-        /*for(let suggestion of response.suggestions){
-          this.entities.push({
-            guid: suggestion.payload.guid,
-            username: suggestion.payload.username,
-            name: '@' + suggestion.payload.name,
-            icontime: Date.now()
-          });
-        }*/
         this.emitter.next(this.entities);
         this.offset = response['load-next'];
         this.inProgress = false;
@@ -94,26 +107,61 @@ export class DiscoveryService {
     if(refresh)
       this.offset = "";
 
-    return new Promise((res, reject) => {
-      this.client.get('api/v1/entities/' + this.filter + '/' + this.type, { limit: this.limit, offset: this.offset})
+    if(this.type == 'activity'){ //for refresh and load more
+      return this.client.get('api/v1/search', {
+          q: this.q,
+          type: this.type,
+          limit: 12,
+          offset: this.offset
+        })
         .then((response : any) => {
-
-          if(refresh)
-            this.entities = [];
-
-          if(this.offset)
-            response.entities.shift();
-
           for(let entity of response.entities){
             this.entities.push(entity);
           }
 
           this.emitter.next(this.entities);
-          this.inProgress = false;
           this.offset = response['load-next'];
-          res();
+          this.inProgress = false;
+          return true;
         });
-    });
+    }
+
+    return this.client.get('api/v1/entities/' + this.filter + '/' + this.type, { limit: this.limit, offset: this.offset})
+      .then((response : any) => {
+
+        if(refresh)
+          this.entities = [];
+
+        if(this.offset)
+          response.entities.shift();
+
+        for(let entity of response.entities){
+          this.entities.push(entity);
+        }
+
+        this.emitter.next(this.entities);
+        this.inProgress = false;
+        this.offset = response['load-next'];
+        return true;
+      });
+
+  }
+
+  reset(){
+    this.entities = [];
+    this.q = "";
+    this.offset = "";
+    if(this.storage.get('saved.discovery.filter')){
+      this.filter = <string>this.storage.get('saved.discovery.filter');
+    } else {
+      this.filter = 'featured';
+    }
+    if(this.storage.get('saved.discovery.type')){
+      this.type = <string>this.storage.get('saved.discovery.type');
+    } else {
+      this.type = 'object/image';
+    }
+    this.get(true);
   }
 
   static _(client : Client, storage : Storage){

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { PopoverController } from 'ionic-angular';
+import { PopoverController, NavParams } from 'ionic-angular';
 import { PhotoViewer } from 'ionic-native';
 
 import { ChannelComponent } from '../channel/channel.component';
@@ -40,7 +40,10 @@ export class DiscoveryList {
   offset : string = "";
   inProgress : boolean = true;
 
+  search : string = "";
+
   storage = new Storage();
+  emitterSubscription;
 
   components = {
     channel: ChannelComponent,
@@ -52,14 +55,27 @@ export class DiscoveryList {
   }
 
   constructor(private client : Client, private popoverCtrl : PopoverController, private cd : ChangeDetectorRef,
-    private service : DiscoveryService){}
+    private service : DiscoveryService, private params: NavParams){}
 
   ngOnInit(){
-    this.loadList();
-    this.service.emitter.subscribe(() => {
+    this.emitterSubscription = this.service.emitter.subscribe(() => {
       this.cd.markForCheck();
       this.cd.detectChanges();
     });
+
+    if(this.params.get('q')){
+      this.search = this.params.get('q');
+      this.service.search(this.search);
+    } else {
+      this.loadList();
+    }
+  }
+
+  ngOnDestroy(){
+    if(this.emitterSubscription)
+      this.emitterSubscription.unsubscribe();
+    if(this.params.get('q'))
+      this.service.reset();
   }
 
   loadList(){

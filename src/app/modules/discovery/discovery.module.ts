@@ -12,9 +12,10 @@ import { ButtonsModule } from '../buttons/buttons.module';
 import { CommonModule } from '../../common/common.module';
 import { HeaderModule } from '../header/header.module';
 import { VideoModule } from "../video/video.module";
+import { NewsfeedModule } from "../newsfeed/newsfeed.module";
 
 @NgModule({
-  imports: [ IonicModule, CommonModule, ButtonsModule, HeaderModule, VideoModule ],
+  imports: [ IonicModule, CommonModule, ButtonsModule, HeaderModule, VideoModule, NewsfeedModule ],
   providers: [
     {
       provide: DiscoveryService,

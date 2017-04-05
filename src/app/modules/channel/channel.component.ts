@@ -92,17 +92,16 @@ export class ChannelComponent implements OnInit, OnDestroy, AfterContentInit {
     let _channel = this.cache.get('channel:' + this.guid);
     if(_channel && !this.channel){
       this.channel = _channel;
-      this.cd.markForCheck();
-      this.cd.detectChanges();
+      this.detectChanges();
       //return true;
     }
 
-    this.client.get('api/v1/channel/' + this.guid)
+    return this.client.get('api/v1/channel/' + this.guid)
       .then((response : any) => {
         this.channel = response.channel;
         this.cache.set('channel:' + this.guid, this.channel, true);
-        this.cd.markForCheck();
-        this.cd.detectChanges();
+        this.detectChanges();
+        return true;
       });
   }
 
@@ -132,8 +131,7 @@ export class ChannelComponent implements OnInit, OnDestroy, AfterContentInit {
           .then((response : any) => {
             loader.dismiss();
             this.channel.icontime = Date.now();
-            this.cd.markForCheck();
-            this.cd.detectChanges();
+            this.detectChanges();
           })
           .catch((exception)=>{
             loader.dismiss();
@@ -147,36 +145,36 @@ export class ChannelComponent implements OnInit, OnDestroy, AfterContentInit {
       return this.unsubscribe();
     }
     this.channel.subscribed = true;
-    this.cd.markForCheck();
-    this.cd.detectChanges();
+    this.detectChanges();
     this.client.post('api/v1/subscribe/' + this.channel.guid, {})
       .then((response : any) => {
           this.channel.subscribed = true;
       })
       .catch((e) => {
         this.channel.subscribed = false;
-        this.cd.markForCheck();
-        this.cd.detectChanges();
+        this.detectChanges();
       });
   }
 
   unsubscribe(){
     this.channel.subscribed = false;
-    this.cd.markForCheck();
-    this.cd.detectChanges();
+    this.detectChanges();
     this.client.delete('api/v1/subscribe/' + this.channel.guid, {})
       .then((response : any) => {
           this.channel.subscribed = false;
       })
       .catch((e) => {
         this.channel.subscribed = true;
-        this.cd.markForCheck();
-        this.cd.detectChanges();
+        this.detectChanges();
       });
   }
 
-  refresh(){
-
+  refresh(puller){
+    this.load()
+      .then(() => {
+        puller.complete();
+        this.detectChanges();
+      });
   }
 
   openActions(){
@@ -231,8 +229,7 @@ export class ChannelComponent implements OnInit, OnDestroy, AfterContentInit {
       text: 'View feed',
       handler: () => {
         this.feedType = 'activity';
-        this.cd.markForCheck();
-        this.cd.detectChanges();
+        this.detectChanges();
       }
     });
 
@@ -240,8 +237,7 @@ export class ChannelComponent implements OnInit, OnDestroy, AfterContentInit {
       text: 'View images',
       handler: () => {
         this.feedType = 'image';
-        this.cd.markForCheck();
-        this.cd.detectChanges();
+        this.detectChanges();
       }
     });
 
@@ -249,8 +245,7 @@ export class ChannelComponent implements OnInit, OnDestroy, AfterContentInit {
       text: 'View videos',
       handler: () => {
         this.feedType = 'video';
-        this.cd.markForCheck();
-        this.cd.detectChanges();
+        this.detectChanges();
       }
     });
 
@@ -332,6 +327,11 @@ export class ChannelComponent implements OnInit, OnDestroy, AfterContentInit {
     let participants = [ this.channel.guid, this.storage.get('user_guid') ];
     participants.sort((a, b) => a < b ? -1 : 1);
     return participants.join(':');
+  }
+
+  private detectChanges(){
+    this.cd.markForCheck();
+    this.cd.detectChanges();
   }
 
 }

@@ -9,6 +9,8 @@ import { Storage } from '../../common/services/storage';
 import { CONFIG } from '../../config';
 import { OnScreenService } from "../../common/services/visibility/on-screen.service";
 
+import { GroupFeedComponent } from './feed.component';
+
 @Component({
   moduleId: 'module.id',
   selector: 'group-profile',
@@ -17,9 +19,8 @@ import { OnScreenService } from "../../common/services/visibility/on-screen.serv
 })
 
 export class GroupProfile implements OnInit, OnDestroy, AfterContentInit {
-
   guid : string = "";
-  group;
+  group : any = {};
 
   editing = {
     name: false
@@ -30,6 +31,8 @@ export class GroupProfile implements OnInit, OnDestroy, AfterContentInit {
   }
 
   @ViewChild('scrollArea') scrollArea: Content;
+  @ViewChild('feed') feed: GroupFeedComponent;
+
   onScreen = new OnScreenService();
 
   constructor(private client : Client, private params: NavParams, private cd : ChangeDetectorRef,
@@ -50,27 +53,24 @@ export class GroupProfile implements OnInit, OnDestroy, AfterContentInit {
   }
 
   load(){
-
     let _group = this.cache.get('group:' + this.guid);
     if(_group && !this.group){
       this.group = _group;
-      this.cd.markForCheck();
-      this.cd.detectChanges();
+      this.detectChanges();
     }
 
-    this.client.get('api/v1/groups/group/' + this.guid)
+    return this.client.get('api/v1/groups/group/' + this.guid)
       .then((response : any) => {
         this.group = response.group;
         this.cache.set('group:' + this.guid, this.group, true);
-        this.cd.markForCheck();
-        this.cd.detectChanges();
+        this.detectChanges();
+        return true;
       });
   }
 
   join(){
     this.group['is:member'] = true;
-    this.cd.markForCheck();
-    this.cd.detectChanges();
+    this.detectChanges();
     this.client.put('api/v1/groups/membership/' + this.guid)
       .catch(() => {
         this.group['is:member'] = false;
@@ -79,12 +79,32 @@ export class GroupProfile implements OnInit, OnDestroy, AfterContentInit {
 
   leave(){
     this.group['is:member'] = false;
-    this.cd.markForCheck();
-    this.cd.detectChanges();
+    this.detectChanges();
     this.client.delete('api/v1/groups/membership/' + this.guid)
       .catch(() => {
         this.group['is:member'] = true;
       });
+  }
+
+  refresh(puller){
+    this.load()
+      .then(() => {
+        puller.complete();
+        this.detectChanges();
+      });
+  }
+
+  loadMore(loader){
+    this.feed.loadList()
+      .then(() => {
+        loader.complete();
+        this.detectChanges();
+    });
+  }
+
+  private detectChanges() {
+    this.cd.markForCheck();
+    this.cd.detectChanges();
   }
 
 }

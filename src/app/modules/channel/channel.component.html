@@ -2,6 +2,10 @@
 
 <ion-content scroll="false" #scrollArea>
 
+  <ion-refresher (ionRefresh)="refresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-icon name="md-arrow-round-back" class="m-ionic-back-button" navPop></ion-icon>
 
   <ion-icon name="md-arrow-dropdown" class="m-ionic-channel--actions-button" (click)="openActions()"></ion-icon>

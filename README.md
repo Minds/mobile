@@ -32,7 +32,7 @@ _Cordova (phonegap) is a fantastic tool which lets you run HTML5 in native apps.
 _Ionic is a framework for making ui/ux work well with your app._
 
 #####Angularjs (https://angularjs.org/)
-_Angularjs is a MVC framework which make maintaing and development app easy_
+_Angularjs is a MVC framework which make maintenance and development of app easy_
 
 #####Requirejs (http://requirejs.org/)
 _RequireJS is a file and module loader used to improve speed and quality of code and bring sanity to developers_

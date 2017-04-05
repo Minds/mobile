@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from "@angular/core";
+import { Component, ChangeDetectionStrategy, Input } from "@angular/core";
 import { NavController } from 'ionic-angular';
 import { Storage } from '../../common/services/storage';
 import { ChannelComponent } from '../channel/channel.component';
@@ -22,6 +22,8 @@ export class HeaderComponent {
   minds = {
     cdn_url: CONFIG.cdnUrl
   }
+
+  @Input() showNavbar : boolean = true;
 
   constructor(private storage : Storage, private navCtrl : NavController){
   }

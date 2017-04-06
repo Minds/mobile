@@ -261,7 +261,7 @@ export class CommentsList implements OnInit, OnDestroy {
       return;
     }
 
-    this.meta.comment = `@${comment.ownerObj.username}: ${this.meta.comment}`;
+    this.meta.comment = `@${comment.ownerObj.username} ${this.meta.comment}`;
     setTimeout(() => {
       this.textareaComponent.focus();
     }, 50);

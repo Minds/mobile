@@ -1,16 +1,14 @@
 Minds Mobile App
 ======
 
-[![Build Status](https://magnum.travis-ci.com/Minds/mobile.svg?token=vHzWaxguqXbJqkudCFTn&branch=master)](https://magnum.travis-ci.com/Minds/mobile)
-
 The minds mobile apps source code repository.
 
-##Platforms
+## Platforms
 - Android
 - iOS
 
 
-##Features
+## Features
 
 - Boost (Exchange your points with Minds or p2p with other users for expanded reach) 
 - Wallet (Earn points just for using the app or purchase them)
@@ -23,33 +21,27 @@ The minds mobile apps source code repository.
 - Subscribe to other channels
 - Notifications
 
-##Tech
+## Tech
 
-#####Cordova (http://cordova.apache.org/)
+##### Cordova (http://cordova.apache.org/)
 _Cordova (phonegap) is a fantastic tool which lets you run HTML5 in native apps._
 
-#####Ionic (http://ionicframework.com/)
+##### Ionic (http://ionicframework.com/)
 _Ionic is a framework for making ui/ux work well with your app._
 
-#####Angularjs (https://angularjs.org/)
-_Angularjs is a MVC framework which make maintaing and development app easy_
+##### Angular (https://angular.io/)
+_Angular is an application framework_
 
-#####Requirejs (http://requirejs.org/)
-_RequireJS is a file and module loader used to improve speed and quality of code and bring sanity to developers_
-
-#####neo4j (http://neo4j.com)
-_neo4j is the World’s Leading Graph Database._
-
-##Creators
+## Creators
 
 - Mark Harding - Engineering & Design 
 - Bill Ottman - Design
 
-##License
+## License
 
 This project is licensed under the AGPLv3 free software license. See license for full text. 
 
-##Contributing
+## Contributing
 
 You will need to a few tools in order to contribute to this project:
 
@@ -83,7 +75,7 @@ npm install
 
 ### Compiling / Building
 
-Run `cordova build`
+Run `ionic build`
 
 ### Environment configurations
 

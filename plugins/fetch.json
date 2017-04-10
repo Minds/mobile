@@ -95,14 +95,6 @@
         "is_top_level": true,
         "variables": {}
     },
-    "com-sarriaroman-photoviewer": {
-        "source": {
-            "type": "registry",
-            "id": "com-sarriaroman-photoviewer"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "org.apache.cordova.crypt": {
         "source": {
             "type": "local",
@@ -147,6 +139,15 @@
         "source": {
             "type": "registry",
             "id": "cordova-plugin-x-socialsharing"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "com-sarriaroman-photoviewer": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/edgebal/photoviewer.git",
+            "subdir": "."
         },
         "is_top_level": true,
         "variables": {}

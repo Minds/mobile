@@ -4,6 +4,7 @@ import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
+import org.json.JSONObject;
 import org.json.JSONException;
 
 import android.Manifest;
@@ -34,7 +35,13 @@ public class PhotoViewer extends CordovaPlugin {
             this.args = args;
             this.callbackContext = callbackContext;
 
-            if (cordova.hasPermission(READ) && cordova.hasPermission(WRITE)) {
+            boolean requiresExternalPermission = true;
+            try {
+                JSONObject options = this.args.optJSONObject(2);
+                requiresExternalPermission = options.getBoolean("share");
+            } catch(JSONException exception) { }
+
+            if (!requiresExternalPermission || (cordova.hasPermission(READ) && cordova.hasPermission(WRITE))) {
                 this.launchActivity();
             } else {
                 this.getPermission();

@@ -7,7 +7,10 @@
         "files": {}
     },
     "installed_plugins": {
-        "com-sarriaroman-photoviewer": {
+        "card.io.cordova.mobilesdk": {
+            "PACKAGE_NAME": "com.minds.mobile.dev"
+        },
+        "cordova-plugin-app-version": {
             "PACKAGE_NAME": "com.minds.mobile.dev"
         },
         "cordova-plugin-camera": {
@@ -42,23 +45,20 @@
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.minds.mobile.dev"
         },
+        "cordova-plugin-x-socialsharing": {
+            "PACKAGE_NAME": "com.minds.mobile.dev"
+        },
         "cordova-sqlite-storage": {
             "PACKAGE_NAME": "com.minds.mobile.dev"
         },
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "com.minds.mobile.dev"
         },
-        "card.io.cordova.mobilesdk": {
-            "PACKAGE_NAME": "com.minds.mobile.dev"
-        },
-        "cordova-plugin-app-version": {
-            "PACKAGE_NAME": "com.minds.mobile"
-        },
         "phonegap-plugin-push": {
             "SENDER_ID": "85075801930",
             "PACKAGE_NAME": "com.minds.mobile.dev"
         },
-        "cordova-plugin-x-socialsharing": {
+        "com-sarriaroman-photoviewer": {
             "PACKAGE_NAME": "com.minds.mobile.dev"
         }
     },

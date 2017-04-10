@@ -96,7 +96,7 @@
   <template ngSwitchCase="like">
     <div *ngIf="entity.entityObj">
       <a *ngIf="entity.entityObj.type == 'object'"
-          [navPush]="components.activity"
+          [navPush]="components.blogView"
           [navParams]="{ guid: entity.entityObj.guid}">
         <p>
           <!-- i18n -->{{entity.fromObj.name}} voted up<!-- /i18n -->
@@ -132,7 +132,9 @@
   <!-- down voted content -->
   <template ngSwitchCase="downvote">
     <div *ngIf="entity.entityObj">
-      <a *ngIf="entity.entityObj.type == 'object'">
+      <a *ngIf="entity.entityObj.type == 'object'"
+          [navPush]="components.blogView"
+          [navParams]="{ guid: entity.entityObj.guid}">
         <p>
           <!-- i18n -->{{entity.fromObj.name}} down voted<!-- /i18n -->
               <span class="pseudo-link mdl-color-text--blue-grey-400" *ngIf="entity.entityObj.title">{{entity.entityObj.title}}</span>

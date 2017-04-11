@@ -10,7 +10,7 @@
 
   <ion-icon name="md-arrow-dropdown" class="m-ionic-channel--actions-button" (click)="openActions()"></ion-icon>
 
-  <div class="m-ionic-channel--header" *ngIf="channel">
+  <div class="m-ionic-channel--header" *ngIf="channel.guid">
 
     <minds-banner (fileToUpload)="setUploadFile($event)" *ngIf="channel" [editing]="editing.banner" [entity]="channel" #bannerComponent>
       <!-- accept-changes-icon -->

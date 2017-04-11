@@ -79,7 +79,7 @@ export class AttachmentService{
 
   upload(file, type : string = ''){
 
-    this.client.post('api/v1/archive/' + type, [ file ], {}, (progress) => {
+    this.client.post('api/v1/archive/' + type, [ file ], this.meta, (progress) => {
         console.log('progress: ' + progress);
         this.progress = progress;
         this.emitter.next({ progress: progress});

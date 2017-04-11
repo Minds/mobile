@@ -28,6 +28,7 @@ export class Upload  {
     var options: any;
 
     options = {
+      params: data,
       fileKey: 'file',
       headers: {
         'Authorization': 'Bearer ' + this.storage.get('access_token')

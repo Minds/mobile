@@ -25,6 +25,7 @@ export class SubscribersComponent {
 
   users : Array<any> = [];
   offset : string = "";
+  moreData: boolean = true;
 
   components = {
     channel : ChannelComponent
@@ -47,23 +48,38 @@ export class SubscribersComponent {
 
   load(refresh : boolean = false){
     return new Promise((resolve, reject) => {
-      if(refresh)
+      if (refresh) {
         this.offset = "";
+        this.moreData = true;
+      }
+
       this.client.get('api/v1/subscribe/' + this.filter + '/' + this.guid, {
           offset: this.offset
         })
         .then((response : any) => {
           if(refresh)
             this.users = [];
+
           this.users = this.users.concat(response.users);
-          this.offset = response['load-next'];
+
+          if (response['load-next']) {
+            this.offset = response['load-next'];
+          } else {
+            this.moreData = false;
+          }
+
           this.detectChanges();
           resolve();
         });
     });
   }
 
-  loadMore(e){
+  loadMore(e) {
+    if (!this.moreData) {
+      e.complete();
+      return;
+    }
+
     this.load()
       .then(() => {
         e.complete();

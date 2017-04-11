@@ -70,7 +70,7 @@
 	</ion-list>
 
 
-  <ion-infinite-scroll (ionInfinite)="loadMore($event)" *ngIf="q.value">
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)" *ngIf="!q.value">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 

@@ -13,9 +13,10 @@ import { RichInputComponent } from './components/rich-input.component.ts';
 import { SafePipe } from "./pipes/safe.pipe";
 import { PlatformFeaturesService } from "./services/platform-features.service";
 import { AppStatusService } from "./services/app-status.service";
+import { SuggestionsModule } from "../modules/suggestions/suggestions.module";
 
 @NgModule({
-  imports: [ IonicModule ],
+  imports: [ IonicModule, SuggestionsModule ],
   providers: [ Storage, PlatformFeaturesService, AppStatusService ],
   declarations: [ ImgFadeDirective, ExplicitDirective, ContenteditableModel, DomainPipe, AbbrPipe, TagsPipe, TextareaComponent, RichInputComponent, SafePipe ],
   exports: [ ImgFadeDirective, ExplicitDirective, ContenteditableModel, DomainPipe, AbbrPipe, TagsPipe, TextareaComponent, RichInputComponent, SafePipe ]

@@ -21,6 +21,14 @@
     textarea{
       border:0;
     }
+
+    suggestions-list{
+      position: fixed;
+      z-index: 100;
+      margin-top: 10px;
+      left: 0;
+      width: 100%;
+    }
   }
 
   .m-ionic-poster--icons{
@@ -29,6 +37,11 @@
     ion-icon{
       font-size:24px;
     }
+  }
+
+  .m-ionic-poster--suggestionsList {
+    flex: 1;
+    width: 100%;
   }
 }
 

@@ -30,6 +30,7 @@
 }
 
 
+
 .m-ionic-comments--composer-wrapper{
   position: fixed;
   bottom: 0;
@@ -91,6 +92,14 @@
       border: 0;
       min-height: 0;
       height: auto;
+    }
+
+    suggestions-list{
+      position: fixed;
+      z-index: 100;
+      left: 0;
+      bottom: 10px;
+      width: 100%;
     }
 
     .m-ionic-comments--actions{

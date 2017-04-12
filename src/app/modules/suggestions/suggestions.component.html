@@ -1,0 +1,8 @@
+<ion-list *ngIf="showResults">
+	<ion-item (mousedown)="onSuggestionTap($event, result.username)" *ngFor="let result of suggestionsList">
+		<ion-avatar item-left>
+			<img [src]="minds.cdn_url + '/icon/' + result.guid + '/small'">
+		</ion-avatar>
+		<h2>@{{ result.username }}</h2>
+	</ion-item>
+</ion-list>

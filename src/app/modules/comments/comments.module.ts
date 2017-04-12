@@ -8,9 +8,10 @@ import { ReportModule } from '../report/report.module';
 
 import { CommentsList } from './list.component';
 import { CommentComponent } from './comment.component';
+import { SuggestionsModule } from "../suggestions/suggestions.module";
 
 @NgModule({
-  imports: [ IonicModule, CommonModule, ButtonsModule, ReportModule ],
+  imports: [ IonicModule, CommonModule, ButtonsModule, ReportModule, SuggestionsModule ],
   providers: [ Client ],
   declarations: [ CommentsList, CommentComponent ],
   exports: [ CommentsList, CommentComponent ],

@@ -1,7 +1,6 @@
 import { NgModule }     from '@angular/core';
 import { IonicModule } from 'ionic-angular';
 
-
 import { Client } from '../../common/services/api/client';
 import { NewsfeedList } from './list.component';
 import { NewsfeedSingleComponent } from './single.component';
@@ -24,6 +23,7 @@ import { AttachmentModule } from '../attachments/attachment.module';
 import { TranslationsModule } from '../translations/translations.module';
 import { ReportModule } from '../report/report.module';
 import { VideoModule } from "../video/video.module";
+import { SuggestionsModule } from '../suggestions/suggestions.module';
 
 @NgModule({
   /*imports: [
@@ -41,7 +41,7 @@ import { VideoModule } from "../video/video.module";
   exports: [
     RouterModule
   ]*/
-  imports: [ IonicModule, CommonModule, ButtonsModule, AttachmentModule, HeaderModule, TranslationsModule, ReportModule, VideoModule ],
+  imports: [ IonicModule, CommonModule, ButtonsModule, AttachmentModule, HeaderModule, TranslationsModule, ReportModule, VideoModule, SuggestionsModule ],
   providers: [ Client ],
   declarations: [
     NewsfeedList,

@@ -7,8 +7,10 @@ import { GroupProfile } from './profile.component';
 import { GroupFeedComponent } from './feed.component';
 import { GroupsList } from './list.component';
 
+import { SuggestionsModule } from "../suggestions/suggestions.module";
+
 @NgModule({
-  imports: [ IonicModule, NewsfeedModule, CommonModule ],
+  imports: [ IonicModule, NewsfeedModule, CommonModule, SuggestionsModule ],
   declarations: [ GroupProfile, GroupFeedComponent, GroupsList ],
   exports: [ GroupProfile, GroupFeedComponent, GroupsList ],
   entryComponents: [ GroupProfile, GroupsList ]

@@ -1,6 +1,6 @@
 export const CONFIG = {
-  baseUrl: 'https://edge.minds.com/',
-  cdnUrl: 'https://edge.minds.com/',
+  baseUrl: 'https://www.minds.com/',
+  cdnUrl: 'https://d3ae0shxev0cb7.cloudfront.net/',
   socketUri: 'https://ha-socket-io-us-east-1.minds.com:3030',
 };
 // export const CONFIG = {

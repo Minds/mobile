@@ -9,6 +9,7 @@ import { Storage } from '../../common/services/storage';
 import { CONFIG } from '../../config';
 import { SocketsService } from "../../common/services/api/sockets.service";
 import { AttachmentService } from "../attachments/attachment.service";
+import { SuggestionsList } from "../suggestions/suggestions.component";
 
 @Component({
   moduleId: 'module.id',
@@ -27,7 +28,10 @@ export class CommentsList implements OnInit, OnDestroy {
   comments : Array<any> = [];
   offset : string = "";
   inProgress : boolean = true;
+
   @ViewChild('scrollArea') scrollArea : Content;
+  @ViewChild('suggestionsList') suggestionsList : SuggestionsList;
+
   autofocus : boolean = false;
   @ViewChild('textarea') textareaComponent: TextareaComponent;
 
@@ -265,5 +269,10 @@ export class CommentsList implements OnInit, OnDestroy {
     setTimeout(() => {
       this.textareaComponent.focus();
     }, 50);
+  }
+
+  detectChanges(){
+    this.cd.markForCheck();
+    this.cd.detectChanges();
   }
 }

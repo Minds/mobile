@@ -22,6 +22,7 @@ import { ShareModule } from './modules/share/share.module';
 import { SettingsModule } from './modules/settings/settings.module';
 import { RemindModule } from "./modules/remind/remind.module";
 import { VideoModule } from "./modules/video/video.module";
+import { SuggestionsModule } from './modules/suggestions/suggestions.module';
 
 import { routes } from "./app.routes";
 
@@ -44,6 +45,7 @@ import { routes } from "./app.routes";
         }
       }
     }),
+    SuggestionsModule,
     CommonModule,
     ApiModule,
     BlogModule,

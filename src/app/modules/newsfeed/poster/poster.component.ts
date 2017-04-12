@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { ActionSheetController, LoadingController } from 'ionic-angular';
 
 import { Client } from '../../../common/services/api/client';
@@ -65,8 +65,7 @@ export class PosterComponent {
     this.attachment.emitter.subscribe((response : any) => {
       this.progress = response.progress;
       this.meta.attachment_guid = response.guid;
-      this.cd.markForCheck();
-      this.cd.detectChanges();
+      this.detectChanges();
     });
   }
 
@@ -128,8 +127,7 @@ export class PosterComponent {
         this.attachment.reset();
         this.progress = 0;
         this.prepend.next(response.activity);
-        this.cd.markForCheck();
-        this.cd.detectChanges();
+        this.detectChanges();
         loader.dismiss();
       })
       .catch((err) => {
@@ -143,6 +141,10 @@ export class PosterComponent {
 
   toggleMature() {
     this.meta.mature = !this.meta.mature ? 1 : 0;
+    this.detectChanges();
+  }
+
+  detectChanges(){
     this.cd.markForCheck();
     this.cd.detectChanges();
   }

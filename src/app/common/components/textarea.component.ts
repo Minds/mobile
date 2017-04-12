@@ -1,28 +1,16 @@
 import { Component, ElementRef, Input, Output, EventEmitter, ViewChild, OnChanges, ChangeDetectorRef } from '@angular/core';
+import { SuggestionsList } from '../../modules/suggestions/suggestions.component';
 
 @Component({
   selector: 'm-textarea',
-  template: `
-    <div
-      #editor
-      class="m-editor"
-      [class.m-editor-disabled]="disabled "
-      [attr.contenteditable]="!disabled ? 'true' : null"
-      (keyup)="change()"
-      (blur)="change()"
-      (paste)="paste($event); change()"
-    ></div>
-    <span
-      *ngIf="placeholder && editor.innerText.length === 0"
-      class="m-placeholder"
-    >{{ placeholder }}</span>
-  `,
+  templateUrl: 'textarea.component.html',
   exportAs: 'Textarea'
 })
 
 export class TextareaComponent implements OnChanges {
 
   @ViewChild('editor') editorControl: ElementRef;
+  @ViewChild('suggestionsList') suggestionsList: SuggestionsList;
 
   @Input() placeholder : string = '';
   @Input('mModel') model : string = '';
@@ -32,10 +20,7 @@ export class TextareaComponent implements OnChanges {
 
   disabled : boolean = false;
 
-
-  constructor(el: ElementRef, private cd : ChangeDetectorRef) {
-
-  }
+  constructor(el: ElementRef, private cd : ChangeDetectorRef) {}
 
   @Input('autofocus') set autofocus(value : boolean){
     //alert('autofocusing');
@@ -55,9 +40,19 @@ export class TextareaComponent implements OnChanges {
       this.editorControl.nativeElement.blur();
   }
 
-  change() {
-    this.model = this.editorControl.nativeElement.innerText;
-    this.update.emit(this.editorControl.nativeElement.innerText);
+  change(event) {
+    if(!event){
+      this._placeCaretAtEnd(this.editorControl.nativeElement);  
+    } else {
+      this.model = this.editorControl.nativeElement.innerText;
+      this.update.emit(this.editorControl.nativeElement.innerText);
+    }
+  }
+
+  getSuggestionsList(event){
+    let sel = window.getSelection();
+    let search = this.model.substring(0, sel.anchorOffset);
+    this.suggestionsList.searchSuggestions(search, event);
   }
 
   paste(e: any) {
@@ -92,8 +87,7 @@ export class TextareaComponent implements OnChanges {
       this.blur();
     }
 
-    this.cd.markForCheck();
-    this.cd.detectChanges();
+    this.detectChanges();
   }
 
   private insertTextAtCursor(text: string) {
@@ -125,5 +119,10 @@ export class TextareaComponent implements OnChanges {
       textRange.collapse(false);
       textRange.select();
     }
+  }
+
+  private detectChanges() {
+    this.cd.markForCheck();
+    this.cd.detectChanges();
   }
 }

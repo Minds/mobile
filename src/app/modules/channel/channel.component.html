@@ -14,7 +14,7 @@
 
     <minds-banner (fileToUpload)="setUploadFile($event)" *ngIf="channel" [editing]="editing.banner" [entity]="channel" #bannerComponent>
       <!-- accept-changes-icon -->
-      <ion-icon *ngIf="!editing.banner"
+      <ion-icon *ngIf="isOwner() && !editing.banner"
         class="icon icon-ios ion-ios-create m-ionic-banner--edit-button"
         (click)="editing.banner=true; cd.markForCheck(); cd.detectChanges();">
       </ion-icon>
@@ -43,11 +43,11 @@
 
     <div class="m-ionic-channel--name" [class.editing]="editing.name">
       <h1 [attr.contentEditable]="editing.name" [(contenteditableModel)]="channel.name">  {{channel.name}} </h1>
-      <ion-icon name="create" *ngIf="!editing.name && channel.guid == this.storage.get('user_guid')" (click)="editing.name = true; cd.markForCheck(); cd.detectChanges();"></ion-icon>
+      <ion-icon name="create" *ngIf="isOwner() && !editing.name" (click)="editing.name = true; cd.markForCheck(); cd.detectChanges();"></ion-icon>
       <ion-icon name="checkmark-circle" *ngIf="editing.name" [class.editing]="editing.name" (click)="editing.name = false; save({name: channel.name})"></ion-icon>
 
       <ion-icon name="person-add"
-        *ngIf="channel.guid != this.storage.get('user_guid')"
+        *ngIf="channel && !isOwner()"
         [class.selected]="channel.subscribed"
         (click)="subscribe()"
         ></ion-icon>
@@ -60,7 +60,7 @@
       [(contenteditableModel)]="channel.briefdescription"
       >
     </div>
-    <ion-icon name="create" class="m-ionic-channel--bio-icon" *ngIf="!editing.bio && channel.guid == this.storage.get('user_guid')" (click)="editing.bio = true; cd.markForCheck(); cd.detectChanges();"></ion-icon>
+    <ion-icon name="create" class="m-ionic-channel--bio-icon" *ngIf="isOwner() && !editing.bio" (click)="editing.bio = true; cd.markForCheck(); cd.detectChanges();"></ion-icon>
     <ion-icon name="checkmark-circle" class="m-ionic-channel--bio-icon" [class.editing]="editing.bio" *ngIf="editing.bio" (click)="editing.bio = false; save({briefdescription: channel.briefdescription})"></ion-icon>
 
     <div class="m-ionic-channel--stats">

@@ -112,7 +112,7 @@ export class ChannelComponent implements OnInit, OnDestroy, AfterContentInit {
 
   changeAvatar(){
     //can change?
-    if(this.channel.guid != this.storage.get('user_guid'))
+    if(!this.isOwner())
       return;
 
     Camera.getPicture({
@@ -181,7 +181,7 @@ export class ChannelComponent implements OnInit, OnDestroy, AfterContentInit {
 
     let buttons = [];
 
-    if(!this.channel.blocked && this.channel.guid != this.storage.get('user_guid')){
+    if(!this.channel.blocked && !this.isOwner()){
       buttons.push({
         text: 'Block',
         handler: () => {
@@ -194,7 +194,7 @@ export class ChannelComponent implements OnInit, OnDestroy, AfterContentInit {
             });
         }
       });
-    } else if(this.channel.guid != this.storage.get('user_guid')) {
+    } else if(!this.isOwner()) {
       buttons.push({
         text: 'Unblock',
         handler: () => {
@@ -209,7 +209,7 @@ export class ChannelComponent implements OnInit, OnDestroy, AfterContentInit {
       });
     }
 
-    if(this.channel.guid != this.storage.get('user_guid')){
+    if(!this.isOwner()){
       buttons.push({
         text: 'Send message',
         handler: () => {
@@ -321,6 +321,10 @@ export class ChannelComponent implements OnInit, OnDestroy, AfterContentInit {
   cancelUpload(){
     this.fileToUpload = "";
     this.bannerComponent.resetPicture();
+  }
+
+  isOwner() {
+    return this.channel && this.channel.guid == this.storage.get('user_guid');
   }
 
   private getMessengerGuid(){

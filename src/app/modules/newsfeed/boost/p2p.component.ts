@@ -17,7 +17,7 @@ import { CONFIG } from '../../../config';
 export class P2PBoostComponent {
 
   data = {
-    points: 100
+    points: 500
   }
 
   @Input('entity') entity;

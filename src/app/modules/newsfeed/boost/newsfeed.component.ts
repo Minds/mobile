@@ -24,8 +24,8 @@ export class NewsfeedBoostComponent {
   }
 
   data = {
-    points: 100,
-    impressions: 100
+    points: 500,
+    impressions: 500
   }
 
   rate : any = {

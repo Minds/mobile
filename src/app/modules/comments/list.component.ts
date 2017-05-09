@@ -74,6 +74,8 @@ export class CommentsList implements OnInit, OnDestroy {
       .then(() => {
         this.listen();
       });
+
+    this.attachment.setContainerGuid(this.params.get('guid'));
   }
 
   ngOnDestroy() {

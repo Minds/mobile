@@ -46,7 +46,7 @@
             "PACKAGE_NAME": "com.minds.mobile.dev"
         },
         "cordova-plugin-x-socialsharing": {
-            "PACKAGE_NAME": "com.minds.mobile.dev"
+            "PACKAGE_NAME": "com.minds.mobile.dev2"
         },
         "cordova-sqlite-storage": {
             "PACKAGE_NAME": "com.minds.mobile.dev"
@@ -60,6 +60,9 @@
         },
         "com-sarriaroman-photoviewer": {
             "PACKAGE_NAME": "com.minds.mobile.dev"
+        },
+        "com.minds.share.intent": {
+            "PACKAGE_NAME": "com.minds.mobile"
         }
     },
     "dependent_plugins": {

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild } from '@angular/core';
-import { ViewController, LoadingController, ToastController, ModalController } from 'ionic-angular';
+import { ViewController, LoadingController, ToastController, ModalController, NavParams } from 'ionic-angular';
 
 import { Client } from '../../common/services/api/client';
 import { Storage } from '../../common/services/storage';
@@ -33,7 +33,7 @@ export class CaptureComponent {
 
   constructor(private client : Client, private viewCtrl : ViewController, public attachment : AttachmentService, private loadingCtrl : LoadingController,
     private toastCtrl: ToastController, private modalCtrl : ModalController, private storage : Storage, private cd : ChangeDetectorRef,
-    private wallet : WalletService){
+    private wallet : WalletService, private params : NavParams){
 
   }
 
@@ -44,6 +44,12 @@ export class CaptureComponent {
       this.cd.markForCheck();
       this.cd.detectChanges();
     });
+
+    if(this.params.get('message')){
+      this.meta.message = this.params.get('message');
+      this.cd.markForCheck();
+      this.cd.detectChanges();
+    }
   }
 
   openPhoto(){

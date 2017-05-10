@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from "@angular/core";
-import { ModalController, MenuController } from 'ionic-angular';
+import { ModalController, MenuController, Platform } from 'ionic-angular';
 
 import { CaptureComponent } from '../capture/capture.component';
 import { MessengerList } from "../messenger/list.component";
@@ -28,7 +28,19 @@ export class TabsComponent {
   }
 
 
-  constructor(private modalCtrl : ModalController, private menuCtrl : MenuController){
+  constructor(private modalCtrl : ModalController, private menuCtrl : MenuController, private platform : Platform){
+  }
+
+  ngOnInit(){
+    this.platform.ready().then(() => {
+      (<any>window).plugins.intent.setNewIntentHandler(intent => {
+        if(intent.action == 'android.intent.action.SEND'){
+          let text = intent.clipItems[0].text;
+          this.modalCtrl.create(CaptureComponent, { message: text })
+            .present();
+        }
+      });
+    });
   }
 
   openCapture(){

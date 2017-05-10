@@ -151,5 +151,13 @@
         },
         "is_top_level": true,
         "variables": {}
+    },
+    "com.minds.share.intent": {
+        "source": {
+            "type": "local",
+            "path": "/Users/mark/Documents/mobile-internal/node_modules/minds-share-intent"
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }

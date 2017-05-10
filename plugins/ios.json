@@ -55,6 +55,9 @@
         },
         "com-sarriaroman-photoviewer": {
             "PACKAGE_NAME": "com.minds.mobile.dev"
+        },
+        "com.minds.share.intent": {
+            "PACKAGE_NAME": "com.minds.mobile"
         }
     },
     "dependent_plugins": {

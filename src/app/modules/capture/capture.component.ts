@@ -39,8 +39,13 @@ export class CaptureComponent {
 
   ngOnInit(){
     this.attachment.emitter.subscribe((response : any) => {
-      this.progress = response.progress;
+      if(response.progress <= 99)
+        this.progress = response.progress;
       this.meta.attachment_guid = response.guid;
+
+      if(response.guid && response.progress == 100)
+        this.progress = 100;
+
       this.cd.markForCheck();
       this.cd.detectChanges();
     });

@@ -10,7 +10,7 @@
     </ion-title>
 
     <ion-buttons right>
-      <button ion-button class="m-ionic-capture--post-button" (click)="post()">
+      <button ion-button class="m-ionic-capture--post-button" (click)="post()" [disabled]="progress > 0 && progress < 100">
         Post <ion-icon name="send"></ion-icon>
       </button>
     </ion-buttons>

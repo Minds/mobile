@@ -63,7 +63,11 @@ export class PosterComponent {
 
   ngOnInit(){
     this.attachment.emitter.subscribe((response : any) => {
-      this.progress = response.progress;
+      if(response.progress <= 99)
+        this.progress = response.progress;
+
+      if(response.guid && response.progress == 100)
+        this.progress = 100;
       this.meta.attachment_guid = response.guid;
       this.detectChanges();
     });

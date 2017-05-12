@@ -19,16 +19,16 @@ export class WireService {
     return this.getTransactionPayloads()
       .then((payload) => {
         return this.client.post(`api/v1/wire/${this.guid}`, {
-            payload,
-            method: this.method,
-            amount: this.amount
-          })
+          payload,
+          method: this.method,
+          amount: this.amount
+        })
           .then(() => {
             return true;
           })
           .catch((e) => {
-            return e;
-          })
+            throw e;
+          });
       });
   }
 

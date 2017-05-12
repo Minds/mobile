@@ -157,9 +157,19 @@ export class WireFabComponent {
                   this.dismiss();
                 }, 1000);
               })
-              .catch(() => {
-                //console.log('[wire]: exception thrown');
+              .catch(e => {
                 this.inProgress = false;
+                this.animate = false;
+                this.cd.markForCheck();
+                this.cd.detectChanges();
+
+                let alert = this.alertCtrl.create({
+                  title: 'There was a problem processing payment',
+                  subTitle: e.message || 'Unknown internal error',
+                  buttons: ['Ok']
+                });
+                alert.present();
+
               });
           }
         }]

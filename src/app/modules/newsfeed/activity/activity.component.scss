@@ -63,6 +63,10 @@ activity {
   margin-left: 12px;
   padding: 4px 0 4px 12px;
   border-left: 3px solid #eee;
+
+  > span {
+    white-space: pre;
+  }
 }
 
 .m-ionic-image{

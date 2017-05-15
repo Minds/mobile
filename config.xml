@@ -88,4 +88,9 @@
     <plugin name="minds-plugin-crypt" spec="~4.0.1" />
     <icon src="resources/android/icon/drawable-xhdpi-icon.png" />
     <plugin name="cordova-sqlite-storage" spec="~2.0.1" />
+    <allow-navigation href="https://*youtu.be/*"/>
+    <allow-navigation href="https://*youtube.com/*"/>
+    <allow-navigation href="https://*vimeo.com/*"/>
+    <allow-navigation href="https://*soundcloud.com/*"/>
+    <allow-navigation href="https://*giphy.com/*"/>
 </widget>

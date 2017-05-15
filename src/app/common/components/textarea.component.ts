@@ -42,7 +42,7 @@ export class TextareaComponent implements OnChanges {
 
   change(event) {
     if(!event){
-      this._placeCaretAtEnd(this.editorControl.nativeElement);  
+      this._placeCaretAtEnd(this.editorControl.nativeElement);
     } else {
       this.model = this.editorControl.nativeElement.innerText;
       this.update.emit(this.editorControl.nativeElement.innerText);
@@ -65,6 +65,7 @@ export class TextareaComponent implements OnChanges {
       var text = (<any> window).clipboardData.getData("Text");
       this.insertTextAtCursor(text);
     }
+    this.change(e);
   }
 
   @Input() set clear(value : any){

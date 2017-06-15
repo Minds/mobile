@@ -10,40 +10,40 @@
 <div [ngSwitch]="entity.notification_view" class="m-ionic-notifications--card-body">
 
   <!-- subscribed -->
-  <template ngSwitchCase="friends">
+  <ng-template ngSwitchCase="friends">
     <a [navPush]="components.channel"
         [navParams]="{ guid: entity.fromObj.guid}">
       <p *ngIf="entity.fromObj.subscribed" i18n>You have a match! {{entity.fromObj.name}} subscribed to you</p>
       <p *ngIf="!entity.fromObj.subscribed" i18n>{{entity.fromObj.name}} subscribed to you</p>
     </a>
-  </template>
+  </ng-template>
 
   <!-- group inivite -->
-  <template ngSwitchCase="group_invite">
+  <ng-template ngSwitchCase="group_invite">
     <a [navPush]="components.group" [navParams]="{guid: entity.params.group.guid}">
         <p i18n>{{entity.params.user}} invited you to join <span class="pseudo-link mdl-color-text--blue-grey-400">{{entity.params.group.name}}</span></p>
     </a>
-  </template>
+  </ng-template>
 
   <!-- group kick -->
-  <template ngSwitchCase="group_kick">
+  <ng-template ngSwitchCase="group_kick">
     <a [navPush]="components.group" [navParams]="{guid: entity.params.group.guid}">
         <p i18n>You were kicked off from <span class="pseudo-link mdl-color-text--blue-grey-400">{{entity.params.group.name}}</span></p>
     </a>
-  </template>
+  </ng-template>
 
   <!-- group activity -->
-  <template ngSwitchCase="group_activity">
+  <ng-template ngSwitchCase="group_activity">
     <a [navPush]="components.activity"
         [navParams]="{ guid: entity.entityObj.guid }">
       <p>
         <!-- i18n --><span class="pseudo-link mdl-color-text--blue-grey-400">{{entity.fromObj.name}}</span> posted in <span class="pseudo-link mdl-color-text--blue-grey-400">{{entity.params.group.name}}</span><!-- /i18n -->
       </p>
     </a>
-  </template>
+  </ng-template>
 
   <!-- comment -->
-  <template ngSwitchCase="comment">
+  <ng-template ngSwitchCase="comment">
     <div *ngIf="entity.entityObj">
 
       <!-- Activity -->
@@ -90,10 +90,10 @@
         </p>
       </a>
     </div>
-  </template>
+  </ng-template>
 
   <!-- up voted content -->
-  <template ngSwitchCase="like">
+  <ng-template ngSwitchCase="like">
     <div *ngIf="entity.entityObj">
       <a *ngIf="entity.entityObj.type == 'object'"
           [navPush]="components.blogView"
@@ -127,10 +127,10 @@
         </p>
       </a>
     </div>
-  </template>
+  </ng-template>
 
   <!-- down voted content -->
-  <template ngSwitchCase="downvote">
+  <ng-template ngSwitchCase="downvote">
     <div *ngIf="entity.entityObj">
       <a *ngIf="entity.entityObj.type == 'object'"
           [navPush]="components.blogView"
@@ -160,10 +160,10 @@
         </p>
       </a>
     </div>
-  </template>
+  </ng-template>
 
   <!-- Remind -->
-  <template ngSwitchCase="remind">
+  <ng-template ngSwitchCase="remind">
     <div *ngIf="entity.entityObj">
       <a *ngIf="entity.entityObj.type == 'object'"
         [navPush]="components.activity"
@@ -185,20 +185,20 @@
           </p>
       </a>
     </div>
-  </template>
+  </ng-template>
 
   <!-- featured -->
-  <template ngSwitchCase="feature">
+  <ng-template ngSwitchCase="feature">
     <div *ngIf="entity.entityObj">
       <a [navPush]="components.activity"
         [navParams]="{ guid: entity.entityObj.guid}">
         <p i18n><span class="pseudo-link mdl-color-text--blue-grey-400">{{entity.entityObj.title}}</span> was featured</p>
       </a>
     </div>
-  </template>
+  </ng-template>
 
   <!-- mention -->
-  <template ngSwitchCase="tag">
+  <ng-template ngSwitchCase="tag">
     <div *ngIf="entity.entityObj">
       <!-- tags from comments link differently -->
       <a *ngIf="entity.entityObj.type != 'comment'"
@@ -212,17 +212,17 @@
         <p i18n>{{entity.fromObj.name}} tagged you in a comment</p>
       </a>
     </div>
-  </template>
+  </ng-template>
 
   <!-- missed-call -->
-  <template ngSwitchCase="missed_call">
+  <ng-template ngSwitchCase="missed_call">
     <a >
       <p i18n><span class="pseudo-link mdl-color-text--blue-grey-400" >{{entity.fromObj.name}}</span> tried to call you.</p>
     </a>
-  </template>
+  </ng-template>
 
   <!-- boost_gift -->
-  <template ngSwitchCase="boost_gift">
+  <ng-template ngSwitchCase="boost_gift">
     <a>
       <p>
         <!-- i18n -->{{entity.fromObj.name}} gifted you {{entity.params.impressions}} views <span *ngIf="entity.entityObj">for</span><!-- /i18n -->
@@ -232,10 +232,10 @@
         <span class="pseudo-link mdl-color-text--blue-grey-400" *ngIf="entity.entityObj && !entity.entityObj.title && !entity.entityObj.name && entity.entityObj.type === 'user'" i18n>your channel</span>
       </p>
     </a>
-  </template>
+  </ng-template>
 
   <!-- Standard boost notification for owner -->
-  <template ngSwitchCase="boost_submitted">
+  <ng-template ngSwitchCase="boost_submitted">
     <a>
      <p><!-- i18n -->{{entity.params.impressions}} views <span *ngIf="entity.entityObj">for</span><!-- /i18n -->
       <span class="pseudo-link mdl-color-text--blue-grey-400" *ngIf="entity.entityObj && entity.entityObj.title">{{entity.entityObj.title}}</span>
@@ -245,10 +245,10 @@
       <!-- i18n: boost --> is awaiting approval.<!-- /i18n -->
      </p>
    </a>
-  </template>
+  </ng-template>
 
   <!-- P2P boost submitted -->
-  <template ngSwitchCase="boost_submitted_p2p">
+  <ng-template ngSwitchCase="boost_submitted_p2p">
       <a>
         <p><!-- i18n -->{{entity.params.points}} points <span *ngIf="entity.entityObj">for</span><!-- /i18n -->
           <span class="pseudo-link mdl-color-text--blue-grey-400" *ngIf="entity.entityObj && entity.entityObj.title">{{entity.entityObj.title}}</span>
@@ -258,10 +258,10 @@
           <!-- i18n: boost -->is awaiting approval by <span class="pseudo-link mdl-color-text--blue-grey-400">@{{entity.params.channel}}</span><!-- /i18n -->
         </p>
       </a>
-  </template>
+  </ng-template>
 
   <!-- Boost reject -->
-  <template ngSwitchCase="boost_rejected">
+  <ng-template ngSwitchCase="boost_rejected">
     <a>
       <p><!-- i18n -->Your boost <span *ngIf="entity.entityObj">for</span><!-- /i18n -->
         <span class="pseudo-link mdl-color-text--blue-grey-400" *ngIf="entity.entityObj && entity.entityObj.title">{{entity.entityObj.title}}</span>
@@ -271,10 +271,10 @@
         <!-- i18n: boost -->was rejected. Your points have been credited back to your wallet.<!-- /i18n -->
       </p>
     </a>
-  </template>
+  </ng-template>
 
   <!-- Boost accepted -->
-  <template ngSwitchCase="boost_accepted">
+  <ng-template ngSwitchCase="boost_accepted">
     <a>
       <p *ngIf="entity.params.impressions"><!-- i18n -->{{entity.params.impressions}} points <span *ngIf="entity.entityObj">for</span><!-- /i18n -->
         <span class="pseudo-link mdl-color-text--blue-grey-400" *ngIf="entity.entityObj && entity.entityObj.title">{{entity.entityObj.title}}</span>
@@ -291,10 +291,10 @@
         <!-- i18n: boost -->were accepted.<!-- /i18n -->
       </p>
     </a>
-  </template>
+  </ng-template>
 
   <!-- Boost completed -->
-  <template ngSwitchCase="boost_completed">
+  <ng-template ngSwitchCase="boost_completed">
     <a>
       <p><!-- i18n -->{{entity.params.impressions}}/{{entity.params.impressions}} views <span *ngIf="entity.entityObj">for</span><!-- /i18n -->
         <span class="pseudo-link mdl-color-text--blue-grey-400" *ngIf="entity.entityObj && entity.entityObj.title">{{entity.entityObj.title}}</span>
@@ -303,10 +303,10 @@
         <span class="pseudo-link mdl-color-text--blue-grey-400" *ngIf="entity.entityObj && !entity.entityObj.title && !entity.entityObj.name && entity.entityObj.type === 'user'" i18n>your channel</span>
         <!-- i18n: boost -->have been met.<!-- /i18n --></p>
     </a>
-  </template>
+  </ng-template>
 
   <!-- Boost (Peer) Request -->
-  <template ngSwitchCase="boost_peer_request">
+  <ng-template ngSwitchCase="boost_peer_request">
     <a>
       <p>
         <!-- i18n --><b>@{{entity.from.username}}</b> is offering<!-- /i18n -->
@@ -322,10 +322,10 @@
         <span class="pseudo-link mdl-color-text--blue-grey-400" *ngIf="entity.entityObj && !entity.entityObj.title && !entity.entityObj.name && entity.entityObj.type === 'user'" i18n>their channel</span>
       </p>
     </a>
-  </template>
+  </ng-template>
 
   <!-- Boost (Peer) Request -->
-  <template ngSwitchCase="boost_peer_accepted">
+  <ng-template ngSwitchCase="boost_peer_accepted">
     <a>
       <p>
         <!-- i18n --><b>@{{entity.from.username}}</b> accepted your bid of<!-- /i18n -->
@@ -340,10 +340,10 @@
         <span class="pseudo-link mdl-color-text--blue-grey-400" *ngIf="entity.entityObj && !entity.entityObj.title && entity.entityObj.type === 'user'" i18n>your channel</span>
       </p>
     </a>
-  </template>
+  </ng-template>
 
   <!-- Boost (Peer) Rejeced -->
-  <template ngSwitchCase="boost_peer_rejected">
+  <ng-template ngSwitchCase="boost_peer_rejected">
     <a>
       <p>
         <!-- i18n --><b>@{{entity.from.username}}</b> declined your bid of<!-- /i18n -->
@@ -359,51 +359,51 @@
         <!-- i18n: boost -->You have not been charged.<!-- /i18n -->
       </p>
     </a>
-  </template>
+  </ng-template>
 
   <!-- Points prompt -->
-  <template ngSwitchCase="custom_message">
+  <ng-template ngSwitchCase="custom_message">
       <a>
           <p>{{entity.params.message}}</p>
       </a>
-  </template>
+  </ng-template>
 
   <!-- Welcome points -->
-  <template ngSwitchCase="welcome_points">
+  <ng-template ngSwitchCase="welcome_points">
       <a>
           <p i18n>Welcome to Minds. We have given you  <span class="pseudo-link mdl-color-text--blue-grey-400">100 points</span> to get you started.</p>
       </a>
-  </template>
+  </ng-template>
 
   <!-- tutorial/promts -->
-  <template ngSwitchCase="welcome_post">
+  <ng-template ngSwitchCase="welcome_post">
       <a>
           <p i18n><span class="pseudo-link mdl-color-text--blue-grey-400">Tap here</span> to create a post</p>
       </a>
-  </template>
+  </ng-template>
 
   <!-- Welcome messages -->
-  <template ngSwitchCase="welcome_boost">
+  <ng-template ngSwitchCase="welcome_boost">
       <a>
           <p i18n>You can gain more reach by boosting your content. Hit the blue boost icon on your posts.</p>
       </a>
-  </template>
-  <template ngSwitchCase="welcome_chat">
+  </ng-template>
+  <ng-template ngSwitchCase="welcome_chat">
       <a>
           <p i18n>Chat securely with your mutual subscriptions.</p>
       </a>
-  </template>
-  <template ngSwitchCase="welcome_discover">
+  </ng-template>
+  <ng-template ngSwitchCase="welcome_discover">
       <a>
           <p i18n><span class="pseudo-link mdl-color-text--blue-grey-400">Tap here.</span> to discover new channels and media.</p>
       </a>
-  </template>
+  </ng-template>
 
   <!-- Default -->
-  <template ngSwitchDefault>
+  <ng-template ngSwitchDefault>
     <i i18n>Sorry, there was an error viewing this notification</i>
     <span hidden>View: {{ entity.notification_view }}</span>
-  </template>
+  </ng-template>
 
   <span class="ts mdl-color-text--grey">{{ entity.time_created * 1000 | date : 'medium' }}</span>
 

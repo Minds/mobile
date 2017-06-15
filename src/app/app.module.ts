@@ -1,4 +1,5 @@
 import { NgModule, ErrorHandler, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 
 import { MindsApp } from './app.component';
@@ -26,6 +27,17 @@ import { SuggestionsModule } from './modules/suggestions/suggestions.module';
 
 import { routes } from "./app.routes";
 
+import { Camera } from '@ionic-native/camera';
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { Keyboard } from '@ionic-native/keyboard';
+import { AppVersion } from '@ionic-native/app-version';
+import { MediaCapture } from '@ionic-native/media-capture';
+import { Transfer } from '@ionic-native/transfer';
+import { PhotoViewer } from '@ionic-native/photo-viewer';
+import { SQLite } from '@ionic-native/sqlite';
+import { SocialSharing } from '@ionic-native/social-sharing';
+
 @NgModule({
   declarations: [
     MindsApp
@@ -45,6 +57,7 @@ import { routes } from "./app.routes";
         }
       }
     }),
+    BrowserModule,
     SuggestionsModule,
     CommonModule,
     ApiModule,
@@ -66,6 +79,6 @@ import { routes } from "./app.routes";
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [IonicApp],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, StatusBar, SplashScreen, Keyboard, Camera, AppVersion, MediaCapture, Transfer, PhotoViewer, SQLite, SocialSharing]
 })
-export class MindsAppModule {}
+export class AppModule { }

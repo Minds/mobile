@@ -1,6 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 
-import { Camera, MediaCapture, MediaFile, CaptureError, CaptureImageOptions } from 'ionic-native';
+import { Camera } from '@ionic-native/camera';
+import { MediaCapture, MediaFile, CaptureError, CaptureImageOptions} from '@ionic-native/media-capture';
 
 import { Upload } from '../../common/services/api/upload';
 
@@ -15,11 +16,11 @@ export class AttachmentService{
   emitter = new EventEmitter();
   progress : number = 0;
 
-  constructor(private client : Upload){
+  constructor(private client : Upload, private camera: Camera, private mediaCapture: MediaCapture){
   }
 
   takePicture(){
-    MediaCapture.captureImage({
+    this.mediaCapture.captureImage({
         limit: 1,
         //correctOrientation: true,
         //encodingType: 0, //jpeg
@@ -37,7 +38,7 @@ export class AttachmentService{
   }
 
   takeVideo(){
-    MediaCapture.captureVideo({
+    this.mediaCapture.captureVideo({
       limit: 1,
       duration: 360,
       //saveToPhotoAlbum: true
@@ -52,9 +53,9 @@ export class AttachmentService{
   }
 
   selectFromLibrary(){
-    Camera.getPicture({
+    this.camera.getPicture({
         correctOrientation: true,
-        destinationType: Camera.DestinationType.FILE_URI,
+        destinationType: this.camera.DestinationType.FILE_URI,
         sourceType: 0,
         mediaType: 2
       })

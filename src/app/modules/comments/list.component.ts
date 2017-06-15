@@ -43,15 +43,15 @@ export class CommentsList implements OnInit, OnDestroy {
     comment: '',
     attachment_guid: null,
     mature: 0,
-  }
+  };
 
   components = {
     channel: ChannelComponent
-  }
+  };
 
   minds = {
     cdn_url: CONFIG.cdnUrl
-  }
+  };
 
   socketRoomName: string;
   socketSubscriptions: any = {

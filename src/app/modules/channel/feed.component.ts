@@ -60,7 +60,7 @@ export class ChannelFeedComponent {
 
   @Input() visibilityService: VisibilityServiceInterface;
 
-  loadList(refresh : boolean = false){
+  loadList(refresh : boolean = false): Promise<any> {
     if(!this.guid || this.inProgress)
       return new Promise((resolve, reject) => { reject(true) }); //has to be a promise!
 

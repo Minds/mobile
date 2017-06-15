@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef, HostListener, AfterViewInit, ElementRef } from '@angular/core';
 import { ActionSheetController, ModalController, PopoverController, Platform, NavController } from 'ionic-angular'
-import { PhotoViewer } from 'ionic-native';
+import { PhotoViewer } from '@ionic-native/photo-viewer';
 
 import { CacheService } from '../../../common/services/cache/cache.service';
 import { Storage } from '../../../common/services/storage';
@@ -22,7 +22,7 @@ import { CONFIG } from '../../../config';
   selector: 'activity',
   templateUrl: 'activity.component.html',
   //styleUrls: ['activity.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  //changeDetection: ChangeDetectionStrategy.OnPush
   ////styleUrls: ['activity.component.css']
 })
 
@@ -42,20 +42,21 @@ export class Activity implements AfterViewInit, OnDestroy {
   minds = {
     cdn_url: CONFIG.cdnUrl,
     base: CONFIG.baseUrl,
-  }
+  };
 
   components = {
     activity: NewsfeedSingleComponent,
     channel: ChannelComponent,
     group: GroupProfile
-  }
+  };
 
   language : string = '';
   impressionRegistered: boolean = false;
 
   constructor(private client : Client, public cache : CacheService, public actionSheetCtrl: ActionSheetController,
     private cd : ChangeDetectorRef, private storage : Storage, private modalCtrl : ModalController, private platform : Platform,
-    private navCtrl : NavController, private popoverCtrl : PopoverController, private report : ReportService, private share : ShareService, private elementRef: ElementRef){
+    private navCtrl : NavController, private popoverCtrl : PopoverController, private report : ReportService, private share : ShareService, private elementRef: ElementRef,
+    private photoViewer: PhotoViewer){
 
   }
 
@@ -168,6 +169,34 @@ export class Activity implements AfterViewInit, OnDestroy {
       }
     });
 
+    if (this.entity.comments_enabled) {
+      buttons.push({
+        text: 'Disable Comments',
+        handler: () => {
+          this.client.delete(`api/v1/comments/disable/${this.entity.guid}`).then((response: any) => {
+            this.entity.comments_enabled = false;
+            this.cd.markForCheck();
+            this.cd.detectChanges();
+          }).catch(e => {
+            this.entity.comments_enabled = true;
+          });
+        }
+      });
+    } else {
+      buttons.push({
+        text: 'Enable Comments',
+        handler: () => {
+          this.client.put(`api/v1/comments/disable/${this.entity.guid}`).then((response: any) => {
+            this.entity.comments_enabled = true;
+            this.cd.markForCheck();
+            this.cd.detectChanges();
+          }).catch(e => {
+            this.entity.comments_enabled = false;
+          });
+        }
+      });
+    }
+
     buttons.push({
       text: 'Share',
       handler: () => {
@@ -217,7 +246,7 @@ export class Activity implements AfterViewInit, OnDestroy {
   }
 
   openImage(){
-    PhotoViewer.show(`${this.minds.cdn_url}api/v1/archive/thumbnails/${this.entity.entity_guid}/xlarge`);
+    this.photoViewer.show(`${this.minds.cdn_url}api/v1/archive/thumbnails/${this.entity.entity_guid}/xlarge`);
   }
 
   onShow() {

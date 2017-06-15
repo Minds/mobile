@@ -1,6 +1,10 @@
 import { Component, ViewChild } from "@angular/core";
 import { Nav, MenuController, Platform, App } from 'ionic-angular';
-import { StatusBar, Splashscreen, Keyboard, AppVersion } from 'ionic-native';
+
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { Keyboard } from '@ionic-native/keyboard';
+import { AppVersion } from '@ionic-native/app-version';
 
 import { TabsComponent } from "./modules/tabs/tabs.component";
 import { LoginComponent } from "./modules/auth/login.component";
@@ -40,7 +44,8 @@ export class MindsApp {
 
   constructor(private oauth2 : OAuth2, public menuCtrl: MenuController, private platform : Platform, private app : App,
     private storage : Storage, private push : PushService, private share : ShareService, private sockets: SocketsService,
-    private client : Client, private appStatus: AppStatusService){
+    private client : Client, private appStatus: AppStatusService,
+    private statusBar: StatusBar, private splashScreen: SplashScreen, private keyboard: Keyboard, private appVersion: AppVersion){
 
     if(this.oauth2.hasAccessToken()){
       this.rootPage = TabsComponent;
@@ -50,16 +55,16 @@ export class MindsApp {
 
   ngOnInit(){
     this.platform.ready().then(() => {
-      StatusBar.backgroundColorByHexString('#37474f');
+      this.statusBar.backgroundColorByHexString('#37474f');
       //Keyboard.disableScroll(true);
-      Splashscreen.hide();
+      this.splashScreen.hide();
       this.setDefaultSettings();
       this.sockets.reconnect();
-      AppVersion.getVersionNumber()
+      this.appVersion.getVersionNumber()
         .then((version) => {
           this.versionNumber = version;
         });
-      AppVersion.getVersionCode()
+      this.appVersion.getVersionCode()
         .then((code) => {
           this.versionCode = code;
       });

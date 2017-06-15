@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { NavController, LoadingController, AlertController } from 'ionic-angular';
-import { Keyboard } from 'ionic-native';
+import { Keyboard } from '@ionic-native/keyboard';
 
 import { TabsComponent } from '../tabs/tabs.component';
 import { OnboardingComponent } from '../onboarding/onboarding.component';
@@ -22,15 +22,15 @@ export class RegisterComponent {
   keyboardHideSubscription;
 
   constructor(private client : Client, private oauth2 : OAuth2, private nav : NavController, public loadingCtrl: LoadingController,
-    private alertCtrl: AlertController, private push : PushService, private sockets: SocketsService, private cd : ChangeDetectorRef){
+    private alertCtrl: AlertController, private push : PushService, private sockets: SocketsService, private cd : ChangeDetectorRef, private keyboard: Keyboard){
   }
 
   ionViewDidEnter(){
-    Keyboard.disableScroll(true);
+    this.keyboard.disableScroll(true);
   }
 
   ionViewWillLeave(){
-    Keyboard.disableScroll(false);
+    this.keyboard.disableScroll(false);
   }
 
   ngOnInit(){
@@ -39,12 +39,12 @@ export class RegisterComponent {
       this.sockets.reconnect();
     }
 
-    this.keyboardShowSubscription = Keyboard.onKeyboardShow().subscribe(() => {
+    this.keyboardShowSubscription = this.keyboard.onKeyboardShow().subscribe(() => {
       this.keyboardVisible = true;
       this.cd.markForCheck();
       this.cd.detectChanges();
     });
-    this.keyboardHideSubscription = Keyboard.onKeyboardHide().subscribe(() => {
+    this.keyboardHideSubscription = this.keyboard.onKeyboardHide().subscribe(() => {
       this.keyboardVisible = false;
       this.cd.markForCheck();
       this.cd.detectChanges();

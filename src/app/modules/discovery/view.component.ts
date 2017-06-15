@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { PopoverController, NavParams } from 'ionic-angular';
-import { PhotoViewer } from 'ionic-native';
+import { PhotoViewer } from '@ionic-native/photo-viewer';
 
 import { ChannelComponent } from '../channel/channel.component';
 import { Client } from '../../common/services/api/client';
@@ -33,7 +33,7 @@ export class DiscoveryView {
     cdn_url: CONFIG.cdnUrl
   }
 
-  constructor(private client : Client, private params : NavParams, private cd : ChangeDetectorRef, private storage : Storage){}
+  constructor(private client : Client, private params : NavParams, private cd : ChangeDetectorRef, private storage : Storage, private photoViewer: PhotoViewer){}
 
   ngOnInit(){
     this.guid = this.params.get('guid');
@@ -65,6 +65,6 @@ export class DiscoveryView {
   }
 
   openImage(entity : any){
-    PhotoViewer.show(`${this.minds.cdn_url}api/v1/archive/thumbnails/${entity.guid}/xlarge`);
+    this.photoViewer.show(`${this.minds.cdn_url}api/v1/archive/thumbnails/${entity.guid}/xlarge`);
   }
 }

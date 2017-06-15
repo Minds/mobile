@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { Content, NavParams, NavController, ActionSheetController, AlertController, LoadingController } from 'ionic-angular';
-import { Keyboard } from 'ionic-native';
+import { Keyboard } from '@ionic-native/keyboard';
 
 import { ChannelComponent } from '../channel/channel.component';
 import { Client } from '../../common/services/api/client';
@@ -50,7 +50,7 @@ export class MessengerView implements OnInit, OnDestroy {
   constructor(private client: Client, private cd: ChangeDetectorRef, private params: NavParams,
     private service: MessengerViewService, private storage: Storage, private sockets: SocketsService,
     private actionSheetCtrl : ActionSheetController, private navCtrl : NavController, private alertCtrl : AlertController,
-    private loadingCtrl: LoadingController){}
+    private loadingCtrl: LoadingController, private keyboard: Keyboard){}
 
   ngOnInit() {
     this.conversation = this.params.get('conversation');
@@ -63,7 +63,7 @@ export class MessengerView implements OnInit, OnDestroy {
         });
     }, 300);
 
-    this.keyboardListener = Keyboard.onKeyboardShow();
+    this.keyboardListener = this.keyboard.onKeyboardShow();
     this.keyboardListener.subscribe(() => {
       this.scrollArea.scrollToBottom();
     });

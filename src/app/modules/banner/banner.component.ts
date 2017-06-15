@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef, Input, Output, EventEmitter } from '@angular/core';
 import { ActionSheetController, LoadingController, ToastController } from 'ionic-angular';
-import { Camera, CameraOptions, MediaCapture, MediaFile } from 'ionic-native';
+import { Camera,CameraOptions } from '@ionic-native/camera';
+import { MediaCapture, MediaFile } from '@ionic-native/media-capture';
 import { Client } from '../../common/services/api/client';
 import { CONFIG } from '../../config';
 
@@ -39,7 +40,9 @@ export class BannerComponent {
     private actionSheetCtrl: ActionSheetController,
     private cd: ChangeDetectorRef,
     private loaderCtrl: LoadingController,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private mediaCapture: MediaCapture,
+    private camera: Camera
   ) { }
 
   onPressAddPicture() {
@@ -88,7 +91,7 @@ export class BannerComponent {
   }
 
   private getImageFromCamera() {
-    MediaCapture.captureImage({
+    this.mediaCapture.captureImage({
       limit: 1
     }).then((data: MediaFile[]) => {
       this.picture = data[0].fullPath;
@@ -101,9 +104,9 @@ export class BannerComponent {
   }
 
   private getImageFromLibrary() {
-    Camera.getPicture({
+    this.camera.getPicture({
       correctOrientation: true,
-      destinationType: Camera.DestinationType.FILE_URI,
+      destinationType: this.camera.DestinationType.FILE_URI,
       sourceType: 0,
       mediaType: 2
     })

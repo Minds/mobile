@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { Transfer } from 'ionic-native';
+import { Transfer } from '@ionic-native/transfer';
 import { Http, Headers } from '@angular/http';
 import { OAuth2 } from './oauth2';
 import { Storage } from '../storage';
@@ -9,6 +9,7 @@ import { CONFIG } from '../../../config';
 /**
  * API Class
  */
+@Injectable()
 export class Upload  {
 
   base : string = CONFIG.baseUrl;
@@ -17,13 +18,13 @@ export class Upload  {
 
   storage = new Storage();
 
-	constructor(){
+	constructor(private transfer: Transfer){
 	}
 
 
 	post(endpoint : string, files : Array<any> = [], data : any = {}, progress : Function = ()=>{}){
 
-    const fileTransfer = new Transfer();
+    const fileTransfer = this.transfer.create();
     this.ft = fileTransfer;
     var options: any;
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { PopoverController, NavParams } from 'ionic-angular';
-import { PhotoViewer } from 'ionic-native';
+import { PhotoViewer } from '@ionic-native/photo-viewer';
 
 import { ChannelComponent } from '../channel/channel.component';
 import { Client } from '../../common/services/api/client';
@@ -55,7 +55,7 @@ export class DiscoveryList {
   }
 
   constructor(private client : Client, private popoverCtrl : PopoverController, private cd : ChangeDetectorRef,
-    private service : DiscoveryService, private params: NavParams){}
+    private service : DiscoveryService, private params: NavParams, private photoViewer: PhotoViewer){}
 
   ngOnInit(){
     this.emitterSubscription = this.service.emitter.subscribe(() => {
@@ -110,7 +110,7 @@ export class DiscoveryList {
   }
 
   openImage(entity : any){
-    PhotoViewer.show(`${this.minds.cdn_url}api/v1/archive/thumbnails/${entity.guid}/xlarge`);
+    this.photoViewer.show(`${this.minds.cdn_url}api/v1/archive/thumbnails/${entity.guid}/xlarge`);
   }
 
 }

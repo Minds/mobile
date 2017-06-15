@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { NavController, LoadingController, AlertController } from 'ionic-angular';
-import { Camera } from 'ionic-native';
+import { Camera } from '@ionic-native/camera';
 
 import { TabsComponent } from '../tabs/tabs.component';
 import { Upload } from '../../common/services/api/upload';
@@ -16,7 +16,7 @@ export class AvatarSetupComponent {
 
   @Output() done : EventEmitter<any> = new EventEmitter();
 
-  constructor(private upload : Upload, private nav : NavController, public loadingCtrl: LoadingController, private alertCtrl: AlertController){
+  constructor(private upload : Upload, private nav : NavController, public loadingCtrl: LoadingController, private alertCtrl: AlertController, private camera: Camera){
   }
 
   ngOnInit(){
@@ -24,9 +24,9 @@ export class AvatarSetupComponent {
   }
 
   selectAvatar(){
-    Camera.getPicture({
+    this.camera.getPicture({
         correctOrientation: true,
-        destinationType: Camera.DestinationType.FILE_URI,
+        destinationType: this.camera.DestinationType.FILE_URI,
         sourceType: 0,
         mediaType: 2
       })

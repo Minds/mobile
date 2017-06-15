@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SQLite } from 'ionic-native';
+import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 
 import { Client } from '../../common/services/api/client';
 
@@ -7,19 +7,23 @@ import { Client } from '../../common/services/api/client';
 @Injectable()
 export class MessengerViewService {
 
-  db : SQLite;
+  db : SQLiteObject;
   guid : string;
   offset : string = "";
   publickeys = {};
 
   messages : Array<any> = [];
 
-  constructor(private client : Client){
-    this.db = new SQLite();
-    this.db.openDatabase({name: "minds4.db", location: "default"})
-      .then(() => {
-        this.db.executeSql("CREATE TABLE IF NOT EXISTS messages (guid TEXT PRIMARY KEY, conversation_guid TEXT, data TEXT)", []);
-      });
+  constructor(private client : Client, private sqLite: SQLite){
+    this.sqLite.create({
+      name: 'minds4.db',
+      location: 'default'
+    })
+    .then((db: SQLiteObject) => {
+      this.db = db;
+      this.db.executeSql("CREATE TABLE IF NOT EXISTS messages (guid TEXT PRIMARY KEY, conversation_guid TEXT, data TEXT)", []);
+    })
+    .catch(e => console.log(e));
   }
 
   setGuid(guid : string){

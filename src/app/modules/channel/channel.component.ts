@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild, AfterContentInit } from '@angular/core';
 import { NavController, NavParams, LoadingController, ToastController, ActionSheetController, AlertController, Content } from 'ionic-angular';
-import { Camera } from 'ionic-native';
+import { Camera } from '@ionic-native/camera';
 
 import { Client } from '../../common/services/api/client';
 import { Upload } from '../../common/services/api/upload';
@@ -52,7 +52,7 @@ export class ChannelComponent implements OnInit, OnDestroy, AfterContentInit {
 
   constructor(private client : Client, private upload : Upload, private nav : NavController, private params: NavParams, private cache : CacheService,
     private cd: ChangeDetectorRef, private loadingCtrl : LoadingController, private storage : Storage, private actionSheetCtrl : ActionSheetController,
-    private toastCtrl : ToastController, private alertCtrl : AlertController){
+    private toastCtrl : ToastController, private alertCtrl : AlertController, private camera: Camera){
     //if(applicationModule.android)
     //  page.actionBarHidden = true;
   }
@@ -115,9 +115,9 @@ export class ChannelComponent implements OnInit, OnDestroy, AfterContentInit {
     if(!this.isOwner())
       return;
 
-    Camera.getPicture({
+    this.camera.getPicture({
         correctOrientation: true,
-        destinationType: Camera.DestinationType.FILE_URI,
+        destinationType: this.camera.DestinationType.FILE_URI,
         sourceType: 0,
         mediaType: 2
       })

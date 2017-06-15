@@ -7,7 +7,6 @@ import { Storage } from '../../common/services/storage';
 import { BoostSliderComponent } from "./boost/slider.component";
 import { OnScreenService } from "../../common/services/visibility/on-screen.service";
 
-
 @Component({
   moduleId: 'module.id',
   selector: 'newsfeed-list',
@@ -27,7 +26,7 @@ export class NewsfeedList implements OnInit, OnDestroy, AfterContentInit {
 
   components = {
     channel: ChannelComponent
-  }
+  };
 
   onScreen = new OnScreenService();
 

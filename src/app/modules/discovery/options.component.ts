@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { NavParams, ViewController } from 'ionic-angular';
-import { PhotoViewer } from 'ionic-native';
+import { PhotoViewer } from '@ionic-native/photo-viewer';
 
 import { ChannelComponent } from '../channel/channel.component';
 import { DiscoveryService } from './discovery.service';
@@ -21,7 +21,7 @@ export class DiscoveryOptionsComponent {
   callback : Function;
 
   constructor(private client : Client, private params : NavParams, private viewCtrl : ViewController, private cd : ChangeDetectorRef,
-    private service : DiscoveryService){
+    private service : DiscoveryService, private photoViewer: PhotoViewer){
   }
 
   showVideos(){

@@ -17,6 +17,11 @@
       <input #password type="password" placeholder="Password" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
     </div>
 
+    <div class="m-ionic-login--tos">
+      <ion-label>I accept the <a (click)="showTOS()">Terms and Conditions</a></ion-label>
+      <ion-checkbox [(ngModel)]="tos"></ion-checkbox>
+    </div>
+
     <div class="m-ionic-login--field">
       <button ion-button (click)="nav.pop()"> Go back </button>
       <button ion-button (click)="register(username, email, password, $event)"> Register </button>

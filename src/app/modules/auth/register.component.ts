@@ -21,6 +21,8 @@ export class RegisterComponent {
   keyboardShowSubscription;
   keyboardHideSubscription;
 
+  tos : boolean = true;
+
   constructor(private client : Client, private oauth2 : OAuth2, private nav : NavController, public loadingCtrl: LoadingController,
     private alertCtrl: AlertController, private push : PushService, private sockets: SocketsService, private cd : ChangeDetectorRef, private keyboard: Keyboard){
   }
@@ -53,6 +55,15 @@ export class RegisterComponent {
 
   register(username, email, password, e){
     e.preventDefault();
+
+    if(!this.tos){
+      let alert = this.alertCtrl.create({
+        title: 'Please accept the Terms and Conditions',
+        buttons: ['Ok!']
+      });
+      alert.present();
+      return;
+    }
 
     let loader = this.loadingCtrl.create({
       //content: "Please wait...",
@@ -111,6 +122,10 @@ export class RegisterComponent {
       });
     });
 
+  }
+
+  showTOS(){
+    (<any>window).open('https://www.minds.com/p/terms', "_system");
   }
 
   ngOnDestroy(){

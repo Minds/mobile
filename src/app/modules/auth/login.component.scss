@@ -74,3 +74,15 @@
   margin:50px 0;
   background:transparent;
 }
+
+.m-ionic-login--tos{
+  color: #FFF;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+
+  ion-label a{
+    color: #FFF;
+    font-weight: bold
+  }
+}

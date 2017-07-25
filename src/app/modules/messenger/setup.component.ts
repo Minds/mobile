@@ -5,6 +5,7 @@ import { MessengerList } from './list.component';
 import { ChannelComponent } from '../channel/channel.component';
 import { Client } from '../../common/services/api/client';
 import { Storage } from '../../common/services/storage';
+import { CurrentUserService } from "../../common/services/current-user.service";
 
 @Component({
   moduleId: 'module.id',
@@ -21,28 +22,26 @@ export class MessengerSetup {
 
 
   constructor(private client : Client, private cd : ChangeDetectorRef, private params: NavParams, private nav : NavController,
-    private loadingCtrl : LoadingController, private alertCtrl : AlertController, private storage : Storage ){}
+    private loadingCtrl : LoadingController, private alertCtrl : AlertController, private storage : Storage, private currentUser: CurrentUserService ){}
 
   ngOnInit(){
     let changePassword : boolean = this.params.get('changePassword') || false;
     let loader = this.showLoader();
 
-    this.client.get('api/v1/channel/me')
-      .then((response : any) => {
-				if(response.channel.chat && !changePassword) {
-					this.configured = true;
-				}
+    this.currentUser.get(true)
+      .then(user => {
+        if (user && !changePassword) {
+          this.configured = true;
+        }
         loader.dismiss();
         this.ready = true;
 
-        this.storage.set('user', JSON.stringify(response.channel));
-
         this.cd.markForCheck();
         this.cd.detectChanges();
-			})
+      })
       .catch(() => {
         loader.dismiss();
-      })
+      });
   }
 
   showLoader(){

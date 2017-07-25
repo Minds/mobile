@@ -8,6 +8,7 @@ import { WalletService } from './wallet.service';
 import { WalletHistoryComponent } from './history.component';
 import { PurchaseComponent } from './purchase.component';
 import { BoostReviewComponent } from '../boost/boost.component';
+import { PlanConsoleComponent } from "../payments/console/plan.component";
 
 import { CONFIG } from '../../config';
 
@@ -27,7 +28,8 @@ export class WalletComponent {
   components = {
     history: WalletHistoryComponent,
     purchase : PurchaseComponent,
-    boost: BoostReviewComponent
+    boost: BoostReviewComponent,
+    planConsole: PlanConsoleComponent
   }
 
   inProgress : boolean = false;

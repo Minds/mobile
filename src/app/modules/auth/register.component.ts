@@ -8,6 +8,7 @@ import { Client } from '../../common/services/api/client';
 import { OAuth2 } from '../../common/services/api/oauth2';
 import { PushService } from '../push/push.service';
 import { SocketsService } from "../../common/services/api/sockets.service";
+import { CurrentUserService } from "../../common/services/current-user.service";
 
 @Component({
   moduleId: 'module.id',
@@ -24,7 +25,7 @@ export class RegisterComponent {
   tos : boolean = true;
 
   constructor(private client : Client, private oauth2 : OAuth2, private nav : NavController, public loadingCtrl: LoadingController,
-    private alertCtrl: AlertController, private push : PushService, private sockets: SocketsService, private cd : ChangeDetectorRef, private keyboard: Keyboard){
+    private alertCtrl: AlertController, private push : PushService, private sockets: SocketsService, private cd : ChangeDetectorRef, private keyboard: Keyboard, private currentUser: CurrentUserService){
   }
 
   ionViewDidEnter(){
@@ -115,7 +116,10 @@ export class RegisterComponent {
     return new Promise((resolve, reject) => {
       this.oauth2.login(username, password, (success) => {
         loader.dismiss();
-        if(success){
+        if (success) {
+          this.currentUser
+            .destroy()
+            .fetch();
           return resolve(success);
         }
         reject();

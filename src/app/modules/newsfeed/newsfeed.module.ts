@@ -24,6 +24,7 @@ import { TranslationsModule } from '../translations/translations.module';
 import { ReportModule } from '../report/report.module';
 import { VideoModule } from "../video/video.module";
 import { SuggestionsModule } from '../suggestions/suggestions.module';
+import { PaywallModule } from '../paywall/paywall.module';
 
 @NgModule({
   /*imports: [
@@ -41,7 +42,7 @@ import { SuggestionsModule } from '../suggestions/suggestions.module';
   exports: [
     RouterModule
   ]*/
-  imports: [ IonicModule, CommonModule, ButtonsModule, AttachmentModule, HeaderModule, TranslationsModule, ReportModule, VideoModule, SuggestionsModule ],
+  imports: [ IonicModule, CommonModule, ButtonsModule, AttachmentModule, HeaderModule, TranslationsModule, ReportModule, VideoModule, SuggestionsModule, PaywallModule ],
   providers: [ Client ],
   declarations: [
     NewsfeedList,

@@ -7,6 +7,7 @@ import { TabsComponent } from '../tabs/tabs.component';
 import { OAuth2 } from '../../common/services/api/oauth2';
 import { PushService } from '../push/push.service';
 import { SocketsService } from "../../common/services/api/sockets.service";
+import { CurrentUserService } from "../../common/services/current-user.service";
 
 @Component({
   moduleId: 'module.id',
@@ -22,7 +23,7 @@ export class LoginComponent {
   keyboardHideSubscription;
 
   constructor(private oauth2 : OAuth2, private nav : NavController, public loadingCtrl: LoadingController, private alertCtrl: AlertController,
-    private push : PushService, private sockets: SocketsService, private cd: ChangeDetectorRef, private keyboard: Keyboard){
+    private push : PushService, private sockets: SocketsService, private cd: ChangeDetectorRef, private keyboard: Keyboard, private currentUser: CurrentUserService){
   }
 
   ionViewDidEnter(){
@@ -65,6 +66,9 @@ export class LoginComponent {
       loader.dismiss();
       if(success){
         this.push.registerToken();
+        this.currentUser
+          .destroy()
+          .fetch();
         this.nav.setRoot(TabsComponent);
       } else {
         let alert = this.alertCtrl.create({

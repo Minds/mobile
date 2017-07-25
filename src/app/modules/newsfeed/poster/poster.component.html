@@ -37,11 +37,25 @@
 
 <div class="m-ionic-poster--actions" [class.m-ionic-poster--actions-show]="meta.message || meta.attachment_guid">
   <div class="m-ionic-poster--action">
-    <button class="m-mature" (mousedown)="toggleMature(); $event.preventDefault()" [class.m-mature-active]="meta.mature">
+    <button class="m-action m-mature" (mousedown)="toggleMature(); $event.preventDefault()" [class.m-action-active]="meta.mature">
       <img [src]="'assets/explicit_icon_' + (meta.mature ? 'active' : 'idle') + '.svg'"/>
     </button>
 
-    <span class="m-mature-label" [hidden]="!meta.mature">Explicit</span>
+    <span class="m-action-label m-mature-label"
+      [hidden]="!meta.mature"
+      (mousedown)="toggleMature(); $event.preventDefault()"
+    >Explicit</span>
+
+    <ng-container *ngIf="paywall">
+      <button class="m-action m-paywall" (mousedown)="togglePaywall(); $event.preventDefault()" [class.m-action-active]="meta.paywall">
+        <ion-icon name="logo-usd"></ion-icon>
+      </button>
+
+      <span class="m-action-label m-paywall-label"
+        [hidden]="!meta.paywall"
+        (mousedown)="togglePaywall(); $event.preventDefault()"
+      >Exclusive</span>
+    </ng-container>
   </div>
 
   <div class="m-ionic-poster--action">

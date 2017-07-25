@@ -3,9 +3,9 @@ import { ActionSheetController, LoadingController } from 'ionic-angular';
 
 import { Client } from '../../../common/services/api/client';
 import { ChannelComponent } from '../../channel/channel.component';
-import { Storage } from '../../../common/services/storage';
 import { AttachmentService } from '../../attachments/attachment.service';
 import { WalletService } from '../../wallet/wallet.service';
+import { CurrentUserService } from "../../../common/services/current-user.service";
 
 import { CONFIG } from '../../../config';
 
@@ -31,10 +31,12 @@ export class PosterComponent {
   message : string = "";
   progress : number = 0;
   mature: boolean = false;
+  paywall: boolean = false;
 
   meta = {
     message: '',
     mature: 0,
+    paywall: 0,
     attachment_guid: null,
     container_guid: null
   };
@@ -54,10 +56,8 @@ export class PosterComponent {
 
   @Output('prepend') prepend : EventEmitter<any> = new EventEmitter();
 
-  storage = new Storage();
-
   constructor(public client : Client, public actionSheetCtrl: ActionSheetController, public attachment : AttachmentService, private loadingCtrl : LoadingController,
-    private wallet : WalletService, private cd : ChangeDetectorRef){
+    private wallet : WalletService, private cd : ChangeDetectorRef, private currentUser: CurrentUserService){
 
   }
 
@@ -71,6 +71,8 @@ export class PosterComponent {
       this.meta.attachment_guid = response.guid;
       this.detectChanges();
     });
+
+    this.fetchUserPaywall();
   }
 
   openCamera(){
@@ -125,6 +127,7 @@ export class PosterComponent {
         this.meta = {
           message: '',
           mature: 0,
+          paywall: 0,
           attachment_guid: null,
           container_guid: this.containerGuid,
         };
@@ -148,9 +151,27 @@ export class PosterComponent {
     this.detectChanges();
   }
 
+  togglePaywall() {
+    this.meta.paywall = !this.meta.paywall ? 1 : 0;
+    this.detectChanges();
+  }
+
+  fetchUserPaywall() {
+    this.paywall = false;
+
+    this.currentUser.get()
+      .then(user => {
+        this.paywall = user && user.merchant && user.merchant.exclusive && user.merchant.exclusive.enabled;
+        this.detectChanges();
+      })
+      .catch(() => {
+        this.paywall = false;
+        this.detectChanges();
+      });
+  }
+
   detectChanges(){
     this.cd.markForCheck();
     this.cd.detectChanges();
   }
-
 }

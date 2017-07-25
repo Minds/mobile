@@ -37,6 +37,7 @@ import { Transfer } from '@ionic-native/transfer';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { SQLite } from '@ionic-native/sqlite';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { CurrentUserService } from "./common/services/current-user.service";
 
 @NgModule({
   declarations: [
@@ -79,6 +80,6 @@ import { SocialSharing } from '@ionic-native/social-sharing';
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [IonicApp],
-  providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, StatusBar, SplashScreen, Keyboard, Camera, AppVersion, MediaCapture, Transfer, PhotoViewer, SQLite, SocialSharing]
+  providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, StatusBar, SplashScreen, Keyboard, Camera, AppVersion, MediaCapture, Transfer, PhotoViewer, SQLite, SocialSharing, CurrentUserService ]
 })
 export class AppModule { }

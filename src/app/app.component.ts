@@ -23,6 +23,7 @@ import { SettingsComponent } from './modules/settings/settings.component';
 //for testing onboarding
 import { OnboardingComponent } from './modules/onboarding/onboarding.component';
 import { AppStatusService } from "./common/services/app-status.service";
+import { CurrentUserService } from "./common/services/current-user.service";
 
 @Component({
   selector: "ion-app",
@@ -45,7 +46,8 @@ export class MindsApp {
   constructor(private oauth2 : OAuth2, public menuCtrl: MenuController, private platform : Platform, private app : App,
     private storage : Storage, private push : PushService, private share : ShareService, private sockets: SocketsService,
     private client : Client, private appStatus: AppStatusService,
-    private statusBar: StatusBar, private splashScreen: SplashScreen, private keyboard: Keyboard, private appVersion: AppVersion){
+    private statusBar: StatusBar, private splashScreen: SplashScreen, private keyboard: Keyboard, private appVersion: AppVersion,
+    private currentUser: CurrentUserService) {
 
     if(this.oauth2.hasAccessToken()){
       this.rootPage = TabsComponent;
@@ -70,6 +72,7 @@ export class MindsApp {
       });
 
       this.appStatus.setUp();
+      this.currentUser.fetch();
     });
   }
 
@@ -100,6 +103,7 @@ export class MindsApp {
   logout() {
     this.sockets.deregister();
     this.client.post('api/v1/logout');
+    this.currentUser.destroy();
     (<any>window).localStorage.clear();
     this.menuCtrl.close();
     this.app.getRootNav().setRoot(LoginComponent);

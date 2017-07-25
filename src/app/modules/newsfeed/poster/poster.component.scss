@@ -72,7 +72,7 @@
     }
   }
 
-  .m-mature {
+  .m-action {
     appearance: none;
     padding: 0;
     margin: 0;
@@ -84,19 +84,37 @@
       height: 23px;
     }
 
-    &.m-mature-active {
+    &.m-mature.m-action-active {
       color: #c00000;
+    }
+
+    &.m-paywall {
+      padding: 0 0.35em;
+
+      &.m-action-active {
+        color: #009000;
+      }
     }
   }
 
-  .m-mature-label {
+  .m-action-label {
     display: inline-block;
     font-size: 8px;
     padding: 3px;
-    border: 1px solid #c00000;
+    border: 1px solid #000000;
     border-radius: 4px;
-    color: #c00000;
+    color: #000000;
     text-transform: uppercase;
+
+    &.m-mature-label {
+      border-color: #c00000;
+      color: #c00000;
+    }
+
+    &.m-paywall-label {
+      border-color: #009000;
+      color: #009000;
+    }
   }
 }
 .m-ionic-poster--actions-show{

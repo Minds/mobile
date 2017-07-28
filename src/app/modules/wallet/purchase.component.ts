@@ -5,7 +5,7 @@ import { CacheService } from '../../common/services/cache/cache.service';
 import { Storage } from '../../common/services/storage';
 
 import { WalletService } from './wallet.service';
-import { BraintreeCheckout } from '../payments/braintree/checkout.component';
+import { StripeCheckout } from '../payments/stripe/checkout.component';
 
 import { CONFIG } from '../../config';
 
@@ -65,7 +65,7 @@ export class PurchaseComponent {
   }
 
   buy(){
-    let checkout = this.modalCtrl.create(BraintreeCheckout, {
+    let checkout = this.modalCtrl.create(StripeCheckout, {
         success: (nonce : string) => {
           this.nonce = nonce;
           this.purchase();

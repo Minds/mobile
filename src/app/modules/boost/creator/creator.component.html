@@ -1,0 +1,218 @@
+<ion-content overflow-scroll="true" class="m-ionic-boost--creator">
+  <ion-icon name="md-close" class="m-ionic-boost--creator--close" (click)="dismiss()"></ion-icon>
+
+  <div class="m-ionic-boost--creator--header">
+    <h2>Boost</h2>
+  </div>
+
+  <!-- Select Type -->
+  <section class="m-ionic-boost--creator-section">
+    <h3 class="m-ionic-boost--creator-section-title--small">Boost Type</h3>
+    <ul class="m-ionic-boost--creator-selector"
+      [class.m-ionic-boost--creator-selector--has-selection]="boost.type"
+      >
+      <li class="m-ionic-boost--creator--options-option"
+        *ngIf="allowedTypes.newsfeed"
+        (click)="setBoostType('newsfeed')"
+        [class.m-ionic-boost--creator-selector--highlight]="!boost.type || boost.type == 'newsfeed'"
+        >
+        <h4>Newsfeeds</h4>
+        <span class="m-ionic-boost--creator-selector--description">Your content will appear on newsfeeds across the site.</span>
+        <span class="m-ionic-boost--creator-selector--selected-label">Selected</span>
+      </li>
+      <li class="m-ionic-boost--creator--options-option"
+          *ngIf="allowedTypes.p2p"
+          [class.m-ionic-boost--creator-selector--highlight]="boost.type == 'p2p'"
+          (click)="setBoostType('p2p')">
+        <h4>Channels</h4>
+        <span class="m-ionic-boost--creator-selector--description">Your content will be shared to a specific channel in exchange for USD or points.</span>
+        <span class="m-ionic-boost--creator-selector--selected-label">Selected</span>
+      </li>
+      <li class="m-ionic-boost--creator--options-option"
+          *ngIf="allowedTypes.content"
+          [class.m-ionic-boost--creator--options-option-selected]="boost.type == 'content'"
+          (click)="setBoostType('content')">
+        <h4>Sidebars</h4>
+        <span class="m-ionic-boost--creator-selector--description">Your content will display on the sidebars throughout the site.</span>
+        <span class="m-ionic-boost--creator-selector--selected-label">Selected</span>
+      </li>
+    </ul>
+
+  </section>
+  <!-- /Select Type -->
+
+  <!-- Bid -->
+  <section class="m-ionic-boost--creator-section">
+    <h3 class="m-ionic-boost--creator-section-title--small">
+      <ng-container *ngIf="boost.type != 'p2p'">How many views do you want?</ng-container>
+      <ng-container *ngIf="boost.type == 'p2p'">What's your offer?</ng-container>
+    </h3>
+    <div class="m-ionic-boost--creator-wide-input m-ionic-boost--creator--amount"
+      [class.m-ionic-boost--creator-wide-input--reading]="!editingAmount"
+    >
+      <input type="text"
+        class="m-ionic-boost--creator-wide-input--edit"
+        [ngModel]="boost.amount | number"
+        (ngModelChange)="setBoostAmount($event)"
+        (blur)="amountEditorBlur()"
+        (keydown.enter)="amountEditorBlur()"
+        (keydown.esc)="amountEditorBlur()"
+        #amountEditor
+      />
+
+      <span class="m-ionic-boost--creator-wide-input--label"
+        (click)="amountEditorFocus()"
+      >
+        <ng-container *ngIf="boost.type != 'p2p'">views</ng-container>
+        <ng-container *ngIf="boost.type == 'p2p' && boost.currency == 'points'">points</ng-container>
+        <ng-container *ngIf="boost.type == 'p2p' && boost.currency == 'usd'">USD</ng-container>
+        <!-- TODO: BTC -->
+      </span>
+    </div>
+    <!--</div>-->
+  </section>
+  <!-- /Bid -->
+
+  <!-- Payment Method -->
+  <section class="m-ionic-boost--creator-section">
+    <h3 class="m-ionic-boost--creator-section-title--small">Payment Method</h3>
+    <ul class="m-ionic-boost--creator-selector"
+      [class.m-ionic-boost--creator-selector--has-selection]="boost.currency"
+    >
+      <li
+        (click)="setBoostCurrency('usd')"
+        [class.m-ionic-boost--creator-selector--highlight]="!boost.currency || boost.currency == 'usd'"
+      >
+        <h4><b *ngIf="boost.amount">{{ calcCharges('usd') | currency:'USD':true }}</b> USD</h4>
+        <span class="m-ionic-boost--creator-selector--cta">Select Money</span>
+        <span class="m-ionic-boost--creator-selector--selected-label">Selected</span>
+      </li>
+
+      <li
+        (click)="setBoostCurrency('points')"
+        [class.m-ionic-boost--creator-selector--highlight]="!boost.currency || boost.currency == 'points'"
+      >
+        <h4>
+          <b *ngIf="boost.amount">{{ calcCharges('points') | number }}</b>
+          {{ boost.amount ? 'points' : 'Points' }}
+        </h4>
+        <span class="m-ionic-boost--creator-selector--cta">Select Points</span>
+        <span class="m-ionic-boost--creator-selector--selected-label">Selected</span>
+      </li>
+
+      <!-- TODO: BTC -->
+    </ul>
+  </section>
+  <!-- /Payment Method -->
+
+  <ng-container *ngIf="boost.type && (boost.type != 'p2p')">
+    <!-- Category -->
+    <section class="m-ionic-boost--creator-section">
+      <h3>
+        Target
+        <span class="m-ionic-boost--creator-section--title-context">Select the categories which you want your boost to be targeted to ({{ rates.maxCategories }} max).</span>
+      </h3>
+      <div class="m-ionic-boost--creator--categories">
+        <span *ngFor="let category of categories"
+          class="m-ionic-boost--creator-clickable"
+          [class.m-ionic-boost--creator-clickable--highlight]="hasCategory(category.id)"
+          (click)="toggleCategory(category.id)"
+        >
+          {{ category.label }}
+        </span>
+      </div>
+    </section>
+    <!-- /Category -->
+    <section class="m-ionic-boost--creator-section" *ngIf="boost.currency == 'usd'">
+      <h3>
+        Priority
+        <span class="m-ionic-boost--creator-section--title-context">Priority content goes to the front of the line, but costs at least twice the price of a regular boost.</span>
+      </h3>
+
+      <span class="m-ionic-boost--creator-toggle"
+        [class.m-ionic-boost--creator-toggle--highlight]="boost.priority"
+        (click)="togglePriority()"
+      >
+        <span class="m-ionic-boost--creator-toggle--select">Select</span>
+        <span class="m-ionic-boost--creator-toggle--selected">Selected</span>
+
+        <span class="m-ionic-boost--creator-toggle--label" *ngIf="boost.currency == 'usd'">+ <b>{{ calcPriorityChargesPreview('usd') | currency:'USD':true }} USD</b></span>
+        <span class="m-ionic-boost--creator-toggle--label" *ngIf="boost.currency == 'points'">+ <b>{{ calcPriorityChargesPreview('points') | number }} points</b></span>
+        <!-- TODO: BTC -->
+      </span>
+    </section>
+  </ng-container>
+
+  <!-- P2P -->
+  <ng-container *ngIf="boost.type && (boost.type == 'p2p')">
+    <section class="m-ionic-boost--creator-section">
+      <h3>
+        Target
+        <span class="m-ionic-boost--creator-section--title-context">Search for the channel you want to boost to.</span>
+      </h3>
+
+      <div class="m-ionic-boost--creator-wide-input m-ionic-boost--creator--target">
+        <input type="text"
+          class="m-ionic-boost--creator-wide-input--edit"
+          [(ngModel)]="targetQuery"
+          (keyup)="searchTarget()"
+          placeholder="@channel"
+          #targetEditor
+        />
+     </div>
+
+      <div *ngIf="targetResults.length > 0"
+        class="m-ionic-boost--creator-autocomplete--results"
+      >
+        <div *ngFor="let target of targetResults"
+          class="m-ionic-boost--creator-autocomplete--result"
+          (mousedown)="setTarget(target, $event);"
+        >
+          <div class="m-ionic-boost--creator-autocomplete--result-content">
+            @{{ target.username }}
+            <ng-container *ngIf="target.merchant"><ion-icon name="usd"></ion-icon></ng-container>
+          </div>
+
+          <div class="m-ionic-boost--creator-autocomplete--result-label">
+            <ng-container *ngIf="target.subscribers_count">{{ target.subscribers_count | abbr }} <ion-icon name="people"></ion-icon></ng-container>
+            <ng-container *ngIf="target.impressions">{{ target.impressions | abbr }} <ion-icon name="eye"></ion-icon></ng-container>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="boost.target && boost.target.boostProPlus"
+        class="m-ionic-boost--creator--target-facebook"
+      >
+        <div class="m-ionic-boost--creator-toggle m-ionic-boost--creator-toggle--target-facebook"
+          [class.m-ionic-boost--creator-toggle--highlight]="boost.postToFacebook"
+          (click)="tooglePostToFacebook()"
+        >
+          <span class="m-ionic-boost--creator-toggle--select">Select</span>
+          <span class="m-ionic-boost--creator-toggle--selected">Selected</span>
+
+          <span>Post to {{ boost.target.fb.name }}</span>
+          <img [src]="'https://graph.facebook.com/' + boost.target.fb.uuid + '/picture'" />
+        </div>
+      </div>
+    </section>
+  </ng-container>
+  <!-- / -->
+
+  <section class="m-ionic-boost--creator-section m-ionic-boost--creator--submit">
+    <button class="m-ionic-boost--creator-button"
+            [disabled]="!isValid() || inProgress || success || criticalError"
+            (click)="submit()">
+      Boost
+    </button>
+
+    <div *ngIf="!inProgress && success" class="m-ionic-boost--creator--submit-label">
+      <ion-icon name="checkmark"></ion-icon>
+      <span>Boosted!</span>
+    </div>
+
+    <div *ngIf="!inProgress && error" class="m-ionic-boost--creator--submit-error">
+      <ion-icon name="close"></ion-icon>
+      <span>{{ error }}</span>
+    </div>
+  </section>
+</ion-content>

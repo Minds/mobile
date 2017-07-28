@@ -18,6 +18,7 @@ import { BoostSliderComponent } from "./boost/slider.component";
 
 import { ImageCachePipe } from '../../common/pipes/image-cache.pipe';
 import { CommonModule } from '../../common/common.module';
+import { BoostCreatorModule } from './../boost/creator/creator.module';
 import { HeaderModule } from '../header/header.module';
 import { AttachmentModule } from '../attachments/attachment.module';
 import { TranslationsModule } from '../translations/translations.module';
@@ -42,7 +43,19 @@ import { PaywallModule } from '../paywall/paywall.module';
   exports: [
     RouterModule
   ]*/
-  imports: [ IonicModule, CommonModule, ButtonsModule, AttachmentModule, HeaderModule, TranslationsModule, ReportModule, VideoModule, SuggestionsModule, PaywallModule ],
+  imports: [
+    IonicModule,
+    CommonModule,
+    BoostCreatorModule,
+    ButtonsModule,
+    AttachmentModule,
+    HeaderModule,
+    TranslationsModule,
+    ReportModule,
+    VideoModule,
+    SuggestionsModule,
+    PaywallModule
+  ],
   providers: [ Client ],
   declarations: [
     NewsfeedList,

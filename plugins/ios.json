@@ -58,6 +58,9 @@
         },
         "com.minds.share.intent": {
             "PACKAGE_NAME": "com.minds.mobile"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "com.minds.mobile"
         }
     },
     "dependent_plugins": {

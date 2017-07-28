@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="20002" id="com.minds.mobile.dev" version="2.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Minds DEV</name>
+<widget android-versionCode="20050" id="com.minds.mobile" version="2.0.5" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Minds</name>
     <description>The next gen Minds app</description>
     <author email="mark@minds.com" href="http://minds.com/mark">Minds Inc.</author>
     <content src="index.html" />
@@ -72,9 +72,9 @@
     <preference name="loadUrlTimeoutValue" value="700000" />
     <preference name="SplashMaintainAspectRatio" value="true" />
     <preference name="ShowSplashScreenSpinner" value="false" />
-    <preference name="FadeSplashScreenDuration" value="300" />
+    <preference name="FadeSplashScreenDuration" value="600" />
     <preference name="SplashScreen" value="screen" />
-    <preference name="SplashScreenDelay" value="6000" />
+    <preference name="SplashScreenDelay" value="8000" />
     <preference name="KeyboardDisplayRequiresUserAction" value="false" />
     <feature name="StatusBar">
         <param name="ios-package" onload="true" value="CDVStatusBar" />
@@ -86,11 +86,13 @@
     <allow-navigation href="https://*soundcloud.com/*" />
     <allow-navigation href="https://*giphy.com/*" />
     <plugin name="com-sarriaroman-photoviewer" spec="~1.1.10" />
+    <plugin name="com.minds.share.intent" spec="../minds-share-intent" />
     <plugin name="cordova-plugin-app-version" spec="~0.1.9" />
     <plugin name="cordova-plugin-camera" spec="~2.1.1" />
     <plugin name="cordova-plugin-console" spec="1.0.5" />
     <plugin name="cordova-plugin-device" spec="1.1.4" />
     <plugin name="cordova-plugin-file-transfer" spec="~1.5.1" />
+    <plugin name="cordova-plugin-inappbrowser" spec="git+https://github.com/apache/cordova-plugin-inappbrowser.git" />
     <plugin name="cordova-plugin-media-capture" spec="~1.2.0" />
     <plugin name="cordova-plugin-splashscreen" spec="~4.0.1" />
     <plugin name="cordova-plugin-statusbar" spec="~2.2.1" />

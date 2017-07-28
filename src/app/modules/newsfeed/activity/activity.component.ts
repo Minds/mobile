@@ -16,6 +16,7 @@ import { GroupProfile } from '../../groups/profile.component';
 import { VisibilityServiceInterface } from "../../../common/services/visibility/visibility-service.interface";
 
 import { CONFIG } from '../../../config';
+import { BoostCreatorFabController } from '../../boost/creator/fab';
 
 @Component({
   moduleId: 'module.id',
@@ -56,7 +57,7 @@ export class Activity implements AfterViewInit, OnDestroy {
   constructor(private client : Client, public cache : CacheService, public actionSheetCtrl: ActionSheetController,
     private cd : ChangeDetectorRef, private storage : Storage, private modalCtrl : ModalController, private platform : Platform,
     private navCtrl : NavController, private popoverCtrl : PopoverController, private report : ReportService, private share : ShareService, private elementRef: ElementRef,
-    private photoViewer: PhotoViewer){
+    private photoViewer: PhotoViewer,  private boostFab : BoostCreatorFabController){
 
   }
 
@@ -241,8 +242,8 @@ export class Activity implements AfterViewInit, OnDestroy {
   }
 
   boost(){
-    this.modalCtrl.create(BoostComponent, { entity: this.originalEntity })
-      .present();
+    let fab = this.boostFab.create({ entity: this.entity });
+    fab.present();
   }
 
   openImage(){

@@ -158,7 +158,7 @@
   <minds-button-thumbs-up [entity]="entity" ></minds-button-thumbs-up>
   <minds-button-thumbs-down [entity]="entity" ></minds-button-thumbs-down>
 	<minds-button-wire [entity]="entity" *ngIf="!(entity.owner_guid == storage.get('user_guid') || (entity.reminderOwnerObj  && entity.reminderOwnerObj.guid == storage.get('user_guid')))"></minds-button-wire>
-  <minds-button-comment [entity]="entity" ></minds-button-comment>
+  <minds-button-comment [entity]="originalEntity" ></minds-button-comment>
   <minds-button-remind [entity]="rawEntity" ></minds-button-remind>
 	<button class="m-ionic-boost-button" (click)="boost()"
 		*ngIf="entity.owner_guid == storage.get('user_guid') || (entity.reminderOwnerObj  && entity.reminderOwnerObj.guid == storage.get('user_guid'))">

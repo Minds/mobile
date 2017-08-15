@@ -1,5 +1,6 @@
 activity {
   display: block;
+  position: relative;
 }
 .m-ionic-activity{
   border-bottom:1px solid #EEE;
@@ -156,9 +157,23 @@ activity {
   position: absolute;
   padding: 1px 4px;
   font-size: 9px;
-  right: 0;
+  right: 4px;
+  bottom: -4px;
   background: #EEE;
   border-radius: 3px 0 0 3px;
   margin: -5px 0;
   letter-spacing: 0.5px;
+
+  .m-mdl-icon-bank {
+    fill: #000000;
+  }
+
+  > span {
+    vertical-align: middle;
+    margin-right: 1em;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
 }

@@ -72,8 +72,10 @@
 </div>
 
 <!-- PayWall -->
-<m-paywall class="m-paywall" [(entity)]="entity" *ngIf="!preview && entity.paywall">
-</m-paywall>
+<m-wire-lock-screen class="m-wire-lock"
+  [(entity)]="entity"
+  *ngIf="!preview && entity.paywall"
+></m-wire-lock-screen>
 <!-- END: PayWall -->
 
 <!-- Messages -->
@@ -167,5 +169,17 @@
 </div>
 
 <div class="m-ionic-activity--impressions" *ngIf="!preview">
-	{{entity.impressions}} views
+  <span *ngIf="entity?.wire_totals?.points">
+    <m-mdl-icon icon="bank"></m-mdl-icon>
+    {{ entity.wire_totals.points | number }}
+  </span>
+
+  <span *ngIf="entity?.wire_totals?.usd">
+    {{ entity.wire_totals.usd | currency:'USD':true }}
+  </span>
+
+  <span>
+    <ion-icon name="md-eye"></ion-icon>
+    {{ entity.impressions | abbr }}
+  </span>
 </div>

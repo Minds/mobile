@@ -88,11 +88,15 @@
       color: #c00000;
     }
 
-    &.m-paywall {
+    &.m-wire {
       padding: 0 0.35em;
 
+      > ion-icon {
+        font-size: 24px;
+      }
+
       &.m-action-active {
-        color: #009000;
+        color: #4690D6;
       }
     }
   }
@@ -111,9 +115,9 @@
       color: #c00000;
     }
 
-    &.m-paywall-label {
-      border-color: #009000;
-      color: #009000;
+    &.m-wire-label {
+      border-color: #4690D6;
+      color: #4690D6;
     }
   }
 }

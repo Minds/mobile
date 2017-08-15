@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild } from '@angular/core';
-import { ActionSheetController, LoadingController } from 'ionic-angular';
+import { ActionSheetController, LoadingController, ModalController } from 'ionic-angular';
 
 import { Client } from '../../../common/services/api/client';
 import { ChannelComponent } from '../../channel/channel.component';
@@ -8,6 +8,7 @@ import { WalletService } from '../../wallet/wallet.service';
 import { CurrentUserService } from "../../../common/services/current-user.service";
 
 import { CONFIG } from '../../../config';
+import { WireThresholdInputComponent } from "../../wire/threshold-input/threshold-input.component";
 
 @Component({
   moduleId: 'module.id',
@@ -31,12 +32,11 @@ export class PosterComponent {
   message : string = "";
   progress : number = 0;
   mature: boolean = false;
-  paywall: boolean = false;
 
   meta = {
     message: '',
     mature: 0,
-    paywall: 0,
+    wire_threshold: null,
     attachment_guid: null,
     container_guid: null
   };
@@ -57,7 +57,7 @@ export class PosterComponent {
   @Output('prepend') prepend : EventEmitter<any> = new EventEmitter();
 
   constructor(public client : Client, public actionSheetCtrl: ActionSheetController, public attachment : AttachmentService, private loadingCtrl : LoadingController,
-    private wallet : WalletService, private cd : ChangeDetectorRef, private currentUser: CurrentUserService){
+    private wallet : WalletService, private cd : ChangeDetectorRef, private currentUser: CurrentUserService, private modalCtrl: ModalController){
 
   }
 
@@ -71,8 +71,6 @@ export class PosterComponent {
       this.meta.attachment_guid = response.guid;
       this.detectChanges();
     });
-
-    this.fetchUserPaywall();
   }
 
   openCamera(){
@@ -127,7 +125,7 @@ export class PosterComponent {
         this.meta = {
           message: '',
           mature: 0,
-          paywall: 0,
+          wire_threshold: null,
           attachment_guid: null,
           container_guid: this.containerGuid,
         };
@@ -151,23 +149,18 @@ export class PosterComponent {
     this.detectChanges();
   }
 
-  togglePaywall() {
-    this.meta.paywall = !this.meta.paywall ? 1 : 0;
-    this.detectChanges();
-  }
+  showWireThreshold() {
+    let modal = this.modalCtrl.create(WireThresholdInputComponent, { threshold: this.meta.wire_threshold });
 
-  fetchUserPaywall() {
-    this.paywall = false;
+    modal.onDidDismiss(data => {
+      if (data && (typeof data.threshold !== 'undefined')) {
+        this.meta.wire_threshold = data.threshold;
+      }
 
-    this.currentUser.get()
-      .then(user => {
-        this.paywall = user && user.merchant && user.merchant.exclusive && user.merchant.exclusive.enabled;
-        this.detectChanges();
-      })
-      .catch(() => {
-        this.paywall = false;
-        this.detectChanges();
-      });
+      this.detectChanges();
+    });
+
+    modal.present();
   }
 
   detectChanges(){

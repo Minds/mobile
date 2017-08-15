@@ -25,7 +25,7 @@ import { TranslationsModule } from '../translations/translations.module';
 import { ReportModule } from '../report/report.module';
 import { VideoModule } from "../video/video.module";
 import { SuggestionsModule } from '../suggestions/suggestions.module';
-import { PaywallModule } from '../paywall/paywall.module';
+import { WireModule } from "../wire/wire.module";
 
 @NgModule({
   /*imports: [
@@ -54,7 +54,7 @@ import { PaywallModule } from '../paywall/paywall.module';
     ReportModule,
     VideoModule,
     SuggestionsModule,
-    PaywallModule
+    WireModule
   ],
   providers: [ Client ],
   declarations: [

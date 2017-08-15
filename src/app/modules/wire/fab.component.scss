@@ -4,15 +4,17 @@ wire-fab{
   display: block;
   top: 0;
   left: 0;
-  background: rgba(0,0,0,0.8);
+  background: rgba(248, 248, 248, 0.97);
   position: fixed;
+  overflow: scroll;
+  overflow-x: hidden;
 }
 
 .m-ionic-wire--fab-bolt{
   text-align: center;
 
   ion-icon{
-    color: #FFF;
+    color: #4690D6;
     font-size: 64px;
   }
 }
@@ -25,8 +27,8 @@ wire-fab{
 }
 
 .m-ionic-wire--fab{
-  position: fixed;
-  top: calc(50% - 150px);
+  position: relative;
+  margin-top: 56px;
   left: 5%;
   width: 90%;
   height: auto;
@@ -39,7 +41,7 @@ wire-fab{
     padding: 16px;
     border: 0;
     background: transparent;
-    color: #FFF;
+    color: #666;
     text-align: center;
     font-size: 50px;
     letter-spacing: 8px;
@@ -47,7 +49,7 @@ wire-fab{
 }
 
 .m-ionic-wire--fab-options{
-  color: #FFF;
+  color: #666;
   display: flex;
   align-items: center;
 
@@ -55,32 +57,70 @@ wire-fab{
     flex: 1;
     text-align: center;
     letter-spacing: 2px;
+    font-size: 16px;
 
-    ion-icon{
+    ion-icon {
       display: block;
       padding-bottom: 8px;
     }
+
+    m-mdl-icon {
+      display: block;
+      font-size: 24px;
+      svg {
+        fill: #666;
+      }
+    }
   }
   .m-ionic-wire--fab-options-option-selected{
-    color: #ffca28 !important;
+    color: #4690D6 !important;
+
+    m-mdl-icon svg {
+      fill: #4690D6;
+    }
+  }
+}
+
+.m-ionic-wire--fab-recurring {
+  text-align: center;
+  width: 100%;
+  font-size: 13px;
+  letter-spacing: 2px;
+  margin: 42px 0px 0;
+  color: #666;
+
+  > * {
+    vertical-align: middle;
   }
 }
 
 .m-ionic-wire--fab-send{
   text-align: center;
-  width: 100%;
-  font-size: 24px;
+  width: auto;
+  font-size: 16px;
   letter-spacing: 5px;
-  margin: 42px 0px 0;
-  color: #FFF;
+  margin: 24px auto 0;
+  color: #666;
+  border: 1px solid #666;
+  display: block;
 }
 
 .m-ionic-wire--close{
   position: fixed;
   padding: 16px;
   right: 0;
-  color: #FFF;
+  color: #666;
   font-size: 25px;
+}
+
+.m-ionic-wire--fab-payment {
+  text-align: center;
+  padding-top: 25px;
+  color: #666;
+
+  .m-ionic-wire--fab-payment-attached {
+    font-size: 18px;
+  }
 }
 
 
@@ -98,5 +138,39 @@ wire-fab{
   100%{
     opacity: 1;
     transform: scale(1, 1) translateY(0);
+  }
+}
+
+wire-fab .m-ionic-wire--fab-rewards {
+  margin: 32px 0 0;
+  padding: 8px;
+  background: rgba(248, 248, 248, 0.35);
+  border-radius: 8px;
+
+  h2 {
+    margin: 0 0 8px;
+    color: #666;
+    font-size: 18px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    text-align: center;
+  }
+
+  .m-wire--slide {
+    color: #666;
+    text-align: center;
+  }
+
+  .m-ionic-wire--fab-rewards--sums {
+    padding: 0 16px 16px;
+    color: rgba(0, 0, 0, 0.8);
+    font-size: 13px;
+    font-weight: 200;
+    letter-spacing: 0.5px;
+    text-align: center;
+
+    b {
+      font-weight: 400;
+    }
   }
 }

@@ -1,49 +1,13 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef, ElementRef, Renderer } from "@angular/core";
 import { ViewController, Config, Platform, GestureController, NavParams, AlertController } from 'ionic-angular';
+import { Client } from "../../common/services/api/client";
 
 import { WireService } from './wire.service';
 
 @Component({
   moduleId: 'module.id',
   selector: "wire-fab",
-  template: `
-    <ion-icon name="md-close" class="m-ionic-wire--close" (click)="dismiss()"></ion-icon>
-    <div class="m-ionic-wire--fab">
-
-      <div class="m-ionic-wire--fab-bolt m-ionic-wire--fab-button"
-       [class.m-ionic-wire--fab-bolt-animate]="animate">
-        <ion-icon name="ios-flash" class="m-ionic-icon"></ion-icon>
-      </div>
-
-      <div class="m-ionic-wire--fab-input">
-        <input type="number" [(ngModel)]="amount" />
-      </div>
-
-      <div class="m-ionic-wire--fab-options">
-        <div class="m-ionic-wire--fab-options-option"
-          [class.m-ionic-wire--fab-options-option-selected]="method == 'points'"
-          (click)="selectMethod('points')">
-          <ion-icon name="md-trophy" class="m-ionic-icon"></ion-icon>
-          Points
-        </div>
-        <div class="m-ionic-wire--fab-options-option"
-          [class.m-ionic-wire--fab-options-option-selected]="method == 'money'"
-          (click)="selectMethod('money')">
-          <ion-icon name="logo-usd" class="m-ionic-icon"></ion-icon>
-          Money
-        </div>
-        <div class="m-ionic-wire--fab-options-option"
-          [class.m-ionic-wire--fab-options-option-selected]="method == 'bitcoin'"
-          (click)="selectMethod('bitcoin')">
-          <ion-icon name="logo-bitcoin" class="m-ionic-icon"></ion-icon>
-          Bitcoin
-        </div>
-      </div>
-
-      <button ion-button clear class="m-ionic-wire--fab-send" (click)="send()" *ngIf="!inProgress">Send</button>
-
-    </div>
-  `,
+  templateUrl: 'fab.component.html'
 })
 
 export class WireFabComponent {
@@ -51,9 +15,15 @@ export class WireFabComponent {
   guid : string;
   amount : number = 1000;
   method : string = "points";
+  payload: any;
+  recurring: boolean = false;
 
   animate : boolean = false;
   inProgress : boolean = false;
+
+  owner: any = {};
+  sums: any;
+  default: any;
 
   constructor(
     private _viewCtrl: ViewController,
@@ -65,15 +35,22 @@ export class WireFabComponent {
     renderer: Renderer,
     private service : WireService,
     private cd : ChangeDetectorRef,
-    private alertCtrl : AlertController
+    private alertCtrl : AlertController,
+    private client: Client
   ){
     this.guid = params.get('guid');
+
+    if (params.get('default')) {
+      this.default = params.get('default');
+      this.setDefaults();
+    }
   }
 
   ngOnInit(){
     //setTimeout(() => {
     //  this._viewCtrl.dismiss();
     //}, 2000);
+    this.syncOwner();
   }
 
   selectMethod(method : string){
@@ -102,10 +79,17 @@ export class WireFabComponent {
 
   }
 
+  setPayload(payload: any) {
+    this.payload = payload;
+
+    this.cd.markForCheck();
+    this.cd.detectChanges();
+  }
+
   round(number, precision) {
-    var factor = Math.pow(10, precision);
-    var tempNumber = number * factor;
-    var roundedTempNumber = Math.round(tempNumber);
+    const factor = Math.pow(10, precision);
+    const tempNumber = number * factor;
+    const roundedTempNumber = Math.round(tempNumber);
     return roundedTempNumber / factor;
   }
 
@@ -145,6 +129,8 @@ export class WireFabComponent {
             this.service.setEntityGuid(this.guid);
             this.service.setMethod(this.method);
             this.service.setAmount(this.amount);
+            this.service.setRecurring(this.recurring);
+            this.service.setPayload(this.payload);
 
             this.animate = true;
             this.cd.markForCheck();
@@ -179,6 +165,43 @@ export class WireFabComponent {
 
   dismiss(){
     this._viewCtrl.dismiss();
+  }
+
+  syncOwner() {
+    if (!this.guid) {
+      return;
+    }
+
+    this.client.get(`api/v1/wire/rewards/${this.guid}/entity`)
+      .then(({ username, merchant, wire_rewards, sums }) => {
+        this.owner.username = username;
+        this.owner.merchant = merchant;
+        this.owner.wire_rewards = wire_rewards;
+        this.sums = sums;
+
+        this.setDefaults();
+
+        this.cd.markForCheck();
+        this.cd.detectChanges();
+      });
+  }
+
+  setDefaults() {
+    if (this.default) {
+      this.method = this.default.type;
+      this.amount = this.default.min;
+
+      if (this.sums && this.sums[this.default.type]) {
+        this.amount = <number>this.amount - Math.ceil(this.sums[this.default.type]);
+      }
+    } else if (this.owner.merchant) {
+      this.method = 'money';
+      this.amount = 1;
+    }
+
+    if (this.amount < 0) {
+      this.amount = 0;
+    }
   }
 
 }

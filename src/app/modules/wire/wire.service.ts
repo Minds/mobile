@@ -10,49 +10,63 @@ export class WireService {
   guid : string;
   method : string;
   amount : number;
+  recurring : boolean;
+  payload: any;
 
   constructor(private client : Client, private modalCtrl : ModalController){
 
   }
 
   send(){
-    return this.getTransactionPayloads()
+
+    return new Promise((resolve, reject) => {
+      if (!this.payload) {
+        resolve(this.getTransactionPayloads());
+        return;
+      }
+
+      resolve(this.payload);
+    })
       .then((payload) => {
         return this.client.post(`api/v1/wire/${this.guid}`, {
           payload,
           method: this.method,
-          amount: this.amount
+          amount: this.amount,
+          recurring: this.recurring
         })
-          .then(() => {
-            return true;
-          })
-          .catch((e) => {
-            throw e;
-          });
+      })
+      .then(() => {
+        return true;
+      })
+      .catch((e) => {
+        throw e;
       });
   }
 
-  getTransactionPayloads(){
-    return new Promise((resolve, reject) => {
-      switch(this.method){
-        case "money":
+  getTransactionPayloads(): Promise<any> {
+    switch(this.method){
+      case "money":
+        return new Promise((resolve, reject) => {
           let checkout = this.modalCtrl.create(StripeCheckout, {
-              success: (nonce : string) => {
-                resolve({nonce: nonce});
-              },
-              error: (msg) => {
-                reject(msg);
-              }
-            });
+            success: (nonce : string) => {
+              resolve({nonce: nonce});
+            },
+            error: (msg) => {
+              reject({ message: msg });
+            }
+          });
+
           checkout.present();
-          break;
-        case "bitcoin":
-          break;
-        case "points":
-          resolve({});
-          break;
-      }
-    });
+        });
+
+      case "bitcoin":
+        return Promise.reject({ message: 'Not implemented' });
+
+      case "points":
+        return Promise.resolve({})
+    }
+
+    return Promise.reject({ message: 'Unknown method' });
   }
 
   setMethod(method : string){
@@ -67,6 +81,14 @@ export class WireService {
 
   setEntityGuid(guid : string){
     this.guid = guid;
+  }
+
+  setRecurring(recurring: boolean) {
+    this.recurring = recurring;
+  }
+
+  setPayload(payload: any) {
+    this.payload = payload;
   }
 
 }

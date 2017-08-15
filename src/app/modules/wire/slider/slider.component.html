@@ -1,0 +1,23 @@
+<ion-slides [loop]="!!autoplay" pager [autoplay]="autoplay ? 7500 : null" *ngIf="rewards?.length"
+  class="m-wire--slider"
+  [ngClass]="[ 'm-wire-slider--rewards-' + type ]"
+  #slider
+>
+  <ion-slide *ngFor="let reward of rewards; let i = index"
+    class="m-wire--slide"
+  >
+    <div class="m-wire-slider--reward-amount">
+      <ng-container *ngIf="!editing && reward.type == 'money'">{{ (reward.amount || 0) | currency:'USD':true:'1.0-0' }}</ng-container>
+      <ng-container *ngIf="!editing && reward.type == 'points'">{{ (reward.amount || 0) | number }} points</ng-container>
+    </div>
+
+    <div class="m-wire-slider--reward-description">
+      <ng-container *ngIf="!editing">{{ reward.description }}</ng-container>
+      <textarea *ngIf="editing" [ngModel]="reward.description" (ngModelChange)="setDescription(i, $event)" placeholder="Describe the reward"></textarea>
+    </div>
+  </ion-slide>
+</ion-slides>
+
+<div *ngIf="!rewards?.length">
+  <p class="m-wire-slider--empty-rewards">There are no rewards set.</p>
+</div>

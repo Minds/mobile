@@ -1,0 +1,32 @@
+.m-wire--slider > .swiper-container {
+  padding-bottom: 48px;
+
+  .swiper-pagination-bullet-active {
+    background: #ffffff;
+  }
+}
+
+.m-wire--slide {
+  font-size: 16px;
+  letter-spacing: 1px;
+  text-align: left;
+
+  > .slide-zoom {
+    text-align: inherit;
+  }
+}
+
+.m-wire-slider--reward-amount {
+  font-weight: 700;
+  padding-bottom: 8px;
+}
+
+.m-wire-slider--reward-description {
+  font-weight: 300;
+}
+
+.m-wire-slider--empty-rewards {
+  text-align: center;
+  margin: 16px;
+  color: #666666;
+}

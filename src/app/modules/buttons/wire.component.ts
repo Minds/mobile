@@ -25,7 +25,10 @@ export class WireButtonComponent {
   }
 
   open(e){
-    let fab = this.fab.create({ guid: this.entity.guid });
+    let fab = this.fab.create({
+      guid: this.entity.guid,
+      default: this.entity && this.entity.wire_threshold
+    });
     fab.present();
   }
 

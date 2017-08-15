@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button clear icon-only (click)="dismiss()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title>Wire</ion-title>
+
+    <ion-buttons end>
+      <button ion-button clear icon-only [disabled]="!isValid()" (click)="apply()">
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="m-wire--threshold-input--input">
+    <a *ngIf="merchant; else nonMerchantContainer"
+      class="m-wire--threshold-input--icon"
+      (click)="selectType()"
+    >
+      <ng-container *ngFor="let typeLabel of typeLabels">
+        <ion-icon *ngIf="typeLabel.icon && threshold.type == typeLabel.type" class="m-wire--threshold-input--type" [name]="typeLabel.icon"></ion-icon>
+
+        <m-mdl-icon *ngIf="typeLabel.mdlIcon && threshold.type == typeLabel.type" class="m-wire--threshold-input--type" [icon]="typeLabel.mdlIcon"></m-mdl-icon>
+      </ng-container>
+    </a>
+
+    <ng-template #nonMerchantContainer>
+      <m-mdl-icon class="m-wire--threshold-input--type" icon="bank"></m-mdl-icon>
+    </ng-template>
+
+    <ion-input type="text"
+      class="m-wire--threshold-input--field"
+      [ngModel]="threshold.min | number"
+      (ngModelChange)="setMinAmount($event)"
+      #minAmountInput
+    ></ion-input>
+  </div>
+
+</ion-content>

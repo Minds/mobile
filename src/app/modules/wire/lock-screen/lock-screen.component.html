@@ -1,0 +1,103 @@
+<div *ngIf="isOwner(); else notIsOwner"
+  class="m-wire-lock-screen--exclusive-self"
+>
+  <div>
+    Only supporters who wire you over
+
+    <ng-container *ngIf="entity?.wire_threshold?.type == 'money'">
+      {{ entity.wire_threshold.min | currency:'USD':true:'1.0-0' }}/month
+    </ng-container>
+
+    <ng-container *ngIf="entity?.wire_threshold?.type == 'points'">
+      {{ entity.wire_threshold.min | number }} points/month
+    </ng-container>
+
+    will see this post.
+  </div>
+
+  <div>
+    <button ion-button class="m-wire-lock-screen--exclusive-button">
+      <ion-icon name="ios-flash"></ion-icon>
+      <span>Locked</span>
+    </button>
+  </div>
+</div>
+
+<ng-template #notIsOwner>
+  <div class="m-wire-lock-screen--exclusive">
+    <div class="m-wire-lock-screen--exclusive-intro">
+      <b>&ldquo;</b>
+
+      <ng-container *ngIf="entity.ownerObj?.merchant?.exclusive?.intro; else notHasIntro">
+        {{entity.ownerObj?.merchant?.exclusive?.intro}}
+      </ng-container>
+
+      <ng-template #notHasIntro>
+        Wire me over
+
+        <ng-container *ngIf="entity?.wire_threshold?.type == 'money'">
+          {{ entity.wire_threshold.min | currency:'USD':true:'1.0-0' }}/month
+        </ng-container>
+
+        <ng-container *ngIf="entity?.wire_threshold?.type == 'points'">
+          {{ entity.wire_threshold.min | number }} points/month
+        </ng-container>
+
+        to see this post.
+      </ng-template>
+
+      <b>&rdquo;</b>
+    </div>
+
+    <div>
+      <button ion-button class="m-wire-lock-screen--exclusive-button"
+        (click)="unlock()"
+      >
+        <ion-icon name="ios-flash" *ngIf="!inProgress; else inProgressLoader"></ion-icon>
+
+        <ng-template #inProgressLoader>
+          <ion-spinner></ion-spinner>
+        </ng-template>
+
+        <span>Unlock</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="m-wire-lock-screen"
+    [style.backgroundImage]="getBackground()"
+  >
+    <div class="m-wire-lock-screen--icon">
+      <ion-icon name="ios-flash"></ion-icon>
+    </div>
+
+    <div class="m-wire-lock-screen--legend">
+      <span>
+        <ng-container *ngIf="entity?.wire_threshold?.type == 'money'">
+          {{ entity.wire_threshold.min | currency:'USD':true:'1.0-0' }}/month
+        </ng-container>
+
+        <ng-container *ngIf="entity?.wire_threshold?.type == 'points'">
+          {{ entity.wire_threshold.min | number }} points/month
+        </ng-container>
+      </span>
+    </div>
+
+    <div class="m-wire-lock-screen--description">
+      This post can only be seen by supporters who
+      wire
+
+      <ng-container *ngIf="entity?.wire_threshold?.type == 'money'">
+          over {{ entity.wire_threshold.min | currency:'USD':true:'1.0-0' }}/month
+      </ng-container>
+
+      <ng-container *ngIf="entity?.wire_threshold?.type == 'points'">
+        over {{ entity.wire_threshold.min | number }} points/month
+      </ng-container>
+
+      <ng-container *ngIf="entity?.ownerObj?.username">
+        to @{{ entity.ownerObj.username }}
+      </ng-container>
+    </div>
+  </div>
+</ng-template>

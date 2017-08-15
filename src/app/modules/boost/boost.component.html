@@ -17,7 +17,7 @@
       <activity [entity]="boost.entity"></activity>
 
       <div class="m-ionic-boost-review--tabs">
-        <div class="m-boost-admin-bid" style="color:green"><ion-icon name="md-trophy"></ion-icon>{{boost.bid}} points</div>
+        <div class="m-boost-admin-bid"><m-mdl-icon icon="bank" color="green"></m-mdl-icon> {{boost.bid}} points</div>
         <div class="m-boost-admin-state"><ion-icon name="md-time"></ion-icon> {{boost.state}}</div>
         <div class="m-ionic-boost-review--admin-buttons" *ngIf="boost.state == 'created'">
           <button ion-button (click)="accept(boost, i)">Accept</button>

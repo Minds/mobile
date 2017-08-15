@@ -15,10 +15,12 @@ import { PlatformFeaturesService } from "./services/platform-features.service";
 import { AppStatusService } from "./services/app-status.service";
 import { SuggestionsModule } from "../modules/suggestions/suggestions.module";
 
+import { MDLIcon } from "./components/mdl-icon";
+
 @NgModule({
   imports: [ IonicModule, SuggestionsModule ],
   providers: [ Storage, PlatformFeaturesService, AppStatusService ],
-  declarations: [ ImgFadeDirective, ExplicitDirective, ContenteditableModel, DomainPipe, AbbrPipe, TagsPipe, TextareaComponent, RichInputComponent, SafePipe ],
-  exports: [ ImgFadeDirective, ExplicitDirective, ContenteditableModel, DomainPipe, AbbrPipe, TagsPipe, TextareaComponent, RichInputComponent, SafePipe ]
+  declarations: [ ImgFadeDirective, ExplicitDirective, ContenteditableModel, DomainPipe, AbbrPipe, TagsPipe, TextareaComponent, RichInputComponent, SafePipe, MDLIcon ],
+  exports: [ ImgFadeDirective, ExplicitDirective, ContenteditableModel, DomainPipe, AbbrPipe, TagsPipe, TextareaComponent, RichInputComponent, SafePipe, MDLIcon ]
 })
 export class CommonModule { }

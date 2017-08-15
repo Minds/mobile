@@ -46,16 +46,22 @@
       (mousedown)="toggleMature(); $event.preventDefault()"
     >Explicit</span>
 
-    <ng-container *ngIf="paywall">
-      <button class="m-action m-paywall" (mousedown)="togglePaywall(); $event.preventDefault()" [class.m-action-active]="meta.paywall">
-        <ion-icon name="logo-usd"></ion-icon>
-      </button>
+    <button class="m-action m-wire" (click)="showWireThreshold()" [class.m-action-active]="meta.wire_threshold">
+      <ion-icon name="ios-flash"></ion-icon>
+    </button>
 
-      <span class="m-action-label m-paywall-label"
-        [hidden]="!meta.paywall"
-        (mousedown)="togglePaywall(); $event.preventDefault()"
-      >Exclusive</span>
-    </ng-container>
+    <span *ngIf="meta.wire_threshold"
+      class="m-action-label m-wire-label"
+      (click)="showWireThreshold()"
+    >
+      <ng-container *ngIf="meta.wire_threshold.type != 'money'">
+        {{ meta.wire_threshold.min | number }} {{ meta.wire_threshold.type }}
+      </ng-container>
+
+      <ng-container *ngIf="meta.wire_threshold.type == 'money'">
+        {{ meta.wire_threshold.min | currency:'USD':true }}
+      </ng-container>
+  </span>
   </div>
 
   <div class="m-ionic-poster--action">

@@ -1,0 +1,18 @@
+
+.m-wire-type-selector {
+  text-align: right;
+  margin: 16px 0;
+  padding: 0 16px;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 12px;
+  letter-spacing: 0.5px;
+
+  > * {
+    vertical-align: middle;
+    margin-right: 0.35em;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

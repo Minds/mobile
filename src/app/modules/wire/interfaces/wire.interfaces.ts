@@ -6,7 +6,8 @@ export type WireRewardsType =
 
 export type WireRewardsTier = {
   amount: number | '',
-  description: string
+  description: string,
+  type?: string
 };
 
 export type WireRewardsTiers = Array<WireRewardsTier>;

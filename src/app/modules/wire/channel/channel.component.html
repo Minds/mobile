@@ -9,11 +9,12 @@
   <m-wire-slider
     *ngIf="rewards && rewards.rewards && rewards.rewards.merged"
     [(rewards)]="rewards.rewards.merged"
+    [channel]="channel"
     [editing]="editing"
   ></m-wire-slider>
 </div>
 
-<div class="m-wire-channel--call-to-action"
+<!--<div class="m-wire-channel--call-to-action"
   *ngIf="!isOwner()"
 >
   <button ion-button
@@ -30,4 +31,4 @@
       </span>
     </span>
   </button>
-</div>
+</div>-->

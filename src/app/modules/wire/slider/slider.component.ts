@@ -1,6 +1,7 @@
 import { Component, Input, EventEmitter, Output, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { Slides } from "ionic-angular";
 
+import { WireFabController } from "../fab";
 import { WireRewardsType, WireRewardsTiers } from "../interfaces/wire.interfaces";
 
 @Component({
@@ -12,6 +13,7 @@ import { WireRewardsType, WireRewardsTiers } from "../interfaces/wire.interfaces
 export class WireSliderComponent {
   @ViewChild(Slides) private slider: Slides;
 
+  @Input() channel;
   @Input() type: WireRewardsType;
 
   @Input() autoplay: boolean = true;
@@ -19,7 +21,11 @@ export class WireSliderComponent {
   rewards: WireRewardsTiers = [];
 
   @Input('rewards') set _rewards(rewards: WireRewardsTiers) {
-    this.rewards = rewards;
+    this.rewards = rewards.map((reward) => {
+      if (!reward.type && this.type)
+        reward.type = this.type;
+      return reward;
+    });
 
     if (!this.rewards) {
       this.rewards = [];
@@ -56,7 +62,7 @@ export class WireSliderComponent {
 
   @Input() sums: any;
 
-  constructor(private cd: ChangeDetectorRef) { }
+  constructor(private cd: ChangeDetectorRef, private fab: WireFabController) { }
 
   ngAfterViewInit() {
     try {
@@ -155,6 +161,17 @@ export class WireSliderComponent {
     }
 
     return this._sliderReadyPromise;
+  }
+
+  sendWire(reward) {
+    const fab = this.fab.create({
+      guid: this.channel.guid,
+      default: {
+        min: reward.amount,
+        type: reward.type
+      }
+    });
+    fab.present();
   }
 
   detectChanges() {

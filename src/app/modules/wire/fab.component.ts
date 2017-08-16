@@ -204,4 +204,14 @@ export class WireFabComponent {
     }
   }
 
+  canWire() {
+    let valid = this.method && (this.amount > 0);
+
+    if (this.method == 'money') {
+      valid = valid && this.payload;
+    }
+
+    return valid;
+  }
+
 }

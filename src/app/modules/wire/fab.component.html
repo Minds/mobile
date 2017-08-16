@@ -78,6 +78,6 @@
     ></m-wire-slider>
   </div>
 
-  <button ion-button clear class="m-ionic-wire--fab-send" (click)="send()" *ngIf="!inProgress">Send</button>
+  <button ion-button clear class="m-ionic-wire--fab-send" (click)="send()" [disabled]="!canWire()" *ngIf="!inProgress">Send</button>
 
 </div>

@@ -1,4 +1,4 @@
-<ion-slides [loop]="!!autoplay" pager [autoplay]="autoplay ? 7500 : null" *ngIf="rewards?.length"
+<ion-slides pager *ngIf="rewards?.length"
   class="m-wire--slider"
   [ngClass]="[ 'm-wire-slider--rewards-' + type ]"
   #slider
@@ -20,7 +20,3 @@
     <ion-icon class="m-wire-channel--cta-icon" name="ios-flash" *ngIf="!type"></ion-icon>
   </ion-slide>
 </ion-slides>
-
-<div *ngIf="!rewards?.length">
-  <p class="m-wire-slider--empty-rewards">There are no rewards set.</p>
-</div>

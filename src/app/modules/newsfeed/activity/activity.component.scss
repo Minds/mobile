@@ -153,24 +153,34 @@ activity {
   }
 }
 
-.m-ionic-activity--impressions {
+.m-ionic-activity--metrics {
   position: absolute;
-  padding: 1px 4px;
-  font-size: 9px;
+  padding: 2px 4px 1px;
+  font-size: 8px;
   right: 4px;
-  bottom: -4px;
+  bottom: -5px;
   background: #EEE;
   border-radius: 3px 0 0 3px;
-  margin: -5px 0;
+  margin: -1px 0;
   letter-spacing: 0.5px;
 
   .m-mdl-icon-bank {
     fill: #000000;
   }
 
-  > span {
+  .m-ionic-activity--metrics-metric {
+    display: inline-block;
     vertical-align: middle;
     margin-right: 1em;
+
+    * > {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    ion-icon{
+      font-size: 8px;
+    }
 
     &:last-child {
       margin-right: 0;

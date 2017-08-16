@@ -15,8 +15,9 @@ export class WireSliderComponent {
 
   @Input() channel;
   @Input() type: WireRewardsType;
+  @Input() isOwner: boolean = false;
 
-  @Input() autoplay: boolean = true;
+  @Input() autoplay: boolean = false;
 
   rewards: WireRewardsTiers = [];
 
@@ -164,6 +165,8 @@ export class WireSliderComponent {
   }
 
   sendWire(reward) {
+    if (this.isOwner)
+      return;
     const fab = this.fab.create({
       guid: this.channel.guid,
       default: {

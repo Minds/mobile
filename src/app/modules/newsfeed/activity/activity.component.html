@@ -168,18 +168,25 @@
 	</button>
 </div>
 
-<div class="m-ionic-activity--impressions" *ngIf="!preview">
-  <span *ngIf="entity?.wire_totals?.points">
+<div class="m-ionic-activity--metrics" *ngIf="!preview">
+	<div class="m-ionic-activity--metrics-metric">
     <m-mdl-icon icon="bank"></m-mdl-icon>
-    {{ entity.wire_totals.points | number }}
-  </span>
+		<span *ngIf="originalEntity?.wire_totals">
+			{{ originalEntity.wire_totals.points | number }}
+		</span>
+	</div>
 
-  <span *ngIf="entity?.wire_totals?.usd">
-    {{ entity.wire_totals.usd | currency:'USD':true }}
-  </span>
+	<div class="m-ionic-activity--metrics-metric">
+		<ion-icon name="logo-usd"></ion-icon>
+  	<span *ngIf="originalEntity?.wire_totals">
+    {{ originalEntity.wire_totals.money | number }}
+  	</span>
+	</div>
 
-  <span>
+  <div class="m-ionic-activity--metrics-metric">
     <ion-icon name="md-eye"></ion-icon>
-    {{ entity.impressions | abbr }}
-  </span>
+    <span>
+			{{ entity.impressions | abbr }}
+		</span>
+  </div>
 </div>

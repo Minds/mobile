@@ -39,7 +39,7 @@
     </div>
   </div>
 
-  <div class="m-ionic-wire--fab-recurring">
+  <div class="m-ionic-wire--fab-recurring" *ngIf="method == 'money'">
     <ion-checkbox [(ngModel)]="recurring"></ion-checkbox>
     <label>Repeat this transaction monthly</label>
   </div>

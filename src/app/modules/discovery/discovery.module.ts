@@ -13,9 +13,10 @@ import { CommonModule } from '../../common/common.module';
 import { HeaderModule } from '../header/header.module';
 import { VideoModule } from "../video/video.module";
 import { NewsfeedModule } from "../newsfeed/newsfeed.module";
+import { WireModule } from "../wire/wire.module";
 
 @NgModule({
-  imports: [ IonicModule, CommonModule, ButtonsModule, HeaderModule, VideoModule, NewsfeedModule ],
+  imports: [ IonicModule, CommonModule, ButtonsModule, HeaderModule, VideoModule, NewsfeedModule, WireModule ],
   providers: [
     {
       provide: DiscoveryService,

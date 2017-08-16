@@ -37,7 +37,7 @@ export class DiscoveryEntity {
   }
 
   constructor(private client : Client, public cache : CacheService, public actionSheetCtrl: ActionSheetController,
-    private cd : ChangeDetectorRef, private storage : Storage, private modalCtrl : ModalController, private platform : Platform,
+    private cd : ChangeDetectorRef, public storage : Storage, private modalCtrl : ModalController, private platform : Platform,
     private photoViewer: PhotoViewer, public currentUser: CurrentUserService){
 
   }
@@ -110,5 +110,17 @@ export class DiscoveryEntity {
 
   openImage(){
     this.photoViewer.show(this.currentUser.asset(`${this.minds.cdn_url}api/v1/archive/thumbnails/${this.entity.guid}/xlarge`, this.entity.access_id != 2));
+  }
+
+  isPaywallUnlocked() {
+    if (this.storage.get('user_guid') == this.entity.owner_guid) {
+      return true;
+    }
+
+    if (this.entity && this.entity.flags && this.entity.flags.paywall) {
+      return !!this.entity.paywall_unlocked;
+    }
+
+    return true;
   }
 }

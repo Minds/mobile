@@ -36,6 +36,8 @@ export class WireLockScreenComponent {
       .then((response: any) => {
         if (response.activity) {
           this.entityChangeEmitter.emit(response.activity);
+        } else if (response.entity) {
+          this.entityChangeEmitter.emit(response.entity);
         } else if (!skipWireModal) {
           this.showWire();
         }

@@ -49,24 +49,31 @@
 	<button class="mdl-button mdl-button--colored mdl-button--raised" (click)="entity.title = titleEdit.value; save();" i18n>Save</button>
 </div>
 
-<div class="item item-image item-image-video"
-  *ngIf="entity.subtype == 'video'">
-    <minds-video
-      [thumbnail]="currentUser.asset(entity.thumbnail_src, entity.access_id != 2)"
-      [src]="minds.cdn_url + 'api/v1/archive/' + entity.guid + '/play'"
-      [autoplay]="true"
-      [analyticsGuid]="entity.guid"
-      #player='video'
-    ></minds-video>
- </div>
+<ng-container *ngIf="isPaywallUnlocked(); else isPaywalled">
+  <div class="item item-image item-image-video"
+    *ngIf="entity.subtype == 'video'">
+      <minds-video
+        [thumbnail]="currentUser.asset(entity.thumbnail_src, entity.access_id != 2)"
+        [src]="minds.cdn_url + 'api/v1/archive/' + entity.guid + '/play'"
+        [autoplay]="true"
+        [analyticsGuid]="entity.guid"
+        #player='video'
+      ></minds-video>
+  </div>
 
-<!-- Images -->
-<div class="m-ionic-image allow-select"
- *ngIf="entity.subtype == 'image'">
-	<a (click)="openImage()">
-		<img [src]="currentUser.asset(entity.thumbnail_src, entity.access_id != 2)" (error)="entity.thumbnail_src = null">
-	</a>
-</div>
+  <!-- Images -->
+  <div class="m-ionic-image allow-select"
+  *ngIf="entity.subtype == 'image'">
+    <a (click)="openImage()">
+      <img [src]="currentUser.asset(entity.thumbnail_src, entity.access_id != 2)" (error)="entity.thumbnail_src = null">
+    </a>
+  </div>
+</ng-container>
+<ng-template #isPaywalled>
+  <m-wire-lock-screen class="m-wire-lock"
+    [(entity)]="entity"
+  ></m-wire-lock-screen>
+</ng-template>
 
 <div class="m-ionic-tabs" *ngIf="!preview">
   <minds-button-thumbs-up [entity]="entity" ></minds-button-thumbs-up>

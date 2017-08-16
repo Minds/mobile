@@ -34,7 +34,7 @@ interface CreditCard {
       <p>One moment please...</p>
     </div>
 
-    <div class="m-payments--saved-cards" *ngIf="cards.length">
+    <div class="m-payments--saved-cards" *ngIf="!loading">
       <div class="m-payments-saved--title">Select a card to use</div>
       <ul>
         <li *ngFor="let card of cards"
@@ -134,8 +134,10 @@ export class CardSelectorComponent {
             label: `${card.brand} ${card.exp_month}/${('' + card.exp_year).substr(2)} **** ${card.last4}`
           }));*/
           this.cards = cards;
-          this.detectChanges();
+        } else {
+          this.card = [];
         }
+        this.detectChanges();
       })
       .catch(e => {
         this.loading = false;

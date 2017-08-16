@@ -1,0 +1,14 @@
+<ion-list>
+  <ion-list-header color="light">
+    Recurring Payments
+  </ion-list-header>
+  <ion-item *ngFor="let subscription of subscriptions; let i = index"
+    class="m-settings--billing-subscriptions--subscription-item">
+
+    <span class="m-settings--billing-subscriptions--subscription-item-type">{{ subscription.plan }}</span>
+    <span *ngIf="subscription.entity && subscription.entity.type == 'user'"><i style="text-style:normal">@</i>{{subscription.entity.username}}</span>
+    <span *ngIf="subscription.entity && subscription.entity.type != 'user'"><i style="text-style:normal">@</i>{{subscription.entity.ownerObj.username}}</span>
+    <span class="m-settings--billing-subscriptions--subscription-item-amount">{{subscription.amount | currency:'USD':true:'1.0-0' }}</span>
+    <span class="m-settings--billing-subscriptions--subscription-item-select" (click)="cancel(i)">Cancel</span>
+  </ion-item>
+</ion-list>

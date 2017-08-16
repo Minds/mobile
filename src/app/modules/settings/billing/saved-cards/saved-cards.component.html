@@ -1,0 +1,17 @@
+<ion-list>
+  <ion-list-header color="light">
+    Payment Methods
+  </ion-list-header>
+  <ion-item *ngFor="let card of cards; let i = index"
+    class="m-settings--billing-saved-cards--cards-item">
+
+    <span class="m-settings--billing-saved-cards--cards-item-type">{{card.brand}}</span>
+    <span class="m-settings--billing-saved-cards--cards-item-number">**** {{card.last4}}</span>
+    <span class="m-settings--billing-saved-cards--cards-item-expiry">{{card.exp_month}} / {{card.exp_year}}</span>
+    <span class="m-settings--billing-saved-cards--cards-item-select" (click)="removeCard(i)">Remove</span>
+  </ion-item>
+  <ion-item class="m-settings--billing-saved-cards--cards-item m-settings--billing-saved-cards--cards-item-new">
+    <span class="m-settings--billing-saved-cards--cards-item-type">Add a new card</span>
+    <span class="m-settings--billing-saved-cards--cards-item-select" (click)="addCard()">ADD</span>
+  </ion-item>
+</ion-list>

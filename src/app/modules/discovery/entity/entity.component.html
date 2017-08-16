@@ -52,7 +52,7 @@
 <div class="item item-image item-image-video"
   *ngIf="entity.subtype == 'video'">
     <minds-video
-      [thumbnail]="entity.thumbnail_src"
+      [thumbnail]="currentUser.asset(entity.thumbnail_src, entity.access_id != 2)"
       [src]="minds.cdn_url + 'api/v1/archive/' + entity.guid + '/play'"
       [autoplay]="true"
       [analyticsGuid]="entity.guid"
@@ -64,7 +64,7 @@
 <div class="m-ionic-image allow-select"
  *ngIf="entity.subtype == 'image'">
 	<a (click)="openImage()">
-		<img [src]="entity.thumbnail_src" (error)="entity.thumbnail_src = null">
+		<img [src]="currentUser.asset(entity.thumbnail_src, entity.access_id != 2)" (error)="entity.thumbnail_src = null">
 	</a>
 </div>
 

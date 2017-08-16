@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Client } from "./api/client";
 import { Storage } from "./storage";
+import { CONFIG } from "../../config";
 
 @Injectable()
 export class CurrentUserService {
@@ -43,5 +44,20 @@ export class CurrentUserService {
     this.storage.destroy('user');
 
     return this;
+  }
+
+  asset(src, apply: boolean = false, unsafeUrls: boolean = false) {
+    if (!src || !apply) {
+      return src;
+    }
+
+    if (!unsafeUrls && src.indexOf(CONFIG.baseUrl) !== 0 && src.indexOf(CONFIG.cdnUrl) !== 0) {
+      return;
+    }
+
+    src += src.indexOf('?') > -1 ? '&' : '?';
+    src += 'access_token=' + this.storage.get('access_token');
+
+    return src;
   }
 }

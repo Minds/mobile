@@ -17,6 +17,7 @@ import { VisibilityServiceInterface } from "../../../common/services/visibility/
 
 import { CONFIG } from '../../../config';
 import { BoostCreatorFabController } from '../../boost/creator/fab';
+import { CurrentUserService } from "../../../common/services/current-user.service";
 
 @Component({
   moduleId: 'module.id',
@@ -57,7 +58,7 @@ export class Activity implements AfterViewInit, OnDestroy {
   constructor(private client : Client, public cache : CacheService, public actionSheetCtrl: ActionSheetController,
     private cd : ChangeDetectorRef, private storage : Storage, private modalCtrl : ModalController, private platform : Platform,
     private navCtrl : NavController, private popoverCtrl : PopoverController, private report : ReportService, private share : ShareService, private elementRef: ElementRef,
-    private photoViewer: PhotoViewer,  private boostFab : BoostCreatorFabController){
+    private photoViewer: PhotoViewer,  private boostFab : BoostCreatorFabController, public currentUser: CurrentUserService){
 
   }
 
@@ -247,7 +248,7 @@ export class Activity implements AfterViewInit, OnDestroy {
   }
 
   openImage(){
-    this.photoViewer.show(`${this.minds.cdn_url}api/v1/archive/thumbnails/${this.entity.entity_guid}/xlarge`);
+    this.photoViewer.show(this.currentUser.asset(`${this.minds.cdn_url}api/v1/archive/thumbnails/${this.entity.entity_guid}/xlarge`, this.entity.paywall_unlocked));
   }
 
   onShow() {

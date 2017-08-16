@@ -5,6 +5,7 @@ import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { CacheService } from '../../../common/services/cache/cache.service';
 import { Storage } from '../../../common/services/storage';
 import { Client } from '../../../common/services/api/client';
+import { CurrentUserService } from "../../../common/services/current-user.service";
 import { ChannelComponent } from '../../channel/channel.component';
 import { BoostComponent } from '../boost/boost.component';
 
@@ -37,7 +38,7 @@ export class DiscoveryEntity {
 
   constructor(private client : Client, public cache : CacheService, public actionSheetCtrl: ActionSheetController,
     private cd : ChangeDetectorRef, private storage : Storage, private modalCtrl : ModalController, private platform : Platform,
-    private photoViewer: PhotoViewer){
+    private photoViewer: PhotoViewer, public currentUser: CurrentUserService){
 
   }
 
@@ -108,6 +109,6 @@ export class DiscoveryEntity {
   }
 
   openImage(){
-    this.photoViewer.show(`${this.minds.cdn_url}api/v1/archive/thumbnails/${this.entity.guid}/xlarge`);
+    this.photoViewer.show(this.currentUser.asset(`${this.minds.cdn_url}api/v1/archive/thumbnails/${this.entity.guid}/xlarge`, this.entity.access_id != 2));
   }
 }

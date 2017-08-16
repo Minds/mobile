@@ -139,7 +139,7 @@
  (showExplicit)="entity.mature = !$event; cd.markForCheck(); cd.detectChanges()"
  >
 	<a (click)="openImage()">
-		<img [src]="entity.thumbnail_src" (error)="entity.thumbnail_src = null">
+		<img [src]="currentUser.asset(entity.thumbnail_src, entity.paywall_unlocked)" (error)="entity.thumbnail_src = null">
 	</a>
 </div>
 
@@ -148,7 +148,7 @@
  *ngIf="entity.custom_type == 'batch'">
 
 	<a (click)="openImage()">
-		<img [src]="entity.custom_data[0].src" style="width:100%"
+		<img [src]="currentUser.asset(entity.custom_data[0].src, entity.paywall_unlocked)" style="width:100%"
       (error)="entity.custom_data[0].src = minds.cdn_url + 'assets/logos/medium.png'"
       imgFade
       *ngIf="entity.custom_data"

@@ -39,7 +39,9 @@
 
 
       <img [src]="minds.cdn_url + 'icon/' + message.owner.guid + '/small'"
-        *ngIf="message.owner.guid != storage.get('user_guid')">
+        *ngIf="message.owner.guid != storage.get('user_guid')"
+        [navPush]="components.channel"
+        [navParams]="{ guid: message.owner.guid }">
 
       <div class="m-ionic-messenger--message-ts">
         {{ message.time_created * 1000 | date: 'medium' }}

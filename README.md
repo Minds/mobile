@@ -82,3 +82,25 @@ Run `ionic build`
 Minds supports multiple environments. See `config/config-example.js` for an example. 
 
 To run a production build run `export config_target=prod; cordova build`
+
+### Local Setup, Compiling, Building instructions for iOS app
+1- Download mobile-master under /minds, open a fresh terminal and enter the following commands:
+2- sudo npm install -g cordova
+3- sudo npm install -g cordova ionic
+4- sudo npm -g install grunt-cli
+5- cd [PathToYourApp]/mobile-master
+6- npm install
+7- npm install ios-sim
+8- cordova platform add ios
+9- cordova build ios //build should succeed at this point
+10- sudo npm install -g gulp
+11- sudo chown -v -R -L [yourUserName] [PathToYourApp]/mobile-master
+12- touch gulpfile.js
+13- On Finder, open [PathToYourApp]/mobile-master/gulpfile.js on a text editor and paste this block of code: 
+  	var gulp = require('gulp');
+	  gulp.task('default', function () { console.log('Hello 		Gulp!') });
+14- ionic cordova run ios --target="[your phone choice]"
+
+psd: Once it starts running, you should also enable "toggle software keyboard" with command+K to enable the iphone keyboard.
+
+

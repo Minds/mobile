@@ -62,6 +62,7 @@ export class PosterComponent {
   }
 
   ngOnInit(){
+    this.attachment.reset();
     this.attachment.emitter.subscribe((response : any) => {
       if(response.progress <= 99)
         this.progress = response.progress;

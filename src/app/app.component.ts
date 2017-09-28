@@ -19,6 +19,7 @@ import { PushService } from './modules/push/push.service';
 import { ShareService } from './modules/share/share.service';
 import { SocketsService } from './common/services/api/sockets.service'
 import { SettingsComponent } from './modules/settings/settings.component';
+import { AttachmentService } from "./modules/attachments/attachment.service";
 
 //for testing onboarding
 import { OnboardingComponent } from './modules/onboarding/onboarding.component';
@@ -47,7 +48,7 @@ export class MindsApp {
     private storage : Storage, private push : PushService, private share : ShareService, private sockets: SocketsService,
     private client : Client, private appStatus: AppStatusService,
     private statusBar: StatusBar, private splashScreen: SplashScreen, private keyboard: Keyboard, private appVersion: AppVersion,
-    private currentUser: CurrentUserService) {
+    private attachment: AttachmentService, private currentUser: CurrentUserService) {
 
     if(this.oauth2.hasAccessToken()){
       this.rootPage = TabsComponent;
@@ -101,6 +102,7 @@ export class MindsApp {
   }
 
   logout() {
+    this.attachment.reset();
     this.sockets.deregister();
     this.client.post('api/v1/logout');
     this.currentUser.destroy();

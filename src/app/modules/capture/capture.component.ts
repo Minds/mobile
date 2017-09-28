@@ -8,6 +8,7 @@ import { WalletService } from '../wallet/wallet.service';
 import { BoostComponent } from '../newsfeed/boost/boost.component';
 
 import { CONFIG } from '../../config';
+import { BoostCreatorFabController } from '../boost/creator/fab';
 
 @Component({
   moduleId: 'module.id',
@@ -33,7 +34,7 @@ export class CaptureComponent {
 
   constructor(private client : Client, private viewCtrl : ViewController, public attachment : AttachmentService, private loadingCtrl : LoadingController,
     private toastCtrl: ToastController, private modalCtrl : ModalController, private storage : Storage, private cd : ChangeDetectorRef,
-    private wallet : WalletService, private params : NavParams){
+    private wallet : WalletService, private params : NavParams, private boostFab : BoostCreatorFabController){
 
   }
 
@@ -90,8 +91,10 @@ export class CaptureComponent {
         };
         this.progress = 0;
 
-        this.modalCtrl.create(BoostComponent, { entity: response.activity })
-          .present();
+        //this.modalCtrl.create(BoostComponent, { entity: response.activity })
+         // .present();
+         let fab = this.boostFab.create({ entity: response.activity });
+         fab.present();
 
         this.toastCtrl.create({
             message: 'Posted!',

@@ -20,6 +20,10 @@ export class CurrentUserService {
       return this._currentUser;
     }
 
+    if (!this.storage.get('access_token')) {
+      throw new Error('Not logged in');
+    }
+
     this._currentUser = this.client.get(`api/v1/channel/me`)
       .then((response: any) => {
         if (!response || !response.channel) {

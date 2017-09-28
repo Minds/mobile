@@ -54,7 +54,8 @@ export class Client {
 				  },
           err => {
             if(err.status == 401 && err.json().loggedin === false){
-              //window.location.href="/login";
+							this.storage.clear();
+							(<any>window).location.reload();
               return reject(err);
             }
             return reject(err);
@@ -85,7 +86,8 @@ export class Client {
 				  },
           err => {
             if(err.status == 401 && err.json().loggedin === false){
-							window.location.href="/login";
+							this.storage.clear();
+							(<any>window).location.reload();
 							return reject(err);
 						}
 						if(err.status != 200){
@@ -117,7 +119,8 @@ export class Client {
   				},
           err => {
             if(err.status == 401 && err.json().loggedin === false){
-              window.location.href="/login";
+              this.storage.clear();
+							(<any>window).location.reload();
               return reject(err);
             }
             if(err.status != 200){
@@ -148,7 +151,8 @@ export class Client {
 				  },
           err => {
             if(err.status == 401 && err.json().loggedin === false){
-              window.location.href="/login";
+              this.storage.clear();
+							(<any>window).location.reload();
               return reject(err);
             }
             if(err.status != 200){

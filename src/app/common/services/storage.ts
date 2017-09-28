@@ -22,4 +22,8 @@ export class Storage {
 		return window.localStorage.removeItem(key);
 	}
 
+	clear() {
+		return window.localStorage.clear();
+	}
+
 }

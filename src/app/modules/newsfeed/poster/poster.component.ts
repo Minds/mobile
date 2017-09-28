@@ -8,6 +8,7 @@ import { WalletService } from '../../wallet/wallet.service';
 import { CurrentUserService } from "../../../common/services/current-user.service";
 
 import { CONFIG } from '../../../config';
+import { BoostCreatorComponent } from "../../boost/creator/creator.component";
 import { WireThresholdInputComponent } from "../../wire/threshold-input/threshold-input.component";
 
 @Component({
@@ -133,6 +134,12 @@ export class PosterComponent {
         this.attachment.reset();
         this.progress = 0;
         this.prepend.next(response.activity);
+
+        setTimeout(()=>{
+          this.modalCtrl.create(BoostCreatorComponent, { entity: response.activity }).present();
+
+        }, 250);
+
         this.detectChanges();
         loader.dismiss();
       })

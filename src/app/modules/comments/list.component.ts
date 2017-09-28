@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 import { NavParams, Content, ActionSheetController } from 'ionic-angular';
 
 import { ChannelComponent } from '../channel/channel.component';
@@ -30,6 +30,7 @@ export class CommentsList implements OnInit, OnDestroy {
   inProgress : boolean = true;
 
   @ViewChild('scrollArea') scrollArea : Content;
+  @ViewChild('commentsList') commentsList: ElementRef;
   @ViewChild('suggestionsList') suggestionsList : SuggestionsList;
 
   autofocus : boolean = false;
@@ -82,11 +83,12 @@ export class CommentsList implements OnInit, OnDestroy {
     this.unListen();
   }
 
-  loadList(){
-    let scrollPosition = 0; //bottom
+  loadList() {
+    let scrollPosition: null | number = null;
 
-    if(this.offset)
-      scrollPosition = this.scrollArea.scrollHeight;
+    if (this.offset && this.commentsList && this.commentsList.nativeElement) {
+      scrollPosition = this.commentsList.nativeElement.clientHeight;
+    }
 
     return new Promise((res, err) => {
       this.inProgress = true;
@@ -94,7 +96,7 @@ export class CommentsList implements OnInit, OnDestroy {
         .then((response : any) => {
 
           if (response.comments && response.comments.length >= 1) {
-  					this.comments = response.comments.concat(this.comments);
+            this.comments = response.comments.concat(this.comments);
             this.offset = response['load-previous'];
           }
 
@@ -109,15 +111,11 @@ export class CommentsList implements OnInit, OnDestroy {
           this.cd.markForCheck();
           this.cd.detectChanges();
 
-          //console.log('old height: ' + scrollPosition);
-          //console.log('new height: ' + this.scrollArea.scrollHeight);
-          //console.log('scroll to: ' + (this.scrollArea.scrollHeight - scrollPosition));
-          //console.log(this.scrollArea);
-
-          if(scrollPosition){
-          //  this.scrollArea.scrollTo(this.scrollArea.scrollHeight - scrollPosition, 0, 100);
-          } else {
-            this.scrollArea.scrollToBottom(300);
+          if (!scrollPosition) {
+            this.scrollArea.scrollToBottom(150);
+          } else if (this.commentsList && this.commentsList.nativeElement) {
+            scrollPosition = this.commentsList.nativeElement.clientHeight - scrollPosition;
+            this.scrollArea.scrollTo(0, scrollPosition, 0);
           }
         });
     });

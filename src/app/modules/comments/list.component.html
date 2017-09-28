@@ -16,7 +16,7 @@
     <ion-refresher-content *ngIf="inProgress"></ion-refresher-content>
   </ion-refresher>
 
-  <ion-list class="m-ionic-comments--list">
+  <ion-list class="m-ionic-comments--list" #commentsList>
 
     <div *ngFor="let comment of comments; let i = index">
       <comment

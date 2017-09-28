@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild, AfterViewInit } from "@angular/core";
-import { Slides } from "ionic-angular";
+import { Platform, Slides } from "ionic-angular";
 
 import { Client } from "../../../common/services/api/client";
 import { OnSlideService } from "../../../common/services/visibility/on-slide.service";
@@ -28,7 +28,7 @@ export class BoostSliderComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private onSlide = new OnSlideService();
 
-  constructor(private client: Client, private changeDetectorRef: ChangeDetectorRef) { }
+  constructor(private client: Client, private platform: Platform, private changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.load(true);
@@ -64,7 +64,10 @@ export class BoostSliderComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.detectChanges();
 
-    return this.client.get('api/v1/boost/fetch/newsfeed', { limit })
+    return this.client.get('api/v1/boost/fetch/newsfeed', {
+      limit: limit,
+      platform: this.platform.is('ios') ? 'ios' : 'other'
+    })
       .then(({ boosts = [] }) => {
         this.inProgress = false;
         this.boosts.push(...boosts);

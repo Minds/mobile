@@ -268,7 +268,7 @@
         <span class="pseudo-link mdl-color-text--blue-grey-400" *ngIf="entity.entityObj && !entity.entityObj.title && entity.entityObj.name">{{entity.entityObj.name}}</span>
         <span class="pseudo-link mdl-color-text--blue-grey-400" *ngIf="entity.entityObj && !entity.entityObj.title && !entity.entityObj.name && entity.entityObj.type !== 'user'" i18n>your post</span>
         <span class="pseudo-link mdl-color-text--blue-grey-400" *ngIf="entity.entityObj && !entity.entityObj.title && !entity.entityObj.name && entity.entityObj.type === 'user'" i18n>your channel</span>
-        <!-- i18n: boost -->was rejected. Your points have been credited back to your wallet.<!-- /i18n -->
+        <!-- i18n: boost -->was rejected: <ng-container *ngIf="entity.params.reason && entity.params.reason !== -1"><i>{{ findReason(entity.params.reason).label}}</i>.</ng-container> Your points have been credited back to your wallet.<!-- /i18n -->
       </p>
     </a>
   </ng-template>

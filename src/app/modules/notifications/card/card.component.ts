@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CacheService } from '../../../common/services/cache/cache.service';
 import { Client } from '../../../common/services/api/client';
 import { Storage } from '../../../common/services/storage';
@@ -10,6 +10,7 @@ import { DiscoveryView } from "../../discovery/view.component";
 import { BlogView } from "../../blog/view.component";
 
 import { CONFIG } from '../../../config';
+import { Reason, rejectionReasons } from '../../boost/rejection-reasons';
 
 @Component({
   moduleId: 'module.id',
@@ -26,7 +27,7 @@ export class NotificationCard {
 
   minds = {
     cdn_url: CONFIG.cdnUrl
-  }
+  };
 
   components = {
     activity: NewsfeedSingleComponent,
@@ -34,7 +35,8 @@ export class NotificationCard {
     group: GroupProfile,
     entityView: DiscoveryView,
     blogView: BlogView,
-  }
+  };
+
 
   constructor(public cache : CacheService, private client : Client, public storage : Storage){
 
@@ -58,6 +60,12 @@ export class NotificationCard {
       .catch((e) => {
         this.entity.fromObj.subscribed = false;
       });
+  }
+
+  findReason(code: number) {
+    return rejectionReasons.find((item: Reason) => {
+      return item.code == code;
+    });
   }
 
 }

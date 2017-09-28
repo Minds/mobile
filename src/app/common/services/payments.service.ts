@@ -34,6 +34,7 @@ export class PaymentsService {
   }
 
   checkout(amount: number, currency: AllowedCurrencies, description: string = 'Minds'): Promise<any> {
+    this.setUp();
     if (this._hasApplePay) {
       return this._checkoutApplePay(amount, description, currency);
     } else {

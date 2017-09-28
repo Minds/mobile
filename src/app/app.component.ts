@@ -25,6 +25,7 @@ import { AttachmentService } from "./modules/attachments/attachment.service";
 import { OnboardingComponent } from './modules/onboarding/onboarding.component';
 import { AppStatusService } from "./common/services/app-status.service";
 import { CurrentUserService } from "./common/services/current-user.service";
+import { PaymentsService } from "./common/services/payments.service";
 
 @Component({
   selector: "ion-app",
@@ -48,7 +49,7 @@ export class MindsApp {
     private storage : Storage, private push : PushService, private share : ShareService, private sockets: SocketsService,
     private client : Client, private appStatus: AppStatusService,
     private statusBar: StatusBar, private splashScreen: SplashScreen, private keyboard: Keyboard, private appVersion: AppVersion,
-    private attachment: AttachmentService, private currentUser: CurrentUserService) {
+    private attachment: AttachmentService, private currentUser: CurrentUserService, private payments: PaymentsService) {
 
     if(this.oauth2.hasAccessToken()){
       this.rootPage = TabsComponent;
@@ -74,6 +75,8 @@ export class MindsApp {
 
       this.appStatus.setUp();
       this.currentUser.fetch();
+
+      this.payments.setUp();
     });
   }
 

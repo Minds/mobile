@@ -2,17 +2,17 @@ import { Injectable } from '@angular/core';
 import { ModalController } from 'ionic-angular';
 
 import { Client } from '../../../common/services/api/client';
+import { PaymentsService } from "../../../common/services/payments.service";
 import { BoostStruc, VisibleBoostError } from './types';
-import { StripeCheckout } from '../../payments/stripe/checkout.component';
 
 @Injectable()
 export class BoostCreatorService {
 
-  constructor(private client: Client, private modalCtrl: ModalController) {
+  constructor(private client: Client, private modalCtrl: ModalController, private payments: PaymentsService) {
   }
 
-  send(boost: BoostStruc, entity: any) {
-    return this.getTransactionPayloads(boost)
+  send(boost: BoostStruc, entity: any, amountPreview: number) {
+    return this.getTransactionPayloads(boost, amountPreview)
       .then((payload: any) => {
         boost.nonce = payload.nonce;
 
@@ -54,26 +54,21 @@ export class BoostCreatorService {
 
   }
 
-  getTransactionPayloads(boost: BoostStruc): Promise<string> {
-    return new Promise((resolve, reject) => {
-      switch (boost.currency) {
-        case 'usd':
-          const checkout = this.modalCtrl.create(StripeCheckout, {
-            success: (nonce: string) => {
-              resolve({ nonce: nonce });
-            },
-            error: (msg) => {
-              reject(msg);
-            }
+  getTransactionPayloads(boost: BoostStruc, amountPreview: number): Promise<any> {
+    switch (boost.currency) {
+      case 'usd':
+        return this.payments.checkout(amountPreview, 'USD', 'Boost')
+          .then(nonce => {
+            return { nonce };
           });
-          checkout.present();
-          break;
-        case 'btc':
-          break;
-        case 'points':
-          resolve({});
-          break;
-      }
-    });
+
+      case 'btc':
+        return Promise.reject({ message: 'Not implemented' });
+
+      case 'points':
+        return Promise.resolve({});
+    }
+
+    return Promise.reject({ message: 'Unknown method' });
   }
 }

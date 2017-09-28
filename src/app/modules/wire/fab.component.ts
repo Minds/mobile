@@ -33,7 +33,7 @@ export class WireFabComponent {
     gestureCtrl: GestureController,
     params: NavParams,
     renderer: Renderer,
-    private service : WireService,
+    public service : WireService,
     private cd : ChangeDetectorRef,
     private alertCtrl : AlertController,
     private client: Client
@@ -149,12 +149,14 @@ export class WireFabComponent {
                 this.cd.markForCheck();
                 this.cd.detectChanges();
 
-                let alert = this.alertCtrl.create({
-                  title: 'There was a problem processing payment',
-                  subTitle: e.message || 'Unknown internal error',
-                  buttons: ['Ok']
-                });
-                alert.present();
+                if (!e || e.message != 'user cancelled apple pay') {
+                  let alert = this.alertCtrl.create({
+                    title: 'There was a problem processing payment',
+                    subTitle: (e && e.message) || 'Unknown internal error',
+                    buttons: ['Ok']
+                  });
+                  alert.present();
+                }
 
               });
           }
@@ -208,7 +210,7 @@ export class WireFabComponent {
     let valid = this.method && (this.amount > 0);
 
     if (this.method == 'money') {
-      valid = valid && this.payload;
+      valid = valid && (this.payload || !this.service.showCardUI());
     }
 
     return valid;

@@ -35,7 +35,7 @@
     </div>
   </div>
 
-  <div class="m-ionic-wire--fab-payment" *ngIf="method == 'money'">
+  <div class="m-ionic-wire--fab-payment" *ngIf="method == 'money' && service.showCardUI()">
     <minds-card-selector *ngIf="!payload?.nonce" (inputed)="setPayload({ nonce: $event})"></minds-card-selector>
     <div class="m-ionic-wire--fab-payment-attached" *ngIf="payload?.nonce">
       <ion-icon name="checkmark-circle"></ion-icon>
@@ -43,7 +43,7 @@
     </div>
   </div>
 
-  <div class="m-ionic-wire--fab-recurring" *ngIf="method == 'money'">
+  <div class="m-ionic-wire--fab-recurring" *ngIf="method == 'money' && service.areSubscriptionsAllowed()">
     <ion-checkbox [(ngModel)]="recurring"></ion-checkbox>
     <label>Repeat this transaction monthly</label>
   </div>

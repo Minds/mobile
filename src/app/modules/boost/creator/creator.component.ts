@@ -521,7 +521,7 @@ export class BoostCreatorComponent implements AfterViewInit {
 
     this.inProgress = true;
 
-    this.boostService.send(this.boost, this.entity)
+    this.boostService.send(this.boost, this.entity, this.calcCharges(this.boost.currency))
       .then(({ done }) => {
         this.inProgress = false;
 
@@ -535,7 +535,9 @@ export class BoostCreatorComponent implements AfterViewInit {
       })
       .catch(e => {
         this.inProgress = false;
-        this.error = (e && e.message) || 'Sorry, something went wrong';
+        if (!e || e.message != 'user cancelled apple pay') {
+          this.error = (e && e.message) || 'Sorry, something went wrong';
+        }
       });
   }
 }

@@ -10,3 +10,7 @@ export const CONFIG = {
 // };
 
 export const ANDROID_SENDER_ID = '81109256529';
+
+export const APPLE_MERCHANT_ID = '';
+export const STRIPE_PUBLISHABLE_KEY = '';
+export const STRIPE_COUNTRY = 'US';

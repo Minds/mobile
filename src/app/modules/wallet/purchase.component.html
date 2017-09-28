@@ -41,7 +41,7 @@
         </div>
       </div>
 
-      <div class="m-ionic-wallet--purchase-recur">
+      <div class="m-ionic-wallet--purchase-recur" *ngIf="areSubscriptionsAllowed()">
         <ion-toggle [(ngModel)]="recurring"></ion-toggle>
         <span>Repeat this transaction every month and get 10% more points</span>
       </div>

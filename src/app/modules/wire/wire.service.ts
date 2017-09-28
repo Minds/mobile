@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ModalController } from 'ionic-angular';
 
-import { StripeCheckout } from '../payments/stripe/checkout.component';
 import { Client } from '../../common/services/api/client';
+import { PaymentsService } from "../../common/services/payments.service";
 
 @Injectable()
 export class WireService {
@@ -13,7 +12,7 @@ export class WireService {
   recurring : boolean;
   payload: any;
 
-  constructor(private client : Client, private modalCtrl : ModalController){
+  constructor(private client : Client, private payments: PaymentsService){
 
   }
 
@@ -44,26 +43,19 @@ export class WireService {
   }
 
   getTransactionPayloads(): Promise<any> {
-    switch(this.method){
+    switch (this.method) {
       case "money":
-        return new Promise((resolve, reject) => {
-          let checkout = this.modalCtrl.create(StripeCheckout, {
-            success: (nonce : string) => {
-              resolve({nonce: nonce});
-            },
-            error: (msg) => {
-              reject({ message: msg });
-            }
-          });
 
-          checkout.present();
-        });
+        return this.payments.checkout(this.amount, 'USD', 'Wire')
+          .then(nonce => {
+            return { nonce };
+          });
 
       case "bitcoin":
         return Promise.reject({ message: 'Not implemented' });
 
       case "points":
-        return Promise.resolve({})
+        return Promise.resolve({});
     }
 
     return Promise.reject({ message: 'Unknown method' });
@@ -89,6 +81,14 @@ export class WireService {
 
   setPayload(payload: any) {
     this.payload = payload;
+  }
+
+  areSubscriptionsAllowed() {
+    return this.payments.areSubscriptionsAllowed();
+  }
+
+  showCardUI() {
+    return this.payments.showCardUI();
   }
 
 }

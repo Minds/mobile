@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef, HostListener } from '@angular/core';
-import { ModalController, AlertController, NavController, LoadingController } from 'ionic-angular'
+import { AlertController, NavController, LoadingController } from 'ionic-angular'
 import { Client } from '../../common/services/api/client';
 import { CacheService } from '../../common/services/cache/cache.service';
 import { Storage } from '../../common/services/storage';
 
 import { WalletService } from './wallet.service';
-import { StripeCheckout } from '../payments/stripe/checkout.component';
+import { PaymentsService } from "../../common/services/payments.service";
 
 import { CONFIG } from '../../config';
 
@@ -31,8 +31,7 @@ export class PurchaseComponent {
   nonce : string | number = "";
   recurring : boolean = true;
 
-  constructor(public client : Client, public service : WalletService,  public modalCtrl: ModalController,
-    private navCtrl : NavController, private loadingCtrl : LoadingController, private alertCtrl : AlertController){
+  constructor(public client : Client, public service : WalletService, private navCtrl : NavController, private loadingCtrl : LoadingController, private alertCtrl : AlertController, private payments: PaymentsService){
     this.getRate();
     this.calculateUSD();
     this.getSubscription();
@@ -64,22 +63,23 @@ export class PurchaseComponent {
       });
   }
 
-  buy(){
-    let checkout = this.modalCtrl.create(StripeCheckout, {
-        success: (nonce : string) => {
-          this.nonce = nonce;
-          this.purchase();
-        },
-        error: (msg) => {
-          let alert = this.alertCtrl.create({
-            title: 'Ooooopppsss...',
-            subTitle: "We couldn't process your card details",
-            buttons: ['Try again']
-          });
-          alert.present();
-        }
-      });
-    checkout.present();
+  async buy() {
+    try {
+      const nonce = await this.payments.checkout(this.usd, 'USD', `${this.points} Points`)
+
+      this.nonce = nonce;
+      this.purchase();
+    } catch (e) {
+      if (!e || e.message != 'user cancelled apple pay') {
+        const alert = this.alertCtrl.create({
+          title: 'Oops!',
+          subTitle: (e && e.message) || `We couldn't process your card details`,
+          buttons: [ 'Try again' ]
+        });
+
+        alert.present();
+      }
+    }
   }
 
   getSubscription(){
@@ -182,4 +182,7 @@ export class PurchaseComponent {
     this.purchase();
   }
 
+  areSubscriptionsAllowed() {
+    return this.payments.areSubscriptionsAllowed();
+  }
 }

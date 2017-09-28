@@ -213,7 +213,7 @@ export class ChannelComponent implements OnInit, OnDestroy, AfterContentInit {
       buttons.push({
         text: 'Send message',
         handler: () => {
-          this.nav.push(MessengerView, { guid : this.getMessengerGuid() });
+          this.nav.push(MessengerView, { conversation : this.buildConversation() });
         }
       });
     }
@@ -325,6 +325,15 @@ export class ChannelComponent implements OnInit, OnDestroy, AfterContentInit {
 
   isOwner() {
     return this.channel && this.channel.guid == this.storage.get('user_guid');
+  }
+
+  private buildConversation(){
+    return {
+      guid: this.getMessengerGuid(),
+      participants: [ this.storage.get('user'), this.getMessengerGuid() ],
+      open: true
+    };
+
   }
 
   private getMessengerGuid(){

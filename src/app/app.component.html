@@ -7,7 +7,7 @@
   <ion-content>
     <ion-list #dropdowns>
 
-      <button ion-item (click)="dropdowns.blog = true">
+      <button ion-item (click)="dropdowns.blog = !dropdowns.blog">
         Blogs
       </button>
       <button ion-item class="m-ionic-nav--subitem" (click)="openBlogs('featured'); dropdowns.blog = false;" *ngIf="dropdowns.blog">
@@ -20,7 +20,7 @@
         Mine
       </button>
 
-      <button ion-item (click)="dropdowns.group = true">
+      <button ion-item (click)="dropdowns.group = !dropdowns.group">
         Groups
       </button>
       <button ion-item class="m-ionic-nav--subitem" (click)="openGroups('featured'); dropdowns.group = false;" *ngIf="dropdowns.group">

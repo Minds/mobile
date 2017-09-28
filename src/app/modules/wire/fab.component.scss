@@ -19,6 +19,18 @@ wire-fab{
   }
 }
 
+.m-ionic-wire--fab-subtext {
+  font-size: 12px;
+  text-align: center;
+  color: #666666;
+  margin-top: 12px;
+  font-weight: 200;
+
+  b {
+    font-weight: 400;
+  }
+}
+
 .m-ionic-wire--fab-bolt-animate{
   animation-name: throbAnimation;
   animation-duration: 1s;

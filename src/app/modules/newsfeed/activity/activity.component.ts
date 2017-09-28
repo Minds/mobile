@@ -171,16 +171,16 @@ export class Activity implements AfterViewInit, OnDestroy {
       }
     });
 
-    if (this.entity.comments_enabled) {
+    if (!this.entity.comments_disabled) {
       buttons.push({
         text: 'Disable Comments',
         handler: () => {
-          this.client.delete(`api/v1/comments/disable/${this.entity.guid}`).then((response: any) => {
-            this.entity.comments_enabled = false;
+          this.client.put(`api/v1/comments/disable/${this.entity.guid}`).then((response: any) => {
+            this.entity.comments_disabled = true;
             this.cd.markForCheck();
             this.cd.detectChanges();
           }).catch(e => {
-            this.entity.comments_enabled = true;
+            this.entity.comments_disabled = false;
           });
         }
       });
@@ -188,12 +188,12 @@ export class Activity implements AfterViewInit, OnDestroy {
       buttons.push({
         text: 'Enable Comments',
         handler: () => {
-          this.client.put(`api/v1/comments/disable/${this.entity.guid}`).then((response: any) => {
-            this.entity.comments_enabled = true;
+          this.client.delete(`api/v1/comments/disable/${this.entity.guid}`).then((response: any) => {
+            this.entity.comments_disabled = false;
             this.cd.markForCheck();
             this.cd.detectChanges();
           }).catch(e => {
-            this.entity.comments_enabled = false;
+            this.entity.comments_disabled = true;
           });
         }
       });

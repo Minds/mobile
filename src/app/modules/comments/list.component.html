@@ -31,7 +31,11 @@
 </ion-content>
 
 <div class="m-ionic-comments--composer-wrapper">
-  <div class="m-ionic-comments--composer">
+  <div class="m-ionic-comments--composer" *ngIf="params.get('comments_disabled')">
+    <span class="m-comments-disabled">Comments are disabled for this post</span>
+  </div>
+
+  <div class="m-ionic-comments--composer" *ngIf="!params.get('comments_disabled')">
     <div class="m-ionic-avatar">
       <img [src]="minds.cdn_url + 'icon/' +  storage.get('user_guid') + '/medium'" class="mdl-shadow--2dp"/>
     </div>

@@ -7,10 +7,10 @@ import { CommentsList } from '../comments/list.component';
 @Component({
   moduleId: 'module.id',
   selector: 'minds-button-comment',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 
   template: `
-    <div [navPush]="components.comments" [navParams]="{ guid: entity.entity_guid ? entity.entity_guid : entity.guid }">
+    <div [navPush]="components.comments" [navParams]="{ guid: entity.entity_guid ? entity.entity_guid : entity.guid, comments_disabled: entity.comments_disabled }">
       <ion-icon name="md-chatbubbles" class="m-ionic-icon" [class.selected]="entity['comments:count'] > 0" ></ion-icon>
       <span class="m-ionic-icon--counter" [class.m-ionic-icon--counter-hide]="entity['comments:count'] == 0">({{entity['comments:count']}})</span>
     </div>

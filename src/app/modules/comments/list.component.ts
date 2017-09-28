@@ -60,7 +60,7 @@ export class CommentsList implements OnInit, OnDestroy {
 
   progress: number = 0;
 
-  constructor(private client : Client, private cd : ChangeDetectorRef,  private params: NavParams, private sockets: SocketsService, public actionSheetCtrl: ActionSheetController, public attachment : AttachmentService){}
+  constructor(private client : Client, private cd : ChangeDetectorRef,  public params: NavParams, private sockets: SocketsService, public actionSheetCtrl: ActionSheetController, public attachment : AttachmentService){}
 
   ngOnInit() {
     this.attachment.emitter.subscribe((response : any) => {

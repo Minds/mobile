@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { AlertController, LoadingController, NavController } from 'ionic-angular';
+import { AlertController, LoadingController, NavController, Platform } from 'ionic-angular';
 
 import { Client } from '../../common/services/api/client';
 import { Storage } from '../../common/services/storage';
@@ -31,8 +31,15 @@ export class SettingsComponent {
   selectedCategories: string[] = [];
   categoriesChanged: boolean;
 
-  constructor(private client: Client, private cd: ChangeDetectorRef, private nav: NavController,
-              private loadingCtrl: LoadingController, private storage: Storage, private alertCtrl: AlertController) {
+  constructor(
+    private client: Client,
+    private cd: ChangeDetectorRef,
+    private nav: NavController,
+    private loadingCtrl: LoadingController,
+    private storage: Storage,
+    private alertCtrl: AlertController,
+    public platform: Platform
+  ) {
 
   }
 

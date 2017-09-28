@@ -36,14 +36,20 @@ export class SuggestionsList {
     if(!event)
       return;
 
+    let position = search.indexOf('@');
+
     if(event.keyCode == this.keys.enter)
       this.onSuggestionTap(null, this.suggestionsList[0].username);
 
     if(event.keyCode == this.keys.space)
       this.showResults = false;
 
-    if(this.showResults && search.indexOf('@') == -1)
+    if(this.showResults && position == -1)
       this.showResults = false;
+
+    if(position > 0 && search.slice(position - 1, position) !== ' '){
+      this.showResults = false;
+    }
 
     let input = search.substr(window.getSelection().anchorOffset - 1, 1);
     if(input === "@" || this.showResults){

@@ -14,8 +14,7 @@ import { OAuth2 } from '../../common/services/api/oauth2';
 export class OnboardingComponent {
 
   steps : Array<any> = [
-    'categories',
-    'avatar'
+    'categories'
   ];
 
   step : number = 0;

@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
-import { NavController, LoadingController, AlertController, NavParams } from 'ionic-angular';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { AlertController, LoadingController, NavController } from 'ionic-angular';
 
 import { Client } from '../../common/services/api/client';
 import { Storage } from '../../common/services/storage';
@@ -19,39 +19,56 @@ export class SettingsComponent {
 
   minds = {
     cdn_url: CONFIG.cdnUrl
-  }
+  };
 
-  currentPassword : string;
-  password : string;
-  password2 : string;
-  currentEmail : string = "";
+  currentPassword: string;
+  password: string;
+  password2: string;
+  currentEmail: string = "";
   mailChanged: boolean = false;
-  myForm : FormGroup;
+  myForm: FormGroup;
+  categories: { id, label, selected }[] = [];
+  selectedCategories: string[] = [];
+  categoriesChanged: boolean;
 
-  constructor(private client : Client, private cd : ChangeDetectorRef, private nav : NavController, private loadingCtrl : LoadingController,
-    private storage : Storage, private params: NavParams, private alertCtrl : AlertController){
+  constructor(private client: Client, private cd: ChangeDetectorRef, private nav: NavController,
+              private loadingCtrl: LoadingController, private storage: Storage, private alertCtrl: AlertController) {
+
   }
 
-  ngOnInit(){
+  ngOnInit() {
 
     this.myForm = new FormGroup({
-      email : new FormControl(this.currentEmail)
+      email: new FormControl(this.currentEmail)
     });
 
-    this.client.get('api/v1/settings/' + this.storage.get('user_guid'))
-      .then((response : any) => {
+    this.getCategories()
+      .then(() => {
+        return this.client.get('api/v1/settings/' + this.storage.get('user_guid'))
+      })
+      .then((response: any) => {
         this.currentEmail = response.channel.email;
+        this.selectedCategories = response.channel.categories;
+
+        if (this.selectedCategories.length > 0) {
+          this.selectedCategories.forEach((item, index, array) => {
+            const category = this.categories.find(i => i.id === item);
+            if (category)
+              category.selected = true;
+          });
+        }
+
         this.detectChanges();
       });
   }
 
-  save(){
-    if(this.password != this.password2){
+  save() {
+    if (this.password != this.password2) {
       this.alertCtrl.create({
-          title: 'Sorry!',
-          subTitle: "The passwords your entered do not match",
-          buttons: ['Try again']
-        })
+        title: 'Sorry!',
+        subTitle: "The passwords your entered do not match",
+        buttons: [ 'Try again' ]
+      })
         .present();
       return;
     }
@@ -62,25 +79,60 @@ export class SettingsComponent {
     loader.present();
 
     this.client.post('api/v1/settings/' + this.storage.get('user_guid'), {
-        password: this.currentPassword,
-        new_password: this.password,
-        email: this.currentEmail
-      })
+      password: this.currentPassword,
+      new_password: this.password,
+      email: this.currentEmail,
+      categories: this.selectedCategories
+    })
       .then((response) => {
         this.password = "";
         this.password2 = "";
+
         loader.dismiss();
         this.nav.pop();
       })
       .catch((error) => {
         loader.dismiss();
         this.alertCtrl.create({
-            title: 'Sorry!',
-            subTitle: error.message,
-            buttons: ['Try again']
-          })
+          title: 'Sorry!',
+          subTitle: error.message,
+          buttons: [ 'Try again' ]
+        })
           .present();
       });
+  }
+
+  getCategories() {
+    return new Promise((resolve, reject) => {
+      this.categories = [];
+
+      this.client.get('api/v1/categories').then((categories: any) => {
+        for (let id in categories.categories) {
+          this.categories.push({
+            id: id,
+            label: categories.categories[ id ],
+            selected: false
+          });
+        }
+        this.categories.sort((a, b) => a.label > b.label ? 1 : -1);
+        resolve(this.categories);
+      }).catch(error => {
+        console.error('got error: ', error);
+        reject(error);
+      });
+    });
+  }
+
+  onCategoryClick(category) {
+    category.selected = !category.selected;
+
+    if (category.selected) {
+      this.selectedCategories.push(category.id);
+    } else {
+      this.selectedCategories.splice(this.selectedCategories.indexOf(category.id), 1);
+    }
+
+    this.categoriesChanged = true;
   }
 
   detectChanges() {

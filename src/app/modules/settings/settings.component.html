@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-buttons right>
-      <button ion-button (click)="save()" style="color:#FFF" *ngIf="password || password2 || mailChanged">
+      <button ion-button (click)="save()" style="color:#FFF" *ngIf="password || password2 || mailChanged || categoriesChanged">
         Save
       </button>
     </ion-buttons>
@@ -49,5 +49,20 @@
   <m-settings--billing-saved-cards></m-settings--billing-saved-cards>
 
   <m-settings--billing-subscriptions></m-settings--billing-subscriptions>
+
+  <ion-list>
+    <ion-list-header color="light">
+      Categories
+    </ion-list-header>
+
+      <ion-item *ngFor="let category of categories">
+        <div class="ionic-settings--category"
+             [class.selected]="category.selected"
+             (click)="onCategoryClick(category)">
+          {{ category.label }}
+        </div>
+      </ion-item>
+
+  </ion-list>
 
 </ion-content>

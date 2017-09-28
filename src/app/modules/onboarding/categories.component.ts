@@ -19,21 +19,23 @@ export class CategoriesComponent {
     cdn_url: CONFIG.cdnUrl
   }
 
-  categories : Array<{id, label, selected}> = [
-    { id: "awesome", label: "Awesome", selected : false },
-    { id: "art", label: "Art", selected : false },
-    { id: "music", label: "Music", selected : false },
-    { id: "technology", label: "Science & Technology", selected : false },
-    { id: "gaming", label: "Gaming", selected : false },
-    { id: "nature", label: "Nature", selected : false },
-    { id: "news", label: "News", selected : false }
-  ];
+  categories : Array<{id, label, selected}> = [];
 
   channels : Array<any> = [];
   inProgress : boolean = false;
   @Output() done : EventEmitter<any> = new EventEmitter();
 
   constructor(private client : Client, private nav : NavController, public loadingCtrl: LoadingController, private alertCtrl: AlertController){
+    this.client.get('api/v1/categories').then((categories: any) => {
+      for (let id in categories.categories) {
+        this.categories.push({
+          id: id,
+          label: categories.categories[ id ],
+          selected: false
+        });
+      }
+      this.categories.sort((a, b) => a.label > b.label ? 1 : -1);
+    });
   }
 
   ngOnInit(){
@@ -51,10 +53,10 @@ export class CategoriesComponent {
     return loader;
   }
 
-  findChannels(){
+  saveCategories(){
     let loader = this.showLoader();
     this.inProgress = true;
-    this.client.get('api/v1/categories/featured', {
+    this.client.post('api/v1/settings', {
         categories: this.categories
           .filter((category) => {
             return category.selected;
@@ -66,29 +68,12 @@ export class CategoriesComponent {
       .then((response : any) => {
         loader.dismiss();
         this.inProgress = false;
-        this.channels = response.entities.map((channel) => {
-          channel.selected = true;
-          return channel;
-        });
+        this.done.next(true);
       })
       .catch(() => {
         loader.dismiss();
         this.inProgress = false;
       })
-  }
-
-  subscribe(){
-    //let loader = this.showLoader();
-    this.client.post('api/v1/subscribe/batch', {
-        guids: this.channels
-          .filter((channel) => {
-            return channel.selected;
-          })
-          .map((channel) => {
-            return channel.guid
-          })
-      });
-    this.done.next(true);
   }
 
   ngOnDestroy(){

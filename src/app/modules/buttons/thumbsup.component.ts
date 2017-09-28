@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, ChangeDetectorRef } from '@angular/core';
 
 import { Client } from '../../common/services/api/client';
 import { Storage } from '../../common/services/storage';
@@ -29,7 +29,7 @@ export class ThumbsUpComponent {
   storage = new Storage();
   animate : boolean = false;
 
-  constructor(public client : Client, private wallet : WalletService) {
+  constructor(public client : Client, private wallet : WalletService, private cd : ChangeDetectorRef) {
   }
 
   @Input('entity') set _entity(value : any){
@@ -63,6 +63,7 @@ export class ThumbsUpComponent {
         //this.wallet.decrement(1);
       }
     }
+    this.detectChanges();
   }
 
   has(){
@@ -71,6 +72,11 @@ export class ThumbsUpComponent {
         return true;
     }
     return false;
+  }
+
+  private detectChanges() {
+    this.cd.markForCheck();
+    this.cd.detectChanges();
   }
 
 }

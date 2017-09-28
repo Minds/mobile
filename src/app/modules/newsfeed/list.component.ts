@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild, AfterContentInit } from '@angular/core';
-import { Content, Refresher } from 'ionic-angular';
+import { Content, Refresher, Platform } from 'ionic-angular';
 
 import { ChannelComponent } from '../channel/channel.component';
 import { Client } from '../../common/services/api/client';
@@ -30,7 +30,7 @@ export class NewsfeedList implements OnInit, OnDestroy, AfterContentInit {
 
   onScreen = new OnScreenService();
 
-  constructor(private client: Client, private cd: ChangeDetectorRef, private storage: Storage) { }
+  constructor(private client: Client, private cd: ChangeDetectorRef, private storage: Storage, private platform: Platform) { }
 
   ngOnInit(){
     this.loadList(true);
@@ -47,7 +47,11 @@ export class NewsfeedList implements OnInit, OnDestroy, AfterContentInit {
   loadList(refresh : boolean = false){
     return new Promise((res, err) => {
       this.inProgress = true;
-      this.client.get('api/v1/newsfeed', { limit: 12, offset: this.offset})
+      this.client.get('api/v1/newsfeed', { 
+        limit: 12, 
+        offset: this.offset,
+        platform: this.platform.is('ios') ? 'ios' : 'other'
+      })
         .then((response : any) => {
 
           if(refresh)

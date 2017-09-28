@@ -5,6 +5,9 @@
 <ion-content>
 
   <ion-list *ngIf="!inProgress">
+    <ion-list-header style="font-size: 11px" color="light">
+      Enable and disable push notifications
+    </ion-list-header>
     <ion-item *ngFor="let toggle of toggles">
       <ion-icon [name]="toggle.icon"></ion-icon>
       <ion-label>{{toggle.name}}</ion-label>

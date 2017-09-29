@@ -10,6 +10,7 @@ import { CONFIG } from '../../config';
 import { SocketsService } from "../../common/services/api/sockets.service";
 import { AttachmentService } from "../attachments/attachment.service";
 import { SuggestionsList } from "../suggestions/suggestions.component";
+import { CurrentUserService } from "../../common/services/current-user.service";
 
 @Component({
   moduleId: 'module.id',
@@ -61,7 +62,8 @@ export class CommentsList implements OnInit, OnDestroy {
 
   progress: number = 0;
 
-  constructor(private client : Client, private cd : ChangeDetectorRef,  public params: NavParams, private sockets: SocketsService, public actionSheetCtrl: ActionSheetController, public attachment : AttachmentService){}
+  constructor(private client : Client, private cd : ChangeDetectorRef,  private params: NavParams, private sockets: SocketsService, public actionSheetCtrl: ActionSheetController, public attachment : AttachmentService,
+  private currentUser: CurrentUserService){}
 
   ngOnInit() {
     this.attachment.emitter.subscribe((response : any) => {
@@ -96,7 +98,7 @@ export class CommentsList implements OnInit, OnDestroy {
         .then((response : any) => {
 
           if (response.comments && response.comments.length >= 1) {
-            this.comments = response.comments.concat(this.comments);
+            this.comments = response.comments.concat(this.comments);
             this.offset = response['load-previous'];
           }
 
@@ -134,21 +136,37 @@ export class CommentsList implements OnInit, OnDestroy {
       return;
     }
 
-    this.client.post('api/v1/comments/' +  this.params.get('guid'), this.meta)
-      .then((response : any) => {
-        this.meta = {
-          comment: '',
-          attachment_guid: null,
-          mature: 0,
-        };
-
-        this.attachment.reset();
-        this.progress = 0;
-
-        this.comments.push(response.comment);
+    this.currentUser.get()
+      .then((user: any) => {
+        let newLength = this.comments.push({ // Optimistic
+          description: this.meta.comment,
+          guid: "0",
+          ownerObj: user,
+          owner_guid: user.guid,
+          time_created: Date.now()/1000,
+          type:"comment"
+        }), currentIndex = newLength - 1;
         this.cd.markForCheck();
         this.cd.detectChanges();
-        this.scrollArea.scrollToBottom(300);
+
+        this.client.post('api/v1/comments/' +  this.params.get('guid'), this.meta)
+          .then((response : any) => {
+            this.meta = {
+              comment: '',
+              attachment_guid: null,
+              mature: 0,
+            };
+
+            this.attachment.reset();
+            this.progress = 0;
+
+            if (response.comment) {
+              this.comments[currentIndex] = response.comment;
+            }
+            this.cd.markForCheck();
+            this.cd.detectChanges();
+            this.scrollArea.scrollToBottom(300);
+          });
       });
   }
 
@@ -276,3 +294,4 @@ export class CommentsList implements OnInit, OnDestroy {
     this.cd.detectChanges();
   }
 }
+

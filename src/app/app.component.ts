@@ -17,7 +17,7 @@ import { Client } from './common/services/api/client';
 import { Storage } from "./common/services/storage";
 import { PushService } from './modules/push/push.service';
 import { ShareService } from './modules/share/share.service';
-import { SocketsService } from './common/services/api/sockets.service'
+import { SocketsService } from './common/services/api/sockets.service';
 import { SettingsComponent } from './modules/settings/settings.component';
 import { AttachmentService } from "./modules/attachments/attachment.service";
 
@@ -111,8 +111,6 @@ export class MindsApp {
     this.currentUser.destroy();
     (<any>window).localStorage.clear();
     this.menuCtrl.close();
-    this.app.getRootNav().setRoot(LoginComponent);
-    //(<any>window).location.reload();
   }
 
   setDefaultSettings() {

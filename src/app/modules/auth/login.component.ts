@@ -13,6 +13,9 @@ import { CurrentUserService } from "../../common/services/current-user.service";
   moduleId: 'module.id',
   selector: 'login',
   templateUrl: 'login.component.html',
+  providers: [
+    CurrentUserService
+  ]
   //styleUrls: ['login.component.css']
 })
 

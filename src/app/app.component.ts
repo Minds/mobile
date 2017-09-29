@@ -111,6 +111,8 @@ export class MindsApp {
     this.currentUser.destroy();
     (<any>window).localStorage.clear();
     this.menuCtrl.close();
+    this.app.getRootNav().setRoot(LoginComponent);
+    //(<any>window).location.reload();
   }
 
   setDefaultSettings() {

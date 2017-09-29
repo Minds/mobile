@@ -19,6 +19,7 @@ export class NotificationsList {
 
   notifications : Array<any> = [];
   filter : string = "all";
+  moreData: boolean = true;
   offset : string = "";
   inProgress : boolean = true;
 
@@ -50,12 +51,20 @@ export class NotificationsList {
         .then((response : any) => {
           if(refresh)
             this.notifications = [];
+
           this.inProgress = false;
           this.loader.dismiss();
+
           if(response.notifications){
             this.notifications.push(...response.notifications);
             this.offset = response['load-next'];
+          } else {
+            this.moreData = false;
+            return false;
           }
+
+          this.moreData = !!this.offset;
+
           return true;
         })
         .catch(() => {

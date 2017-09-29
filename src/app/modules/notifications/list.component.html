@@ -48,7 +48,7 @@
 	</ion-list>
 
 
-  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)" [enabled]="moreData">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 

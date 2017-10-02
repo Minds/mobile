@@ -32,7 +32,7 @@ import { routes } from "./app.routes";
   ],
   imports: [
     IonicModule.forRoot(MindsApp, {
-      tabsHideOnSubPages: true,
+      tabsHideOnSubPages: false, //Shows bottom tab on subpages. Set it to false because it improves UX. 
       tabsPlacement: 'bottom',
       platforms: {
         android: {

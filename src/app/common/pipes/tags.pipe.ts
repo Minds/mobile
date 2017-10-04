@@ -5,6 +5,7 @@ import { NavController } from 'ionic-angular';
 import { ChannelComponent } from '../../modules/channel/channel.component';
 import { BlogView } from '../../modules/blog/view.component';
 import { NewsfeedSingleComponent } from '../../modules/newsfeed/single.component';
+import { DiscoveryView } from '../../modules/discovery/view.component';
 import { GroupProfile } from '../../modules/groups/profile.component';
 
 import { DiscoveryList } from "../../modules/discovery/list.component";
@@ -66,6 +67,11 @@ export class TagsPipe {
       if(url.indexOf('minds.com/newsfeed/') > -1){
         let parts = url.split('/');
         this.navCtrl.push(NewsfeedSingleComponent, { guid: parts[parts.length-1]});
+        return;
+      }
+      if(url.indexOf('minds.com/media/') > -1){
+        let parts = url.split('/');
+        this.navCtrl.push(DiscoveryView, { guid: parts[parts.length-1]});
         return;
       }
       if(url.indexOf('minds.com/groups/profile') > -1){

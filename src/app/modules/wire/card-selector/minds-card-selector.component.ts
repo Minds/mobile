@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input } from '@angular/core';
+import { Platform } from 'ionic-angular';
 
 import { WalletService } from '../../services/wallet';
 import { Client } from '../../../common/services/api/client';
@@ -34,7 +35,7 @@ interface CreditCard {
       <p>One moment please...</p>
     </div>
 
-    <div class="m-payments--saved-cards" *ngIf="!loading">
+    <div class="m-payments--saved-cards" *ngIf="!loading && platform.is('ios')">
       <div class="m-payments-saved--title">Select a card to use</div>
       <ul>
         <li *ngFor="let card of cards"
@@ -90,7 +91,7 @@ export class CardSelectorComponent {
   @Input() useBitcoin: boolean = false;
   token: string = '';
 
-  constructor(public client: Client, private service: WireService, private cd: ChangeDetectorRef) {
+  constructor(public client: Client, private service: WireService, private cd: ChangeDetectorRef, public platform: Platform) {
   }
 
   ngOnInit() {

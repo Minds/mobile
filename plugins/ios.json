@@ -61,6 +61,9 @@
         },
         "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "com.minds.mobile"
+        },
+        "cordova-plugin-applepay": {
+            "PACKAGE_NAME": "com.minds.mobile"
         }
     },
     "dependent_plugins": {

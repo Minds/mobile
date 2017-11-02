@@ -163,7 +163,23 @@
     "cordova-plugin-inappbrowser": {
         "source": {
             "type": "registry",
-            "id": "https://github.com/apache/cordova-plugin-inappbrowser"
+            "id": "cordova-plugin-inappbrowser@git+https://github.com/apache/cordova-plugin-inappbrowser.git"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-datepicker": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-datepicker@^0.9.3"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-applepay": {
+        "source": {
+            "type": "registry",
+            "id": "https://github.com/edgebal/cordova-plugin-applepay"
         },
         "is_top_level": true,
         "variables": {}

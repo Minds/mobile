@@ -11,6 +11,6 @@ export const CONFIG = {
 
 export const ANDROID_SENDER_ID = '81109256529';
 
-export const APPLE_MERCHANT_ID = '';
-export const STRIPE_PUBLISHABLE_KEY = '';
+export const APPLE_MERCHANT_ID = 'merchant.com.minds.mobile';
+export const STRIPE_PUBLISHABLE_KEY = 'pk_live_TmRkoEoAep4oOu40VARALUsU';
 export const STRIPE_COUNTRY = 'US';

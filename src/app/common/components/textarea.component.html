@@ -3,8 +3,8 @@
     class="m-editor"
     [class.m-editor-disabled]="disabled "
     [attr.contenteditable]="!disabled ? 'true' : null"
-    (keyup)="change(true); getSuggestionsList($event)"
-    (blur)="change()"
+    (keyup)="change($event); getSuggestionsList($event)"
+    (blur)="change($event)"
     (paste)="paste($event); change()"></div>
 <span
     *ngIf="placeholder && editor.innerText.length === 0"

@@ -6,6 +6,7 @@ import { ChannelComponent } from '../channel/channel.component';
 import { Client } from '../../common/services/api/client';
 import { Storage } from '../../common/services/storage';
 
+import { MessengerSetup } from './setup.component';
 import { MessengerViewService } from './view.service';
 
 import { CONFIG } from '../../config';
@@ -50,9 +51,12 @@ export class MessengerView implements OnInit, OnDestroy {
   constructor(private client: Client, private cd: ChangeDetectorRef, private params: NavParams,
     private service: MessengerViewService, private storage: Storage, private sockets: SocketsService,
     private actionSheetCtrl : ActionSheetController, private navCtrl : NavController, private alertCtrl : AlertController,
-    private loadingCtrl: LoadingController, private keyboard: Keyboard){}
+    private loadingCtrl: LoadingController, private keyboard: Keyboard, private nav : NavController){}
 
   ngOnInit() {
+    if(!this.storage.get('private-key')){
+      return this.nav.setRoot(MessengerSetup);
+    }
     this.conversation = this.params.get('conversation');
 
     this.service.setGuid(this.conversation.guid);

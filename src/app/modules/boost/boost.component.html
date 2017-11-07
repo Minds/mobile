@@ -9,22 +9,24 @@
   <ion-refresher (ionRefresh)="refresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-
+  <ion-row justify-content-center align-items-center>
+      <ion-col col-4>
+        <button class="m-ionic-boost-review--filter-button col" ion-button color="light" [ngClass]="{'active': type === 'newsfeed' }" (click)="changeFilters('newsfeed')">Newsfeed</button>
+      </ion-col>
+      <ion-col col-4>
+        <button class="m-ionic-boost-review--filter-button col" ion-button color="light" [ngClass]="{'active': type === 'content' }" (click)="changeFilters('content')">Sidebar</button>
+      </ion-col>
+      <ion-col col-4>
+        <button class="m-ionic-boost-review--filter-button col" ion-button color="light" [ngClass]="{'active': type === 'peer' }" (click)="changeFilters('peer')">Channel</button>
+      </ion-col>
+  </ion-row>
   <ion-list>
 
     <div *ngFor="let boost of boosts; let i = index" class="m-ionic-boost-review--boost">
-
-      <activity [entity]="boost.entity"></activity>
-
-      <div class="m-ionic-boost-review--tabs">
-        <div class="m-boost-admin-bid"><m-mdl-icon icon="bank" color="green"></m-mdl-icon> {{boost.bid}} points</div>
-        <div class="m-boost-admin-state"><ion-icon name="md-time"></ion-icon> {{boost.state}}</div>
-        <div class="m-ionic-boost-review--admin-buttons" *ngIf="boost.state == 'created'">
-          <button ion-button (click)="accept(boost, i)">Accept</button>
-          <button ion-button color="danger" (click)="reject(boost, i)">Reject</button>
-        </div>
-      </div>
-
+      <ion-card>
+        <activity *ngIf="boost.entity" [entity]="boost.entity"></activity>
+        <m-boost-console-card [boost]="boost"></m-boost-console-card>
+      </ion-card>
     </div>
 
 	</ion-list>

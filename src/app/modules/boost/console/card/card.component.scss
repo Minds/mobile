@@ -1,0 +1,14 @@
+.m-ionic-boost-card--tabs{
+  display: flex;
+  align-items: center;
+  font-size: 10px;
+
+  > * {
+    flex: 1;
+    padding: 12px;
+
+    ion-icon{
+      padding-right:5px;
+    }
+  }
+}

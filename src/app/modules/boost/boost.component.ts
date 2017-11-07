@@ -6,6 +6,9 @@ import { Storage } from '../../common/services/storage';
 
 import { CONFIG } from '../../config';
 
+export type BoostConsoleType = 'newsfeed' | 'content' | 'peer';
+export type BoostConsoleFilter = '' | 'inbox' | 'outbox';
+
 @Component({
   moduleId: 'module.id',
   selector: 'boost-review',
@@ -23,6 +26,8 @@ export class BoostReviewComponent {
   boosts : Array<any> = [];
   limit : number = 12;
   offset : string = "";
+  type : BoostConsoleType = 'newsfeed';
+  filter: BoostConsoleFilter = 'inbox';
 
   constructor(public client : Client, public modalCtrl: ModalController, private params : NavParams, private loadingCtrl : LoadingController,
     private navCtrl : NavController, private cd : ChangeDetectorRef, private storage : Storage){
@@ -34,9 +39,12 @@ export class BoostReviewComponent {
   }
 
   loadList(refresh : boolean = false){
+    if(this.type === 'content'){
+      this.filter = '';
+    }
     if(refresh)
       this.offset = "";
-    return this.client.get('api/v1/boost/peer/inbox', { limit: 12, offset: this.offset})
+    return this.client.get('api/v1/boost/' + this.type + '/' + this.filter, { limit: 12, offset: this.offset})
       .then((response : any) => {
         if(refresh)
           this.boosts = [];
@@ -48,6 +56,13 @@ export class BoostReviewComponent {
         this.cd.markForCheck();
         this.cd.detectChanges();
       });
+  }
+
+  changeFilters(type: BoostConsoleType){
+    this.type = type;
+    this.filter = 'inbox';
+    this.boosts = [];
+    this.loadList(true);
   }
 
   loadMore(loader){
@@ -67,32 +82,4 @@ export class BoostReviewComponent {
         this.cd.detectChanges();
       });
   }
-
-
-  accept(boost, i){
-    let agreed = true;
-    if(boost.bidType == 'usd' && boost.postToFacebook){
-      agreed = confirm(`I accept a 5% transaction fee and agree not to delete this content from Facebook`);
-    } else if(boost.bidType == 'usd'){
-      agreed =  confirm(`I accept a 5% transaction fee`);
-    } else if(boost.postToFacebook){
-      agreed =  confirm(`I agree not to delete this content from Facebook`);
-    }
-    if(!agreed)
-      return;
-    this.boosts[i].state = 'accepted';
-    this.client.put('api/v1/boost/peer/' + boost.guid)
-      .catch(e => {
-        this.boosts[i].state = 'created';
-      });
-  }
-
-  reject(boost, i){
-    this.boosts[i].state = 'rejected';
-    this.client.delete('api/v1/boost/peer/' + boost.guid)
-      .catch(e => {
-        this.boosts[i].state = 'created';
-      });
-  }
-
 }

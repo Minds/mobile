@@ -6,6 +6,7 @@ import { CommonModule } from '../../common/common.module';
 import { NewsfeedModule } from '../newsfeed/newsfeed.module';
 import { BoostReviewComponent } from './boost.component';
 import { BoostCreatorModule } from './creator/creator.module';
+import { BoostConsoleCard } from './console/card/card.component';
 
 @NgModule({
   imports: [
@@ -15,10 +16,12 @@ import { BoostCreatorModule } from './creator/creator.module';
     NewsfeedModule
   ],
   declarations: [
-    BoostReviewComponent
+    BoostReviewComponent,
+    BoostConsoleCard
   ],
   exports: [
-    BoostReviewComponent
+    BoostReviewComponent,
+    BoostConsoleCard
   ],
   entryComponents: [
     BoostReviewComponent

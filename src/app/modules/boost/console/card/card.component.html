@@ -1,0 +1,94 @@
+
+<div class="m-ionic-boost-card--tabs" *ngIf="user">
+  <!-- Destination, if incoming P2P -->
+  <div *ngIf="type == 'p2p' && !isIncoming()"
+    class="m-boost-card--manager-item"
+  >
+    <ion-icon name="person"></ion-icon>
+    <span>@{{boost.destination.username}}</span>
+  </div>
+
+  <!-- Impressions, if applicable -->
+  <div *ngIf="boost.impressions"
+    class="m-boost-card--manager-item"
+  >
+    <ion-icon name="eye"></ion-icon>
+    <!-- i18n -->{{ boost.impressions | number }} views<!-- /i18n -->
+  </div>
+
+  <!-- USD bid, if applicable -->
+  <div *ngIf="boost.bidType == 'pro' || boost.bidType == 'usd'"
+    class="m-boost-card--manager-item"
+  >
+    <ion-icon name="logo-usd"></ion-icon>
+    <!-- i18n -->{{ boost.bid / 100 | currency:'USD':true }} USD<!-- /i18n -->
+  </div>
+
+  <!-- Points bid, if applicable -->
+  <div *ngIf="boost.bidType == 'points'"
+    class="m-boost-card--manager-item"
+  >
+    <m-mdl-icon icon="bank" color="green"></m-mdl-icon>
+    <!-- i18n -->{{ boost.bid | number }} views<!-- /i18n -->
+  </div>
+
+  <!-- TODO: BTC  -->
+
+  <!-- State (non-P2P or incoming P2P) -->
+  <div *ngIf="type != 'p2p' || !isIncoming()"
+    class="m-boost-card--manager-item"
+  >
+    <ion-icon name="timer"></ion-icon>
+    {{ boost.state }}
+  </div>
+
+  <!-- Facebook crosspost -->
+  <div *ngIf="boost.postToFacebook"
+    class="m-boost-card--manager-item"
+  >
+    <svg width="32" height="32" viewBox="-2 -2 32 32" class="m-facebook-icon">
+      <path d="M17.9 14h-3v8H12v-8h-2v-2.9h2V8.7C12 6.8 13.1 5 16 5c1.2 0 2 .1 2 .1v3h-1.8c-1 0-1.2.5-1.2 1.3v1.8h3l-.1 2.8z"></path>
+    </svg>
+  </div>
+
+  <!-- Boost creation time, if not scheduled -->
+  <div *ngIf="!boost.scheduledTs"
+    class="m-boost-card--manager-item"
+  >
+    <ion-icon name="clock"></ion-icon>
+    {{ boost.time_created * 1000 | date: 'short' }}
+  </div>
+
+  <!-- Actions -->
+  <div *ngIf="boost.scheduledTs"
+    class="m-boost-card--manager-item"
+  >
+    <ion-icon name="alarm"></ion-icon>
+    {{ boost.scheduledTs * 1000 | date: 'short' }}
+  </div>
+
+  <div *ngIf="canAccept() || canReject() || canRevoke()"
+    class="m-ionic-boost-review--admin-buttons">
+    <button *ngIf="canRevoke()"
+      ion-button color="danger"
+      (click)="revoke()"
+      i18n
+    >Revoke</button>
+
+    <button *ngIf="canReject()"
+      ion-button color="danger"
+      (click)="reject()"
+      i18n
+    >Reject</button>
+
+    <button *ngIf="canAccept()"
+      ion-button color="secondary"
+      (click)="accept()"
+      i18n
+    >Accept</button>
+  </div>
+</div>
+
+<div class="m-boost-card--rejection-reason" *ngIf="boost.rejection_reason && boost.rejection_reason != -1">
+  <i class="material-icons">warning</i> Your boost was rejected: {{ findReason(boost.rejection_reason)?.label }}
+</div>

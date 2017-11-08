@@ -15,3 +15,13 @@
 .m-ionic-boost-review--filter-button.active{
   color: #4690D6;
 }
+
+.m-ionic-boost-console--filter{
+  .segment-button{
+    border-bottom:0;
+    color: #FFF;
+  }
+  ion-icon{
+    color:#FFF;
+  }
+}

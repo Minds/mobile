@@ -2,6 +2,17 @@
   <ion-navbar>
 
   </ion-navbar>
+
+  <ion-toolbar mode='md'>
+    <ion-segment [(ngModel)]="type" class="m-ionic-boost-console--filter" mode='md'>
+      <ion-segment-button value="newsfeed" (ionSelect)="changeFilters('newsfeed')">
+        Newsfeed
+      </ion-segment-button>
+      <ion-segment-button value="peer" (ionSelect)="changeFilters('peer')">
+        Channel
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
@@ -9,24 +20,12 @@
   <ion-refresher (ionRefresh)="refresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-row justify-content-center align-items-center>
-      <ion-col col-4>
-        <button class="m-ionic-boost-review--filter-button col" ion-button color="light" [ngClass]="{'active': type === 'newsfeed' }" (click)="changeFilters('newsfeed')">Newsfeed</button>
-      </ion-col>
-      <ion-col col-4>
-        <button class="m-ionic-boost-review--filter-button col" ion-button color="light" [ngClass]="{'active': type === 'content' }" (click)="changeFilters('content')">Sidebar</button>
-      </ion-col>
-      <ion-col col-4>
-        <button class="m-ionic-boost-review--filter-button col" ion-button color="light" [ngClass]="{'active': type === 'peer' }" (click)="changeFilters('peer')">Channel</button>
-      </ion-col>
-  </ion-row>
+
   <ion-list>
 
     <div *ngFor="let boost of boosts; let i = index" class="m-ionic-boost-review--boost">
-      <ion-card>
-        <activity *ngIf="boost.entity" [entity]="boost.entity"></activity>
-        <m-boost-console-card [boost]="boost"></m-boost-console-card>
-      </ion-card>
+      <activity *ngIf="boost.entity" [entity]="boost.entity"></activity>
+      <m-boost-console-card [boost]="boost"></m-boost-console-card>
     </div>
 
 	</ion-list>

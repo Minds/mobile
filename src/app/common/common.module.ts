@@ -3,7 +3,7 @@ import { IonicModule } from 'ionic-angular';
 
 import { Storage } from './services/storage';
 import { ImgFadeDirective } from './directives/img-fade.directive';
-import { ExplicitDirective } from './directives/explicit.directive';
+import { MatureComponent } from './components/mature/mature.component';
 import { ContenteditableModel } from './directives/content-editable-model.directive.ts';
 import { AbbrPipe } from './pipes/abbr.pipe';
 import { DomainPipe } from './pipes/domain.pipe';
@@ -18,9 +18,38 @@ import { SuggestionsModule } from "../modules/suggestions/suggestions.module";
 import { MDLIcon } from "./components/mdl-icon";
 
 @NgModule({
-  imports: [ IonicModule, SuggestionsModule ],
-  providers: [ Storage, PlatformFeaturesService, AppStatusService ],
-  declarations: [ ImgFadeDirective, ExplicitDirective, ContenteditableModel, DomainPipe, AbbrPipe, TagsPipe, TextareaComponent, RichInputComponent, SafePipe, MDLIcon ],
-  exports: [ ImgFadeDirective, ExplicitDirective, ContenteditableModel, DomainPipe, AbbrPipe, TagsPipe, TextareaComponent, RichInputComponent, SafePipe, MDLIcon ]
+  imports: [ 
+    IonicModule, 
+    SuggestionsModule 
+  ],
+  providers: [ 
+    Storage,
+    PlatformFeaturesService,
+    AppStatusService 
+  ],
+  declarations: [ 
+    ImgFadeDirective,
+    MatureComponent,
+    ContenteditableModel, 
+    DomainPipe, 
+    AbbrPipe, 
+    TagsPipe, 
+    TextareaComponent, 
+    RichInputComponent, 
+    SafePipe, 
+    MDLIcon 
+  ],
+  exports: [ 
+    ImgFadeDirective,
+    MatureComponent,
+    ContenteditableModel, 
+    DomainPipe, 
+    AbbrPipe, 
+    TagsPipe, 
+    TextareaComponent, 
+    RichInputComponent, 
+    SafePipe, 
+    MDLIcon 
+  ]
 })
 export class CommonModule { }

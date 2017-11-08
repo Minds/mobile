@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { PopoverController, NavParams } from 'ionic-angular';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
-
+import { ExplicitImgComponent } from '../../../common/components/explicit/explicit-image.component';
 import { ChannelComponent } from '../channel/channel.component';
 import { Client } from '../../common/services/api/client';
 import { Storage } from '../../common/services/storage';

@@ -5,6 +5,8 @@ import { ChannelComponent } from '../channel/channel.component';
 import { Client } from '../../common/services/api/client';
 import { Storage } from '../../common/services/storage';
 import { ReportService } from '../report/report.service';
+import { ExplicitImgComponent } from '../../../common/components/explicit/explicit-image.component';
+import { ExplicitTextComponent } from '../../../common/components/explicit/explicit-text.component';
 
 import { CONFIG } from '../../config';
 import { SocketsService } from "../../common/services/api/sockets.service";

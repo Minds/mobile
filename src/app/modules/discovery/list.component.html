@@ -36,10 +36,10 @@
       class="m-ionic-discovery--tile"
       [navPush]="components.view"
       [navParams]="{entity: entity}"
-      [explicit]="entity.mature"
-      (showExplicit)="entity.mature = false; cd.markForCheck(); cd.detectChanges()"
       >
-  	    <img [src]="minds.cdn_url + 'api/v1/archive/thumbnails/' + entity.guid + '/medium'"/>
+      <m-mature (show)="entity.mature = !$event; cd.markForCheck(); cd.detectChanges()" [mature]="entity.mature">
+        <img [src]="minds.cdn_url + 'api/v1/archive/thumbnails/' + entity.guid + '/medium'"/>
+      </m-mature>
     </div>
 
 	</ion-list>

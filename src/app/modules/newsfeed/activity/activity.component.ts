@@ -34,6 +34,7 @@ export class Activity implements AfterViewInit, OnDestroy {
   originalEntity; //original, none manipulated entity
   rawEntity; //none manipulated 'base' entity
   editing : boolean = false;
+  hiddenByPlatform: boolean = false;
   @Output() deleted : EventEmitter<any> = new EventEmitter();
 
   @Input() visibilityService: VisibilityServiceInterface;
@@ -248,7 +249,9 @@ export class Activity implements AfterViewInit, OnDestroy {
   }
 
   openImage(){
-    this.photoViewer.show(this.currentUser.asset(`${this.minds.cdn_url}api/v1/archive/thumbnails/${this.entity.entity_guid}/xlarge`, this.entity.paywall_unlocked));
+    if(!this.entity.mature){
+      this.photoViewer.show(this.currentUser.asset(`${this.minds.cdn_url}api/v1/archive/thumbnails/${this.entity.entity_guid}/xlarge`, this.entity.paywall_unlocked));
+    }
   }
 
   onShow() {

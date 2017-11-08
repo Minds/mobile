@@ -80,13 +80,13 @@
 
 <!-- Messages -->
 <div class="m-ionic-message" [hidden]="!entity.message || (editing && !entity.isRemind)">
-	<span
-	  [innerHtml]="entity.message | tags "
-		allow-text-select
-		[explicit]="entity.mature"
-		(showExplicit)="entity.mature = !$event; cd.markForCheck(); cd.detectChanges()"
+	<m-mature (show)="entity.mature = !$event; cd.markForCheck(); cd.detectChanges()" [mature]="entity.mature">
+		<span
+			[innerHtml]="entity.message | tags "
+			allow-text-select
 		>
-    </span>
+		</span>
+	</m-mature>
 </div>
 
 <translation-view [guid]="entity.guid" [language]="language"></translation-view>
@@ -102,12 +102,12 @@
 <div class="m-ionic-rich-embed"
   *ngIf="entity.perma_url && entity.title"
   (click)="openInBrowser(entity.perma_url)"
-	[explicit]="entity.mature"
-	(showExplicit)="entity.mature = !$event; cd.markForCheck(); cd.detectChanges()"
-  >
-	<img [src]="entity.thumbnail_src" (error)="entity.thumbnail_src = null" *ngIf="entity.thumbnail_src">
-  <h3>{{entity.title}}</h3>
-  <p>{{entity.perma_url | domain }}</p>
+	>
+	<m-mature (show)="entity.mature = !$event; cd.markForCheck(); cd.detectChanges()" [mature]="entity.mature">
+		<img [src]="entity.thumbnail_src" (error)="entity.thumbnail_src = null" *ngIf="entity.thumbnail_src">
+		<h3>{{entity.title}}</h3>
+		<p>{{entity.perma_url | domain }}</p>
+	</m-mature>
 </div>
 
 <div class="mdl-card__supporting-text m-ionic-message" [hidden]="!entity.title || entity.perma_url || editing" [innerHtml]="entity.title" allow-text-select></div>
@@ -122,38 +122,40 @@
 <div class="item item-image item-image-video"
   *ngIf="entity.custom_type == 'video'"
 >
-  <minds-video
-    [src]="minds.cdn_url + 'api/v1/archive/' + entity.custom_data.guid + '/play'"
-    [thumbnail]="entity.custom_data.thumbnail_src"
-    [preview]="true"
-    [previewPlayback]="active"
-    [analyticsGuid]="entity.entity_guid"
-    #player='video'
-  ></minds-video>
- </div>
+	<m-mature (show)="entity.mature = !$event; cd.markForCheck(); cd.detectChanges()" [mature]="entity.mature">
+		<minds-video
+			[src]="minds.cdn_url + 'api/v1/archive/' + entity.custom_data.guid + '/play'"
+			[thumbnail]="entity.custom_data.thumbnail_src"
+			[preview]="true"
+			[previewPlayback]="active"
+			[analyticsGuid]="entity.entity_guid"
+			#player='video'
+		></minds-video>
+	</m-mature>
+</div>
 
 <!-- Images -->
 <div class="m-ionic-image allow-select"
- *ngIf="entity.thumbnail_src && !entity.perma_url"
- [explicit]="entity.mature"
- (showExplicit)="entity.mature = !$event; cd.markForCheck(); cd.detectChanges()"
- >
-	<a (click)="openImage()">
-		<img [src]="currentUser.asset(entity.thumbnail_src, entity.paywall_unlocked)" (error)="entity.thumbnail_src = null">
-	</a>
+ *ngIf="entity.thumbnail_src && !entity.perma_url">
+ <m-mature (show)="entity.mature = !$event; cd.markForCheck(); cd.detectChanges()" [mature]="entity.mature">
+		<a (click)="openImage()">
+			<img [src]="currentUser.asset(entity.thumbnail_src, entity.paywall_unlocked)" (error)="entity.thumbnail_src = null">
+		</a>
+	</m-mature>
 </div>
 
 <!-- Custom type:: batch -->
 <div class="m-ionic-image allow-select"
- *ngIf="entity.custom_type == 'batch'">
-
-	<a (click)="openImage()">
-		<img [src]="currentUser.asset(entity.custom_data[0].src, entity.paywall_unlocked)" style="width:100%"
-      (error)="entity.custom_data[0].src = minds.cdn_url + 'assets/logos/medium.png'"
-      imgFade
-      *ngIf="entity.custom_data"
-    >
-	</a>
+ 	*ngIf="entity.custom_type == 'batch'">
+	<m-mature (show)="entity.mature = !$event; cd.markForCheck(); cd.detectChanges()" [mature]="entity.mature">
+		<a (click)="openImage()">
+			<img [src]="currentUser.asset(entity.custom_data[0].src, entity.paywall_unlocked)" style="width:100%"
+				(error)="entity.custom_data[0].src = minds.cdn_url + 'assets/logos/medium.png'"
+				imgFade
+				*ngIf="entity.custom_data"
+			>
+		</a>
+	</m-mature>
 </div>
 
 <div class="m-ionic-tabs" *ngIf="!preview">

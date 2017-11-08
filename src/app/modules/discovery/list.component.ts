@@ -27,13 +27,25 @@ export class DiscoveryList {
   layout : string = 'tiles';
 
   categories : Array<{id, label}> = [
-    { id: "awesome", label: "Awesome" },
-    { id: "art", label: "Art" },
-    { id: "music", label: "Music" },
-    { id: "technology", label: "Science & Technology" },
+    { id: "animals", label: "Animals" }, 
+    { id: "art", label: "Art" }, 
+    { id: "comedy", label: "Comedy" },
+    { id: "education", label: "Education" },
+    { id: "film", label: "Film" },
+    { id: "food", label: "Food" },
     { id: "gaming", label: "Gaming" },
+    { id: "health", label: "Health" },
+    { id: "history", label: "History" },
+    { id: "modeling", label: "Modeling" },
+    { id: "music", label: "Music" },
     { id: "nature", label: "Nature" },
-    { id: "news", label: "News" }
+    { id: "news", label: "News" },
+    { id: "politics", label: "Politics" },
+    { id: "science", label: "Science" },
+    { id: "spirituality", label: "Spirituality" },
+    { id: "sports", label: "Sports" },
+    { id: "technology", label: "Technology" },
+    { id: "travel", label: "Travel" }
   ];
 
   feed : Array<any> = [];

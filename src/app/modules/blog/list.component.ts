@@ -7,7 +7,7 @@ import { Storage } from '../../common/services/storage';
 
 import { BlogView } from './view.component';
 
-import { CONFIG } from '../../config';
+import { CONFIG, CATEGORIES } from '../../config';
 
 @Component({
   moduleId: 'module.id',
@@ -26,15 +26,7 @@ export class BlogsList {
   inProgress : boolean = true;
 
   category : string = 'all';
-  categories : Array<{id, label}> = [
-    { id: "awesome", label: "Awesome" },
-    { id: "art", label: "Art" },
-    { id: "music", label: "Music" },
-    { id: "technology", label: "Science & Technology" },
-    { id: "gaming", label: "Gaming" },
-    { id: "nature", label: "Nature" },
-    { id: "news", label: "News" }
-  ];
+  categories : Array<{id, label}> = CATEGORIES;
 
   components = {
     view: BlogView,

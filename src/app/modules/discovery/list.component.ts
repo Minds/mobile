@@ -10,7 +10,7 @@ import { DiscoveryOptionsComponent } from './options.component';
 import { DiscoveryView } from './view.component';
 import { DiscoveryService } from './discovery.service';
 
-import { CONFIG } from '../../config';
+import { CONFIG, CATEGORIES } from '../../config';
 
 @Component({
   moduleId: 'module.id',
@@ -26,27 +26,7 @@ export class DiscoveryList {
   type : string = 'images';
   layout : string = 'tiles';
 
-  categories : Array<{id, label}> = [
-    { id: "animals", label: "Animals" }, 
-    { id: "art", label: "Art" }, 
-    { id: "comedy", label: "Comedy" },
-    { id: "education", label: "Education" },
-    { id: "film", label: "Film" },
-    { id: "food", label: "Food" },
-    { id: "gaming", label: "Gaming" },
-    { id: "health", label: "Health" },
-    { id: "history", label: "History" },
-    { id: "modeling", label: "Modeling" },
-    { id: "music", label: "Music" },
-    { id: "nature", label: "Nature" },
-    { id: "news", label: "News" },
-    { id: "politics", label: "Politics" },
-    { id: "science", label: "Science" },
-    { id: "spirituality", label: "Spirituality" },
-    { id: "sports", label: "Sports" },
-    { id: "technology", label: "Technology" },
-    { id: "travel", label: "Travel" }
-  ];
+  categories : Array<{id, label}> = CATEGORIES;
 
   feed : Array<any> = [];
   offset : string = "";

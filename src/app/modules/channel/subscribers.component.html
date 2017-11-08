@@ -37,7 +37,11 @@
       <ion-icon class="m-ionic-discovery--card-icon" name="person-add"
         *ngIf="entity.guid != storage.get('user_guid') && !entity.subscribed"
         (click)="subscribe(i)"
-        ></ion-icon>
+      ></ion-icon>
+      <ion-icon class="m-ionic-discovery--card-icon selected" name="person-add"
+        *ngIf="entity.guid != storage.get('user_guid') && entity.subscribed"
+        (click)="unsubscribe(i)"
+      ></ion-icon>
     </div>
   </ion-list>
 

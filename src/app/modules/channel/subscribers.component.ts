@@ -103,6 +103,22 @@ export class SubscribersComponent {
       });
   }
 
+  unsubscribe(index){
+    this.users[index].subscribed = false;
+    this.users[index].subscribers_count--;
+    this.detectChanges();
+
+    this.client.delete('api/v1/subscribe/' + this.users[index].guid, {})
+      .then((response : any) => {
+        this.users[index].subscribed = false;
+      })
+      .catch((e) => {
+        this.users[index].subscribed = true;
+        this.users[index].subscribers_count++;
+        this.detectChanges();
+      });
+  }
+
   detectChanges(){
     this.cd.markForCheck();
     this.cd.detectChanges();

@@ -36,7 +36,8 @@ export class WireFabComponent {
     public service : WireService,
     private cd : ChangeDetectorRef,
     private alertCtrl : AlertController,
-    private client: Client
+    private client: Client,
+    public platform: Platform
   ){
     this.guid = params.get('guid');
 

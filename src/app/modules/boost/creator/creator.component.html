@@ -82,6 +82,7 @@
       <li
         (click)="setBoostCurrency('usd')"
         [class.m-ionic-boost--creator-selector--highlight]="!boost.currency || boost.currency == 'usd'"
+        *ngIf="!platform.is('ios')"
       >
         <h4><b *ngIf="boost.amount">{{ calcCharges('usd') | currency:'USD':true }}</b> USD</h4>
         <span class="m-ionic-boost--creator-selector--cta">Select Money</span>

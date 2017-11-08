@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, Input, AfterViewInit, ViewChild } from '@angular/core';
 import { CONFIG } from '../../../config';
-import { LoadingController, ModalController, NavParams, Tabs, ViewController } from 'ionic-angular';
+import { LoadingController, ModalController, NavParams, Tabs, ViewController, Platform } from 'ionic-angular';
 import { CacheService } from '../../../common/services/cache/cache.service';
 import { Storage } from '../../../common/services/storage';
 import { Client } from '../../../common/services/api/client';
@@ -71,10 +71,20 @@ export class BoostCreatorComponent implements AfterViewInit {
   targetQuery: string = '';
   targetResults: any[] = [];
 
-  constructor(private client: Client, public boostService: BoostCreatorService, public discoveryService: DiscoveryService, public cache: CacheService,
-              public modalCtrl: ModalController, private params: NavParams, private datePicker: DatePicker,
-              private viewCtrl: ViewController, private loadingCtrl: LoadingController, private cd: ChangeDetectorRef,
-              private storage: Storage) {
+  constructor(
+    private client: Client,
+    public boostService: BoostCreatorService,
+    public discoveryService: DiscoveryService,
+    public cache: CacheService,
+    public modalCtrl: ModalController,
+    private params: NavParams,
+    private datePicker: DatePicker,
+    private viewCtrl: ViewController,
+    private loadingCtrl: LoadingController,
+    private cd: ChangeDetectorRef,
+    private storage: Storage,
+    public platform: Platform
+  ) {
 
     const guid: any = this.storage.get('user_guid');
     if (guid && typeof guid === 'string') {

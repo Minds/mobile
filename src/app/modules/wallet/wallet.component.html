@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-buttons right >
-      <button ion-button (click)="purchasePoints()" style="color:#FFF">
+      <button ion-button (click)="purchasePoints()" style="color:#FFF" *ngIf="!platform.is('ios')">
         <ion-icon name="md-card" style="padding-right: 8px;"></ion-icon>
         Purchase
       </button>
@@ -35,7 +35,7 @@
         </div>
       </div>
 
-      <div class="m-ionic-wallet--menu-item" [navPush]="components.purchase">
+      <div class="m-ionic-wallet--menu-item" [navPush]="components.purchase" *ngIf="!platform.is('ios')">
         <p>
           Purchase points
         </p>
@@ -53,7 +53,7 @@
         </div>
       </div>
 
-      <div class="m-ionic-wallet--menu-item" [navPush]="components.planConsole">
+      <div class="m-ionic-wallet--menu-item" [navPush]="components.planConsole" *ngIf="!platform.is('ios')">
         <p>
           Plan Subscriptions
         </p>

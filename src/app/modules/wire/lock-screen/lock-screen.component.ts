@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { Platform } from 'ionic-angular';
 
 import { Storage } from '../../../common/services/storage';
 import { Client } from "../../../common/services/api/client";
@@ -25,7 +26,8 @@ export class WireLockScreenComponent {
     private storage: Storage,
     private client: Client,
     private cd: ChangeDetectorRef,
-    private fab: WireFabController
+    private fab: WireFabController,
+    private platform: Platform
   ) { }
 
   unlock(skipWireModal: boolean = false) {
@@ -52,6 +54,11 @@ export class WireLockScreenComponent {
   }
 
   showWire() {
+    if (this.platform.is('ios') && this.entity.wire_threshold.type == 'money') {
+      alert("Sorry, we can't accept payments on iOS");
+      return;
+    }
+
     let fab = this.fab.create({
       guid: this.entity.guid,
       default: this.entity && this.entity.wire_threshold

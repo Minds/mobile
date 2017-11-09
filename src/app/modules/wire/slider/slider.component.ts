@@ -1,5 +1,5 @@
 import { Component, Input, EventEmitter, Output, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild } from '@angular/core';
-import { Slides } from "ionic-angular";
+import { Slides, Platform } from "ionic-angular";
 
 import { WireFabController } from "../fab";
 import { WireRewardsType, WireRewardsTiers } from "../interfaces/wire.interfaces";
@@ -26,7 +26,12 @@ export class WireSliderComponent {
       if (!reward.type && this.type)
         reward.type = this.type;
       return reward;
-    });
+    })
+    .filter((reward) => {
+      if (reward.type == 'money' && this.platform.is('ios')) 
+        return false;
+      return true;
+    })
 
     if (!this.rewards) {
       this.rewards = [];
@@ -63,7 +68,11 @@ export class WireSliderComponent {
 
   @Input() sums: any;
 
-  constructor(private cd: ChangeDetectorRef, private fab: WireFabController) { }
+  constructor(
+    private cd: ChangeDetectorRef,
+    private fab: WireFabController,
+    private platform: Platform
+  ) { }
 
   ngAfterViewInit() {
     try {

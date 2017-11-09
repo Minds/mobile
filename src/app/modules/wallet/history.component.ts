@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef, HostListener } from '@angular/core';
-import { ModalController, NavParams, NavController, ViewController, LoadingController } from 'ionic-angular'
+import { ModalController, NavParams, NavController, ViewController, LoadingController, Platform } from 'ionic-angular'
 import { Client } from '../../common/services/api/client';
 import { CacheService } from '../../common/services/cache/cache.service';
 import { Storage } from '../../common/services/storage';
@@ -33,9 +33,18 @@ export class WalletHistoryComponent {
   subscription;
   points : number = 0;
 
-  constructor(public client : Client, public modalCtrl: ModalController, private params : NavParams,
-    private viewCtrl : ViewController, private loadingCtrl : LoadingController, private navCtrl : NavController,
-    private cd : ChangeDetectorRef, private storage : Storage, private service : WalletService){
+  constructor(
+    public client: Client,
+    public modalCtrl: ModalController,
+    private params: NavParams,
+    private viewCtrl: ViewController,
+    private loadingCtrl: LoadingController,
+    private navCtrl: NavController,
+    private cd: ChangeDetectorRef,
+    private storage: Storage,
+    private service: WalletService,
+    public platform: Platform
+  ){
 
   }
 

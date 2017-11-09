@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectorRef } from '@angular/core';
 
 import { BoostService } from '../../boost.service';
 import { Reason, rejectionReasons } from '../../rejection-reasons';;
@@ -19,18 +19,24 @@ export class BoostConsoleCard {
 
   reasons: Array<Reason> = rejectionReasons;
 
-  constructor(public service: BoostService, private currentUser: CurrentUserService) {
+  constructor(
+    public service: BoostService,
+    private currentUser: CurrentUserService,
+    private cd: ChangeDetectorRef
+  ) {
   }
 
   @Input('boost')
   set _boost(boost: any) {
     this.boost = boost;
     this.type = this.service.getBoostType(this.boost) || '';
+    this.detectChanges();
   }
 
   ngOnInit(){
     this.currentUser.get().then((user: any) => {
       this.user = user;
+      this.detectChanges();
     });
   }
 
@@ -80,6 +86,11 @@ export class BoostConsoleCard {
     return rejectionReasons.find((item: Reason) => {
       return item.code == code;
     });
+  }
+
+  detectChanges() {
+    this.cd.markForCheck();
+    this.cd.detectChanges();
   }
 
 }

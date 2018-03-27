@@ -1,9 +1,0 @@
-
-<ion-list>
-  <ion-item-group>
-    <ion-item *ngFor="let language of languages">
-      <ion-label>{{language.name}} ({{language.language}})</ion-label>
-      <ion-radio checked="false" (ionSelect)="setLanguage(language)"></ion-radio>
-    </ion-item>
-  </ion-item-group>
-</ion-list>
